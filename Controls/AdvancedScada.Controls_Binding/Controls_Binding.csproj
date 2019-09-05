@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{593D94F6-E928-4F50-B40B-CFCAA79FCB65}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AdvancedScada.Controls_Binding</RootNamespace>
+    <AssemblyName>AdvancedScada.HMIControlsBinding</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Krypton Toolkit">
+      <HintPath>..\..\Lib\Krypton\Krypton Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ButtonAll\HMIAnnunciator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ButtonAll\HMIbutton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ButtonAll\HMICheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ButtonAll\HMISquareIlluminatedButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Indicator\HMIIndicator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DialogEditor\TestDialogEditor.cs" />
+    <Compile Include="DigitalDisplay\HMIDigitalPanelMeter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DigitalDisplay\HMITempController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Display\HMIDateTimeDisplay.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Display\HMIKeyboardInput.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Display\HMILabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Display\HMITextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Display\Label\Format.cs" />
+    <Compile Include="Display\SetLabel.cs" />
+    <Compile Include="Enum\Enums.cs" />
+    <Compile Include="Hydraulic\HMIHydraulicCylinder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Hydraulic\HMIHydraulicCylinderAnalog.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Hydraulic\HMIPneumaticBallVave.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ImageAll\HMIGraphicIndicator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ImageAll\HMIImageContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ImageAll\HMIImageDisplayByValue.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ImageAll\HMIImageSelectByBit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Leds\DrawAll\DrawGraphics.cs" />
+    <Compile Include="Leds\HMILedSingle.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LED\HMISimpleLED.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Licenses\LicenseManager.cs" />
+    <Compile Include="Linear\HMILinearMeter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Linear\HMILinearMeterH.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Linear\HMILinearMeterV.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Motor\HMIMotor.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Motor\HMIWaterPump.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProcessAll\DrawAll\DrawGraphics.cs" />
+    <Compile Include="ProcessAll\DrawAll\DrawGraphics2.cs" />
+    <Compile Include="ProcessAll\HMIProcessIndicator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProcessAll\HMIProcessLevel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Segment\DrawAll\DrawGraphics.cs" />
+    <Compile Include="Segment\HMILCDMatrix.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Segment\HMISegment16LED.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Segment\HMISegment7LED.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SelectorSwitch\HMIMushroomButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SelectorSwitch\HMIPilotLight.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SelectorSwitch\HMIPushButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SelectorSwitch\HMISelectorSwitch.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SevenSegment\HMISevenSegment2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Thermometer\HMIThermometer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Thermometer\HMIThermometer2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Utility\Utility.cs" />
+    <Compile Include="WCFChannelFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Drivers\AdvancedScada.DriverBase\DriverBase.csproj">
+      <Project>{1d570e9a-e5b4-44dd-946d-9d73cfa4a535}</Project>
+      <Name>DriverBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Util\AdvancedScada.Utils\Utils.csproj">
+      <Project>{5c361f75-32c8-487b-9eb8-0b4d627b89b4}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WCF\AdvancedScada.BaseService\BaseService.csproj">
+      <Project>{5b05b8bd-b05a-4b7a-8b0d-78c8be7441e1}</Project>
+      <Name>BaseService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WCF\AdvancedScada.IBaseService\IBaseService.csproj">
+      <Project>{f47222c0-6b69-4ff1-aec3-b4c668b0a55a}</Project>
+      <Name>IBaseService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AdvancedScada.Controls_Net45\Controls_Net45.vbproj">
+      <Project>{6a4ea5f0-f6a7-4d58-8542-e39444a0a7c3}</Project>
+      <Name>Controls_Net45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AdvancedScada.ImagePicker\ImagePicker.csproj">
+      <Project>{06c4d61d-cbb1-4f3d-8599-f18099548a25}</Project>
+      <Name>ImagePicker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AdvancedScada.Monitor\Monitor.csproj">
+      <Project>{b160281b-93b1-45bd-a07e-fd75c27916ea}</Project>
+      <Name>Monitor</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

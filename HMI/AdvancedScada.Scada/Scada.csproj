@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AFE58B77-0383-41AE-AD22-5534D360A913}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>AdvancedScada.HMI</RootNamespace>
+    <AssemblyName>AdvancedScada.Scada</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>CPU.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Krypton Toolkit">
+      <HintPath>..\..\Lib\Krypton\Krypton Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm\FRM_Advanced.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm\FRM_Advanced.Designer.cs">
+      <DependentUpon>FRM_Advanced.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm\FRM_Editr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm\FRM_Editr.Designer.cs">
+      <DependentUpon>FRM_Editr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\Tools.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm\FRM_Advanced.resx">
+      <DependentUpon>FRM_Advanced.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm\FRM_Editr.resx">
+      <DependentUpon>FRM_Editr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Controls\AdvancedScada.Controls\Controls.csproj">
+      <Project>{61d652f9-adef-4024-b1a8-4709656068ca}</Project>
+      <Name>Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Controls\AdvancedScada.Controls_Net45\Controls_Net45.vbproj">
+      <Project>{6a4ea5f0-f6a7-4d58-8542-e39444a0a7c3}</Project>
+      <Name>Controls_Net45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Controls\AdvancedScada.ImagePicker\ImagePicker.csproj">
+      <Project>{06c4d61d-cbb1-4f3d-8599-f18099548a25}</Project>
+      <Name>ImagePicker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Drivers\AdvancedScada.DriverBase\DriverBase.csproj">
+      <Project>{1d570e9a-e5b4-44dd-946d-9d73cfa4a535}</Project>
+      <Name>DriverBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Studio\AdvancedScada.Management\Management.csproj">
+      <Project>{8feab090-6b9a-4c8d-ad4a-b5c9062152a0}</Project>
+      <Name>Management</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Util\AdvancedScada.Utils\Utils.csproj">
+      <Project>{5c361f75-32c8-487b-9eb8-0b4d627b89b4}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WCF\AdvancedScada.BaseService\BaseService.csproj">
+      <Project>{5b05b8bd-b05a-4b7a-8b0d-78c8be7441e1}</Project>
+      <Name>BaseService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WCF\AdvancedScada.IBaseService\IBaseService.csproj">
+      <Project>{f47222c0-6b69-4ff1-aec3-b4c668b0a55a}</Project>
+      <Name>IBaseService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AdvancedScada.DataAccess\DataAccess.vbproj">
+      <Project>{36f477cc-54a4-4f55-adb3-2a2e06dbfbef}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AdvancedScada.ReportView\ReportViewer.vbproj">
+      <Project>{a7e14a59-51ee-4e8e-b1ee-3cb3c71dc9d3}</Project>
+      <Name>ReportViewer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\17-1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\17-2.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\17-3.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\17-4.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\17-5.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\17-6.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\18-3.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\18-4.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\18-6.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2063.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddFooter_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddNewDataSource_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AdvancedHMILogoBR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Build_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonBlue_DNTransparent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonBlue_DNTransparent1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonBlueTransparent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonBlueTransparent1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonGreen2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonGreen2_DN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonGreen2_DN1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonGreen2_ON.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonGreen2_ON1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonGreen21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonRed2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonRed2_DN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonRed2_DN1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonRed2_ON.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonRed2_ON1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonRed21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonYellow2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonYellow2_DN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonYellow2_DN1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonYellow2_ON.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonYellow21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Database_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DeleteDataSource2_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DeleteGroupFooter_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExportModelDifferences_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExportModelDifferences_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExportToDOC_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FanBlades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Hopper 3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Large weigh belt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Large weigh belt1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Math&amp;Trig_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Micro flowmeter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Project1_img12%400.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ResetModelDifferences_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sanitary inline mixer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Silo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SortAsc_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ToolBer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CPU.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6A4EA5F0-F6A7-4D58-8542-E39444A0A7C3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>AdvancedScada.Controls_Net45</RootNamespace>
+    <AssemblyName>AdvancedScada.Controls_Net45</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>AdvancedScada.Controls_Net45.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>AdvancedScada.Controls_Net45.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlarmMan\AlarmMan.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AlarmMan\Designers\iniClass.vb" />
+    <Compile Include="AlarmMan\Designers\ListViewDesigner.vb" />
+    <Compile Include="AlarmMan\Designers\ListViewDesignerForm.Designer.vb">
+      <DependentUpon>ListViewDesignerForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AlarmMan\Designers\ListViewDesignerForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BarLevel\BarLevel.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="BarLevel\BarLevelGraphic.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="BarLevel\BarMeter.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Basic\AnalogMeterBase.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Basic\BasicSelectorSwitch.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Basic\BasicShape.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Basic\ButtonBase.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Basic\LinearMeterBase.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Buttons\Annunciator.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Buttons\BeveledButtonDisplay.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Buttons\ListButtons.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Buttons\SquareIlluminatedButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Class\AutoToDoubleEditor.vb" />
+    <Compile Include="Class\AutoToDoubleTypeConverter%28Of T%29.vb" />
+    <Compile Include="Class\AutoValueConverter.vb" />
+    <Compile Include="Class\ConnecterType.vb" />
+    <Compile Include="Class\DataPoint.vb" />
+    <Compile Include="Class\DoubleDateNanValueConverter.vb" />
+    <Compile Include="Class\EmptyTypeConverter.vb" />
+    <Compile Include="Class\LineDirection.vb" />
+    <Compile Include="Class\ListButtonsEventArgs.vb" />
+    <Compile Include="Class\MenuPos.vb" />
+    <Compile Include="Class\OutputType.vb" />
+    <Compile Include="Class\PanChartEventArgs.vb" />
+    <Compile Include="Class\PanelGraphics.vb" />
+    <Compile Include="Class\RollingDigit.vb" />
+    <Compile Include="Class\RotationScale.vb" />
+    <Compile Include="Class\RotationTypeConverter.vb" />
+    <Compile Include="Class\RotationValueEditor.vb" />
+    <Compile Include="Class\ShapesStateValue.vb" />
+    <Compile Include="Class\ShapesStateValueTypeConverter.vb" />
+    <Compile Include="Class\ShapeType.vb" />
+    <Compile Include="Class\ShapeTypeEditor.vb" />
+    <Compile Include="Class\TranslationScale.vb" />
+    <Compile Include="Class\TranslationScaleTypeConverter.vb" />
+    <Compile Include="Class\Utilities.vb" />
+    <Compile Include="Common\BaseEventArgs.vb" />
+    <Compile Include="Common\ValueChangedEventArgs.vb" />
+    <Compile Include="Controls\A1Panel.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\BasicLine.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CircularProgressBar.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ColorPicker.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ControlShapeType.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\GroupPanel.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\HVScrollBar.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Indicator.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Line.vb" />
+    <Compile Include="Controls\MultistateIndicator.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DigitalPanel\DigitalPanelMeter.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DigitalPanel\DigitalPanelMeterBlue.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DigitalPanel\Odometer.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DigitalPanel\TempController.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlowArrow\FlowArrowHatched.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlowArrow\FlowArrowMatrix1.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlowArrow\FlowArrowMatrix2.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlowArrow\FlowArrowSolid.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlowArrow\FlowArrowStriped.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlowArrow\SimpleFlowArrows.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Gauge\Gauge.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Gauge\GaugeCompact.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Hydraulic\HydraulicCylinder.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Hydraulic\HydraulicCylinderAnalog.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Keyboard\AlphaKeyboard_v3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Keyboard\IKeyboard.vb" />
+    <Compile Include="Keyboard\KeyboardInput.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Keyboard\KeypadEventArgs.vb" />
+    <Compile Include="Keyboard\Keypad_v3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LED\SimpleLED.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LED\SimpleLEDAnalog.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LED\SimpleLedAnalogArray.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LED\SimpleLEDArray.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LED\SimpleLEDMatrix.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LED\SimpleLEDMultiColor.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LED\SimpleLEDMulticolorArray.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LinearM\LinearMeter.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LinearM\LinearMeterH.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LinearM\LinearMeterHorizontal.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LinearM\LinearMeterV.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LinearM\LinearMeterVertical.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Message\MessageByBit.vb" />
+    <Compile Include="Message\MessageByItem.vb" />
+    <Compile Include="Message\MessageByValue.vb" />
+    <Compile Include="Message\MessageConverterByBit.vb" />
+    <Compile Include="Message\MessageConverterByItem.vb" />
+    <Compile Include="Message\MessageConverterByValue.vb" />
+    <Compile Include="Message\MessageDisplayByBit.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Message\MessageDisplayByValue.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Message\MessageListByBit.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Message\MessageListByItem.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Message\MessageListByValue.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Meter\Meter.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Meter\Meter2.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Meter\MeterCompact.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Motor\Conveyor.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Motor\Fan.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Motor\Motor.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Motor\Motor3Color.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Motor\PneumaticBallValve.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Motor\WaterPump.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Picture\AnimatingPictureBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Picture\GifAnimator.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Picture\GraphicIndicator.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Picture\GraphicIndicatorBase.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Picture\ImageDisplayByValue.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Picture\ImageDisplayByValue2.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Picture\ImageSelectByBit.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Picture\RotatingImage2.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Picture\RotationalPositionIndicator.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Picture\RotationValueEditorForm.Designer.vb">
+      <DependentUpon>RotationValueEditorForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Picture\RotationValueEditorForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectorSwitch\MomentaryButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SelectorSwitch\MushroomButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SelectorSwitch\PilotLight.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SelectorSwitch\PilotLight3Color.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SelectorSwitch\SelectorSwitch.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SelectorSwitch\SelectorSwitch3Pos.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SevenSegment\DigitalDisplayControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SevenSegment\SevenSegment.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SevenSegment\SevenSegment2.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SevenSegment\SevenSegmentGDI.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TankAll\Pipe.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TankAll\StackLight2.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TankAll\StackLight5Lights.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TankAll\Tank.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TankAll\TankLibrary.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Thermometer\Thermometer.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Thermometer\Thermometer2.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="VerticalSlider\AnalogDial.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="VerticalSlider\ThumbDial.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="VerticalSlider\VerticalSlider.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="VerticalSlider\VerticalSlider3.vb">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AlarmMan\Designers\ListViewDesignerForm.resx">
+      <DependentUpon>ListViewDesignerForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DigitalPanel\TempController.resx">
+      <DependentUpon>TempController.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Keyboard\Keypad_v3.resx">
+      <DependentUpon>Keypad_v3.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Picture\RotationValueEditorForm.resx">
+      <DependentUpon>RotationValueEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MotorYellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Legs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Settings.ini" />
+    <None Include="Resources\Silo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SiloGreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SiloRed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SiloWithLegs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SiloWithLegsGreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SiloWithLegsRed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tank1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tank1Green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tank1Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tank1WithLegs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tank1WithLegsGreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tank1WithLegsRed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vessel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VesselGreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VesselRed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VesselRedWithLegs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VesselWithLegs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VesselWithLegsGreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Drum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DrumBlack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DrumBlue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DrumGreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DrumRed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ketlle1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ketlle1Green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ketlle1Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KetlleLongLegsGreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KetlleLongLegsRed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KettleShortLegs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KettleShortLegsGreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KettleShortLegsRed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KetlleLongLegs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DigitalPanelMeterR1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Drivers\AdvancedScada.DriverBase\DriverBase.csproj">
+      <Project>{1d570e9a-e5b4-44dd-946d-9d73cfa4a535}</Project>
+      <Name>DriverBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>

@@ -1,0 +1,496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{61D652F9-ADEF-4024-B1A8-4709656068CA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AdvancedScada.Controls</RootNamespace>
+    <AssemblyName>AdvancedScada.HMIControls</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <WarningLevel>1</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>TagManager.Controls.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+  </PropertyGroup>
+  <PropertyGroup>
+  </PropertyGroup>
+  <PropertyGroup>
+  </PropertyGroup>
+  <PropertyGroup>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HslControls, Version=2.2.1.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\HslControls.2.2.1\lib\net45\HslControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Krypton Docking, Version=5.470.742.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\Krypton\Krypton Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="Krypton Navigator, Version=5.470.763.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\Krypton\Krypton Navigator.dll</HintPath>
+    </Reference>
+    <Reference Include="Krypton Toolkit, Version=5.470.1254.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\Krypton\Krypton Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="NetToolKit">
+      <HintPath>..\..\Lib\NetToolKit.dll</HintPath>
+    </Reference>
+    <Reference Include="SymbolFactoryDotNet">
+      <HintPath>..\..\Lib\SymbolFactoryDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="SymbolFactoryNetEngine">
+      <HintPath>..\..\Lib\SymbolFactoryNetEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AHMI\Controls\HMIBasicLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AHMI\Controls\HMIHVScrollBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Controls\HMINumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\HMIRotationalIndicator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\HMIStackLight.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Alarm\HMIAlarmMan2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Alarm\HMIAlarmMan.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\ButtonAll\HMIBasicButtonFlag.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\ButtonAll\HMIAnnunciator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\ButtonAll\HMIbutton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\ButtonAll\HMICheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\ButtonAll\HMISquareIlluminatedButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Components\HMIAnalogVisibilityController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Components\HMIBasicDataLogger.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Components\HMIBasicDataLogger2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Components\HMIDataSubscriber.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Components\HMIDataSubscriber2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Components\HMISimpleWebServer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Components\SocketClient\HMIGenericTCPClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Components\HMISoundPlayer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Controls\HMIGroupPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Controls\HMIIndicator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Controls\HMIRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DialogEditor\GraphicDialogEditor.cs" />
+    <Compile Include="DialogEditor\TestDialogEditor.cs" />
+    <Compile Include="AHMI\DigitalDisplay\HMIDigitalPanelMeter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\DigitalDisplay\HMIOdometer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\DigitalDisplay\HMITempController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Display\HMIAnalogValueDisplay.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Display\HMIDateTimeDisplay.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Display\HMILabelWerk.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Display\HMITextBoxInput.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Display\HMIKeyboardInput.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Display\HMILabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Display\HMITextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Display\SetLabel.cs" />
+    <Compile Include="Drivers\PLCAddressItem.cs" />
+    <Compile Include="Enum\Enums.cs" />
+    <Compile Include="AHMI\Hydraulic\HMIHydraulicCylinder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Hydraulic\HMIHydraulicCylinderAnalog.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Hydraulic\HMIPipe.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Hydraulic\HMIPneumaticBallVave.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\ImageAll\HMIAnimatingPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\ImageAll\HMIGraphicIndicator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\ImageAll\HMIImageContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\ImageAll\HMIImageDisplayByValue.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\ImageAll\Symbols\GraphicIndicatorBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Leds\DrawAll\DrawGraphics.cs" />
+    <Compile Include="AHMI\Leds\HMILedSingle.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\LED\HMISimpleLED.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Licenses\LicenseManager.cs" />
+    <Compile Include="AHMI\Linear\HMILinearMeter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Linear\HMILinearMeterH.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Linear\HMILinearMeterHorizontal.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Linear\HMILinearMeterVertical.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Meter\HMIMeter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Meter\HMIMeter2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Motor\HMIFan.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Motor\HMIMotor.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Motor\HMIMotor3Color.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Motor\HMIWaterPump.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\ProcessAll\DrawAll\DrawGraphics2.cs" />
+    <Compile Include="AHMI\ProcessAll\DrawAll\DrawGraphics.cs" />
+    <Compile Include="AHMI\ProcessAll\HMIProcessLevel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\ProcessAll\HMIProcessIndicator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="HslControls\ButtonAll\HMIBasicButtonFlag.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\ButtonAll\HMIbutton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\Conveyer\HMIConveyer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\Conveyer\HMIConveyerRollers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\Gauge\HMIGauge.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\Lad\HMILanternSimple.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\Motor\HMIMotor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\Motor\HMIPumpOne.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\Pipe\HMIPipeLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\Pipe\HMIVacuumPump.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\ProgressBar\HMIProcessLevel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\ProgressBar\HMIProgressLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\Segment\HMILedDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\SelectorSwitch\HMISwitch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\TankAll\HMIBottle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\TankAll\HMIClassifier.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\Thermometer\HMIThermometer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControls\Valves\HMIValves.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Application.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="AHMI\Segment\DrawAll\DrawGraphics.cs" />
+    <Compile Include="AHMI\Segment\HMILCDMatrix.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Segment\HMISegment16LED.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Segment\HMISegment7LED.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\SelectorSwitch\HMIMushroomButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\SelectorSwitch\HMIPilotLight.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\SelectorSwitch\HMIPilotLight3Color.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\SelectorSwitch\HMIPushButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\SelectorSwitch\HMISelectorSwitch.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\SelectorSwitch\HMISelectorSwitch3Pos.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\SelectorSwitch\HMISelectorSwitch3PosByValue.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\SevenSegment\HMISevenSegment2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Components\SocketClient\GenericTCPEventArgs.cs" />
+    <Compile Include="AHMI\Components\SocketClient\MessageEventArgs.cs" />
+    <Compile Include="AHMI\Components\SocketClient\SocketStateObject.cs" />
+    <Compile Include="Subscription\IComComponent.cs" />
+    <Compile Include="Subscription\SubscriptionDetail.cs" />
+    <Compile Include="Subscription\SubscriptionHandler.cs" />
+    <Compile Include="Subscription\SubscriptionHandlerEventArgs.cs" />
+    <Compile Include="AHMI\TankAll\HMIBarLevel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\TankAll\HMICylinderTrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\TankAll\DrawingUtils.cs" />
+    <Compile Include="AHMI\ImageAll\HMIImageSelectByBit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\TankAll\HMITank.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Thermometer\HMIThermometer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Thermometer\HMIThermometer2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SymbolFactory\HMISymbolFactory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SymbolFactory\HMISymbolFactory.Designer.cs">
+      <DependentUpon>HMISymbolFactory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\Utility.cs" />
+    <Compile Include="AHMI\Vertical\HMIThumbDial.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Vertical\HMIVerticalSlider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Vertical\HMIVerticalSlider3.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Utilities.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Alarm\HMIAlarmMan.resx">
+      <DependentUpon>HMIAlarmMan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HslControls\Conveyer\HMIConveyer.resx">
+      <DependentUpon>HMIConveyer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HslControls\Conveyer\HMIConveyerRollers.resx">
+      <DependentUpon>HMIConveyerRollers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HslControls\Gauge\HMIGauge.resx">
+      <DependentUpon>HMIGauge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HslControls\Pipe\HMIPipeLine.resx">
+      <DependentUpon>HMIPipeLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SymbolFactory\HMISymbolFactory.resx">
+      <DependentUpon>HMISymbolFactory.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Drivers\AdvancedScada.DriverBase\DriverBase.csproj">
+      <Project>{1d570e9a-e5b4-44dd-946d-9d73cfa4a535}</Project>
+      <Name>DriverBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Util\AdvancedScada.Utils\Utils.csproj">
+      <Project>{5c361f75-32c8-487b-9eb8-0b4d627b89b4}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WCF\AdvancedScada.BaseService\BaseService.csproj">
+      <Project>{5b05b8bd-b05a-4b7a-8b0d-78c8be7441e1}</Project>
+      <Name>BaseService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WCF\AdvancedScada.IBaseService\IBaseService.csproj">
+      <Project>{f47222c0-6b69-4ff1-aec3-b4c668b0a55a}</Project>
+      <Name>IBaseService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AdvancedScada.Controls_Net45\Controls_Net45.vbproj">
+      <Project>{6a4ea5f0-f6a7-4d58-8542-e39444a0a7c3}</Project>
+      <Name>Controls_Net45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AdvancedScada.ImagePicker\ImagePicker.csproj">
+      <Project>{06c4d61d-cbb1-4f3d-8599-f18099548a25}</Project>
+      <Name>ImagePicker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AdvancedScada.Monitor\Monitor.csproj">
+      <Project>{b160281b-93b1-45bd-a07e-fd75c27916ea}</Project>
+      <Name>Monitor</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
