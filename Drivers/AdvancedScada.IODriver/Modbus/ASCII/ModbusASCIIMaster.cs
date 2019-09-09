@@ -114,9 +114,9 @@ namespace AdvancedScada.IODriver.Modbus.ASCII
 
 
 
-        public OperateResult<bool[]> ReadDiscrete(string address, ushort length)
+        public bool[] ReadDiscrete(string address, ushort length)
         {
-            return busAsciiClient.ReadDiscrete(address, length);
+            return busAsciiClient.ReadDiscrete(address, length).Content;
         }
 
         public bool Write(string address, dynamic value)

@@ -116,10 +116,10 @@ namespace AdvancedScada.IODriver.Delta.RTU
 
 
 
-        public OperateResult<bool[]> ReadDiscrete(string address, ushort length)
+        public bool[] ReadDiscrete(string address, ushort length)
         {
             var Address = DMT.DevToAddrW("DVP", address, Station);
-            return busRtuClient.ReadDiscrete($"{Address}", length);
+            return busRtuClient.ReadDiscrete($"{Address}", length).Content;
         }
 
         public bool Write(string address, dynamic value)

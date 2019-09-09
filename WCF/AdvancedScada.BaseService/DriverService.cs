@@ -40,8 +40,6 @@ namespace AdvancedScada.BaseService
 
                 var xmlFile = objChannelManager.ReadKey(objChannelManager.XML_NAME_DEFAULT);
                 if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile)) return false;
-
-
                 objChannelManager.Channels.Clear();
                 TagCollection.Tags.Clear();
                 var channels = objChannelManager.GetChannels(xmlFile);

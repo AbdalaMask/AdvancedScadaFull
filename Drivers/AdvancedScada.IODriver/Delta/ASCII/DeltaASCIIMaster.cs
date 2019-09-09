@@ -116,10 +116,10 @@ namespace AdvancedScada.IODriver.Delta.ASCII
 
 
 
-        public OperateResult<bool[]> ReadDiscrete(string address, ushort length)
+        public bool[] ReadDiscrete(string address, ushort length)
         {
             var Address = DMT.DevToAddrW("DVP", address, Station);
-            return busAsciiClient.ReadDiscrete($"{Address}", length);
+            return busAsciiClient.ReadDiscrete($"{Address}", length).Content;
         }
 
         public bool Write(string address, dynamic value)

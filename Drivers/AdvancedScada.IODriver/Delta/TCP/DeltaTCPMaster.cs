@@ -133,10 +133,10 @@ namespace AdvancedScada.IODriver.Delta.TCP
 
 
 
-        public OperateResult<bool[]> ReadDiscrete(string address, ushort length)
+        public bool[] ReadDiscrete(string address, ushort length)
         {
             var Address = DMT.DevToAddrW("DVP", address, Station);
-            return busTcpClient.ReadDiscrete($"{Address}", length);
+            return busTcpClient.ReadDiscrete($"{Address}", length).Content;
         }
 
         public bool Write(string address, dynamic value)

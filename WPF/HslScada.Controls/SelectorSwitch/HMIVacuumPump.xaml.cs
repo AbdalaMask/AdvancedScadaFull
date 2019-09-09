@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HslScada.Controls
 {
@@ -21,7 +11,7 @@ namespace HslScada.Controls
     /// </summary>
     public partial class HMIVacuumPump : UserControl
     {
-        
+
         public HMIVacuumPump()
         {
             InitializeComponent();
@@ -43,8 +33,6 @@ namespace HslScada.Controls
             DependencyProperty.Register("StartAngle", typeof(double), typeof(HMIVacuumPump), new PropertyMetadata(0d));
 
         private DoubleAnimation doubleAnimation;
-
-        private Storyboard storyboard = new Storyboard();
 
         /// <summary>
         /// 转动速度
@@ -86,7 +74,7 @@ namespace HslScada.Controls
         {
             HMIVacuumPump pumpOne = (HMIVacuumPump)dependency;
 
-            if (dependency !=null)
+            if (dependency != null)
             {
                 pumpOne.UpdateMoveSpeed();
             }

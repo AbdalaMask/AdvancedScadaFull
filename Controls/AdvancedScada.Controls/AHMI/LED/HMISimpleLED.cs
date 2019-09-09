@@ -91,7 +91,6 @@ namespace AdvancedScada.Controls.AHMI.LED
         //* Property - Hold time before bit reset
         //*****************************************
         private readonly Timer MinHoldTimer = new Timer();
-        private readonly bool MouseIsDown = false;
 
         //***************************************
         //* Call backs for returned data
@@ -210,38 +209,6 @@ namespace AdvancedScada.Controls.AHMI.LED
         public event EventHandler ValueChanged;
         #endregion
         #region Events
-        private void ReleaseValue()
-        {
-            try
-            {
-                switch (OutputType)
-                {
-                    case OutputType.MomentarySet:
-                        Utilities.Write(PLCAddressClick, Convert.ToString(false));
-                        break;
-                    case OutputType.MomentaryReset:
-                        Utilities.Write(PLCAddressClick, Convert.ToString(true));
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(this, ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void HoldTimer_Tick(object sender, EventArgs e)
-        {
-            MinHoldTimer.Enabled = false;
-            HoldTimeMet = true;
-            if (!MouseIsDown) ReleaseValue();
-        }
-
-        private void MaxHoldTimer_Tick(object sender, EventArgs e)
-        {
-            MaxHoldTimer.Enabled = false;
-            ReleaseValue();
-        }
 
 
         protected override void OnMouseDown(MouseEventArgs e)
@@ -368,13 +335,6 @@ namespace AdvancedScada.Controls.AHMI.LED
             {
                 SubscribeToComDriver();
             }
-        }
-        //***************************************
-        //* Call backs for returned data
-        //***************************************
-
-        private void PolledDataReturned(object sender, SubscriptionHandlerEventArgs e)
-        {
         }
 
         private void DisplaySubscribeError(object sender, PlcComEventArgs e)

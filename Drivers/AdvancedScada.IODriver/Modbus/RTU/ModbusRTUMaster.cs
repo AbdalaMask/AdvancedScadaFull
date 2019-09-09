@@ -114,9 +114,9 @@ namespace AdvancedScada.IODriver.Modbus.RTU
 
 
 
-        public OperateResult<bool[]> ReadDiscrete(string address, ushort length)
+        public bool[] ReadDiscrete(string address, ushort length)
         {
-            return busRtuClient.ReadDiscrete(address, length);
+            return busRtuClient.ReadDiscrete(address, length).Content;
         }
         public bool Write(string address, dynamic value)
         {

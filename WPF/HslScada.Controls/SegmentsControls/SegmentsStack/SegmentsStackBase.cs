@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace SegmentsControls
@@ -50,100 +47,100 @@ namespace SegmentsControls
 
         public ObservableCollection<CharItem> GetCharsArray()
         {
-            ObservableCollection<CharItem> valueChars=null;
+            ObservableCollection<CharItem> valueChars = null;
             try
             {
-            
-            // converts value to char array
-            char[] charArray =  Value.ToCharArray();
-            // the dots count
-            var dotCount = charArray.Where(c => c == '.').Count();
-            // the colons count
-            var colonCount = charArray.Where(c => c == ':').Count();
 
-            // the chars count without dots and colons
-            var charCount = charArray.Count() - dotCount;
-            
-             valueChars = new ObservableCollection<CharItem>();
-            int index = 0;
+                // converts value to char array
+                char[] charArray = Value.ToCharArray();
+                // the dots count
+                var dotCount = charArray.Where(c => c == '.').Count();
+                // the colons count
+                var colonCount = charArray.Where(c => c == ':').Count();
 
-            if (charArray.Count() > 0)
-            {
-                for (int i = 0; i < ElementsCount; i++)
+                // the chars count without dots and colons
+                var charCount = charArray.Count() - dotCount;
+
+                valueChars = new ObservableCollection<CharItem>();
+                int index = 0;
+
+                if (charArray.Count() > 0)
                 {
-                    // sets properties for the each seven segment item
-                    var item = new CharItem();
-                    item.ShowDot = ShowDot;
-                    item.ShowColon = ShowColon;
-                    item.FillBrush = FillBrush;
-                    item.SelectedFillBrush = SelectedFillBrush;
-                    item.PenColor = PenColor;
-                    item.SelectedPenColor = SelectedPenColor;
-                    item.PenThickness = PenThickness;
-                    item.GapWidth = GapWidth;
-                    item.RoundedCorners = RoundedCorners;
-                    item.TiltAngle = TiltAngle;
-                    item.VertSegDivider = VertSegDivider;
-                    item.HorizSegDivider = HorizSegDivider;
-
-                    valueChars.Add(item);
-
-                    if (i >= ElementsCount - charCount)
+                    for (int i = 0; i < ElementsCount; i++)
                     {
-                        if (index <= charArray.Count() - 1)
+                        // sets properties for the each seven segment item
+                        var item = new CharItem();
+                        item.ShowDot = ShowDot;
+                        item.ShowColon = ShowColon;
+                        item.FillBrush = FillBrush;
+                        item.SelectedFillBrush = SelectedFillBrush;
+                        item.PenColor = PenColor;
+                        item.SelectedPenColor = SelectedPenColor;
+                        item.PenThickness = PenThickness;
+                        item.GapWidth = GapWidth;
+                        item.RoundedCorners = RoundedCorners;
+                        item.TiltAngle = TiltAngle;
+                        item.VertSegDivider = VertSegDivider;
+                        item.HorizSegDivider = HorizSegDivider;
+
+                        valueChars.Add(item);
+
+                        if (i >= ElementsCount - charCount)
                         {
-                            // sets char for the element
-                            if (charArray[index] != '.' && charArray[index] != ':')
+                            if (index <= charArray.Count() - 1)
                             {
-                                valueChars[i].Item = charArray[index];
+                                // sets char for the element
+                                if (charArray[index] != '.' && charArray[index] != ':')
+                                {
+                                    valueChars[i].Item = charArray[index];
+                                }
+
+                                // sets ":" for the element
+                                if (charArray[index] == ':')
+                                {
+                                    valueChars[i].OnColon = true;
+                                }
+
+                                // sets dot for the element
+                                if (charArray[index] == '.')
+                                {
+                                    valueChars[i - 1].OnDot = true;
+                                    valueChars[i].Item = charArray[index + 1];
+                                    index++;
+                                }
                             }
 
-                            // sets ":" for the element
-                            if (charArray[index] == ':')
-                            {
-                                valueChars[i].OnColon = true;
-                            }
-
-                            // sets dot for the element
-                            if (charArray[index] == '.')
-                            {
-                                valueChars[i - 1].OnDot = true;
-                                valueChars[i].Item = charArray[index + 1];
-                                index++;
-                            }
+                            index++;
                         }
-
-                        index++;
                     }
-                }
 
 
-                // sets dot for the last element if required
-                if (ElementsCount >= charCount)
-                {
-                    if (charArray[charArray.Count() - 1] == '.')
+                    // sets dot for the last element if required
+                    if (ElementsCount >= charCount)
                     {
-                        var item = valueChars.Last();
-                        item.OnDot = true;
+                        if (charArray[charArray.Count() - 1] == '.')
+                        {
+                            var item = valueChars.Last();
+                            item.OnDot = true;
+                        }
                     }
-                }
-                else
-                {
-                    if (charArray[index] == '.')
+                    else
                     {
-                        var item = valueChars[ElementsCount - 1];
-                        item.OnDot = true;
+                        if (charArray[index] == '.')
+                        {
+                            var item = valueChars[ElementsCount - 1];
+                            item.OnDot = true;
+                        }
                     }
+
                 }
 
-            }
 
-           
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-               
+
             }
             return valueChars;
         }

@@ -200,7 +200,7 @@ namespace AdvancedScada.IODriver.Siemens
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
 
-        public OperateResult<bool[]> ReadDiscrete(string address, ushort length)
+        public bool[] ReadDiscrete(string address, ushort length)
         {
             throw new NotImplementedException();
         }

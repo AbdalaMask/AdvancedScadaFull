@@ -202,7 +202,7 @@ namespace AdvancedScada.IODriver.Panasonic
             throw new NotImplementedException();
         }
 
-        public OperateResult<bool[]> ReadDiscrete(string address, ushort length)
+        public bool[] ReadDiscrete(string address, ushort length)
         {
             throw new NotImplementedException();
         }

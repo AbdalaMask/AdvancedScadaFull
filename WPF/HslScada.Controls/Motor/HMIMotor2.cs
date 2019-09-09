@@ -1,11 +1,7 @@
 ﻿using AdvancedScada.DriverBase.Client;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -145,7 +141,7 @@ namespace HslScada.Controls
             {
                 base.SetValue(ValueProperty, value);
 
-              
+
 
             }
         }
@@ -210,9 +206,9 @@ namespace HslScada.Controls
             base.OnInitialized(e);
             try
             {
-            //* When address is changed, re-subscribe to new address
-            if (string.IsNullOrEmpty(PLCAddressValue) || string.IsNullOrWhiteSpace(PLCAddressValue) ||
-                    HslScada.Controls.Licenses.LicenseHMI.IsInDesignMode) return;
+                //* When address is changed, re-subscribe to new address
+                if (string.IsNullOrEmpty(PLCAddressValue) || string.IsNullOrWhiteSpace(PLCAddressValue) ||
+                        HslScada.Controls.Licenses.LicenseHMI.IsInDesignMode) return;
                 Binding binding = new Binding("Value");
                 binding.Source = TagCollectionClient.Tags[PLCAddressValue];
                 this.SetBinding(ValueProperty, binding);
@@ -222,8 +218,8 @@ namespace HslScada.Controls
                 DisplayError(ex.Message);
             }
 
-           
-          
+
+
 
 
         }
@@ -269,7 +265,7 @@ namespace HslScada.Controls
                     DisplayError("WRITE FAILED!" + ex.Message);
                 }
 
-                
+
             }
         }
         protected override void OnMouseUp(MouseButtonEventArgs e)
@@ -295,7 +291,7 @@ namespace HslScada.Controls
                     DisplayError("WRITE FAILED!" + ex.Message);
                 }
 
-                 
+
             }
         }
         #endregion
@@ -305,7 +301,7 @@ namespace HslScada.Controls
         //********************************************************
         private string OriginalText;
         private DispatcherTimer ErrorDisplayTime;
-       
+
 
 
         private void DisplayError(string ErrorMessage)

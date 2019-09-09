@@ -187,13 +187,14 @@ namespace AdvancedScada.Studio.Editors
         {
             return NewPages("UserProperty ", 0, new UserPropertyGrid());
         }
-        private KryptonPage NewPages(string name, int image, System.Windows.Forms.Control content)
+        private KryptonPage NewPages(string name, int image, Control content)
         {
             // Create new page with title and image
             KryptonPage p = new KryptonPage();
             p.Text = name;
             p.TextTitle = name;
             p.TextDescription = name;
+            
 
 
             // Add the control for display inside the page

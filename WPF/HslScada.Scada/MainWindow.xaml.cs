@@ -1,5 +1,4 @@
-﻿using AdvancedScada.BaseService;
-using AdvancedScada.BaseService.Client;
+﻿using AdvancedScada.BaseService.Client;
 using AdvancedScada.DriverBase;
 using AdvancedScada.IBaseService;
 using AdvancedScada.IBaseService.Common;
@@ -41,7 +40,7 @@ namespace HslScada.Scada
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-               // Application.Current.Shutdown(0);
+                // Application.Current.Shutdown(0);
             }
 
 
@@ -56,13 +55,13 @@ namespace HslScada.Scada
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             t8.Value = true;
-           
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             t8.Value = false;
-            
+
         }
 
         private void Window_Unloaded(object sender, RoutedEventArgs e)

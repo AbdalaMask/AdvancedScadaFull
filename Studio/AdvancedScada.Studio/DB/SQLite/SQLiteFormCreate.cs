@@ -57,9 +57,6 @@ namespace AdvancedScada.Studio.DB.SQLite
                         cmd.CommandText = tempStrg;
                         cmd.ExecuteNonQuery();
 
-
-
-
                     }
 
                 }

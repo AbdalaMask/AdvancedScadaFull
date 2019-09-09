@@ -2,14 +2,10 @@
 using Svg;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ImagePicker
@@ -98,14 +94,14 @@ namespace ImagePicker
                 {
                     var newName = Path.GetFileNameWithoutExtension(file);
 
-                   
+
                     if (file.EndsWith(".svg"))
                     {
                         try
                         {
                             var svgDocument = SvgDocument.Open(file);
                             var bitmap = svgDocument.Draw();
-                           
+
                             Pic.Image = bitmap;
                             rsxw.AddResource(file, bitmap);
                         }

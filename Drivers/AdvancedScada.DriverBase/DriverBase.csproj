@@ -47,6 +47,15 @@
     <Compile Include="Comm\PLCComEventArgs.cs" />
     <Compile Include="Comm\PLCDriverException.cs" />
     <Compile Include="Comm\Util.cs" />
+    <Compile Include="DataTypes\Bit.cs" />
+    <Compile Include="DataTypes\ByteArray.cs" />
+    <Compile Include="DataTypes\Conversion.cs" />
+    <Compile Include="DataTypes\DInt.cs" />
+    <Compile Include="DataTypes\DWord.cs" />
+    <Compile Include="DataTypes\Int.cs" />
+    <Compile Include="DataTypes\Memory.cs" />
+    <Compile Include="DataTypes\Real.cs" />
+    <Compile Include="DataTypes\Word.cs" />
     <Compile Include="DemoUtils.cs" />
     <Compile Include="Devices\Channel.cs" />
     <Compile Include="Devices\DataBlock.cs" />

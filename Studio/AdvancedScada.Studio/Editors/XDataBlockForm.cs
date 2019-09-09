@@ -1,12 +1,11 @@
 ﻿using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.Management;
+using AdvancedScada.Utils.LSIS;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
-using AdvancedScada.Utils.LSIS;
 using static AdvancedScada.IBaseService.Common.XCollection;
-using AdvancedScada.Management;
 
 namespace AdvancedScada.Studio.Editors
 {
@@ -273,10 +272,7 @@ namespace AdvancedScada.Studio.Editors
 
         }
 
-        private void DbFrm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Close();
-        }
+
 
         private void cboxDataType_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -1,10 +1,7 @@
 ﻿using AdvancedScada.DriverBase.Client;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,7 +10,7 @@ using System.Windows.Media.Imaging;
 
 namespace HslScada.Controls
 {
-   public class WaterPump : Control
+    public class WaterPump : Control
     {
         protected event PropertyChangedCallback PropertyChanged = (sender, e) => { };
         public static DependencyProperty MotorColorsProperty = DependencyProperty.Register(
@@ -65,7 +62,7 @@ namespace HslScada.Controls
 
             }
         }
-        [Category("HMI"),Browsable(false)]
+        [Category("HMI"), Browsable(false)]
         public MotorColor MotorColors
         {
             get
@@ -82,7 +79,7 @@ namespace HslScada.Controls
         {
             Gray,
             Green
-           
+
         }
 
         ImageSource imageSource;
@@ -114,26 +111,26 @@ namespace HslScada.Controls
             try
             {
                 //* When address is changed, re-subscribe to new address
-            if (string.IsNullOrEmpty(PLCAddressValue) || string.IsNullOrWhiteSpace(PLCAddressValue) ||
-                    HslScada.Controls.Licenses.LicenseHMI.IsInDesignMode) return;
+                if (string.IsNullOrEmpty(PLCAddressValue) || string.IsNullOrWhiteSpace(PLCAddressValue) ||
+                        HslScada.Controls.Licenses.LicenseHMI.IsInDesignMode) return;
                 Binding binding = new Binding("Value");
                 binding.Source = TagCollectionClient.Tags[PLCAddressValue];
                 this.SetBinding(ValueProperty, binding);
-            
+
             }
             catch (Exception ex)
             {
                 DisplayError(ex.Message);
             }
 
-           
+
 
 
         }
 
         private void DisplayError(string message)
         {
-             
+
         }
     }
 }

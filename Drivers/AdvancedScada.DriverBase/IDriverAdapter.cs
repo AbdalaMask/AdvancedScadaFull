@@ -24,7 +24,7 @@ namespace AdvancedScada.DriverBase
 
         TValue[] Read<TValue>(DataBlock db);
 
-        OperateResult<bool[]> ReadDiscrete(string address, ushort length);
+         bool[] ReadDiscrete(string address, ushort length);
 
         bool Write(string address, dynamic value);
 

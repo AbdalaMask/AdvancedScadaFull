@@ -97,6 +97,8 @@
             // 
             // xtbImageGallery
             // 
+            this.xtbImageGallery.Button.ButtonDisplayLogic = ComponentFactory.Krypton.Navigator.ButtonDisplayLogic.None;
+            this.xtbImageGallery.Button.CloseButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Hide;
             this.xtbImageGallery.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtbImageGallery.Location = new System.Drawing.Point(0, 28);
             this.xtbImageGallery.Name = "xtbImageGallery";

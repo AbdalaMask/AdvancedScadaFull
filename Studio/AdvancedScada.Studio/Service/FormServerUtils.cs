@@ -1,10 +1,9 @@
-﻿using ComponentFactory.Krypton.Toolkit;
+﻿using AdvancedScada.BaseService;
+using AdvancedScada.IBaseService.Common;
+using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Linq;
 using System.ServiceModel;
-using System.Windows.Forms;
-using AdvancedScada.BaseService;
-using AdvancedScada.IBaseService.Common;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.Studio.Service
 {
@@ -104,10 +103,6 @@ namespace AdvancedScada.Studio.Service
         {
 
             txtStatus.Text = "The Server is running";
-        }
-        private void FormServerUtils_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            e.Cancel = true;
         }
     }
 }

@@ -44,6 +44,7 @@ namespace AdvancedScada.Management
         public const string MemoryType = "MemoryType";
         public const string LENGTH = "Length";
         public const string DATA_TYPE = "DataType";
+        public const string Is_Array = "IsArray";
         //================================Tag=====================
         public const string TAG = "Tag";
         public const string TAG_ID = "TagId";

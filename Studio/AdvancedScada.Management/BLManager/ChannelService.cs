@@ -400,7 +400,7 @@ namespace AdvancedScada.Management.BLManager
             try
             {
                 RegistryKey regKey;
-                regKey = Registry.CurrentUser.OpenSubKey(@"Software\IndustrialHMI"); //HKEY_CURRENR_USER\Software\VSSCD
+                regKey = Registry.CurrentUser.OpenSubKey(@"Software\AdvancedScada"); //HKEY_CURRENR_USER\Software\VSSCD
                 if (regKey != null) result = (string)regKey.GetValue(keyName);
             }
             catch (Exception ex)
@@ -421,7 +421,7 @@ namespace AdvancedScada.Management.BLManager
             try
             {
                 RegistryKey regKey;
-                regKey = Registry.CurrentUser.CreateSubKey(@"Software\IndustrialHMI");
+                regKey = Registry.CurrentUser.CreateSubKey(@"Software\AdvancedScada");
                 regKey.SetValue(keyName, keyValue);
                 regKey.Close();
             }
@@ -499,6 +499,7 @@ namespace AdvancedScada.Management.BLManager
                             dbElement.SetAttribute(DataBlockService.START_ADDRESS, $"{db.StartAddress}");
                             dbElement.SetAttribute(DataBlockService.LENGTH, $"{db.Length}");
                             dbElement.SetAttribute(DataBlockService.DATA_TYPE, $"{db.DataType}");
+                            dbElement.SetAttribute(DataBlockService.Is_Array, $"{db.IsArray}");
                             dbElement.SetAttribute(DataBlockService.MemoryType, $"{db.MemoryType}");
                             dbElement.SetAttribute(DESCRIPTION, db.Description);
                             dvElement.AppendChild(dbElement);

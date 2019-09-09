@@ -160,11 +160,6 @@ namespace AdvancedScada.Utils.Net
             Message m = Message.Create(Handle, IPM_CLEARADDRESS, IntPtr.Zero, IntPtr.Zero);
             WndProc(ref m);
         }
-        private System.Net.IPAddress GetIpAddress(IntPtr ip)
-        {
-            if (!initialized) return System.Net.IPAddress.None;
-            return new System.Net.IPAddress(ip.ToInt64());
-        }
         private IntPtr MakeRange(byte low, byte high)
         {
             return (IntPtr)((high << 8) + low);

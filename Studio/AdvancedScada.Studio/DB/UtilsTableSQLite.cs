@@ -77,6 +77,7 @@ namespace AdvancedScada.Studio.DB
                     tables.Add(tablename);
                 }
                 con.Close();
+                con.Dispose();
             }
             return tables;
         }
@@ -130,6 +131,7 @@ namespace AdvancedScada.Studio.DB
 
                 dr.Close();
                 connection.Close();
+                connection.Dispose();
             }
             return dtable;
         }

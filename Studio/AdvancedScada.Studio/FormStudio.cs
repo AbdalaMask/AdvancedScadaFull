@@ -393,12 +393,6 @@ namespace AdvancedScada.Studio
         }
 
         #endregion
-
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void TabForm_CloseAction(object sender, CloseActionEventArgs e)
         {
             if (e.Item.Text == "MonitorForm")

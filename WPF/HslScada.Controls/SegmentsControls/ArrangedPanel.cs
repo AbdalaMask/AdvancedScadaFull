@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -12,7 +10,7 @@ namespace SegmentsControls
     /// <summary>
     /// A panel children of which fill maximum space
     /// </summary>
-    [DesignTimeVisible(false)] 
+    [DesignTimeVisible(false)]
     internal class ArrangedPanel : Panel
     {
         protected override Size ArrangeOverride(Size finalSize)

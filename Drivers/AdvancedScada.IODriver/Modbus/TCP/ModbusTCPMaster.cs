@@ -136,9 +136,9 @@ namespace AdvancedScada.IODriver.Modbus.TCP
 
 
 
-        public OperateResult<bool[]> ReadDiscrete(string address, ushort length)
+        public bool[] ReadDiscrete(string address, ushort length)
         {
-            return busTcpClient.ReadDiscrete(address, length);
+            return busTcpClient.ReadDiscrete(address, length).Content;
         }
 
 

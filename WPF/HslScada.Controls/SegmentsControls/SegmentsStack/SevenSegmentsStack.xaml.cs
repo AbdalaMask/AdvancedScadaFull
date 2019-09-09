@@ -1,15 +1,10 @@
-﻿using AdvancedScada.DriverBase.Client;
-using HslScada.Controls;
+﻿using HslScada.Controls;
 using KeyPad;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace SegmentsControls
@@ -29,9 +24,9 @@ namespace SegmentsControls
         {
             InitializeComponent();
         }
-      
 
-        
+
+
         public override void OnPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             ValueChars = GetCharsArray();
@@ -48,33 +43,9 @@ namespace SegmentsControls
             set
             {
                 base.SetValue(PLCAddressValueProperty, value);
-                
+
 
             }
-        }
-
-        private void SegmentsStackBase_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-          //* When address is changed, re-subscribe to new address
-            if (string.IsNullOrEmpty(PLCAddressValue) || string.IsNullOrWhiteSpace(PLCAddressValue) ||
-                    HslScada.Controls.Licenses.LicenseHMI.IsInDesignMode) return;
-                Binding binding = new Binding("Value");
-                binding.Source = TagCollectionClient.Tags[PLCAddressValue];
-                this.SetBinding(ValueProperty, binding);
-            }
-            catch (Exception ex)
-            {
-                DisplayError(ex.Message);
-            }
-
- 
-        }
-
-        private void DisplayError(string message)
-        {
-            
         }
         #region "Keypad popup for data entry"
 
@@ -100,7 +71,7 @@ namespace SegmentsControls
                 {
                     Utilities.Write(PLCAddressKeypad, keypadWindow.Result);
                 }
-                
+
             }
         }
 

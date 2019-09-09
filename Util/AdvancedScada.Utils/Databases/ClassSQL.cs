@@ -4,15 +4,12 @@ using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.IO;
-using System.ServiceProcess;
 using System.Windows.Forms;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.Utils.Databases
 {
     public class ClassSQL
     {
-        // متغير التحكم بالخدمة
-        private readonly ServiceController SqlServiceCon = new ServiceController("MSSQL$SQLEXPRESS");
 
         public void FillComboServers(ComboBox Combo)
         {
@@ -82,90 +79,6 @@ namespace AdvancedScada.Utils.Databases
             return Photo;
         }
 
-        private void BackUp()
-        {
-            var bBackUpStatus = true;
-
-            if (Directory.Exists(@"directory loction"))
-            {
-                if (File.Exists(@"filelocation"))
-                {
-                    if (MessageBox.Show(@"Do you want to replace it?", "Back", MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Question) == DialogResult.Yes)
-                        File.Delete(@"file loction");
-                    else
-                        bBackUpStatus = false;
-                }
-            }
-            else
-            {
-                Directory.CreateDirectory(@"dirctorylocation");
-            }
-
-            if (bBackUpStatus)
-            {
-                //Connect to DB 
-                SqlConnection connect;
-                var con = "Connectionn String";
-                connect = new SqlConnection(con);
-                connect.Open();
-                //---------------------------------------------------------------------------------------------------- 
-
-                //Execute SQL--------------- 
-                SqlCommand command;
-                command = new SqlCommand(@"backup database databaseName to disk ='DatabaseLocation' with init,stats=10",
-                    connect);
-                command.ExecuteNonQuery();
-                //------------------------------------------------------------------------------------------------------------------------------- 
-
-                connect.Close();
-
-                MessageBox.Show("The support of the database was successfully performed", "Back", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-            }
-        }
-
-        private void Restore()
-        {
-            try
-            {
-                if (File.Exists(@"FILE LOCAITON"))
-                {
-                    if (MessageBox.Show("Are you sure you restore?", "Back", MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        //Connect SQL----------- 
-                        SqlConnection connect;
-                        var con = "CONNECTION STRING";
-                        connect = new SqlConnection(con);
-                        connect.Open();
-                        //----------------------------------------------------------------------------------------- 
-
-                        //Excute SQL---------------- 
-                        SqlCommand command;
-                        command = new SqlCommand("use master", connect);
-                        command.ExecuteNonQuery();
-                        command = new SqlCommand(@"restore database DatabaseName from disk = 'FILE LOCATION'", connect);
-                        command.ExecuteNonQuery();
-                        //-------------------------------------------------------------------------------------------------------- 
-                        connect.Close();
-
-                        MessageBox.Show("Has been restored database", "Restoration", MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(@"Do not make any endorsement above (or is not in the correct path)", "Restoration",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show(exp.Message);
-            }
-        }
-
 
         public void CreateDatabase(string connString, string dbName, bool dropExistent = true)
         {
@@ -218,39 +131,6 @@ namespace AdvancedScada.Utils.Databases
                 cn.Close();
             }
         }
-
-        #region  SQl Express Service Functions 
-
-        // إجراء بدء الخدمة
-        private void StartSQLExpress()
-        {
-            try
-            {
-                SqlServiceCon.Refresh();
-                if (SqlServiceCon.Status != ServiceControllerStatus.Running &&
-                    SqlServiceCon.Status != ServiceControllerStatus.StartPending) SqlServiceCon.Start();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(this.GetType().Name, ex.Message);
-            }
-        }
-
-        // إجراء إنهاء الخدمة
-        private void StopSQLExpress()
-        {
-            try
-            {
-                SqlServiceCon.Refresh();
-                if (SqlServiceCon.CanStop) SqlServiceCon.Stop();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        #endregion
     }
     public class UtilsTable
     {
