@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="HslScada.Controls.Tank"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HslScada.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="90" d:DesignWidth="190">
+    <Viewbox Stretch="Uniform">
+        <Canvas x:Name="HorizontalRight" Width="190" Height="90">
+            <!--Step 1-->
+            <Path x:Name="PathBody" Width=" 190" Height=" 90" Canvas.Left=" 0" Canvas.Top="1" 
+                  Stretch="Fill" StrokeThickness=" 0.5" StrokeMiterLimit="2.75" Data="M 168.828,96.8201L 174.874,95.271L 179.311,92.0437L 183.235,87.2027L 185.872,82.6198L 188.123,77.327L 190.052,71.4532L 191.467,64.9986L 192.432,58.1566L 192.818,53.3156L 192.946,50.8628L 192.946,48.4101L 192.689,41.0517L 191.853,34.0161L 190.567,27.4324L 188.83,21.365L 186.708,15.8785L 184.135,11.102L 180.34,5.87376L 175.967,2.19459L 170.05,0.0645466L 168.828,1.90735e-006L 24.1183,1.90735e-006L 18.0726,1.54912L 13.6349,4.77646L 9.71163,9.61746L 7.0747,14.2003L 4.82366,19.4931L 2.89419,25.3669L 1.47925,31.8215L 0.514523,38.6635L 0.12863,43.5045L 0,45.9573L 0,48.4101L 0.257261,55.7684L 1.09336,62.804L 2.37967,69.3877L 4.11619,75.4551L 6.23859,80.9416L 8.81121,85.7181L 12.6058,90.9464L 16.9793,94.6255L 22.8963,96.7556L 24.1183,96.8201L 168.828,96.8201 Z ">
+                <Path.Fill>
+                    <LinearGradientBrush StartPoint=" 0,0" EndPoint=" 0,0.5" SpreadMethod="Reflect" >
+                        <GradientStop Color=" #FF071923" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Path.Fill>
+            </Path>
+            <!--Step 2-->
+            <Rectangle x:Name="PathBodyLeft" Width="4" Height="87.5" Canvas.Left="24" Canvas.Top="1" Stretch="Fill" StrokeThickness="0.5" Stroke="Black" StrokeMiterLimit="2.75">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint=" 0,0.5" SpreadMethod="Reflect">
+                        <GradientStop Color="#FF071923" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <!--Step 3-->
+            <Rectangle x:Name="PathBodyRight" Width="4" Height="87.5" Canvas.Left="162" Canvas.Top="1" Stretch="Fill" StrokeThickness="0.5" Stroke="Black" StrokeMiterLimit="2.75">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint=" 0,0.5" SpreadMethod="Reflect">
+                        <GradientStop Color="#FF071923" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Canvas>
+            
+    </Viewbox>
+</UserControl>

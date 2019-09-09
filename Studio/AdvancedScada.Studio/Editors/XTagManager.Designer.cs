@@ -567,6 +567,7 @@ namespace AdvancedScada.Studio.Editors
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.toolStrip2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockActive;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "XTagManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -61,6 +61,7 @@ namespace AdvancedScada.Studio.Editors
             this.tabPageEthernet = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cboxModeNet = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.txtIPAddress = new AdvancedScada.Utils.Net.IPAddressText();
             this.txtSlot = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.txtPort = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -71,7 +72,6 @@ namespace AdvancedScada.Studio.Editors
             this.btnBlack = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnNext = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtIPAddress = new AdvancedScada.Utils.Net.IPAddressText();
             ((System.ComponentModel.ISupportInitialize)(this.TabControlLSIS)).BeginInit();
             this.TabControlLSIS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabPageChannel)).BeginInit();
@@ -454,6 +454,15 @@ namespace AdvancedScada.Studio.Editors
             this.cboxModeNet.TabIndex = 17;
             this.cboxModeNet.Text = "FENET";
             // 
+            // txtIPAddress
+            // 
+            this.txtIPAddress.Location = new System.Drawing.Point(124, 21);
+            this.txtIPAddress.Margin = new System.Windows.Forms.Padding(4);
+            this.txtIPAddress.Name = "txtIPAddress";
+            this.txtIPAddress.Size = new System.Drawing.Size(189, 20);
+            this.txtIPAddress.TabIndex = 16;
+            this.txtIPAddress.Text = "127.0.0.1";
+            // 
             // txtSlot
             // 
             this.txtSlot.Location = new System.Drawing.Point(121, 106);
@@ -523,6 +532,7 @@ namespace AdvancedScada.Studio.Editors
             this.kryptonHeaderGroup4.Panel.Controls.Add(this.btnNext);
             this.kryptonHeaderGroup4.Size = new System.Drawing.Size(500, 54);
             this.kryptonHeaderGroup4.TabIndex = 6;
+            this.kryptonHeaderGroup4.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddChannel;
             this.kryptonHeaderGroup4.ValuesSecondary.Heading = "";
             // 
             // btnCancel
@@ -561,15 +571,6 @@ namespace AdvancedScada.Studio.Editors
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // txtIPAddress
-            // 
-            this.txtIPAddress.Location = new System.Drawing.Point(124, 21);
-            this.txtIPAddress.Margin = new System.Windows.Forms.Padding(4);
-            this.txtIPAddress.Name = "txtIPAddress";
-            this.txtIPAddress.Size = new System.Drawing.Size(189, 20);
-            this.txtIPAddress.TabIndex = 16;
-            this.txtIPAddress.Text = "127.0.0.1";
             // 
             // XChannelForm
             // 

@@ -42,12 +42,12 @@ namespace AdvancedScada.DriverBase.Devices
         [DataMember]
         [Browsable(true)]
         public string DataType { get; set; }
+
         [Display(Name = "Length", Order = 5)]
         [Category("DataBlock")]
         [DataMember]
         [Browsable(true)]
         public ushort Length { get; set; }
-
 
         [Display(Name = "StartAddress", Order = 4)]
         [Category("DataBlock")]
@@ -95,6 +95,11 @@ namespace AdvancedScada.DriverBase.Devices
         [Browsable(false)]
         [Display(Name = "TypeOfRead")]
         public string TypeOfRead { get; set; }
+        [Category("DataBlock")]
+        [DataMember]
+        [Browsable(false)]
+        [Display(Name = "IsArray")]
+        public bool IsArray { get; set; }
 
     }
 }

@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="HslScada.Controls.HMISwitchButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HslScada.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100">
+    <Viewbox>
+        <Canvas Width="100" Height="100">
+            <!--Step 1-->
+            <Path x:Name="Path1" Width="100" Height="100" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" StrokeThickness="0" 
+                  StrokeMiterLimit="2.75" Stroke="DarkGray" 
+                  Data="M 337.713,183.353L 292.307,73.3283L 182.686,27.7566L 73.0468,73.3283L 27.6411,183.353L 73.0468,293.378L 182.686,338.95L 292.307,293.378L 337.713,183.353L 337.732,183.353" RenderTransformOrigin="0.5,0.5">
+                <Path.Fill>
+                    <RadialGradientBrush Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.5" RadiusY="0.5" Opacity="1" SpreadMethod="Reflect">
+                        <GradientStop Color="#FF071923" Offset="0.8" />
+                        <GradientStop Color="White" Offset="1" />
+                    </RadialGradientBrush>
+                </Path.Fill>
+            </Path>
+            <!--Step 2-->
+            <Ellipse Canvas.Left="10" Canvas.Top="10" Width="80" Height="80" StrokeThickness="1" Stroke="Gray">
+                <Ellipse.Fill>
+                    <RadialGradientBrush Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.5" RadiusY="0.5" Opacity="1" SpreadMethod="Reflect">
+                        <GradientStop Color="Gray" Offset="0"/>
+                        <GradientStop Color="#FF071923" Offset="1.5"/>
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <!--Step3-->
+            <Ellipse Canvas.Left="15" Canvas.Top="15" Width="70" Height="70" StrokeThickness="3" Stroke="Black">
+                <Ellipse.Fill>
+                    <SolidColorBrush Color="#FF910E0E"/>
+                </Ellipse.Fill>
+            </Ellipse> 
+            <!--Step 4-->
+            <Rectangle Canvas.Left="45" Canvas.Top="18" Width="12" Height="64" StrokeThickness="1" Stroke="Black" RadiusX="5" RadiusY="5">
+                <Rectangle.Fill>
+                    <LinearGradientBrush x:Name="LinearProcessBrush2" StartPoint="1,0.5" EndPoint="0,1" SpreadMethod="Pad">
+                        <GradientStop Color="Gray" Offset="0"/>
+                        <GradientStop Color="Silver" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <!--Step 5-->
+            <Path x:Name="Path3" Width="8" Height="10" Canvas.Left="47" Canvas.Top="22" Stretch="Fill" StrokeThickness="0.5" 
+                  StrokeMiterLimit="2.75" Stroke="Black" 
+                  Data="M7,14l5,-5 5,5z">
+                <Path.Fill>
+                    <SolidColorBrush Color="Black"/>
+                </Path.Fill>
+            </Path>
+        </Canvas>       
+    </Viewbox>
+</UserControl>

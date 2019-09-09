@@ -1,0 +1,362 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+    mc:Ignorable="d"
+    xmlns:local="clr-namespace:HslScada.Controls">
+    <Style TargetType="{x:Type local:PilotLight}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:PilotLight}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="28"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="ellipse">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#FF65A860"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed"/>
+                                <VisualState x:Name="Disabled"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[3].(GradientStop.Color)" Storyboard.TargetName="ellipse">
+                                            <EasingColorKeyFrame KeyTime="0" Value="Red"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="ellipse">
+                                            <EasingColorKeyFrame KeyTime="0" Value="Red"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="ellipse">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#FF830A04"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <StringAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Text)" Storyboard.TargetName="textBlock">
+                                            <DiscreteStringKeyFrame KeyTime="0" Value="إيقاف"/>
+                                        </StringAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked"/>
+                                <VisualState x:Name="Indeterminate"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border>
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFDBDDDC" Offset="1"/>
+                                    <GradientStop Color="#FFDBDDDC"/>
+                                    <GradientStop Color="#FFFAFDF7" Offset="0.5"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                        <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+                        <Grid Grid.RowSpan="1" Grid.Row="1">
+                            <Border BorderBrush="{x:Null}" Grid.Row="0" Background="#FF414051"/>
+                            <ed:RegularPolygon InnerRadius="1" PointCount="8" Stretch="Fill" StrokeThickness="5" Stroke="{x:Null}" Grid.RowSpan="1" Grid.Row="0">
+                                <ed:RegularPolygon.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFE1E5E3" Offset="0"/>
+                                        <GradientStop Color="#FFE1E5E3" Offset="1"/>
+                                        <GradientStop Color="#FF6D7271" Offset="0.5"/>
+                                    </LinearGradientBrush>
+                                </ed:RegularPolygon.Fill>
+                            </ed:RegularPolygon>
+                            <Ellipse x:Name="ellipse" Grid.Row="0" Stroke="#FF41404E" StrokeThickness="1" VerticalAlignment="Stretch" Height="65" Width="65">
+                                <Ellipse.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF128B05"/>
+                                        <GradientStop Color="#FFE1E5E3" Offset="1"/>
+                                        <GradientStop Color="#FF0E8304" Offset="0.5"/>
+                                        <GradientStop Color="#FF128B05" Offset="0.992"/>
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--==========================-->
+    <Style TargetType="{x:Type local:HMIArrow}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:HMIArrow}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="16.599"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="33*"/>
+                            <RowDefinition Height="40*"/>
+                            <RowDefinition Height="35*"/>
+                        </Grid.RowDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="blockArrow">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#FF5BD35B"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="blockArrow1">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#FFD8D8D8"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="blockArrow">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#FF97EFB7"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="blockArrow1">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#FFA9B4B5"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ed:BlockArrow x:Name="blockArrow1" Height="Auto" Orientation="Right" Grid.RowSpan="3" Width="Auto" Grid.ColumnSpan="3" StrokeThickness="5" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+                            <ed:BlockArrow.Stroke>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF727278" Offset="0"/>
+                                    <GradientStop Color="#FF727278" Offset="1"/>
+                                    <GradientStop Color="#FFAEAEAB" Offset="0.5"/>
+                                </LinearGradientBrush>
+                            </ed:BlockArrow.Stroke>
+                            <ed:BlockArrow.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF363E35" Offset="1"/>
+                                    <GradientStop Color="#FF363E35"/>
+                                    <GradientStop Color="#FFA9B5AA" Offset="0.475"/>
+                                </LinearGradientBrush>
+                            </ed:BlockArrow.Fill>
+                        </ed:BlockArrow>
+                        <ed:BlockArrow x:Name="blockArrow" Orientation="Right" StrokeThickness="3" Grid.RowSpan="1" Grid.Row="1" Grid.ColumnSpan="1" Grid.Column="1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+                            <ed:BlockArrow.Stroke>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF4C994D" Offset="0"/>
+                                    <GradientStop Color="#FF4C994D" Offset="1"/>
+                                    <GradientStop Color="#FFBACEBB" Offset="0.5"/>
+                                </LinearGradientBrush>
+                            </ed:BlockArrow.Stroke>
+                            <ed:BlockArrow.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF3FD53F"/>
+                                    <GradientStop Color="#FF3FD53F" Offset="1"/>
+                                    <GradientStop Color="#FF97EF97" Offset="0.5"/>
+                                </LinearGradientBrush>
+                            </ed:BlockArrow.Fill>
+                        </ed:BlockArrow>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--==================CircleButton=============================-->
+
+    <Style TargetType="{x:Type local:CircleButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:CircleButton}">
+                    <Viewbox Stretch="Fill">
+                        <Canvas Width="110" Height="110">
+                            <Ellipse Fill="#FF9F1014" Height="110" Width="110"/>
+                            <Ellipse Canvas.Left="0" Canvas.Top="0" Height="110" Width="110">
+                                <Ellipse.Fill>
+                                    <RadialGradientBrush>
+                                        <GradientStop Offset="0" Color="#00000000"/>
+                                        <GradientStop Offset="0.88" Color="#00000000"/>
+                                        <GradientStop Offset="1" Color="#80000000"/>
+                                    </RadialGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse Height="90" Canvas.Left="10" Canvas.Top="10" Width="90">
+                                <Ellipse.Fill>
+                                    <LinearGradientBrush>
+                                        <GradientStop Offset="0" Color="#50FFFFFF"/>
+                                        <GradientStop Offset="0.5" Color="#00FFFFFF"/>
+                                        <GradientStop Offset="1" Color="#50FFFFFF"/>
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Canvas>
+
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--======================-->
+    <!--电机Style-->
+    <Style TargetType="{x:Type local:HMIMotor}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:HMIMotor}">
+
+                    <Viewbox x:Name="viewbox" RenderTransformOrigin="0.5,0.5" Stretch="Fill" Margin="0,0,-0.167,-0.333" Width="Auto" Height="Auto">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="workstate">
+                                <VisualState x:Name="Inwork">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="heat_1">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FF0FF147"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="heat_2">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FF19A535"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="heat_2">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FF407A06"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(GradientStops)[0].(GradientStop.Offset)" Storyboard.TargetName="PathBrush">
+                                            <DiscreteDoubleKeyFrame KeyTime="0" Value="0.375"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(GradientStops)[2].(GradientStop.Offset)" Storyboard.TargetName="PathBrush">
+                                            <DiscreteDoubleKeyFrame KeyTime="0" Value="0.591"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="PathBrush">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FF1EF117"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="PathBrush">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FF0FF147"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="box_1">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="Lime"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="box_2">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="Lime"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Outwork"/>
+                                <VisualState x:Name="AlarmOn1">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Offset)" Storyboard.TargetName="path">
+                                            <DiscreteDoubleKeyFrame KeyTime="0" Value="0.349"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="path">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FFED5050"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[2].(GradientStop.Offset)" Storyboard.TargetName="path">
+                                            <DiscreteDoubleKeyFrame KeyTime="0" Value="0.569"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="path">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FFE52828"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="path">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FFED6A6A"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="heat_1">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FFB63F25"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="heat_1">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FFC45E4D"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="heat_2">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FFED847A"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Offset)" Storyboard.TargetName="path">
+                                            <DiscreteDoubleKeyFrame KeyTime="0" Value="0.461"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <!--<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="box_1">
+                                            <DiscreteDoubleKeyFrame KeyTime="0" Value="0.3"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="box_2">
+                                            <DiscreteDoubleKeyFrame KeyTime="0" Value="0.3"/>
+                                        </DoubleAnimationUsingKeyFrames>-->
+                                    </Storyboard>
+
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="alarmstate">
+                                <VisualState x:Name="AlarmOn">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Offset)" Storyboard.TargetName="path">
+                                            <DiscreteDoubleKeyFrame KeyTime="0" Value="0.349"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="path">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FFED5050"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[2].(GradientStop.Offset)" Storyboard.TargetName="path">
+                                            <DiscreteDoubleKeyFrame KeyTime="0" Value="0.569"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="path">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FFE52828"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="path">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FFED6A6A"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="heat_1">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FFB63F25"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="heat_1">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FFC45E4D"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="heat_2">
+                                            <DiscreteColorKeyFrame KeyTime="0" Value="#FFED847A"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Offset)" Storyboard.TargetName="path">
+                                            <DiscreteDoubleKeyFrame KeyTime="0" Value="0.461"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="box_1">
+                                            <DiscreteDoubleKeyFrame KeyTime="0" Value="0.3"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="box_2">
+                                            <DiscreteDoubleKeyFrame KeyTime="0" Value="0.3"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="AlarmOff">
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="Direction">
+                                <VisualState x:Name="Left">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="viewbox">
+                                            <DiscreteDoubleKeyFrame KeyTime="0" Value="-180"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Right"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="ValidationStates">
+                                <VisualState x:Name="Valid"/>
+                                <VisualState x:Name="InvalidFocused"/>
+                                <VisualState x:Name="InvalidUnfocused"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid Height="203.616" Width="267.509">
+                            <Path x:Name="heat_1" Data="M2.5,2.667 L135.16701,2.667 M2.5,16.007 L135.167,16.007 M2.5,30.681 L135.167,30.681 M2.5,45.355 L134.5,45.355 M2.5,60.029 L154.167,60.029 M2.5,75.37 L154.167,75.37 M2.5,90.711 L154.167,90.711 M2.5,105.385 L135.167,105.385 M2.5,120.726 L135.167,120.726 M2.5,135.4 L135.167,135.4 M2.5,151.408 L135.167,151.408 M133.834,2.5000001 L154.5,8.8329996 M134.354,151.695 L153.98,142.639 M133.584,15.75 L154.5,19.833 M133.997,135.513 L154.088,128.405 M133.30898,120.77585 L154.11001,116.14015 M134.674,30.651 L154.786,33.557 M133.59284,45.146495 L154.86716,46.397505 M133.58088,105.54862 L154.83812,104.03138" Fill="#FF5D8353" Height="Auto" Margin="90.097,8,60.796,19.758" Stretch="Fill" Stroke="#FF041604" VerticalAlignment="Stretch" StrokeThickness="5" Panel.ZIndex="1" HorizontalAlignment="Stretch" Width="Auto"/>
+                            <Path x:Name="heat_2" Data="M131.566,0.5 L153.233,6.7903603 153.233,145.02687 131.566,155.375 z M0.50000001,2.4 L132.21601,2.4 L132.21601,153.53401 L0.50000001,153.53401 z" HorizontalAlignment="Stretch" Margin="88.668,4,55.78,12.506" Stretch="Fill" Stroke="#FF433D3D" Width="Auto" Fill="#FF646662" Height="187.11" VerticalAlignment="Stretch"/>
+                            <Path x:Name="path" Data="M290.93301,73.720003 L317.349,73.720003 317.349,98.386003 290.93301,98.386003 z M246.59999,6.5010028 L272.18298,6.5010028 272.18298,164.33499 246.59999,164.33499 z M34.415997,5.930182 L34.415997,161.57181 34.248898,161.56876 C15.529315,160.88425 0.5000003,138.76782 0.5,111.58503 L0.5,55.916963 C0.5000003,28.734167 15.529315,6.6177363 34.248898,5.9332333 z M34.415997,4.834002 L105.66599,4.834002 105.66599,162.66799 34.415997,162.66799 34.415997,161.57181 35.082993,161.58399 35.082993,5.9180017 34.415997,5.930182 z M272.59998,0.5 L290.18298,0.5 290.18298,173.66699 272.59998,173.66699 z" HorizontalAlignment="Stretch" Margin="0" Stretch="Fill" Stroke="Black" Width="Auto" Height="Auto" VerticalAlignment="Stretch" >
+                                <Path.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" x:Name="PathBrush">
+                                        <GradientStop Color="Black" Offset="0.01"/>
+                                        <GradientStop Color="White" Offset="0.467"/>
+                                        <GradientStop Color="#FF5C5959" Offset="0.799"/>
+                                    </LinearGradientBrush>
+                                </Path.Fill>
+                            </Path>
+                            <Path x:Name="box_1" Data="M12.905814,25.32863 C12.905814,22.567206 15.14439,20.32863 17.905814,20.32863 L65.572814,20.32863 C68.334238,20.32863 70.572814,22.567206 70.572814,25.32863 L70.572814,72.99563 C70.572814,75.757054 68.334238,77.99563 65.572814,77.99563 L17.905814,77.99563 C15.14439,77.99563 12.905814,75.757054 12.905814,72.99563 z" Margin="101.951,45.644,77.663,58.698" Stretch="Fill" Stroke="Black" Panel.ZIndex="3" Fill="#FF726D6D"/>
+                            <Path x:Name="box_2" Data="M18.024267,16.874393 L43.158811,16.874393 50.079652,23.774731 50.079652,48.617088 42.510838,56.208393 17.666663,56.208393 10.745652,49.307884 10.745652,24.174636 z" Margin="109.941,53.259,84.78,68.145" Stretch="Fill" Stroke="Black" Panel.ZIndex="3" Fill="#FF5C5959"/>
+                            <Path x:Name="box_3" Data="M17.649892,22.942657 C17.649892,24.254334 16.586568,25.317657 15.274892,25.317657 13.963216,25.317657 12.899892,24.254334 12.899892,22.942657 12.899892,21.630981 13.963216,20.567657 15.274892,20.567657 16.586568,20.567657 17.649892,21.630981 17.649892,22.942657 z M64.649892,22.692657 C64.649892,24.004334 63.586568,25.067657 62.274892,25.067657 60.963216,25.067657 59.899892,24.004334 59.899892,22.692657 59.899892,21.380981 60.963216,20.317657 62.274892,20.317657 63.586568,20.317657 64.649892,21.380981 64.649892,22.692657 z M17.774892,69.567657 C17.774892,70.879333 16.711568,71.942657 15.399892,71.942657 14.088216,71.942657 13.024892,70.879333 13.024892,69.567657 13.024892,68.255981 14.088216,67.192657 15.399892,67.192657 16.711568,67.192657 17.774892,68.255981 17.774892,69.567657 z M64.774892,69.192657 C64.774892,70.504333 63.711568,71.567657 62.399892,71.567657 61.088216,71.567657 60.024892,70.504333 60.024892,69.192657 60.024892,67.880981 61.088216,66.817657 62.399892,66.817657 63.711568,66.817657 64.774892,67.880981 64.774892,69.192657 z" Fill="White" Margin="106.695,50.227,81.596,64.34" Stretch="Fill" Stroke="Black" Panel.ZIndex="3" />
+                        </Grid>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,52 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HslScada.Scada"
+        xmlns:Controls="clr-namespace:HslScada.Scada.Controls" x:Class="HslScada.Scada.FRM_Editr"
+        mc:Ignorable="d"
+        Title=" شاشة اضافة الخلطة" Height="567" Width="1166">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="183"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1" Background="#FFFFE0C0">
+            <Grid>
+                <GroupBox Header="طرق التحكم" HorizontalAlignment="Left" Height="163" Margin="986,9,0,0" VerticalAlignment="Top" Width="161" FlowDirection="RightToLeft">
+                    <Grid>
+                        <RadioButton x:Name="red_lode" Content="اختيار" HorizontalAlignment="Left" Height="21" Margin="10,10,0,0" VerticalAlignment="Top" Width="119" FontWeight="Bold" FontFamily="Arial" FontSize="20"/>
+                        <RadioButton x:Name="red_edit" Content="تعديل" HorizontalAlignment="Left" Height="21" Margin="10,51,0,0" VerticalAlignment="Top" Width="119" FontWeight="Bold" FontFamily="Arial" FontSize="20"/>
+                        <RadioButton x:Name="red_seva" Content="حفظ" HorizontalAlignment="Left" Height="20" Margin="10,93,0,0" VerticalAlignment="Top" Width="93" FontWeight="Bold" FontFamily="Arial" FontSize="20"/>
+                    </Grid>
+
+                </GroupBox>
+                <GroupBox Header="اختيار الخلطة" HorizontalAlignment="Left" Height="161" Margin="574,10,0,0" VerticalAlignment="Top" Width="407">
+                    <Grid>
+                        <Label Content="اسم الخلطة" Margin="0,0,10,113" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                        <ComboBox x:Name="comBatchName" HorizontalAlignment="Left" Height="28" Margin="172,1,0,0" VerticalAlignment="Top" Width="146"/>
+                        <TextBox x:Name="txt_BatchName" HorizontalAlignment="Left" Height="29" Margin="10,3,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="149"/>
+                        <Controls:HMIButton1 x:Name="btn_save" HorizontalAlignment="Left" Height="43" Margin="262,86,0,0" VerticalAlignment="Top" Width="123" ButtonColors="Green" Text="حفظ" FontWeight="Bold"/>
+                        <Controls:HMIButton1 x:Name="btn_edit" HorizontalAlignment="Left" Height="43" Margin="138,86,0,0" VerticalAlignment="Top" Width="122" ButtonColors="Orange" Text="تعديل"/>
+                        <Controls:HMIButton1 x:Name="btn_lode" HorizontalAlignment="Left" Height="43" Margin="8,86,0,0" VerticalAlignment="Top" Width="125" ButtonColors="Red" Text="تحميل"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="اضافة خامة" HorizontalAlignment="Left" Height="161" Margin="274,10,0,0" VerticalAlignment="Top" Width="283">
+                    <Grid>
+                        <TextBox x:Name="Txt_TankName" HorizontalAlignment="Left" Height="24" Margin="40,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="188"/>
+                        <Controls:HMIButton1 HorizontalAlignment="Left" Height="42" Margin="63,55,0,0" VerticalAlignment="Top" Width="141" ButtonColors="Green" Text="اضافة خامة"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="حذف خلطة" HorizontalAlignment="Left" Height="161" Margin="10,10,0,0" VerticalAlignment="Top" Width="246" FlowDirection="LeftToRight">
+                    <Grid HorizontalAlignment="Left" Height="110" Margin="4,3,0,0" VerticalAlignment="Top" Width="226">
+                        <ComboBox x:Name="comBatchName_2" HorizontalAlignment="Left" Height="29" Margin="45,10,0,0" VerticalAlignment="Top" Width="157"/>
+                        <Controls:HMIButton1 HorizontalAlignment="Left" Height="38" Margin="49,48,0,0" VerticalAlignment="Top" Width="141" ButtonColors="Red" Text="حذف خامة"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" Background="#FFC0FFC0"/>
+    </Grid>
+</Window>

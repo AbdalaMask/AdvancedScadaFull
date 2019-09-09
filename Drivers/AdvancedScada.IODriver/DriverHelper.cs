@@ -330,7 +330,9 @@ namespace AdvancedScada.IODriver
                                         case "Siemens":
                                             SendPackageSiemens(DriverAdapter, dv, db);
                                             break;
-
+                                        case "ABradley":
+                                            SendPackageAllenBradleyPLC(DriverAdapter, dv, db);
+                                            break;
                                         default:
                                             break;
                                     }
@@ -370,6 +372,10 @@ namespace AdvancedScada.IODriver
         }
 
         #endregion
+
+        #region SendPackage All
+
+      
         private void SendPackageDelta(IDriverAdapter DriverAdapter, Device dv, DataBlock db)
         {
             try
@@ -523,7 +529,132 @@ namespace AdvancedScada.IODriver
             try
             {
                 SendDone.WaitOne(-1);
+                if (!db.IsArray)
+                {
                 DriverAdapter.Read<string>(db);
+
+                }
+                else
+                {
+                    switch (db.DataType)
+                    {
+                        case "Bit":
+
+                            lock (DriverAdapter)
+                            {
+
+                                bool[] bitRs = DriverAdapter.Read<bool>($"{db.MemoryType}{db.StartAddress}", db.Length);
+
+                                int length = bitRs.Length;
+                                if (bitRs.Length > db.Tags.Count) length = db.Tags.Count;
+                                for (int j = 0; j < length; j++)
+                                {
+                                    db.Tags[j].Value = bitRs[j];
+                                    db.Tags[j].Checked = bitRs[j];
+                                    db.Tags[j].Enabled = bitRs[j];
+                                    db.Tags[j].Visible = bitRs[j];
+                                    db.Tags[j].ValueSelect1 = bitRs[j];
+                                    db.Tags[j].ValueSelect2 = bitRs[j];
+                                    db.Tags[j].Timestamp = DateTime.Now;
+                                }
+                            }
+                            break;
+                        case "Int":
+
+                            lock (DriverAdapter)
+                            {
+                                short[] IntRs = DriverAdapter.Read<Int16>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                                if (IntRs.Length > db.Tags.Count) return;
+                                for (int j = 0; j < IntRs.Length; j++)
+                                {
+                                    if (db.Tags[j].IsScaled)
+                                    {
+                                        db.Tags[j].Value = Util.Interpolation(IntRs[j], db.Tags[j].AImin, db.Tags[j].AImax, db.Tags[j].RLmin, db.Tags[j].RLmax);
+                                    }
+                                    else
+                                    {
+                                        db.Tags[j].Value = IntRs[j];
+                                    }
+
+                                    db.Tags[j].Timestamp = DateTime.Now;
+                                }
+                            }
+                            break;
+                        case "DInt":
+
+                            lock (DriverAdapter)
+                            {
+                                int[] DIntRs = DriverAdapter.Read<Int32>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                                if (DIntRs.Length > db.Tags.Count) return;
+                                for (int j = 0; j < DIntRs.Length; j++)
+                                {
+                                    db.Tags[j].Value = DIntRs[j];
+                                    db.Tags[j].Timestamp = DateTime.Now;
+                                }
+                            }
+                            break;
+                        case "Word":
+
+                            lock (DriverAdapter)
+                            {
+                                var wdRs = DriverAdapter.Read<UInt16>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                                if (wdRs == null) return;
+                                if (wdRs.Length > db.Tags.Count) return;
+                                for (int j = 0; j < wdRs.Length; j++)
+                                {
+                                    if (db.Tags[j].IsScaled)
+                                    {
+                                        db.Tags[j].Value = Util.Interpolation(wdRs[j], db.Tags[j].AImin, db.Tags[j].AImax, db.Tags[j].RLmin, db.Tags[j].RLmax);
+                                    }
+                                    else
+                                    {
+                                        db.Tags[j].Value = wdRs[j];
+                                    }
+                                    db.Tags[j].Timestamp = DateTime.Now;
+                                }
+                            }
+                            break;
+                        case "DWord":
+
+                            lock (DriverAdapter)
+                            {
+                                uint[] dwRs = DriverAdapter.Read<UInt32>($"{db.MemoryType}{db.StartAddress}", db.Length);
+
+                                for (int j = 0; j < dwRs.Length; j++)
+                                {
+                                    db.Tags[j].Value = dwRs[j];
+                                    db.Tags[j].Timestamp = DateTime.Now;
+                                }
+                            }
+                            break;
+                        case "Real1":
+
+                            lock (DriverAdapter)
+                            {
+                                float[] rl1Rs = DriverAdapter.Read<float>($"{db.MemoryType}{db.StartAddress}", db.Length);
+
+                                for (int j = 0; j < rl1Rs.Length; j++)
+                                {
+                                    db.Tags[j].Value = rl1Rs[j];
+                                    db.Tags[j].Timestamp = DateTime.Now;
+                                }
+                            }
+                            break;
+                        case "Real2":
+
+                            lock (DriverAdapter)
+                            {
+                                double[] rl2Rs = DriverAdapter.Read<double>($"{db.MemoryType}{db.StartAddress}", db.Length);
+
+                                for (int j = 0; j < rl2Rs.Length; j++)
+                                {
+                                    db.Tags[j].Value = rl2Rs[j];
+                                    db.Tags[j].Timestamp = DateTime.Now;
+                                }
+                            }
+                            break;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -814,7 +945,6 @@ namespace AdvancedScada.IODriver
                 Console.WriteLine(ex.Message);
             }
         }
-
         private void SendPackagePanasonic(IDriverAdapter Panasonic, Device dv, DataBlock db)
         {
             try
@@ -949,129 +1079,136 @@ namespace AdvancedScada.IODriver
                 Disconnect();
             }
         }
-
         private void SendPackageSiemens(IDriverAdapter ISiemens, Device dv, DataBlock db)
         {
             try
             {
-
-                switch (db.DataType)
+                SendDone.WaitOne(-1);
+                if (db.IsArray)
                 {
-                    case "Bit":
+                    ISiemens.Read<string>(db);
 
-                        lock (ISiemens)
-                        {
+                }
+                else
+                {
+                    switch (db.DataType)
+                    {
+                        case "Bit":
 
-                            bool[] bitRs = ISiemens.Read<bool>($"{db.MemoryType}{db.StartAddress}", db.Length);
-
-                            int length = bitRs.Length;
-                            if (bitRs.Length > db.Tags.Count) length = db.Tags.Count;
-                            for (int j = 0; j < length; j++)
+                            lock (ISiemens)
                             {
-                                db.Tags[j].Value = bitRs[j];
-                                db.Tags[j].Checked = bitRs[j];
-                                db.Tags[j].Enabled = bitRs[j];
-                                db.Tags[j].Visible = bitRs[j];
-                                db.Tags[j].ValueSelect1 = bitRs[j];
-                                db.Tags[j].ValueSelect2 = bitRs[j];
-                                db.Tags[j].Timestamp = DateTime.Now;
-                            }
-                        }
-                        break;
-                    case "Int":
 
-                        lock (ISiemens)
-                        {
-                            short[] IntRs = ISiemens.Read<Int16>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                            if (IntRs.Length > db.Tags.Count) return;
-                            for (int j = 0; j < IntRs.Length; j++)
-                            {
-                                if (db.Tags[j].IsScaled)
+                                bool[] bitRs = ISiemens.Read<bool>($"{db.MemoryType}{db.StartAddress}", db.Length);
+
+                                int length = bitRs.Length;
+                                if (bitRs.Length > db.Tags.Count) length = db.Tags.Count;
+                                for (int j = 0; j < length; j++)
                                 {
-                                    db.Tags[j].Value = Util.Interpolation(IntRs[j], db.Tags[j].AImin, db.Tags[j].AImax, db.Tags[j].RLmin, db.Tags[j].RLmax);
+                                    db.Tags[j].Value = bitRs[j];
+                                    db.Tags[j].Checked = bitRs[j];
+                                    db.Tags[j].Enabled = bitRs[j];
+                                    db.Tags[j].Visible = bitRs[j];
+                                    db.Tags[j].ValueSelect1 = bitRs[j];
+                                    db.Tags[j].ValueSelect2 = bitRs[j];
+                                    db.Tags[j].Timestamp = DateTime.Now;
                                 }
-                                else
+                            }
+                            break;
+                        case "Int":
+
+                            lock (ISiemens)
+                            {
+                                short[] IntRs = ISiemens.Read<Int16>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                                if (IntRs.Length > db.Tags.Count) return;
+                                for (int j = 0; j < IntRs.Length; j++)
                                 {
-                                    db.Tags[j].Value = IntRs[j];
+                                    if (db.Tags[j].IsScaled)
+                                    {
+                                        db.Tags[j].Value = Util.Interpolation(IntRs[j], db.Tags[j].AImin, db.Tags[j].AImax, db.Tags[j].RLmin, db.Tags[j].RLmax);
+                                    }
+                                    else
+                                    {
+                                        db.Tags[j].Value = IntRs[j];
+                                    }
+
+                                    db.Tags[j].Timestamp = DateTime.Now;
                                 }
-
-                                db.Tags[j].Timestamp = DateTime.Now;
                             }
-                        }
-                        break;
-                    case "DInt":
+                            break;
+                        case "DInt":
 
-                        lock (ISiemens)
-                        {
-                            int[] DIntRs = ISiemens.Read<Int32>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                            if (DIntRs.Length > db.Tags.Count) return;
-                            for (int j = 0; j < DIntRs.Length; j++)
+                            lock (ISiemens)
                             {
-                                db.Tags[j].Value = DIntRs[j];
-                                db.Tags[j].Timestamp = DateTime.Now;
-                            }
-                        }
-                        break;
-                    case "Word":
-
-                        lock (ISiemens)
-                        {
-                            var wdRs = ISiemens.Read<UInt16>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                            if (wdRs == null) return;
-                            if (wdRs.Length > db.Tags.Count) return;
-                            for (int j = 0; j < wdRs.Length; j++)
-                            {
-                                if (db.Tags[j].IsScaled)
+                                int[] DIntRs = ISiemens.Read<Int32>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                                if (DIntRs.Length > db.Tags.Count) return;
+                                for (int j = 0; j < DIntRs.Length; j++)
                                 {
-                                    db.Tags[j].Value = Util.Interpolation(wdRs[j], db.Tags[j].AImin, db.Tags[j].AImax, db.Tags[j].RLmin, db.Tags[j].RLmax);
+                                    db.Tags[j].Value = DIntRs[j];
+                                    db.Tags[j].Timestamp = DateTime.Now;
                                 }
-                                else
+                            }
+                            break;
+                        case "Word":
+
+                            lock (ISiemens)
+                            {
+                                var wdRs = ISiemens.Read<UInt16>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                                if (wdRs == null) return;
+                                if (wdRs.Length > db.Tags.Count) return;
+                                for (int j = 0; j < wdRs.Length; j++)
                                 {
-                                    db.Tags[j].Value = wdRs[j];
+                                    if (db.Tags[j].IsScaled)
+                                    {
+                                        db.Tags[j].Value = Util.Interpolation(wdRs[j], db.Tags[j].AImin, db.Tags[j].AImax, db.Tags[j].RLmin, db.Tags[j].RLmax);
+                                    }
+                                    else
+                                    {
+                                        db.Tags[j].Value = wdRs[j];
+                                    }
+                                    db.Tags[j].Timestamp = DateTime.Now;
                                 }
-                                db.Tags[j].Timestamp = DateTime.Now;
                             }
-                        }
-                        break;
-                    case "DWord":
+                            break;
+                        case "DWord":
 
-                        lock (ISiemens)
-                        {
-                            uint[] dwRs = ISiemens.Read<UInt32>($"{db.MemoryType}{db.StartAddress}", db.Length);
-
-                            for (int j = 0; j < dwRs.Length; j++)
+                            lock (ISiemens)
                             {
-                                db.Tags[j].Value = dwRs[j];
-                                db.Tags[j].Timestamp = DateTime.Now;
+                                uint[] dwRs = ISiemens.Read<UInt32>($"{db.MemoryType}{db.StartAddress}", db.Length);
+
+                                for (int j = 0; j < dwRs.Length; j++)
+                                {
+                                    db.Tags[j].Value = dwRs[j];
+                                    db.Tags[j].Timestamp = DateTime.Now;
+                                }
                             }
-                        }
-                        break;
-                    case "Real1":
+                            break;
+                        case "Real1":
 
-                        lock (ISiemens)
-                        {
-                            float[] rl1Rs = ISiemens.Read<float>($"{db.MemoryType}{db.StartAddress}", db.Length);
-
-                            for (int j = 0; j < rl1Rs.Length; j++)
+                            lock (ISiemens)
                             {
-                                db.Tags[j].Value = rl1Rs[j];
-                                db.Tags[j].Timestamp = DateTime.Now;
+                                float[] rl1Rs = ISiemens.Read<float>($"{db.MemoryType}{db.StartAddress}", db.Length);
+
+                                for (int j = 0; j < rl1Rs.Length; j++)
+                                {
+                                    db.Tags[j].Value = rl1Rs[j];
+                                    db.Tags[j].Timestamp = DateTime.Now;
+                                }
                             }
-                        }
-                        break;
-                    case "Real2":
+                            break;
+                        case "Real2":
 
-                        lock (ISiemens)
-                        {
-                            double[] rl2Rs = ISiemens.Read<double>($"{db.MemoryType}{db.StartAddress}", db.Length);
-
-                            for (int j = 0; j < rl2Rs.Length; j++)
+                            lock (ISiemens)
                             {
-                                db.Tags[j].Value = rl2Rs[j];
-                                db.Tags[j].Timestamp = DateTime.Now;
+                                double[] rl2Rs = ISiemens.Read<double>($"{db.MemoryType}{db.StartAddress}", db.Length);
+
+                                for (int j = 0; j < rl2Rs.Length; j++)
+                                {
+                                    db.Tags[j].Value = rl2Rs[j];
+                                    db.Tags[j].Timestamp = DateTime.Now;
+                                }
                             }
-                        }
-                        break;
+                            break;
+                    }
                 }
             }
             catch (SocketException ex)
@@ -1085,6 +1222,10 @@ namespace AdvancedScada.IODriver
                 Console.WriteLine(ex.Message);
             }
         }
+  #endregion
+        #region SendPackage All
+
+     
         public void WriteTag(string tagName, dynamic value)
         {
             try
@@ -1201,5 +1342,7 @@ namespace AdvancedScada.IODriver
                 SendDone.Set();
             }
         }
+
+        #endregion
     }
 }

@@ -43,7 +43,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HslControls, Version=2.2.1.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\HslControls.2.2.1\lib\net45\HslControls.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Scada\Advanced\packages\HslControls.2.2.1\lib\net45\HslControls.dll</HintPath>
     </Reference>
     <Reference Include="Krypton Docking, Version=5.470.742.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -99,10 +100,10 @@
     <Compile Include="AHMI\Controls\HMINumericUpDown.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="AHMI\HMIRotationalIndicator.cs">
+    <Compile Include="AHMI\ButtonAll\HMIRotationalIndicator.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="AHMI\HMIStackLight.cs">
+    <Compile Include="AHMI\TankAll\HMIStackLight.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Alarm\HMIAlarmMan2.cs">
@@ -442,7 +443,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
     <None Include="Properties\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.cs</LastGenOutput>

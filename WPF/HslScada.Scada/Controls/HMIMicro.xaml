@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="HslScada.Scada.Controls.HMIMicro"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="400">
+    <Viewbox Stretch="Fill">
+        <Canvas UseLayoutRounding="False" Name="Group_Micro_flowmeter" Tag="#00000000,#FF8080FF,Shaded,0,None" LayoutTransform="Identity" Width="66.059" Height="48.547" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Path Data="F1M23.312,55.451L89.189,55.451 89.189,71.78 23.312,71.78z" Stretch="Fill" Fill="#FF94C4C4" Width="65.877" Height="16.329" Canvas.Left="0" Canvas.Top="0" />
+            <Path Data="F1M23.312,71.78L31.532,105 80.855,105 89.188,71.78z" Stretch="Fill" Width="65.876" Height="33.22" Canvas.Left="0" Canvas.Top="16.329">
+                <Path.Fill>
+                    <LinearGradientBrush StartPoint="0.5,1" EndPoint="0.5,0">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#FF4B9393" Offset="0" />
+                            <GradientStop Color="#FFC0DCDC" Offset="1" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Path.Fill>
+            </Path>
+            <Path Data="M27.2529,81.4648L86.2609,81.4648" Stretch="Fill" Stroke="#FFFFFFFF" StrokeThickness="0.25"  Canvas.Left="3.816" Canvas.Top="25.889" />
+            <Path Data="M27.2529,85.0684L86.2609,85.0684" Stretch="Fill" Stroke="#FF7F7F7F" StrokeThickness="0.25"  Canvas.Left="3.816" Canvas.Top="29.492" />
+            <Path Data="M30.1807,88.6719L83.5587,88.6719" Stretch="Fill" Stroke="#FFFFFFFF" StrokeThickness="0.25"  Canvas.Left="6.744" Canvas.Top="33.096" />
+            <Path Data="M30.1807,91.9375L83.5587,91.9375" Stretch="Fill" Stroke="#FF7F7F7F" StrokeThickness="0.25"  Canvas.Left="6.744" Canvas.Top="36.361" />
+            <Path Data="M31.5322,95.7656L82.2072,95.7656" Stretch="Fill" Stroke="#FFFFFFFF" StrokeThickness="0.25"  Canvas.Left="8.096" Canvas.Top="40.19" />
+            <Path Data="M31.5322,99.3701L82.2072,99.3701" Stretch="Fill" Stroke="#FF7F7F7F" StrokeThickness="0.25"  Canvas.Left="8.096" Canvas.Top="43.794" />
+            <Path Data="M25.9014,74.4824L87.8384,74.4824" Stretch="Fill" Stroke="#FFFFFFFF" StrokeThickness="0.25"  Canvas.Left="2.465" Canvas.Top="18.906" />
+            <Path Data="M25.9014,78.0859L87.8384,78.0859" Stretch="Fill" Stroke="#FF7F7F7F" StrokeThickness="0.25"  Canvas.Left="2.465" Canvas.Top="22.51" />
+            <Path Data="F1M26.1265,55.4512L86.2605,55.4512 86.2605,71.7802 25.9015,71.7802z" Stretch="Fill" Fill="#FFB8D7D7" Width="60.359" Height="16.329" Canvas.Left="2.59" Canvas.Top="0" />
+            <Path Data="M89.1885,71.7803L80.8555,105.0003 31.5325,105.0003 23.3115,71.7803 23.3115,55.4513 89.1885,55.4513 89.1885,71.7803" Stretch="Fill" Stroke="#FF4C4C4C" StrokeThickness="0.25" Width="65.938" Height="49.448" Canvas.Top="0.101" />
+        </Canvas>
+    </Viewbox>
+</UserControl>

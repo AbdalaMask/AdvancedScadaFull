@@ -46,6 +46,7 @@
             // 
             this.kryptonHeaderGroup1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonHeaderGroup1.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockInactive;
+            this.kryptonHeaderGroup1.HeaderVisibleSecondary = false;
             this.kryptonHeaderGroup1.Location = new System.Drawing.Point(0, 0);
             this.kryptonHeaderGroup1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.kryptonHeaderGroup1.Name = "kryptonHeaderGroup1";
@@ -58,7 +59,7 @@
             this.kryptonHeaderGroup1.Size = new System.Drawing.Size(473, 284);
             this.kryptonHeaderGroup1.TabIndex = 0;
             this.kryptonHeaderGroup1.ValuesPrimary.Heading = "SelectedDrivers";
-            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.Convert_32x32;
+            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.BottomCenterHorizontalOutside_32x321;
             // 
             // cboxSelectedDrivers
             // 
@@ -79,10 +80,10 @@
             // picSelectedDrivers
             // 
             this.picSelectedDrivers.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.picSelectedDrivers.Location = new System.Drawing.Point(0, 65);
+            this.picSelectedDrivers.Location = new System.Drawing.Point(0, 29);
             this.picSelectedDrivers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picSelectedDrivers.Name = "picSelectedDrivers";
-            this.picSelectedDrivers.Size = new System.Drawing.Size(471, 160);
+            this.picSelectedDrivers.Size = new System.Drawing.Size(471, 217);
             this.picSelectedDrivers.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picSelectedDrivers.TabIndex = 2;
             this.picSelectedDrivers.TabStop = false;

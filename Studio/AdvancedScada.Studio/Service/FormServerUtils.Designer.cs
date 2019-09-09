@@ -133,9 +133,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 436);
+            this.ControlBox = false;
             this.Controls.Add(this.DGServerUtils);
             this.Controls.Add(this.toolStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "FormServerUtils";
+            this.ShowIcon = false;
             this.Text = "FormServerUtils";
             this.Load += new System.EventHandler(this.FormServerUtils_Load);
             this.toolStrip1.ResumeLayout(false);

@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9945610D-D7D3-4FB3-8148-A68016F06BED}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>HslScada.Controls</RootNamespace>
+    <AssemblyName>HslScada.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HslControls, Version=2.1.9.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\HslControls.2.2.1\lib\net45\HslControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Drawing">
+      <HintPath>..\Microsoft.Expression.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ButtonAll\HMIButton1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ButtonAll\HMIButton2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ButtonAll\HMIButton3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ButtonAll\HMIButton4.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Indicator\HMIIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="KeyPad\Keypad.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="KeyPad\VirtualKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SegmentsControls\SegmentsStack\SevenSegmentsStack.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SegmentsControls\SegmentsStack\SixteenSegmentsStack..xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SelectorSwitch\HMISwitchButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SelectorSwitch\HMISwitchButton2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SelectorSwitch\HMIVacuumPump.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SelectorSwitch\MushroomButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SelectorSwitch\PilotLightSmall.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SelectorSwitch\Tank.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ButtonAll\HMIAnnunciator.cs" />
+    <Compile Include="ButtonAll\HMIButton1.xaml.cs">
+      <DependentUpon>HMIButton1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ButtonAll\HMIButton2.xaml.cs">
+      <DependentUpon>HMIButton2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ButtonAll\HMIButton3.xaml.cs">
+      <DependentUpon>HMIButton3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ButtonAll\HMIButton4.xaml.cs">
+      <DependentUpon>HMIButton4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EnumAll.cs" />
+    <Compile Include="HMIArrow.cs" />
+    <Compile Include="CircleButton.cs" />
+    <Compile Include="HMILable.cs" />
+    <Compile Include="HMIMotor.cs" />
+    <Compile Include="KeyPad\Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="KeyPad\Keypad.xaml.cs">
+      <DependentUpon>Keypad.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="KeyPad\VirtualKeyboard.xaml.cs">
+      <DependentUpon>VirtualKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\ConverterHelper.cs" />
+    <Compile Include="Motor\HMIMotor2.cs" />
+    <Compile Include="Indicator\ConverterHelper.cs" />
+    <Compile Include="Indicator\HMIIndicator.xaml.cs">
+      <DependentUpon>HMIIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\LicenseManager.cs" />
+    <Compile Include="Motor\Utilities.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SegmentsControls\ArrangedPanel.cs" />
+    <Compile Include="SegmentsControls\CharItem.cs" />
+    <Compile Include="SegmentsControls\SegmentsStack\SegmentsStackBase.cs" />
+    <Compile Include="SegmentsControls\SegmentsStack\SevenSegmentsStack.xaml.cs">
+      <DependentUpon>SevenSegmentsStack.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SegmentsControls\SegmentsStack\SixteenSegmentsStack..xaml.cs">
+      <DependentUpon>SixteenSegmentsStack..xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SegmentsControls\Segments\GeometryWithSegm.cs" />
+    <Compile Include="SegmentsControls\Segments\iSegment.cs" />
+    <Compile Include="SegmentsControls\Segments\SegmentBase.cs" />
+    <Compile Include="SegmentsControls\Segments\SegmentsEnum.cs" />
+    <Compile Include="SegmentsControls\Segments\SevenSegments.cs" />
+    <Compile Include="SegmentsControls\Segments\SixteenSegments.cs" />
+    <Compile Include="SelectorSwitch\ColorLightConverter.cs" />
+    <Compile Include="SelectorSwitch\HMISwitchButton.xaml.cs">
+      <DependentUpon>HMISwitchButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SelectorSwitch\HMISwitchButton2.xaml.cs">
+      <DependentUpon>HMISwitchButton2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SelectorSwitch\HMIVacuumPump.xaml.cs">
+      <DependentUpon>HMIVacuumPump.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SelectorSwitch\MushroomButton.xaml.cs">
+      <DependentUpon>MushroomButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SelectorSwitch\PilotLight.cs" />
+    <Compile Include="SelectorSwitch\PilotLightSmall.xaml.cs">
+      <DependentUpon>PilotLightSmall.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SelectorSwitch\Tank.xaml.cs">
+      <DependentUpon>Tank.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Motor\WaterPump.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AnnunciatorOff.png" />
+    <Resource Include="Images\AnnunciatorOn.png" />
+    <Resource Include="Images\PneumaticBallValveOff.png" />
+    <Resource Include="Images\PneumaticBallValveOn.png" />
+    <Resource Include="Images\RSCorPumpOff.png" />
+    <Resource Include="Images\RSCorPumpOn.png" />
+    <Resource Include="Images\SquareButtonBlueOff.png" />
+    <Resource Include="Images\SquareButtonBlueOn.png" />
+    <Resource Include="Images\SquareButtonGreenOff.png" />
+    <Resource Include="Images\SquareButtonGreenOn.png" />
+    <Resource Include="Images\SquareButtonRedOff.png" />
+    <Resource Include="Images\SquareButtonRedOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MotorGray.png" />
+    <Resource Include="Images\MotorGreen.png" />
+    <Resource Include="Images\MotorRed.png" />
+    <Resource Include="Images\MotorYellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Drivers\AdvancedScada.DriverBase\DriverBase.csproj">
+      <Project>{1d570e9a-e5b4-44dd-946d-9d73cfa4a535}</Project>
+      <Name>DriverBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WCF\AdvancedScada.BaseService\BaseService.csproj">
+      <Project>{5b05b8bd-b05a-4b7a-8b0d-78c8be7441e1}</Project>
+      <Name>BaseService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WCF\AdvancedScada.IBaseService\IBaseService.csproj">
+      <Project>{f47222c0-6b69-4ff1-aec3-b4c668b0a55a}</Project>
+      <Name>IBaseService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

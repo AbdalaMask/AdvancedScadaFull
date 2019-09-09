@@ -71,16 +71,6 @@ namespace AdvancedScada.Studio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon _38 {
-            get {
-                object obj = ResourceManager.GetObject("_38", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap _515Oof_jXUL__AC_SY400_ {
@@ -166,6 +156,16 @@ namespace AdvancedScada.Studio.Properties {
         internal static System.Drawing.Bitmap BottomCenterHorizontalOutside_32x32 {
             get {
                 object obj = ResourceManager.GetObject("BottomCenterHorizontalOutside_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BottomCenterHorizontalOutside_32x321 {
+            get {
+                object obj = ResourceManager.GetObject("BottomCenterHorizontalOutside_32x321", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

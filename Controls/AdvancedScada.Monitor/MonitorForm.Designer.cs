@@ -29,27 +29,28 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node1");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node2");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node4");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node5");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Node3", new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode5});
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Node7");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Node8");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Node6", new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8});
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Node1");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Node2");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
+            treeNode10,
+            treeNode11});
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Node4");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Node5");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Node3", new System.Windows.Forms.TreeNode[] {
+            treeNode13,
+            treeNode14});
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Node7");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Node8");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Node6", new System.Windows.Forms.TreeNode[] {
+            treeNode16,
+            treeNode17});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MonitorForm));
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.lblSelectedTagName = new System.Windows.Forms.ToolStripLabel();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.treeViewSI = new ComponentFactory.Krypton.Toolkit.KryptonTreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.kryptonHeader2 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.DGMonitorForm = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.colTagId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,7 +71,6 @@
             this.mWriteTagValue = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonDockingManager1 = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -134,32 +134,40 @@
             this.treeViewSI.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewSI.Location = new System.Drawing.Point(0, 23);
             this.treeViewSI.Name = "treeViewSI";
-            treeNode1.Name = "Node1";
-            treeNode1.Text = "Node1";
-            treeNode2.Name = "Node2";
-            treeNode2.Text = "Node2";
-            treeNode3.Name = "Node0";
-            treeNode3.Text = "Node0";
-            treeNode4.Name = "Node4";
-            treeNode4.Text = "Node4";
-            treeNode5.Name = "Node5";
-            treeNode5.Text = "Node5";
-            treeNode6.Name = "Node3";
-            treeNode6.Text = "Node3";
-            treeNode7.Name = "Node7";
-            treeNode7.Text = "Node7";
-            treeNode8.Name = "Node8";
-            treeNode8.Text = "Node8";
-            treeNode9.Name = "Node6";
-            treeNode9.Text = "Node6";
+            treeNode10.Name = "Node1";
+            treeNode10.Text = "Node1";
+            treeNode11.Name = "Node2";
+            treeNode11.Text = "Node2";
+            treeNode12.Name = "Node0";
+            treeNode12.Text = "Node0";
+            treeNode13.Name = "Node4";
+            treeNode13.Text = "Node4";
+            treeNode14.Name = "Node5";
+            treeNode14.Text = "Node5";
+            treeNode15.Name = "Node3";
+            treeNode15.Text = "Node3";
+            treeNode16.Name = "Node7";
+            treeNode16.Text = "Node7";
+            treeNode17.Name = "Node8";
+            treeNode17.Text = "Node8";
+            treeNode18.Name = "Node6";
+            treeNode18.Text = "Node6";
             this.treeViewSI.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3,
-            treeNode6,
-            treeNode9});
+            treeNode12,
+            treeNode15,
+            treeNode18});
             this.treeViewSI.Size = new System.Drawing.Size(176, 564);
             this.treeViewSI.StateImageList = this.imageList1;
             this.treeViewSI.TabIndex = 3;
             this.treeViewSI.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewSI_AfterSelect);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "Phone_16x16.png");
+            this.imageList1.Images.SetKeyName(1, "BottomCenterHorizontalOutside_16x16.png");
+            this.imageList1.Images.SetKeyName(2, "Database_16x16.png");
             // 
             // kryptonHeader2
             // 
@@ -178,6 +186,7 @@
             this.DGMonitorForm.AllowUserToAddRows = false;
             this.DGMonitorForm.AllowUserToDeleteRows = false;
             this.DGMonitorForm.AllowUserToResizeRows = false;
+            this.DGMonitorForm.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGMonitorForm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGMonitorForm.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colTagId,
@@ -210,48 +219,41 @@
             this.colTagId.HeaderText = "TagId";
             this.colTagId.Name = "colTagId";
             this.colTagId.ReadOnly = true;
-            this.colTagId.Width = 89;
             // 
             // colTagName
             // 
             this.colTagName.HeaderText = "TagName";
             this.colTagName.Name = "colTagName";
             this.colTagName.ReadOnly = true;
-            this.colTagName.Width = 90;
             // 
             // colAddress
             // 
             this.colAddress.HeaderText = "Address";
             this.colAddress.Name = "colAddress";
             this.colAddress.ReadOnly = true;
-            this.colAddress.Width = 89;
             // 
             // colDataType
             // 
             this.colDataType.HeaderText = "DataType";
             this.colDataType.Name = "colDataType";
             this.colDataType.ReadOnly = true;
-            this.colDataType.Width = 89;
             // 
             // colValue
             // 
             this.colValue.HeaderText = "Value";
             this.colValue.Name = "colValue";
-            this.colValue.Width = 89;
             // 
             // colTimeStamp
             // 
             this.colTimeStamp.HeaderText = "TimeStamp";
             this.colTimeStamp.Name = "colTimeStamp";
             this.colTimeStamp.ReadOnly = true;
-            this.colTimeStamp.Width = 90;
             // 
             // colDescription
             // 
             this.colDescription.HeaderText = "Description";
             this.colDescription.Name = "colDescription";
             this.colDescription.ReadOnly = true;
-            this.colDescription.Width = 89;
             // 
             // kryptonDockableWorkspace1
             // 
@@ -279,6 +281,7 @@
             this.kryptonHeader1.Size = new System.Drawing.Size(794, 31);
             this.kryptonHeader1.TabIndex = 1;
             this.kryptonHeader1.Values.Heading = "TagList";
+            this.kryptonHeader1.Values.Image = global::AdvancedScada.Monitor.Properties.Resources.AddTag;
             // 
             // popupMenuLeft
             // 
@@ -325,14 +328,6 @@
             // kryptonManager1
             // 
             this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2007Blue;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "Phone_16x16.png");
-            this.imageList1.Images.SetKeyName(1, "BottomCenterHorizontalOutside_16x16.png");
-            this.imageList1.Images.SetKeyName(2, "Database_16x16.png");
             // 
             // MonitorForm
             // 

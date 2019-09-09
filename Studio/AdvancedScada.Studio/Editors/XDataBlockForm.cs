@@ -420,6 +420,7 @@ namespace AdvancedScada.Studio.Editors
                             Description = txtDesc.Text,
                             Length = (ushort)txtAddressLength.Value,
                             DataType = cboxDataType.Text,
+                            IsArray = chkIsArray.Checked,
                             Tags = new List<Tag>()
                         };
 
@@ -465,6 +466,7 @@ namespace AdvancedScada.Studio.Editors
                         db.Length = (ushort)txtAddressLength.Value;
                         db.Description = txtDesc.Text;
                         db.DataType = $"{cboxDataType.Text}";
+                        db.IsArray = chkIsArray.Checked;
 
                         switch (ch.ChannelTypes)
 

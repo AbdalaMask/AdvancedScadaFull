@@ -58,10 +58,10 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnOK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
+            this.chkIsArray = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.lblTypeOfRead = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.CboxTypeOfRead = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.chkIsArray = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.DxErrorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).BeginInit();
@@ -87,14 +87,14 @@
             this.kryptonHeaderGroup2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.kryptonHeaderGroup2.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockInactive;
             this.kryptonHeaderGroup2.HeaderVisibleSecondary = false;
-            this.kryptonHeaderGroup2.Location = new System.Drawing.Point(0, 135);
+            this.kryptonHeaderGroup2.Location = new System.Drawing.Point(0, 149);
             this.kryptonHeaderGroup2.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonHeaderGroup2.Name = "kryptonHeaderGroup2";
             // 
             // kryptonHeaderGroup2.Panel
             // 
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.txtDesc);
-            this.kryptonHeaderGroup2.Size = new System.Drawing.Size(554, 79);
+            this.kryptonHeaderGroup2.Size = new System.Drawing.Size(554, 94);
             this.kryptonHeaderGroup2.TabIndex = 25;
             this.kryptonHeaderGroup2.ValuesPrimary.Heading = "Description:";
             this.kryptonHeaderGroup2.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddGoup;
@@ -107,7 +107,7 @@
             this.txtDesc.Margin = new System.Windows.Forms.Padding(2);
             this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
-            this.txtDesc.Size = new System.Drawing.Size(552, 55);
+            this.txtDesc.Size = new System.Drawing.Size(552, 70);
             this.txtDesc.TabIndex = 0;
             // 
             // btnCancel
@@ -116,7 +116,7 @@
             this.btnCancel.Location = new System.Drawing.Point(437, 0);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(119, 24);
+            this.btnCancel.Size = new System.Drawing.Size(119, 26);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Values.Text = "Cancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -351,7 +351,7 @@
             this.btnOK.Location = new System.Drawing.Point(312, 0);
             this.btnOK.Margin = new System.Windows.Forms.Padding(2);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(125, 24);
+            this.btnOK.Size = new System.Drawing.Size(125, 26);
             this.btnOK.TabIndex = 5;
             this.btnOK.Values.Text = "OK";
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -393,10 +393,20 @@
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.txtChannelId);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonLabel2);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonLabel1);
-            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(556, 238);
+            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(556, 267);
             this.kryptonHeaderGroup1.TabIndex = 3;
             this.kryptonHeaderGroup1.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddGoup;
             this.kryptonHeaderGroup1.ValuesSecondary.Heading = "Heading";
+            // 
+            // chkIsArray
+            // 
+            this.chkIsArray.Location = new System.Drawing.Point(473, 109);
+            this.chkIsArray.Margin = new System.Windows.Forms.Padding(2);
+            this.chkIsArray.Name = "chkIsArray";
+            this.chkIsArray.Size = new System.Drawing.Size(64, 20);
+            this.chkIsArray.TabIndex = 28;
+            this.chkIsArray.Values.Text = "Is Array";
+            this.chkIsArray.CheckedChanged += new System.EventHandler(this.ChkIsArray_CheckedChanged);
             // 
             // lblTypeOfRead
             // 
@@ -426,26 +436,16 @@
             this.kryptonPanel1.Controls.Add(this.btnOK);
             this.kryptonPanel1.Controls.Add(this.btnCancel);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 238);
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 267);
             this.kryptonPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(556, 24);
+            this.kryptonPanel1.Size = new System.Drawing.Size(556, 26);
             this.kryptonPanel1.TabIndex = 6;
-            // 
-            // chkIsArray
-            // 
-            this.chkIsArray.Location = new System.Drawing.Point(473, 109);
-            this.chkIsArray.Margin = new System.Windows.Forms.Padding(2);
-            this.chkIsArray.Name = "chkIsArray";
-            this.chkIsArray.Size = new System.Drawing.Size(64, 20);
-            this.chkIsArray.TabIndex = 28;
-            this.chkIsArray.Values.Text = "Is Array";
-            this.chkIsArray.CheckedChanged += new System.EventHandler(this.ChkIsArray_CheckedChanged);
             // 
             // XDataBlockForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(556, 262);
+            this.ClientSize = new System.Drawing.Size(556, 293);
             this.Controls.Add(this.kryptonPanel1);
             this.Controls.Add(this.kryptonHeaderGroup1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

@@ -105,7 +105,7 @@
             this.tbImageGallerySVG,
             this.ImageGallery,
             this.tbLibraryImages});
-            this.xtbImageGallery.SelectedIndex = 0;
+            this.xtbImageGallery.SelectedIndex = 2;
             this.xtbImageGallery.Size = new System.Drawing.Size(625, 404);
             this.xtbImageGallery.TabIndex = 0;
             this.xtbImageGallery.Text = "kryptonNavigator1";
@@ -210,6 +210,7 @@
             this.gc.Size = new System.Drawing.Size(413, 372);
             this.gc.TabIndex = 0;
             this.gc.SelectedIndexChanged += new System.EventHandler(this.gc_SelectedIndexChanged);
+            this.gc.MouseLeave += new System.EventHandler(this.gc_MouseLeave);
             // 
             // tbLibraryImages
             // 
@@ -260,6 +261,8 @@
             this.pnlPictures.Name = "pnlPictures";
             this.pnlPictures.Size = new System.Drawing.Size(415, 372);
             this.pnlPictures.TabIndex = 0;
+            this.pnlPictures.SelectedIndexChanged += new System.EventHandler(this.pnlPictures_SelectedIndexChanged);
+            this.pnlPictures.MouseLeave += new System.EventHandler(this.pnlPictures_MouseLeave);
             // 
             // ImageContextMenu
             // 
@@ -398,6 +401,10 @@
             // kryptonContextMenuItem8
             // 
             this.kryptonContextMenuItem8.Text = "Menu Item";
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             // 
             // MainView
             // 
