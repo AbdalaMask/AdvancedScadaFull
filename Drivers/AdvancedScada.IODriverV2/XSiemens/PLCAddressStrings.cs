@@ -3,7 +3,7 @@ using System;
 namespace AdvancedScada.IODriverV2.XSiemens
 
 {
-    public  class PLCAddressStrings
+    public class PLCAddressStrings
     {
         private DataType dataType;
         private int dbNumber;
@@ -15,21 +15,21 @@ namespace AdvancedScada.IODriverV2.XSiemens
         {
             get { return dataType; }
             set { dataType = value; }
-            }
+        }
 
         public int DbNumber
         {
             get
             { return dbNumber; }
             set { dbNumber = value; }
-            }
+        }
 
         public int StartByte
         {
             get
             { return startByte; }
             set { startByte = value; }
-            }
+        }
 
         public int BitNumber
         {
@@ -37,16 +37,18 @@ namespace AdvancedScada.IODriverV2.XSiemens
             {
                 return bitNumber;
             }
-                set { bitNumber = value;
+            set
+            {
+                bitNumber = value;
             }
-            }
+        }
 
         public VarType VarType
         {
             get
             { return varType; }
             set { varType = value; }
-            }
+        }
 
         public PLCAddressStrings(string address)
         {

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Linq;
 using System.Net;
 
@@ -143,5 +141,5 @@ namespace AdvancedScada.IODriverV2.Comm
             return ResultingValues;
         }
     }
-    
+
 }

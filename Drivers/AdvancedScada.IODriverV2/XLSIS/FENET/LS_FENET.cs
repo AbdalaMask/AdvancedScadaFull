@@ -1,15 +1,14 @@
-using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IODriverV2.Comm;
 using AdvancedScada.IODriverV2.XLSIS.Comm;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using AdvancedScada.DriverBase.Devices;
-using System.Data;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.IODriverV2.XLSIS.FENET
@@ -19,7 +18,7 @@ namespace AdvancedScada.IODriverV2.XLSIS.FENET
         protected const string CONNECTED = "CONNECTED";
         protected const string DISCONNECTED = "DISCONNECTED";
         public bool _IsConnected = false;
-         public bool IsConnected
+        public bool IsConnected
         {
             get
             {
@@ -42,7 +41,7 @@ namespace AdvancedScada.IODriverV2.XLSIS.FENET
 
         private EthernetAdapter EthernetAdaper;
 
-     
+
         // Privates
         private SerialPortAdapter SerialAdaper;
         object mutexDispose = new object();
@@ -243,7 +242,7 @@ namespace AdvancedScada.IODriverV2.XLSIS.FENET
                     iRemLen = iRemLen - int.Parse(strHexa);
                 }
 
- 
+
 
                 return TxWrite;
 
@@ -294,17 +293,17 @@ namespace AdvancedScada.IODriverV2.XLSIS.FENET
             try
             {
                 IsConnected = EthernetAdaper.Connect();
-               
+
                 stopwatch.Stop();
             }
             catch (SocketException ex)
             {
-               
+
                 stopwatch.Stop();
 
                 EventscadaException?.Invoke(this.GetType().Name,
                         $"Could Not Connect to Server : {ex.SocketErrorCode}Time{stopwatch.ElapsedTicks}");
-              
+
                 IsConnected = false;
 
             }
@@ -315,7 +314,7 @@ namespace AdvancedScada.IODriverV2.XLSIS.FENET
             try
             {
                 EthernetAdaper.Close();
-               
+
                 IsConnected = false;
             }
             catch (SocketException ex)
@@ -324,8 +323,8 @@ namespace AdvancedScada.IODriverV2.XLSIS.FENET
             }
             finally
             {
-                
-              
+
+
 
             }
         }
@@ -528,7 +527,7 @@ namespace AdvancedScada.IODriverV2.XLSIS.FENET
 
                 FullPacket.AddRange(new byte[] { 0, 0 });//Reserved area (2)
 
-               // FullPacket.AddRange(new byte[] { 1, 0 });//Variable Number (2)
+                // FullPacket.AddRange(new byte[] { 1, 0 });//Variable Number (2)
 
                 //FullPacket.AddRange(new byte[] { (byte)Length, 0 });//Variable Length
 
@@ -537,12 +536,12 @@ namespace AdvancedScada.IODriverV2.XLSIS.FENET
                 //FullPacket.AddRange(new byte[] { (byte)RequestCount, 0 }); //Count Adr
 
 
-               FullPacket.AddRange(BitConverter.GetBytes((ushort)1));
-               FullPacket.AddRange(BitConverter.GetBytes((ushort)Encoding.ASCII.GetByteCount(RequestAddress)));
-               FullPacket.AddRange(Encoding.ASCII.GetBytes(RequestAddress));
+                FullPacket.AddRange(BitConverter.GetBytes((ushort)1));
+                FullPacket.AddRange(BitConverter.GetBytes((ushort)Encoding.ASCII.GetByteCount(RequestAddress)));
+                FullPacket.AddRange(Encoding.ASCII.GetBytes(RequestAddress));
                 FullPacket.AddRange(BitConverter.GetBytes(RequestCount));
 
- 
+
 
 
                 return FullPacket.ToArray();

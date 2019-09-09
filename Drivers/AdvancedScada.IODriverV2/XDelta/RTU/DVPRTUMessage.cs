@@ -54,25 +54,6 @@ namespace AdvancedScada.IODriverV2.XDelta.RTU
             return frame;
         }
 
-        private byte[] CRC16(byte[] data)
-        {
-            var checkSum = new byte[2];
-            ushort reg_crc = 0XFFFF;
-            for (var i = 0; i < data.Length - 2; i++)
-            {
-                reg_crc ^= data[i];
-                for (var j = 0; j < 8; j++)
-                    if ((reg_crc & 0x01) == 1)
-                        reg_crc = (ushort)((reg_crc >> 1) ^ 0xA001);
-                    else
-                        reg_crc = (ushort)(reg_crc >> 1);
-            }
-
-            checkSum[1] = (byte)((reg_crc >> 8) & 0xFF);
-            checkSum[0] = (byte)(reg_crc & 0xFF);
-            return checkSum;
-        }
-
         private byte[] CRC(byte[] data)
         {
             ushort CRCFull = 0xFFFF;

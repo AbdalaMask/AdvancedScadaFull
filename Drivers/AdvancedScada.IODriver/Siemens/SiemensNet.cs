@@ -13,7 +13,6 @@ namespace AdvancedScada.IODriver.Siemens
     {
         private SiemensS7Net siemensTcpNet = null;
         private SiemensPLCS siemensPLCSelected = SiemensPLCS.S1200;
-        private const int DELAY = 10;
 
         public bool _IsConnected = false;
         public byte station;

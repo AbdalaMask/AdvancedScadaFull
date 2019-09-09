@@ -1,6 +1,5 @@
 ﻿using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
-using HslCommunication;
 using HslCommunication.Profinet.Siemens;
 using System;
 using System.Data;
@@ -12,7 +11,6 @@ namespace AdvancedScada.IODriver.Siemens
     public class SiemensComPPI : IDriverAdapter
     {
         private SiemensPPI siemensPPI = null;
-        private const int DELAY = 100; // delay 100 ms
         private SerialPort serialPort;
 
         public bool IsConnected

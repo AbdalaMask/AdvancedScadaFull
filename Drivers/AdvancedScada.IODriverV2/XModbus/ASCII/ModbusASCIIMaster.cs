@@ -1,10 +1,10 @@
 ﻿using AdvancedScada.DriverBase.DataTypes;
+using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IODriverV2.Comm;
 using System;
+using System.Data;
 using System.Diagnostics;
 using System.Threading;
-using AdvancedScada.DriverBase.Devices;
-using System.Data;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.IODriverV2.XModbus.ASCII
@@ -16,6 +16,13 @@ namespace AdvancedScada.IODriverV2.XModbus.ASCII
         private SerialPortAdapter SerialAdaper;
 
         public bool _IsConnected = false;
+        private short slaveId;
+
+        public ModbusASCIIMaster(short slaveId)
+        {
+            this.slaveId = slaveId;
+        }
+
         public bool IsConnected
         {
             get { return _IsConnected; }
@@ -37,7 +44,7 @@ namespace AdvancedScada.IODriverV2.XModbus.ASCII
             try
             {
                 IsConnected = SerialAdaper.Connect();
-                
+
                 stopwatch.Stop();
             }
             catch (TimeoutException ex)
@@ -46,7 +53,7 @@ namespace AdvancedScada.IODriverV2.XModbus.ASCII
 
                 EventscadaException?.Invoke(this.GetType().Name,
                     $"Could Not Connect to Server : {ex.Message}Time{stopwatch.ElapsedTicks}");
-                
+
             }
         }
 

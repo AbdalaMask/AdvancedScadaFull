@@ -8,7 +8,6 @@ namespace AdvancedScada.IODriverV2.XDelta.ASCII
     {
         private const char Header = ':';
         private const char CR = '\r';
-        private const char LF = '\n';
         private string Trailer = string.Empty + CR;
 
         private string Read(byte slaveAddress, uint startAddress, byte functionCode, uint numberOfPoints)
@@ -17,18 +16,6 @@ namespace AdvancedScada.IODriverV2.XDelta.ASCII
             frame += $"{functionCode:X2}";
             frame += $"{startAddress:X4}";
             frame += $"{numberOfPoints:X4}";
-            byte[] bytes = Comm.Conversion.HexToBytes(frame);
-            byte lrc = LRC(bytes);
-            return Header + frame + lrc.ToString("X2") + Trailer;
-        }
-
-        private string Write(byte slaveAddress, uint startAddress, byte functionCode, byte[] value)
-        {
-            string frame = $"{slaveAddress:X2}"; // Địa chỉ slave.
-            frame += $"{functionCode:X2}"; // Mã hàm modbus.
-            frame += $"{startAddress:X4}"; // Địa chỉ bắt đầu của coil.
-            frame += $"{value[0]:X2}"; // Dữ liệu cần ghi xuống coil.
-            frame += $"{value[1]:X2}"; // Dữ liệu cần ghi xuống coil.
             byte[] bytes = Comm.Conversion.HexToBytes(frame);
             byte lrc = LRC(bytes);
             return Header + frame + lrc.ToString("X2") + Trailer;

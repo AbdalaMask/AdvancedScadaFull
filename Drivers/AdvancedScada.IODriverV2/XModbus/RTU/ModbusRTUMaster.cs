@@ -1,24 +1,31 @@
 ﻿
 using AdvancedScada.DriverBase.DataTypes;
+using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IODriverV2.Comm;
-using static AdvancedScada.IBaseService.Common.XCollection;
 using System;
+using System.Data;
 using System.Diagnostics;
 using System.Threading;
-using AdvancedScada.DriverBase.Devices;
-using System.Data;
+using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.IODriverV2.XModbus.RTU
 {
     public class ModbusRTUMaster : ModbusRTUMessage, IDriverAdapterV2
     {
         private const int DELAY = 100; // delay 100 ms
-      
+
 
         private EthernetAdapter EthernetAdaper;
         private SerialPortAdapter SerialAdaper;
 
         public bool _IsConnected = false;
+        private short slaveId;
+
+        public ModbusRTUMaster(short slaveId)
+        {
+            this.slaveId = slaveId;
+        }
+
         public bool IsConnected
         {
             get { return _IsConnected; }
@@ -40,7 +47,7 @@ namespace AdvancedScada.IODriverV2.XModbus.RTU
             try
             {
                 IsConnected = SerialAdaper.Connect();
-                
+
                 stopwatch.Stop();
             }
             catch (TimeoutException ex)
@@ -49,7 +56,7 @@ namespace AdvancedScada.IODriverV2.XModbus.RTU
 
                 EventscadaException?.Invoke(this.GetType().Name,
                     $"Could Not Connect to Server : {ex.Message}Time{stopwatch.ElapsedTicks}");
-               
+
             }
         }
 
@@ -58,13 +65,13 @@ namespace AdvancedScada.IODriverV2.XModbus.RTU
             try
             {
                 SerialAdaper.Close();
-                
+
             }
             catch (TimeoutException ex)
             {
 
                 EventscadaException?.Invoke(this.GetType().Name, $"Could Not Connect to Server : {ex.Message}");
-                 
+
             }
         }
 

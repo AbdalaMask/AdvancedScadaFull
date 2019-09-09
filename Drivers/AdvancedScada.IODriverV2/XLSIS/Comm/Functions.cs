@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdvancedScada.IODriverV2.Comm;
+using System;
 using System.Collections.Generic;
 
 namespace AdvancedScada.IODriverV2.XLSIS.Comm

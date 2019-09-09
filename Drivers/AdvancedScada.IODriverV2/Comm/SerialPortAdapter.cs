@@ -27,13 +27,13 @@ namespace AdvancedScada.IODriverV2.Comm
                 if (serialPort.IsOpen) serialPort.Close();
                 serialPort.Open();
 
-               
+
                 return true;
             }
             catch (System.Exception)
             {
 
-               
+
                 return false;
             }
 
@@ -44,12 +44,12 @@ namespace AdvancedScada.IODriverV2.Comm
             try
             {
                 if (serialPort.IsOpen) serialPort.Close();
-               
+
             }
             catch (System.Exception)
             {
 
-                
+
             }
 
         }

@@ -1,17 +1,17 @@
-﻿using System;
-using System.Diagnostics;
+﻿using AdvancedScada.DriverBase.Devices;
 using Opc;
 using Opc.Da;
-using Convert = System.Convert;
-using Factory = OpcCom.Factory;
-using Server = Opc.Da.Server;
-using AdvancedScada.DriverBase.Devices;
+using System;
+using System.Diagnostics;
 using static AdvancedScada.IBaseService.Common.XCollection;
+using Server = Opc.Da.Server;
+using Factory = OpcCom.Factory;
+using Convert = System.Convert;
 namespace AdvancedScada.IODriverV2.XOPC
 {
     public class OpcDaCom : IDisposable
     {
-       
+
         public bool IsConnected
         {
             get { return _IsConnected; }
@@ -56,7 +56,7 @@ namespace AdvancedScada.IODriverV2.XOPC
                     DLL = new Server(fact, null);
                     DLL.Url = new URL(m_OPCServerPath + "/" + OPCServer);
                     DLL.Connect();
-                   
+
                     stopwatch.Stop();
 
 
@@ -66,7 +66,7 @@ namespace AdvancedScada.IODriverV2.XOPC
             {
                 EventscadaException?.Invoke(this.GetType().Name,
                   $"Could Not Connect to Server : {ex.Message}Time{stopwatch.ElapsedTicks}");
-              
+
                 IsConnected = false;
             }
 
@@ -91,7 +91,7 @@ namespace AdvancedScada.IODriverV2.XOPC
                     fact.Dispose();
                 }
 
-               
+
                 IsConnected = false;
 
 
@@ -101,7 +101,7 @@ namespace AdvancedScada.IODriverV2.XOPC
 
 
                 EventscadaException?.Invoke(this.GetType().Name, $"Could Not Connect to Server : {ex.Message}");
-                 
+
                 throw ex;
             }
         }
@@ -121,7 +121,7 @@ namespace AdvancedScada.IODriverV2.XOPC
         #endregion
 
         #region Properties
-       
+
         private string m_OPCServerPath = "opcda://localhost";
         public string OPCServerPath
         {
@@ -375,7 +375,7 @@ namespace AdvancedScada.IODriverV2.XOPC
                     fact.Dispose();
                 }
 
-                
+
                 IsConnected = false;
 
 
@@ -385,7 +385,7 @@ namespace AdvancedScada.IODriverV2.XOPC
 
 
                 EventscadaException?.Invoke(this.GetType().Name, $"Could Not Connect to Server : {ex.Message}");
-                 
+
                 throw ex;
             }
         }

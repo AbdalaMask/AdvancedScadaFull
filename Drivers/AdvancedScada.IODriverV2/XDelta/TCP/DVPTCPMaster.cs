@@ -1,12 +1,11 @@
-﻿using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.DataTypes;
+﻿using AdvancedScada.DriverBase.DataTypes;
+using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IODriverV2.Comm;
 using System;
+using System.Data;
 using System.Diagnostics;
 using System.Net.Sockets;
 using System.Threading;
-using AdvancedScada.DriverBase.Devices;
-using System.Data;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.IODriverV2.XDelta.TCP
 {
@@ -16,7 +15,7 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
 
 
         private EthernetAdapter EthernetAdaper;
-         private SerialPortAdapter SerialAdaper;
+        private SerialPortAdapter SerialAdaper;
         public bool _IsConnected = false;
         public bool IsConnected
         {
@@ -62,7 +61,7 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
             try
             {
                 IsConnected = EthernetAdaper.Connect();
-                
+
                 stopwatch.Stop();
             }
             catch (SocketException ex)
@@ -72,7 +71,7 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
                      $"Could Not Connect to Server : {ex.SocketErrorCode} Time: {stopwatch.ElapsedTicks}");
                 IsConnected = false;
 
-                
+
             }
         }
 
@@ -81,7 +80,7 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
             try
             {
                 EthernetAdaper.Close();
-               
+
                 IsConnected = false;
             }
             catch (SocketException)
@@ -89,7 +88,7 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
             }
             finally
             {
-                
+
             }
         }
 
@@ -100,7 +99,7 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
             var Address = DMT.DevToAddrW("DVP", startAddress, slaveAddress);
             var frame = ReadCoilStatusMessage(slaveAddress, $"{Address}", nuMBErOfPoints);
             stopwatch.Stop();
- 
+
             EthernetAdaper.Write(frame);
             Thread.Sleep(DELAY);
             var buffReceiver = EthernetAdaper.Read();

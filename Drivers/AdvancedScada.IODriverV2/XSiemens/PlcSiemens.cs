@@ -1,10 +1,10 @@
 ﻿using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IODriverV2.Comm;
+using S7.Net;
 using System;
+using System.Data;
 using System.Diagnostics;
 using System.Net.Sockets;
-using System.Data;
-using S7.Net;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.IODriverV2.XSiemens
 
@@ -15,12 +15,12 @@ namespace AdvancedScada.IODriverV2.XSiemens
     public partial class PlcSiemens : IDriverAdapterV2
     {
         private EthernetAdapter EthernetAdaper;
-         private SerialPortAdapter SerialAdaper;
-        
+        private SerialPortAdapter SerialAdaper;
+
         Plc plc = null;
 
         #region MyRegion
-  /// <summary>
+        /// <summary>
         /// IP address of the PLC
         /// </summary>
         public string IP { get; private set; }
@@ -46,7 +46,7 @@ namespace AdvancedScada.IODriverV2.XSiemens
         public Int16 MaxPDUSize { get; set; }
 
         #endregion
-      
+
         /// <summary>
         /// Returns true if a connection to the PLC can be established
         /// </summary>
@@ -81,7 +81,7 @@ namespace AdvancedScada.IODriverV2.XSiemens
         }
 
 
-        
+
         public PlcSiemens(CpuType cpu, string ip, Int16 rack, Int16 slot)
         {
             if (!Enum.IsDefined(typeof(CpuType), cpu))
@@ -96,7 +96,7 @@ namespace AdvancedScada.IODriverV2.XSiemens
             Slot = slot;
             MaxPDUSize = 240;
         }
-        
+
         // construction
         /// <summary>
         /// 
@@ -124,7 +124,7 @@ namespace AdvancedScada.IODriverV2.XSiemens
             CPU = cpu;
             Rack = rack;
             Slot = slot;
-          
+
         }
         #region Connection (Open, Close)
 
@@ -145,7 +145,7 @@ namespace AdvancedScada.IODriverV2.XSiemens
 
                 EventscadaException?.Invoke(this.GetType().Name, string.Format("Could Not Connect to Server : {0} Time: {1}", ex.SocketErrorCode,
                     stopwatch.ElapsedTicks));
-             
+
 
             }
         }
@@ -156,27 +156,27 @@ namespace AdvancedScada.IODriverV2.XSiemens
             {
                 plc.Close();
 
-               
+
             }
             catch (SocketException ex)
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
-           
+
         }
 
         #endregion
         public object ReadStrings(string variable)
         {
             var adr = new PLCAddressStrings(variable);
-            return plc. Read(adr.DataType, adr.DbNumber, adr.StartByte, adr.VarType, 1, (byte)adr.BitNumber);
+            return plc.Read(adr.DataType, adr.DbNumber, adr.StartByte, adr.VarType, 1, (byte)adr.BitNumber);
         }
         public object ReadStruct(DataBlock structType, int db, int startByteAdr = 0)
         {
             int numBytes = Struct.GetStructSize(structType);
             // now read the package
 
-            var resultBytes =plc.ReadBytes(DataType.DataBlock, db, startByteAdr, numBytes);
+            var resultBytes = plc.ReadBytes(DataType.DataBlock, db, startByteAdr, numBytes);
             // and decode it
             return Struct.FromBytes(structType, resultBytes, this);
         }

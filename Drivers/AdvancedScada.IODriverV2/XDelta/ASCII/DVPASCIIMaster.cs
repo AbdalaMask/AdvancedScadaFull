@@ -1,13 +1,11 @@
-﻿
-using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.DataTypes;
+﻿using AdvancedScada.DriverBase.DataTypes;
+using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IODriverV2.Comm;
 using System;
+using System.Data;
 using System.Diagnostics;
 using System.Threading;
 using static AdvancedScada.IBaseService.Common.XCollection;
-using AdvancedScada.DriverBase.Devices;
-using System.Data;
 
 namespace AdvancedScada.IODriverV2.XDelta.ASCII
 {
@@ -17,6 +15,13 @@ namespace AdvancedScada.IODriverV2.XDelta.ASCII
         private EthernetAdapter EthernetAdaper;
         private SerialPortAdapter SerialAdaper;
         public bool _IsConnected = false;
+        private short slaveId;
+
+        public DVPASCIIMaster(short slaveId)
+        {
+            this.slaveId = slaveId;
+        }
+
         public bool IsConnected
         {
             get
@@ -45,7 +50,7 @@ namespace AdvancedScada.IODriverV2.XDelta.ASCII
             try
             {
                 IsConnected = SerialAdaper.Connect();
-              
+
 
                 stopwatch.Stop();
             }
@@ -55,7 +60,7 @@ namespace AdvancedScada.IODriverV2.XDelta.ASCII
 
                 EventscadaException?.Invoke(this.GetType().Name, string.Format("Could Not Connect to Server : {0}Time{1}", this.GetType().Name, ex.Message,
                     stopwatch.ElapsedTicks));
-              
+
                 IsConnected = false;
             }
         }
@@ -65,13 +70,13 @@ namespace AdvancedScada.IODriverV2.XDelta.ASCII
             try
             {
                 SerialAdaper.Close();
-               
+
             }
             catch (TimeoutException ex)
             {
 
                 EventscadaException?.Invoke(this.GetType().Name, string.Format("Could Not Connect to Server : {0}", this.GetType().Name, ex.Message));
-                
+
             }
         }
         /// <summary>

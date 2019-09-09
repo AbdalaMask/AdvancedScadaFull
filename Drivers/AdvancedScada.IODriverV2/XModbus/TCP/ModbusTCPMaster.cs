@@ -1,19 +1,19 @@
 ﻿using AdvancedScada.DriverBase.DataTypes;
+using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IODriverV2.Comm;
 using System;
+using System.Data;
 using System.Diagnostics;
 using System.Net.Sockets;
 using System.Threading;
-using AdvancedScada.DriverBase.Devices;
-using System.Data;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.IODriverV2.XModbus.TCP
 {
     public class ModbusTCPMaster : ModbusTCPMessage, IDriverAdapterV2
     {
         private const int DELAY = 10;
-         private EthernetAdapter EthernetAdaper;
-         private SerialPortAdapter SerialAdaper;
+        private EthernetAdapter EthernetAdaper;
+        private SerialPortAdapter SerialAdaper;
         public bool _IsConnected = false;
         public bool IsConnected
         {
@@ -52,7 +52,7 @@ namespace AdvancedScada.IODriverV2.XModbus.TCP
             try
             {
                 IsConnected = EthernetAdaper.Connect();
-               
+
                 stopwatch.Stop();
             }
             catch (SocketException ex)
@@ -62,7 +62,7 @@ namespace AdvancedScada.IODriverV2.XModbus.TCP
                 EventscadaException?.Invoke(this.GetType().Name,
                    $"Could Not Connect to Server : {ex.SocketErrorCode}Time{stopwatch.ElapsedTicks}");
 
-                 
+
             }
         }
 
@@ -71,14 +71,14 @@ namespace AdvancedScada.IODriverV2.XModbus.TCP
             try
             {
                 EthernetAdaper.Close();
-                
+
             }
             catch (SocketException)
             {
             }
             finally
             {
-               
+
             }
         }
 
@@ -87,7 +87,7 @@ namespace AdvancedScada.IODriverV2.XModbus.TCP
             var stopwatch = Stopwatch.StartNew();
 
             var frame = ReadCoilStatusMessage(slaveAddress, startAddress, nuMBErOfPoints);
- 
+
 
             stopwatch.Stop();
 
@@ -111,7 +111,7 @@ namespace AdvancedScada.IODriverV2.XModbus.TCP
         public byte[] ReadInputStatus(byte slaveAddress, string startAddress, ushort nuMBErOfPoints)
         {
             var frame = ReadInputStatusMessage(slaveAddress, startAddress, nuMBErOfPoints);
- 
+
             EthernetAdaper.Write(frame);
             Thread.Sleep(DELAY);
             var buffReceiver = EthernetAdaper.Read();
@@ -132,7 +132,7 @@ namespace AdvancedScada.IODriverV2.XModbus.TCP
         public byte[] ReadHoldingRegisters(byte slaveAddress, string startAddress, ushort nuMBErOfPoints)
         {
             var frame = ReadHoldingRegistersMessage(slaveAddress, startAddress, nuMBErOfPoints);
- 
+
             EthernetAdaper.Write(frame);
             Thread.Sleep(DELAY);
             var buffReceiver = EthernetAdaper.Read();
@@ -153,7 +153,7 @@ namespace AdvancedScada.IODriverV2.XModbus.TCP
         public byte[] ReadInputRegisters(byte slaveAddress, string startAddress, ushort nuMBErOfPoints)
         {
             var frame = ReadInputRegistersMessage(slaveAddress, startAddress, nuMBErOfPoints);
- 
+
             EthernetAdaper.Write(frame);
             Thread.Sleep(DELAY);
             var buffReceiver = EthernetAdaper.Read();
@@ -174,7 +174,7 @@ namespace AdvancedScada.IODriverV2.XModbus.TCP
         public byte[] WriteSingleCoil(byte slaveAddress, string startAddress, bool value)
         {
             var frame = WriteSingleCoilMessage(slaveAddress, startAddress, value);
- 
+
             EthernetAdaper.Write(frame);
             Thread.Sleep(DELAY);
             var buffReceiver = EthernetAdaper.Read();
@@ -191,7 +191,7 @@ namespace AdvancedScada.IODriverV2.XModbus.TCP
         public byte[] WriteMultipleCoils(byte slaveAddress, string startAddress, bool[] values)
         {
             var frame = WriteMultipleCoilsMessage(slaveAddress, startAddress, values);
- 
+
             EthernetAdaper.Write(frame);
             Thread.Sleep(DELAY);
             var buffReceiver = EthernetAdaper.Read();
@@ -208,7 +208,7 @@ namespace AdvancedScada.IODriverV2.XModbus.TCP
         public byte[] WriteSingleRegister(byte slaveAddress, string startAddress, byte[] values)
         {
             var frame = WriteSingleRegisterMessage(slaveAddress, startAddress, values);
- 
+
             EthernetAdaper.Write(frame);
             Thread.Sleep(DELAY);
             var buffReceiver = EthernetAdaper.Read();
@@ -225,7 +225,7 @@ namespace AdvancedScada.IODriverV2.XModbus.TCP
         public byte[] WriteMultipleRegisters(byte slaveAddress, string startAddress, byte[] values)
         {
             var frame = WriteMultipleRegistersMessage(slaveAddress, startAddress, values);
- 
+
             EthernetAdaper.Write(frame);
             Thread.Sleep(DELAY);
             var buffReceiver = EthernetAdaper.Read();

@@ -1,27 +1,25 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IODriverV2.Comm;
 using AdvancedScada.IODriverV2.XLSIS.Comm;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using static AdvancedScada.IBaseService.Common.XCollection;
-using AdvancedScada.DriverBase.Devices;
-using System.Data;
 
 namespace AdvancedScada.IODriverV2.XLSIS.Cnet
 {
     public class LS_CNET : IDriverAdapterV2, IDisposable
     {
-       
+
         private object LockObject = new object();
-        private const int DELAY = 200;// delay 100 ms
         private SerialPortAdapter SerialAdaper = null;
         private EthernetAdapter EthernetAdaper = null;
         public bool _IsConnected = false;
         private static string txtValue;
-       
+
         #region IPLC_LS_Master
         public bool IsConnected
         {
@@ -61,7 +59,7 @@ namespace AdvancedScada.IODriverV2.XLSIS.Cnet
             try
             {
                 IsConnected = SerialAdaper.Connect();
-               
+
                 stopwatch.Stop();
             }
             catch (TimeoutException ex)
@@ -69,7 +67,7 @@ namespace AdvancedScada.IODriverV2.XLSIS.Cnet
                 stopwatch.Stop();
                 EventscadaException?.Invoke(this.GetType().Name,
                    $"Could Not Connect to Server : {ex.Message}Time{stopwatch.ElapsedTicks}");
-                
+
                 IsConnected = false;
 
 
@@ -82,7 +80,7 @@ namespace AdvancedScada.IODriverV2.XLSIS.Cnet
             try
             {
                 this.SerialAdaper.Close();
-               
+
                 IsConnected = false;
 
 
@@ -92,7 +90,7 @@ namespace AdvancedScada.IODriverV2.XLSIS.Cnet
 
 
                 EventscadaException?.Invoke(this.GetType().Name, $"Could Not Connect to Server : {ex.Message}");
-           
+
             }
         }
 
@@ -109,12 +107,12 @@ namespace AdvancedScada.IODriverV2.XLSIS.Cnet
                     byte[] frame = ReadBytes(station, type, strVar, numberOfElements);
                     this.SerialAdaper.Write(frame, 0, frame.Length);
 
- 
+
                     Thread.Sleep(500);
                     buffReceiver = SerialAdaper.ReadExisting();
 
                     if (buffReceiver == "null") return null;
-                     tempStrg = buffReceiver.Substring(1, buffReceiver.Length - 2);
+                    tempStrg = buffReceiver.Substring(1, buffReceiver.Length - 2);
                     tempStrg = tempStrg.Remove(0, 9);
 
                     return Conversion.HexToBytes(tempStrg);
@@ -143,7 +141,7 @@ namespace AdvancedScada.IODriverV2.XLSIS.Cnet
                     this.SerialAdaper.Write(frame, 0, frame.Length);
                     Thread.Sleep(500);
                     buffReceiver = SerialAdaper.ReadExisting();
- 
+
                     if (buffReceiver == null) return false;
 
 
@@ -232,7 +230,7 @@ namespace AdvancedScada.IODriverV2.XLSIS.Cnet
                         FullPacket = WriteWord(station, type, (double)value, data_type2);
                         break;
                 }
- 
+
                 return FullPacket;
             }
             catch (Exception ex)
@@ -387,12 +385,19 @@ namespace AdvancedScada.IODriverV2.XLSIS.Cnet
                     break;
             }
             byte[] TxWrite = Encoding.ASCII.GetBytes((char)5 + frame + (char)4 + sBcc);
- 
+
 
             return TxWrite;
 
         }
         object mutexDispose = new object();
+        private short slaveId;
+
+        public LS_CNET(short slaveId)
+        {
+            this.slaveId = slaveId;
+        }
+
         public void Dispose()
         {
             lock (mutexDispose)
