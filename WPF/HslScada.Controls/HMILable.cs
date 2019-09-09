@@ -78,27 +78,29 @@ namespace HMIControl
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            Boolean isInWpfDesignerMode = (LicenseManager.UsageMode == LicenseUsageMode.Designtime);
-            Boolean isInFormsDesignerMode = (System.Diagnostics.Process.GetCurrentProcess().ProcessName == "devenv");
-
-            if (isInWpfDesignerMode || isInFormsDesignerMode)
+            try
             {
-                // is in any designer mode
-            }
-            else
-            {
-                // not in designer mode
                 //* When address is changed, re-subscribe to new address
                 if (string.IsNullOrEmpty(PLCAddressValue) || string.IsNullOrWhiteSpace(PLCAddressValue) ||
-                    HslScada.Controls.Licenses.LicenseManager.IsInDesignMode) return;
+                        HslScada.Controls.Licenses.LicenseHMI.IsInDesignMode) return;
                 Binding binding = new Binding("Value");
                 binding.Source = TagCollectionClient.Tags[PLCAddressValue];
                 this.SetBinding(TextProperty, binding);
             }
+            catch (Exception ex)
+            {
+                DisplayError(ex.Message);
+            }
+           
+            
 
 
         }
 
+        private void DisplayError(string message)
+        {
+           
+        }
 
         [Category("HMI")]
         public BorderStyle BorderStyle

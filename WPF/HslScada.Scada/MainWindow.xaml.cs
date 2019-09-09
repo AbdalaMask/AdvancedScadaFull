@@ -41,7 +41,7 @@ namespace HslScada.Scada
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                Application.Current.Shutdown(0);
+               // Application.Current.Shutdown(0);
             }
 
 

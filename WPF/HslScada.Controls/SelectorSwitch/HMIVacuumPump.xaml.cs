@@ -84,10 +84,12 @@ namespace HslScada.Controls
 
         public static void MoveSpeedDependencyPropertyChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs e)
         {
-            //if (dependency is HMIVacuumPump pumpOne)
-            //{
-            //    pumpOne.UpdateMoveSpeed();
-            //}
+            HMIVacuumPump pumpOne = (HMIVacuumPump)dependency;
+
+            if (dependency !=null)
+            {
+                pumpOne.UpdateMoveSpeed();
+            }
         }
 
     }
