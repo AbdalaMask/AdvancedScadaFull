@@ -50,7 +50,6 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Comm\Conversion.cs" />
     <Compile Include="Comm\EthernetAdapter.cs" />
     <Compile Include="Comm\IDriverAdapterV2.cs" />

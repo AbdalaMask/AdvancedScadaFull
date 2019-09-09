@@ -67,18 +67,8 @@ namespace AdvancedScada.IODriverV2.XSiemens
             }
         }
 
-        public bool IsConnected
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public bool IsConnected { get; set; }
+        
 
 
 
@@ -109,23 +99,7 @@ namespace AdvancedScada.IODriverV2.XSiemens
             Slot = 3;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cpu"></param>
-        /// <param name="ip"></param>
-        /// <param name="rack"></param>
-        /// <param name="slot"></param>
-        /// <param name="name"></param>
-        /// <param name="tag"></param>
-        public PlcSiemens(CpuType cpu, string ip, Int16 rack, Int16 slot, string name, object tag)
-        {
-            IP = ip;
-            CPU = cpu;
-            Rack = rack;
-            Slot = slot;
-
-        }
+        
         #region Connection (Open, Close)
 
 

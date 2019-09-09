@@ -29,12 +29,23 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
                 _IsConnected = value;
             }
         }
-
+        private short slaveId;
         public bool IsAvailable
         {
             get
             {
-                throw new NotImplementedException();
+                try
+                {
+                    Connection();
+
+                    return IsConnected;
+
+
+                }
+                catch
+                {
+                    return false;
+                }
             }
         }
 
@@ -42,9 +53,10 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
         {
         }
 
-        public DVPTCPMaster(string ip, int port)
+        public DVPTCPMaster(short slaveId, string ip, int port)
             : this()
         {
+            this.slaveId = slaveId;
             EthernetAdaper = new EthernetAdapter(ip, port);
         }
 
@@ -145,8 +157,7 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
             var Address = DMT.DevToAddrW("DVP", startAddress, slaveAddress);
             var frame = ReadHoldingRegistersMessage(slaveAddress, $"{Address}", nuMBErOfPoints);
             EthernetAdaper.Write(frame);
-            //RequestAndResponseMessage _RequestAndResponseMessage = new RequestAndResponseMessage("RequestRead", frame);
-
+ 
             Thread.Sleep(DELAY);
             var buffReceiver = EthernetAdaper.Read();
             if (FUNCTION_03 != buffReceiver[7])
@@ -168,8 +179,7 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
             var Address = DMT.DevToAddrW("DVP", startAddress, slaveAddress);
             var frame = ReadInputRegistersMessage(slaveAddress, $"{Address}", nuMBErOfPoints);
             EthernetAdaper.Write(frame);
-            // RequestAndResponseMessage _RequestAndResponseMessage = new RequestAndResponseMessage("RequestRead", frame);
-
+ 
             Thread.Sleep(DELAY);
             var buffReceiver = EthernetAdaper.Read();
             if (FUNCTION_04 != buffReceiver[7])
@@ -191,8 +201,7 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
             var Address = DMT.DevToAddrW("DVP", startAddress, slaveAddress);
             var frame = WriteSingleCoilMessage(slaveAddress, $"{Address}", value);
             EthernetAdaper.Write(frame);
-            //RequestAndResponseMessage _RequestAndResponseMessage = new RequestAndResponseMessage("RequestWrite", frame);
-
+ 
             Thread.Sleep(DELAY);
             var buffReceiver = EthernetAdaper.Read();
             if (FUNCTION_05 != buffReceiver[7])
@@ -210,8 +219,7 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
             var Address = DMT.DevToAddrW("DVP", startAddress, slaveAddress);
             var frame = WriteMultipleCoilsMessage(slaveAddress, $"{Address}", values);
             EthernetAdaper.Write(frame);
-            // RequestAndResponseMessage _RequestAndResponseMessage = new RequestAndResponseMessage("RequestWrite", frame);
-
+ 
             Thread.Sleep(DELAY);
             var buffReceiver = EthernetAdaper.Read();
             if (FUNCTION_15 != buffReceiver[7])
@@ -229,8 +237,7 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
             var Address = DMT.DevToAddrW("DVP", startAddress, slaveAddress);
             var frame = WriteSingleRegisterMessage(slaveAddress, $"{Address}", values);
             EthernetAdaper.Write(frame);
-            // RequestAndResponseMessage _RequestAndResponseMessage = new RequestAndResponseMessage("RequestWrite", frame);
-
+ 
             Thread.Sleep(DELAY);
             var buffReceiver = EthernetAdaper.Read();
             if (FUNCTION_06 != buffReceiver[7])
@@ -248,8 +255,7 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
             var Address = DMT.DevToAddrW("DVP", startAddress, slaveAddress);
             var frame = WriteMultipleRegistersMessage(slaveAddress, $"{Address}", values);
             EthernetAdaper.Write(frame);
-            // RequestAndResponseMessage _RequestAndResponseMessage = new RequestAndResponseMessage("RequestWrite", frame);
-
+ 
             Thread.Sleep(DELAY);
             var buffReceiver = EthernetAdaper.Read();
             if (FUNCTION_16 != buffReceiver[7])
@@ -289,7 +295,62 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
 
         public TValue[] Read<TValue>(string address, ushort length)
         {
-            throw new NotImplementedException();
+            if (typeof(TValue) == typeof(bool))
+            {
+                var b = Bit.ToArray(ReadCoilStatus((byte)slaveId, address, length));
+                return (TValue[])(object)b;
+            }
+            if (typeof(TValue) == typeof(ushort))
+            {
+                var b = Word.ToArray(ReadHoldingRegisters((byte)slaveId, address, length));
+
+                return (TValue[])(object)b;
+            }
+            if (typeof(TValue) == typeof(int))
+            {
+                var b = Int.ToArray(ReadHoldingRegisters((byte)slaveId, address, length));
+
+                return (TValue[])(object)b;
+            }
+            if (typeof(TValue) == typeof(uint))
+            {
+                var b = DInt.ToArray(ReadHoldingRegisters((byte)slaveId, address, length));
+                return (TValue[])(object)b;
+            }
+            if (typeof(TValue) == typeof(long))
+            {
+                var b = DWord.ToArray(ReadHoldingRegisters((byte)slaveId, address, length));
+                return (TValue[])(object)b;
+            }
+            if (typeof(TValue) == typeof(ulong))
+            {
+                var b = DInt.ToArray(ReadHoldingRegisters((byte)slaveId, address, length));
+                return (TValue[])(object)b;
+            }
+
+            if (typeof(TValue) == typeof(short))
+            {
+                var b = Word.ToArray(ReadHoldingRegisters((byte)slaveId, address, length));
+                return (TValue[])(object)b;
+            }
+            if (typeof(TValue) == typeof(double))
+            {
+                var b = Real.ToArrayInverse(ReadHoldingRegisters((byte)slaveId, address, length));
+                return (TValue[])(object)b;
+            }
+            if (typeof(TValue) == typeof(float))
+            {
+                var b = Real.ToArray(ReadHoldingRegisters((byte)slaveId, address, length));
+                return (TValue[])(object)b;
+
+            }
+            if (typeof(TValue) == typeof(string))
+            {
+                var b = string.Empty;
+                return (TValue[])(object)b;
+            }
+
+            throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
 
         public TValue[] Read<TValue>(DataBlock db)
@@ -299,12 +360,22 @@ namespace AdvancedScada.IODriverV2.XDelta.TCP
 
         public bool[] ReadDiscrete(string address, ushort length)
         {
-            throw new NotImplementedException();
+            var b = Bit.ToArray(ReadInputStatus((byte)slaveId, address, length));
+            return b;
         }
 
         public bool Write(string address, dynamic value)
         {
-            throw new NotImplementedException();
+            if (value is bool)
+            {
+                WriteSingleCoil((byte)slaveId, address, value);
+            }
+            else
+            {
+                WriteSingleRegister((byte)slaveId, address, value);
+            }
+
+            return true;
         }
     }
 }

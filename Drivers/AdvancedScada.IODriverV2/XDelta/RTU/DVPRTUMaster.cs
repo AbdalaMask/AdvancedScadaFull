@@ -40,7 +40,18 @@ namespace AdvancedScada.IODriverV2.XDelta.RTU
         {
             get
             {
-                throw new NotImplementedException();
+                try
+                {
+                    Connection();
+
+                    return IsConnected;
+
+
+                }
+                catch
+                {
+                    return false;
+                }
             }
         }
 
@@ -189,7 +200,7 @@ namespace AdvancedScada.IODriverV2.XDelta.RTU
 
         public ConnectionState GetConnectionState()
         {
-            throw new NotImplementedException();
+            return ConnectionState.Broken;
         }
 
         public byte[] BuildReadByte(byte station, string address, ushort length)
@@ -204,7 +215,62 @@ namespace AdvancedScada.IODriverV2.XDelta.RTU
 
         public TValue[] Read<TValue>(string address, ushort length)
         {
-            throw new NotImplementedException();
+            if (typeof(TValue) == typeof(bool))
+            {
+                var b = Bit.ToArray(ReadCoilStatus((byte)slaveId, address, length));
+                return (TValue[])(object)b;
+            }
+            if (typeof(TValue) == typeof(ushort))
+            {
+                var b = Word.ToArray(ReadHoldingRegisters((byte)slaveId, address, length));
+
+                return (TValue[])(object)b;
+            }
+            if (typeof(TValue) == typeof(int))
+            {
+                var b = Int.ToArray(ReadHoldingRegisters((byte)slaveId, address, length));
+
+                return (TValue[])(object)b;
+            }
+            if (typeof(TValue) == typeof(uint))
+            {
+                var b = DInt.ToArray(ReadHoldingRegisters((byte)slaveId, address, length));
+                return (TValue[])(object)b;
+            }
+            if (typeof(TValue) == typeof(long))
+            {
+                var b = DWord.ToArray(ReadHoldingRegisters((byte)slaveId, address, length));
+                return (TValue[])(object)b;
+            }
+            if (typeof(TValue) == typeof(ulong))
+            {
+                var b = DInt.ToArray(ReadHoldingRegisters((byte)slaveId, address, length));
+                return (TValue[])(object)b;
+            }
+
+            if (typeof(TValue) == typeof(short))
+            {
+                var b = Word.ToArray(ReadHoldingRegisters((byte)slaveId, address, length));
+                return (TValue[])(object)b;
+            }
+            if (typeof(TValue) == typeof(double))
+            {
+                var b = Real.ToArrayInverse(ReadHoldingRegisters((byte)slaveId, address, length));
+                return (TValue[])(object)b;
+            }
+            if (typeof(TValue) == typeof(float))
+            {
+                var b = Real.ToArray(ReadHoldingRegisters((byte)slaveId, address, length));
+                return (TValue[])(object)b;
+
+            }
+            if (typeof(TValue) == typeof(string))
+            {
+                var b = string.Empty;
+                return (TValue[])(object)b;
+            }
+
+            throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
 
         public TValue[] Read<TValue>(DataBlock db)
@@ -214,12 +280,22 @@ namespace AdvancedScada.IODriverV2.XDelta.RTU
 
         public bool[] ReadDiscrete(string address, ushort length)
         {
-            throw new NotImplementedException();
+            var b = Bit.ToArray(ReadInputStatus((byte)slaveId, address, length));
+            return b;
         }
 
         public bool Write(string address, dynamic value)
         {
-            throw new NotImplementedException();
+            if (value is bool)
+            {
+                WriteSingleCoil((byte)slaveId, address, value);
+            }
+            else
+            {
+                WriteSingleRegister((byte)slaveId, address, value);
+            }
+
+            return true;
         }
     }
 }

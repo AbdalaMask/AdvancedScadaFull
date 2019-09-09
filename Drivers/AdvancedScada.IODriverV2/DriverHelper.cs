@@ -10,6 +10,7 @@ using AdvancedScada.IODriverV2.XLSIS.FENET;
 using AdvancedScada.IODriverV2.XModbus.ASCII;
 using AdvancedScada.IODriverV2.XModbus.RTU;
 using AdvancedScada.IODriverV2.XModbus.TCP;
+using AdvancedScada.IODriverV2.XOPC;
 using AdvancedScada.IODriverV2.XSiemens;
 using S7.Net;
 using System;
@@ -39,7 +40,10 @@ namespace AdvancedScada.IODriverV2
        
         //==================================Siemens===================================================
         private static Dictionary<string, PlcSiemens> _PLCS7 = null;
-       
+
+        //=====================================OPC====================================================
+        private static Dictionary<string, OpcDaCom> _OpcDaCom = null;
+
 
         private static int COUNTER;
         private static bool IsConnected;
@@ -64,7 +68,8 @@ namespace AdvancedScada.IODriverV2
                 cnet = new Dictionary<string, LS_CNET>();
                 FENET = new Dictionary<string, LS_FENET>();
                 //=================================================================
-               
+                _OpcDaCom = new Dictionary<string, OpcDaCom>();
+                //===================================================================
                 _PLCS7 = new Dictionary<string, PlcSiemens>();
                 
                 Channels = chns;
@@ -137,13 +142,13 @@ namespace AdvancedScada.IODriverV2
                                     switch (ch.ChannelTypes)
                                     {
                                         case "Delta":
-                                            dv.PLC = new DVPTCPMaster( die.IPAddress, die.Port);
-                                            DriverAdapter = new DVPTCPMaster( die.IPAddress, die.Port);
+                                            dv.PLC = new DVPTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
+                                            DriverAdapter = new DVPTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
                                             Deltambe.Add(ch.ChannelName, (DVPTCPMaster)DriverAdapter);
                                             break;
                                         case "Modbus":
-                                            dv.PLC = new ModbusTCPMaster( die.IPAddress, die.Port);
-                                            DriverAdapter = new ModbusTCPMaster( die.IPAddress, die.Port);
+                                            dv.PLC = new ModbusTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
+                                            DriverAdapter = new ModbusTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
                                             mbe.Add(ch.ChannelName, (ModbusTCPMaster)DriverAdapter);
                                             break;
                                         case "LSIS":
@@ -151,7 +156,10 @@ namespace AdvancedScada.IODriverV2
                                             DriverAdapter = new LS_FENET(die.IPAddress, die.Port, die.Slot);
                                             FENET.Add(ch.ChannelName, (LS_FENET)DriverAdapter);
                                             break;
-                                        case "Panasonic":
+                                        case "OPC":
+                                            dv.PLC= new OpcDaCom(ch.Mode, ch.CPU.Trim());
+                                            DriverAdapter = new OpcDaCom(ch.Mode, ch.CPU.Trim());
+                                            _OpcDaCom.Add(ch.ChannelName,(OpcDaCom) DriverAdapter);
                                             break;
                                         case "Siemens":
                                             var cpu = (CpuType)Enum.Parse(typeof(CpuType), die.CPU);
@@ -223,7 +231,7 @@ namespace AdvancedScada.IODriverV2
                 {
                     threads[i] = new Thread((chParam) =>
                     {
-                        IDriverAdapter DriverAdapter = null;
+                        IDriverAdapterV2 DriverAdapter = null;
                         Channel ch = (Channel)chParam;
                         switch (ch.ChannelTypes)
                         {
@@ -277,13 +285,16 @@ namespace AdvancedScada.IODriverV2
                                         break;
                                 }
                                 break;
+                            case "OPC":
+                                DriverAdapter = _OpcDaCom[ch.ChannelName];
+                                break;
 
                             default:
                                 break;
                         }
 
-
-
+                        DriverAdapter.Connection();
+                        IsConnected = DriverAdapter.IsConnected;
                         while (IsConnected)
                         {
                             foreach (Device dv in ch.Devices)
@@ -306,8 +317,10 @@ namespace AdvancedScada.IODriverV2
                                         case "LSIS":
                                             SendPackageLSIS(DriverAdapter, ch, dv, db);
                                             break;
-                                       
-                                           
+                                        case "OPC":
+                                            SendPackageOPC(DriverAdapter, ch, dv, db);
+                                            break;
+
                                         case "Siemens":
                                             SendPackageSiemens(DriverAdapter, dv, db);
                                             break;
@@ -356,7 +369,7 @@ namespace AdvancedScada.IODriverV2
         #region SendPackage All
 
       
-        private void SendPackageDelta(IDriverAdapter DriverAdapter, Device dv, DataBlock db)
+        private void SendPackageDelta(IDriverAdapterV2 DriverAdapter, Device dv, DataBlock db)
         {
             try
             {
@@ -505,7 +518,7 @@ namespace AdvancedScada.IODriverV2
             }
         }
    
-        private void SendPackageModbus(IDriverAdapter DriverAdapter, Device dv, DataBlock db)
+        private void SendPackageModbus(IDriverAdapterV2 DriverAdapter, Device dv, DataBlock db)
         {
             try
             {
@@ -653,7 +666,7 @@ namespace AdvancedScada.IODriverV2
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
         }
-        private void SendPackageLSIS(IDriverAdapter ILSIS, Channel ch, Device dv, DataBlock db)
+        private void SendPackageLSIS(IDriverAdapterV2 ILSIS, Channel ch, Device dv, DataBlock db)
         {
             try
             {
@@ -788,7 +801,41 @@ namespace AdvancedScada.IODriverV2
                 Console.WriteLine(ex.Message);
             }
         }
-       
+
+        public void SendPackageOPC(IDriverAdapterV2 opcDaCom, Channel ch, Device dv, DataBlock db)
+        {
+            try
+            {
+                SendDone.WaitOne(-1);
+                lock (this)
+                {
+                    var wdArys = opcDaCom.Read<string>(db);
+                    if (wdArys == null || wdArys.Length == 0) return;
+                    for (var i = 0; i < db.Tags.Count; i++)
+                    {
+                        db.Tags[i].Value = wdArys[i];
+                        switch (wdArys[i])
+                        {
+                            case "True":
+                            case "False":
+                                db.Tags[i].Visible = bool.Parse(wdArys[i]);
+                                db.Tags[i].Enabled = bool.Parse(wdArys[i]);
+                                break;
+
+                        }
+
+                        db.Tags[i].Timestamp = DateTime.Now;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                IsConnected = false;
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            }
+
+        }
+
         private void SendPackageSiemens(IDriverAdapter ISiemens, Device dv, DataBlock db)
         {
             try

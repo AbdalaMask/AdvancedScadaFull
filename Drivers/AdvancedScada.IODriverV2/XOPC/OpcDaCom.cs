@@ -7,16 +7,15 @@ using static AdvancedScada.IBaseService.Common.XCollection;
 using Server = Opc.Da.Server;
 using Factory = OpcCom.Factory;
 using Convert = System.Convert;
+using AdvancedScada.IODriverV2.Comm;
+using System.Data;
+
 namespace AdvancedScada.IODriverV2.XOPC
 {
-    public class OpcDaCom : IDisposable
+    public class OpcDaCom : IDriverAdapterV2, IDisposable
     {
 
-        public bool IsConnected
-        {
-            get { return _IsConnected; }
-            set { _IsConnected = value; }
-        }
+        public bool IsConnected { get; set; }
         private static readonly object mutex = new object();
         private static OpcDaCom _instance;
         public OpcDaCom(string m_OPCServerPath, string m_OPCServer)
@@ -45,30 +44,7 @@ namespace AdvancedScada.IODriverV2.XOPC
         //***************************************************************
         public void CreateDLLInstance()
         {
-            var stopwatch = Stopwatch.StartNew();
-
-            try
-            {
-                if (DLL == null)
-                {
-                    if (DLL != null && DLL.IsConnected)
-                        DLL.Disconnect();
-                    DLL = new Server(fact, null);
-                    DLL.Url = new URL(m_OPCServerPath + "/" + OPCServer);
-                    DLL.Connect();
-
-                    stopwatch.Stop();
-
-
-                }
-            }
-            catch (Exception ex)
-            {
-                EventscadaException?.Invoke(this.GetType().Name,
-                  $"Could Not Connect to Server : {ex.Message}Time{stopwatch.ElapsedTicks}");
-
-                IsConnected = false;
-            }
+           
 
         }
 
@@ -117,7 +93,6 @@ namespace AdvancedScada.IODriverV2.XOPC
         private readonly SubscriptionState SubscriptionState = new SubscriptionState();
         private Item[] SubscribedItems;
         public Item OPCItem;
-        public bool _IsConnected;
         #endregion
 
         #region Properties
@@ -179,6 +154,14 @@ namespace AdvancedScada.IODriverV2.XOPC
             set
             {
                 if (value >= 0) m_PollRateOverride = value;
+            }
+        }
+
+        public bool IsAvailable
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
         #endregion
@@ -388,6 +371,85 @@ namespace AdvancedScada.IODriverV2.XOPC
 
                 throw ex;
             }
+        }
+
+        public void AllSerialPortAdapter(SerialPortAdapter AllSerialPortAdapter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AllEthernetAdapter(EthernetAdapter AllEthernetAdapter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Connection()
+        {
+            var stopwatch = Stopwatch.StartNew();
+
+            try
+            {
+                if (DLL == null)
+                {
+                    if (DLL != null && DLL.IsConnected)
+                        DLL.Disconnect();
+                    DLL = new Server(fact, null);
+                    DLL.Url = new URL(m_OPCServerPath + "/" + OPCServer);
+                    DLL.Connect();
+
+                    stopwatch.Stop();
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                EventscadaException?.Invoke(this.GetType().Name,
+                  $"Could Not Connect to Server : {ex.Message}Time{stopwatch.ElapsedTicks}");
+
+                IsConnected = false;
+            }
+        }
+
+        public ConnectionState GetConnectionState()
+        {
+            return ConnectionState.Broken;
+        }
+
+        public byte[] BuildReadByte(byte station, string address, ushort length)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte[] BuildWriteByte(byte station, string address, byte[] value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TValue[] Read<TValue>(string address, ushort length)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TValue[] Read<TValue>(DataBlock db)
+        {
+            if (typeof(TValue) == typeof(string))
+            {
+                var b = Read(db.DataBlockName, 250, db);
+                return (TValue[])(object)b;
+            }
+            throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
+        }
+
+        public bool[] ReadDiscrete(string address, ushort length)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Write(string address, dynamic value)
+        {
+            Write(address, value);
+            return true;
         }
         #endregion
     }

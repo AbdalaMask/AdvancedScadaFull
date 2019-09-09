@@ -38,7 +38,18 @@ namespace AdvancedScada.IODriverV2.XLSIS.Cnet
         {
             get
             {
-                throw new NotImplementedException();
+                try
+                {
+                    Connection();
+
+                    return IsConnected;
+
+
+                }
+                catch
+                {
+                    return false;
+                }
             }
         }
 
@@ -419,7 +430,7 @@ namespace AdvancedScada.IODriverV2.XLSIS.Cnet
 
         public ConnectionState GetConnectionState()
         {
-            throw new NotImplementedException();
+            return ConnectionState.Broken;
         }
 
         public byte[] BuildReadByte(byte station, string address, ushort length)

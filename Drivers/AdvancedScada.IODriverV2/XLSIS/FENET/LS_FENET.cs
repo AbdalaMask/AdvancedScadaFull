@@ -583,7 +583,7 @@ namespace AdvancedScada.IODriverV2.XLSIS.FENET
 
         public ConnectionState GetConnectionState()
         {
-            throw new NotImplementedException();
+            return ConnectionState.Broken;
         }
 
         public byte[] BuildReadByte(byte station, string address, ushort length)
