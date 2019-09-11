@@ -21,29 +21,8 @@ namespace AdvancedScada.IODriver.Modbus.ASCII
         }
 
         private ModbusAscii busAsciiClient = null;
-        /// <summary>
-        /// Returns true if a connection to the PLC can be established
-        /// </summary>
-        public bool IsAvailable
-        {
-            //TODO: Fix This
-            get
-            {
-                try
-                {
-                    Connection();
-
-                    return IsConnected;
-
-
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-        }
-        public void Connection()
+        
+        public bool Connection()
         {
 
             busAsciiClient?.Close();
@@ -64,7 +43,7 @@ namespace AdvancedScada.IODriver.Modbus.ASCII
                 });
                 busAsciiClient.Open();
                 IsConnected = true;
-
+                return IsConnected;
 
             }
             catch (TimeoutException ex)
@@ -72,20 +51,22 @@ namespace AdvancedScada.IODriver.Modbus.ASCII
 
 
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                return IsConnected;
             }
         }
 
-        public void Disconnection()
+        public bool Disconnection()
         {
             try
             {
                 busAsciiClient.Close();
-
+                return IsConnected;
             }
             catch (TimeoutException ex)
             {
 
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                return IsConnected;
             }
         }
 
@@ -123,7 +104,7 @@ namespace AdvancedScada.IODriver.Modbus.ASCII
         {
             if (value is bool)
             {
-                busAsciiClient.WriteCoil(address, value);
+                busAsciiClient.Write(address, value);
             }
             else
             {
@@ -193,19 +174,6 @@ namespace AdvancedScada.IODriver.Modbus.ASCII
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
 
-        public ConnectionState GetConnectionState()
-        {
-            return ConnectionState.Broken;
-        }
-
-        public TValue[] Read<TValue>(string[] address)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TValue[] Read<TValue>(DataBlock db)
-        {
-            throw new NotImplementedException();
-        }
+     
     }
 }

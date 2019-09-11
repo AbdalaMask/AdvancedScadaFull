@@ -1,5 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using AdvancedScada.DriverBase;
 using System;
 using System.ComponentModel;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.Hydraulic
 {
-    public class HMIHydraulicCylinderAnalog : AdvancedScada.Controls_Net45.HydraulicCylinderAnalog
+    public class HMIHydraulicCylinderAnalog : MfgControl.AdvancedHMI.Controls.HydraulicCylinderAnalog
     {
 
         public bool HoldTimeMet;

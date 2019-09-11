@@ -15,12 +15,13 @@ using System.Xml.Linq;
 using AdvancedScada;
  using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
- using AdvancedScada.DriverBase.Comm;
+using MfgControl.AdvancedHMI.Controls;
+using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.Controls.AHMI.ButtonAll;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
+
 
 namespace AdvancedScada.Controls.AHMI.ButtonAll
 {
@@ -211,9 +212,9 @@ namespace AdvancedScada.Controls.AHMI.ButtonAll
         {
             try
             {
-                if (OutputTypes == OutputType.MomentarySet)
+                if (OutputType == OutputType.MomentarySet)
                     Utilities.Write(PLCAddressClick, "0");
-                else if (OutputTypes == OutputType.MomentaryReset) Utilities.Write(PLCAddressClick, "1");
+                else if (OutputType == OutputType.MomentaryReset) Utilities.Write(PLCAddressClick, "1");
             }
             catch (Exception ex)
             {
@@ -329,30 +330,30 @@ namespace AdvancedScada.Controls.AHMI.ButtonAll
             if (PLCAddressClick != null && string.Compare(PLCAddressClick, string.Empty) != 0 && Enabled)
                 try
                 {
-                    if (OutputTypes == OutputType.MomentarySet)
+                    if (OutputType == OutputType.MomentarySet)
                     {
                         Utilities.Write(PLCAddressClick, "1");
                         if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
                         if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
                     }
-                    else if (OutputTypes == OutputType.MomentaryReset)
+                    else if (OutputType == OutputType.MomentaryReset)
                     {
                         Utilities.Write(PLCAddressClick, "0");
                         if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
                         if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
                     }
 
-                    else if (OutputTypes == OutputType.SetTrue)
+                    else if (OutputType == OutputType.SetTrue)
                     {
                         Utilities.Write(PLCAddressClick, "1");
                     }
 
-                    else if (OutputTypes == OutputType.SetFalse)
+                    else if (OutputType == OutputType.SetFalse)
                     {
                         Utilities.Write(PLCAddressClick, "0");
                     }
 
-                    else if (OutputTypes == OutputType.Toggle)
+                    else if (OutputType == OutputType.Toggle)
                     {
                         var CurrentValue = Convert.ToBoolean(Value);
                         if (CurrentValue)

@@ -53,6 +53,13 @@ Public Class Keypad_v3
 
     Public Sub New(m_KeypadWidth As Integer)
         Me.m_KeypadWidth = m_KeypadWidth
+        '* reduce the flicker
+        SetStyle(System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer Or
+                    System.Windows.Forms.ControlStyles.AllPaintingInWmPaint Or
+                    System.Windows.Forms.ControlStyles.UserPaint Or
+                    System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, True)
+
+        InitializeComponent()
     End Sub
 
     Private Sub InitializeComponent()

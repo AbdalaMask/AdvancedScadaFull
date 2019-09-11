@@ -2,7 +2,7 @@
 using AdvancedScada.Controls_Binding.Enum;
 using AdvancedScada.Controls_Binding.Leds.DrawAll;
 using AdvancedScada.DriverBase;
-using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;

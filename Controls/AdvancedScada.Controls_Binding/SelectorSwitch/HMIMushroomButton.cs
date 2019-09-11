@@ -13,7 +13,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
 {
     [DefaultEvent("Click")]
     [Designer(typeof(HMIMushroomButtonDesigner))]
-    public class HMIMushroomButton : AdvancedScada.Controls_Net45.MushroomButton
+    public class HMIMushroomButton : MfgControl.AdvancedHMI.Controls.PushButton
     {
 
         #region PLC Properties

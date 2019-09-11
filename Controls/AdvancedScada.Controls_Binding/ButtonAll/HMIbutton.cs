@@ -9,7 +9,7 @@ using System.Drawing.Design;
 using System.Security.Permissions;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using AdvancedScada.Monitor;
 
 namespace AdvancedScada.Controls_Binding.ButtonAll

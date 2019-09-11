@@ -17,8 +17,7 @@ using AdvancedScada;
  
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
- 
+using MfgControl.AdvancedHMI.Controls;
 using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.Controls.AHMI.Controls;
 using AdvancedScada;
@@ -27,7 +26,7 @@ using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.Controls
 {
-    public class HMIIndicator : AdvancedScada.Controls_Net45.Indicator
+    public class HMIIndicator : Indicator
     {
 
         #region PLC Related Properties

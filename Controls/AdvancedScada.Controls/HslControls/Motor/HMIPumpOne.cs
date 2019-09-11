@@ -15,6 +15,7 @@ using AdvancedScada.Controls.HslControls.Motor;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.HslControls;
+using MfgControl.AdvancedHMI.Controls;
 
 namespace AdvancedScada.Controls.HslControls.Motor
 {

@@ -1,6 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.DriverBase;
-using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.Drawing.Design;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.ButtonAll
 {
-    public class HMISquareIlluminatedButton : AdvancedScada.Controls_Net45.SquareIlluminatedButton
+    public class HMISquareIlluminatedButton : MfgControl.AdvancedHMI.Controls.SquareIlluminatedButton
     {
 
  
@@ -188,7 +188,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         {
             try
             {
-                switch (OutputTypes)
+                switch (OutputType)
                 {
                     case OutputType.MomentarySet:
                         WCFChannelFactory.Write(PLCAddressClick, Convert.ToString(false));
@@ -227,7 +227,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
             {
                 try
                 {
-                    switch (OutputTypes)
+                    switch (OutputType)
                     {
                         case OutputType.MomentarySet:
                             WCFChannelFactory.Write(m_PLCAddressClick, "1");
@@ -272,7 +272,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
             {
                 try
                 {
-                    switch (OutputTypes)
+                    switch (OutputType)
                     {
                         case OutputType.MomentarySet:
                             WCFChannelFactory.Write(m_PLCAddressClick, "0");

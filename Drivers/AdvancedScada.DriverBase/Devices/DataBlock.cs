@@ -95,11 +95,7 @@ namespace AdvancedScada.DriverBase.Devices
         [Browsable(false)]
         [Display(Name = "TypeOfRead")]
         public string TypeOfRead { get; set; }
-        [Category("DataBlock")]
-        [DataMember]
-        [Browsable(false)]
-        [Display(Name = "IsArray")]
-        public bool IsArray { get; set; }
+      
 
     }
 }

@@ -12,8 +12,8 @@ using AdvancedScada;
  
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
- 
+using MfgControl.AdvancedHMI.Controls;
+
 using AdvancedScada.DriverBase.Comm;
  
 using AdvancedScada.Monitor;
@@ -25,7 +25,7 @@ using AdvancedScada.Controls.AHMI;
 namespace AdvancedScada.Controls.AHMI.SelectorSwitch
 {
     [DefaultEvent("Click")]
-    public class HMIPilotLight : AdvancedScada.Controls_Net45.PilotLight
+    public class HMIPilotLight : PilotLight
     {
         #region PLC Related Properties
 

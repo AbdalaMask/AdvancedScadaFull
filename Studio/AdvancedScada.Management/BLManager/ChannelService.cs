@@ -499,7 +499,6 @@ namespace AdvancedScada.Management.BLManager
                             dbElement.SetAttribute(DataBlockService.START_ADDRESS, $"{db.StartAddress}");
                             dbElement.SetAttribute(DataBlockService.LENGTH, $"{db.Length}");
                             dbElement.SetAttribute(DataBlockService.DATA_TYPE, $"{db.DataType}");
-                            dbElement.SetAttribute(DataBlockService.Is_Array, $"{db.IsArray}");
                             dbElement.SetAttribute(DataBlockService.MemoryType, $"{db.MemoryType}");
                             dbElement.SetAttribute(DESCRIPTION, db.Description);
                             dvElement.AppendChild(dbElement);

@@ -22,7 +22,7 @@ using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.SelectorSwitch
 {
-    public class HMISelectorSwitch3Pos : AdvancedScada.Controls_Net45.SelectorSwitch3Pos
+    public class HMISelectorSwitch3Pos : MfgControl.AdvancedHMI.Controls.SelectorSwitch3Pos
     {
         #region PLC Related Properties
 
@@ -178,52 +178,7 @@ namespace AdvancedScada.Controls.AHMI.SelectorSwitch
             }
         }
 
-        //Private m_ValueLeft As Boolean
-        public bool ValueLeft
-        {
-            get
-            {
-                return (Value == ValueOfLeftPosition);
-            }
-            set
-            {
-                //* V3.99v - commented out
-                //    If Me.Value <> ValueOfLeftPosition Then
-                if (value)
-                {
-                    this.Value = ValueOfLeftPosition;
-                }
-                else if (!ValueRight)
-                {
-                    this.Value = ValueOfCenterPosition;
-                }
-                //m_ValueLeft = value
-                // End If
-            }
-        }
-
-        //Private m_ValueRight As Boolean
-        public bool ValueRight
-        {
-            get
-            {
-                return (Value == ValueOfRightPosition);
-            }
-            set
-            {
-                //  If Me.Value <> ValueOfRightPosition Then
-                if (value)
-                {
-                    this.Value = ValueOfRightPosition;
-                }
-                else if (!ValueLeft)
-                {
-                    this.Value = ValueOfCenterPosition;
-                }
-                //m_ValueRight = value
-                //    End If
-            }
-        }
+       
 
         #endregion
 

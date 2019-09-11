@@ -9,54 +9,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Utils.Excel
 {
-    public class ExcelUtil
-    {
-        public static List<string> GetSheets(string fileName)
-        {
-            List<string> list = new List<string>();
-            try
-            {
-                string empty = string.Empty;
-                new DataTable();
-                empty = ((!Path.GetExtension(fileName).Equals(".xls")) ? ("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=Yes;IMEX=1';") : ("provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';"));
-                using (OleDbConnection oleDbConnection = new OleDbConnection(empty))
-                {
-                    oleDbConnection.Open();
-                    foreach (DataRow row in oleDbConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows)
-                    {
-                        if (row["TABLE_NAME"].ToString().Contains("$"))
-                        {
-                            list.Add(row["TABLE_NAME"].ToString());
-                        }
-                    }
-                    return list;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public static DataTable ReadExcel(string fileName, string sheetName)
-        {
-            DataTable dataTable = new DataTable();
-            try
-            {
-                string empty = string.Empty;
-                empty = ((!Path.GetExtension(fileName).Equals(".xls")) ? ("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=Yes;IMEX=1';") : ("provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';"));
-                using (OleDbConnection selectConnection = new OleDbConnection(empty))
-                {
-                    new OleDbDataAdapter($"SELECT * FROM [{sheetName}]", selectConnection).Fill(dataTable);
-                    return dataTable;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-    }
+  
 
     public static class ExcelUtils
 

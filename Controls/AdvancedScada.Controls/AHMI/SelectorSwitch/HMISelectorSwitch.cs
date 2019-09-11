@@ -16,8 +16,8 @@ using AdvancedScada;
  
  
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
- 
+using MfgControl.AdvancedHMI.Controls;
+
 using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.Controls.AHMI.SelectorSwitch;
 using AdvancedScada;
@@ -26,7 +26,7 @@ using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.SelectorSwitch
 {
-    public class HMISelectorSwitch : AdvancedScada.Controls_Net45.SelectorSwitch
+    public class HMISelectorSwitch : MfgControl.AdvancedHMI.Controls.SelectorSwitch
     {
 
         #region PLC Related Properties
@@ -164,7 +164,7 @@ namespace AdvancedScada.Controls.AHMI.SelectorSwitch
                             Utilities.Write(m_PLCAddressClick, "0");
                             break;
                         case OutputType.Toggle:
-                            bool CurrentValue = Value;
+                            bool CurrentValue = true;
                             if (CurrentValue)
                             {
                                 Utilities.Write(m_PLCAddressClick, "0");
@@ -243,10 +243,7 @@ namespace AdvancedScada.Controls.AHMI.SelectorSwitch
             }
         }
 
-        protected override void OnValueChanged(System.EventArgs e)
-        {
-            base.OnValueChanged(e);
-        }
+     
 
         #endregion
 

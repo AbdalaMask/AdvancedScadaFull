@@ -182,10 +182,11 @@ namespace AdvancedScada.Studio
                 if (form.GetType() == typeof(FormServerUtils))
                 {
                     form.Activate();
+                   
                     return;
                 }
             }
-            KryptonPage page = NewPage("ServerUtils ", 0, new FormServerUtils());
+            KryptonPage page = NewPage("ServerUtils", 0, new FormServerUtils());
             TabForm.Pages.Add(page);
 
         }
@@ -302,15 +303,17 @@ namespace AdvancedScada.Studio
         #region Form
         private void FormStudio_Load(object sender, EventArgs e)
         {
-
+            Left = SystemInformation.WorkingArea.Size.Width - Size.Width;
+            Top = SystemInformation.WorkingArea.Size.Height - Size.Height;
+            CheckEnabele.Checked = Settings.Default.CheckEnabele;
 
             Registry.SetValue("HKEY_CURRENT_USER\\Software\\FormConfiguration", "IPAddress", "localhost");
             Registry.SetValue("HKEY_CURRENT_USER\\Software\\FormConfiguration", "Port", "8080");
 
             XCollection.EventscadaLogger += (_Id, _logType, _time, _message) =>
             {
-                AdvancedScada.Studio.Logging.Logger logger = new AdvancedScada.Studio.Logging.Logger { ID = AdvancedScada.Studio.Logging.Logger.Loggers.Count + 1, LogType = _logType, TIME = _time, MESSAGE = _message };
-                AdvancedScada.Studio.Logging.Logger.Loggers.Add(logger);
+                Logger logger = new Logger { ID = Logger.Loggers.Count + 1, LogType = _logType, TIME = _time, MESSAGE = _message };
+                Logger.Loggers.Add(logger);
             };
 
             // Setup docking functionality
@@ -335,6 +338,7 @@ namespace AdvancedScada.Studio
             if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile)) return;
             var chList = objChannelManager.GetChannels(xmlFile);
             if (chList.Count < 1) return;
+            ServiceItem.PerformClick();
         }
         private void FormStudio_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -408,6 +412,29 @@ namespace AdvancedScada.Studio
             }
 
 
+        }
+
+        private void CheckEnabele_CheckedChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void CheckEnabele_Click(object sender, EventArgs e)
+        {
+            if (Settings.Default.CheckEnabele == false)
+            {
+                Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "AdvancedScada.Studio",
+                    Application.ExecutablePath);
+                Settings.Default.CheckEnabele = true;
+                Settings.Default.Save();
+            }
+            else
+            {
+                Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true)
+                    .DeleteValue("AdvancedScada.Studio", false);
+                Settings.Default.CheckEnabele = false;
+                Settings.Default.Save();
+            }
         }
     }
 }

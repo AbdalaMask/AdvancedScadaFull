@@ -22,7 +22,7 @@ using AdvancedScada.Controls.AHMI.Components;
 namespace AdvancedScada.Controls.AHMI.Components.SocketClient
 {
     [System.ComponentModel.DefaultEvent("DataReceived")]
-    public class GenericTcpClient : System.ComponentModel.Component, IDisposable, System.ComponentModel.ISupportInitialize
+    public class HMIGenericTCPClient : System.ComponentModel.Component, IDisposable, System.ComponentModel.ISupportInitialize
     {
         private System.Net.Sockets.Socket WorkSocket;
 
@@ -40,7 +40,7 @@ namespace AdvancedScada.Controls.AHMI.Components.SocketClient
 
 
         #region Constructor/Destructors
-        public GenericTcpClient()
+        public HMIGenericTCPClient()
         {
             //DataReceivedCallBackDelegate = New AsyncCallback(AddressOf DataReceivedCallback)
             m_ProtocolType = System.Net.Sockets.ProtocolType.Tcp;

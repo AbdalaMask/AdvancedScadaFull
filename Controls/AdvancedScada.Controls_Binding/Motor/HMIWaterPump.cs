@@ -1,6 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.DriverBase;
-using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -12,7 +12,7 @@ using AdvancedScada.Monitor;
 namespace AdvancedScada.Controls_Binding.Motor
 {
     [Designer(typeof(HMIWaterPumpDesigner))]
-    public class HMIWaterPump : AdvancedScada.Controls_Net45.WaterPump
+    public class HMIWaterPump : MfgControl.AdvancedHMI.Controls.WaterPump
     {
 
 

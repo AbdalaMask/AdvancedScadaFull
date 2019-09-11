@@ -15,7 +15,7 @@ using System.Xml.Linq;
 using AdvancedScada;
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
- 
+using MfgControl.AdvancedHMI.Controls;
 using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.Controls.AHMI.ImageAll;
 using AdvancedScada;
@@ -31,7 +31,7 @@ using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.ImageAll
 {
-    public class HMIGraphicIndicator : AdvancedScada.Controls_Net45.GraphicIndicator
+    public class HMIGraphicIndicator : GraphicIndicator
     {
 
         #region Constructor/Destructor

@@ -3,15 +3,7 @@ using System.Runtime.Serialization;
 
 namespace AdvancedScada.DriverBase
 {
-    public delegate void EventConnectedToPLC(bool flag);
-    public delegate void EventActiveDeviceChanged(Device dv);
-
-    public enum DeviceState
-    {
-        Connected,
-        Connecting,
-        Disconnected
-    }
+   
 
     [DataContract]
     public class Machine

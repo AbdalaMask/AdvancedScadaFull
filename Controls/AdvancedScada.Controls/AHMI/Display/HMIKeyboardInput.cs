@@ -13,6 +13,7 @@ using AdvancedScada.Controls.AHMI.Display;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
+using MfgControl.AdvancedHMI.Controls;
 
 namespace AdvancedScada.Controls.AHMI.Display
 {

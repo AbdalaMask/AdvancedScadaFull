@@ -1,6 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.DriverBase;
-using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.Drawing.Design;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.Hydraulic
 {
-    public class HMIHydraulicCylinder : AdvancedScada.Controls_Net45.HydraulicCylinder
+    public class HMIHydraulicCylinder : MfgControl.AdvancedHMI.Controls.HydraulicCylinder
     {
 
         #region PLC

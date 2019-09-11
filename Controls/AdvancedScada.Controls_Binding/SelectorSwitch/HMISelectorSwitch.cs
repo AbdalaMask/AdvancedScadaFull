@@ -1,6 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.DriverBase;
-using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.Drawing.Design;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.SelectorSwitch
 {
-    public class HMISelectorSwitch : AdvancedScada.Controls_Net45.SelectorSwitch
+    public class HMISelectorSwitch : MfgControl.AdvancedHMI.Controls.SelectorSwitch
     {
 
         #region PLC Properties
@@ -61,21 +61,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
 
         #region "Basic Properties"
 
-        public new bool Value
-        {
-            get { return m_Value; }
-            set
-            {
-                if (m_Value != value)
-                {
-                    m_Value = value;
-                    base.Value = m_Value;
-                    OnValueChanged(this, EventArgs.Empty);
-                    Invalidate();
-                }
-            }
-        }
-
+       
         #endregion
 
         [Category("PLC Properties")]
@@ -261,7 +247,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                             break;
                         case OutputType.Toggle:
 
-                            var CurrentValue = Value;
+                            var CurrentValue = true;
                             if (CurrentValue)
                                 WCFChannelFactory.Write(m_PLCAddressClick, "0");
                             else

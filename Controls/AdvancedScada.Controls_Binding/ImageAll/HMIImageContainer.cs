@@ -13,7 +13,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 {
     [Designer(typeof(ImageContainerDesigner))]
     [ToolboxItem(true)]
-    public class HMIImageContainer : AdvancedScada.Controls_Net45.GraphicIndicator
+    public class HMIImageContainer : MfgControl.AdvancedHMI.Controls.GraphicIndicator
     {
         //*****************************************
         //* Property - Address in PLC to Link to

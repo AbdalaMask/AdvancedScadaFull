@@ -28,29 +28,8 @@ namespace AdvancedScada.IODriver.Modbus.TCP
 
         }
 
-        /// <summary>
-        /// Returns true if a connection to the PLC can be established
-        /// </summary>
-        public bool IsAvailable
-        {
-            //TODO: Fix This
-            get
-            {
-                try
-                {
-                    Connection();
-
-                    return IsConnected;
-
-
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-        }
-        public void Connection()
+        
+        public bool Connection()
         {
 
 
@@ -76,10 +55,12 @@ namespace AdvancedScada.IODriver.Modbus.TCP
                     {
                         IsConnected = false;
                     }
+                    return IsConnected;
                 }
                 catch (Exception ex)
                 {
                     EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                    return IsConnected;
                 }
 
 
@@ -91,20 +72,21 @@ namespace AdvancedScada.IODriver.Modbus.TCP
 
 
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-
+                return IsConnected;
             }
         }
 
-        public void Disconnection()
+        public bool Disconnection()
         {
             try
             {
                 busTcpClient.ConnectClose();
-
+                return IsConnected;
             }
             catch (SocketException ex)
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                return IsConnected;
             }
 
         }
@@ -146,7 +128,7 @@ namespace AdvancedScada.IODriver.Modbus.TCP
         {
             if (value is bool)
             {
-                busTcpClient.WriteCoil(address, value);
+                busTcpClient.Write(address, value);
             }
             else
             {
@@ -158,7 +140,7 @@ namespace AdvancedScada.IODriver.Modbus.TCP
 
         public TValue[] Read<TValue>(string address, ushort length)
         {
-            if (!IsAvailable) return null;
+           
 
             if (typeof(TValue) == typeof(bool))
             {
@@ -218,19 +200,6 @@ namespace AdvancedScada.IODriver.Modbus.TCP
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
 
-        public virtual ConnectionState GetConnectionState()
-        {
-            return ConnectionState.Broken;
-        }
-
-        public TValue[] Read<TValue>(string[] address)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TValue[] Read<TValue>(DataBlock db)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

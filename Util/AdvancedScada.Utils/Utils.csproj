@@ -53,7 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Compression\ImageCompression.cs" />
     <Compile Include="Compression\StringCompression.cs" />
     <Compile Include="Databases\ClassSQL.cs" />

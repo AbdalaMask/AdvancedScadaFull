@@ -6,6 +6,33 @@ using System.Text.RegularExpressions;
 
 namespace AdvancedScada.DriverBase.Comm
 {
+    public enum ConnectionType
+    {
+        None,
+        Ethernet,
+        SerialPort
+    }
+    public enum Mode
+    {
+        RTU,
+        ASCII,
+        TCP
+    }
+    public enum DataType
+    {
+        Bit,
+        Byte,
+        Int,
+        DInt,
+        Word,
+        DWord,
+        Real1,
+        Real2,
+        DReal1,
+        DReal2,
+        Long1,
+        Long2
+    }
     public class Util
     {
 

@@ -18,8 +18,8 @@ using System.Xml.Linq;
 using AdvancedScada;
  using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
- 
+using MfgControl.AdvancedHMI.Controls;
+
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using AdvancedScada.DriverBase.Comm;
@@ -33,7 +33,7 @@ using AdvancedScada.Controls.AHMI;
 namespace AdvancedScada.Controls.AHMI.Motor
 {
 
-    public class HMIMotor : AdvancedScada.Controls_Net45.Motor
+    public class HMIMotor : MfgControl.AdvancedHMI.Controls.Motor
     {
 
         #region Constructor/Destructor

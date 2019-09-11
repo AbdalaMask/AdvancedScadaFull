@@ -24,6 +24,7 @@ using AdvancedScada.Controls.AHMI.Leds;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
+using MfgControl.AdvancedHMI.Controls;
 
 namespace AdvancedScada.Controls.AHMI.Leds
 {

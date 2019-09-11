@@ -1,6 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.DriverBase;
-using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -9,13 +9,14 @@ using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using AdvancedScada.Monitor;
+using AdvancedScada.Controls_Net45;
 
 namespace AdvancedScada.Controls_Binding.Linear
 {
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(HMILinearMeter), "HMI7Segment.ico")]
     [Designer(typeof(HMILinearMeterDesigner))]
-    public class HMILinearMeter : AdvancedScada.Controls_Net45.LinearMeter
+    public class HMILinearMeter : MfgControl.AdvancedHMI.Controls.LinearMeter
     {
 
         private string OriginalText;

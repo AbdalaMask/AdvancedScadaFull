@@ -20,6 +20,7 @@ using AdvancedScada.Controls.AHMI.Controls;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
+using MfgControl.AdvancedHMI.Controls;
 
 namespace AdvancedScada.Controls.AHMI.Controls
 {

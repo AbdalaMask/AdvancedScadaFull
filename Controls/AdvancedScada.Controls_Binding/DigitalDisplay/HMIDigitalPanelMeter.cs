@@ -1,6 +1,7 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.DriverBase;
 using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -11,7 +12,7 @@ using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.DigitalDisplay
 {
-    public class HMIDigitalPanelMeter : AdvancedScada.Controls_Net45.DigitalPanelMeter
+    public class HMIDigitalPanelMeter : MfgControl.AdvancedHMI.Controls.DigitalPanelMeter
     {
 
 

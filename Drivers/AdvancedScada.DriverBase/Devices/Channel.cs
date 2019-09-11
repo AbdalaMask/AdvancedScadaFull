@@ -68,23 +68,13 @@ namespace AdvancedScada.DriverBase.Devices
         [Browsable(true)]
         [DisplayName("ConnectionType")]
         public string ConnectionType { get; set; }
+        //=====================list=============================
         [DataMember]
         [Category("Channel")]
         [Browsable(false)]
         [DisplayName("Channel")]
         public List<Device> Devices { get; set; }
 
-        [DataMember]
-        [Browsable(false)]
-        public Device this[string deviceName]
-        {
-            get
-            {
-                foreach (var item in Devices)
-                    if (deviceName.Equals(item.DeviceName))
-                        return item;
-                return null;
-            }
-        }
+       
     }
 }

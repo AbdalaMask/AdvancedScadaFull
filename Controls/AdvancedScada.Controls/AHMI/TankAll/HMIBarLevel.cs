@@ -24,7 +24,7 @@ using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.TankAll
 {
-    public class HMIBarLevel : AdvancedScada.Controls_Net45.BarLevel
+    public class HMIBarLevel :  MfgControl.AdvancedHMI.Controls.BarLevel
     {
 
         #region Properties
@@ -64,24 +64,10 @@ namespace AdvancedScada.Controls.AHMI.TankAll
                     {
                         base.BackColor = SavedBackColor;
                     }
-                }
+             
 
-                if (m_ValueScaleFactor == 1)
-                {
-                    base.Text = value;
-                }
-                else
-                {
-                    double v = 0;
-                    //* v3.99y
-                    if (double.TryParse(value, System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.NumberFormatInfo.CurrentInfo, out v))
-                    {
-                        base.Text = (Convert.ToSingle(value) * m_ValueScaleFactor).ToString();
-                    }
-                    else
-                    {
                         base.Text = value;
-                    }
+                    
                 }
             }
         }

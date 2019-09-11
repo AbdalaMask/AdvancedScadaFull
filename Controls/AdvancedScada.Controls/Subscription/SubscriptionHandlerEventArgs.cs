@@ -18,33 +18,8 @@ namespace AdvancedScada.Controls.Subscription
 {
     public class SubscriptionHandlerEventArgs : EventArgs
     {
-
-
-        private PlcComEventArgs m_PLCComEventArgs;
-        public PlcComEventArgs PLCComEventArgs
-        {
-            get
-            {
-                return m_PLCComEventArgs;
-            }
-            set
-            {
-                m_PLCComEventArgs = value;
-            }
-        }
-
-        private SubscriptionDetail m_SubscriptionDetail;
-        public SubscriptionDetail SubscriptionDetail
-        {
-            get
-            {
-                return m_SubscriptionDetail;
-            }
-            set
-            {
-                m_SubscriptionDetail = value;
-            }
-        }
+        public PlcComEventArgs PLCComEventArgs { get; set; }
+        public SubscriptionDetail SubscriptionDetail { get; set; }
     }
 
 }

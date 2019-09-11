@@ -42,9 +42,8 @@
   <PropertyGroup>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HslControls, Version=2.2.1.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Scada\Advanced\packages\HslControls.2.2.1\lib\net45\HslControls.dll</HintPath>
+    <Reference Include="HslControls, Version=2.2.2.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\HslControls.2.2.2\lib\net45\HslControls.dll</HintPath>
     </Reference>
     <Reference Include="Krypton Docking, Version=5.470.742.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -57,6 +56,9 @@
     <Reference Include="Krypton Toolkit, Version=5.470.1254.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\Krypton\Krypton Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="MfgControl.AdvancedHMI.Controls">
+      <HintPath>..\..\Lib\MfgControl.AdvancedHMI.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
@@ -91,16 +93,31 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AHMI\Controls\HMIBasicLine.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="AHMI\Controls\HMIHVScrollBar.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="AHMI\Controls\HMINumericUpDown.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="AHMI\ButtonAll\HMIRotationalIndicator.cs">
+    <Compile Include="AHMI\DigitalDisplay\HMITempController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Hydraulic\HMIHydraulicCylinder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Hydraulic\HMIPneumaticBallVave.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\ImageAll\HMIGraphicIndicator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\Meter\HMIMeter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\SevenSegment\HMISevenSegment2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\TankAll\HMIBarLevel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="AHMI\TankAll\HMIStackLight.cs">
@@ -151,9 +168,6 @@
     <Compile Include="AHMI\Components\HMISoundPlayer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="AHMI\Controls\HMIGroupPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="AHMI\Controls\HMIIndicator.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -163,12 +177,6 @@
     <Compile Include="DialogEditor\GraphicDialogEditor.cs" />
     <Compile Include="DialogEditor\TestDialogEditor.cs" />
     <Compile Include="AHMI\DigitalDisplay\HMIDigitalPanelMeter.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\DigitalDisplay\HMIOdometer.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\DigitalDisplay\HMITempController.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="AHMI\Display\HMIAnalogValueDisplay.cs">
@@ -195,24 +203,6 @@
     <Compile Include="AHMI\Display\SetLabel.cs" />
     <Compile Include="Drivers\PLCAddressItem.cs" />
     <Compile Include="Enum\Enums.cs" />
-    <Compile Include="AHMI\Hydraulic\HMIHydraulicCylinder.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\Hydraulic\HMIHydraulicCylinderAnalog.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\Hydraulic\HMIPipe.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\Hydraulic\HMIPneumaticBallVave.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\ImageAll\HMIAnimatingPictureBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\ImageAll\HMIGraphicIndicator.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="AHMI\ImageAll\HMIImageContainer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -226,35 +216,8 @@
     <Compile Include="AHMI\Leds\HMILedSingle.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="AHMI\LED\HMISimpleLED.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="AHMI\Licenses\LicenseManager.cs" />
-    <Compile Include="AHMI\Linear\HMILinearMeter.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\Linear\HMILinearMeterH.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\Linear\HMILinearMeterHorizontal.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\Linear\HMILinearMeterVertical.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\Meter\HMIMeter.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\Meter\HMIMeter2.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\Motor\HMIFan.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="AHMI\Motor\HMIMotor.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\Motor\HMIMotor3Color.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="AHMI\Motor\HMIWaterPump.cs">
@@ -322,6 +285,9 @@
     <Compile Include="HslControls\Valves\HMIValves.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="AHMI\SevenSegment\HMISevenSegment.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Application.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -347,13 +313,7 @@
     <Compile Include="AHMI\Segment\HMISegment7LED.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="AHMI\SelectorSwitch\HMIMushroomButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="AHMI\SelectorSwitch\HMIPilotLight.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\SelectorSwitch\HMIPilotLight3Color.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="AHMI\SelectorSwitch\HMIPushButton.cs">
@@ -365,12 +325,6 @@
     <Compile Include="AHMI\SelectorSwitch\HMISelectorSwitch3Pos.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="AHMI\SelectorSwitch\HMISelectorSwitch3PosByValue.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\SevenSegment\HMISevenSegment2.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="AHMI\Components\SocketClient\GenericTCPEventArgs.cs" />
     <Compile Include="AHMI\Components\SocketClient\MessageEventArgs.cs" />
     <Compile Include="AHMI\Components\SocketClient\SocketStateObject.cs" />
@@ -378,9 +332,6 @@
     <Compile Include="Subscription\SubscriptionDetail.cs" />
     <Compile Include="Subscription\SubscriptionHandler.cs" />
     <Compile Include="Subscription\SubscriptionHandlerEventArgs.cs" />
-    <Compile Include="AHMI\TankAll\HMIBarLevel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="AHMI\TankAll\HMICylinderTrackBar.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -391,28 +342,7 @@
     <Compile Include="AHMI\TankAll\HMITank.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="AHMI\Thermometer\HMIThermometer.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\Thermometer\HMIThermometer2.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="SymbolFactory\HMISymbolFactory.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SymbolFactory\HMISymbolFactory.Designer.cs">
-      <DependentUpon>HMISymbolFactory.cs</DependentUpon>
-    </Compile>
     <Compile Include="Utility\Utility.cs" />
-    <Compile Include="AHMI\Vertical\HMIThumbDial.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\Vertical\HMIVerticalSlider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AHMI\Vertical\HMIVerticalSlider3.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -437,12 +367,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SymbolFactory\HMISymbolFactory.resx">
-      <DependentUpon>HMISymbolFactory.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.cs</LastGenOutput>
@@ -453,6 +381,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AHMI\LED\" />
+    <Folder Include="AHMI\Linear\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
@@ -473,7 +403,7 @@
       <Name>IBaseService</Name>
     </ProjectReference>
     <ProjectReference Include="..\AdvancedScada.Controls_Net45\Controls_Net45.vbproj">
-      <Project>{6a4ea5f0-f6a7-4d58-8542-e39444a0a7c3}</Project>
+      <Project>{6A4EA5F0-F6A7-4D58-8542-E39444A0A7C3}</Project>
       <Name>Controls_Net45</Name>
     </ProjectReference>
     <ProjectReference Include="..\AdvancedScada.ImagePicker\ImagePicker.csproj">

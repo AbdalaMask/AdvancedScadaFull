@@ -16,8 +16,8 @@ using System.Xml.Linq;
 using AdvancedScada;
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
- 
+using MfgControl.AdvancedHMI.Controls;
+
 using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.Controls.AHMI.ButtonAll;
 using AdvancedScada;
@@ -26,7 +26,7 @@ using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.ButtonAll
 {
-    public class HMISquareIlluminatedButton : AdvancedScada.Controls_Net45.SquareIlluminatedButton
+    public class HMISquareIlluminatedButton : SquareIlluminatedButton
     {
 
 
@@ -155,7 +155,7 @@ namespace AdvancedScada.Controls.AHMI.ButtonAll
             {
                 try
                 {
-                    switch (OutputTypes)
+                    switch (OutputType)
                     {
                         case OutputType.MomentarySet:
                             Utilities.Write(m_PLCAddressClick, 1);
@@ -209,7 +209,7 @@ namespace AdvancedScada.Controls.AHMI.ButtonAll
             {
                 try
                 {
-                    switch (OutputTypes)
+                    switch (OutputType)
                     {
                         case OutputType.MomentarySet:
                             Utilities.Write(m_PLCAddressClick, 0);

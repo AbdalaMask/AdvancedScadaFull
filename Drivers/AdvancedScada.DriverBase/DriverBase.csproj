@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HslCommunication, Version=7.0.1.0, Culture=neutral, PublicKeyToken=cdb2261fa039ed67, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\HslCommunication.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -47,16 +43,6 @@
     <Compile Include="Comm\PLCComEventArgs.cs" />
     <Compile Include="Comm\PLCDriverException.cs" />
     <Compile Include="Comm\Util.cs" />
-    <Compile Include="DataTypes\Bit.cs" />
-    <Compile Include="DataTypes\ByteArray.cs" />
-    <Compile Include="DataTypes\Conversion.cs" />
-    <Compile Include="DataTypes\DInt.cs" />
-    <Compile Include="DataTypes\DWord.cs" />
-    <Compile Include="DataTypes\Int.cs" />
-    <Compile Include="DataTypes\Memory.cs" />
-    <Compile Include="DataTypes\Real.cs" />
-    <Compile Include="DataTypes\Word.cs" />
-    <Compile Include="DemoUtils.cs" />
     <Compile Include="Devices\Channel.cs" />
     <Compile Include="Devices\DataBlock.cs" />
     <Compile Include="Devices\Device.cs" />

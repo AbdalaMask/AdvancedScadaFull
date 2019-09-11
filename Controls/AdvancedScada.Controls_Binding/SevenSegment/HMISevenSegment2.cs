@@ -1,6 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.DriverBase;
-using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -9,11 +9,12 @@ using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using AdvancedScada.Monitor;
+using AdvancedScada.Controls_Net45;
 
 namespace AdvancedScada.Controls_Binding.SevenSegment
 {
     [Designer(typeof(SevenSegmentDesigner))]
-    public class HMISevenSegment2 : AdvancedScada.Controls_Net45.SevenSegment2
+    public class HMISevenSegment2 : MfgControl.AdvancedHMI.Controls.SevenSegment
     {
 
         private string OriginalText;

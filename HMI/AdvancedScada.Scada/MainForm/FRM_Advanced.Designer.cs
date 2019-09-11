@@ -326,11 +326,13 @@
             // 
             // ToolStrip1
             // 
+            this.ToolStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ToolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsPorts,
             this.ts_Del_DataBase});
             this.ToolStrip1.Location = new System.Drawing.Point(0, 0);
             this.ToolStrip1.Name = "ToolStrip1";
+            this.ToolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.ToolStrip1.Size = new System.Drawing.Size(829, 25);
             this.ToolStrip1.TabIndex = 2;
             this.ToolStrip1.Text = "ToolStrip1";
@@ -377,6 +379,7 @@
             // 
             // ToolStrip2
             // 
+            this.ToolStrip2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ToolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsSeve,
             this.ts_Res,
@@ -384,6 +387,7 @@
             this.ts_Del_DataBase2});
             this.ToolStrip2.Location = new System.Drawing.Point(3, 3);
             this.ToolStrip2.Name = "ToolStrip2";
+            this.ToolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.ToolStrip2.Size = new System.Drawing.Size(815, 25);
             this.ToolStrip2.TabIndex = 0;
             this.ToolStrip2.Text = "ToolStrip2";
@@ -534,12 +538,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(829, 360);
+            this.ClientSize = new System.Drawing.Size(829, 358);
             this.Controls.Add(this.ToolStrip1);
             this.Controls.Add(this.TabControl1);
+            this.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockActive;
             this.Name = "FRM_Advanced";
-            this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "اعدادات البرنامج";
             this.Load += new System.EventHandler(this.FRM_Advanced_Load);

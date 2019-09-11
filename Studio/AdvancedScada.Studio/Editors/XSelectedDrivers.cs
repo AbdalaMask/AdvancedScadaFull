@@ -51,17 +51,10 @@ namespace AdvancedScada.Studio.Editors
                 case "Modbus":
                     picSelectedDrivers.Image = Properties.Resources.Modbus;
                     break;
-                //case 3:
-                //    picSelectedDrivers.Image = Properties.Resources.Panasonic;
-                //    break;
-
                 default:
                     break;
             }
 
-
-            //// قراءة مصفوفة  البايت الخاصة بالمشروع الثاني
-            //txtPath.Text = Application.StartupPath + $@"\AdvancedScada.{DriverTypes.Insert(0, "X")}.Core.dll";
-        }
+         }
     }
 }

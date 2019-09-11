@@ -54,9 +54,9 @@
             this.toolStripSeparator2,
             this.txtChannelCount,
             this.toolStripSeparator3});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 411);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 325);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(752, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(693, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -106,8 +106,9 @@
             this.ColAddress});
             this.DGServerUtils.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DGServerUtils.Location = new System.Drawing.Point(0, 0);
+            this.DGServerUtils.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.DGServerUtils.Name = "DGServerUtils";
-            this.DGServerUtils.Size = new System.Drawing.Size(752, 411);
+            this.DGServerUtils.Size = new System.Drawing.Size(693, 325);
             this.DGServerUtils.TabIndex = 1;
             // 
             // ColDateTime
@@ -130,13 +131,14 @@
             // 
             // FormServerUtils
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(752, 436);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(693, 350);
             this.ControlBox = false;
             this.Controls.Add(this.DGServerUtils);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockActive;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormServerUtils";
             this.ShowIcon = false;
             this.Text = "FormServerUtils";

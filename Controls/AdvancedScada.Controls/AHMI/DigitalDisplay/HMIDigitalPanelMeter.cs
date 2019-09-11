@@ -22,8 +22,8 @@ using AdvancedScada;
  
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
- 
+using MfgControl.AdvancedHMI.Controls;
+
 using AdvancedScada.DriverBase.Comm;
  
 using AdvancedScada.Monitor;
@@ -31,10 +31,11 @@ using AdvancedScada.Controls.AHMI.DigitalDisplay;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls_Net45;
 
 namespace AdvancedScada.Controls.AHMI.DigitalDisplay
 {
-    public class HMIDigitalPanelMeter : AdvancedScada.Controls_Net45.DigitalPanelMeter
+    public class HMIDigitalPanelMeter : DigitalPanelMeter
     {
         public event EventHandler ValueChanged;
         #region Constructor/Destructor

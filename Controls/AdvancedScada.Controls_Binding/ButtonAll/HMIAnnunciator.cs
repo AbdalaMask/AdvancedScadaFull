@@ -1,5 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using AdvancedScada.DriverBase;
 using System;
 using System.ComponentModel;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.ButtonAll
 {
-    public class HMIAnnunciator : AdvancedScada.Controls_Net45.Annunciator
+    public class HMIAnnunciator : MfgControl.AdvancedHMI.Controls.Annunciator
     {
 
 
@@ -194,9 +194,9 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         {
             try
             {
-                if (OutputTypes == OutputType.MomentarySet)
+                if (OutputType == OutputType.MomentarySet)
                     WCFChannelFactory.Write(PLCAddressClick, "0");
-                else if (OutputTypes == OutputType.MomentaryReset) WCFChannelFactory.Write(PLCAddressClick, "1");
+                else if (OutputType == OutputType.MomentaryReset) WCFChannelFactory.Write(PLCAddressClick, "1");
             }
             catch (Exception ex)
             {
@@ -291,30 +291,30 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                 PLCAddressClick != null)
                 try
                 {
-                    if (OutputTypes == OutputType.MomentarySet)
+                    if (OutputType == OutputType.MomentarySet)
                     {
                         WCFChannelFactory.Write(PLCAddressClick, "1");
                         if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
                         if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
                     }
-                    else if (OutputTypes == OutputType.MomentaryReset)
+                    else if (OutputType == OutputType.MomentaryReset)
                     {
                         WCFChannelFactory.Write(PLCAddressClick, "0");
                         if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
                         if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
                     }
 
-                    else if (OutputTypes == OutputType.SetTrue)
+                    else if (OutputType == OutputType.SetTrue)
                     {
                         WCFChannelFactory.Write(PLCAddressClick, "1");
                     }
 
-                    else if (OutputTypes == OutputType.SetFalse)
+                    else if (OutputType == OutputType.SetFalse)
                     {
                         WCFChannelFactory.Write(PLCAddressClick, "0");
                     }
 
-                    else if (OutputTypes == OutputType.Toggle)
+                    else if (OutputType == OutputType.Toggle)
                     {
                         var CurrentValue = Convert.ToBoolean(Value);
                         if (CurrentValue)

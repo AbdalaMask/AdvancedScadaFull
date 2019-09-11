@@ -1,6 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.DriverBase;
-using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -14,7 +14,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
 {
     [DefaultEvent("Click")]
     [Designer(typeof(HMIPilotLightDesigner))]
-    public class HMIPilotLight : AdvancedScada.Controls_Net45.PilotLight
+    public class HMIPilotLight : MfgControl.AdvancedHMI.Controls.PilotLight
     {
 
 

@@ -34,7 +34,7 @@ namespace AdvancedScada.Studio.Monitor
 
             if (_SelectedTag == null) return;
             // txtAddress.Items.AddRange(_SelectedTag);
-            txtAddress.SelectedIndex = 0;
+           
             this.client = client;
 
         }
@@ -42,7 +42,7 @@ namespace AdvancedScada.Studio.Monitor
         {
             //   client = DriverHelper.GetInstance().GetReadService();
             if (client != null)
-                client.WriteTag(txtAddress.Text, NumValue.Text);
+                client.WriteTag(txtAddress.Text, txtValue.Text);
 
             Thread.Sleep(50);
 
@@ -54,7 +54,7 @@ namespace AdvancedScada.Studio.Monitor
             switch (TagCollection.Tags[txtAddress.Text].DataType)
             {
                 case "String":
-                    NumValue.Text = "Test";
+                    txtValue.Text = "Test";
                     break;
                 case "Int":
                 case "DInt":
@@ -62,7 +62,7 @@ namespace AdvancedScada.Studio.Monitor
                 case "DWord":
                 case "Real1":
                 case "Real2":
-                    NumValue.Text = "0";
+                    txtValue.Text = "0";
                     break;
             }
         }

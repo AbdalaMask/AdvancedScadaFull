@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.ImageAll
 {
-    public class HMIGraphicIndicator : AdvancedScada.Controls_Net45.GraphicIndicator
+    public class HMIGraphicIndicator : MfgControl.AdvancedHMI.Controls.GraphicIndicator
     {
 
         public bool HoldTimeMet;

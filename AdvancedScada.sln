@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WCF", "WCF", "{847A4434-0653-4125-87B2-E3C2459660F8}"
 EndProject
@@ -51,7 +51,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF.Controls", "WPF\HslScad
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF.Scada", "WPF\HslScada.Scada\WPF.Scada.csproj", "{95299DFD-A767-4B89-944E-E7253428C161}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IODriverV2", "Drivers\AdvancedScada.IODriverV2\IODriverV2.csproj", "{6CC8B202-62E6-4EBC-A03E-EC69C28CED6F}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Controls_Net35", "Controls\AdvancedScada.Controls_Net35\Controls_Net35.vbproj", "{31B3F32B-550A-445D-8AC4-5F8A37A12124}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,10 +127,10 @@ Global
 		{95299DFD-A767-4B89-944E-E7253428C161}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95299DFD-A767-4B89-944E-E7253428C161}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95299DFD-A767-4B89-944E-E7253428C161}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6CC8B202-62E6-4EBC-A03E-EC69C28CED6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CC8B202-62E6-4EBC-A03E-EC69C28CED6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CC8B202-62E6-4EBC-A03E-EC69C28CED6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CC8B202-62E6-4EBC-A03E-EC69C28CED6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31B3F32B-550A-445D-8AC4-5F8A37A12124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31B3F32B-550A-445D-8AC4-5F8A37A12124}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31B3F32B-550A-445D-8AC4-5F8A37A12124}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31B3F32B-550A-445D-8AC4-5F8A37A12124}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -153,6 +153,9 @@ Global
 		{AFE58B77-0383-41AE-AD22-5534D360A913} = {C78BBDA7-369E-47D7-BDCA-EB33AFE7B6DC}
 		{9945610D-D7D3-4FB3-8148-A68016F06BED} = {3E0B0CA0-A512-4AA6-96BA-B13DF9B8EA55}
 		{95299DFD-A767-4B89-944E-E7253428C161} = {3E0B0CA0-A512-4AA6-96BA-B13DF9B8EA55}
-		{6CC8B202-62E6-4EBC-A03E-EC69C28CED6F} = {D0B07350-1C4B-4484-836A-B450309F94AD}
+		{31B3F32B-550A-445D-8AC4-5F8A37A12124} = {3F39B096-049E-452F-AC7F-AA6F167C5886}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {204AF3B5-65D3-431D-B11A-887625B7EECD}
 	EndGlobalSection
 EndGlobal

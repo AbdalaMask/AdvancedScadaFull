@@ -21,29 +21,8 @@ namespace AdvancedScada.IODriver.Delta.RTU
         }
 
         private ModbusRtu busRtuClient = null;
-        /// <summary>
-        /// Returns true if a connection to the PLC can be established
-        /// </summary>
-        public bool IsAvailable
-        {
-            //TODO: Fix This
-            get
-            {
-                try
-                {
-                    Connection();
-
-                    return IsConnected;
-
-
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-        }
-        public void Connection()
+      
+        public bool Connection()
         {
 
             busRtuClient?.Close();
@@ -64,28 +43,27 @@ namespace AdvancedScada.IODriver.Delta.RTU
                 });
                 busRtuClient.Open();
                 IsConnected = true;
-
+                return IsConnected;
 
             }
             catch (TimeoutException ex)
             {
-
-
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                return IsConnected;
             }
         }
 
-        public void Disconnection()
+        public bool Disconnection()
         {
             try
             {
                 busRtuClient.Close();
-
+                return IsConnected;
             }
             catch (TimeoutException ex)
             {
-
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                return IsConnected;
             }
         }
 
@@ -127,7 +105,7 @@ namespace AdvancedScada.IODriver.Delta.RTU
             var Address = DMT.DevToAddrW("DVP", address, Station);
             if (value is bool)
             {
-                busRtuClient.WriteCoil($"{Address}", value);
+                busRtuClient.Write($"{Address}", value);
             }
             else
             {

@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>C:\AdvancedScada_2020\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -36,8 +36,14 @@
     <ApplicationIcon>CPU.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HslControls, Version=2.2.2.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\HslControls.2.2.2\lib\net45\HslControls.dll</HintPath>
+    </Reference>
     <Reference Include="Krypton Toolkit">
       <HintPath>..\..\Lib\Krypton\Krypton Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="MfgControl.AdvancedHMI.Controls">
+      <HintPath>..\..\Lib\MfgControl.AdvancedHMI.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
@@ -107,6 +113,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -156,10 +163,6 @@
     <ProjectReference Include="..\AdvancedScada.DataAccess\DataAccess.vbproj">
       <Project>{36f477cc-54a4-4f55-adb3-2a2e06dbfbef}</Project>
       <Name>DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AdvancedScada.ReportView\ReportViewer.vbproj">
-      <Project>{a7e14a59-51ee-4e8e-b1ee-3cb3c71dc9d3}</Project>
-      <Name>ReportViewer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

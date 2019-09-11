@@ -14,16 +14,17 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using AdvancedScada;
  using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.Controls.AHMI.TankAll;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls_Net45;
 
 namespace AdvancedScada.Controls.AHMI.TankAll
 {
-    public class HMITank : AdvancedScada.Controls_Net45.Tank
+    public class HMITank : MfgControl.AdvancedHMI.Controls.Tank
     {
         #region Basic Properties
         private System.Drawing.Color SavedBackColor;

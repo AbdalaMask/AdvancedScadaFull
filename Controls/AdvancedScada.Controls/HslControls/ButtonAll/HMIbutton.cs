@@ -16,6 +16,7 @@ using AdvancedScada.Controls.HslControls.ButtonAll;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.HslControls;
+using MfgControl.AdvancedHMI.Controls;
 
 namespace AdvancedScada.Controls.HslControls.ButtonAll
 {

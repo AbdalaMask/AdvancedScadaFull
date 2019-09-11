@@ -12,7 +12,7 @@ namespace AdvancedScada.Controls_Binding.Linear
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(HMILinearMeterH), "HMI7Segment.ico")]
     [Designer(typeof(HMILinearMeterHDesigner))]
-    public class HMILinearMeterH : AdvancedScada.Controls_Net45.LinearMeterH
+    public class HMILinearMeterH : MfgControl.AdvancedHMI.Controls.LinearMeterHorizontal
     {
 
 

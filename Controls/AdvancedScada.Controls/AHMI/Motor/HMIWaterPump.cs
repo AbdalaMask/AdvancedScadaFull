@@ -11,8 +11,7 @@ using AdvancedScada;
  
  using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
- 
+  
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using AdvancedScada.DriverBase.Comm;
@@ -22,11 +21,12 @@ using AdvancedScada.Controls.AHMI.Motor;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
+using MfgControl.AdvancedHMI.Controls;
 
 namespace AdvancedScada.Controls.AHMI.Motor
 {
 
-    public class HMIWaterPump : AdvancedScada.Controls_Net45.WaterPump
+    public class HMIWaterPump : MfgControl.AdvancedHMI.Controls.WaterPump
     {
         #region Constructor/Destructor
         //****************************************************************

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XSelectedDrivers));
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.cboxSelectedDrivers = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.picSelectedDrivers = new System.Windows.Forms.PictureBox();
@@ -80,6 +81,7 @@
             // picSelectedDrivers
             // 
             this.picSelectedDrivers.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.picSelectedDrivers.Image = global::AdvancedScada.Studio.Properties.Resources.img_wemx_designer_5;
             this.picSelectedDrivers.Location = new System.Drawing.Point(0, 29);
             this.picSelectedDrivers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picSelectedDrivers.Name = "picSelectedDrivers";
@@ -126,9 +128,13 @@
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.kryptonHeaderGroup1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "XSelectedDrivers";
-            this.Text = "XSelectedDrivers";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "SelectedDrivers";
             this.Load += new System.EventHandler(this.XSelectedDrivers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).EndInit();
             this.kryptonHeaderGroup1.Panel.ResumeLayout(false);

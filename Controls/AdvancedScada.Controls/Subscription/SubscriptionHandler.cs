@@ -22,35 +22,15 @@ namespace AdvancedScada.Controls.Subscription
         //*****************************************************
         private IComComponent m_ComComponent;
 
-
-        private object m_Parent;
-        public object Parent
-        {
-            get
-            {
-                return m_Parent;
-            }
-            set
-            {
-                m_Parent = value;
-            }
-        }
-
-        private List<SubscriptionDetail> m_SubscriptionList;
-        public List<SubscriptionDetail> SubscriptionList
-        {
-            get
-            {
-                return m_SubscriptionList;
-            }
-        }
+        public object Parent { get; set; }
+        public List<SubscriptionDetail> SubscriptionList { get; }
         #endregion
 
 
         #region Constructor/Destructor
         public SubscriptionHandler()
         {
-            m_SubscriptionList = new List<SubscriptionDetail>();
+            SubscriptionList = new List<SubscriptionDetail>();
             m_ComComponent = new IComComponent();
         }
 
@@ -72,11 +52,11 @@ namespace AdvancedScada.Controls.Subscription
                     if (m_ComComponent != null)
                     {
                         //* Unsubscribe from all
-                        for (int i = 0; i < m_SubscriptionList.Count; i++)
+                        for (int i = 0; i < SubscriptionList.Count; i++)
                         {
-                            m_ComComponent.Unsubscribe(m_SubscriptionList[i].NotificationID);
+                            m_ComComponent.Unsubscribe(SubscriptionList[i].NotificationID);
                         }
-                        m_SubscriptionList.Clear();
+                        SubscriptionList.Clear();
                     }
                     if (SubscribeTryTimer != null)
                     {
@@ -104,22 +84,22 @@ namespace AdvancedScada.Controls.Subscription
         {
             //* Check to see if the subscription has already been created
             int index = 0;
-            while (index < m_SubscriptionList.Count && (m_SubscriptionList[index].CallBack != callBack || m_SubscriptionList[index].PropertyNameToSet != propertyName))
+            while (index < SubscriptionList.Count && (SubscriptionList[index].CallBack != callBack || SubscriptionList[index].PropertyNameToSet != propertyName))
             {
                 index += 1;
             }
 
             //* Already subscribed and PLCAddress was changed, so unsubscribe
-            if ((index < m_SubscriptionList.Count) && m_SubscriptionList[index].PLCAddress != plcAddress)
+            if ((index < SubscriptionList.Count) && SubscriptionList[index].PLCAddress != plcAddress)
             {
-                m_ComComponent.Unsubscribe(m_SubscriptionList[index].NotificationID);
-                m_SubscriptionList.RemoveAt(index);
+                m_ComComponent.Unsubscribe(SubscriptionList[index].NotificationID);
+                SubscriptionList.RemoveAt(index);
                 //* V3.99y - the address changed and old subscription removed, so force the next condition check to re-subscribe
-                index = m_SubscriptionList.Count;
+                index = SubscriptionList.Count;
             }
 
             //* Make sure subscription doesn't already exist - V3.99b
-            if (index >= m_SubscriptionList.Count)
+            if (index >= SubscriptionList.Count)
             {
                 //* Is there an address to subscribe to?
                 if (!string.IsNullOrEmpty(plcAddress))
@@ -148,7 +128,7 @@ namespace AdvancedScada.Controls.Subscription
                             temp.ScaleFactor = ScaleFactor;
                             temp.ScaleOffset = ScaleOffset;
 
-                            m_SubscriptionList.Add(temp);
+                            SubscriptionList.Add(temp);
                             //* V3.99y - reduced from 500 to 10
                             InitializeTryTimer(10);
                         }
@@ -172,7 +152,7 @@ namespace AdvancedScada.Controls.Subscription
         {
             if (m_ComComponent != null)
             {
-                foreach (var Subscript in m_SubscriptionList)
+                foreach (var Subscript in SubscriptionList)
                 {
                     m_ComComponent.Unsubscribe(Subscript.NotificationID);
                 }
@@ -183,7 +163,7 @@ namespace AdvancedScada.Controls.Subscription
         {
             if (!m_ComComponent.DisableSubscriptions)
             {
-                foreach (var Subscript in m_SubscriptionList)
+                foreach (var Subscript in SubscriptionList)
                 {
                     if (!Subscript.SuccessfullySubscribed)
                     {
@@ -247,11 +227,11 @@ namespace AdvancedScada.Controls.Subscription
                         //* This is to phase in from strings to PLCAddressItem
                         if ((p[i].PropertyType) == typeof(string))
                         {
-                            PLCAddress = (string)(p[i].GetValue(m_Parent, null));
+                            PLCAddress = (string)(p[i].GetValue(Parent, null));
                         }
                         else
                         {
-                            PA = (PLCAddressItem)(p[i].GetValue(m_Parent, null));
+                            PA = (PLCAddressItem)(p[i].GetValue(Parent, null));
                             if (PA != null)
                             {
                                 PLCAddress = PA.PLCAddress;
@@ -298,7 +278,7 @@ namespace AdvancedScada.Controls.Subscription
         private void SubscribedDataReturned(object sender, PlcComEventArgs e)
         {
             double Value = 0;
-            foreach (var Subscript in m_SubscriptionList)
+            foreach (var Subscript in SubscriptionList)
             {
                 string address = Subscript.PLCAddress;
                 if (Subscript.Invert)
@@ -379,7 +359,7 @@ namespace AdvancedScada.Controls.Subscription
                                 try
                                 {
                                     //* Does this property exist?
-                                    if (m_Parent.GetType().GetProperty(a.SubscriptionDetail.PropertyNameToSet) != null)
+                                    if (Parent.GetType().GetProperty(a.SubscriptionDetail.PropertyNameToSet) != null)
                                     {
                                         string v = a.PLCComEventArgs.Values[0];
                                         if (a.SubscriptionDetail.ScaleFactor != 1 || a.SubscriptionDetail.ScaleOffset != 0)
@@ -394,7 +374,7 @@ namespace AdvancedScada.Controls.Subscription
                                         }
 
                                         //* Write the value to the property that came from the end of the PLCAddress... property name
-                                        m_Parent.GetType().GetProperty(a.SubscriptionDetail.PropertyNameToSet).SetValue(m_Parent, Utilities.DynamicConverter(v, m_Parent.GetType().GetProperty(a.SubscriptionDetail.PropertyNameToSet).PropertyType), null);
+                                        Parent.GetType().GetProperty(a.SubscriptionDetail.PropertyNameToSet).SetValue(Parent, Utilities.DynamicConverter(v, Parent.GetType().GetProperty(a.SubscriptionDetail.PropertyNameToSet).PropertyType), null);
                                     }
                                 }
                                 catch (Exception ex)

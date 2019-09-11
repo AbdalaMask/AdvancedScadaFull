@@ -16,10 +16,10 @@ using AdvancedScada.Controls.AHMI.Meter;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
-
+using MfgControl.AdvancedHMI.Controls;
 namespace AdvancedScada.Controls.AHMI.Meter
 {
-    public class HMIMeter : AdvancedScada.Controls_Net45.Meter
+    public class HMIMeter : Meter2
     {
 
     }

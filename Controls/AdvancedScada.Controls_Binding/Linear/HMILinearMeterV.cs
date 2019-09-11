@@ -12,7 +12,7 @@ namespace AdvancedScada.Controls_Binding.Linear
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(HMILinearMeterV), "HMI7Segment.ico")]
     [Designer(typeof(HMILinearMeterVDesigner))]
-    public class HMILinearMeterV : AdvancedScada.Controls_Net45.LinearM.LinearMeterV
+    public class HMILinearMeterV : MfgControl.AdvancedHMI.Controls.LinearMeterVertical
     {
 
 

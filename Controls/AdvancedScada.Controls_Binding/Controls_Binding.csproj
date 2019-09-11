@@ -35,6 +35,9 @@
     <Reference Include="Krypton Toolkit">
       <HintPath>..\..\Lib\Krypton\Krypton Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="MfgControl.AdvancedHMI.Controls">
+      <HintPath>..\..\Lib\MfgControl.AdvancedHMI.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -83,9 +86,6 @@
     <Compile Include="Hydraulic\HMIHydraulicCylinder.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Hydraulic\HMIHydraulicCylinderAnalog.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Hydraulic\HMIPneumaticBallVave.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -103,9 +103,6 @@
     </Compile>
     <Compile Include="Leds\DrawAll\DrawGraphics.cs" />
     <Compile Include="Leds\HMILedSingle.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="LED\HMISimpleLED.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Licenses\LicenseManager.cs" />
@@ -143,9 +140,6 @@
     <Compile Include="Segment\HMISegment7LED.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="SelectorSwitch\HMIMushroomButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="SelectorSwitch\HMIPilotLight.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -156,12 +150,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="SevenSegment\HMISevenSegment2.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Thermometer\HMIThermometer.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Thermometer\HMIThermometer2.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Utility\Utility.cs" />
@@ -199,6 +187,9 @@
       <Project>{b160281b-93b1-45bd-a07e-fd75c27916ea}</Project>
       <Name>Monitor</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="LED\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

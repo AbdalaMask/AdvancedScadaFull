@@ -28,29 +28,8 @@ namespace AdvancedScada.IODriver.Delta.TCP
 
         }
 
-        /// <summary>
-        /// Returns true if a connection to the PLC can be established
-        /// </summary>
-        public bool IsAvailable
-        {
-            //TODO: Fix This
-            get
-            {
-                try
-                {
-                    Connection();
-
-                    return IsConnected;
-
-
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-        }
-        public void Connection()
+        
+        public bool Connection()
         {
 
 
@@ -60,8 +39,6 @@ namespace AdvancedScada.IODriver.Delta.TCP
                 busTcpClient?.ConnectClose();
                 busTcpClient = new ModbusTcpNet(IP, Port, Station);
                 busTcpClient.AddressStartWithZero = true;
-
-
                 busTcpClient.IsStringReverse = false;
 
                 try
@@ -76,10 +53,12 @@ namespace AdvancedScada.IODriver.Delta.TCP
                     {
                         IsConnected = false;
                     }
+                    return IsConnected;
                 }
                 catch (Exception ex)
                 {
                     EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                    return IsConnected;
                 }
 
 
@@ -91,20 +70,22 @@ namespace AdvancedScada.IODriver.Delta.TCP
 
 
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                return IsConnected;
 
             }
         }
 
-        public void Disconnection()
+        public bool Disconnection()
         {
             try
             {
                 busTcpClient.ConnectClose();
-
+                return IsConnected;
             }
             catch (SocketException ex)
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                return IsConnected;
             }
 
         }
@@ -144,7 +125,7 @@ namespace AdvancedScada.IODriver.Delta.TCP
             var Address = DMT.DevToAddrW("DVP", address, Station);
             if (value is bool)
             {
-                busTcpClient.WriteCoil($"{Address}", value);
+                busTcpClient.Write($"{Address}", value);
             }
             else
             {
@@ -215,14 +196,6 @@ namespace AdvancedScada.IODriver.Delta.TCP
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
 
-        public virtual ConnectionState GetConnectionState()
-        {
-            return ConnectionState.Broken;
-        }
-
-        public TValue[] Read<TValue>(DataBlock db)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

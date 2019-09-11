@@ -14,7 +14,7 @@ using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
  
 using AdvancedScada.DriverBase.Comm;
- 
+using MfgControl.AdvancedHMI.Controls;
 using AdvancedScada.Monitor;
 using AdvancedScada.Controls.AHMI.SelectorSwitch;
 using AdvancedScada;
@@ -25,7 +25,7 @@ namespace AdvancedScada.Controls.AHMI.SelectorSwitch
 {
     [DefaultEvent("Click")]
 
-    public class HMIPushButton : AdvancedScada.Controls_Net45.MomentaryButton
+    public class HMIPushButton : MfgControl.AdvancedHMI.Controls.PushButton
     {
 
         #region PLC Related Properties

@@ -13,7 +13,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
 {
     [DefaultEvent("Click")]
     [Designer(typeof(HMIPushButtonDesigner))]
-    public class HMIPushButton : AdvancedScada.Controls_Net45.MomentaryButton
+    public class HMIPushButton : MfgControl.AdvancedHMI.Controls.PushButton
     {
 
         #region PLC Properties

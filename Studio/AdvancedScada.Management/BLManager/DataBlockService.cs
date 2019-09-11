@@ -99,7 +99,7 @@ namespace AdvancedScada.Management.BLManager
                         item.StartAddress = db.StartAddress;
                         item.MemoryType = db.MemoryType;
                         item.Length = db.Length;
-                        item.IsArray = db.IsArray;
+                        
                         break;
                     }
             }
@@ -270,7 +270,7 @@ namespace AdvancedScada.Management.BLManager
                     db.MemoryType = $"{dbNote.Attributes[MemoryType].Value}";
                     db.Length = ushort.Parse(dbNote.Attributes[LENGTH].Value);
                     db.DataType = dbNote.Attributes[DATA_TYPE].Value;
-                    db.IsArray =bool.Parse( dbNote.Attributes[Is_Array].Value);
+                    
                     db.Description = dbNote.Attributes[ChannelService.DESCRIPTION].Value;
                     db.Tags = objTagManager.GetTags(dbNote);
                     dbList.Add(db);

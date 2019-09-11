@@ -22,32 +22,11 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
             Station = (byte)slaveId;
             this.serialPort = serialPort;
         }
-        /// <summary>
-        /// Returns true if a connection to the PLC can be established
-        /// </summary>
-        public bool IsAvailable
-        {
-            //TODO: Fix This
-            get
-            {
-                try
-                {
-                    Connection();
-
-                    return IsConnected;
-
-
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-        }
+       
         #region IReadWritePLC
         public bool IsConnected { get; set; } = false;
         public byte Station { get; set; }
-        public void Connection()
+        public bool Connection()
         {
 
 
@@ -71,25 +50,24 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
                         });
                         xGBCnet.Open();
                         IsConnected = true;
+                        return IsConnected;
                     }
                     catch (Exception ex)
                     {
                         EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-                        throw new PLCDriverException("Failed To Open ." + ex.Message);
+                        return IsConnected;
 
                     }
-
-                    OnConnectionEstablished(System.EventArgs.Empty);
                 }
             }
             catch (TimeoutException ex)
             {
                 IsConnected = false;
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-
+                return IsConnected;
             }
         }
-        public void Disconnection()
+        public bool Disconnection()
         {
 
             try
@@ -97,30 +75,29 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
                 xGBCnet.Close();
 
                 IsConnected = false;
+                return IsConnected;
             }
             catch (TimeoutException ex)
             {
 
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                return IsConnected;
             }
         }
         #endregion
         protected virtual void OnDataReceived(PlcComEventArgs e)
         {
-            if (DataReceived != null)
-                DataReceived(this, e);
+            DataReceived?.Invoke(this, e);
         }
 
         protected virtual void OnComError(PlcComEventArgs e)
         {
-            if (ComError != null)
-                ComError(this, e);
+            ComError?.Invoke(this, e);
         }
 
         protected virtual void OnConnectionEstablished(System.EventArgs e)
         {
-            if (ConnectionEstablished != null)
-                ConnectionEstablished(this, e);
+            ConnectionEstablished?.Invoke(this, e);
         }
 
         public byte[] BuildReadByte(byte station, string address, ushort length)
@@ -230,14 +207,6 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
             throw new NotImplementedException();
         }
 
-        public ConnectionState GetConnectionState()
-        {
-            return ConnectionState.Broken;
-        }
-
-        public TValue[] Read<TValue>(DataBlock db)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

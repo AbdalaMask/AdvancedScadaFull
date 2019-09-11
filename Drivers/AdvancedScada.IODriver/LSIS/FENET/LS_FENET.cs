@@ -16,7 +16,7 @@ namespace AdvancedScada.IODriver.LSIS.FENET
         public event EventHandler<PlcComEventArgs> DataReceived;
         public event EventHandler<PlcComEventArgs> ComError;
         public event EventHandler ConnectionEstablished;
-        private readonly int Port = 502;
+        private readonly int Port = 2004;
         private readonly string IP = "127.0.0.1";
 
         private object slotNo;
@@ -47,7 +47,7 @@ namespace AdvancedScada.IODriver.LSIS.FENET
         }
 
 
-        public void Connection()
+        public bool Connection()
         {
 
             try
@@ -64,11 +64,12 @@ namespace AdvancedScada.IODriver.LSIS.FENET
                     {
                         IsConnected = true;
                     }
-
+                    return IsConnected;
                 }
                 catch (Exception ex)
                 {
                     EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                    return IsConnected;
                 }
 
 
@@ -79,48 +80,30 @@ namespace AdvancedScada.IODriver.LSIS.FENET
 
                 IsConnected = false;
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                return IsConnected;
 
             }
         }
 
-        public void Disconnection()
+        public bool Disconnection()
         {
             try
             {
                 fastEnet.ConnectClose();
 
                 IsConnected = false;
+                return IsConnected;
             }
             catch (SocketException ex)
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                return IsConnected;
             }
 
         }
 
         #endregion
-        /// <summary>
-        /// Returns true if a connection to the PLC can be established
-        /// </summary>
-        public bool IsAvailable
-        {
-            //TODO: Fix This
-            get
-            {
-                try
-                {
-                    Connection();
-
-                    return IsConnected;
-
-
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-        }
+       
         public byte[] BuildReadByte(byte station, string address, ushort length)
         {
             var frame = DemoUtils.BulkReadRenderResult(fastEnet, address, length);
@@ -156,20 +139,17 @@ namespace AdvancedScada.IODriver.LSIS.FENET
         }
         protected virtual void OnDataReceived(PlcComEventArgs e)
         {
-            if (DataReceived != null)
-                DataReceived(this, e);
+            DataReceived?.Invoke(this, e);
         }
 
         protected virtual void OnComError(PlcComEventArgs e)
         {
-            if (ComError != null)
-                ComError(this, e);
+            ComError?.Invoke(this, e);
         }
 
         protected virtual void OnConnectionEstablished(System.EventArgs e)
         {
-            if (ConnectionEstablished != null)
-                ConnectionEstablished(this, e);
+            ConnectionEstablished?.Invoke(this, e);
         }
 
         public TValue[] Read<TValue>(string address, ushort length)
@@ -243,14 +223,6 @@ namespace AdvancedScada.IODriver.LSIS.FENET
             throw new NotImplementedException();
         }
 
-        public ConnectionState GetConnectionState()
-        {
-            return ConnectionState.Broken;
-        }
-
-        public TValue[] Read<TValue>(DataBlock db)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

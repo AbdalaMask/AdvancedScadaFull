@@ -40,6 +40,7 @@
             this.kryptonRibbonGroupTriple1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.mConfiguration = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.mSQLServerUtils = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.CheckEnabele = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupCheckBox();
             this.kryptonRibbonGroupTriple2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.mPCControllercs = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroup2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
@@ -154,7 +155,8 @@
             // 
             this.kryptonRibbonGroupTriple1.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
             this.mConfiguration,
-            this.mSQLServerUtils});
+            this.mSQLServerUtils,
+            this.CheckEnabele});
             // 
             // mConfiguration
             // 
@@ -167,6 +169,12 @@
             this.mSQLServerUtils.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.Database_32x32;
             this.mSQLServerUtils.TextLine1 = "SQLUtils";
             this.mSQLServerUtils.Click += new System.EventHandler(this.mSQLServerUtils_Click);
+            // 
+            // CheckEnabele
+            // 
+            this.CheckEnabele.TextLine1 = "RUN";
+            this.CheckEnabele.Click += new System.EventHandler(this.CheckEnabele_Click);
+            this.CheckEnabele.CheckedChanged += new System.EventHandler(this.CheckEnabele_CheckedChanged);
             // 
             // kryptonRibbonGroupTriple2
             // 
@@ -670,6 +678,7 @@
         private Tulpep.NotificationWindow.PopupNotifier ThisNotificationPopup;
         private ComponentFactory.Krypton.Navigator.KryptonPage tabFormMain;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupCheckBox CheckEnabele;
     }
 }
 

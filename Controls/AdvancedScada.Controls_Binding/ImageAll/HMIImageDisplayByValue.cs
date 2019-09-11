@@ -1,6 +1,7 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.DriverBase;
 using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -11,7 +12,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.ImageAll
 {
-    public class HMIImageDisplayByValue : AdvancedScada.Controls_Net45.ImageDisplayByValue
+    public class HMIImageDisplayByValue : MfgControl.AdvancedHMI.Controls.ImageDisplayByValue
     {
 
         #region Basic Properties

@@ -34,8 +34,7 @@ namespace AdvancedScada.Studio.Config
                 Settings.Default.TypeLibrary = cboxLibraryImage.Text;
                 Settings.Default.TypeForms = cboxTypeForms.Text;
 
-                Settings.Default.SymbolFactory = txtSymbolFactory.Text;
-                Settings.Default.Save();
+                 Settings.Default.Save();
 
                 Close();
 
@@ -79,7 +78,7 @@ namespace AdvancedScada.Studio.Config
 
                 cboxLibraryImage.Text = Settings.Default.TypeLibrary;
 
-                txtSymbolFactory.Text = Settings.Default.SymbolFactory;
+               
 
                 cboxTypeForms.Text = Settings.Default.TypeForms;
 
@@ -135,26 +134,22 @@ namespace AdvancedScada.Studio.Config
         }
         private void btnLibraryImage_Click(object sender, EventArgs e)
         {
-            if (FBDLibraryImage.ShowDialog() == DialogResult.OK) WriteKey("LibraryImage", FBDLibraryImage.SelectedPath);
-            cboxLibraryImage.Text = FBDLibraryImage.SelectedPath;
+            if (FBD.ShowDialog() == DialogResult.OK) WriteKey("LibraryImage", FBD.SelectedPath);
+            cboxLibraryImage.Text = FBD.SelectedPath;
         }
 
         private void btnTypeForms_Click(object sender, EventArgs e)
         {
-            if (FBDSymbols.ShowDialog() == DialogResult.OK) WriteKey("Symbols", FBDSymbols.SelectedPath);
-            cboxTypeForms.Text = FBDSymbols.SelectedPath;
+            if (FBD.ShowDialog() == DialogResult.OK) WriteKey("Symbols", FBD.SelectedPath);
+            cboxTypeForms.Text = FBD.SelectedPath;
         }
 
-        private void BtnSymbolFactory_Click(object sender, EventArgs e)
-        {
-            if (FBDSymbols.ShowDialog() == DialogResult.OK) WriteKeySymbolFactory("InstallDir", FBDSymbols.SelectedPath);
-            txtSymbolFactory.Text = FBDSymbols.SelectedPath;
-        }
+        
 
         private void BtnLibraryImages_Click(object sender, EventArgs e)
         {
-            if (FBDLibraryImage.ShowDialog() == DialogResult.OK) WriteKey("LibraryImages", FBDLibraryImage.SelectedPath);
-            txtLibraryImages.Text = FBDLibraryImage.SelectedPath;
+            if (FBD.ShowDialog() == DialogResult.OK) WriteKey("LibraryImages", FBD.SelectedPath);
+            txtLibraryImages.Text = FBD.SelectedPath;
         }
     }
 }

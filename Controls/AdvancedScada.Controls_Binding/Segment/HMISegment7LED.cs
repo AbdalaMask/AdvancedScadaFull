@@ -2,7 +2,7 @@
 using AdvancedScada.Controls_Binding.Enum;
 using AdvancedScada.Controls_Binding.Segment.DrawAll;
 using AdvancedScada.DriverBase;
-using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -13,6 +13,7 @@ using System.Drawing.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using AdvancedScada.Monitor;
+using AdvancedScada.Controls_Net45;
 
 namespace AdvancedScada.Controls_Binding.Segment
 {

@@ -19,8 +19,8 @@ using System.Xml.Linq;
 using AdvancedScada;
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
- 
+using MfgControl.AdvancedHMI.Controls;
+
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using AdvancedScada.DriverBase.Comm;
@@ -31,11 +31,12 @@ using AdvancedScada.Controls.AHMI.SevenSegment;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls_Net45;
 
 namespace AdvancedScada.Controls.AHMI.SevenSegment
 {
 
-    public class HMISevenSegment2 : AdvancedScada.Controls_Net45.SevenSegment2
+    public class HMISevenSegment2 : MfgControl.AdvancedHMI.Controls.SevenSegment
     {
         #region Properties
         #endregion

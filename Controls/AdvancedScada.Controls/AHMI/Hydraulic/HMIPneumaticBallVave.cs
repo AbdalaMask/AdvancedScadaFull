@@ -16,8 +16,8 @@ using System.Xml.Linq;
 using AdvancedScada;
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
- 
+using MfgControl.AdvancedHMI.Controls;
+
 using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.Controls.AHMI.Hydraulic;
 using AdvancedScada;
@@ -26,7 +26,7 @@ using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.Hydraulic
 {
-    public class HMIPneumaticBallVave : AdvancedScada.Controls_Net45.PneumaticBallValve
+    public class HMIPneumaticBallVave : PneumaticBallVave
     {
         #region PLC Related Properties
         public OutputType OutputType

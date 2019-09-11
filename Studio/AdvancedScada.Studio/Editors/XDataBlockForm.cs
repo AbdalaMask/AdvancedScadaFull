@@ -204,18 +204,18 @@ namespace AdvancedScada.Studio.Editors
                             txtDomain.Items.Clear();
                             txtDomain.Items.AddRange(DVP);
                             txtPrefix.Text = "txtPrefix :";
-                            chkIsArray.Visible = false;
+                           
                             break;
                         case "LSIS":
                             lblTypeOfRead.Visible = false;
                             CboxTypeOfRead.Visible = false;
-                            chkIsArray.Visible = false;
+                           
                             break;
                         case "Modbus":
                             chkX10.Visible = false;
                             txtDomain.Items.Clear();
                             txtPrefix.Text = "txtPrefix :";
-                            chkIsArray.Visible = false;
+                           
                             break;
                         default:
                             break;
@@ -234,15 +234,15 @@ namespace AdvancedScada.Studio.Editors
                             txtDomain.Items.Clear();
                             txtDomain.Items.AddRange(DVP);
                             txtPrefix.Text = "txtPrefix :";
-                            chkIsArray.Visible = false;
+                            
                             break;
                         case "LSIS":
                             lblTypeOfRead.Visible = false;
-                            CboxTypeOfRead.Visible = false; chkIsArray.Visible = false;
+                            CboxTypeOfRead.Visible = false;  
                             break;
                         case "Modbus":
                             chkX10.Visible = false;
-                            txtDomain.Items.Clear(); chkIsArray.Visible = false;
+                            txtDomain.Items.Clear();  
                             break;
                         default:
                             break;
@@ -416,7 +416,7 @@ namespace AdvancedScada.Studio.Editors
                             Description = txtDesc.Text,
                             Length = (ushort)txtAddressLength.Value,
                             DataType = cboxDataType.Text,
-                            IsArray = chkIsArray.Checked,
+                           
                             Tags = new List<Tag>()
                         };
 
@@ -462,7 +462,7 @@ namespace AdvancedScada.Studio.Editors
                         db.Length = (ushort)txtAddressLength.Value;
                         db.Description = txtDesc.Text;
                         db.DataType = $"{cboxDataType.Text}";
-                        db.IsArray = chkIsArray.Checked;
+                       
 
                         switch (ch.ChannelTypes)
 
@@ -507,26 +507,7 @@ namespace AdvancedScada.Studio.Editors
             Close();
         }
 
-        private void ChkIsArray_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkIsArray.Checked)
-            {
-                CboxTypeOfRead.Visible = true;
-                chkCreateTag.Visible = true;
-                txtDomain.Visible = true;
-                txtStartAddress.Visible = true;
-                txtAddressLength.Visible = true;
-            }
-            else
-            {
-                CboxTypeOfRead.Visible = false;
-                chkCreateTag.Visible = false;
-                txtDomain.Visible = false;
-                txtStartAddress.Visible = false;
-                txtAddressLength.Visible = false;
-            }
-
-        }
+       
     }
 }
 

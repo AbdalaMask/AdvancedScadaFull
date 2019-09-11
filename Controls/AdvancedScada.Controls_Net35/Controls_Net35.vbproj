@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{31B3F32B-550A-445D-8AC4-5F8A37A12124}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>AdvancedScada.Controls_Net35</RootNamespace>
+    <AssemblyName>AdvancedScada.Controls_Net35</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>AdvancedScada.Controls_Net35.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>AdvancedScada.Controls_Net35.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Annunciator.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BasicLight.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DigitalPanelMeter.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gauge.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Meter.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MomentaryButton.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Motor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PilotLight.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pipe.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StackLight.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tank.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Thermometer.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TankWithWindow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tee1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tee2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tee3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tee4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Thermometer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VerticalPipe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Annunciator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AnnunciatorRed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlackButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlackButtonDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlueButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlueButtonDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Elbow1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Elbow2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Elbow3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Elbow4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EstopButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EstopButtonDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GaugeNeedle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GaugeNeedleShadow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GaugeSilverNoNeedle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GreenButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GreenButtonDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GreenLightOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GreenLightOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HorizontalPipe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KeyKeyWide.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KeyKeyWideDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KeypadKey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KeypadKeyDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KeypadNoKeys.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segement.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segement0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segement1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segement2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segement3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segement4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segement5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segement6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segement7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segement8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segement9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7SegementOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segment0Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segment1Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segment2Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segment3Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segment4Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segment5Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segment6Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segment7Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segment8Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segment9Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7SegmentDecimalRed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7SegmentOffRed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LED7Segment-Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LEDFrame2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LEDGreenOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LEDGreenOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LEDPanelMeter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LEDRedOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LEDRedOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LegendPlate2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MeterBase.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MeterNeedle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MeterNoNeedle2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MeterNoNeedleCenterScale.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MotorNoShaft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedButtonDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedLightOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedLightOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SelectorSwitchLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SelectorSwitchRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShaftPos1_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShaftPos2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShaftPos2_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShaftPos3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StackLightAmberOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StackLightAmberOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StackLightBase.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StackLightCap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StackLightGreenOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StackLightGreenOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StackLightRedOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StackLightRedON.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>

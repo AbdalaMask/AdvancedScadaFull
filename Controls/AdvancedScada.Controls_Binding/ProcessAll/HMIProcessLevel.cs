@@ -1,8 +1,9 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Binding.Enum;
 using AdvancedScada.Controls_Binding.ProcessAll.DrawAll;
-using AdvancedScada.DriverBase;
 using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.Drawing;

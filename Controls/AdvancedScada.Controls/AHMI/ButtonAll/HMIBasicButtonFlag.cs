@@ -51,30 +51,30 @@ namespace AdvancedScada.Controls.AHMI.ButtonAll
                 PLCAddressClick != null)
                 try
                 {
-                    if (OutputType == OutputType.MomentarySet)
+                    if (OutputType == MfgControl.AdvancedHMI.Controls.OutputType.MomentarySet)
                     {
                          AdvancedScada.Controls.Utilities.Write(PLCAddressClick, "1");
                         if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
                         if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
                     }
-                    else if (OutputType == OutputType.MomentaryReset)
+                    else if (OutputType == MfgControl.AdvancedHMI.Controls.OutputType.MomentaryReset)
                     {
                          AdvancedScada.Controls.Utilities.Write(PLCAddressClick, "0");
                         if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
                         if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
                     }
 
-                    else if (OutputType == OutputType.SetTrue)
+                    else if (OutputType == MfgControl.AdvancedHMI.Controls.OutputType.SetTrue)
                     {
                          AdvancedScada.Controls.Utilities.Write(PLCAddressClick, "1");
                     }
 
-                    else if (OutputType == OutputType.SetFalse)
+                    else if (OutputType == MfgControl.AdvancedHMI.Controls.OutputType.SetFalse)
                     {
                          AdvancedScada.Controls.Utilities.Write(PLCAddressClick, "0");
                     }
 
-                    else if (OutputType == OutputType.Toggle)
+                    else if (OutputType == MfgControl.AdvancedHMI.Controls.OutputType.Toggle)
                     {
                         bool CurrentValue = Convert.ToBoolean(Value);
                         if (CurrentValue)

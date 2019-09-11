@@ -1,5 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using AdvancedScada.DriverBase;
 using System;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.Thermometer
 {
-    public class HMIThermometer2 : AdvancedScada.Controls_Net45.Thermometer2
+    public class HMIThermometer2 : MfgControl.AdvancedHMI.Controls.Thermometer2
     {
 
 

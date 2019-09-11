@@ -21,29 +21,8 @@ namespace AdvancedScada.IODriver.Modbus.RTU
         }
 
         private ModbusRtu busRtuClient = null;
-        /// <summary>
-        /// Returns true if a connection to the PLC can be established
-        /// </summary>
-        public bool IsAvailable
-        {
-            //TODO: Fix This
-            get
-            {
-                try
-                {
-                    Connection();
-
-                    return IsConnected;
-
-
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-        }
-        public void Connection()
+        
+        public bool Connection()
         {
 
             busRtuClient?.Close();
@@ -64,7 +43,7 @@ namespace AdvancedScada.IODriver.Modbus.RTU
                 });
                 busRtuClient.Open();
                 IsConnected = true;
-
+                return IsConnected;
 
             }
             catch (TimeoutException ex)
@@ -72,20 +51,22 @@ namespace AdvancedScada.IODriver.Modbus.RTU
 
 
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                return IsConnected;
             }
         }
 
-        public void Disconnection()
+        public bool Disconnection()
         {
             try
             {
                 busRtuClient.Close();
-
+                return IsConnected;
             }
             catch (TimeoutException ex)
             {
 
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                return IsConnected;
             }
         }
 
@@ -122,7 +103,7 @@ namespace AdvancedScada.IODriver.Modbus.RTU
         {
             if (value is bool)
             {
-                busRtuClient.WriteCoil(address, value);
+                busRtuClient.Write(address, value);
             }
             else
             {
@@ -192,19 +173,6 @@ namespace AdvancedScada.IODriver.Modbus.RTU
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
 
-        public ConnectionState GetConnectionState()
-        {
-            return ConnectionState.Broken;
-        }
-
-        public TValue[] Read<TValue>(string[] address)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TValue[] Read<TValue>(DataBlock db)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

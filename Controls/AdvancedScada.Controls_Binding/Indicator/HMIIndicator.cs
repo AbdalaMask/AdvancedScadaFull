@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.Indicator
 {
-    public class HMIIndicator : AdvancedScada.Controls_Net45.Indicator
+    public class HMIIndicator : MfgControl.AdvancedHMI.Controls.Indicator
     {
 
         #region PLC Related Properties

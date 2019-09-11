@@ -29,7 +29,7 @@ namespace AdvancedScada.Monitor
         private bool IsConnected;
         public bool IsDataChanged = false;
 
-        private BindingList<Device> bS7Device = null;
+        
         private IReadService client;
         private ChannelService objChannelManager;
         private DataBlockService objDataBlockManager;
@@ -45,46 +45,7 @@ namespace AdvancedScada.Monitor
         {
             InitializeComponent();
         }
-        //private void InitializeData(string xmlPath)
-        //{
-        //    objChannelManager.Channels.Clear();
-        //    objChannelManager.XmlPath = xmlPath;
-        //    List<Channel> chList = objChannelManager.GetChannels(xmlPath);
-        //    bS7Device = new BindingList<Device>();
-        //    treeViewSI.Nodes.Clear();
-        //    foreach (Channel ch in chList)
-        //    {
-        //        List<TreeNode> dvList = new List<TreeNode>();
-        //        ////Sort.
-        //        ch.Devices.Sort(delegate (Device x, Device y)
-        //        {
-        //            return x.DeviceName.CompareTo(y.DeviceName);
-        //        });
-
-        //        foreach (Device dv in ch.Devices)
-        //        {
-        //            Device sendTo = new Device();
-        //            sendTo.DeviceId = bS7Device.Count + 1;
-        //            sendTo.ChannelId = dv.ChannelId;
-        //            sendTo.DeviceName = dv.DeviceName;
-        //            sendTo.SlaveId = dv.SlaveId;
-        //            sendTo.Status = dv.Status;
-        //            sendTo.Description = dv.Description;
-        //            sendTo.DataBlocks = dv.DataBlocks;
-        //            bS7Device.Add(sendTo);
-        //            List<TreeNode> tgList = new List<TreeNode>();
-        //            foreach (DataBlock db in dv.DataBlocks)
-        //            {
-        //                tgList.Add(new TreeNode(db.DataBlockName));
-        //            }
-        //            //TreeNode dvNode = new TreeNode(dv.DeviceName, tgList.ToArray());
-        //            TreeNode dvNode = new TreeNode(dv.DeviceName, tgList.ToArray());
-        //            dvList.Add(dvNode);
-        //        }
-        //        TreeNode chNode = new TreeNode(ch.ChannelName, dvList.ToArray());
-        //        treeViewSI.Nodes.Add(chNode);
-        //    }
-        //}
+       
         private void InitializeData(string xmlPath)
         {
             objChannelManager.Channels.Clear();
@@ -298,28 +259,7 @@ namespace AdvancedScada.Monitor
 
 
         }
-        public void DataDevices(Dictionary<string, Device> Devices)
-        {
-            var DevicesClient = bS7Device;
-            if (DevicesClient == null) throw new ArgumentNullException(nameof(DevicesClient));
-            foreach (var author in Devices)
-            {
-                foreach (var dv in bS7Device)
-                {
-                    if (author.Value.ChannelId == dv.ChannelId && author.Value.SlaveId == dv.SlaveId)
-                    {
-                        dv.ChannelId = author.Value.ChannelId;
-                        dv.DeviceId = author.Value.DeviceId;
-                        dv.DeviceName = author.Value.DeviceName;
-                        dv.SlaveId = author.Value.SlaveId;
-                        dv.Status = author.Value.Status;
-                        break;
-                    }
-
-                }
-
-            }
-        }
+       
 
         public void DataTags(Dictionary<string, Tag> Tags)
         {

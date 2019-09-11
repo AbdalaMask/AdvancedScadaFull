@@ -74,84 +74,17 @@
     <Compile Include="AlarmMan\Designers\ListViewDesignerForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BarLevel\BarLevel.vb">
+    <Compile Include="Components\SimpleWebServer.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="BarLevel\BarLevelGraphic.vb">
+    <Compile Include="Components\SocketClient\GenericTCPClient.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="BarLevel\BarMeter.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Basic\AnalogMeterBase.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Basic\BasicSelectorSwitch.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Basic\BasicShape.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Basic\ButtonBase.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Basic\LinearMeterBase.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Buttons\Annunciator.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Buttons\BeveledButtonDisplay.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Buttons\ListButtons.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Buttons\SquareIlluminatedButton.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Class\AutoToDoubleEditor.vb" />
-    <Compile Include="Class\AutoToDoubleTypeConverter%28Of T%29.vb" />
-    <Compile Include="Class\AutoValueConverter.vb" />
-    <Compile Include="Class\ConnecterType.vb" />
-    <Compile Include="Class\DataPoint.vb" />
-    <Compile Include="Class\DoubleDateNanValueConverter.vb" />
-    <Compile Include="Class\EmptyTypeConverter.vb" />
-    <Compile Include="Class\LineDirection.vb" />
-    <Compile Include="Class\ListButtonsEventArgs.vb" />
-    <Compile Include="Class\MenuPos.vb" />
-    <Compile Include="Class\OutputType.vb" />
-    <Compile Include="Class\PanChartEventArgs.vb" />
-    <Compile Include="Class\PanelGraphics.vb" />
-    <Compile Include="Class\RollingDigit.vb" />
-    <Compile Include="Class\RotationScale.vb" />
-    <Compile Include="Class\RotationTypeConverter.vb" />
-    <Compile Include="Class\RotationValueEditor.vb" />
-    <Compile Include="Class\ShapesStateValue.vb" />
-    <Compile Include="Class\ShapesStateValueTypeConverter.vb" />
-    <Compile Include="Class\ShapeType.vb" />
-    <Compile Include="Class\ShapeTypeEditor.vb" />
-    <Compile Include="Class\TranslationScale.vb" />
-    <Compile Include="Class\TranslationScaleTypeConverter.vb" />
-    <Compile Include="Class\Utilities.vb" />
-    <Compile Include="Common\BaseEventArgs.vb" />
-    <Compile Include="Common\ValueChangedEventArgs.vb" />
-    <Compile Include="Controls\A1Panel.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\BasicLine.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\CircularProgressBar.vb">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Components\SocketClient\GenericTCPEventArgs.vb" />
+    <Compile Include="Components\SocketClient\MessageEventArgs.vb" />
+    <Compile Include="Components\SocketClient\SharedSocket.vb" />
+    <Compile Include="Components\SocketClient\SocketStateObject.vb" />
     <Compile Include="Controls\ColorPicker.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\ControlShapeType.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\GroupPanel.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\HVScrollBar.vb">
@@ -160,52 +93,10 @@
     <Compile Include="Controls\Indicator.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Line.vb" />
-    <Compile Include="Controls\MultistateIndicator.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DigitalPanel\DigitalPanelMeter.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DigitalPanel\DigitalPanelMeterBlue.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="DigitalPanel\Odometer.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DigitalPanel\TempController.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="FlowArrow\FlowArrowHatched.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="FlowArrow\FlowArrowMatrix1.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="FlowArrow\FlowArrowMatrix2.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="FlowArrow\FlowArrowSolid.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="FlowArrow\FlowArrowStriped.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="FlowArrow\SimpleFlowArrows.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Gauge\Gauge.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Gauge\GaugeCompact.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Hydraulic\HydraulicCylinder.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Hydraulic\HydraulicCylinderAnalog.vb">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="DigitalPanel\RollingDigit.vb" />
     <Compile Include="Keyboard\AlphaKeyboard_v3.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -216,90 +107,6 @@
     <Compile Include="Keyboard\KeypadEventArgs.vb" />
     <Compile Include="Keyboard\Keypad_v3.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LED\SimpleLED.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="LED\SimpleLEDAnalog.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="LED\SimpleLedAnalogArray.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="LED\SimpleLEDArray.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="LED\SimpleLEDMatrix.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="LED\SimpleLEDMultiColor.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="LED\SimpleLEDMulticolorArray.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="LinearM\LinearMeter.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="LinearM\LinearMeterH.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="LinearM\LinearMeterHorizontal.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="LinearM\LinearMeterV.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="LinearM\LinearMeterVertical.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Message\MessageByBit.vb" />
-    <Compile Include="Message\MessageByItem.vb" />
-    <Compile Include="Message\MessageByValue.vb" />
-    <Compile Include="Message\MessageConverterByBit.vb" />
-    <Compile Include="Message\MessageConverterByItem.vb" />
-    <Compile Include="Message\MessageConverterByValue.vb" />
-    <Compile Include="Message\MessageDisplayByBit.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Message\MessageDisplayByValue.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Message\MessageListByBit.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Message\MessageListByItem.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Message\MessageListByValue.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Meter\Meter.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Meter\Meter2.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Meter\MeterCompact.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Motor\Conveyor.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Motor\Fan.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Motor\Motor.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Motor\Motor3Color.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Motor\PneumaticBallValve.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Motor\WaterPump.vb">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -316,15 +123,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Picture\AnimatingPictureBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Picture\GifAnimator.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Picture\GraphicIndicator.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Picture\GraphicIndicatorBase.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -340,46 +138,7 @@
     <Compile Include="Picture\RotatingImage2.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Picture\RotationalPositionIndicator.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Picture\RotationValueEditorForm.Designer.vb">
-      <DependentUpon>RotationValueEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Picture\RotationValueEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SelectorSwitch\MomentaryButton.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="SelectorSwitch\MushroomButton.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="SelectorSwitch\PilotLight.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="SelectorSwitch\PilotLight3Color.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="SelectorSwitch\SelectorSwitch.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="SelectorSwitch\SelectorSwitch3Pos.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="SevenSegment\DigitalDisplayControl.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="SevenSegment\SevenSegment.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="SevenSegment\SevenSegment2.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="SevenSegment\SevenSegmentGDI.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="TankAll\Pipe.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="TankAll\StackLight2.vb">
@@ -388,37 +147,14 @@
     <Compile Include="TankAll\StackLight5Lights.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TankAll\Tank.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="TankAll\TankLibrary.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Thermometer\Thermometer.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Thermometer\Thermometer2.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="VerticalSlider\AnalogDial.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="VerticalSlider\ThumbDial.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="VerticalSlider\VerticalSlider.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="VerticalSlider\VerticalSlider3.vb">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Utilities.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AlarmMan\Designers\ListViewDesignerForm.resx">
       <DependentUpon>ListViewDesignerForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DigitalPanel\TempController.resx">
-      <DependentUpon>TempController.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Keyboard\Keypad_v3.resx">
       <DependentUpon>Keypad_v3.vb</DependentUpon>
@@ -428,9 +164,6 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Picture\RotationValueEditorForm.resx">
-      <DependentUpon>RotationValueEditorForm.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -556,6 +289,9 @@
       <Project>{1d570e9a-e5b4-44dd-946d-9d73cfa4a535}</Project>
       <Name>DriverBase</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BarLevel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
