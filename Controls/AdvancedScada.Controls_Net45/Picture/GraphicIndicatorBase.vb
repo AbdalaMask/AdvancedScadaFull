@@ -216,7 +216,7 @@ Public Class GraphicIndicatorBase
     '*****************************************
     '* Property - Second Text
     '*****************************************
-    Private m_Text2 As String = String.Empty
+    Private m_Text2 As String = ""
     Public Property Text2() As String
         Get
             Return m_Text2

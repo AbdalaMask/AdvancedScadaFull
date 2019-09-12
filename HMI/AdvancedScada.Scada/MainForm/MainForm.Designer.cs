@@ -118,10 +118,11 @@ namespace AdvancedScada.HMI.MainForm
             this.thnk_rec_2 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
             this.thnk_set_2 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
             this.Panel2 = new System.Windows.Forms.Panel();
-            this.hmiLedDisplay1 = new AdvancedScada.Controls.HslControls.Segment.HMILedDisplay();
+            this.hmiLedDisplay1 = new AdvancedScada.Controls.HslControl.Segment.HMILedDisplay();
             this.hmiLabel25 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
             this.msg_thnk = new System.Windows.Forms.Label();
             this.Panel21 = new System.Windows.Forms.Panel();
+            this.hmiLanternSimple2 = new AdvancedScada.Controls.HslControl.Lad.HMILanternSimple();
             this.hmiIndicator2 = new AdvancedScada.Controls.AHMI.Controls.HMIIndicator();
             this.hmiLabel23 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
             this.hmiLabel24 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
@@ -152,6 +153,7 @@ namespace AdvancedScada.HMI.MainForm
             this.thnk_rec_oil = new AdvancedScada.Controls.AHMI.Display.HMILabel();
             this.hmiLabel46 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.hmiLanternSimple1 = new AdvancedScada.Controls.HslControl.Lad.HMILanternSimple();
             this.Label5 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.hmiLabel53 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
@@ -197,9 +199,8 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle8 = new AdvancedScada.Controls.AHMI.Leds.HMILedSingle();
             this.hmiDigitalPanelMeter2 = new AdvancedScada.Controls.AHMI.DigitalDisplay.HMIDigitalPanelMeter();
             this.hmiSimpleWebServer1 = new AdvancedScada.Controls.AHMI.Components.HMISimpleWebServer();
-            this.hmiLedDisplay2 = new AdvancedScada.Controls.HslControls.Segment.HMILedDisplay();
-            this.hmiLanternSimple1 = new AdvancedScada.Controls.HslControls.Lad.HMILanternSimple();
-            this.hmiLanternSimple2 = new AdvancedScada.Controls.HslControls.Lad.HMILanternSimple();
+            this.hmiLedDisplay2 = new AdvancedScada.Controls.HslControl.Segment.HMILedDisplay();
+            this.hmiVacuumPump1 = new AdvancedScada.Controls.HslControl.Pipe.HMIVacuumPump();
             this.Panel3.SuspendLayout();
             this.Panel14.SuspendLayout();
             this.Panel15.SuspendLayout();
@@ -2203,12 +2204,12 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedDisplay1.KeypadWidth = 300;
             this.hmiLedDisplay1.LedNumberSize = 9;
             this.hmiLedDisplay1.LeftRightOffect = 7;
-            this.hmiLedDisplay1.Location = new System.Drawing.Point(78, 20);
+            this.hmiLedDisplay1.Location = new System.Drawing.Point(75, 14);
             this.hmiLedDisplay1.Margin = new System.Windows.Forms.Padding(3, 11, 3, 11);
             this.hmiLedDisplay1.Name = "hmiLedDisplay1";
-            this.hmiLedDisplay1.PLCAddressKeypad = "";
+            this.hmiLedDisplay1.PLCAddressKeypad = "CH2.PLC1.DataD.TAG00016";
             this.hmiLedDisplay1.PLCAddressText = "";
-            this.hmiLedDisplay1.PLCAddressValue = "";
+            this.hmiLedDisplay1.PLCAddressValue = "CH2.PLC1.DataD.TAG00016";
             this.hmiLedDisplay1.PLCAddressVisible = "";
             this.hmiLedDisplay1.Size = new System.Drawing.Size(387, 105);
             this.hmiLedDisplay1.TabIndex = 9;
@@ -2273,6 +2274,7 @@ namespace AdvancedScada.HMI.MainForm
             this.Panel21.BackColor = System.Drawing.Color.Transparent;
             this.Panel21.BackgroundImage = global::AdvancedScada.HMI.Properties.Resources.Sanitary_inline_mixer;
             this.Panel21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Panel21.Controls.Add(this.hmiVacuumPump1);
             this.Panel21.Controls.Add(this.hmiLanternSimple2);
             this.Panel21.Controls.Add(this.hmiIndicator2);
             this.Panel21.Controls.Add(this.hmiLabel23);
@@ -2288,6 +2290,19 @@ namespace AdvancedScada.HMI.MainForm
             this.Panel21.Name = "Panel21";
             this.Panel21.Size = new System.Drawing.Size(548, 181);
             this.Panel21.TabIndex = 503;
+            // 
+            // hmiLanternSimple2
+            // 
+            this.hmiLanternSimple2.LanternBackground = System.Drawing.Color.Red;
+            this.hmiLanternSimple2.Location = new System.Drawing.Point(497, 139);
+            this.hmiLanternSimple2.Name = "hmiLanternSimple2";
+            this.hmiLanternSimple2.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.MomentarySet;
+            this.hmiLanternSimple2.PLCAddressText = "";
+            this.hmiLanternSimple2.PLCAddressValue = "";
+            this.hmiLanternSimple2.PLCAddressVisible = "";
+            this.hmiLanternSimple2.Size = new System.Drawing.Size(33, 36);
+            this.hmiLanternSimple2.TabIndex = 555;
+            this.hmiLanternSimple2.Value = false;
             // 
             // hmiIndicator2
             // 
@@ -2886,6 +2901,19 @@ namespace AdvancedScada.HMI.MainForm
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(151, 195);
             this.panel5.TabIndex = 520;
+            // 
+            // hmiLanternSimple1
+            // 
+            this.hmiLanternSimple1.LanternBackground = System.Drawing.Color.Red;
+            this.hmiLanternSimple1.Location = new System.Drawing.Point(55, 18);
+            this.hmiLanternSimple1.Name = "hmiLanternSimple1";
+            this.hmiLanternSimple1.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.MomentarySet;
+            this.hmiLanternSimple1.PLCAddressText = "";
+            this.hmiLanternSimple1.PLCAddressValue = "";
+            this.hmiLanternSimple1.PLCAddressVisible = "";
+            this.hmiLanternSimple1.Size = new System.Drawing.Size(31, 34);
+            this.hmiLanternSimple1.TabIndex = 554;
+            this.hmiLanternSimple1.Value = false;
             // 
             // Label5
             // 
@@ -4253,7 +4281,6 @@ namespace AdvancedScada.HMI.MainForm
             0});
             this.hmiDigitalPanelMeter2.Size = new System.Drawing.Size(150, 65);
             this.hmiDigitalPanelMeter2.TabIndex = 551;
-            this.hmiDigitalPanelMeter2.Text = "hmiDigitalPanelMeter2";
             this.hmiDigitalPanelMeter2.Value = 0F;
             this.hmiDigitalPanelMeter2.ValueScaleFactor = new decimal(new int[] {
             1,
@@ -4287,39 +4314,25 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedDisplay2.Location = new System.Drawing.Point(386, 279);
             this.hmiLedDisplay2.Margin = new System.Windows.Forms.Padding(3, 11, 3, 11);
             this.hmiLedDisplay2.Name = "hmiLedDisplay2";
-            this.hmiLedDisplay2.PLCAddressKeypad = "";
+            this.hmiLedDisplay2.PLCAddressKeypad = "CH2.PLC1.DataD.TAG00016";
             this.hmiLedDisplay2.PLCAddressText = "";
-            this.hmiLedDisplay2.PLCAddressValue = "";
+            this.hmiLedDisplay2.PLCAddressValue = "CH2.PLC1.DataD.TAG00016";
             this.hmiLedDisplay2.PLCAddressVisible = "";
             this.hmiLedDisplay2.Size = new System.Drawing.Size(159, 50);
             this.hmiLedDisplay2.TabIndex = 553;
             this.hmiLedDisplay2.Value = "0";
             // 
-            // hmiLanternSimple1
+            // hmiVacuumPump1
             // 
-            this.hmiLanternSimple1.LanternBackground = System.Drawing.Color.Red;
-            this.hmiLanternSimple1.Location = new System.Drawing.Point(55, 18);
-            this.hmiLanternSimple1.Name = "hmiLanternSimple1";
-            this.hmiLanternSimple1.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.MomentarySet;
-            this.hmiLanternSimple1.PLCAddressText = "";
-            this.hmiLanternSimple1.PLCAddressValue = "";
-            this.hmiLanternSimple1.PLCAddressVisible = "";
-            this.hmiLanternSimple1.Size = new System.Drawing.Size(33, 36);
-            this.hmiLanternSimple1.TabIndex = 554;
-            this.hmiLanternSimple1.Value = false;
-            // 
-            // hmiLanternSimple2
-            // 
-            this.hmiLanternSimple2.LanternBackground = System.Drawing.Color.Red;
-            this.hmiLanternSimple2.Location = new System.Drawing.Point(497, 139);
-            this.hmiLanternSimple2.Name = "hmiLanternSimple2";
-            this.hmiLanternSimple2.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.MomentarySet;
-            this.hmiLanternSimple2.PLCAddressText = "";
-            this.hmiLanternSimple2.PLCAddressValue = "";
-            this.hmiLanternSimple2.PLCAddressVisible = "";
-            this.hmiLanternSimple2.Size = new System.Drawing.Size(33, 36);
-            this.hmiLanternSimple2.TabIndex = 555;
-            this.hmiLanternSimple2.Value = false;
+            this.hmiVacuumPump1.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(151)))), ((int)(((byte)(0)))));
+            this.hmiVacuumPump1.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
+            this.hmiVacuumPump1.Color3 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.hmiVacuumPump1.Color4 = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(151)))), ((int)(((byte)(151)))));
+            this.hmiVacuumPump1.Location = new System.Drawing.Point(141, 66);
+            this.hmiVacuumPump1.Name = "hmiVacuumPump1";
+            this.hmiVacuumPump1.Size = new System.Drawing.Size(60, 111);
+            this.hmiVacuumPump1.TabIndex = 556;
+            this.hmiVacuumPump1.Text = "hmiVacuumPump1";
             // 
             // MainForm
             // 
@@ -4604,9 +4617,10 @@ namespace AdvancedScada.HMI.MainForm
         private HMILedSingle hmiLedSingle8;
         private HMIDigitalPanelMeter hmiDigitalPanelMeter2;
         private HMISimpleWebServer hmiSimpleWebServer1;
-        private Controls.HslControls.Segment.HMILedDisplay hmiLedDisplay1;
-        private Controls.HslControls.Segment.HMILedDisplay hmiLedDisplay2;
-        private Controls.HslControls.Lad.HMILanternSimple hmiLanternSimple2;
-        private Controls.HslControls.Lad.HMILanternSimple hmiLanternSimple1;
+        private Controls.HslControl.Segment.HMILedDisplay hmiLedDisplay1;
+        private Controls.HslControl.Segment.HMILedDisplay hmiLedDisplay2;
+        private Controls.HslControl.Lad.HMILanternSimple hmiLanternSimple2;
+        private Controls.HslControl.Lad.HMILanternSimple hmiLanternSimple1;
+        private Controls.HslControl.Pipe.HMIVacuumPump hmiVacuumPump1;
     }
 }

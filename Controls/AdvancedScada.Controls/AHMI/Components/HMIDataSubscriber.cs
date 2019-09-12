@@ -132,16 +132,9 @@ namespace AdvancedScada.Controls.AHMI.Components
             }
         }
 
-        private System.Collections.Concurrent.ConcurrentDictionary<string, string> SubscribedValueList = new System.Collections.Concurrent.ConcurrentDictionary<string, string>();
         //* Do this to hide it from the Property Window
         [System.ComponentModel.Browsable(false)]
-        public System.Collections.Concurrent.ConcurrentDictionary<string, string> SubscribedValues
-        {
-            get
-            {
-                return SubscribedValueList;
-            }
-        }
+        public System.Collections.Concurrent.ConcurrentDictionary<string, string> SubscribedValues { get; } = new System.Collections.Concurrent.ConcurrentDictionary<string, string>();
         #endregion
 
         #region Events
@@ -189,15 +182,13 @@ namespace AdvancedScada.Controls.AHMI.Components
 
         protected virtual void OnDataReceived(PlcComEventArgs e)
         {
-            if (DataReturned != null)
-                DataReturned(this, e);
+            DataReturned?.Invoke(this, e);
         }
 
 
         protected virtual void OnDataChanged(PlcComEventArgs e)
         {
-            if (DataChanged != null)
-                DataChanged(this, e);
+            DataChanged?.Invoke(this, e);
         }
 
         //****************************************************************************
@@ -219,14 +210,12 @@ namespace AdvancedScada.Controls.AHMI.Components
 
         protected virtual void OnSuccessfulSubscription(PlcComEventArgs e)
         {
-            if (SuccessfulSubscription != null)
-                SuccessfulSubscription(this, e);
+            SuccessfulSubscription?.Invoke(this, e);
         }
 
         protected virtual void OnComError(PlcComEventArgs e)
         {
-            if (ComError != null)
-                ComError(this, e);
+            ComError?.Invoke(this, e);
         }
         #endregion
 
@@ -255,12 +244,12 @@ namespace AdvancedScada.Controls.AHMI.Components
 
                     for (var i = 0; i < AddressList.Count(); i++)
                     {
-                        if (!SubscribedValueList.ContainsKey(AddressList[i]))
+                        if (!SubscribedValues.ContainsKey(AddressList[i]))
                         {
                             //* We must pass the address as a property name so the subscriptionHandler doesn't confuse the next address as a change for the same property
                             SubScriptions.SubscribeTo(AddressList[i], 1, PolledDataReturned, AddressList[i], 1, 0);
 
-                            SubscribedValueList.TryAdd(AddressList[i], string.Empty);
+                            SubscribedValues.TryAdd(AddressList[i], string.Empty);
 
                             PlcComEventArgs x = new PlcComEventArgs(0, string.Empty);
                             x.PlcAddress = AddressList[i];
@@ -330,7 +319,7 @@ namespace AdvancedScada.Controls.AHMI.Components
 
                 //* Case may be switched so find key based on that
                 string TargetKey = string.Empty;
-                foreach (var key in SubscribedValueList.Keys)
+                foreach (var key in SubscribedValues.Keys)
                 {
                     if (string.Compare(key, e.PlcAddress, true) == 0)
                     {
@@ -365,10 +354,10 @@ namespace AdvancedScada.Controls.AHMI.Components
 
 
 
-                if (TempString != SubscribedValueList[TargetKey])
+                if (TempString != SubscribedValues[TargetKey])
                 {
                     //* Save this value so we know if it changed without comparing the invert
-                    SubscribedValueList[e.PlcAddress] = TempString;
+                    SubscribedValues[e.PlcAddress] = TempString;
 
                     //* This event is only fired when the returned data has changed
                     OnDataChanged(e);

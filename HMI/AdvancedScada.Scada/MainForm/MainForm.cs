@@ -35,23 +35,23 @@ namespace AdvancedScada.HMI.MainForm
             try
             {
 
-                ReadServiceCallbackClient.LoadTagCollection();
-                XCollection.CURRENT_MACHINE = new Machine
-                {
-                    MachineName = Environment.MachineName,
-                    Description = "Free"
-                };
-                IPAddress[] hostAddresses = Dns.GetHostAddresses(Dns.GetHostName());
-                foreach (IPAddress iPAddress in hostAddresses)
-                {
-                    if (iPAddress.AddressFamily == AddressFamily.InterNetwork)
-                    {
-                        XCollection.CURRENT_MACHINE.IPAddress = $"{iPAddress}";
-                        break;
-                    }
-                }
-                client = DriverHelper.GetInstance().GetReadService();
-                client.Connect(XCollection.CURRENT_MACHINE);
+                //ReadServiceCallbackClient.LoadTagCollection();
+                //XCollection.CURRENT_MACHINE = new Machine
+                //{
+                //    MachineName = Environment.MachineName,
+                //    Description = "Free"
+                //};
+                //IPAddress[] hostAddresses = Dns.GetHostAddresses(Dns.GetHostName());
+                //foreach (IPAddress iPAddress in hostAddresses)
+                //{
+                //    if (iPAddress.AddressFamily == AddressFamily.InterNetwork)
+                //    {
+                //        XCollection.CURRENT_MACHINE.IPAddress = $"{iPAddress}";
+                //        break;
+                //    }
+                //}
+                //client = DriverHelper.GetInstance().GetReadService();
+                //client.Connect(XCollection.CURRENT_MACHINE);
 
             }
             catch (CommunicationException ex)

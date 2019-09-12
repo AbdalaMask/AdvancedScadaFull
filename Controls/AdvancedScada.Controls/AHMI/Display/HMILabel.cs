@@ -20,6 +20,7 @@ using AdvancedScada.Controls.AHMI.Display;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.DialogEditor;
 
 namespace AdvancedScada.Controls.AHMI.Display
 {
@@ -548,6 +549,7 @@ namespace AdvancedScada.Controls.AHMI.Display
         //*****************************************
         private string m_PLCAddressValue = string.Empty;
         [System.ComponentModel.DefaultValue(""), System.ComponentModel.Category("PLC Properties")]
+        [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressValue
         {
             get
@@ -573,6 +575,7 @@ namespace AdvancedScada.Controls.AHMI.Display
         //*****************************************
         private string m_PLCAddressVisible = string.Empty;
         [System.ComponentModel.DefaultValue(""), System.ComponentModel.Category("PLC Properties")]
+        [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressVisible
         {
             get
@@ -596,6 +599,7 @@ namespace AdvancedScada.Controls.AHMI.Display
         //*****************************************
         private string m_PLCAddressHighlight = string.Empty;
         [System.ComponentModel.DefaultValue(""), System.ComponentModel.Category("PLC Properties")]
+        [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressHighlight
         {
             get

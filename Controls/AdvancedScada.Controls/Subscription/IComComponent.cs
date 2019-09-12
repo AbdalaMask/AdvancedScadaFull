@@ -37,6 +37,7 @@ namespace AdvancedScada.Controls.Subscription
         private static List<SubscriptionInfo> SubscriptionList = new List<SubscriptionInfo>();
 
         public event EventHandler<PlcComEventArgs> DataReceived;
+        public event EventHandler<PlcComEventArgs> ComError;
         private struct SubscriptionInfo
         {
             public string Address;
@@ -286,7 +287,10 @@ namespace AdvancedScada.Controls.Subscription
                 return string.Empty;
             }
         }
-
+        protected virtual void OnComError(PlcComEventArgs e)
+        {
+            ComError?.Invoke(this, e);
+        }
         public void DataTags(Dictionary<string, Tag> Tags)
         {
             int i = 0;
@@ -297,20 +301,67 @@ namespace AdvancedScada.Controls.Subscription
 
                 foreach (var Subscript in SubscriptionList.ToList())
                 {
-                    string address = Subscript.Address;
-                    string v = $"{ Tags[address].Value}";
-                    string[] ReturnedValues = { v };
+                    try
+                    {
+                        string address = Subscript.Address;
+                        string v = $"{ Tags[address].Value}";
+                        string[] ReturnedValues = { v };
 
-                    PlcComEventArgs f = new PlcComEventArgs(ReturnedValues, Subscript.Address, 0);
-                    f.PlcAddress = Subscript.Address;
-                    f.SubscriptionID = Subscript.ID;
-                    object[] z = { this, f };
-                    Subscript.dlgCallBack(this, f);
+                        PlcComEventArgs f = new PlcComEventArgs(ReturnedValues, Subscript.Address, 0);
+                        f.PlcAddress = Subscript.Address;
+                        f.SubscriptionID = Subscript.ID;
+                        object[] z = { this, f };
+                        Subscript.dlgCallBack(this, f);
+                    }
+                    catch (Exception ex)
+                    {
+                        DisplayError("INVALID VALUE!" + ex.Message);
+                    }
+
 
 
                 }
             }
         }
+        #region Error Display
+        //********************************************************
+        //* Show an error via the text property for a short time
+        //********************************************************
+        private System.Windows.Forms.Timer ErrorDisplayTime;
+        private void DisplayError(string ErrorMessage)
+        {
+            if (ErrorDisplayTime == null)
+            {
+                ErrorDisplayTime = new System.Windows.Forms.Timer();
+                ErrorDisplayTime.Tick += ErrorDisplay_Tick;
+                ErrorDisplayTime.Interval = 5000;
+            }
+
+            //* Save the text to return to
+            if (!ErrorDisplayTime.Enabled)
+            {
+                // OriginalText = Me.Text
+            }
+
+            OnComError(new PlcComEventArgs(1, ErrorMessage));
+
+            ErrorDisplayTime.Enabled = true;
+        }
+
+
+        //**************************************************************************************
+        //* Return the text back to its original after displaying the error for a few seconds.
+        //**************************************************************************************
+        private void ErrorDisplay_Tick(object sender, System.EventArgs e)
+        {
+            if (ErrorDisplayTime != null)
+            {
+                ErrorDisplayTime.Enabled = false;
+                ErrorDisplayTime.Dispose();
+                ErrorDisplayTime = null;
+            }
+        }
+        #endregion
     }
 
 }

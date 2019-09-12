@@ -30,11 +30,19 @@ namespace Scada
         /// </summary>
         private void InitializeComponent()
         {
-            this.hmiLedDisplay2 = new AdvancedScada.Controls.HslControls.Segment.HMILedDisplay();
+            this.hmiLedDisplay2 = new AdvancedScada.Controls.HslControl.Segment.HMILedDisplay();
             this.hmiSegment7LED1 = new AdvancedScada.Controls.AHMI.Segment.HMISegment7LED();
-            this.hmiVacuumPump1 = new AdvancedScada.Controls.HslControls.Pipe.HMIVacuumPump();
-            this.hmiPumpOne1 = new AdvancedScada.Controls.HslControls.Motor.HMIPumpOne();
-            this.hmiLedDisplay1 = new AdvancedScada.Controls.HslControls.Segment.HMILedDisplay();
+            this.hmiVacuumPump1 = new AdvancedScada.Controls.HslControl.Pipe.HMIVacuumPump();
+            this.hmiPumpOne1 = new AdvancedScada.Controls.HslControl.Motor.HMIPumpOne();
+            this.hmiLedDisplay1 = new AdvancedScada.Controls.HslControl.Segment.HMILedDisplay();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.hmiSevenSegment1 = new AdvancedScada.Controls.AHMI.SevenSegment.HMISevenSegment();
+            this.hmiSquareIlluminatedButton1 = new AdvancedScada.Controls.AHMI.ButtonAll.HMISquareIlluminatedButton();
+            this.hmiGenericTCPClient1 = new AdvancedScada.Controls.AHMI.Components.SocketClient.HMIGenericTCPClient();
+            this.hmiLabel1 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hmiSevenSegment1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hmiGenericTCPClient1)).BeginInit();
             this.SuspendLayout();
             // 
             // hmiLedDisplay2
@@ -139,7 +147,7 @@ namespace Scada
             this.hmiVacuumPump1.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.hmiVacuumPump1.Color3 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.hmiVacuumPump1.Color4 = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(151)))), ((int)(((byte)(151)))));
-            this.hmiVacuumPump1.Location = new System.Drawing.Point(401, 286);
+            this.hmiVacuumPump1.Location = new System.Drawing.Point(170, 257);
             this.hmiVacuumPump1.Name = "hmiVacuumPump1";
             this.hmiVacuumPump1.Size = new System.Drawing.Size(102, 148);
             this.hmiVacuumPump1.TabIndex = 3;
@@ -194,11 +202,118 @@ namespace Scada
             this.hmiLedDisplay1.TabIndex = 1;
             this.hmiLedDisplay1.Value = "66";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::AdvancedScada.HMI.Properties.Resources.DigitalPanelMeterR1;
+            this.pictureBox1.Location = new System.Drawing.Point(433, 122);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(323, 145);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
+            // hmiSevenSegment1
+            // 
+            this.hmiSevenSegment1.BackColor = System.Drawing.Color.Transparent;
+            this.hmiSevenSegment1.BackColour_1 = System.Drawing.Color.Black;
+            this.hmiSevenSegment1.BackColour_2 = System.Drawing.Color.DimGray;
+            this.hmiSevenSegment1.BevelRate = 0.5F;
+            this.hmiSevenSegment1.FadedColour = System.Drawing.Color.DimGray;
+            this.hmiSevenSegment1.ForeColor = System.Drawing.Color.Yellow;
+            this.hmiSevenSegment1.HighlightOpaque = ((byte)(50));
+            this.hmiSevenSegment1.KeypadFontColor = System.Drawing.Color.WhiteSmoke;
+            this.hmiSevenSegment1.KeypadMaxValue = 0D;
+            this.hmiSevenSegment1.KeypadMinValue = 0D;
+            this.hmiSevenSegment1.KeypadScaleFactor = 1D;
+            this.hmiSevenSegment1.KeypadText = null;
+            this.hmiSevenSegment1.KeypadWidth = 300;
+            this.hmiSevenSegment1.Location = new System.Drawing.Point(465, 156);
+            this.hmiSevenSegment1.Name = "hmiSevenSegment1";
+            this.hmiSevenSegment1.PLCAddressForecolorHighLimitValue = null;
+            this.hmiSevenSegment1.PLCAddressForecolorLowLimitValue = null;
+            this.hmiSevenSegment1.PLCAddressKeypad = "CH2.PLC1.DataD.TAG00018";
+            this.hmiSevenSegment1.PLCAddressText = "CH2.PLC1.DataD.TAG00018";
+            this.hmiSevenSegment1.PLCAddressValue = null;
+            this.hmiSevenSegment1.PLCAddressVisible = "";
+            this.hmiSevenSegment1.Size = new System.Drawing.Size(258, 84);
+            this.hmiSevenSegment1.TabIndex = 8;
+            this.hmiSevenSegment1.Text = "0";
+            this.hmiSevenSegment1.TextAlignment = AdvancedScada.Controls.AHMI.SevenSegment.HMISevenSegment.Alignment.Right;
+            this.hmiSevenSegment1.TotalCharCount = 6;
+            // 
+            // hmiSquareIlluminatedButton1
+            // 
+            this.hmiSquareIlluminatedButton1.LightColor = MfgControl.AdvancedHMI.Controls.SquareIlluminatedButton.LightColors.Green;
+            this.hmiSquareIlluminatedButton1.Location = new System.Drawing.Point(433, 273);
+            this.hmiSquareIlluminatedButton1.Name = "hmiSquareIlluminatedButton1";
+            this.hmiSquareIlluminatedButton1.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.MomentarySet;
+            this.hmiSquareIlluminatedButton1.PLCAddressClick = "";
+            this.hmiSquareIlluminatedButton1.PLCAddressText = "";
+            this.hmiSquareIlluminatedButton1.PLCAddressValue = "";
+            this.hmiSquareIlluminatedButton1.PLCAddressVisible = "";
+            this.hmiSquareIlluminatedButton1.Size = new System.Drawing.Size(212, 69);
+            this.hmiSquareIlluminatedButton1.TabIndex = 9;
+            this.hmiSquareIlluminatedButton1.Text = "hmiSquareIlluminatedButton1";
+            this.hmiSquareIlluminatedButton1.Value = false;
+            // 
+            // hmiGenericTCPClient1
+            // 
+            this.hmiGenericTCPClient1.AutoConnect = true;
+            this.hmiGenericTCPClient1.IPAddress = "192.168.0.1";
+            this.hmiGenericTCPClient1.Port = ((ushort)(23));
+            this.hmiGenericTCPClient1.ProtocolType = System.Net.Sockets.ProtocolType.Tcp;
+            this.hmiGenericTCPClient1.TerminatingCharacters = "\\r";
+            // 
+            // hmiLabel1
+            // 
+            this.hmiLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.hmiLabel1.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.hmiLabel1.DisplayAsTime = false;
+            this.hmiLabel1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hmiLabel1.ForeColor = System.Drawing.Color.Black;
+            this.hmiLabel1.Highlight = false;
+            this.hmiLabel1.HighlightColor = System.Drawing.Color.Red;
+            this.hmiLabel1.HighlightForeColor = System.Drawing.Color.White;
+            this.hmiLabel1.HighlightKeyCharacter = "!";
+            this.hmiLabel1.InterpretValueAsBCD = false;
+            this.hmiLabel1.KeypadAlphanumeric = false;
+            this.hmiLabel1.KeypadAlphaNumeric = false;
+            this.hmiLabel1.KeypadFont = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hmiLabel1.KeypadFontColor = System.Drawing.Color.WhiteSmoke;
+            this.hmiLabel1.KeypadMaxValue = 0D;
+            this.hmiLabel1.KeypadMinValue = 0D;
+            this.hmiLabel1.KeypadScaleFactor = 1D;
+            this.hmiLabel1.KeypadShowCurrentValue = false;
+            this.hmiLabel1.KeypadText = null;
+            this.hmiLabel1.KeypadWidth = 300;
+            this.hmiLabel1.Location = new System.Drawing.Point(441, 360);
+            this.hmiLabel1.Name = "hmiLabel1";
+            this.hmiLabel1.NumericFormat = null;
+            this.hmiLabel1.PLCAddressKeypad = "CH2.PLC1.DataD.TAG00018";
+            this.hmiLabel1.PLCAddressValue = "CH2.PLC1.DataD.TAG00018";
+            this.hmiLabel1.PollRate = 0;
+            this.hmiLabel1.Size = new System.Drawing.Size(203, 55);
+            this.hmiLabel1.TabIndex = 10;
+            this.hmiLabel1.Text = "BasicLabel";
+            this.hmiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.hmiLabel1.Value = "BasicLabel";
+            this.hmiLabel1.ValueLeftPadCharacter = ' ';
+            this.hmiLabel1.ValueLeftPadLength = 0;
+            this.hmiLabel1.ValuePrefix = null;
+            this.hmiLabel1.ValueScaleFactor = 1D;
+            this.hmiLabel1.ValueSuffix = null;
+            this.hmiLabel1.ValueToSubtractFrom = 0F;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(836, 446);
+            this.ClientSize = new System.Drawing.Size(836, 559);
+            this.Controls.Add(this.hmiLabel1);
+            this.Controls.Add(this.hmiSquareIlluminatedButton1);
+            this.Controls.Add(this.hmiSevenSegment1);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.hmiLedDisplay2);
             this.Controls.Add(this.hmiSegment7LED1);
             this.Controls.Add(this.hmiVacuumPump1);
@@ -206,16 +321,24 @@ namespace Scada
             this.Controls.Add(this.hmiLedDisplay1);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hmiSevenSegment1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hmiGenericTCPClient1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private AdvancedScada.Controls.HslControls.Segment.HMILedDisplay hmiLedDisplay1;
-        private AdvancedScada.Controls.HslControls.Motor.HMIPumpOne hmiPumpOne1;
-        private AdvancedScada.Controls.HslControls.Pipe.HMIVacuumPump hmiVacuumPump1;
+        private AdvancedScada.Controls.HslControl.Segment.HMILedDisplay hmiLedDisplay1;
+        private AdvancedScada.Controls.HslControl.Motor.HMIPumpOne hmiPumpOne1;
+        private AdvancedScada.Controls.HslControl.Pipe.HMIVacuumPump hmiVacuumPump1;
         private AdvancedScada.Controls.AHMI.Segment.HMISegment7LED hmiSegment7LED1;
-        private AdvancedScada.Controls.HslControls.Segment.HMILedDisplay hmiLedDisplay2;
+        private AdvancedScada.Controls.HslControl.Segment.HMILedDisplay hmiLedDisplay2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private AdvancedScada.Controls.AHMI.SevenSegment.HMISevenSegment hmiSevenSegment1;
+        private AdvancedScada.Controls.AHMI.ButtonAll.HMISquareIlluminatedButton hmiSquareIlluminatedButton1;
+        private AdvancedScada.Controls.AHMI.Components.SocketClient.HMIGenericTCPClient hmiGenericTCPClient1;
+        private AdvancedScada.Controls.AHMI.Display.HMILabel hmiLabel1;
     }
 }
 

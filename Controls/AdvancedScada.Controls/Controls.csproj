@@ -138,7 +138,7 @@
     <Compile Include="AHMI\ButtonAll\HMIbutton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="AHMI\ButtonAll\HMICheckBox.cs">
+    <Compile Include="AHMI\Controls\HMICheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="AHMI\ButtonAll\HMISquareIlluminatedButton.cs">
@@ -231,58 +231,58 @@
     <Compile Include="AHMI\ProcessAll\HMIProcessIndicator.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="HslControls\ButtonAll\HMIBasicButtonFlag.cs">
+    <Compile Include="HslControl\ButtonAll\HMIBasicButtonFlag.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\ButtonAll\HMIbutton.cs">
+    <Compile Include="HslControl\ButtonAll\HMIbutton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\Conveyer\HMIConveyer.cs">
+    <Compile Include="HslControl\Conveyer\HMIConveyer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\Conveyer\HMIConveyerRollers.cs">
+    <Compile Include="HslControl\Conveyer\HMIConveyerRollers.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\Gauge\HMIGauge.cs">
+    <Compile Include="HslControl\Gauge\HMIGauge.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\Lad\HMILanternSimple.cs">
+    <Compile Include="HslControl\Lad\HMILanternSimple.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\Motor\HMIMotor.cs">
+    <Compile Include="HslControl\Motor\HMIMotor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\Motor\HMIPumpOne.cs">
+    <Compile Include="HslControl\Motor\HMIPumpOne.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\Pipe\HMIPipeLine.cs">
+    <Compile Include="HslControl\Pipe\HMIPipeLine.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\Pipe\HMIVacuumPump.cs">
+    <Compile Include="HslControl\Pipe\HMIVacuumPump.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\ProgressBar\HMIProcessLevel.cs">
+    <Compile Include="HslControl\ProgressBar\HMIProcessLevel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\ProgressBar\HMIProgressLine.cs">
+    <Compile Include="HslControl\ProgressBar\HMIProgressLine.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\Segment\HMILedDisplay.cs">
+    <Compile Include="HslControl\Segment\HMILedDisplay.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\SelectorSwitch\HMISwitch.cs">
+    <Compile Include="HslControl\SelectorSwitch\HMISwitch.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\TankAll\HMIBottle.cs">
+    <Compile Include="HslControl\TankAll\HMIBottle.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\TankAll\HMIClassifier.cs">
+    <Compile Include="HslControl\TankAll\HMIClassifier.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\Thermometer\HMIThermometer.cs">
+    <Compile Include="HslControl\Thermometer\HMIThermometer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HslControls\Valves\HMIValves.cs">
+    <Compile Include="HslControl\Valves\HMIValves.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="AHMI\SevenSegment\HMISevenSegment.cs">
@@ -325,9 +325,6 @@
     <Compile Include="AHMI\SelectorSwitch\HMISelectorSwitch3Pos.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="AHMI\Components\SocketClient\GenericTCPEventArgs.cs" />
-    <Compile Include="AHMI\Components\SocketClient\MessageEventArgs.cs" />
-    <Compile Include="AHMI\Components\SocketClient\SocketStateObject.cs" />
     <Compile Include="Subscription\IComComponent.cs" />
     <Compile Include="Subscription\SubscriptionDetail.cs" />
     <Compile Include="Subscription\SubscriptionHandler.cs" />
@@ -349,16 +346,16 @@
     <EmbeddedResource Include="Alarm\HMIAlarmMan.resx">
       <DependentUpon>HMIAlarmMan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HslControls\Conveyer\HMIConveyer.resx">
+    <EmbeddedResource Include="HslControl\Conveyer\HMIConveyer.resx">
       <DependentUpon>HMIConveyer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HslControls\Conveyer\HMIConveyerRollers.resx">
+    <EmbeddedResource Include="HslControl\Conveyer\HMIConveyerRollers.resx">
       <DependentUpon>HMIConveyerRollers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HslControls\Gauge\HMIGauge.resx">
+    <EmbeddedResource Include="HslControl\Gauge\HMIGauge.resx">
       <DependentUpon>HMIGauge.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HslControls\Pipe\HMIPipeLine.resx">
+    <EmbeddedResource Include="HslControl\Pipe\HMIPipeLine.resx">
       <DependentUpon>HMIPipeLine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
