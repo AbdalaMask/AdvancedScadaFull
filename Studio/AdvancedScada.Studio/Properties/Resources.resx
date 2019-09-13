@@ -133,14 +133,14 @@
   <data name="Paste_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Paste_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Example_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Example_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Choose" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Choose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AddDevice" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AddDevice.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TagManager" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TagManager.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Convert_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Convert_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -156,9 +156,6 @@
   </data>
   <data name="Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="38" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\38.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Copy_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Copy_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -180,9 +177,6 @@
   </data>
   <data name="Tag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Tag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="IconSetRedToBlack4_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconSetRedToBlack4_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_38" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\38.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -226,8 +220,14 @@
   <data name="Image_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Image_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AddDataBlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddDataBlock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Panasonic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Panasonic.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Database_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Database_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AddGoup" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AddGoup.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -250,20 +250,23 @@
   <data name="ExportToXLS_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ExportToXLS_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Database_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Database_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Example_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Example_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Channel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Channel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BottomCenterHorizontalOutside_32x321" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BottomCenterHorizontalOutside_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Open" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TagManager" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TagManager.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="IconSetRedToBlack4_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IconSetRedToBlack4_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AddDataBlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AddDataBlock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="38" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\38.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="OPC" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OPC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -271,7 +274,7 @@
   <data name="Modbus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Modbus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BottomCenterHorizontalOutside_32x321" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BottomCenterHorizontalOutside_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="IconTagManager" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IconTagManager.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

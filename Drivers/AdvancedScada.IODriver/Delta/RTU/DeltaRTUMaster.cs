@@ -1,6 +1,5 @@
 ﻿using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
-using HslCommunication;
 using HslCommunication.ModBus;
 using System;
 using System.Data;
@@ -21,7 +20,7 @@ namespace AdvancedScada.IODriver.Delta.RTU
         }
 
         private ModbusRtu busRtuClient = null;
-      
+
         public bool Connection()
         {
 

@@ -15,7 +15,7 @@ namespace AdvancedScada.DriverBase
             {
                 Console.WriteLine(DateTime.Now.ToString("[HH:mm:ss] ") + $"[{address}] Read Failed {Environment.NewLine}Reason：{result.ToMessageShowString()}");
             }
-            
+
         }
 
 
@@ -49,7 +49,7 @@ namespace AdvancedScada.DriverBase
             catch (Exception ex)
             {
                 //  EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-                throw ex;
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -72,8 +72,8 @@ namespace AdvancedScada.DriverBase
             }
             catch (Exception ex)
             {
-                
-                throw ex;
+
+                Console.WriteLine(ex.Message);
             }
             return resultDate;
         }

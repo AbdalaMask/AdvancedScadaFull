@@ -410,6 +410,17 @@ namespace AdvancedScada.Studio
                     }
                 }
             }
+            else if (e.Item.Text == "ServerUtils")
+            {
+                foreach (Form form in Application.OpenForms)
+                {
+                    if (form.GetType() == typeof(FormServerUtils))
+                    {
+                        
+                        Application.ExitThread();
+                    }
+                }
+            }
 
 
         }

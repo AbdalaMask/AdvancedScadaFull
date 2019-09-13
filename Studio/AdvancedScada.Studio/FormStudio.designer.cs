@@ -576,7 +576,7 @@
             this.ThisNotificationPopup.ContentFont = new System.Drawing.Font("Tahoma", 8F);
             this.ThisNotificationPopup.ContentText = null;
             this.ThisNotificationPopup.Delay = 2000;
-            this.ThisNotificationPopup.Image = global::AdvancedScada.Studio.Properties.Resources.Convert_32x32;
+            this.ThisNotificationPopup.Image = global::AdvancedScada.Studio.Properties.Resources.IconTagManager;
             this.ThisNotificationPopup.ImagePadding = new System.Windows.Forms.Padding(5);
             this.ThisNotificationPopup.IsRightToLeft = false;
             this.ThisNotificationPopup.OptionsMenu = null;
@@ -593,6 +593,7 @@
             this.Controls.Add(this.kryptonPanel);
             this.Controls.Add(this.kryptonRibbon1);
             this.Controls.Add(this.toolStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormStudio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

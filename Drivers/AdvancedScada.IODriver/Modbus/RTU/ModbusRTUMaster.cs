@@ -1,9 +1,6 @@
 ﻿using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Devices;
-using HslCommunication;
 using HslCommunication.ModBus;
 using System;
-using System.Data;
 using System.IO.Ports;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.IODriver.Modbus.RTU
@@ -21,7 +18,7 @@ namespace AdvancedScada.IODriver.Modbus.RTU
         }
 
         private ModbusRtu busRtuClient = null;
-        
+
         public bool Connection()
         {
 
@@ -173,6 +170,6 @@ namespace AdvancedScada.IODriver.Modbus.RTU
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
 
-       
+
     }
 }

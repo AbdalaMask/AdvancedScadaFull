@@ -1,10 +1,8 @@
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Comm;
-using AdvancedScada.DriverBase.Devices;
 using HslCommunication;
 using HslCommunication.Profinet.LSIS;
 using System;
-using System.Data;
 using System.Net.Sockets;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.IODriver.LSIS.FENET
@@ -103,7 +101,7 @@ namespace AdvancedScada.IODriver.LSIS.FENET
         }
 
         #endregion
-       
+
         public byte[] BuildReadByte(byte station, string address, ushort length)
         {
             var frame = DemoUtils.BulkReadRenderResult(fastEnet, address, length);
@@ -223,6 +221,6 @@ namespace AdvancedScada.IODriver.LSIS.FENET
             throw new NotImplementedException();
         }
 
-      
+
     }
 }

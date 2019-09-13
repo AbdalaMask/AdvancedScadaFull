@@ -1,10 +1,7 @@
 ﻿using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Comm;
-using AdvancedScada.DriverBase.Devices;
-using HslCommunication;
 using HslCommunication.Profinet.LSIS;
 using System;
-using System.Data;
 using System.IO.Ports;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.IODriver.LSIS.Cnet
@@ -22,7 +19,7 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
             Station = (byte)slaveId;
             this.serialPort = serialPort;
         }
-       
+
         #region IReadWritePLC
         public bool IsConnected { get; set; } = false;
         public byte Station { get; set; }
@@ -207,6 +204,6 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
             throw new NotImplementedException();
         }
 
-      
+
     }
 }

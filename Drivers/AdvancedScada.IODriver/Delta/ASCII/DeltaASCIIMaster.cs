@@ -1,9 +1,6 @@
 ﻿using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Devices;
-using HslCommunication;
 using HslCommunication.ModBus;
 using System;
-using System.Data;
 using System.IO.Ports;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.IODriver.Delta.ASCII
@@ -21,7 +18,7 @@ namespace AdvancedScada.IODriver.Delta.ASCII
         }
 
         private ModbusAscii busAsciiClient = null;
-        
+
         public bool Connection()
         {
 
@@ -42,14 +39,14 @@ namespace AdvancedScada.IODriver.Delta.ASCII
                     sp.Parity = serialPort.Parity;
                 });
                 busAsciiClient.Open();
-                return  true;
+                return true;
 
 
             }
             catch (TimeoutException ex)
             {
 
-               
+
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
                 return false;
             }
@@ -179,8 +176,8 @@ namespace AdvancedScada.IODriver.Delta.ASCII
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
 
-       
 
-      
+
+
     }
 }

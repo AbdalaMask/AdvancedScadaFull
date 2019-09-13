@@ -1,9 +1,7 @@
 ﻿using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Devices;
 using HslCommunication;
 using HslCommunication.ModBus;
 using System;
-using System.Data;
 using System.Net.Sockets;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.IODriver.Delta.TCP
@@ -28,7 +26,7 @@ namespace AdvancedScada.IODriver.Delta.TCP
 
         }
 
-        
+
         public bool Connection()
         {
 
@@ -196,6 +194,6 @@ namespace AdvancedScada.IODriver.Delta.TCP
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
 
-        
+
     }
 }

@@ -1,9 +1,7 @@
 ﻿using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Devices;
 using HslCommunication;
 using HslCommunication.ModBus;
 using System;
-using System.Data;
 using System.Net.Sockets;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.IODriver.Modbus.TCP
@@ -28,7 +26,7 @@ namespace AdvancedScada.IODriver.Modbus.TCP
 
         }
 
-        
+
         public bool Connection()
         {
 
@@ -140,7 +138,7 @@ namespace AdvancedScada.IODriver.Modbus.TCP
 
         public TValue[] Read<TValue>(string address, ushort length)
         {
-           
+
 
             if (typeof(TValue) == typeof(bool))
             {
@@ -200,6 +198,6 @@ namespace AdvancedScada.IODriver.Modbus.TCP
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
 
-       
+
     }
 }

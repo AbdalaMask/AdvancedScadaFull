@@ -265,7 +265,9 @@ namespace AdvancedScada.Controls.Subscription
                         }
                     }
                 }
-                AdvancedScada.Controls.Utilities.client.Disconnect(XCollection.CURRENT_MACHINE);
+                AdvancedScada.Controls.Utilities.client?.Disconnect(XCollection.CURRENT_MACHINE);
+                AdvancedScada.Controls.Utilities.Dispose();
+
             }
             catch (Exception ex)
             {

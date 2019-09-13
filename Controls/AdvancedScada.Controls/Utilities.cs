@@ -90,6 +90,9 @@ namespace AdvancedScada.Controls
             }
         }
 
-
-    }
+        public static void Dispose()
+        {
+            client = null;
+        }
+  }
 }

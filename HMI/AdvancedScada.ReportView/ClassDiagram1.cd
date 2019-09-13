@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AdvancedScada.ReportViewer.Batchs" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAwAAABJABAAAQAAAAAgCQBgAAAAAAAEANBA=</HashCode>
+      <FileName>Batchs.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdvancedScada.ReportViewer.FRM_Rport_Show" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEAEUAAACAgABAAIACAaAADQAAEAAAAFaRoUABIAAA=</HashCode>
+      <FileName>ReportViewer\FRM\FRM_Rport_Show.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdvancedScada.ReportViewer.FRM_Rpot_All" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>8EwAAEAAFCAgABBAIACgBAAiABAgEAQACCRAAiiIIAA=</HashCode>
+      <FileName>ReportViewer\FRM\FRM_Rpot_All.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdvancedScada.ReportViewer.FrmViwer" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAACAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>ReportViewer\FRM\FrmViwer.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdvancedScada.ReportViewer.listitem" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAEAAAAAAAAAAAAACAIAAAAAAAAAAA=</HashCode>
+      <FileName>ReportViewer\FRM\listitem.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdvancedScada.ReportViewer.GroupByGrid" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAIAAAAA=</HashCode>
+      <FileName>ReportViewer\GroupByGrid.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdvancedScada.ReportViewer.My.MySettings" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Module Name="AdvancedScada.ReportViewer.My.Resources.Resources" Collapsed="true">
+    <Position X="2.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Module>
+  <Module Name="AdvancedScada.ReportViewer.My.MySettingsProperty" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Module>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,7 +1,7 @@
 ﻿using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.DriverBase.Devices;
- using AdvancedScada.IODriver.Delta.ASCII;
+using AdvancedScada.IODriver.Delta.ASCII;
 using AdvancedScada.IODriver.Delta.RTU;
 using AdvancedScada.IODriver.Delta.TCP;
 using AdvancedScada.IODriver.LSIS.Cnet;
@@ -9,9 +9,8 @@ using AdvancedScada.IODriver.LSIS.FENET;
 using AdvancedScada.IODriver.Modbus.ASCII;
 using AdvancedScada.IODriver.Modbus.RTU;
 using AdvancedScada.IODriver.Modbus.TCP;
- using System;
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO.Ports;
 using System.Linq;
 using System.Net.Sockets;
@@ -35,7 +34,7 @@ namespace AdvancedScada.IODriver
         private static Dictionary<string, LS_CNET> cnet = null;
         private static Dictionary<string, LS_FENET> FENET = null;
         //==================================Panasonic===================================================
-       
+
 
         private static int COUNTER;
         private static bool IsConnected;
@@ -60,7 +59,7 @@ namespace AdvancedScada.IODriver
                 cnet = new Dictionary<string, LS_CNET>();
                 FENET = new Dictionary<string, LS_FENET>();
                 //=================================================================
-              
+
 
                 Channels = chns;
                 if (Channels == null) return;
@@ -84,11 +83,11 @@ namespace AdvancedScada.IODriver
                                             switch (dis.Mode)
                                             {
                                                 case "RTU":
-                                                     DriverAdapter = new DeltaRTUMaster(dv.SlaveId, sp);
+                                                    DriverAdapter = new DeltaRTUMaster(dv.SlaveId, sp);
                                                     Deltartu.Add(ch.ChannelName, (DeltaRTUMaster)DriverAdapter);
                                                     break;
                                                 case "ASCII":
-                                                     DriverAdapter = new DeltaASCIIMaster(dv.SlaveId, sp);
+                                                    DriverAdapter = new DeltaASCIIMaster(dv.SlaveId, sp);
                                                     Deltaascii.Add(ch.ChannelName, (DeltaASCIIMaster)DriverAdapter);
                                                     break;
                                             }
@@ -97,20 +96,20 @@ namespace AdvancedScada.IODriver
                                             switch (dis.Mode)
                                             {
                                                 case "RTU":
-                                                     DriverAdapter = new ModbusRTUMaster(dv.SlaveId, sp);
+                                                    DriverAdapter = new ModbusRTUMaster(dv.SlaveId, sp);
                                                     rtu.Add(ch.ChannelName, (ModbusRTUMaster)DriverAdapter);
                                                     break;
                                                 case "ASCII":
-                                                     DriverAdapter = new ModbusASCIIMaster(dv.SlaveId, sp);
+                                                    DriverAdapter = new ModbusASCIIMaster(dv.SlaveId, sp);
                                                     ascii.Add(ch.ChannelName, (ModbusASCIIMaster)DriverAdapter);
                                                     break;
                                             }
                                             break;
                                         case "LSIS":
-                                             DriverAdapter = new LS_CNET(dv.SlaveId, sp);
+                                            DriverAdapter = new LS_CNET(dv.SlaveId, sp);
                                             cnet.Add(ch.ChannelName, (LS_CNET)DriverAdapter);
                                             break;
-                                       
+
                                         default:
                                             break;
                                     }
@@ -120,30 +119,30 @@ namespace AdvancedScada.IODriver
                                     switch (ch.ChannelTypes)
                                     {
                                         case "Delta":
-                                             DriverAdapter = new DeltaTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
+                                            DriverAdapter = new DeltaTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
                                             Deltambe.Add(ch.ChannelName, (DeltaTCPMaster)DriverAdapter);
                                             break;
                                         case "Modbus":
-                                             DriverAdapter = new ModbusTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
+                                            DriverAdapter = new ModbusTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
                                             mbe.Add(ch.ChannelName, (ModbusTCPMaster)DriverAdapter);
                                             break;
                                         case "LSIS":
-                                             DriverAdapter = new LS_FENET(die.IPAddress, die.Port, die.Slot);
+                                            DriverAdapter = new LS_FENET(die.IPAddress, die.Port, die.Slot);
                                             FENET.Add(ch.ChannelName, (LS_FENET)DriverAdapter);
                                             break;
-                                    
+
                                         default:
                                             break;
                                     }
                                     break;
 
                             }
-                         
+
                         }
                         catch (Exception ex)
                         {
                             Console.WriteLine(ex.Message);
-                           
+
                         }
 
 
@@ -168,7 +167,7 @@ namespace AdvancedScada.IODriver
             }
         }
 
-       
+
         private static Thread[] threads;
         public void Connect()
         {
@@ -230,20 +229,20 @@ namespace AdvancedScada.IODriver
                                         break;
                                 }
                                 break;
-                        
+
 
                             default:
                                 break;
                         }
 
                         //======Connection to PLC==================================
-                         DriverAdapter.Connection();
+                        DriverAdapter.Connection();
 
                         while (IsConnected)
                         {
                             foreach (Device dv in ch.Devices)
                             {
-                              
+
                                 foreach (DataBlock db in dv.DataBlocks)
                                 {
                                     if (!IsConnected) break;
@@ -258,13 +257,13 @@ namespace AdvancedScada.IODriver
                                         case "LSIS":
                                             SendPackageLSIS(DriverAdapter, ch, dv, db);
                                             break;
-                                    
+
                                         default:
                                             break;
                                     }
 
                                 }
-                           
+
                             }
                         }
 
@@ -326,9 +325,9 @@ namespace AdvancedScada.IODriver
                             if (IntRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < IntRs.Length; j++)
                             {
-                                
-                                    db.Tags[j].Value = IntRs[j];
-                                 
+
+                                db.Tags[j].Value = IntRs[j];
+
 
                                 db.Tags[j].Timestamp = DateTime.Now;
                             }
@@ -358,9 +357,9 @@ namespace AdvancedScada.IODriver
                             if (wdRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < wdRs.Length; j++)
                             {
-                                
-                                    db.Tags[j].Value = wdRs[j];
-                                 
+
+                                db.Tags[j].Value = wdRs[j];
+
                                 db.Tags[j].Timestamp = DateTime.Now;
                             }
                         }
@@ -407,7 +406,7 @@ namespace AdvancedScada.IODriver
                 }
 
             }
-            
+
             catch (Exception ex)
             {
                 Disconnect();
@@ -447,9 +446,9 @@ namespace AdvancedScada.IODriver
                             if (IntRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < IntRs.Length; j++)
                             {
-                                
-                                    db.Tags[j].Value = IntRs[j];
-                                 
+
+                                db.Tags[j].Value = IntRs[j];
+
 
                                 db.Tags[j].Timestamp = DateTime.Now;
                             }
@@ -479,9 +478,9 @@ namespace AdvancedScada.IODriver
                             if (wdRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < wdRs.Length; j++)
                             {
-                               
-                                    db.Tags[j].Value = wdRs[j];
-                                 
+
+                                db.Tags[j].Value = wdRs[j];
+
                                 db.Tags[j].Timestamp = DateTime.Now;
                             }
                         }
@@ -528,7 +527,7 @@ namespace AdvancedScada.IODriver
                 }
 
             }
-            
+
             catch (Exception ex)
             {
                 Disconnect();
@@ -544,23 +543,23 @@ namespace AdvancedScada.IODriver
                 {
                     case "Bit":
 
-                       
+
                         lock (ILSIS)
                         {
-                        bool[]  bitArys = ILSIS.Read<bool>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
-                        if (bitArys == null || bitArys.Length == 0) return;
+                            bool[] bitArys = ILSIS.Read<bool>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                            if (bitArys == null || bitArys.Length == 0) return;
 
-                       
-                        if (bitArys.Length > db.Tags.Count)
-                            return;
-                        for (var j = 0; j <= db.Tags.Count - 1; j++)
-                        {
-                            db.Tags[j].Value = bitArys[j];
-                          
-                            db.Tags[j].Timestamp = DateTime.Now;
+
+                            if (bitArys.Length > db.Tags.Count)
+                                return;
+                            for (var j = 0; j <= db.Tags.Count - 1; j++)
+                            {
+                                db.Tags[j].Value = bitArys[j];
+
+                                db.Tags[j].Timestamp = DateTime.Now;
+                            }
                         }
-                        }
-                       
+
 
 
                         break;
@@ -572,9 +571,9 @@ namespace AdvancedScada.IODriver
                             if (IntRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < IntRs.Length; j++)
                             {
-                                
-                                    db.Tags[j].Value = IntRs[j];
-                                
+
+                                db.Tags[j].Value = IntRs[j];
+
 
                                 db.Tags[j].Timestamp = DateTime.Now;
                             }
@@ -599,11 +598,11 @@ namespace AdvancedScada.IODriver
                         {
                             var wdRs = ILSIS.Read<Int16>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
                             if (wdRs == null) return;
-                             for (int j = 0; j < db.Tags.Count; j++)
+                            for (int j = 0; j < db.Tags.Count; j++)
                             {
-                                 
-                                    db.Tags[j].Value = wdRs[j];
-                               
+
+                                db.Tags[j].Value = wdRs[j];
+
                                 db.Tags[j].Timestamp = DateTime.Now;
                             }
                         }
@@ -725,7 +724,7 @@ namespace AdvancedScada.IODriver
                                             break;
                                     }
                                     break;
-                                
+
                                 default:
                                     break;
                             }
