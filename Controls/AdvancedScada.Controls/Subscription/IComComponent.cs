@@ -1,4 +1,4 @@
-﻿ 
+﻿
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,11 +18,11 @@ using AdvancedScada;
 using AdvancedScada.BaseService.Client;
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Comm;
- 
+
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IBaseService;
 using AdvancedScada.IBaseService.Common;
- 
+
 using static AdvancedScada.IBaseService.Common.XCollection;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada;
@@ -57,7 +57,7 @@ namespace AdvancedScada.Controls.Subscription
         //***************************************************************
         private void CreateDLLInstance()
         {
-            if ( AdvancedScada.Controls.Utilities.client == null)
+            if (AdvancedScada.Controls.Utilities.client == null)
             {
                 try
                 {
@@ -79,8 +79,8 @@ namespace AdvancedScada.Controls.Subscription
                             break;
                         }
                     }
-                     AdvancedScada.Controls.Utilities.client = DriverHelper.GetInstance().GetReadService(ic);
-                     AdvancedScada.Controls.Utilities.client.Connect(XCollection.CURRENT_MACHINE);
+                    AdvancedScada.Controls.Utilities.client = DriverHelper.GetInstance().GetReadService(ic);
+                    AdvancedScada.Controls.Utilities.client.Connect(XCollection.CURRENT_MACHINE);
 
 
                 }
@@ -138,7 +138,10 @@ namespace AdvancedScada.Controls.Subscription
 
         public int Subscribe(string plcAddress, short numberOfElements, int pollRate, EventHandler<PlcComEventArgs> callback)
         {
-            if ( AdvancedScada.Controls.Utilities.client == null)
+            SubscriptionInfo tmpPA = new SubscriptionInfo(); 
+            try
+            {
+               if (AdvancedScada.Controls.Utilities.client == null)
             {
                 CreateDLLInstance();
             }
@@ -179,7 +182,7 @@ namespace AdvancedScada.Controls.Subscription
                 //* The ID is used as a reference for removing polled addresses
                 CurrentID += 1;
 
-                SubscriptionInfo tmpPA = new SubscriptionInfo();
+                tmpPA = new SubscriptionInfo();
 
                 tmpPA.PollRate = pollRate;
 
@@ -199,9 +202,16 @@ namespace AdvancedScada.Controls.Subscription
                 SubscriptionList.Sort(SortPolledAddresses);
 
 
-                return tmpPA.ID;
+               
             }
+            }
+            catch (Exception ex)
+            {
 
+                OnComError(new PlcComEventArgs(1, "INVALID VALUE!" + ex.Message));
+            }
+          
+          return tmpPA.ID;
 
         }
         //***************************************************************
@@ -225,68 +235,48 @@ namespace AdvancedScada.Controls.Subscription
         }
         public int Unsubscribe(int id)
         {
-            int i = 0;
-            while (i < SubscriptionList.Count && SubscriptionList[i].ID != id)
+            try
             {
-                i += 1;
-            }
-
-            if (i < SubscriptionList.Count)
-            {
-                int PollRate = SubscriptionList[i].PollRate;
-                SubscriptionList.RemoveAt(i);
-                if (SubscriptionList.Count == 0)
+                int i = 0;
+                while (i < SubscriptionList.Count && SubscriptionList[i].ID != id)
                 {
+                    i += 1;
                 }
-                else
+
+                if (i < SubscriptionList.Count)
                 {
-                    //* Check if no more subscriptions to this poll rate
-                    int j = 0;
-                    bool StillUsed = false;
-                    while (j < SubscriptionList.Count)
+                    int PollRate = SubscriptionList[i].PollRate;
+                    SubscriptionList.RemoveAt(i);
+                    if (SubscriptionList.Count == 0)
                     {
-                        if (SubscriptionList[j].PollRate == PollRate)
+                    }
+                    else
+                    {
+                        //* Check if no more subscriptions to this poll rate
+                        int j = 0;
+                        bool StillUsed = false;
+                        while (j < SubscriptionList.Count)
                         {
-                            StillUsed = true;
+                            if (SubscriptionList[j].PollRate == PollRate)
+                            {
+                                StillUsed = true;
+                            }
+                            j += 1;
                         }
-                        j += 1;
                     }
                 }
+                AdvancedScada.Controls.Utilities.client.Disconnect(XCollection.CURRENT_MACHINE);
             }
-             AdvancedScada.Controls.Utilities.client.Disconnect(XCollection.CURRENT_MACHINE);
+            catch (Exception ex)
+            {
+
+                OnComError(new PlcComEventArgs(1, "INVALID VALUE!" + ex.Message));
+            }
+
             return 0;
         }
 
-        //* 31-JAN-12
-        public bool IsSubscriptionActive(int id)
-        {
-            int i = 0;
-            while (i < SubscriptionList.Count && SubscriptionList[i].ID != id)
-            {
-                i += 1;
-            }
 
-            return (i < SubscriptionList.Count);
-        }
-
-        //* 31-JAN-12
-        public string GetSubscriptionAddress(int id)
-        {
-            int i = 0;
-            while (i < SubscriptionList.Count && SubscriptionList[i].ID != id)
-            {
-                i += 1;
-            }
-
-            if (i < SubscriptionList.Count)
-            {
-                return SubscriptionList[i].Address;
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
         protected virtual void OnComError(PlcComEventArgs e)
         {
             ComError?.Invoke(this, e);
@@ -315,7 +305,8 @@ namespace AdvancedScada.Controls.Subscription
                     }
                     catch (Exception ex)
                     {
-                        DisplayError("INVALID VALUE!" + ex.Message);
+
+                        OnComError(new PlcComEventArgs(1, "INVALID VALUE!" + ex.Message));
                     }
 
 
@@ -323,45 +314,7 @@ namespace AdvancedScada.Controls.Subscription
                 }
             }
         }
-        #region Error Display
-        //********************************************************
-        //* Show an error via the text property for a short time
-        //********************************************************
-        private System.Windows.Forms.Timer ErrorDisplayTime;
-        private void DisplayError(string ErrorMessage)
-        {
-            if (ErrorDisplayTime == null)
-            {
-                ErrorDisplayTime = new System.Windows.Forms.Timer();
-                ErrorDisplayTime.Tick += ErrorDisplay_Tick;
-                ErrorDisplayTime.Interval = 5000;
-            }
 
-            //* Save the text to return to
-            if (!ErrorDisplayTime.Enabled)
-            {
-                // OriginalText = Me.Text
-            }
-
-            OnComError(new PlcComEventArgs(1, ErrorMessage));
-
-            ErrorDisplayTime.Enabled = true;
-        }
-
-
-        //**************************************************************************************
-        //* Return the text back to its original after displaying the error for a few seconds.
-        //**************************************************************************************
-        private void ErrorDisplay_Tick(object sender, System.EventArgs e)
-        {
-            if (ErrorDisplayTime != null)
-            {
-                ErrorDisplayTime.Enabled = false;
-                ErrorDisplayTime.Dispose();
-                ErrorDisplayTime = null;
-            }
-        }
-        #endregion
     }
 
 }

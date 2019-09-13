@@ -42,6 +42,9 @@
   <PropertyGroup>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdvancedHMIBaseControls">
+      <HintPath>..\..\Lib\AdvancedHMIBaseControls.dll</HintPath>
+    </Reference>
     <Reference Include="HslControls, Version=2.2.2.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\HslControls.2.2.2\lib\net45\HslControls.dll</HintPath>
     </Reference>
@@ -57,20 +60,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\Krypton\Krypton Toolkit.dll</HintPath>
     </Reference>
-    <Reference Include="MfgControl.AdvancedHMI.Controls">
-      <HintPath>..\..\Lib\MfgControl.AdvancedHMI.Controls.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="NetToolKit">
-      <HintPath>..\..\Lib\NetToolKit.dll</HintPath>
-    </Reference>
-    <Reference Include="SymbolFactoryDotNet">
-      <HintPath>..\..\Lib\SymbolFactoryDotNet.dll</HintPath>
-    </Reference>
-    <Reference Include="SymbolFactoryNetEngine">
-      <HintPath>..\..\Lib\SymbolFactoryNetEngine.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
