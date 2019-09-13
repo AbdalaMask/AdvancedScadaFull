@@ -36,20 +36,21 @@
     <ApplicationIcon>CPU.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdvancedHMIBaseControls">
-      <HintPath>..\..\Lib\AdvancedHMIBaseControls.dll</HintPath>
-    </Reference>
     <Reference Include="HslControls, Version=2.2.2.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\HslControls.2.2.2\lib\net45\HslControls.dll</HintPath>
     </Reference>
     <Reference Include="Krypton Toolkit">
       <HintPath>..\..\Lib\Krypton\Krypton Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="MfgControl.AdvancedHMI.Controls">
+      <HintPath>..\..\Lib\MfgControl.AdvancedHMI.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -139,6 +140,10 @@
     <ProjectReference Include="..\..\Controls\AdvancedScada.ImagePicker\ImagePicker.csproj">
       <Project>{06c4d61d-cbb1-4f3d-8599-f18099548a25}</Project>
       <Name>ImagePicker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Controls\AdvancedScada.Monitor\Monitor.csproj">
+      <Project>{b160281b-93b1-45bd-a07e-fd75c27916ea}</Project>
+      <Name>Monitor</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Drivers\AdvancedScada.DriverBase\DriverBase.csproj">
       <Project>{1d570e9a-e5b4-44dd-946d-9d73cfa4a535}</Project>

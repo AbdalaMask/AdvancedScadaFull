@@ -6,7 +6,6 @@ using AdvancedScada.Controls.AHMI.Leds;
 using AdvancedScada.Controls.AHMI.Motor;
 using AdvancedScada.Controls.AHMI.ProcessAll;
 using AdvancedScada.Controls.AHMI.SelectorSwitch;
-using MfgControl.AdvancedHMI.Controls;
 
 namespace AdvancedScada.HMI.MainForm
 {
@@ -41,7 +40,7 @@ namespace AdvancedScada.HMI.MainForm
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.Panel3 = new System.Windows.Forms.Panel();
-            this.hmiLabel54 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
+            this.hmiLabel54 = new HMILabel();
             this.hmiLabel20 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
             this.hmiLabel19 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
             this.hmiLabel18 = new AdvancedScada.Controls.AHMI.Display.HMILabel();

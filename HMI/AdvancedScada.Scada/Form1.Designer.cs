@@ -38,11 +38,9 @@ namespace Scada
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.hmiSevenSegment1 = new AdvancedScada.Controls.AHMI.SevenSegment.HMISevenSegment();
             this.hmiSquareIlluminatedButton1 = new AdvancedScada.Controls.AHMI.ButtonAll.HMISquareIlluminatedButton();
-            this.hmiGenericTCPClient1 = new AdvancedScada.Controls.AHMI.Components.SocketClient.HMIGenericTCPClient();
             this.hmiLabel1 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hmiSevenSegment1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hmiGenericTCPClient1)).BeginInit();
             this.SuspendLayout();
             // 
             // hmiLedDisplay2
@@ -256,14 +254,6 @@ namespace Scada
             this.hmiSquareIlluminatedButton1.Text = "hmiSquareIlluminatedButton1";
             this.hmiSquareIlluminatedButton1.Value = false;
             // 
-            // hmiGenericTCPClient1
-            // 
-            this.hmiGenericTCPClient1.AutoConnect = true;
-            this.hmiGenericTCPClient1.IPAddress = "192.168.0.1";
-            this.hmiGenericTCPClient1.Port = ((ushort)(23));
-            this.hmiGenericTCPClient1.ProtocolType = System.Net.Sockets.ProtocolType.Tcp;
-            this.hmiGenericTCPClient1.TerminatingCharacters = "\\r";
-            // 
             // hmiLabel1
             // 
             this.hmiLabel1.BackColor = System.Drawing.Color.Transparent;
@@ -323,7 +313,6 @@ namespace Scada
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hmiSevenSegment1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hmiGenericTCPClient1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -337,7 +326,6 @@ namespace Scada
         private System.Windows.Forms.PictureBox pictureBox1;
         private AdvancedScada.Controls.AHMI.SevenSegment.HMISevenSegment hmiSevenSegment1;
         private AdvancedScada.Controls.AHMI.ButtonAll.HMISquareIlluminatedButton hmiSquareIlluminatedButton1;
-        private AdvancedScada.Controls.AHMI.Components.SocketClient.HMIGenericTCPClient hmiGenericTCPClient1;
         private AdvancedScada.Controls.AHMI.Display.HMILabel hmiLabel1;
     }
 }

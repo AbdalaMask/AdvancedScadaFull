@@ -175,10 +175,12 @@ namespace AdvancedScada.IODriver
 
             try
             {
-                
-           
+                IsConnected = true;
+
+
                 Console.WriteLine(string.Format("STARTED: {0}", ++COUNTER));
                 threads = new Thread[Channels.Count];
+
                 if (threads == null) throw new NullReferenceException("No Data");
                 for (int i = 0; i < Channels.Count; i++)
                 {
@@ -235,7 +237,7 @@ namespace AdvancedScada.IODriver
                         }
 
                         //======Connection to PLC==================================
-                        IsConnected = DriverAdapter.Connection();
+                         DriverAdapter.Connection();
 
                         while (IsConnected)
                         {

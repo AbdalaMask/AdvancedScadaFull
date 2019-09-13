@@ -141,7 +141,7 @@ namespace AdvancedScada.Controls.Subscription
             SubscriptionInfo tmpPA = new SubscriptionInfo(); 
             try
             {
-               if (AdvancedScada.Controls.Utilities.client == null)
+           if (AdvancedScada.Controls.Utilities.client == null)
             {
                 CreateDLLInstance();
             }

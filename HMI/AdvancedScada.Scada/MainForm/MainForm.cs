@@ -117,7 +117,7 @@ namespace AdvancedScada.HMI.MainForm
         {
             try
             {
-                client?.Disconnect(XCollection.CURRENT_MACHINE);
+                //client?.Disconnect(XCollection.CURRENT_MACHINE);
                 // client?.Stop();
 
             }

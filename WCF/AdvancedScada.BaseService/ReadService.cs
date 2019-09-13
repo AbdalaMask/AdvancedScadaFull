@@ -81,6 +81,7 @@ namespace AdvancedScada.BaseService
                 EventChannelCount?.Invoke(1, false);
                 EventDataChanged = null;
                 eventLoggingMessage?.Invoke(string.Format("Removed Callback Channel: {0}, IP Address: {1}.", mac.MachineName, mac.IPAddress));
+                //driverHelper?.Disconnect();
             }
             catch (Exception ex)
             {
