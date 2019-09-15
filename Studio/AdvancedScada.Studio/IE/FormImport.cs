@@ -9,6 +9,8 @@ using System.Threading;
 using System.Windows.Forms;
 using AdvancedScada.Utils.Excel;
 using static AdvancedScada.IBaseService.Common.XCollection;
+using AdvancedScada.DriverBase.Comm;
+
 namespace AdvancedScada.Studio.IE
 {
     public delegate void EventDataBlockImport(DataBlock db);
@@ -83,7 +85,7 @@ namespace AdvancedScada.Studio.IE
                         TagName = $"{item["TagName"]}",
                         Address =
                             $"{item["Address"]}",
-                        DataType = $"{item["DataType"]}",
+                        DataType = db.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), $"{item["DataType"]}"),
                         Description = $"{item["Description"]}"
                     };
 

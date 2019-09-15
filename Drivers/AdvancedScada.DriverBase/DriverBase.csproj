@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\TagCollectionClient.cs" />
+    <Compile Include="Comm\DataType.cs" />
     <Compile Include="Comm\PLCComEventArgs.cs" />
     <Compile Include="Comm\PLCDriverException.cs" />
     <Compile Include="Comm\Util.cs" />

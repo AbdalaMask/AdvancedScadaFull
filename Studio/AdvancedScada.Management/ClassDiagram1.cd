@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AdvancedScada.Management.BaseBindingXML" Collapsed="true">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAIKCgBQwEAEgQBABMBAIgACAAAhAEAQHAhAAAIEMA=</HashCode>
+      <FileName>BaseBindingXML.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdvancedScada.Management.BLManager.ChannelService" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYEAIgAADAAEFABSE4AAAAABgEAIBTAAQAAAIAAMAI=</HashCode>
+      <FileName>BLManager\ChannelService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdvancedScada.Management.BLManager.DataBlockService" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYEAAAAAAAgAEAAAAAQABEAAgEAAABAAAAAAAAAoAA=</HashCode>
+      <FileName>BLManager\DataBlockService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdvancedScada.Management.BLManager.DeviceService" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYEAAAAAAAIAEAAAAAAAAAAAgFAgABAABAAAAAEIAA=</HashCode>
+      <FileName>BLManager\DeviceService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdvancedScada.Management.BLManager.Extensions" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>BLManager\Extensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdvancedScada.Management.BLManager.TagService" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gA4EAAAAQAgCAAAAAAAAAAAAAAEAAABAAAAAAAAAIAA=</HashCode>
+      <FileName>BLManager\TagService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdvancedScada.Management.BLManager.Utils" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>BLManager\Utils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Delegate Name="AdvancedScada.Management.EventSelectedDriversChanged" Collapsed="true">
+    <Position X="9.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DelegateForm.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="AdvancedScada.Management.EventChannelChanged" Collapsed="true">
+    <Position X="9.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>DelegateForm.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="AdvancedScada.Management.EventDeviceChanged" Collapsed="true">
+    <Position X="13.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DelegateForm.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="AdvancedScada.Management.EventDataBlockChanged" Collapsed="true">
+    <Position X="11.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DelegateForm.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="AdvancedScada.Management.EventTagChanged" Collapsed="true">
+    <Position X="11.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DelegateForm.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

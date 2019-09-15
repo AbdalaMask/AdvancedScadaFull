@@ -186,7 +186,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
         [Category("PLC Properties")]
         public int ValueToWrite { get; set; }
 
-        public new event EventHandler ValueChanged;
+        public event EventHandler ValueChanged;
 
 
         private void ReleaseValue()
@@ -296,7 +296,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
 
         protected virtual void OnValueChanged(object sender, EventArgs e)
         {
-            if (ValueChanged != null) ValueChanged(this, e);
+            ValueChanged?.Invoke(this, e);
         }
         #endregion
         #region "Error Display"

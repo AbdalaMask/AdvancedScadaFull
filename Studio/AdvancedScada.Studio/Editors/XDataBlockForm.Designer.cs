@@ -210,16 +210,6 @@
             // 
             this.cboxDataType.DropDownWidth = 188;
             this.cboxDataType.IntegralHeight = false;
-            this.cboxDataType.Items.AddRange(new object[] {
-            "Bit",
-            "Byte",
-            "Word",
-            "DWord",
-            "Int",
-            "DInt",
-            "Real1",
-            "String",
-            "Real2"});
             this.cboxDataType.Location = new System.Drawing.Point(89, 74);
             this.cboxDataType.Margin = new System.Windows.Forms.Padding(2);
             this.cboxDataType.Name = "cboxDataType";

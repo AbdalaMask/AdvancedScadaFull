@@ -18,21 +18,7 @@ namespace AdvancedScada.DriverBase.Comm
         ASCII,
         TCP
     }
-    public enum DataType
-    {
-        Bit,
-        Byte,
-        Int,
-        DInt,
-        Word,
-        DWord,
-        Real1,
-        Real2,
-        DReal1,
-        DReal2,
-        Long1,
-        Long2
-    }
+    
     public class Util
     {
 

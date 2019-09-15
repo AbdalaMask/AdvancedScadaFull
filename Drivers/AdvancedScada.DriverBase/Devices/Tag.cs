@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdvancedScada.DriverBase.Comm;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -16,33 +17,18 @@ namespace AdvancedScada.DriverBase.Devices
      
         public EventValueChanged ValueChanged = null;
 
-
-        public Tag()
-        {
-        }
-
-
-        public Tag(int tagId, string tagName, dynamic value)
-        {
-            TagId = tagId;
-            TagName = tagName;
-            Value = value;
-
-        }
+ 
    
-        [Browsable(false)]
-        [Category("Tag")]
+        
         [DataMember]
         public int ChannelId { get; set; }
 
 
-        [Browsable(false)]
-        [Category("Tag")]
+      
         [DataMember]
         public int DataBlockId { get; set; }
 
-        [Browsable(false)]
-        [Category("Tag")]
+        
         [DataMember]
         public int DeviceId { get; set; }
 
@@ -50,7 +36,7 @@ namespace AdvancedScada.DriverBase.Devices
         ///     Kiểu dữ liệu.
         /// </summary>
         [DataMember]
-        public string DataType { get; set; }
+        public DataTypes DataType { get; set; }
 
 
         [DataMember]

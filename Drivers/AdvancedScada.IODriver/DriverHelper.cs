@@ -300,8 +300,7 @@ namespace AdvancedScada.IODriver
                 SendDone.WaitOne(-1);
                 switch (db.DataType)
                 {
-                    case "Bit":
-
+                    case DataTypes.Bit:
                         lock (DriverAdapter)
                         {
 
@@ -316,11 +315,10 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "Int":
-
+                    case DataTypes.Byte:
                         lock (DriverAdapter)
                         {
-                            short[] IntRs = DriverAdapter.Read<Int16>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                            Byte[] IntRs = DriverAdapter.Read<Byte>($"{db.MemoryType}{db.StartAddress}", db.Length);
                             if (IntRs == null) return;
                             if (IntRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < IntRs.Length; j++)
@@ -333,11 +331,10 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "DInt":
-
+                    case DataTypes.Short:
                         lock (DriverAdapter)
                         {
-                            int[] DIntRs = DriverAdapter.Read<Int32>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                            short[] DIntRs = DriverAdapter.Read<short>($"{db.MemoryType}{db.StartAddress}", db.Length);
                             if (DIntRs == null) return;
                             if (DIntRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < DIntRs.Length; j++)
@@ -347,11 +344,10 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "Word":
-
+                    case DataTypes.UShort:
                         lock (DriverAdapter)
                         {
-                            var wdRs = DriverAdapter.Read<UInt16>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                            var wdRs = DriverAdapter.Read<ushort>($"{db.MemoryType}{db.StartAddress}", db.Length);
 
                             if (wdRs == null) return;
                             if (wdRs.Length > db.Tags.Count) return;
@@ -364,11 +360,10 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "DWord":
-
+                    case DataTypes.Int:
                         lock (DriverAdapter)
                         {
-                            uint[] dwRs = DriverAdapter.Read<UInt32>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                            int[] dwRs = DriverAdapter.Read<int>($"{db.MemoryType}{db.StartAddress}", db.Length);
                             if (dwRs == null) return;
                             for (int j = 0; j < dwRs.Length; j++)
                             {
@@ -377,8 +372,43 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "Real1":
-
+                    case DataTypes.UInt:
+                        lock (DriverAdapter)
+                        {
+                            uint[] dwRs = DriverAdapter.Read<uint>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                            if (dwRs == null) return;
+                            for (int j = 0; j < dwRs.Length; j++)
+                            {
+                                db.Tags[j].Value = dwRs[j];
+                                db.Tags[j].Timestamp = DateTime.Now;
+                            }
+                        }
+                        break;
+                    case DataTypes.Long:
+                        lock (DriverAdapter)
+                        {
+                            long[] rl1Rs = DriverAdapter.Read<long>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                            if (rl1Rs == null) return;
+                            for (int j = 0; j < rl1Rs.Length; j++)
+                            {
+                                db.Tags[j].Value = rl1Rs[j];
+                                db.Tags[j].Timestamp = DateTime.Now;
+                            }
+                        }
+                        break;
+                    case DataTypes.ULong:
+                        lock (DriverAdapter)
+                        {
+                            ulong[] rl1Rs = DriverAdapter.Read<ulong>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                            if (rl1Rs == null) return;
+                            for (int j = 0; j < rl1Rs.Length; j++)
+                            {
+                                db.Tags[j].Value = rl1Rs[j];
+                                db.Tags[j].Timestamp = DateTime.Now;
+                            }
+                        }
+                        break;
+                    case DataTypes.Float:
                         lock (DriverAdapter)
                         {
                             float[] rl1Rs = DriverAdapter.Read<float>($"{db.MemoryType}{db.StartAddress}", db.Length);
@@ -390,8 +420,7 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "Real2":
-
+                    case DataTypes.Double:
                         lock (DriverAdapter)
                         {
                             double[] rl2Rs = DriverAdapter.Read<double>($"{db.MemoryType}{db.StartAddress}", db.Length);
@@ -403,7 +432,12 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
+                    case DataTypes.String:
+                        break;
+                    default:
+                        break;
                 }
+             
 
             }
 
@@ -418,11 +452,9 @@ namespace AdvancedScada.IODriver
             try
             {
                 SendDone.WaitOne(-1);
-
                 switch (db.DataType)
                 {
-                    case "Bit":
-
+                    case DataTypes.Bit:
                         lock (DriverAdapter)
                         {
 
@@ -437,8 +469,9 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "Int":
-
+                    case DataTypes.Byte:
+                        break;
+                    case DataTypes.Short:
                         lock (DriverAdapter)
                         {
                             short[] IntRs = DriverAdapter.Read<Int16>($"{db.StartAddress}", db.Length);
@@ -454,8 +487,9 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "DInt":
-
+                    case DataTypes.UShort:
+                        break;
+                    case DataTypes.Int:
                         lock (DriverAdapter)
                         {
                             int[] DIntRs = DriverAdapter.Read<Int32>(string.Format("{0}", db.StartAddress), db.Length);
@@ -468,11 +502,10 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "Word":
-
+                    case DataTypes.UInt:
                         lock (DriverAdapter)
                         {
-                            var wdRs = DriverAdapter.Read<UInt16>($"{db.StartAddress}", db.Length);
+                            var wdRs = DriverAdapter.Read<uint>($"{db.StartAddress}", db.Length);
 
                             if (wdRs == null) return;
                             if (wdRs.Length > db.Tags.Count) return;
@@ -485,11 +518,10 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "DWord":
-
+                    case DataTypes.Long:
                         lock (DriverAdapter)
                         {
-                            uint[] dwRs = DriverAdapter.Read<UInt32>(string.Format("{0}", db.StartAddress), db.Length);
+                            long[] dwRs = DriverAdapter.Read<long>(string.Format("{0}", db.StartAddress), db.Length);
                             if (dwRs == null) return;
                             for (int j = 0; j < dwRs.Length; j++)
                             {
@@ -498,8 +530,9 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "Real1":
-
+                    case DataTypes.ULong:
+                        break;
+                    case DataTypes.Float:
                         lock (DriverAdapter)
                         {
                             float[] rl1Rs = DriverAdapter.Read<float>(string.Format("{0}", db.StartAddress), db.Length);
@@ -511,8 +544,7 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "Real2":
-
+                    case DataTypes.Double:
                         lock (DriverAdapter)
                         {
                             double[] rl2Rs = DriverAdapter.Read<double>(string.Format("{0}", db.StartAddress), db.Length);
@@ -524,7 +556,12 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
+                    case DataTypes.String:
+                        break;
+                    default:
+                        break;
                 }
+           
 
             }
 
@@ -541,9 +578,7 @@ namespace AdvancedScada.IODriver
                 SendDone.WaitOne(-1);
                 switch (db.DataType)
                 {
-                    case "Bit":
-
-
+                    case DataTypes.Bit:
                         lock (ILSIS)
                         {
                             bool[] bitArys = ILSIS.Read<bool>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
@@ -560,11 +595,26 @@ namespace AdvancedScada.IODriver
                             }
                         }
 
+                        break;
+                    case DataTypes.Byte:
+                        lock (ILSIS)
+                        {
+                            byte[] bitArys = ILSIS.Read<byte>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                            if (bitArys == null || bitArys.Length == 0) return;
 
+
+                            if (bitArys.Length > db.Tags.Count)
+                                return;
+                            for (var j = 0; j <= db.Tags.Count - 1; j++)
+                            {
+                                db.Tags[j].Value = bitArys[j];
+
+                                db.Tags[j].Timestamp = DateTime.Now;
+                            }
+                        }
 
                         break;
-                    case "Int":
-
+                    case DataTypes.Short:
                         lock (ILSIS)
                         {
                             short[] IntRs = ILSIS.Read<Int16>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
@@ -579,8 +629,25 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "DInt":
+                    case DataTypes.UShort:
+                        lock (ILSIS)
+                        {
+                            ushort[] bitArys = ILSIS.Read<ushort>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                            if (bitArys == null || bitArys.Length == 0) return;
 
+
+                            if (bitArys.Length > db.Tags.Count)
+                                return;
+                            for (var j = 0; j <= db.Tags.Count - 1; j++)
+                            {
+                                db.Tags[j].Value = bitArys[j];
+
+                                db.Tags[j].Timestamp = DateTime.Now;
+                            }
+                        }
+
+                        break;
+                    case DataTypes.Int:
                         lock (ILSIS)
                         {
                             int[] DIntRs = ILSIS.Read<Int32>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
@@ -592,11 +659,10 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "Word":
-
+                    case DataTypes.UInt:
                         lock (ILSIS)
                         {
-                            var wdRs = ILSIS.Read<Int16>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                            var wdRs = ILSIS.Read<uint>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
                             if (wdRs == null) return;
                             for (int j = 0; j < db.Tags.Count; j++)
                             {
@@ -607,11 +673,10 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "DWord":
-
+                    case DataTypes.Long:
                         lock (ILSIS)
                         {
-                            uint[] dwRs = ILSIS.Read<UInt32>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                            long[] dwRs = ILSIS.Read<long>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
 
                             for (int j = 0; j < dwRs.Length; j++)
                             {
@@ -620,8 +685,19 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "Real1":
+                    case DataTypes.ULong:
+                        lock (ILSIS)
+                        {
+                            ulong[] dwRs = ILSIS.Read<ulong>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
 
+                            for (int j = 0; j < dwRs.Length; j++)
+                            {
+                                db.Tags[j].Value = dwRs[j];
+                                db.Tags[j].Timestamp = DateTime.Now;
+                            }
+                        }
+                        break;
+                    case DataTypes.Float:
                         lock (ILSIS)
                         {
                             float[] rl1Rs = ILSIS.Read<float>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
@@ -633,8 +709,7 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
-                    case "Real2":
-
+                    case DataTypes.Double:
                         lock (ILSIS)
                         {
                             double[] rl2Rs = ILSIS.Read<double>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
@@ -646,7 +721,12 @@ namespace AdvancedScada.IODriver
                             }
                         }
                         break;
+                    case DataTypes.String:
+                        break;
+                    default:
+                        break;
                 }
+         
             }
             catch (SocketException ex)
             {
@@ -733,28 +813,53 @@ namespace AdvancedScada.IODriver
                             lock (DriverAdapter)
                                 switch (TagCollection.Tags[tagName].DataType)
                                 {
-                                    case "Bit":
+                                    case DataTypes.Bit:
                                         DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), value == "1" ? true : false);
                                         break;
-                                    case "Int":
+                                    case DataTypes.Byte:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), byte.Parse(value));
+
+                                        break;
+                                    case DataTypes.Short:
                                         DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), short.Parse(value));
+
                                         break;
-                                    case "Word":
+                                    case DataTypes.UShort:
                                         DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), ushort.Parse(value));
+
                                         break;
-                                    case "DInt":
-                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), short.Parse(value));
+                                    case DataTypes.Int:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), int.Parse(value));
+
                                         break;
-                                    case "DWord":
-                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), ushort.Parse(value));
+                                    case DataTypes.UInt:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), uint.Parse(value));
+
                                         break;
-                                    case "Real1":
+                                    case DataTypes.Long:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), long.Parse(value));
+
+                                        break;
+                                    case DataTypes.ULong:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), ulong.Parse(value));
+
+                                        break;
+                                    case DataTypes.Float:
                                         DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), float.Parse(value));
+
                                         break;
-                                    case "Real2":
+                                    case DataTypes.Double:
                                         DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), double.Parse(value));
+
+                                        break;
+                                    case DataTypes.String:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), $"{value}");
+
+                                        break;
+                                    default:
                                         break;
                                 }
+                          
                         }
                     }
                 }

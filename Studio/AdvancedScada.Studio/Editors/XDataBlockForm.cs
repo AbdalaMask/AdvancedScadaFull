@@ -1,4 +1,5 @@
-﻿using AdvancedScada.DriverBase.Devices;
+﻿using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.Management;
 using AdvancedScada.Utils.LSIS;
 using ComponentFactory.Krypton.Toolkit;
@@ -34,6 +35,7 @@ namespace AdvancedScada.Studio.Editors
         #region Modbus
         public void AddressCreateTagModbus(DataBlock db, bool IsNew, int TagsCount = 1)
         {
+            
             if (IsNew == false) db.Tags.Clear();
             foreach (var item in dv.DataBlocks)
             {
@@ -58,7 +60,7 @@ namespace AdvancedScada.Studio.Editors
                         TagId = i + 1,
                         TagName = $"TAG{i + TagsCount:d5}",
                         Address = $"{txtStartAddress.Value + i}",
-                        DataType = $"{cboxDataType.SelectedItem}",
+                        DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString()),
                         Description = $"{txtDesc.Text} {i + 1}"
                     };
                     db.Tags.Add(tg);
@@ -98,7 +100,7 @@ namespace AdvancedScada.Studio.Editors
                         TagId = i + 1,
                         TagName = $"TAG{i + TagsCount:d5}",
                         Address = $"{txtDomain.Text}{y}",
-                        DataType = $"{cboxDataType.SelectedItem}",
+                        DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString()),
                         Description = $"{txtDesc.Text} {i + 1}"
                     };
                     db.Tags.Add(tg);
@@ -141,7 +143,7 @@ namespace AdvancedScada.Studio.Editors
                     tg.TagName = $"TAG{TagsCount:d5}";
                     tg.Address = $"{txtDomain.Text}{hexaNumber}";
                     tg.Description = $"{txtDesc.Text} {i.ToString("X")}";
-                    tg.DataType = $"{cboxDataType.SelectedItem}";
+                    tg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString());
                     db.Tags.Add(tg);
                     hex1 += 1;
                     TagsCount += 1;
@@ -177,7 +179,7 @@ namespace AdvancedScada.Studio.Editors
                         $"TAG{i + TagsCount:d5}",
                         Address = $"{txtDomain.Text}{txtStartAddress.Value + i}",
                         DataType =
-                        $"{cboxDataType.SelectedItem}",
+                        (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString()),
                         Description = $"{txtDesc.Text} {i + 1}"
                     };
                     db.Tags.Add(tg);
@@ -194,6 +196,7 @@ namespace AdvancedScada.Studio.Editors
                 txtChannelId.Text = ch.ChannelId.ToString();
                 txtDeviceId.Text = dv.DeviceId.ToString();
                 CboxTypeOfRead.SelectedIndex = 0;
+                cboxDataType.DataSource = System.Enum.GetNames(typeof(DataTypes));
                 if (db == null)
                 {
                     switch (ch.ChannelTypes)
@@ -257,7 +260,7 @@ namespace AdvancedScada.Studio.Editors
                     txtDomain.Text = db.MemoryType;
                     txtDesc.Text = db.Description;
                     txtDataBlockId.Text = $"{db.DataBlockId}";
-                    cboxDataType.Text = $"{db.DataType}";
+                    cboxDataType.SelectedItem = string.Format("{0}", db.DataType);
                 }
             }
             catch (Exception ex)
@@ -278,13 +281,11 @@ namespace AdvancedScada.Studio.Editors
         {
             try
             {
+                object ohj = cboxDataType.SelectedValue;
 
-                var ohj = cboxDataType.Text;
-
-                switch (ohj)
+                switch ((DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedValue.ToString()))
                 {
-                    case "Bit":
-                    case "Byte":
+                    case DataTypes.Bit:
                         switch (ch.ChannelTypes)
 
                         {
@@ -301,10 +302,10 @@ namespace AdvancedScada.Studio.Editors
                                 break;
                         }
 
-
                         break;
-                    case "Word":
-                    case "Int":
+                    case DataTypes.Byte:
+                        break;
+                    case DataTypes.Short:
                         switch (ch.ChannelTypes)
 
                         {
@@ -332,16 +333,26 @@ namespace AdvancedScada.Studio.Editors
                         }
 
                         break;
-                    case "DWord":
-                    case "DInt":
-                    case "Real":
-
+                    case DataTypes.UShort:
+                        break;
+                    case DataTypes.Int:
+                        break;
+                    case DataTypes.UInt:
+                        break;
+                    case DataTypes.Long:                        
+                    case DataTypes.ULong:
+                    case DataTypes.Float:
+                    case DataTypes.Double:
                         txtAddressLength.Maximum = 60;
                         txtAddressLength.Minimum = 1;
                         chkX10.Enabled = false;
-
+                        break;
+                    case DataTypes.String:
+                        break;
+                    default:
                         break;
                 }
+            
             }
             catch (Exception ex)
             {
@@ -415,9 +426,9 @@ namespace AdvancedScada.Studio.Editors
                             MemoryType = txtDomain.Text,
                             Description = txtDesc.Text,
                             Length = (ushort)txtAddressLength.Value,
-                            DataType = cboxDataType.Text,
-                           
-                            Tags = new List<Tag>()
+                            DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", cboxDataType.SelectedItem)),
+
+                        Tags = new List<Tag>()
                         };
 
                         switch (ch.ChannelTypes)
@@ -461,8 +472,8 @@ namespace AdvancedScada.Studio.Editors
                         db.MemoryType = txtDomain.Text;
                         db.Length = (ushort)txtAddressLength.Value;
                         db.Description = txtDesc.Text;
-                        db.DataType = $"{cboxDataType.Text}";
-                       
+                        db.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", cboxDataType.SelectedItem));
+
 
                         switch (ch.ChannelTypes)
 

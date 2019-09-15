@@ -53,18 +53,34 @@ namespace AdvancedScada.Monitor
         {
             switch (TagCollection.Tags[txtAddress.Text].DataType)
             {
-                case "String":
-                    NumValue.Text = "Test";
+                case DriverBase.Comm.DataTypes.Bit:
                     break;
-                case "Int":
-                case "DInt":
-                case "Word":
-                case "DWord":
-                case "Real1":
-                case "Real2":
+                case DriverBase.Comm.DataTypes.Byte:
+                    break;
+                case DriverBase.Comm.DataTypes.Short:
                     NumValue.Text = "0";
                     break;
+                case DriverBase.Comm.DataTypes.UShort:
+                    break;
+                case DriverBase.Comm.DataTypes.Int:
+                    break;
+                case DriverBase.Comm.DataTypes.UInt:
+                    break;
+                case DriverBase.Comm.DataTypes.Long:
+                    break;
+                case DriverBase.Comm.DataTypes.ULong:
+                    break;
+                case DriverBase.Comm.DataTypes.Float:
+                    break;
+                case DriverBase.Comm.DataTypes.Double:
+                    break;
+                case DriverBase.Comm.DataTypes.String:
+                    NumValue.Text = "Test";
+                    break;
+                default:
+                    break;
             }
+           
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

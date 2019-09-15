@@ -51,18 +51,33 @@ namespace AdvancedScada.Studio.Monitor
 
         private void WriteTagForm_Load(object sender, EventArgs e)
         {
-            switch (TagCollection.Tags[txtAddress.Text].DataType)
+             switch (TagCollection.Tags[txtAddress.Text].DataType)
             {
-                case "String":
+                case DriverBase.Comm.DataTypes.Bit:
+                    break;
+                case DriverBase.Comm.DataTypes.Byte:
+                    break;
+                case DriverBase.Comm.DataTypes.Short:
+                    txtValue.Text = "0";
+                    break;
+                case DriverBase.Comm.DataTypes.UShort:
+                    break;
+                case DriverBase.Comm.DataTypes.Int:
+                    break;
+                case DriverBase.Comm.DataTypes.UInt:
+                    break;
+                case DriverBase.Comm.DataTypes.Long:
+                    break;
+                case DriverBase.Comm.DataTypes.ULong:
+                    break;
+                case DriverBase.Comm.DataTypes.Float:
+                    break;
+                case DriverBase.Comm.DataTypes.Double:
+                    break;
+                case DriverBase.Comm.DataTypes.String:
                     txtValue.Text = "Test";
                     break;
-                case "Int":
-                case "DInt":
-                case "Word":
-                case "DWord":
-                case "Real1":
-                case "Real2":
-                    txtValue.Text = "0";
+                default:
                     break;
             }
         }

@@ -4,6 +4,8 @@ using System;
 using System.Linq;
 using static AdvancedScada.IBaseService.Common.XCollection;
 using AdvancedScada.Management;
+using AdvancedScada.DriverBase.Comm;
+
 namespace AdvancedScada.Studio.Editors
 {
     public partial class XTagForm : KryptonForm
@@ -43,7 +45,7 @@ namespace AdvancedScada.Studio.Editors
                     newTg.TagName = txtTagName.Text;
                     newTg.Address = txtAddress.Text;
                     newTg.Description = txtDesc.Text;
-                    newTg.DataType = $"{cboxDataType.SelectedItem}";
+                    newTg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString());
 
                     if (eventTagChanged != null) eventTagChanged(newTg, true);
                 }
@@ -55,7 +57,7 @@ namespace AdvancedScada.Studio.Editors
                     tg.TagName = txtTagName.Text;
                     tg.Address = txtAddress.Text;
                     tg.Description = txtDesc.Text;
-                    tg.DataType = $"{cboxDataType.SelectedItem}";
+                    tg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString());
 
                     if (eventTagChanged != null) eventTagChanged(tg, false);
 

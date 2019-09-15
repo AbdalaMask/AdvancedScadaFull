@@ -6,6 +6,7 @@ using System.Xml;
 using static AdvancedScada.IBaseService.Common.XCollection;
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.DriverBase.Comm;
 
 namespace AdvancedScada.Management.BLManager
 {
@@ -269,8 +270,7 @@ namespace AdvancedScada.Management.BLManager
                     db.StartAddress = ushort.Parse(dbNote.Attributes[START_ADDRESS].Value);
                     db.MemoryType = $"{dbNote.Attributes[MemoryType].Value}";
                     db.Length = ushort.Parse(dbNote.Attributes[LENGTH].Value);
-                    db.DataType = dbNote.Attributes[DATA_TYPE].Value;
-                    
+                    db.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", dbNote.Attributes[DATA_TYPE].Value));
                     db.Description = dbNote.Attributes[ChannelService.DESCRIPTION].Value;
                     db.Tags = objTagManager.GetTags(dbNote);
                     dbList.Add(db);
