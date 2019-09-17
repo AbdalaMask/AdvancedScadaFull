@@ -1,18 +1,18 @@
-﻿using Microsoft.Win32;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.BaseService;
+using AdvancedScada.BaseService.Client;
+using AdvancedScada.Controls;
+using AdvancedScada.IBaseService;
+using AdvancedScada.IBaseService.Common;
+using AdvancedScada.Utils;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading;
 using System.Windows.Forms;
-using AdvancedScada;
-using AdvancedScada.BaseService;
-using AdvancedScada.BaseService.Client;
-using AdvancedScada.IBaseService;
-using AdvancedScada.IBaseService.Common;
-using AdvancedScada.Utils;
 using static AdvancedScada.IBaseService.Common.XCollection;
-using AdvancedScada.Controls;
-using AdvancedScada;
 
 namespace AdvancedScada.Controls
 {
@@ -21,7 +21,7 @@ namespace AdvancedScada.Controls
         Green, Red
     }
     /// <inheritdoc />
-    public sealed class  Utilities
+    public sealed class Utilities
     {
         public static IReadService client;
 
@@ -94,5 +94,5 @@ namespace AdvancedScada.Controls
         {
             client = null;
         }
-  }
+    }
 }

@@ -1,8 +1,6 @@
-﻿using AdvancedScada.Studio.Logging;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace AdvancedScada.Studio.Logging

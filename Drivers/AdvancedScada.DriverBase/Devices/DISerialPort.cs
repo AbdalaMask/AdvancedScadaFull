@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO.Ports;
-using System.Linq;
 using System.Runtime.Serialization;
 
 namespace AdvancedScada.DriverBase.Devices

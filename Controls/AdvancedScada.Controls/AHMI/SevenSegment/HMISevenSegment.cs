@@ -27,7 +27,7 @@ namespace AdvancedScada.Controls.AHMI.SevenSegment
     {
         #region Mycontrol
 
-       
+
         #region Nested Types
         /// <summary>
         /// Specify how the text or value is aligned.
@@ -2015,7 +2015,7 @@ namespace AdvancedScada.Controls.AHMI.SevenSegment
         }
         #endregion
 
-         
+
 
         #region Subscribing and PLC data receiving
         private SubscriptionHandler SubScriptions;

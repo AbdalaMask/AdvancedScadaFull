@@ -1,15 +1,11 @@
 ﻿using OfficeOpenXml;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.OleDb;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace AdvancedScada.Utils.Excel
 {
-  
+
 
     public static class ExcelUtils
 

@@ -11,7 +11,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
     public class HMISquareIlluminatedButton : MfgControl.AdvancedHMI.Controls.SquareIlluminatedButton
     {
 
- 
+
 
         public bool HoldTimeMet;
         private int m_MaximumHoldTime = 3000;

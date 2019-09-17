@@ -1,7 +1,25 @@
-﻿using AdvancedScada.Controls.AHMI.Segment.DrawAll;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.Segment;
+using AdvancedScada.Controls.AHMI.Segment.DrawAll;
+using AdvancedScada.Controls.AHMI.Segment.DrawAll;
+using AdvancedScada.Controls.AHMI.Segment.DrawAll;
+using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Enum;
+using AdvancedScada.Controls.Enum;
+using AdvancedScada.Controls.Enum;
 using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Client;
+using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.Monitor;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -11,27 +29,6 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using AdvancedScada;
- 
-using AdvancedScada.Controls.AHMI.Segment.DrawAll;
-using AdvancedScada.Controls.AHMI.Segment.DrawAll;
-using AdvancedScada.Controls.DialogEditor;
-using AdvancedScada.Controls.DialogEditor;
-using AdvancedScada.Controls.Enum;
-using AdvancedScada.Controls.Enum;
-using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
- 
-using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Client;
-using AdvancedScada.DriverBase.Comm;
-
-using AdvancedScada.Monitor;
-using AdvancedScada.Controls.AHMI.Segment;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.Segment
 {

@@ -1,5 +1,8 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.BaseService.Client;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.IBaseService;
+using AdvancedScada.IBaseService.Common;
 using AdvancedScada.Management.BLManager;
 using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Navigator;
@@ -7,17 +10,12 @@ using ComponentFactory.Krypton.Toolkit;
 using HslScada.Studio.Tools;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.ServiceModel;
 using System.Threading;
 using System.Windows.Forms;
-using AdvancedScada.BaseService.Client;
-using AdvancedScada.IBaseService;
-using AdvancedScada.IBaseService.Common;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.Studio.Monitor
@@ -28,7 +26,7 @@ namespace AdvancedScada.Studio.Monitor
         private bool IsConnected;
         public bool IsDataChanged = false;
 
-         private IReadService client;
+        private IReadService client;
         private ChannelService objChannelManager;
         private DataBlockService objDataBlockManager;
         private DeviceService objDeviceManager;
@@ -38,7 +36,7 @@ namespace AdvancedScada.Studio.Monitor
         {
             InitializeComponent(); Application.DoEvents();
         }
-         
+
 
         private void InitializeData(string xmlPath)
         {
@@ -242,7 +240,7 @@ namespace AdvancedScada.Studio.Monitor
 
 
         }
-      
+
 
         public void DataTags(Dictionary<string, Tag> Tags)
         {

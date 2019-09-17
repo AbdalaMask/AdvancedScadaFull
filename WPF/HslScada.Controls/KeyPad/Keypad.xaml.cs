@@ -20,16 +20,16 @@
  * If you need to check the original source code you can download it here: http://wosk.codeplex.com/
  */
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.ComponentModel;
 
 namespace KeyPad
 {
     /// <summary>
     /// Logica di interazione per MainWindow.xaml
     /// </summary>
-    public partial class Keypad : Window,INotifyPropertyChanged
+    public partial class Keypad : Window, INotifyPropertyChanged
     {
         #region Public Properties
 
@@ -41,19 +41,19 @@ namespace KeyPad
         }
 
         #endregion
-        
+
         public Keypad(Control owner, Window wndOwner)
         {
             InitializeComponent();
             this.Owner = wndOwner;
             this.DataContext = this;
             Result = "";
-        }        
+        }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            switch (button.CommandParameter.ToString()) 
+            switch (button.CommandParameter.ToString())
             {
                 case "ESC":
                     this.DialogResult = false;
@@ -71,8 +71,8 @@ namespace KeyPad
                 default:
                     Result += button.Content.ToString();
                     break;
-            }   
-        }    
+            }
+        }
 
         #region INotifyPropertyChanged members
 
@@ -87,7 +87,7 @@ namespace KeyPad
 
         #endregion
 
-        
-       
+
+
     }
 }

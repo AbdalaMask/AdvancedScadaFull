@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-
-namespace HslCommunication
+﻿namespace HslCommunication
 {
 
     /*******************************************************************************
@@ -25,15 +19,15 @@ namespace HslCommunication
     {
         #region Constractor
 
-        static StringResources( )
+        static StringResources()
         {
-            if (System.Globalization.CultureInfo.CurrentCulture.ToString( ).StartsWith( "zh" ))
+            if (System.Globalization.CultureInfo.CurrentCulture.ToString().StartsWith("zh"))
             {
-                SetLanguageChinese( );
+                SetLanguageChinese();
             }
             else
             {
-                SeteLanguageEnglish( );
+                SeteLanguageEnglish();
             }
         }
 
@@ -44,24 +38,24 @@ namespace HslCommunication
         /// 获取或设置系统的语言选项 ->
         /// Gets or sets the language options for the system
         /// </summary>
-        public static Language.DefaultLanguage Language = new Language.DefaultLanguage( );
+        public static Language.DefaultLanguage Language = new Language.DefaultLanguage();
 
         /// <summary>
         /// 将语言设置为中文 ->
         /// Set the language to Chinese
         /// </summary>
-        public static void SetLanguageChinese( )
+        public static void SetLanguageChinese()
         {
-            Language = new Language.DefaultLanguage( );
+            Language = new Language.DefaultLanguage();
         }
 
         /// <summary>
         /// 将语言设置为英文 ->
         /// Set the language to English
         /// </summary>
-        public static void SeteLanguageEnglish( )
+        public static void SeteLanguageEnglish()
         {
-            Language = new Language.English( );
+            Language = new Language.English();
         }
     }
 }

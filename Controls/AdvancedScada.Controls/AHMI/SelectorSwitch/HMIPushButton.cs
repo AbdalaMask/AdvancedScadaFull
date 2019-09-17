@@ -1,5 +1,15 @@
-﻿using AdvancedScada.Controls.DialogEditor;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.SelectorSwitch;
+using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.Monitor;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -7,19 +17,6 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using AdvancedScada;
- 
- 
-using AdvancedScada.Controls.DialogEditor;
-using AdvancedScada.Controls.Subscription;
- 
-using AdvancedScada.DriverBase.Comm;
-using MfgControl.AdvancedHMI.Controls;
-using AdvancedScada.Monitor;
-using AdvancedScada.Controls.AHMI.SelectorSwitch;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.SelectorSwitch
 {

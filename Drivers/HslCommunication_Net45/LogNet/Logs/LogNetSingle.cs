@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
-using System.IO;
 
 namespace HslCommunication.LogNet
 {
@@ -21,20 +18,20 @@ namespace HslCommunication.LogNet
         #endregion
 
         #region Constructor
-        
+
         /// <summary>
         /// 实例化一个单文件日志的对象
         /// </summary>
         /// <param name="filePath">文件的路径</param>
         /// <exception cref="FileNotFoundException"></exception>
-        public LogNetSingle(string filePath) 
+        public LogNetSingle(string filePath)
         {
             LogSaveMode = LogNetManagment.LogSaveModeBySingleFile;
 
             m_fileName = filePath;
 
             FileInfo fileInfo = new FileInfo(filePath);
-            if(!Directory.Exists(fileInfo.DirectoryName))
+            if (!Directory.Exists(fileInfo.DirectoryName))
             {
                 Directory.CreateDirectory(fileInfo.DirectoryName);
             }
@@ -77,12 +74,12 @@ namespace HslCommunication.LogNet
             m_fileSaveLock.Leave();
             return result;
         }
-        
+
         /// <summary>
         /// 获取所有的日志文件数组，对于单日志文件来说就只有一个
         /// </summary>
         /// <returns>字符串数组，包含了所有的存在的日志数据</returns>
-        public string[] GetExistLogFileNames( )
+        public string[] GetExistLogFileNames()
         {
             return new string[]
             {
@@ -111,7 +108,7 @@ namespace HslCommunication.LogNet
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns></returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return $"LogNetSingle";
         }

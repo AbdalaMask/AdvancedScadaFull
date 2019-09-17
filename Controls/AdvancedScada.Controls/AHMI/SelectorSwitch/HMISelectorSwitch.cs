@@ -1,4 +1,12 @@
-﻿using AdvancedScada.Controls.Subscription;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.SelectorSwitch;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.DriverBase.Comm;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,17 +20,6 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using AdvancedScada;
- 
- 
-using AdvancedScada.Controls.Subscription;
-using MfgControl.AdvancedHMI.Controls;
-
-using AdvancedScada.DriverBase.Comm;
-using AdvancedScada.Controls.AHMI.SelectorSwitch;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.SelectorSwitch
 {
@@ -243,7 +240,7 @@ namespace AdvancedScada.Controls.AHMI.SelectorSwitch
             }
         }
 
-     
+
 
         #endregion
 

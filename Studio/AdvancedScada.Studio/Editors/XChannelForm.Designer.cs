@@ -150,11 +150,6 @@ namespace AdvancedScada.Studio.Editors
             // 
             this.cboxModel.DropDownWidth = 163;
             this.cboxModel.IntegralHeight = false;
-            this.cboxModel.Items.AddRange(new object[] {
-            " XGK",
-            " XGB",
-            " XBL",
-            " MK"});
             this.cboxModel.Location = new System.Drawing.Point(121, 90);
             this.cboxModel.Margin = new System.Windows.Forms.Padding(4);
             this.cboxModel.Name = "cboxModel";

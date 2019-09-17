@@ -34,7 +34,7 @@ namespace AdvancedScada.Studio.Config
                 Settings.Default.TypeLibrary = cboxLibraryImage.Text;
                 Settings.Default.TypeForms = cboxTypeForms.Text;
 
-                 Settings.Default.Save();
+                Settings.Default.Save();
 
                 Close();
 
@@ -78,7 +78,7 @@ namespace AdvancedScada.Studio.Config
 
                 cboxLibraryImage.Text = Settings.Default.TypeLibrary;
 
-               
+
 
                 cboxTypeForms.Text = Settings.Default.TypeForms;
 
@@ -144,7 +144,7 @@ namespace AdvancedScada.Studio.Config
             cboxTypeForms.Text = FBD.SelectedPath;
         }
 
-        
+
 
         private void BtnLibraryImages_Click(object sender, EventArgs e)
         {

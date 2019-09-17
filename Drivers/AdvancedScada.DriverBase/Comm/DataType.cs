@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdvancedScada.DriverBase.Comm
+﻿namespace AdvancedScada.DriverBase.Comm
 {
     public enum DataTypes
     {
@@ -19,6 +13,6 @@ namespace AdvancedScada.DriverBase.Comm
         Float,
         Double,
         String
-       
+
     }
 }

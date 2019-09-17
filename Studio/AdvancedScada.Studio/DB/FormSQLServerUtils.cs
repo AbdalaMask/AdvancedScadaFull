@@ -1,13 +1,11 @@
-﻿using AdvancedScada.Studio.DB;
+﻿using AdvancedScada.Studio.Properties;
+using AdvancedScada.Utils.Databases;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Windows.Forms;
-using AdvancedScada.Utils.Databases;
 using static AdvancedScada.IBaseService.Common.XCollection;
-using AdvancedScada.Studio.Properties;
 
 namespace AdvancedScada.Studio.DB
 {

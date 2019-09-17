@@ -61,7 +61,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
 
         #region "Basic Properties"
 
-       
+
         #endregion
 
         [Category("PLC Properties")]

@@ -1,6 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using MfgControl.AdvancedHMI.Controls;
 using AdvancedScada.DriverBase;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.Drawing.Design;

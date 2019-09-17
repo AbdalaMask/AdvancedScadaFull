@@ -201,7 +201,7 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
 
         public bool[] ReadDiscrete(string address, ushort length)
         {
-            throw new NotImplementedException();
+            return xGBCnet.ReadBool(address, length).Content;
         }
 
 

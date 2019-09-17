@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
 using System.Text;
 
@@ -109,7 +107,7 @@ namespace HslCommunication.BasicFramework
         #endregion
 
         #region Private Member
-        
+
         /// <summary>
         /// 系统的邮件发送客户端
         /// </summary>
@@ -259,9 +257,9 @@ namespace HslCommunication.BasicFramework
                     SoftMailSendFailedCount = 0;
                     return true;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    Console.WriteLine( SoftBasic.GetExceptionMessage( ex ) );
+                    Console.WriteLine(SoftBasic.GetExceptionMessage(ex));
                     SoftMailSendFailedCount++;
                     return false;
                 }

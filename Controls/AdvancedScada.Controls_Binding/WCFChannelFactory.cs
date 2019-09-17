@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading;
-using AdvancedScada.BaseService.Client;
+﻿using AdvancedScada.BaseService.Client;
 using AdvancedScada.IBaseService;
+using System;
+using System.Threading;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.Controls_Binding

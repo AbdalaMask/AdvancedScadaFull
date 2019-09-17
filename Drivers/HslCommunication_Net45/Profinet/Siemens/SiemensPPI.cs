@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HslCommunication.Serial;
-using HslCommunication.Core.Address;
+﻿using HslCommunication.Serial;
+using System;
 #if Net45
 using System.Threading.Tasks;
 #endif
@@ -26,7 +22,7 @@ namespace HslCommunication.Profinet.Siemens
         /// <summary>
         /// 实例化一个西门子的PPI协议对象
         /// </summary>
-        public SiemensPPI( )
+        public SiemensPPI()
         {
             WordLength = 2;
         }
@@ -38,8 +34,11 @@ namespace HslCommunication.Profinet.Siemens
         /// <summary>
         /// 西门子PLC的站号信息
         /// </summary>
-        public byte Station { get => station;
-            set {
+        public byte Station
+        {
+            get => station;
+            set
+            {
                 station = value;
                 executeConfirm[1] = value;
 
@@ -62,35 +61,35 @@ namespace HslCommunication.Profinet.Siemens
         /// <param name="address">西门子的地址数据信息</param>
         /// <param name="length">数据长度</param>
         /// <returns>带返回结果的结果对象</returns>
-        public override OperateResult<byte[]> Read( string address, ushort length )
+        public override OperateResult<byte[]> Read(string address, ushort length)
         {
             // 解析指令
-            OperateResult<byte[]> command = SiemensPPIOverTcp.BuildReadCommand( station, address, length, false );
+            OperateResult<byte[]> command = SiemensPPIOverTcp.BuildReadCommand(station, address, length, false);
             if (!command.IsSuccess) return command;
 
             // 第一次数据交互
-            OperateResult<byte[]> read1 = ReadBase( command.Content );
+            OperateResult<byte[]> read1 = ReadBase(command.Content);
             if (!read1.IsSuccess) return read1;
 
             // 验证
-            if (read1.Content[0] != 0xE5) return new OperateResult<byte[]>( "PLC Receive Check Failed:" + BasicFramework.SoftBasic.ByteToHexString( read1.Content, ' ' ) );
+            if (read1.Content[0] != 0xE5) return new OperateResult<byte[]>("PLC Receive Check Failed:" + BasicFramework.SoftBasic.ByteToHexString(read1.Content, ' '));
 
             // 第二次数据交互
-            OperateResult<byte[]> read2 = ReadBase( executeConfirm );
+            OperateResult<byte[]> read2 = ReadBase(executeConfirm);
             if (!read2.IsSuccess) return read2;
 
             // 错误码判断
-            if (read2.Content.Length < 21) return new OperateResult<byte[]>( read2.ErrorCode, "Failed: " + BasicFramework.SoftBasic.ByteToHexString( read2.Content, ' ' ) );
-            if (read2.Content[17] != 0x00 || read2.Content[18] != 0x00) return new OperateResult<byte[]>( read2.Content[19], SiemensPPIOverTcp.GetMsgFromStatus( read2.Content[18], read2.Content[19] ) );
-            if (read2.Content[21] != 0xFF) return new OperateResult<byte[]>( read2.Content[21], SiemensPPIOverTcp.GetMsgFromStatus( read2.Content[21] ) );
+            if (read2.Content.Length < 21) return new OperateResult<byte[]>(read2.ErrorCode, "Failed: " + BasicFramework.SoftBasic.ByteToHexString(read2.Content, ' '));
+            if (read2.Content[17] != 0x00 || read2.Content[18] != 0x00) return new OperateResult<byte[]>(read2.Content[19], SiemensPPIOverTcp.GetMsgFromStatus(read2.Content[18], read2.Content[19]));
+            if (read2.Content[21] != 0xFF) return new OperateResult<byte[]>(read2.Content[21], SiemensPPIOverTcp.GetMsgFromStatus(read2.Content[21]));
 
             // 数据提取
             byte[] buffer = new byte[length];
             if (read2.Content[21] == 0xFF && read2.Content[22] == 0x04)
             {
-                Array.Copy( read2.Content, 25, buffer, 0, length );
+                Array.Copy(read2.Content, 25, buffer, 0, length);
             }
-            return OperateResult.CreateSuccessResult( buffer );
+            return OperateResult.CreateSuccessResult(buffer);
         }
 
         /// <summary>
@@ -99,36 +98,36 @@ namespace HslCommunication.Profinet.Siemens
         /// <param name="address">西门子的地址数据信息</param>
         /// <param name="length">数据长度</param>
         /// <returns>带返回结果的结果对象</returns>
-        public override OperateResult<bool[]> ReadBool( string address, ushort length )
+        public override OperateResult<bool[]> ReadBool(string address, ushort length)
         {
             // 解析指令
-            OperateResult<byte[]> command = SiemensPPIOverTcp.BuildReadCommand( station, address, length, true );
-            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( command );
+            OperateResult<byte[]> command = SiemensPPIOverTcp.BuildReadCommand(station, address, length, true);
+            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(command);
 
             // 第一次数据交互
-            OperateResult<byte[]> read1 = ReadBase( command.Content );
-            if (!read1.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( read1 );
+            OperateResult<byte[]> read1 = ReadBase(command.Content);
+            if (!read1.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(read1);
 
             // 验证
-            if (read1.Content[0] != 0xE5) return new OperateResult<bool[]>( "PLC Receive Check Failed:" + BasicFramework.SoftBasic.ByteToHexString( read1.Content, ' ' ) );
+            if (read1.Content[0] != 0xE5) return new OperateResult<bool[]>("PLC Receive Check Failed:" + BasicFramework.SoftBasic.ByteToHexString(read1.Content, ' '));
 
             // 第二次数据交互
-            OperateResult<byte[]> read2 = ReadBase( executeConfirm );
-            if (!read2.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( read2 );
+            OperateResult<byte[]> read2 = ReadBase(executeConfirm);
+            if (!read2.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(read2);
 
             // 错误码判断
-            if (read2.Content.Length < 21) return new OperateResult<bool[]>( read2.ErrorCode, "Failed: " + BasicFramework.SoftBasic.ByteToHexString( read2.Content, ' ' ) );
-            if (read2.Content[17] != 0x00 || read2.Content[18] != 0x00) return new OperateResult<bool[]>( read2.Content[19], SiemensPPIOverTcp.GetMsgFromStatus( read2.Content[18], read2.Content[19] ) );
-            if (read2.Content[21] != 0xFF) return new OperateResult<bool[]>( read2.Content[21], SiemensPPIOverTcp.GetMsgFromStatus( read2.Content[21] ) );
+            if (read2.Content.Length < 21) return new OperateResult<bool[]>(read2.ErrorCode, "Failed: " + BasicFramework.SoftBasic.ByteToHexString(read2.Content, ' '));
+            if (read2.Content[17] != 0x00 || read2.Content[18] != 0x00) return new OperateResult<bool[]>(read2.Content[19], SiemensPPIOverTcp.GetMsgFromStatus(read2.Content[18], read2.Content[19]));
+            if (read2.Content[21] != 0xFF) return new OperateResult<bool[]>(read2.Content[21], SiemensPPIOverTcp.GetMsgFromStatus(read2.Content[21]));
 
             // 数据提取
             byte[] buffer = new byte[read2.Content.Length - 27];
             if (read2.Content[21] == 0xFF && read2.Content[22] == 0x03)
             {
-                Array.Copy( read2.Content, 25, buffer, 0, buffer.Length );
+                Array.Copy(read2.Content, 25, buffer, 0, buffer.Length);
             }
 
-            return OperateResult.CreateSuccessResult( BasicFramework.SoftBasic.ByteToBoolArray( buffer, length ) );
+            return OperateResult.CreateSuccessResult(BasicFramework.SoftBasic.ByteToBoolArray(buffer, length));
         }
 
         /// <summary>
@@ -137,29 +136,29 @@ namespace HslCommunication.Profinet.Siemens
         /// <param name="address">西门子的地址数据信息</param>
         /// <param name="value">数据长度</param>
         /// <returns>带返回结果的结果对象</returns>
-        public override OperateResult Write( string address, byte[] value )
+        public override OperateResult Write(string address, byte[] value)
         {
             // 解析指令
-            OperateResult<byte[]> command = SiemensPPIOverTcp.BuildWriteCommand( station, address, value );
+            OperateResult<byte[]> command = SiemensPPIOverTcp.BuildWriteCommand(station, address, value);
             if (!command.IsSuccess) return command;
 
             // 第一次数据交互
-            OperateResult<byte[]> read1 = ReadBase( command.Content );
+            OperateResult<byte[]> read1 = ReadBase(command.Content);
             if (!read1.IsSuccess) return read1;
 
             // 验证
-            if (read1.Content[0] != 0xE5) return new OperateResult<byte[]>( "PLC Receive Check Failed:" + read1.Content[0] );
+            if (read1.Content[0] != 0xE5) return new OperateResult<byte[]>("PLC Receive Check Failed:" + read1.Content[0]);
 
             // 第二次数据交互
-            OperateResult<byte[]> read2 = ReadBase( executeConfirm );
+            OperateResult<byte[]> read2 = ReadBase(executeConfirm);
             if (!read2.IsSuccess) return read2;
 
             // 错误码判断
-            if (read2.Content.Length < 21) return new OperateResult( read2.ErrorCode, "Failed: " + BasicFramework.SoftBasic.ByteToHexString( read2.Content, ' ' ) );
-            if (read2.Content[17] != 0x00 || read2.Content[18] != 0x00) return new OperateResult( read2.Content[19], SiemensPPIOverTcp.GetMsgFromStatus( read2.Content[18], read2.Content[19] ) );
-            if (read2.Content[21] != 0xFF) return new OperateResult( read2.Content[21], SiemensPPIOverTcp.GetMsgFromStatus( read2.Content[21] ) );
+            if (read2.Content.Length < 21) return new OperateResult(read2.ErrorCode, "Failed: " + BasicFramework.SoftBasic.ByteToHexString(read2.Content, ' '));
+            if (read2.Content[17] != 0x00 || read2.Content[18] != 0x00) return new OperateResult(read2.Content[19], SiemensPPIOverTcp.GetMsgFromStatus(read2.Content[18], read2.Content[19]));
+            if (read2.Content[21] != 0xFF) return new OperateResult(read2.Content[21], SiemensPPIOverTcp.GetMsgFromStatus(read2.Content[21]));
             // 数据提取
-            return OperateResult.CreateSuccessResult( );
+            return OperateResult.CreateSuccessResult();
         }
 
         /// <summary>
@@ -168,29 +167,29 @@ namespace HslCommunication.Profinet.Siemens
         /// <param name="address">西门子的地址数据信息</param>
         /// <param name="value">数据长度</param>
         /// <returns>带返回结果的结果对象</returns>
-        public override OperateResult Write(string address, bool[] value )
+        public override OperateResult Write(string address, bool[] value)
         {
             // 解析指令
-            OperateResult<byte[]> command = SiemensPPIOverTcp.BuildWriteCommand( station, address, value );
+            OperateResult<byte[]> command = SiemensPPIOverTcp.BuildWriteCommand(station, address, value);
             if (!command.IsSuccess) return command;
 
             // 第一次数据交互
-            OperateResult<byte[]> read1 = ReadBase( command.Content );
+            OperateResult<byte[]> read1 = ReadBase(command.Content);
             if (!read1.IsSuccess) return read1;
 
             // 验证
-            if (read1.Content[0] != 0xE5) return new OperateResult<byte[]>( "PLC Receive Check Failed:" + read1.Content[0] );
-            
+            if (read1.Content[0] != 0xE5) return new OperateResult<byte[]>("PLC Receive Check Failed:" + read1.Content[0]);
+
             // 第二次数据交互
-            OperateResult<byte[]> read2 = ReadBase( executeConfirm );
+            OperateResult<byte[]> read2 = ReadBase(executeConfirm);
             if (!read2.IsSuccess) return read2;
 
             // 错误码判断
-            if (read2.Content.Length < 21) return new OperateResult( read2.ErrorCode, "Failed: " + BasicFramework.SoftBasic.ByteToHexString( read2.Content, ' ' ) );
-            if (read2.Content[17] != 0x00 || read2.Content[18] != 0x00) return new OperateResult( read2.Content[19], SiemensPPIOverTcp.GetMsgFromStatus( read2.Content[18], read2.Content[19] ) );
-            if (read2.Content[21] != 0xFF) return new OperateResult( read2.Content[21], SiemensPPIOverTcp.GetMsgFromStatus( read2.Content[21] ) );
+            if (read2.Content.Length < 21) return new OperateResult(read2.ErrorCode, "Failed: " + BasicFramework.SoftBasic.ByteToHexString(read2.Content, ' '));
+            if (read2.Content[17] != 0x00 || read2.Content[18] != 0x00) return new OperateResult(read2.Content[19], SiemensPPIOverTcp.GetMsgFromStatus(read2.Content[18], read2.Content[19]));
+            if (read2.Content[21] != 0xFF) return new OperateResult(read2.Content[21], SiemensPPIOverTcp.GetMsgFromStatus(read2.Content[21]));
             // 数据提取
-            return OperateResult.CreateSuccessResult( );
+            return OperateResult.CreateSuccessResult();
         }
 
         #endregion
@@ -202,12 +201,12 @@ namespace HslCommunication.Profinet.Siemens
         /// </summary>
         /// <param name="address">西门子的地址数据信息</param>
         /// <returns>带返回结果的结果对象</returns>
-        public OperateResult<byte> ReadByte( string address )
+        public OperateResult<byte> ReadByte(string address)
         {
-            OperateResult<byte[]> read = Read( address, 1 );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte>( read );
+            OperateResult<byte[]> read = Read(address, 1);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte>(read);
 
-            return OperateResult.CreateSuccessResult( read.Content[0] );
+            return OperateResult.CreateSuccessResult(read.Content[0]);
         }
 
         /// <summary>
@@ -216,9 +215,9 @@ namespace HslCommunication.Profinet.Siemens
         /// <param name="address">西门子的地址数据信息</param>
         /// <param name="value">数据长度</param>
         /// <returns>带返回结果的结果对象</returns>
-        public OperateResult WriteByte(string address, byte value )
+        public OperateResult WriteByte(string address, byte value)
         {
-            return Write( address, new byte[] { value } );
+            return Write(address, new byte[] { value });
         }
 
         #endregion
@@ -229,44 +228,44 @@ namespace HslCommunication.Profinet.Siemens
         /// 启动西门子PLC为RUN模式
         /// </summary>
         /// <returns>是否启动成功</returns>
-        public OperateResult Start( )
+        public OperateResult Start()
         {
             byte[] cmd = new byte[] { 0x68, 0x21, 0x21, 0x68, station, 0x00, 0x6C, 0x32, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x14, 0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFD, 0x00, 0x00, 0x09, 0x50, 0x5F, 0x50, 0x52, 0x4F, 0x47, 0x52, 0x41, 0x4D, 0xAA, 0x16 };
             // 第一次数据交互
-            OperateResult<byte[]> read1 = ReadBase( cmd );
+            OperateResult<byte[]> read1 = ReadBase(cmd);
             if (!read1.IsSuccess) return read1;
 
             // 验证
-            if (read1.Content[0] != 0xE5) return new OperateResult<byte[]>( "PLC Receive Check Failed:" + read1.Content[0] );
+            if (read1.Content[0] != 0xE5) return new OperateResult<byte[]>("PLC Receive Check Failed:" + read1.Content[0]);
 
             // 第二次数据交互
-            OperateResult<byte[]> read2 = ReadBase( executeConfirm );
+            OperateResult<byte[]> read2 = ReadBase(executeConfirm);
             if (!read2.IsSuccess) return read2;
 
             // 数据提取
-            return OperateResult.CreateSuccessResult( );
+            return OperateResult.CreateSuccessResult();
         }
 
         /// <summary>
         /// 停止西门子PLC，切换为Stop模式
         /// </summary>
         /// <returns>是否停止成功</returns>
-        public OperateResult Stop( )
+        public OperateResult Stop()
         {
             byte[] cmd = new byte[] { 0x68, 0x1D, 0x1D, 0x68, station, 0x00, 0x6C, 0x32, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x29, 0x00, 0x00, 0x00, 0x00, 0x00, 0x09, 0x50, 0x5F, 0x50, 0x52, 0x4F, 0x47, 0x52, 0x41, 0x4D, 0xAA, 0x16 };
             // 第一次数据交互
-            OperateResult<byte[]> read1 = ReadBase( cmd );
+            OperateResult<byte[]> read1 = ReadBase(cmd);
             if (!read1.IsSuccess) return read1;
 
             // 验证
-            if (read1.Content[0] != 0xE5) return new OperateResult<byte[]>( "PLC Receive Check Failed:" + read1.Content[0] );
+            if (read1.Content[0] != 0xE5) return new OperateResult<byte[]>("PLC Receive Check Failed:" + read1.Content[0]);
 
             // 第二次数据交互
-            OperateResult<byte[]> read2 = ReadBase( executeConfirm );
+            OperateResult<byte[]> read2 = ReadBase(executeConfirm);
             if (!read2.IsSuccess) return read2;
 
             // 数据提取
-            return OperateResult.CreateSuccessResult( );
+            return OperateResult.CreateSuccessResult();
         }
 
         #endregion
@@ -284,7 +283,7 @@ namespace HslCommunication.Profinet.Siemens
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return $"SiemensPPI[{PortName}:{BaudRate}]";
         }

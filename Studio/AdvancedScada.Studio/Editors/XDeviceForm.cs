@@ -1,10 +1,9 @@
 ﻿using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.Management;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using static AdvancedScada.IBaseService.Common.XCollection;
-using AdvancedScada.Management;
 namespace AdvancedScada.Studio.Editors
 {
     public partial class XDeviceForm : KryptonForm

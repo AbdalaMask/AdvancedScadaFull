@@ -1,4 +1,11 @@
-﻿using AdvancedScada.Controls.Enum;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.ProcessAll;
+using AdvancedScada.Controls.AHMI.ProcessAll.DrawAll;
+using AdvancedScada.Controls.Enum;
+using AdvancedScada.Controls.Enum;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,14 +13,6 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AdvancedScada;
- 
- using AdvancedScada.Controls.Enum;
-using AdvancedScada.Controls.AHMI.ProcessAll.DrawAll;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
-using AdvancedScada.Controls.AHMI.ProcessAll;
 
 namespace AdvancedScada.Controls.AHMI.ProcessAll.DrawAll
 {

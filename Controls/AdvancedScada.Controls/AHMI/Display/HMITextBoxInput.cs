@@ -1,4 +1,11 @@
-﻿using AdvancedScada.Controls.DialogEditor;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.Display;
+using AdvancedScada.Controls.AHMI.Licenses;
+using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.Controls.DialogEditor;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,15 +13,6 @@ using System.Drawing.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AdvancedScada;
- 
- 
-using AdvancedScada.Controls.AHMI.Licenses;
-using AdvancedScada.Controls.DialogEditor;
-using AdvancedScada.Controls.AHMI.Display;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.Display
 {

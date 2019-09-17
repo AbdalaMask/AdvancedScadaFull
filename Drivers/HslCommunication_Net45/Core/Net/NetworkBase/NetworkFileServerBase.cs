@@ -1,12 +1,8 @@
-﻿using System;
+﻿using HslCommunication.Enthernet;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using HslCommunication.BasicFramework;
-using HslCommunication.Enthernet;
-using HslCommunication.LogNet;
 using System.Threading;
 
 namespace HslCommunication.Core.Net
@@ -21,34 +17,34 @@ namespace HslCommunication.Core.Net
         /// <summary>
         /// 所有文件操作的词典锁
         /// </summary>
-        internal Dictionary<string, FileMarkId> m_dictionary_files_marks = new Dictionary<string, FileMarkId>( );
+        internal Dictionary<string, FileMarkId> m_dictionary_files_marks = new Dictionary<string, FileMarkId>();
         /// <summary>
         /// 词典的锁
         /// </summary>
-        private SimpleHybirdLock dict_hybirdLock = new SimpleHybirdLock( );
+        private SimpleHybirdLock dict_hybirdLock = new SimpleHybirdLock();
 
         /// <summary>
         /// 获取当前文件的读写锁，如果没有会自动创建
         /// </summary>
         /// <param name="filename">完整的文件路径</param>
         /// <returns>读写锁</returns>
-        internal FileMarkId GetFileMarksFromDictionaryWithFileName( string filename )
+        internal FileMarkId GetFileMarksFromDictionaryWithFileName(string filename)
         {
             FileMarkId fileMarkId = null;
-            dict_hybirdLock.Enter( );
+            dict_hybirdLock.Enter();
 
             // lock operator
-            if (m_dictionary_files_marks.ContainsKey( filename ))
+            if (m_dictionary_files_marks.ContainsKey(filename))
             {
                 fileMarkId = m_dictionary_files_marks[filename];
             }
             else
             {
-                fileMarkId = new FileMarkId( LogNet, filename );
-                m_dictionary_files_marks.Add( filename, fileMarkId );
+                fileMarkId = new FileMarkId(LogNet, filename);
+                m_dictionary_files_marks.Add(filename, fileMarkId);
             }
 
-            dict_hybirdLock.Leave( );
+            dict_hybirdLock.Leave();
             return fileMarkId;
         }
 
@@ -76,7 +72,7 @@ namespace HslCommunication.Core.Net
             )
         {
             // 先接收文件名
-            OperateResult<int,string> fileNameResult = ReceiveStringContentFromSocket( socket );
+            OperateResult<int, string> fileNameResult = ReceiveStringContentFromSocket(socket);
             if (!fileNameResult.IsSuccess)
             {
                 command = 0;
@@ -91,7 +87,7 @@ namespace HslCommunication.Core.Net
             fileName = fileNameResult.Content2;
 
             // 接收Factory
-            OperateResult<int, string> factoryResult = ReceiveStringContentFromSocket( socket );
+            OperateResult<int, string> factoryResult = ReceiveStringContentFromSocket(socket);
             if (!factoryResult.IsSuccess)
             {
                 factory = null;
@@ -100,10 +96,10 @@ namespace HslCommunication.Core.Net
                 return factoryResult;
             }
             factory = factoryResult.Content2;
-            
+
 
             // 接收Group
-            OperateResult<int, string> groupResult = ReceiveStringContentFromSocket( socket );
+            OperateResult<int, string> groupResult = ReceiveStringContentFromSocket(socket);
             if (!groupResult.IsSuccess)
             {
                 group = null;
@@ -113,7 +109,7 @@ namespace HslCommunication.Core.Net
             group = groupResult.Content2;
 
             // 最后接收id
-            OperateResult<int, string> idResult = ReceiveStringContentFromSocket( socket );
+            OperateResult<int, string> idResult = ReceiveStringContentFromSocket(socket);
             if (!idResult.IsSuccess)
             {
                 id = null;
@@ -121,16 +117,16 @@ namespace HslCommunication.Core.Net
             }
             id = idResult.Content2;
 
-            return OperateResult.CreateSuccessResult( ) ;
+            return OperateResult.CreateSuccessResult();
         }
 
         /// <summary>
         /// 获取一个随机的文件名，由GUID码和随机数字组成
         /// </summary>
         /// <returns>文件名</returns>
-        protected string CreateRandomFileName( )
+        protected string CreateRandomFileName()
         {
-            return BasicFramework.SoftBasic.GetUniqueStringByGuidAndRandom( );
+            return BasicFramework.SoftBasic.GetUniqueStringByGuidAndRandom();
         }
 
         /// <summary>
@@ -140,12 +136,12 @@ namespace HslCommunication.Core.Net
         /// <param name="group">第二大类</param>
         /// <param name="id">第三大类</param>
         /// <returns>是否成功的结果对象</returns>
-        protected string ReturnAbsoluteFilePath( string factory, string group, string id )
+        protected string ReturnAbsoluteFilePath(string factory, string group, string id)
         {
             string result = m_FilesDirectoryPath;
-            if (!string.IsNullOrEmpty( factory )) result += "\\" + factory;
-            if (!string.IsNullOrEmpty( group )) result += "\\" + group;
-            if (!string.IsNullOrEmpty( id )) result += "\\" + id;
+            if (!string.IsNullOrEmpty(factory)) result += "\\" + factory;
+            if (!string.IsNullOrEmpty(group)) result += "\\" + group;
+            if (!string.IsNullOrEmpty(id)) result += "\\" + id;
             return result;
         }
 
@@ -158,9 +154,9 @@ namespace HslCommunication.Core.Net
         /// <param name="id">第三大类</param>
         /// <param name="fileName">文件名</param>
         /// <returns>是否成功的结果对象</returns>
-        protected string ReturnAbsoluteFileName( string factory, string group, string id, string fileName )
+        protected string ReturnAbsoluteFileName(string factory, string group, string id, string fileName)
         {
-            return ReturnAbsoluteFilePath( factory, group, id ) + "\\" + fileName;
+            return ReturnAbsoluteFilePath(factory, group, id) + "\\" + fileName;
         }
 
 
@@ -172,12 +168,12 @@ namespace HslCommunication.Core.Net
         /// <param name="id">第三大类</param>
         /// <param name="fileName">文件名</param>
         /// <returns>是否成功的结果对象</returns>
-        protected string ReturnRelativeFileName( string factory, string group, string id, string fileName )
+        protected string ReturnRelativeFileName(string factory, string group, string id, string fileName)
         {
             string result = "";
-            if (!string.IsNullOrEmpty( factory )) result += factory + "\\";
-            if (!string.IsNullOrEmpty( group )) result += group + "\\";
-            if (!string.IsNullOrEmpty( id )) result += id + "\\";
+            if (!string.IsNullOrEmpty(factory)) result += factory + "\\";
+            if (!string.IsNullOrEmpty(group)) result += group + "\\";
+            if (!string.IsNullOrEmpty(id)) result += id + "\\";
             return result + fileName;
         }
 
@@ -221,27 +217,27 @@ namespace HslCommunication.Core.Net
         /// <param name="fileNameOld">旧的文件名称</param>
         /// <param name="fileNameNew">新的文件名称</param>
         /// <returns>是否成功</returns>
-        protected bool MoveFileToNewFile( string fileNameOld, string fileNameNew )
+        protected bool MoveFileToNewFile(string fileNameOld, string fileNameNew)
         {
             try
             {
-                FileInfo info = new FileInfo( fileNameNew );
-                if (!Directory.Exists( info.DirectoryName ))
+                FileInfo info = new FileInfo(fileNameNew);
+                if (!Directory.Exists(info.DirectoryName))
                 {
-                    Directory.CreateDirectory( info.DirectoryName );
+                    Directory.CreateDirectory(info.DirectoryName);
                 }
 
-                if (File.Exists( fileNameNew ))
+                if (File.Exists(fileNameNew))
                 {
-                    File.Delete( fileNameNew );
+                    File.Delete(fileNameNew);
                 }
 
-                File.Move( fileNameOld, fileNameNew );
+                File.Move(fileNameOld, fileNameNew);
                 return true;
             }
             catch (Exception ex)
             {
-                LogNet?.WriteException( ToString(), "Move a file to new file failed: ", ex );
+                LogNet?.WriteException(ToString(), "Move a file to new file failed: ", ex);
                 return false;
             }
         }
@@ -265,19 +261,19 @@ namespace HslCommunication.Core.Net
             while (times < 3)
             {
                 times++;
-                if (DeleteFileByName( fullname ))
+                if (DeleteFileByName(fullname))
                 {
                     customer = 1;
                     break;
                 }
                 else
                 {
-                    Thread.Sleep( 500 );
+                    Thread.Sleep(500);
                 }
             }
 
             // 回发消息
-           return SendStringAndCheckReceive( socket, customer, StringResources.Language.SuccessText );
+            return SendStringAndCheckReceive(socket, customer, StringResources.Language.SuccessText);
         }
 
 
@@ -298,15 +294,15 @@ namespace HslCommunication.Core.Net
         /// <summary>
         /// 服务器启动时的操作
         /// </summary>
-        protected override void StartInitialization( )
+        protected override void StartInitialization()
         {
-            if (string.IsNullOrEmpty( FilesDirectoryPath ))
+            if (string.IsNullOrEmpty(FilesDirectoryPath))
             {
-                throw new ArgumentNullException( "FilesDirectoryPath", "No saved path is specified" );
+                throw new ArgumentNullException("FilesDirectoryPath", "No saved path is specified");
             }
 
-            CheckFolderAndCreate( );
-            base.StartInitialization( );
+            CheckFolderAndCreate();
+            base.StartInitialization();
         }
 
         #endregion
@@ -318,11 +314,11 @@ namespace HslCommunication.Core.Net
         /// <summary>
         /// 检查文件夹是否存在，不存在就创建
         /// </summary>
-        protected virtual void CheckFolderAndCreate( )
+        protected virtual void CheckFolderAndCreate()
         {
-            if (!Directory.Exists( FilesDirectoryPath ))
+            if (!Directory.Exists(FilesDirectoryPath))
             {
-                Directory.CreateDirectory( FilesDirectoryPath );
+                Directory.CreateDirectory(FilesDirectoryPath);
             }
         }
 
@@ -336,7 +332,7 @@ namespace HslCommunication.Core.Net
         public string FilesDirectoryPath
         {
             get { return m_FilesDirectoryPath; }
-            set { m_FilesDirectoryPath = PreprocessFolderName( value ); }
+            set { m_FilesDirectoryPath = PreprocessFolderName(value); }
         }
 
 
@@ -347,16 +343,16 @@ namespace HslCommunication.Core.Net
         /// <param name="group">第二大类</param>
         /// <param name="id">第三大类</param>
         /// <returns>文件列表</returns>
-        public virtual string[] GetDirectoryFiles( string factory, string group, string id )
+        public virtual string[] GetDirectoryFiles(string factory, string group, string id)
         {
-            if (string.IsNullOrEmpty( FilesDirectoryPath )) return new string[0];
+            if (string.IsNullOrEmpty(FilesDirectoryPath)) return new string[0];
 
-            string absolutePath = ReturnAbsoluteFilePath( factory, group, id );
+            string absolutePath = ReturnAbsoluteFilePath(factory, group, id);
 
             // 如果文件夹不存在
-            if (!Directory.Exists( absolutePath )) return new string[0];
+            if (!Directory.Exists(absolutePath)) return new string[0];
             // 返回文件列表
-            return Directory.GetFiles( absolutePath );
+            return Directory.GetFiles(absolutePath);
         }
 
         /// <summary>
@@ -366,16 +362,16 @@ namespace HslCommunication.Core.Net
         /// <param name="group">第二大类</param>
         /// <param name="id">第三大类</param>
         /// <returns>文件夹列表</returns>
-        public string[] GetDirectories( string factory, string group, string id )
+        public string[] GetDirectories(string factory, string group, string id)
         {
-            if (string.IsNullOrEmpty( FilesDirectoryPath )) return new string[0];
+            if (string.IsNullOrEmpty(FilesDirectoryPath)) return new string[0];
 
-            string absolutePath = ReturnAbsoluteFilePath( factory, group, id );
+            string absolutePath = ReturnAbsoluteFilePath(factory, group, id);
 
             // 如果文件夹不存在
-            if (!Directory.Exists( absolutePath )) return new string[0];
+            if (!Directory.Exists(absolutePath)) return new string[0];
             // 返回文件列表
-            return Directory.GetDirectories( absolutePath );
+            return Directory.GetDirectories(absolutePath);
         }
 
         #endregion
@@ -383,7 +379,7 @@ namespace HslCommunication.Core.Net
         #region Private Members
 
         private string m_FilesDirectoryPath = null;      // 文件的存储路径
-        private Random m_random = new Random( );          // 随机生成的文件名
+        private Random m_random = new Random();          // 随机生成的文件名
 
         #endregion
 
@@ -393,7 +389,7 @@ namespace HslCommunication.Core.Net
         /// 获取本对象的字符串标识形式
         /// </summary>
         /// <returns>对象信息</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return "NetworkFileServerBase";
         }

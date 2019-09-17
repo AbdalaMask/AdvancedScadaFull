@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HslCommunication.BasicFramework;
+﻿using HslCommunication.BasicFramework;
 using HslCommunication.Core;
 using HslCommunication.Core.Net;
+using System;
+using System.Linq;
+using System.Text;
 
 namespace HslCommunication.Profinet.FATEK
 {
@@ -123,7 +122,7 @@ namespace HslCommunication.Profinet.FATEK
         /// <summary>
         /// 实例化默认的构造方法
         /// </summary>
-        public FatekProgramOverTcp( )
+        public FatekProgramOverTcp()
         {
             WordLength = 1;
         }
@@ -147,28 +146,28 @@ namespace HslCommunication.Profinet.FATEK
         /// <param name="address">地址信息</param>
         /// <param name="length">数据长度</param>
         /// <returns>读取结果信息</returns>
-        public override OperateResult<byte[]> Read( string address, ushort length )
+        public override OperateResult<byte[]> Read(string address, ushort length)
         {
             // 解析指令
-            OperateResult<byte[]> command = BuildReadCommand( this.station, address, length, false );
-            if (!command.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( command );
+            OperateResult<byte[]> command = BuildReadCommand(this.station, address, length, false);
+            if (!command.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(command);
 
             // 核心交互
-            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( read );
+            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(read);
 
             // 结果验证
-            if (read.Content[0] != 0x02) return new OperateResult<byte[]>( read.Content[0], "Read Faild:" + BasicFramework.SoftBasic.ByteToHexString( read.Content, ' ' ) );
-            if (read.Content[5] != 0x30) return new OperateResult<byte[]>( read.Content[5], GetErrorDescriptionFromCode( (char)read.Content[5] ) );
+            if (read.Content[0] != 0x02) return new OperateResult<byte[]>(read.Content[0], "Read Faild:" + BasicFramework.SoftBasic.ByteToHexString(read.Content, ' '));
+            if (read.Content[5] != 0x30) return new OperateResult<byte[]>(read.Content[5], GetErrorDescriptionFromCode((char)read.Content[5]));
 
             // 提取结果
             byte[] Content = new byte[length * 2];
             for (int i = 0; i < Content.Length / 2; i++)
             {
-                ushort tmp = Convert.ToUInt16( Encoding.ASCII.GetString( read.Content, i * 4 + 6, 4 ), 16 );
-                BitConverter.GetBytes( tmp ).CopyTo( Content, i * 2 );
+                ushort tmp = Convert.ToUInt16(Encoding.ASCII.GetString(read.Content, i * 4 + 6, 4), 16);
+                BitConverter.GetBytes(tmp).CopyTo(Content, i * 2);
             }
-            return OperateResult.CreateSuccessResult( Content );
+            return OperateResult.CreateSuccessResult(Content);
         }
 
         /// <summary>
@@ -177,22 +176,22 @@ namespace HslCommunication.Profinet.FATEK
         /// <param name="address">地址信息，举例，D100，R200，RC100，RT200</param>
         /// <param name="value">数据值</param>
         /// <returns>是否写入成功</returns>
-        public override OperateResult Write( string address, byte[] value )
+        public override OperateResult Write(string address, byte[] value)
         {
             // 解析指令
-            OperateResult<byte[]> command = BuildWriteByteCommand( this.station, address, value );
+            OperateResult<byte[]> command = BuildWriteByteCommand(this.station, address, value);
             if (!command.IsSuccess) return command;
 
             // 核心交互
-            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
+            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
             if (!read.IsSuccess) return read;
 
             // 结果验证
-            if (read.Content[0] != 0x02) return new OperateResult( read.Content[0], "Write Faild:" + BasicFramework.SoftBasic.ByteToHexString( read.Content, ' ' ) );
-            if (read.Content[5] != 0x30) return new OperateResult<byte[]>( read.Content[5], GetErrorDescriptionFromCode( (char)read.Content[5] ) );
+            if (read.Content[0] != 0x02) return new OperateResult(read.Content[0], "Write Faild:" + BasicFramework.SoftBasic.ByteToHexString(read.Content, ' '));
+            if (read.Content[5] != 0x30) return new OperateResult<byte[]>(read.Content[5], GetErrorDescriptionFromCode((char)read.Content[5]));
 
             // 提取结果
-            return OperateResult.CreateSuccessResult( );
+            return OperateResult.CreateSuccessResult();
         }
 
         #endregion
@@ -205,24 +204,24 @@ namespace HslCommunication.Profinet.FATEK
         /// <param name="address">地址信息，比如X10，Y17，M100</param>
         /// <param name="length">读取的长度</param>
         /// <returns>读取结果信息</returns>
-        public override OperateResult<bool[]> ReadBool( string address, ushort length )
+        public override OperateResult<bool[]> ReadBool(string address, ushort length)
         {
             // 解析指令
-            OperateResult<byte[]> command = BuildReadCommand( this.station, address, length, true );
-            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( command );
+            OperateResult<byte[]> command = BuildReadCommand(this.station, address, length, true);
+            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(command);
 
             // 核心交互
-            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( read );
+            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(read);
 
             // 结果验证
-            if (read.Content[0] != 0x02) return new OperateResult<bool[]>( read.Content[0], "Read Faild:" + BasicFramework.SoftBasic.ByteToHexString( read.Content, ' ' ) );
-            if (read.Content[5] != 0x30) return new OperateResult<bool[]>( read.Content[5], GetErrorDescriptionFromCode( (char)read.Content[5] ) );
+            if (read.Content[0] != 0x02) return new OperateResult<bool[]>(read.Content[0], "Read Faild:" + BasicFramework.SoftBasic.ByteToHexString(read.Content, ' '));
+            if (read.Content[5] != 0x30) return new OperateResult<bool[]>(read.Content[5], GetErrorDescriptionFromCode((char)read.Content[5]));
 
             // 提取结果
             byte[] buffer = new byte[length];
-            Array.Copy( read.Content, 6, buffer, 0, length );
-            return OperateResult.CreateSuccessResult( buffer.Select( m => m == 0x31 ).ToArray( ) );
+            Array.Copy(read.Content, 6, buffer, 0, length);
+            return OperateResult.CreateSuccessResult(buffer.Select(m => m == 0x31).ToArray());
         }
 
         /// <summary>
@@ -231,22 +230,22 @@ namespace HslCommunication.Profinet.FATEK
         /// <param name="address">PLC的地址信息</param>
         /// <param name="value">数据信息</param>
         /// <returns>是否写入成功</returns>
-        public override OperateResult Write( string address, bool[] value )
+        public override OperateResult Write(string address, bool[] value)
         {
             // 解析指令
-            OperateResult<byte[]> command = BuildWriteBoolCommand( this.station, address, value );
+            OperateResult<byte[]> command = BuildWriteBoolCommand(this.station, address, value);
             if (!command.IsSuccess) return command;
 
             // 核心交互
-            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
+            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
             if (!read.IsSuccess) return read;
 
             // 结果验证
-            if (read.Content[0] != 0x02) return new OperateResult( read.Content[0], "Write Faild:" + BasicFramework.SoftBasic.ByteToHexString( read.Content, ' ' ) );
-            if (read.Content[5] != 0x30) return new OperateResult<bool[]>( read.Content[5], GetErrorDescriptionFromCode( (char)read.Content[5] ) );
+            if (read.Content[0] != 0x02) return new OperateResult(read.Content[0], "Write Faild:" + BasicFramework.SoftBasic.ByteToHexString(read.Content, ' '));
+            if (read.Content[5] != 0x30) return new OperateResult<bool[]>(read.Content[5], GetErrorDescriptionFromCode((char)read.Content[5]));
 
             // 提取结果
-            return OperateResult.CreateSuccessResult( );
+            return OperateResult.CreateSuccessResult();
         }
 
         #endregion
@@ -257,7 +256,7 @@ namespace HslCommunication.Profinet.FATEK
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return $"FatekProgramOverTcp[{IpAddress}:{Port}]";
         }
@@ -278,9 +277,9 @@ namespace HslCommunication.Profinet.FATEK
         /// </summary>
         /// <param name="address">数据地址</param>
         /// <returns>地址结果对象</returns>
-        public static OperateResult<string> FatekAnalysisAddress( string address )
+        public static OperateResult<string> FatekAnalysisAddress(string address)
         {
-            var result = new OperateResult<string>( );
+            var result = new OperateResult<string>();
             try
             {
                 switch (address[0])
@@ -288,43 +287,43 @@ namespace HslCommunication.Profinet.FATEK
                     case 'X':
                     case 'x':
                         {
-                            result.Content = "X" + Convert.ToUInt16( address.Substring( 1 ), 10 ).ToString( "D4" );
+                            result.Content = "X" + Convert.ToUInt16(address.Substring(1), 10).ToString("D4");
                             break;
                         }
                     case 'Y':
                     case 'y':
                         {
-                            result.Content = "Y" + Convert.ToUInt16( address.Substring( 1 ), 10 ).ToString( "D4" );
+                            result.Content = "Y" + Convert.ToUInt16(address.Substring(1), 10).ToString("D4");
                             break;
                         }
                     case 'M':
                     case 'm':
                         {
-                            result.Content = "M" + Convert.ToUInt16( address.Substring( 1 ), 10 ).ToString( "D4" );
+                            result.Content = "M" + Convert.ToUInt16(address.Substring(1), 10).ToString("D4");
                             break;
                         }
                     case 'S':
                     case 's':
                         {
-                            result.Content = "S" + Convert.ToUInt16( address.Substring( 1 ), 10 ).ToString( "D4" );
+                            result.Content = "S" + Convert.ToUInt16(address.Substring(1), 10).ToString("D4");
                             break;
                         }
                     case 'T':
                     case 't':
                         {
-                            result.Content = "T" + Convert.ToUInt16( address.Substring( 1 ), 10 ).ToString( "D4" );
+                            result.Content = "T" + Convert.ToUInt16(address.Substring(1), 10).ToString("D4");
                             break;
                         }
                     case 'C':
                     case 'c':
                         {
-                            result.Content = "C" + Convert.ToUInt16( address.Substring( 1 ), 10 ).ToString( "D4" );
+                            result.Content = "C" + Convert.ToUInt16(address.Substring(1), 10).ToString("D4");
                             break;
                         }
                     case 'D':
                     case 'd':
                         {
-                            result.Content = "D" + Convert.ToUInt16( address.Substring( 1 ), 10 ).ToString( "D5" );
+                            result.Content = "D" + Convert.ToUInt16(address.Substring(1), 10).ToString("D5");
                             break;
                         }
                     case 'R':
@@ -332,19 +331,19 @@ namespace HslCommunication.Profinet.FATEK
                         {
                             if (address[1] == 'T' || address[1] == 't')
                             {
-                                result.Content = "RT" + Convert.ToUInt16( address.Substring( 1 ), 10 ).ToString( "D4" );
+                                result.Content = "RT" + Convert.ToUInt16(address.Substring(1), 10).ToString("D4");
                             }
                             else if (address[1] == 'C' || address[1] == 'c')
                             {
-                                result.Content = "RC" + Convert.ToUInt16( address.Substring( 1 ), 10 ).ToString( "D4" );
+                                result.Content = "RC" + Convert.ToUInt16(address.Substring(1), 10).ToString("D4");
                             }
                             else
                             {
-                                result.Content = "R" + Convert.ToUInt16( address.Substring( 1 ), 10 ).ToString( "D5" );
+                                result.Content = "R" + Convert.ToUInt16(address.Substring(1), 10).ToString("D5");
                             }
                             break;
                         }
-                    default: throw new Exception( StringResources.Language.NotSupportedDataType );
+                    default: throw new Exception(StringResources.Language.NotSupportedDataType);
                 }
             }
             catch (Exception ex)
@@ -362,9 +361,9 @@ namespace HslCommunication.Profinet.FATEK
         /// </summary>
         /// <param name="data">指令</param>
         /// <returns>校验之后的信息</returns>
-        public static string CalculateAcc( string data )
+        public static string CalculateAcc(string data)
         {
-            byte[] buffer = Encoding.ASCII.GetBytes( data );
+            byte[] buffer = Encoding.ASCII.GetBytes(data);
 
             int count = 0;
             for (int i = 0; i < buffer.Length; i++)
@@ -372,7 +371,7 @@ namespace HslCommunication.Profinet.FATEK
                 count += buffer[i];
             }
 
-            return count.ToString( "X4" ).Substring( 2 );
+            return count.ToString("X4").Substring(2);
         }
 
         /// <summary>
@@ -383,40 +382,40 @@ namespace HslCommunication.Profinet.FATEK
         /// <param name="length">数据长度</param>
         /// <param name="isBool">是否位读取</param>
         /// <returns>是否成功的结果对象</returns>
-        public static OperateResult<byte[]> BuildReadCommand( byte station, string address, ushort length, bool isBool )
+        public static OperateResult<byte[]> BuildReadCommand(byte station, string address, ushort length, bool isBool)
         {
-            OperateResult<string> addressAnalysis = FatekAnalysisAddress( address );
-            if (!addressAnalysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( addressAnalysis );
+            OperateResult<string> addressAnalysis = FatekAnalysisAddress(address);
+            if (!addressAnalysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(addressAnalysis);
 
-            StringBuilder stringBuilder = new StringBuilder( );
-            stringBuilder.Append( (char)0x02 );
-            stringBuilder.Append( station.ToString( "X2" ) );
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append((char)0x02);
+            stringBuilder.Append(station.ToString("X2"));
 
             if (isBool)
             {
-                stringBuilder.Append( "44" );
-                stringBuilder.Append( length.ToString( "X2" ) );
+                stringBuilder.Append("44");
+                stringBuilder.Append(length.ToString("X2"));
             }
             else
             {
-                stringBuilder.Append( "46" );
-                stringBuilder.Append( length.ToString( "X2" ) );
-                if (addressAnalysis.Content.StartsWith( "X" ) ||
-                    addressAnalysis.Content.StartsWith( "Y" ) ||
-                    addressAnalysis.Content.StartsWith( "M" ) ||
-                    addressAnalysis.Content.StartsWith( "S" ) ||
-                    addressAnalysis.Content.StartsWith( "T" ) ||
-                    addressAnalysis.Content.StartsWith( "C" ))
+                stringBuilder.Append("46");
+                stringBuilder.Append(length.ToString("X2"));
+                if (addressAnalysis.Content.StartsWith("X") ||
+                    addressAnalysis.Content.StartsWith("Y") ||
+                    addressAnalysis.Content.StartsWith("M") ||
+                    addressAnalysis.Content.StartsWith("S") ||
+                    addressAnalysis.Content.StartsWith("T") ||
+                    addressAnalysis.Content.StartsWith("C"))
                 {
-                    stringBuilder.Append( "W" );
+                    stringBuilder.Append("W");
                 }
             }
 
-            stringBuilder.Append( addressAnalysis.Content );
-            stringBuilder.Append( CalculateAcc( stringBuilder.ToString( ) ) );
-            stringBuilder.Append( (char)0x03 );
+            stringBuilder.Append(addressAnalysis.Content);
+            stringBuilder.Append(CalculateAcc(stringBuilder.ToString()));
+            stringBuilder.Append((char)0x03);
 
-            return OperateResult.CreateSuccessResult( Encoding.ASCII.GetBytes( stringBuilder.ToString( ) ) );
+            return OperateResult.CreateSuccessResult(Encoding.ASCII.GetBytes(stringBuilder.ToString()));
         }
 
         /// <summary>
@@ -426,29 +425,29 @@ namespace HslCommunication.Profinet.FATEK
         /// <param name="address">地址</param>
         /// <param name="value">数组值</param>
         /// <returns>是否创建成功</returns>
-        public static OperateResult<byte[]> BuildWriteBoolCommand( byte station, string address, bool[] value )
+        public static OperateResult<byte[]> BuildWriteBoolCommand(byte station, string address, bool[] value)
         {
-            OperateResult<string> addressAnalysis = FatekAnalysisAddress( address );
-            if (!addressAnalysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( addressAnalysis );
+            OperateResult<string> addressAnalysis = FatekAnalysisAddress(address);
+            if (!addressAnalysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(addressAnalysis);
 
-            StringBuilder stringBuilder = new StringBuilder( );
-            stringBuilder.Append( (char)0x02 );
-            stringBuilder.Append( station.ToString( "X2" ) );
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append((char)0x02);
+            stringBuilder.Append(station.ToString("X2"));
 
-            stringBuilder.Append( "45" );
-            stringBuilder.Append( value.Length.ToString( "X2" ) );
+            stringBuilder.Append("45");
+            stringBuilder.Append(value.Length.ToString("X2"));
 
-            stringBuilder.Append( addressAnalysis.Content );
+            stringBuilder.Append(addressAnalysis.Content);
 
             for (int i = 0; i < value.Length; i++)
             {
-                stringBuilder.Append( value[i] ? "1" : "0" );
+                stringBuilder.Append(value[i] ? "1" : "0");
             }
 
-            stringBuilder.Append( CalculateAcc( stringBuilder.ToString( ) ) );
-            stringBuilder.Append( (char)0x03 );
+            stringBuilder.Append(CalculateAcc(stringBuilder.ToString()));
+            stringBuilder.Append((char)0x03);
 
-            return OperateResult.CreateSuccessResult( Encoding.ASCII.GetBytes( stringBuilder.ToString( ) ) );
+            return OperateResult.CreateSuccessResult(Encoding.ASCII.GetBytes(stringBuilder.ToString()));
         }
 
         /// <summary>
@@ -458,42 +457,42 @@ namespace HslCommunication.Profinet.FATEK
         /// <param name="address">地址</param>
         /// <param name="value">数组值</param>
         /// <returns>是否创建成功</returns>
-        public static OperateResult<byte[]> BuildWriteByteCommand( byte station, string address, byte[] value )
+        public static OperateResult<byte[]> BuildWriteByteCommand(byte station, string address, byte[] value)
         {
-            OperateResult<string> addressAnalysis = FatekAnalysisAddress( address );
-            if (!addressAnalysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( addressAnalysis );
+            OperateResult<string> addressAnalysis = FatekAnalysisAddress(address);
+            if (!addressAnalysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(addressAnalysis);
 
-            StringBuilder stringBuilder = new StringBuilder( );
-            stringBuilder.Append( (char)0x02 );
-            stringBuilder.Append( station.ToString( "X2" ) );
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append((char)0x02);
+            stringBuilder.Append(station.ToString("X2"));
 
-            stringBuilder.Append( "47" );
-            stringBuilder.Append( (value.Length / 2).ToString( "X2" ) );
+            stringBuilder.Append("47");
+            stringBuilder.Append((value.Length / 2).ToString("X2"));
 
 
-            if (addressAnalysis.Content.StartsWith( "X" ) ||
-                addressAnalysis.Content.StartsWith( "Y" ) ||
-                addressAnalysis.Content.StartsWith( "M" ) ||
-                addressAnalysis.Content.StartsWith( "S" ) ||
-                addressAnalysis.Content.StartsWith( "T" ) ||
-                addressAnalysis.Content.StartsWith( "C" ))
+            if (addressAnalysis.Content.StartsWith("X") ||
+                addressAnalysis.Content.StartsWith("Y") ||
+                addressAnalysis.Content.StartsWith("M") ||
+                addressAnalysis.Content.StartsWith("S") ||
+                addressAnalysis.Content.StartsWith("T") ||
+                addressAnalysis.Content.StartsWith("C"))
             {
-                stringBuilder.Append( "W" );
+                stringBuilder.Append("W");
             }
 
-            stringBuilder.Append( addressAnalysis.Content );
+            stringBuilder.Append(addressAnalysis.Content);
 
             byte[] buffer = new byte[value.Length * 2];
             for (int i = 0; i < value.Length / 2; i++)
             {
-                SoftBasic.BuildAsciiBytesFrom( BitConverter.ToUInt16( value, i * 2 ) ).CopyTo( buffer, 4 * i );
+                SoftBasic.BuildAsciiBytesFrom(BitConverter.ToUInt16(value, i * 2)).CopyTo(buffer, 4 * i);
             }
-            stringBuilder.Append( Encoding.ASCII.GetString( buffer ) );
+            stringBuilder.Append(Encoding.ASCII.GetString(buffer));
 
-            stringBuilder.Append( CalculateAcc( stringBuilder.ToString( ) ) );
-            stringBuilder.Append( (char)0x03 );
+            stringBuilder.Append(CalculateAcc(stringBuilder.ToString()));
+            stringBuilder.Append((char)0x03);
 
-            return OperateResult.CreateSuccessResult( Encoding.ASCII.GetBytes( stringBuilder.ToString( ) ) );
+            return OperateResult.CreateSuccessResult(Encoding.ASCII.GetBytes(stringBuilder.ToString()));
         }
 
         /// <summary>
@@ -501,7 +500,7 @@ namespace HslCommunication.Profinet.FATEK
         /// </summary>
         /// <param name="code">错误码</param>
         /// <returns>错误的文本描述</returns>
-        public static string GetErrorDescriptionFromCode( char code )
+        public static string GetErrorDescriptionFromCode(char code)
         {
             switch (code)
             {

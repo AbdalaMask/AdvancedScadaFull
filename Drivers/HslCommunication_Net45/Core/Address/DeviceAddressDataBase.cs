@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HslCommunication.Core.Address
+﻿namespace HslCommunication.Core.Address
 {
     /// <summary>
     /// 设备地址数据的信息，通常包含起始地址，数据类型，长度
@@ -25,7 +20,7 @@ namespace HslCommunication.Core.Address
         /// </summary>
         /// <param name="address">地址信息</param>
         /// <param name="length">数据长度</param>
-        public virtual void Parse( string address, ushort length )
+        public virtual void Parse(string address, ushort length)
         {
 
         }

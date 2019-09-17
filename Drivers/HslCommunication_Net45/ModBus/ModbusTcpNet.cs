@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HslCommunication.BasicFramework;
+﻿using HslCommunication.BasicFramework;
 using HslCommunication.Core;
+using HslCommunication.Core.Address;
 using HslCommunication.Core.IMessage;
 using HslCommunication.Core.Net;
-using HslCommunication.Core.Address;
+using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 
 namespace HslCommunication.ModBus
@@ -60,11 +58,11 @@ namespace HslCommunication.ModBus
         /// <summary>
         /// 实例化一个MOdbus-Tcp协议的客户端对象
         /// </summary>
-        public ModbusTcpNet( )
+        public ModbusTcpNet()
         {
-            softIncrementCount        = new SoftIncrementCount( ushort.MaxValue );
-            WordLength                = 1;
-            station                   = 1;
+            softIncrementCount = new SoftIncrementCount(ushort.MaxValue);
+            WordLength = 1;
+            station = 1;
         }
 
 
@@ -74,13 +72,13 @@ namespace HslCommunication.ModBus
         /// <param name="ipAddress">服务器的Ip地址</param>
         /// <param name="port">服务器的端口号</param>
         /// <param name="station">客户端自身的站号</param>
-        public ModbusTcpNet( string ipAddress, int port = 502, byte station = 0x01 )
+        public ModbusTcpNet(string ipAddress, int port = 502, byte station = 0x01)
         {
-            softIncrementCount       = new SoftIncrementCount( ushort.MaxValue );
-            IpAddress                = ipAddress;
-            Port                     = port;
-            WordLength               = 1;
-            this.station             = station;
+            softIncrementCount = new SoftIncrementCount(ushort.MaxValue);
+            IpAddress = ipAddress;
+            Port = port;
+            WordLength = 1;
+            this.station = station;
         }
 
         #endregion
@@ -100,14 +98,14 @@ namespace HslCommunication.ModBus
         /// </summary>
         /// <param name="socket">套接字</param>
         /// <returns>是否初始化成功</returns>
-        protected override OperateResult InitializationOnConnect( Socket socket )
+        protected override OperateResult InitializationOnConnect(Socket socket)
         {
             if (isUseAccountCertificate)
             {
-                return AccountCertificate( socket );
+                return AccountCertificate(socket);
             }
 
-            return base.InitializationOnConnect( socket );
+            return base.InitializationOnConnect(socket);
         }
 
         #endregion
@@ -179,9 +177,9 @@ namespace HslCommunication.ModBus
         /// </summary>
         /// <param name="address">起始地址，格式为"1234"</param>
         /// <returns>带有成功标志的bool对象</returns>
-        public OperateResult<bool> ReadCoil( string address )
+        public OperateResult<bool> ReadCoil(string address)
         {
-            return ReadBool( address );
+            return ReadBool(address);
         }
 
         /// <summary>
@@ -190,9 +188,9 @@ namespace HslCommunication.ModBus
         /// <param name="address">起始地址，格式为"1234"</param>
         /// <param name="length">读取长度</param>
         /// <returns>带有成功标志的bool数组对象</returns>
-        public OperateResult<bool[]> ReadCoil( string address, ushort length )
+        public OperateResult<bool[]> ReadCoil(string address, ushort length)
         {
-            return ReadBool( address, length );
+            return ReadBool(address, length);
         }
 
         /// <summary>
@@ -200,12 +198,12 @@ namespace HslCommunication.ModBus
         /// </summary>
         /// <param name="address">起始地址，格式为"1234"</param>
         /// <returns>带有成功标志的bool对象</returns>
-        public OperateResult<bool> ReadDiscrete( string address )
+        public OperateResult<bool> ReadDiscrete(string address)
         {
-            var read = ReadDiscrete( address, 1 );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool>( read );
+            var read = ReadDiscrete(address, 1);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool>(read);
 
-            return OperateResult.CreateSuccessResult( read.Content[0] );
+            return OperateResult.CreateSuccessResult(read.Content[0]);
         }
 
         /// <summary>
@@ -214,18 +212,18 @@ namespace HslCommunication.ModBus
         /// <param name="address">起始地址，格式为"1234"</param>
         /// <param name="length">读取长度</param>
         /// <returns>带有成功标志的bool数组对象</returns>
-        public OperateResult<bool[]> ReadDiscrete( string address, ushort length )
+        public OperateResult<bool[]> ReadDiscrete(string address, ushort length)
         {
-            OperateResult<byte[]> command = ModbusInfo.BuildReadModbusCommand( address, length, Station, AddressStartWithZero, ModbusInfo.ReadDiscrete );
-            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( command );
+            OperateResult<byte[]> command = ModbusInfo.BuildReadModbusCommand(address, length, Station, AddressStartWithZero, ModbusInfo.ReadDiscrete);
+            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(command);
 
-            OperateResult<byte[]> read = ReadFromCoreServer( ModbusInfo.PackCommandToTcp( command.Content, (ushort)softIncrementCount.GetCurrentValue( ) ) );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( read );
+            OperateResult<byte[]> read = ReadFromCoreServer(ModbusInfo.PackCommandToTcp(command.Content, (ushort)softIncrementCount.GetCurrentValue()));
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(read);
 
-            OperateResult<byte[]> extract = ModbusInfo.ExtractActualData( ModbusInfo.ExplodeTcpCommandToCore( read.Content ) );
-            if(!extract.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( extract );
+            OperateResult<byte[]> extract = ModbusInfo.ExtractActualData(ModbusInfo.ExplodeTcpCommandToCore(read.Content));
+            if (!extract.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(extract);
 
-            return OperateResult.CreateSuccessResult( SoftBasic.ByteToBoolArray( extract.Content, length ) );
+            return OperateResult.CreateSuccessResult(SoftBasic.ByteToBoolArray(extract.Content, length));
         }
 
         /// <summary>
@@ -241,23 +239,23 @@ namespace HslCommunication.ModBus
         /// 此处演示批量读取的示例
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Modbus\Modbus.cs" region="ReadExample1" title="Read示例" />
         /// </example>
-        public override OperateResult<byte[]> Read( string address, ushort length )
+        public override OperateResult<byte[]> Read(string address, ushort length)
         {
-            OperateResult<ModbusAddress> analysis = ModbusInfo.AnalysisAddress( address, Station, isAddressStartWithZero, ModbusInfo.ReadRegister );
-            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( analysis );
+            OperateResult<ModbusAddress> analysis = ModbusInfo.AnalysisAddress(address, Station, isAddressStartWithZero, ModbusInfo.ReadRegister);
+            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(analysis);
 
-            List<byte> lists = new List<byte>( );
+            List<byte> lists = new List<byte>();
             ushort alreadyFinished = 0;
             while (alreadyFinished < length)
             {
-                ushort lengthTmp = (ushort)Math.Min( (length - alreadyFinished), 120 );
-                OperateResult<byte[]> read = ReadModBus( analysis.Content.AddressAdd( alreadyFinished ), lengthTmp );
-                if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( read );
+                ushort lengthTmp = (ushort)Math.Min((length - alreadyFinished), 120);
+                OperateResult<byte[]> read = ReadModBus(analysis.Content.AddressAdd(alreadyFinished), lengthTmp);
+                if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(read);
 
-                lists.AddRange( read.Content );
+                lists.AddRange(read.Content);
                 alreadyFinished += lengthTmp;
             }
-            return OperateResult.CreateSuccessResult( lists.ToArray( ) );
+            return OperateResult.CreateSuccessResult(lists.ToArray());
         }
 
         /// <summary>
@@ -266,15 +264,15 @@ namespace HslCommunication.ModBus
         /// <param name="address">地址</param>
         /// <param name="length">长度</param>
         /// <returns>带是否成功的结果数据</returns>
-        private OperateResult<byte[]> ReadModBus( ModbusAddress address, ushort length )
+        private OperateResult<byte[]> ReadModBus(ModbusAddress address, ushort length)
         {
-            OperateResult<byte[]> command = ModbusInfo.BuildReadModbusCommand( address, length );
+            OperateResult<byte[]> command = ModbusInfo.BuildReadModbusCommand(address, length);
             if (!command.IsSuccess) return command;
 
-            OperateResult<byte[]> read = ReadFromCoreServer( ModbusInfo.PackCommandToTcp( command.Content, (ushort)softIncrementCount.GetCurrentValue( ) ) );
+            OperateResult<byte[]> read = ReadFromCoreServer(ModbusInfo.PackCommandToTcp(command.Content, (ushort)softIncrementCount.GetCurrentValue()));
             if (!read.IsSuccess) return read;
 
-            return ModbusInfo.ExtractActualData( ModbusInfo.ExplodeTcpCommandToCore( read.Content ) );
+            return ModbusInfo.ExtractActualData(ModbusInfo.ExplodeTcpCommandToCore(read.Content));
         }
 
         /// <summary>
@@ -290,15 +288,15 @@ namespace HslCommunication.ModBus
         /// 此处演示批量写入的示例
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Modbus\Modbus.cs" region="WriteExample1" title="Write示例" />
         /// </example>
-        public override OperateResult Write( string address, byte[] value )
+        public override OperateResult Write(string address, byte[] value)
         {
-            OperateResult<byte[]> command = ModbusInfo.BuildWriteWordModbusCommand( address, value, Station, AddressStartWithZero, ModbusInfo.WriteRegister );
+            OperateResult<byte[]> command = ModbusInfo.BuildWriteWordModbusCommand(address, value, Station, AddressStartWithZero, ModbusInfo.WriteRegister);
             if (!command.IsSuccess) return command;
 
-            OperateResult<byte[]> write = ReadFromCoreServer( ModbusInfo.PackCommandToTcp( command.Content, (ushort)softIncrementCount.GetCurrentValue( ) ) );
+            OperateResult<byte[]> write = ReadFromCoreServer(ModbusInfo.PackCommandToTcp(command.Content, (ushort)softIncrementCount.GetCurrentValue()));
             if (!write.IsSuccess) return write;
 
-            return ModbusInfo.ExtractActualData( ModbusInfo.ExplodeTcpCommandToCore( write.Content ) );
+            return ModbusInfo.ExtractActualData(ModbusInfo.ExplodeTcpCommandToCore(write.Content));
         }
 
 
@@ -312,18 +310,18 @@ namespace HslCommunication.ModBus
         /// <param name="address">数据地址</param>
         /// <param name="length">数据长度</param>
         /// <returns>带有成功标识的bool[]数组</returns>
-        public override OperateResult<bool[]> ReadBool( string address, ushort length )
+        public override OperateResult<bool[]> ReadBool(string address, ushort length)
         {
-            OperateResult<byte[]> command = ModbusInfo.BuildReadModbusCommand( address, length, Station, AddressStartWithZero, ModbusInfo.ReadCoil );
-            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( command );
+            OperateResult<byte[]> command = ModbusInfo.BuildReadModbusCommand(address, length, Station, AddressStartWithZero, ModbusInfo.ReadCoil);
+            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(command);
 
-            OperateResult<byte[]> read = ReadFromCoreServer( ModbusInfo.PackCommandToTcp( command.Content, (ushort)softIncrementCount.GetCurrentValue( ) ) );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( read );
+            OperateResult<byte[]> read = ReadFromCoreServer(ModbusInfo.PackCommandToTcp(command.Content, (ushort)softIncrementCount.GetCurrentValue()));
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(read);
 
-            OperateResult<byte[]> extract = ModbusInfo.ExtractActualData( ModbusInfo.ExplodeTcpCommandToCore( read.Content ) );
-            if (!extract.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( extract );
+            OperateResult<byte[]> extract = ModbusInfo.ExtractActualData(ModbusInfo.ExplodeTcpCommandToCore(read.Content));
+            if (!extract.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(extract);
 
-            return OperateResult.CreateSuccessResult( SoftBasic.ByteToBoolArray( extract.Content, length ) );
+            return OperateResult.CreateSuccessResult(SoftBasic.ByteToBoolArray(extract.Content, length));
         }
 
         /// <summary>
@@ -332,15 +330,15 @@ namespace HslCommunication.ModBus
         /// <param name="address">要写入的数据地址</param>
         /// <param name="values">要写入的实际数据，长度为8的倍数</param>
         /// <returns>返回写入结果</returns>
-        public override OperateResult Write( string address, bool[] values )
+        public override OperateResult Write(string address, bool[] values)
         {
-            OperateResult<byte[]> command = ModbusInfo.BuildWriteBoolModbusCommand( address, values, Station, AddressStartWithZero, ModbusInfo.WriteCoil );
+            OperateResult<byte[]> command = ModbusInfo.BuildWriteBoolModbusCommand(address, values, Station, AddressStartWithZero, ModbusInfo.WriteCoil);
             if (!command.IsSuccess) return command;
 
-            OperateResult<byte[]> write = ReadFromCoreServer( ModbusInfo.PackCommandToTcp( command.Content, (ushort)softIncrementCount.GetCurrentValue( ) ) );
+            OperateResult<byte[]> write = ReadFromCoreServer(ModbusInfo.PackCommandToTcp(command.Content, (ushort)softIncrementCount.GetCurrentValue()));
             if (!write.IsSuccess) return write;
 
-            return ModbusInfo.ExtractActualData( ModbusInfo.ExplodeTcpCommandToCore( write.Content ) );
+            return ModbusInfo.ExtractActualData(ModbusInfo.ExplodeTcpCommandToCore(write.Content));
         }
 
         #endregion
@@ -351,7 +349,7 @@ namespace HslCommunication.ModBus
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return $"ModbusTcpNet[{IpAddress}:{Port}]";
         }

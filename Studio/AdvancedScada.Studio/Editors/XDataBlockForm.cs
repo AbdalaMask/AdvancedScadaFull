@@ -5,7 +5,6 @@ using AdvancedScada.Utils.LSIS;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.Studio.Editors
@@ -35,7 +34,7 @@ namespace AdvancedScada.Studio.Editors
         #region Modbus
         public void AddressCreateTagModbus(DataBlock db, bool IsNew, int TagsCount = 1)
         {
-            
+
             if (IsNew == false) db.Tags.Clear();
             foreach (var item in dv.DataBlocks)
             {
@@ -110,7 +109,7 @@ namespace AdvancedScada.Studio.Editors
 
 
         }
-        public void AddressCreateTagBit(DataBlock db, int Address, int Save_BufAddr, bool IsNew)
+        public void AddressCreateTagBitHex(DataBlock db, int Address, int Save_BufAddr, bool IsNew)
         {
             var hex1 = 0;
             if (IsNew == false) db.Tags.Clear();
@@ -142,6 +141,43 @@ namespace AdvancedScada.Studio.Editors
                     tg.DataBlockId = int.Parse(txtDataBlockId.Text);
                     tg.TagName = $"TAG{TagsCount:d5}";
                     tg.Address = $"{txtDomain.Text}{hexaNumber}";
+                    tg.Description = $"{txtDesc.Text} {i.ToString("X")}";
+                    tg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString());
+                    db.Tags.Add(tg);
+                    hex1 += 1;
+                    TagsCount += 1;
+                }
+            }
+        }
+        public void AddressCreateTagBit(DataBlock db, int Address, int Save_BufAddr, bool IsNew)
+        {
+            var hex1 = Address;
+            if (IsNew == false) db.Tags.Clear();
+            foreach (var item in dv.DataBlocks)
+            {
+
+                TagsCount += item.Tags.Count;
+                if (db != null)
+                {
+                    if (db.DataBlockName.Equals(item.DataBlockName)) break;
+                }
+
+            }
+            if (chkCreateTag.Checked)
+            {
+                var y = Address;
+
+                for (var i = Address; i < Save_BufAddr + y; i++)
+                {
+                    var hexaNumber = string.Empty;
+                    var tg = new Tag() { TagId = IDX += 1 };
+
+
+                    tg.ChannelId = int.Parse(txtChannelId.Text);
+                    tg.DeviceId = int.Parse(txtDeviceId.Text);
+                    tg.DataBlockId = int.Parse(txtDataBlockId.Text);
+                    tg.TagName = $"TAG{TagsCount:d5}";
+                    tg.Address = $"{txtDomain.Text}{hex1}";
                     tg.Description = $"{txtDesc.Text} {i.ToString("X")}";
                     tg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString());
                     db.Tags.Add(tg);
@@ -207,18 +243,18 @@ namespace AdvancedScada.Studio.Editors
                             txtDomain.Items.Clear();
                             txtDomain.Items.AddRange(DVP);
                             txtPrefix.Text = "txtPrefix :";
-                           
+
                             break;
                         case "LSIS":
                             lblTypeOfRead.Visible = false;
                             CboxTypeOfRead.Visible = false;
-                           
+
                             break;
                         case "Modbus":
                             chkX10.Visible = false;
                             txtDomain.Items.Clear();
                             txtPrefix.Text = "txtPrefix :";
-                           
+
                             break;
                         default:
                             break;
@@ -237,15 +273,15 @@ namespace AdvancedScada.Studio.Editors
                             txtDomain.Items.Clear();
                             txtDomain.Items.AddRange(DVP);
                             txtPrefix.Text = "txtPrefix :";
-                            
+
                             break;
                         case "LSIS":
                             lblTypeOfRead.Visible = false;
-                            CboxTypeOfRead.Visible = false;  
+                            CboxTypeOfRead.Visible = false;
                             break;
                         case "Modbus":
                             chkX10.Visible = false;
-                            txtDomain.Items.Clear();  
+                            txtDomain.Items.Clear();
                             break;
                         default:
                             break;
@@ -267,12 +303,6 @@ namespace AdvancedScada.Studio.Editors
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
-
-            var DriverTypes2 = ch.ChannelTypes;
-
-
-
-
         }
 
 
@@ -281,7 +311,7 @@ namespace AdvancedScada.Studio.Editors
         {
             try
             {
-             
+
 
                 //switch ((DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedValue.ToString()))
                 //{
@@ -352,7 +382,7 @@ namespace AdvancedScada.Studio.Editors
                 //    default:
                 //        break;
                 //}
-            
+
             }
             catch (Exception ex)
             {
@@ -383,14 +413,16 @@ namespace AdvancedScada.Studio.Editors
                 {
                     case "LSIS":
 
-                        if (cboxDataType.Text == "Bit" || cboxDataType.Text == "Byte")
-                            Save_BufAddr = (int)txtAddressLength.Value * 16;
-                        else
-                            Save_BufAddr = (int)txtAddressLength.Value;
-                        if (chkX10.Checked)
-                            Address = 10 * (int)txtStartAddress.Value;
-                        else
-                            Address = (int)txtStartAddress.Value;
+                        switch (cboxDataType.Text)
+                        {
+                            case "Bit" when chkX16.Checked:
+                                Save_BufAddr = (int)txtAddressLength.Value * 16;
+                                break;
+                            default:
+                                Save_BufAddr = (int)txtAddressLength.Value;
+                                break;
+                        }
+                        Address = chkX10.Checked ? 10 * (int)txtStartAddress.Value : (int)txtStartAddress.Value;
                         break;
                     case "Modbus":
 
@@ -404,7 +436,10 @@ namespace AdvancedScada.Studio.Editors
 
                 if (chkCreateTag.Checked && (string.IsNullOrEmpty(txtDomain.Text)
                                             || string.IsNullOrWhiteSpace(txtDomain.Text)))
+                {
                     DxErrorProvider1.SetError(txtDomain, "The Prefix is empty");
+                }
+
                 if (string.IsNullOrEmpty(txtDataBlock.Text)
                     || string.IsNullOrWhiteSpace(txtDataBlock.Text))
                 {
@@ -428,7 +463,7 @@ namespace AdvancedScada.Studio.Editors
                             Length = (ushort)txtAddressLength.Value,
                             DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", cboxDataType.SelectedItem)),
 
-                        Tags = new List<Tag>()
+                            Tags = new List<Tag>()
                         };
 
                         switch (ch.ChannelTypes)
@@ -438,18 +473,17 @@ namespace AdvancedScada.Studio.Editors
                                 AddressCreateTagDVP(dbNew, true, TagsCount);
                                 break;
                             case "LSIS":
-                                if (cboxDataType.Text == "Bit" || cboxDataType.Text == "Byte")
+                                switch (cboxDataType.Text)
                                 {
-                                    if (chkCreateTag.Checked) AddressCreateTagBit(dbNew, Address, Save_BufAddr, true);
-
+                                    case "Bit":
+                                    case "Byte":
+                                        if (chkCreateTag.Checked && chkIsHex.Checked) AddressCreateTagBitHex(dbNew, Address, Save_BufAddr, true);
+                                        else AddressCreateTagBit(dbNew, Address, Save_BufAddr, true);
+                                        break;
+                                    default:
+                                        if (chkCreateTag.Checked) AddressCreateTagWord(dbNew, true);
+                                        break;
                                 }
-                                else
-                                {
-                                    if (chkCreateTag.Checked) AddressCreateTagWord(dbNew, true);
-
-                                }
-
-
                                 break;
                             case "Modbus":
                                 AddressCreateTagModbus(dbNew, true, TagsCount);
@@ -458,7 +492,7 @@ namespace AdvancedScada.Studio.Editors
                                 break;
                         }
 
-                        if (eventDataBlockChanged != null) eventDataBlockChanged(dbNew, true);
+                        eventDataBlockChanged?.Invoke(dbNew, true);
                         Close();
                     }
                     else
@@ -482,18 +516,17 @@ namespace AdvancedScada.Studio.Editors
                                 AddressCreateTagDVP(db, false, TagsCount);
                                 break;
                             case "LSIS":
-                                if (cboxDataType.Text == "Bit" || cboxDataType.Text == "Byte")
+                                switch (cboxDataType.Text)
                                 {
-                                    if (chkCreateTag.Checked) AddressCreateTagBit(db, Address, Save_BufAddr, false);
-
+                                    case "Bit":
+                                    case "Byte":
+                                        if (chkCreateTag.Checked && chkIsHex.Checked) AddressCreateTagBitHex(db, Address, Save_BufAddr, false);
+                                        else AddressCreateTagBit(db, Address, Save_BufAddr, false);
+                                        break;
+                                    default:
+                                        if (chkCreateTag.Checked) AddressCreateTagWord(db, false);
+                                        break;
                                 }
-                                else
-                                {
-                                    if (chkCreateTag.Checked) AddressCreateTagWord(db, false);
-
-                                }
-
-
                                 break;
                             case "Modbus":
                                 AddressCreateTagModbus(db, false);
@@ -502,7 +535,7 @@ namespace AdvancedScada.Studio.Editors
                                 break;
                         }
 
-                        if (eventDataBlockChanged != null) eventDataBlockChanged(db, false);
+                        eventDataBlockChanged?.Invoke(db, false);
                         Close();
                     }
                 }
@@ -518,7 +551,7 @@ namespace AdvancedScada.Studio.Editors
             Close();
         }
 
-       
+
     }
 }
 

@@ -1,10 +1,6 @@
-﻿using HslCommunication.Core;
+﻿using HslCommunication.BasicFramework;
+using HslCommunication.Core;
 using HslCommunication.Serial;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HslCommunication.BasicFramework;
 
 namespace HslCommunication.Profinet.LSIS
 {
@@ -121,7 +117,7 @@ namespace HslCommunication.Profinet.LSIS
         public override OperateResult<byte[]> Read(string address, ushort length)
         {
             OperateResult<byte[]> command = null;
-             var DataTypeResult = XGBFastEnet.GetDataTypeToAddress(address);
+            var DataTypeResult = XGBFastEnet.GetDataTypeToAddress(address);
             if (!DataTypeResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(DataTypeResult);
 
             switch (DataTypeResult.Content)
@@ -129,6 +125,9 @@ namespace HslCommunication.Profinet.LSIS
                 case "Bit":
                     command = XGBCnetOverTcp.BuildReadOneCommand(Station, address, length);
                     break;
+                case "Word":
+                case "DWord":
+                case "LWord":
                 case "Continuous":
                     command = XGBCnetOverTcp.BuildReadByteCommand(Station, address, length);
                     break;
@@ -152,7 +151,7 @@ namespace HslCommunication.Profinet.LSIS
         public override OperateResult Write(string address, byte[] value)
         {
             OperateResult<byte[]> command = null;
- 
+
             var DataTypeResult = XGBFastEnet.GetDataTypeToAddress(address);
             if (!DataTypeResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(DataTypeResult);
 
@@ -161,6 +160,9 @@ namespace HslCommunication.Profinet.LSIS
                 case "Bit":
                     command = XGBCnetOverTcp.BuildWriteOneCommand(Station, address, value);
                     break;
+                case "Word":
+                case "DWord":
+                case "LWord":
                 case "Continuous":
                     command = XGBCnetOverTcp.BuildWriteByteCommand(Station, address, value);
                     break;

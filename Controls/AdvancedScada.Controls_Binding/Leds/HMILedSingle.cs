@@ -2,6 +2,7 @@
 using AdvancedScada.Controls_Binding.Enum;
 using AdvancedScada.Controls_Binding.Leds.DrawAll;
 using AdvancedScada.DriverBase;
+using AdvancedScada.Monitor;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
@@ -12,7 +13,6 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using AdvancedScada.Monitor;
 
 namespace AdvancedScada.Controls_Binding.Leds
 {

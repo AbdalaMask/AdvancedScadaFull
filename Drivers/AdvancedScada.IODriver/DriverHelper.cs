@@ -12,7 +12,6 @@ using AdvancedScada.IODriver.Modbus.TCP;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
-using System.Linq;
 using System.Net.Sockets;
 using System.Threading;
 using static AdvancedScada.IBaseService.Common.XCollection;
@@ -75,8 +74,10 @@ namespace AdvancedScada.IODriver
                             {
                                 case "SerialPort":
                                     var dis = (DISerialPort)ch;
-                                    var sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits);
-                                    sp.Handshake = dis.Handshake;
+                                    var sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
+                                    {
+                                        Handshake = dis.Handshake
+                                    };
                                     switch (ch.ChannelTypes)
                                     {
                                         case "Delta":
@@ -249,13 +250,13 @@ namespace AdvancedScada.IODriver
                                     switch (ch.ChannelTypes)
                                     {
                                         case "Delta":
-                                            SendPackageDelta(DriverAdapter, dv, db);
+                                            SendPackageDelta(DriverAdapter, db);
                                             break;
                                         case "Modbus":
-                                            SendPackageModbus(DriverAdapter, dv, db);
+                                            SendPackageModbus(DriverAdapter, db);
                                             break;
                                         case "LSIS":
-                                            SendPackageLSIS(DriverAdapter, ch, dv, db);
+                                            SendPackageLSIS(DriverAdapter, db);
                                             break;
 
                                         default:
@@ -293,7 +294,7 @@ namespace AdvancedScada.IODriver
         #endregion
 
         #region SendPackage All
-        private void SendPackageDelta(IDriverAdapter DriverAdapter, Device dv, DataBlock db)
+        private void SendPackageDelta(IDriverAdapter DriverAdapter, DataBlock db)
         {
             try
             {
@@ -437,7 +438,7 @@ namespace AdvancedScada.IODriver
                     default:
                         break;
                 }
-             
+
 
             }
 
@@ -447,7 +448,7 @@ namespace AdvancedScada.IODriver
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
         }
-        private void SendPackageModbus(IDriverAdapter DriverAdapter, Device dv, DataBlock db)
+        private void SendPackageModbus(IDriverAdapter DriverAdapter, DataBlock db)
         {
             try
             {
@@ -561,7 +562,7 @@ namespace AdvancedScada.IODriver
                     default:
                         break;
                 }
-           
+
 
             }
 
@@ -571,7 +572,7 @@ namespace AdvancedScada.IODriver
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
         }
-        private void SendPackageLSIS(IDriverAdapter ILSIS, Channel ch, Device dv, DataBlock db)
+        private void SendPackageLSIS(IDriverAdapter ILSIS, DataBlock db)
         {
             try
             {
@@ -583,10 +584,8 @@ namespace AdvancedScada.IODriver
                         {
                             bool[] bitArys = ILSIS.Read<bool>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
                             if (bitArys == null || bitArys.Length == 0) return;
+                            if (bitArys.Length > db.Tags.Count) return;
 
-
-                            if (bitArys.Length > db.Tags.Count)
-                                return;
                             for (var j = 0; j <= db.Tags.Count - 1; j++)
                             {
                                 db.Tags[j].Value = bitArys[j];
@@ -601,8 +600,6 @@ namespace AdvancedScada.IODriver
                         {
                             byte[] bitArys = ILSIS.Read<byte>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
                             if (bitArys == null || bitArys.Length == 0) return;
-
-
                             if (bitArys.Length > db.Tags.Count)
                                 return;
                             for (var j = 0; j <= db.Tags.Count - 1; j++)
@@ -617,14 +614,11 @@ namespace AdvancedScada.IODriver
                     case DataTypes.Short:
                         lock (ILSIS)
                         {
-                            short[] IntRs = ILSIS.Read<Int16>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                            short[] IntRs = ILSIS.Read<short>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", db.Length);
                             if (IntRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < IntRs.Length; j++)
                             {
-
                                 db.Tags[j].Value = IntRs[j];
-
-
                                 db.Tags[j].Timestamp = DateTime.Now;
                             }
                         }
@@ -632,16 +626,13 @@ namespace AdvancedScada.IODriver
                     case DataTypes.UShort:
                         lock (ILSIS)
                         {
-                            ushort[] bitArys = ILSIS.Read<ushort>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                            ushort[] bitArys = ILSIS.Read<ushort>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", db.Length);
                             if (bitArys == null || bitArys.Length == 0) return;
-
-
                             if (bitArys.Length > db.Tags.Count)
                                 return;
                             for (var j = 0; j <= db.Tags.Count - 1; j++)
                             {
                                 db.Tags[j].Value = bitArys[j];
-
                                 db.Tags[j].Timestamp = DateTime.Now;
                             }
                         }
@@ -650,7 +641,7 @@ namespace AdvancedScada.IODriver
                     case DataTypes.Int:
                         lock (ILSIS)
                         {
-                            int[] DIntRs = ILSIS.Read<Int32>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                            int[] DIntRs = ILSIS.Read<Int32>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", db.Length);
                             if (DIntRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < DIntRs.Length; j++)
                             {
@@ -662,13 +653,11 @@ namespace AdvancedScada.IODriver
                     case DataTypes.UInt:
                         lock (ILSIS)
                         {
-                            var wdRs = ILSIS.Read<uint>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                            var wdRs = ILSIS.Read<uint>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", db.Length);
                             if (wdRs == null) return;
                             for (int j = 0; j < db.Tags.Count; j++)
                             {
-
                                 db.Tags[j].Value = wdRs[j];
-
                                 db.Tags[j].Timestamp = DateTime.Now;
                             }
                         }
@@ -676,7 +665,7 @@ namespace AdvancedScada.IODriver
                     case DataTypes.Long:
                         lock (ILSIS)
                         {
-                            long[] dwRs = ILSIS.Read<long>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                            long[] dwRs = ILSIS.Read<long>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", db.Length);
 
                             for (int j = 0; j < dwRs.Length; j++)
                             {
@@ -688,7 +677,7 @@ namespace AdvancedScada.IODriver
                     case DataTypes.ULong:
                         lock (ILSIS)
                         {
-                            ulong[] dwRs = ILSIS.Read<ulong>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                            ulong[] dwRs = ILSIS.Read<ulong>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", db.Length);
 
                             for (int j = 0; j < dwRs.Length; j++)
                             {
@@ -700,7 +689,7 @@ namespace AdvancedScada.IODriver
                     case DataTypes.Float:
                         lock (ILSIS)
                         {
-                            float[] rl1Rs = ILSIS.Read<float>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                            float[] rl1Rs = ILSIS.Read<float>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", db.Length);
 
                             for (int j = 0; j < rl1Rs.Length; j++)
                             {
@@ -712,7 +701,7 @@ namespace AdvancedScada.IODriver
                     case DataTypes.Double:
                         lock (ILSIS)
                         {
-                            double[] rl2Rs = ILSIS.Read<double>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                            double[] rl2Rs = ILSIS.Read<double>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", db.Length);
 
                             for (int j = 0; j < rl2Rs.Length; j++)
                             {
@@ -726,7 +715,7 @@ namespace AdvancedScada.IODriver
                     default:
                         break;
                 }
-         
+
             }
             catch (SocketException ex)
             {
@@ -859,7 +848,7 @@ namespace AdvancedScada.IODriver
                                     default:
                                         break;
                                 }
-                          
+
                         }
                     }
                 }

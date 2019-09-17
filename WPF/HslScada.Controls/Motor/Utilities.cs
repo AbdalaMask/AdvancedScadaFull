@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading;
-using AdvancedScada.BaseService.Client;
+﻿using AdvancedScada.BaseService.Client;
 using AdvancedScada.IBaseService;
+using System;
+using System.Threading;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace HslScada.Controls
 {
@@ -32,7 +32,7 @@ namespace HslScada.Controls
 
         }
 
-        
+
 
         public static object DynamicConverter(string value, Type t)
         {

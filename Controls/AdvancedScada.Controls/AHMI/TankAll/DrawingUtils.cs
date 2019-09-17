@@ -1,10 +1,10 @@
-﻿using System.Drawing;
-using System.Drawing.Drawing2D;
-using AdvancedScada;
-using AdvancedScada.Controls.AHMI.TankAll;
+﻿using AdvancedScada;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.TankAll;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace AdvancedScada.Controls.AHMI.TankAll
 {

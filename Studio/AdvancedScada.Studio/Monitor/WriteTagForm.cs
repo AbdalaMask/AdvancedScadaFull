@@ -1,10 +1,9 @@
 ﻿using AdvancedScada.DriverBase;
+using AdvancedScada.IBaseService;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using AdvancedScada.IBaseService;
 
 namespace AdvancedScada.Studio.Monitor
 {
@@ -34,7 +33,7 @@ namespace AdvancedScada.Studio.Monitor
 
             if (_SelectedTag == null) return;
             // txtAddress.Items.AddRange(_SelectedTag);
-           
+
             this.client = client;
 
         }
@@ -51,7 +50,7 @@ namespace AdvancedScada.Studio.Monitor
 
         private void WriteTagForm_Load(object sender, EventArgs e)
         {
-             switch (TagCollection.Tags[txtAddress.Text].DataType)
+            switch (TagCollection.Tags[txtAddress.Text].DataType)
             {
                 case DriverBase.Comm.DataTypes.Bit:
                     break;

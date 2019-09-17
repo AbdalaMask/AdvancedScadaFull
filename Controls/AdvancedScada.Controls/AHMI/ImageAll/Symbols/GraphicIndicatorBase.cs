@@ -1,17 +1,17 @@
-﻿using AdvancedScada.Controls.DialogEditor;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.ImageAll;
+using AdvancedScada.Controls.AHMI.ImageAll.Symbols;
+using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.Controls.DialogEditor;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using AdvancedScada;
-using AdvancedScada.Controls.DialogEditor;
-using AdvancedScada.Controls.AHMI.ImageAll.Symbols;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
-using AdvancedScada.Controls.AHMI.ImageAll;
 
 namespace AdvancedScada.Controls.AHMI.ImageAll.Symbols
 {

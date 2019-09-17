@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using HslCommunication.Core.Net;
+using System;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using HslCommunication.Core;
-using HslCommunication.Core.Net;
 
 namespace HslCommunication.Enthernet
 {
@@ -57,25 +53,25 @@ namespace HslCommunication.Enthernet
             string id
             )
         {
-            OperateResult factoryResult = SendStringAndCheckReceive( socket, 1, factory );
+            OperateResult factoryResult = SendStringAndCheckReceive(socket, 1, factory);
             if (!factoryResult.IsSuccess)
             {
                 return factoryResult;
             }
 
-            OperateResult groupResult = SendStringAndCheckReceive( socket, 2, group );
+            OperateResult groupResult = SendStringAndCheckReceive(socket, 2, group);
             if (!groupResult.IsSuccess)
             {
                 return groupResult;
             }
 
-            OperateResult idResult = SendStringAndCheckReceive( socket, 3, id );
+            OperateResult idResult = SendStringAndCheckReceive(socket, 3, id);
             if (!idResult.IsSuccess)
             {
                 return idResult;
             }
 
-            return OperateResult.CreateSuccessResult( ); ;
+            return OperateResult.CreateSuccessResult(); ;
         }
 
 
@@ -91,31 +87,31 @@ namespace HslCommunication.Enthernet
         /// <param name="group">二级分类</param>
         /// <param name="id">三级分类</param>
         /// <returns>是否成功的结果对象</returns>
-        protected OperateResult DeleteFileBase( string fileName, string factory, string group, string id )
+        protected OperateResult DeleteFileBase(string fileName, string factory, string group, string id)
         {
             // connect server
-            OperateResult<Socket> socketResult = CreateSocketAndConnect( ServerIpEndPoint, ConnectTimeOut );
+            OperateResult<Socket> socketResult = CreateSocketAndConnect(ServerIpEndPoint, ConnectTimeOut);
             if (!socketResult.IsSuccess) return socketResult;
 
 
             // 发送操作指令
-            OperateResult sendString = SendStringAndCheckReceive( socketResult.Content, HslProtocol.ProtocolFileDelete, fileName );
+            OperateResult sendString = SendStringAndCheckReceive(socketResult.Content, HslProtocol.ProtocolFileDelete, fileName);
             if (!sendString.IsSuccess) return sendString;
 
             // 发送文件名以及三级分类信息
-            OperateResult sendFileInfo = SendFactoryGroupId( socketResult.Content, factory, group, id );
+            OperateResult sendFileInfo = SendFactoryGroupId(socketResult.Content, factory, group, id);
             if (!sendFileInfo.IsSuccess) return sendFileInfo;
 
             // 接收服务器操作结果
-            OperateResult<int, string> receiveBack = ReceiveStringContentFromSocket( socketResult.Content );
+            OperateResult<int, string> receiveBack = ReceiveStringContentFromSocket(socketResult.Content);
             if (!receiveBack.IsSuccess) return receiveBack;
 
-            OperateResult result = new OperateResult( );
+            OperateResult result = new OperateResult();
 
             if (receiveBack.Content1 == 1) result.IsSuccess = true;
             result.Message = receiveBack.Message;
 
-            socketResult.Content?.Close( );
+            socketResult.Content?.Close();
             return result;
         }
 
@@ -143,27 +139,27 @@ namespace HslCommunication.Enthernet
             )
         {
             // connect server
-            OperateResult<Socket> socketResult = CreateSocketAndConnect( ServerIpEndPoint, ConnectTimeOut );
+            OperateResult<Socket> socketResult = CreateSocketAndConnect(ServerIpEndPoint, ConnectTimeOut);
             if (!socketResult.IsSuccess) return socketResult;
 
             // 发送操作指令
-            OperateResult sendString = SendStringAndCheckReceive( socketResult.Content, HslProtocol.ProtocolFileDownload, fileName );
+            OperateResult sendString = SendStringAndCheckReceive(socketResult.Content, HslProtocol.ProtocolFileDownload, fileName);
             if (!sendString.IsSuccess) return sendString;
 
             // 发送三级分类
-            OperateResult sendClass = SendFactoryGroupId( socketResult.Content, factory, group, id );
+            OperateResult sendClass = SendFactoryGroupId(socketResult.Content, factory, group, id);
             if (!sendClass.IsSuccess) return sendClass;
-           
+
 
             // 根据数据源分析
             if (source is string fileSaveName)
             {
-                OperateResult result = ReceiveFileFromSocket( socketResult.Content, fileSaveName, processReport );
+                OperateResult result = ReceiveFileFromSocket(socketResult.Content, fileSaveName, processReport);
                 if (!result.IsSuccess) return result;
             }
             else if (source is Stream stream)
             {
-                OperateResult result = ReceiveFileFromSocket( socketResult.Content, stream, processReport );
+                OperateResult result = ReceiveFileFromSocket(socketResult.Content, stream, processReport);
                 if (!result.IsSuccess)
                 {
                     return result;
@@ -171,13 +167,13 @@ namespace HslCommunication.Enthernet
             }
             else
             {
-                socketResult.Content?.Close( );
-                LogNet?.WriteError( ToString(), StringResources.Language.NotSupportedDataType );
-                return new OperateResult( StringResources.Language.NotSupportedDataType );
+                socketResult.Content?.Close();
+                LogNet?.WriteError(ToString(), StringResources.Language.NotSupportedDataType);
+                return new OperateResult(StringResources.Language.NotSupportedDataType);
             }
 
-            socketResult.Content?.Close( );
-            return OperateResult.CreateSuccessResult( );
+            socketResult.Content?.Close();
+            return OperateResult.CreateSuccessResult();
         }
 
         #endregion
@@ -205,35 +201,35 @@ namespace HslCommunication.Enthernet
             string id,
             string fileTag,
             string fileUpload,
-            Action<long, long> processReport )
+            Action<long, long> processReport)
         {
             // HslReadWriteLock readWriteLock = new HslReadWriteLock( );
-            
+
 
             // 创建套接字并连接服务器
-            OperateResult<Socket> socketResult = CreateSocketAndConnect( ServerIpEndPoint, ConnectTimeOut );
+            OperateResult<Socket> socketResult = CreateSocketAndConnect(ServerIpEndPoint, ConnectTimeOut);
             if (!socketResult.IsSuccess) return socketResult;
-            
+
             // 上传操作暗号的文件名
-            OperateResult sendString = SendStringAndCheckReceive( socketResult.Content, HslProtocol.ProtocolFileUpload, serverName );
+            OperateResult sendString = SendStringAndCheckReceive(socketResult.Content, HslProtocol.ProtocolFileUpload, serverName);
             if (!sendString.IsSuccess) return sendString;
-            
+
             // 发送三级分类
-            OperateResult sendClass = SendFactoryGroupId( socketResult.Content, factory, group, id );
+            OperateResult sendClass = SendFactoryGroupId(socketResult.Content, factory, group, id);
             if (!sendClass.IsSuccess) return sendClass;
 
             // 判断数据源格式
             if (source is string fileName)
             {
-                OperateResult result = SendFileAndCheckReceive( socketResult.Content, fileName, serverName, fileTag, fileUpload, processReport );
-                if(!result.IsSuccess)
+                OperateResult result = SendFileAndCheckReceive(socketResult.Content, fileName, serverName, fileTag, fileUpload, processReport);
+                if (!result.IsSuccess)
                 {
                     return result;
                 }
             }
             else if (source is Stream stream)
             {
-                OperateResult result = SendFileAndCheckReceive( socketResult.Content, stream, serverName, fileTag, fileUpload, processReport );
+                OperateResult result = SendFileAndCheckReceive(socketResult.Content, stream, serverName, fileTag, fileUpload, processReport);
                 if (!result.IsSuccess)
                 {
                     return result;
@@ -241,23 +237,23 @@ namespace HslCommunication.Enthernet
             }
             else
             {
-                socketResult.Content?.Close( );
-                LogNet?.WriteError( ToString( ), StringResources.Language.DataSourseFormatError );
-                return new OperateResult( StringResources.Language.DataSourseFormatError );
+                socketResult.Content?.Close();
+                LogNet?.WriteError(ToString(), StringResources.Language.DataSourseFormatError);
+                return new OperateResult(StringResources.Language.DataSourseFormatError);
             }
-            
+
 
             // 确认服务器文件保存状态
-            OperateResult<int, string> resultCheck = ReceiveStringContentFromSocket( socketResult.Content );
+            OperateResult<int, string> resultCheck = ReceiveStringContentFromSocket(socketResult.Content);
             if (!resultCheck.IsSuccess) return resultCheck;
-            
+
             if (resultCheck.Content1 == 1)
             {
-                return OperateResult.CreateSuccessResult( );
+                return OperateResult.CreateSuccessResult();
             }
             else
             {
-                return new OperateResult( StringResources.Language.ServerFileCheckFailed );
+                return new OperateResult(StringResources.Language.ServerFileCheckFailed);
             }
         }
 

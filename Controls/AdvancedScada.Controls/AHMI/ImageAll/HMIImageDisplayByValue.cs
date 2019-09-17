@@ -1,4 +1,12 @@
-﻿using AdvancedScada.Controls.Subscription;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.ImageAll;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase.Comm;
 using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.ComponentModel;
@@ -7,15 +15,6 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
-using AdvancedScada;
-using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
- 
-using AdvancedScada.DriverBase.Comm;
-using AdvancedScada.Controls.AHMI.ImageAll;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.ImageAll
 {

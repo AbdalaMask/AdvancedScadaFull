@@ -1,14 +1,14 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using AdvancedScada;
 using AdvancedScada;
 using AdvancedScada;
 using AdvancedScada;
 using AdvancedScada;
-using AdvancedScada;
-using AdvancedScada.Controls.AHMI.Display;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.Display;
+using System;
+using System.Windows.Forms;
 
 namespace AdvancedScada.Controls.AHMI.Display
 {

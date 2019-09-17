@@ -1,4 +1,8 @@
 ﻿
+using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.Drivers;
 using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.ComponentModel;
@@ -6,10 +10,6 @@ using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using AdvancedScada;
-using AdvancedScada.Controls.Drivers;
-using AdvancedScada;
-using AdvancedScada.Controls;
 
 namespace AdvancedScada.Controls.Drivers
 {

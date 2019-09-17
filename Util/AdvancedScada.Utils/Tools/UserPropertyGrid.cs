@@ -1,6 +1,5 @@
 ﻿using AdvancedScada.IBaseService.Common;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace HslScada.Studio.Tools

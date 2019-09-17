@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace HslCommunication.LogNet
 {
@@ -52,7 +49,7 @@ namespace HslCommunication.LogNet
         {
             if (string.IsNullOrEmpty(m_filePath)) return string.Empty;
 
-            switch(generateMode)
+            switch (generateMode)
             {
                 case GenerateMode.ByEveryHour:
                     {
@@ -64,8 +61,8 @@ namespace HslCommunication.LogNet
                     }
                 case GenerateMode.ByEveryWeek:
                     {
-                        GregorianCalendar gc = new GregorianCalendar( );
-                        int weekOfYear = gc.GetWeekOfYear( DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday );
+                        GregorianCalendar gc = new GregorianCalendar();
+                        int weekOfYear = gc.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
                         return m_filePath + LogNetManagment.LogFileHeadString + DateTime.Now.Year + "_W" + weekOfYear + ".txt";
                     }
                 case GenerateMode.ByEveryMonth:
@@ -80,7 +77,7 @@ namespace HslCommunication.LogNet
                     {
                         return m_filePath + LogNetManagment.LogFileHeadString + DateTime.Now.Year + ".txt";
                     }
-                default:return string.Empty;
+                default: return string.Empty;
             }
         }
 
@@ -120,7 +117,7 @@ namespace HslCommunication.LogNet
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return $"LogNetDateTime[{generateMode}]";
         }

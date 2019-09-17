@@ -1,4 +1,9 @@
 ﻿
+using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.Monitor;
 using AdvancedScada.Monitor;
 using Microsoft.Win32;
 using System;
@@ -7,12 +12,6 @@ using System.Drawing.Design;
 using System.Security.Permissions;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using AdvancedScada;
- 
-using AdvancedScada.Monitor;
-using AdvancedScada.Controls.DialogEditor;
-using AdvancedScada;
-using AdvancedScada.Controls;
 
 namespace AdvancedScada.Controls.DialogEditor
 {

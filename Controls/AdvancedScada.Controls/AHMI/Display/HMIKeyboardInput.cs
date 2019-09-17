@@ -1,19 +1,16 @@
-﻿using AdvancedScada.Controls.DialogEditor;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.Display;
+using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.Drawing.Design;
 using System.Windows.Forms;
-using AdvancedScada;
- 
- 
- 
-using AdvancedScada.Controls.DialogEditor;
-using AdvancedScada.Controls_Net45;
-using AdvancedScada.Controls.AHMI.Display;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
-using MfgControl.AdvancedHMI.Controls;
 
 namespace AdvancedScada.Controls.AHMI.Display
 {

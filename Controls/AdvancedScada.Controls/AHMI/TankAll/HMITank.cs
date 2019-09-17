@@ -1,5 +1,14 @@
 ﻿////////
+using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.TankAll;
 using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase.Comm;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,15 +21,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using AdvancedScada;
- using AdvancedScada.Controls.Subscription;
-using MfgControl.AdvancedHMI.Controls;
-using AdvancedScada.DriverBase.Comm;
-using AdvancedScada.Controls.AHMI.TankAll;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
-using AdvancedScada.Controls_Net45;
 
 namespace AdvancedScada.Controls.AHMI.TankAll
 {

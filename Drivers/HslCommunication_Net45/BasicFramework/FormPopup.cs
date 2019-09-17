@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace HslCommunication.BasicFramework
-{ 
+{
     /// <summary>
     /// 一个用于消息弹出显示的类
     /// </summary>
@@ -31,9 +27,9 @@ namespace HslCommunication.BasicFramework
                 }
                 FormsPopup.Add(form);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Console.WriteLine( SoftBasic.GetExceptionMessage( ex ) );
+                Console.WriteLine(SoftBasic.GetExceptionMessage(ex));
             }
         }
         /// <summary>
@@ -50,7 +46,7 @@ namespace HslCommunication.BasicFramework
             }
             catch (Exception ex)
             {
-                Console.WriteLine( SoftBasic.GetExceptionMessage( ex ) );
+                Console.WriteLine(SoftBasic.GetExceptionMessage(ex));
             }
         }
 
@@ -76,7 +72,7 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="infotext">需要显示的文本</param>
         /// <param name="infocolor">文本的颜色</param>
-        public FormPopup(string infotext,Color infocolor)
+        public FormPopup(string infotext, Color infocolor)
         {
             InitializeComponent();
             InfoText = infotext;
@@ -88,14 +84,14 @@ namespace HslCommunication.BasicFramework
         /// <param name="infotext">需要显示的文本</param>
         /// <param name="infocolor">文本的颜色</param>
         /// <param name="existTime">指定窗口多少时间后消失，单位毫秒</param>
-        public FormPopup(string infotext, Color infocolor,int existTime)
+        public FormPopup(string infotext, Color infocolor, int existTime)
         {
             InitializeComponent();
             InfoText = infotext;
             InfoColor = infocolor;
             InfoExistTime = existTime;
         }
-        
+
         private string InfoText { get; set; } = "This is a test message";
         private Color InfoColor { get; set; } = Color.DimGray;
         private int InfoExistTime { get; set; } = -1;
@@ -128,7 +124,7 @@ namespace HslCommunication.BasicFramework
 
             if (InfoExistTime > 100)
             {
-                time = new Timer( );
+                time = new Timer();
                 time.Interval = InfoExistTime;
                 time.Tick += delegate
                 {
@@ -154,7 +150,7 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         public void LocationUpMove(int index)
         {
-            this.Location = new Point(this.Location.X, 
+            this.Location = new Point(this.Location.X,
                 Screen.PrimaryScreen.WorkingArea.Bottom - this.Height - index * this.Height);
         }
 
@@ -169,7 +165,7 @@ namespace HslCommunication.BasicFramework
             }
             catch (Exception ex)
             {
-                Console.WriteLine( SoftBasic.GetExceptionMessage( ex ) );
+                Console.WriteLine(SoftBasic.GetExceptionMessage(ex));
             }
         }
 

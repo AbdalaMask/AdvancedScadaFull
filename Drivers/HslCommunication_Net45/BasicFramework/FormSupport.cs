@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace HslCommunication.BasicFramework
 {
@@ -17,9 +10,9 @@ namespace HslCommunication.BasicFramework
         /// <summary>
         /// 实例化一个默认的界面
         /// </summary>
-        public FormSupport( )
+        public FormSupport()
         {
-            InitializeComponent( );
+            InitializeComponent();
         }
     }
 }

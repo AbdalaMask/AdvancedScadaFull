@@ -1,5 +1,14 @@
-﻿using AdvancedScada.Controls.AHMI.Licenses;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.Controls;
+using AdvancedScada.Controls.AHMI.Licenses;
 using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase.Client;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,19 +17,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AdvancedScada;
- 
- 
- 
-using AdvancedScada.Controls.DialogEditor;
-using AdvancedScada.Controls_Net45;
- 
-using AdvancedScada.DriverBase.Client;
-using AdvancedScada.Controls.AHMI.Controls;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
-using MfgControl.AdvancedHMI.Controls;
 
 namespace AdvancedScada.Controls.AHMI.Controls
 {

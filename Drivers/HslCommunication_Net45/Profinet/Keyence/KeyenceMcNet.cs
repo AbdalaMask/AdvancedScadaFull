@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HslCommunication.Core.Address;
+﻿using HslCommunication.Core.Address;
 using HslCommunication.Profinet.Melsec;
 
 namespace HslCommunication.Profinet.Keyence
@@ -209,7 +205,7 @@ namespace HslCommunication.Profinet.Keyence
         /// <summary>
         /// 实例化基恩士的Qna兼容3E帧协议的通讯对象
         /// </summary>
-        public KeyenceMcNet( ) : base( )
+        public KeyenceMcNet() : base()
         {
 
         }
@@ -219,7 +215,7 @@ namespace HslCommunication.Profinet.Keyence
         /// </summary>
         /// <param name="ipAddress">PLC的Ip地址</param>
         /// <param name="port">PLC的端口</param>
-        public KeyenceMcNet( string ipAddress, int port ) : base( ipAddress, port )
+        public KeyenceMcNet(string ipAddress, int port) : base(ipAddress, port)
         {
 
         }
@@ -234,9 +230,9 @@ namespace HslCommunication.Profinet.Keyence
         /// <param name="address">地址信息</param>
         /// <param name="length">数据长度</param>
         /// <returns>解析后的数据信息</returns>
-        protected override OperateResult<McAddressData> McAnalysisAddress( string address, ushort length )
+        protected override OperateResult<McAddressData> McAnalysisAddress(string address, ushort length)
         {
-            return McAddressData.ParseKeyenceFrom( address, length );
+            return McAddressData.ParseKeyenceFrom(address, length);
         }
 
         #endregion
@@ -251,7 +247,7 @@ namespace HslCommunication.Profinet.Keyence
         {
             return $"KeyenceMcNet[{IpAddress}:{Port}]";
         }
-        
+
         #endregion
     }
 }

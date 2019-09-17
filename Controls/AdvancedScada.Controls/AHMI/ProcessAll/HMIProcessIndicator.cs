@@ -1,7 +1,19 @@
-﻿using AdvancedScada.Controls.AHMI.ProcessAll.DrawAll;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.ProcessAll;
+using AdvancedScada.Controls.AHMI.ProcessAll.DrawAll;
+using AdvancedScada.Controls.AHMI.ProcessAll.DrawAll;
+using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Enum;
+using AdvancedScada.Controls.Enum;
 using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase.Comm;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,20 +25,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AdvancedScada;
- 
- using AdvancedScada.Controls.AHMI.ProcessAll.DrawAll;
-using AdvancedScada.Controls.DialogEditor;
-using AdvancedScada.Controls.Enum;
-using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
- 
-using AdvancedScada.DriverBase.Comm;
-using AdvancedScada.Controls.AHMI.ProcessAll;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
-using MfgControl.AdvancedHMI.Controls;
 
 namespace AdvancedScada.Controls.AHMI.ProcessAll
 {

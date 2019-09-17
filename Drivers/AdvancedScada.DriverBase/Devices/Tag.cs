@@ -1,7 +1,6 @@
 ﻿using AdvancedScada.DriverBase.Comm;
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.Serialization;
 
 namespace AdvancedScada.DriverBase.Devices
@@ -11,24 +10,24 @@ namespace AdvancedScada.DriverBase.Devices
     public class Tag : INotifyPropertyChanged
     {
         public delegate void EventValueChanged(dynamic value);
-   
-     
+
+
         private dynamic m_Value;
-     
+
         public EventValueChanged ValueChanged = null;
 
- 
-   
-        
+
+
+
         [DataMember]
         public int ChannelId { get; set; }
 
 
-      
+
         [DataMember]
         public int DataBlockId { get; set; }
 
-        
+
         [DataMember]
         public int DeviceId { get; set; }
 
@@ -69,11 +68,11 @@ namespace AdvancedScada.DriverBase.Devices
         [DataMember]
         public string Description { get; set; }
 
-      
-      
-       
 
-       
+
+
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string newName)
@@ -83,8 +82,8 @@ namespace AdvancedScada.DriverBase.Devices
         }
 
 
-       
-     
-     
+
+
+
     }
 }

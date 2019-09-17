@@ -2,10 +2,10 @@
 using AdvancedScada.Management;
 using AdvancedScada.Management.BLManager;
 using ComponentFactory.Krypton.Toolkit;
+using HslCommunication.Profinet.LSIS;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
-using System.Linq;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.Studio.Editors
@@ -63,7 +63,7 @@ namespace AdvancedScada.Studio.Editors
                             cboxModeNet.Enabled = false;
                             break;
                         case "LSIS":
-
+                            cboxModel.DataSource = System.Enum.GetNames(typeof(LSCpuInfo));
                             break;
                         case "Modbus":
                             cboxModel.Visible = false;
@@ -122,7 +122,7 @@ namespace AdvancedScada.Studio.Editors
                             cboxModeNet.Enabled = false;
                             break;
                         case "LSIS":
-
+                            cboxModel.DataSource = System.Enum.GetNames(typeof(LSCpuInfo));
                             break;
                         case "Modbus":
                             cboxModel.Visible = false;

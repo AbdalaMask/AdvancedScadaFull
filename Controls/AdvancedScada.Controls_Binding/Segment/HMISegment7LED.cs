@@ -1,8 +1,9 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Binding.Enum;
 using AdvancedScada.Controls_Binding.Segment.DrawAll;
+using AdvancedScada.Controls_Net45;
 using AdvancedScada.DriverBase;
-using MfgControl.AdvancedHMI.Controls;
+using AdvancedScada.Monitor;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -12,8 +13,6 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using AdvancedScada.Monitor;
-using AdvancedScada.Controls_Net45;
 
 namespace AdvancedScada.Controls_Binding.Segment
 {

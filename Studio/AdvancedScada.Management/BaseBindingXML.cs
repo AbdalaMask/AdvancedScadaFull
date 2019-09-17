@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace AdvancedScada.Management
+﻿namespace AdvancedScada.Management
 {
     public class BaseBindingXML
     {

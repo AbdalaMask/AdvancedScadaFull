@@ -1,10 +1,10 @@
 ﻿using AdvancedScada.DriverBase;
+using AdvancedScada.IBaseService;
 using AdvancedScada.IODriver;
 using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Threading;
-using AdvancedScada.IBaseService;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.BaseService
@@ -49,7 +49,7 @@ namespace AdvancedScada.BaseService
                                 {
 
                                     EventDataChanged?.DataTags(TagCollection.Tags);
-                                   
+
                                 }
                             }
                             Thread.Sleep(100);
@@ -81,7 +81,7 @@ namespace AdvancedScada.BaseService
                 EventChannelCount?.Invoke(1, false);
                 EventDataChanged = null;
                 eventLoggingMessage?.Invoke(string.Format("Removed Callback Channel: {0}, IP Address: {1}.", mac.MachineName, mac.IPAddress));
-              
+
             }
             catch (Exception ex)
             {

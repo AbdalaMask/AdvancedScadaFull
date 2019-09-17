@@ -2,7 +2,6 @@
 using AdvancedScada.IBaseService.Common;
 using ComponentFactory.Krypton.Toolkit;
 using System;
-using System.Linq;
 using System.ServiceModel;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.Studio.Service

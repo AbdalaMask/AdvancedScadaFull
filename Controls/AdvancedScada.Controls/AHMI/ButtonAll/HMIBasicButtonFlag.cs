@@ -1,15 +1,15 @@
-﻿using System;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.ButtonAll;
+using AdvancedScada.Controls_Net45;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AdvancedScada;
-using AdvancedScada.Controls_Net45;
-using AdvancedScada.Controls.AHMI.ButtonAll;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.ButtonAll
 {
@@ -53,34 +53,34 @@ namespace AdvancedScada.Controls.AHMI.ButtonAll
                 {
                     if (OutputType == MfgControl.AdvancedHMI.Controls.OutputType.MomentarySet)
                     {
-                         AdvancedScada.Controls.Utilities.Write(PLCAddressClick, "1");
+                        AdvancedScada.Controls.Utilities.Write(PLCAddressClick, "1");
                         if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
                         if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
                     }
                     else if (OutputType == MfgControl.AdvancedHMI.Controls.OutputType.MomentaryReset)
                     {
-                         AdvancedScada.Controls.Utilities.Write(PLCAddressClick, "0");
+                        AdvancedScada.Controls.Utilities.Write(PLCAddressClick, "0");
                         if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
                         if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
                     }
 
                     else if (OutputType == MfgControl.AdvancedHMI.Controls.OutputType.SetTrue)
                     {
-                         AdvancedScada.Controls.Utilities.Write(PLCAddressClick, "1");
+                        AdvancedScada.Controls.Utilities.Write(PLCAddressClick, "1");
                     }
 
                     else if (OutputType == MfgControl.AdvancedHMI.Controls.OutputType.SetFalse)
                     {
-                         AdvancedScada.Controls.Utilities.Write(PLCAddressClick, "0");
+                        AdvancedScada.Controls.Utilities.Write(PLCAddressClick, "0");
                     }
 
                     else if (OutputType == MfgControl.AdvancedHMI.Controls.OutputType.Toggle)
                     {
                         bool CurrentValue = Convert.ToBoolean(Value);
                         if (CurrentValue)
-                             AdvancedScada.Controls.Utilities.Write(PLCAddressClick, "0");
+                            AdvancedScada.Controls.Utilities.Write(PLCAddressClick, "0");
                         else
-                             AdvancedScada.Controls.Utilities.Write(PLCAddressClick, $"{m_Flag}");
+                            AdvancedScada.Controls.Utilities.Write(PLCAddressClick, $"{m_Flag}");
                     }
                 }
                 catch (Exception)

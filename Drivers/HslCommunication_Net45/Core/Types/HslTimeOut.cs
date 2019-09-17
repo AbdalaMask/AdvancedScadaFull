@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using HslCommunication.Core;
+using System;
 using System.Net.Sockets;
-using System.Net;
-using System.Threading;
-using HslCommunication.Core;
 
 namespace HslCommunication
 {
@@ -16,7 +11,7 @@ namespace HslCommunication
      *    When applied to a network connection request timeouts
      * 
      ****************************************************************************/
-    
+
 
 
 
@@ -33,7 +28,7 @@ namespace HslCommunication
         {
             StartTime = DateTime.Now;
             IsSuccessful = false;
-            HybirdLock = new SimpleHybirdLock( );
+            HybirdLock = new SimpleHybirdLock();
         }
 
         /// <summary>
@@ -47,7 +42,7 @@ namespace HslCommunication
         /// <summary>
         /// 延时的时间，单位毫秒
         /// </summary>
-        public int DelayTime { get ; set ; }
+        public int DelayTime { get; set; }
         /// <summary>
         /// 连接超时用的Socket
         /// </summary>

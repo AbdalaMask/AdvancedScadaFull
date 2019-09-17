@@ -1,10 +1,9 @@
-﻿using ComponentFactory.Krypton.Toolkit;
+﻿using AdvancedScada.DriverBase;
+using AdvancedScada.IBaseService;
+using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using AdvancedScada.DriverBase;
-using AdvancedScada.IBaseService;
 
 namespace AdvancedScada.Monitor
 {
@@ -80,7 +79,7 @@ namespace AdvancedScada.Monitor
                 default:
                     break;
             }
-           
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

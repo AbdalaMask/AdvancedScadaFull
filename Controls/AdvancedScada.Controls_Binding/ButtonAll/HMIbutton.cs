@@ -1,6 +1,8 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Binding.Display;
 using AdvancedScada.DriverBase;
+using AdvancedScada.Monitor;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -9,8 +11,6 @@ using System.Drawing.Design;
 using System.Security.Permissions;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using MfgControl.AdvancedHMI.Controls;
-using AdvancedScada.Monitor;
 
 namespace AdvancedScada.Controls_Binding.ButtonAll
 {

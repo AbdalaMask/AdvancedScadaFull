@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net;
-using System.Net.Sockets;
 using System.IO;
+using System.Linq;
+using System.Net.Sockets;
 using System.Threading;
-using HslCommunication.BasicFramework;
-using HslCommunication.Enthernet;
-using HslCommunication.LogNet;
 
 namespace HslCommunication.Core
 {
@@ -44,17 +39,17 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="timeout">数据封送对象</param>
         /// <param name="millisecond">超时的时间</param>
-        internal static void ThreadPoolCheckConnect( HslTimeOut timeout, int millisecond )
+        internal static void ThreadPoolCheckConnect(HslTimeOut timeout, int millisecond)
         {
             while (!timeout.IsSuccessful)
             {
                 if ((DateTime.Now - timeout.StartTime).TotalMilliseconds > millisecond)
                 {
                     // 连接超时或是验证超时
-                    if (!timeout.IsSuccessful) timeout.WorkSocket?.Close( );
+                    if (!timeout.IsSuccessful) timeout.WorkSocket?.Close();
                     break;
                 }
-                Thread.Sleep( 100 );
+                Thread.Sleep(100);
             }
         }
 
@@ -62,7 +57,7 @@ namespace HslCommunication.Core
         /// 检查是否超时的方法信息
         /// </summary>
         /// <param name="obj">socket对象</param>
-        internal static void ThreadPoolCheckTimeOut( object obj )
+        internal static void ThreadPoolCheckTimeOut(object obj)
         {
             if (obj is HslTimeOut timeout)
             {
@@ -73,8 +68,8 @@ namespace HslCommunication.Core
                         // 连接超时或是验证超时
                         if (!timeout.IsSuccessful)
                         {
-                            timeout.Operator?.Invoke( );
-                            timeout.WorkSocket?.Close( );
+                            timeout.Operator?.Invoke();
+                            timeout.WorkSocket?.Close();
                         }
                         break;
                     }
@@ -102,9 +97,9 @@ namespace HslCommunication.Core
         /// 如何接收不定长度的数据呢？我们可以将一条数据拆分成2次接收，第一次是接收8个固定的字节，解析成长度，再接收真实的数据。
         ///  <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetSupport.cs" region="ReadBytesFromSocketExample3" title="ReadBytesFromSocket示例" />
         /// </example>
-        public static byte[] ReadBytesFromSocket( Socket socket, int receive )
+        public static byte[] ReadBytesFromSocket(Socket socket, int receive)
         {
-            return ReadBytesFromSocket( socket, receive, null, false, false );
+            return ReadBytesFromSocket(socket, receive, null, false, false);
         }
 
 
@@ -125,7 +120,7 @@ namespace HslCommunication.Core
         /// 接收数据的举例，输出报告，不根据百分比来产生报告，不回复接收进度。
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetSupport.cs" region="ReadBytesFromSocketExample2" title="ReadBytesFromSocket示例" />
         /// </example>
-        public static byte[] ReadBytesFromSocket( Socket socket, int receive, Action<long, long> report, bool reportByPercent, bool response )
+        public static byte[] ReadBytesFromSocket(Socket socket, int receive, Action<long, long> report, bool reportByPercent, bool response)
         {
             byte[] bytes_receive = new byte[receive];
             int count_receive = 0;
@@ -134,7 +129,7 @@ namespace HslCommunication.Core
             {
                 // 分割成2KB来接收数据
                 int receive_length = (receive - count_receive) >= SocketBufferSize ? SocketBufferSize : (receive - count_receive);
-                count_receive += socket.Receive( bytes_receive, count_receive, receive_length, SocketFlags.None );
+                count_receive += socket.Receive(bytes_receive, count_receive, receive_length, SocketFlags.None);
                 if (reportByPercent)
                 {
                     long percentCurrent = (long)count_receive * 100 / receive;
@@ -142,16 +137,16 @@ namespace HslCommunication.Core
                     {
                         percent = percentCurrent;
                         // 报告进度
-                        report?.Invoke( count_receive, receive );
+                        report?.Invoke(count_receive, receive);
                     }
                 }
                 else
                 {
                     // 报告进度
-                    report?.Invoke( count_receive, receive );
+                    report?.Invoke(count_receive, receive);
                 }
                 // 回发进度
-                if (response) socket.Send( BitConverter.GetBytes( (long)count_receive ) );
+                if (response) socket.Send(BitConverter.GetBytes((long)count_receive));
             }
             return bytes_receive;
         }
@@ -162,28 +157,28 @@ namespace HslCommunication.Core
         /// <param name="socket">网络套接字</param>
         /// <param name="endCode">结束符信息</param>
         /// <returns>带有结果对象的数据信息</returns>
-        public static OperateResult<byte[]> ReceiveCommandLineFromSocket( Socket socket, byte endCode )
+        public static OperateResult<byte[]> ReceiveCommandLineFromSocket(Socket socket, byte endCode)
         {
-            if (!Authorization.nzugaydgwadawdibbas( )) return new OperateResult<byte[]>( StringResources.Language.AuthorizationFailed );
+            if (!Authorization.nzugaydgwadawdibbas()) return new OperateResult<byte[]>(StringResources.Language.AuthorizationFailed);
 
-            List<byte> bufferArray = new List<byte>( );
+            List<byte> bufferArray = new List<byte>();
             try
             {
                 // 接收到endCode为止
                 while (true)
                 {
-                    byte[] head = NetSupport.ReadBytesFromSocket( socket, 1 );
-                    bufferArray.AddRange( head );
+                    byte[] head = NetSupport.ReadBytesFromSocket(socket, 1);
+                    bufferArray.AddRange(head);
                     if (head[0] == endCode) break;
                 }
 
                 // 指令头已经接收完成
-                return OperateResult.CreateSuccessResult( bufferArray.ToArray( ) );
+                return OperateResult.CreateSuccessResult(bufferArray.ToArray());
             }
             catch (Exception ex)
             {
-                socket?.Close( );
-                return new OperateResult<byte[]>( ex.Message );
+                socket?.Close();
+                return new OperateResult<byte[]>(ex.Message);
             }
         }
 
@@ -194,21 +189,21 @@ namespace HslCommunication.Core
         /// <param name="endCode1">结束符1信息</param>
         /// <param name="endCode2">结束符2信息</param>
         /// <returns>带有结果对象的数据信息</returns>
-        public static OperateResult<byte[]> ReceiveCommandLineFromSocket( Socket socket, byte endCode1, byte endCode2 )
+        public static OperateResult<byte[]> ReceiveCommandLineFromSocket(Socket socket, byte endCode1, byte endCode2)
         {
-            if (!Authorization.nzugaydgwadawdibbas( )) return new OperateResult<byte[]>( StringResources.Language.AuthorizationFailed );
+            if (!Authorization.nzugaydgwadawdibbas()) return new OperateResult<byte[]>(StringResources.Language.AuthorizationFailed);
 
-            List<byte> bufferArray = new List<byte>( );
+            List<byte> bufferArray = new List<byte>();
             try
             {
                 // 接收到endCode为止
                 while (true)
                 {
-                    byte[] head = NetSupport.ReadBytesFromSocket( socket, 1 );
-                    bufferArray.AddRange( head );
+                    byte[] head = NetSupport.ReadBytesFromSocket(socket, 1);
+                    bufferArray.AddRange(head);
                     if (head[0] == endCode2)
                     {
-                        if(bufferArray.Count > 0 && bufferArray.Last( ) == endCode1)
+                        if (bufferArray.Count > 0 && bufferArray.Last() == endCode1)
                         {
                             break;
                         }
@@ -216,12 +211,12 @@ namespace HslCommunication.Core
                 }
 
                 // 指令头已经接收完成
-                return OperateResult.CreateSuccessResult( bufferArray.ToArray( ) );
+                return OperateResult.CreateSuccessResult(bufferArray.ToArray());
             }
             catch (Exception ex)
             {
-                socket?.Close( );
-                return new OperateResult<byte[]>( ex.Message );
+                socket?.Close();
+                return new OperateResult<byte[]>(ex.Message);
             }
         }
 
@@ -242,7 +237,7 @@ namespace HslCommunication.Core
         /// 举例从socket读取数据，然后写入到文件流中
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetSupport.cs" region="WriteStreamFromSocketExample" title="WriteStreamFromSocket示例" />
         /// </example>
-        public static void WriteStreamFromSocket( Socket socket, Stream stream, long receive, Action<long, long> report, bool reportByPercent )
+        public static void WriteStreamFromSocket(Socket socket, Stream stream, long receive, Action<long, long> report, bool reportByPercent)
         {
             byte[] buffer = new byte[SocketBufferSize];
             long count_receive = 0;
@@ -250,9 +245,9 @@ namespace HslCommunication.Core
             while (count_receive < receive)
             {
                 // 分割成4KB来接收数据
-                int current = socket.Receive( buffer, 0, SocketBufferSize, SocketFlags.None );
+                int current = socket.Receive(buffer, 0, SocketBufferSize, SocketFlags.None);
                 count_receive += current;
-                stream.Write( buffer, 0, current );
+                stream.Write(buffer, 0, current);
                 if (reportByPercent)
                 {
                     long percentCurrent = count_receive * 100 / receive;
@@ -260,16 +255,16 @@ namespace HslCommunication.Core
                     {
                         percent = percentCurrent;
                         // 报告进度
-                        report?.Invoke( count_receive, receive );
+                        report?.Invoke(count_receive, receive);
                     }
                 }
                 else
                 {
                     // 报告进度
-                    report?.Invoke( count_receive, receive );
+                    report?.Invoke(count_receive, receive);
                 }
                 // 回发进度
-                socket.Send( BitConverter.GetBytes( count_receive ) );
+                socket.Send(BitConverter.GetBytes(count_receive));
             }
         }
 
@@ -292,7 +287,7 @@ namespace HslCommunication.Core
         /// 举例从文件读取数据，然后写入到套接字中，相当于发送文件到socket
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetSupport.cs" region="WriteSocketFromStreamExample" title="WriteSocketFromStream示例" />
         /// </example>
-        public static void WriteSocketFromStream( Socket socket, Stream stream, long length, Action<long, long> report, bool reportByPercent )
+        public static void WriteSocketFromStream(Socket socket, Stream stream, long length, Action<long, long> report, bool reportByPercent)
         {
             byte[] buffer = new byte[SocketBufferSize];
             long count_send = 0;
@@ -301,11 +296,11 @@ namespace HslCommunication.Core
 
             while (count_send < length)
             {
-                int count = stream.Read( buffer, 0, SocketBufferSize );
+                int count = stream.Read(buffer, 0, SocketBufferSize);
                 count_send += count;
-                socket.Send( buffer, 0, count, SocketFlags.None );
+                socket.Send(buffer, 0, count, SocketFlags.None);
 
-                while (count_send != BitConverter.ToInt64( ReadBytesFromSocket( socket, 8 ), 0 )) ;
+                while (count_send != BitConverter.ToInt64(ReadBytesFromSocket(socket, 8), 0)) ;
 
                 long received = count_send;
 
@@ -316,13 +311,13 @@ namespace HslCommunication.Core
                     {
                         percent = percentCurrent;
                         // 报告进度
-                        report?.Invoke( received, length );
+                        report?.Invoke(received, length);
                     }
                 }
                 else
                 {
                     // 报告进度
-                    report?.Invoke( received, length );
+                    report?.Invoke(received, length);
                 }
 
                 // 双重接收验证
@@ -336,5 +331,5 @@ namespace HslCommunication.Core
     }
 
     #endregion
-    
+
 }

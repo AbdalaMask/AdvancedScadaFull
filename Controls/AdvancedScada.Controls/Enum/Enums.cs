@@ -1,11 +1,11 @@
-﻿using System;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AdvancedScada;
-using AdvancedScada.Controls.Enum;
-using AdvancedScada;
-using AdvancedScada.Controls;
 
 namespace AdvancedScada.Controls.Enum
 {

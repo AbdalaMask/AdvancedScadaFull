@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -11,17 +7,17 @@ using System.Windows.Media.Imaging;
 
 namespace HslScada.Scada.Controls
 {
-   public  class HMIButton1 : Control
+    public class HMIButton1 : Control
     {
 
         #region DependencyProperty
 
-       
+
         public static DependencyProperty MotorColorsProperty = DependencyProperty.Register(
           "ButtonColor", typeof(ButtonColor), typeof(HMIButton1),
        new FrameworkPropertyMetadata(ButtonColor.Gray, FrameworkPropertyMetadataOptions.AffectsRender));
 
-       
+
         public static DependencyProperty TextAlignmentProperty = DependencyProperty.Register("TextAlignment", typeof(TextAlignment), typeof(HMIButton1),
           new FrameworkPropertyMetadata(TextAlignment.Center, FrameworkPropertyMetadataOptions.AffectsRender));
 
@@ -68,7 +64,7 @@ namespace HslScada.Scada.Controls
         public enum ButtonColor
         {
             Gray,
-            Green,Red, Orange, Yellow, BlueViolet, WhiteSmoke, Brown, DarkGreen
+            Green, Red, Orange, Yellow, BlueViolet, WhiteSmoke, Brown, DarkGreen
 
         }
         #endregion
@@ -78,7 +74,7 @@ namespace HslScada.Scada.Controls
         ImageSource imageSource;
         protected override void OnRender(DrawingContext drawingContext)
         {
-            
+
             double width = this.ActualWidth;
             double height = this.ActualHeight;
             double bevel = height * 0.1;
@@ -125,7 +121,7 @@ namespace HslScada.Scada.Controls
                     drawingContext.DrawImage(imageSource, new Rect(0, 0, width, height));
                     break;
             }
-            
+
             string txt = this.Text;
             if (!string.IsNullOrEmpty(txt))
             {

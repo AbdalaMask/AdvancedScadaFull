@@ -1,12 +1,6 @@
-﻿using AdvancedScada.Management.BLManager;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Toolkit;
-using Microsoft.Win32;
-using System;
-using System.Windows.Forms;
-using AdvancedScada.IBaseService.Common;
+﻿using AdvancedScada.IBaseService.Common;
 using AdvancedScada.ImagePicker;
+using AdvancedScada.Management.BLManager;
 using AdvancedScada.Studio.Config;
 using AdvancedScada.Studio.DB;
 using AdvancedScada.Studio.DB.SQL;
@@ -14,9 +8,15 @@ using AdvancedScada.Studio.DB.SQLite;
 using AdvancedScada.Studio.Editors;
 using AdvancedScada.Studio.Logging;
 using AdvancedScada.Studio.Monitor;
+using AdvancedScada.Studio.Properties;
 using AdvancedScada.Studio.Service;
 using AdvancedScada.Studio.Tools;
-using AdvancedScada.Studio.Properties;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Toolkit;
+using Microsoft.Win32;
+using System;
+using System.Windows.Forms;
 
 namespace AdvancedScada.Studio
 {
@@ -182,7 +182,7 @@ namespace AdvancedScada.Studio
                 if (form.GetType() == typeof(FormServerUtils))
                 {
                     form.Activate();
-                   
+
                     return;
                 }
             }
@@ -416,7 +416,7 @@ namespace AdvancedScada.Studio
                 {
                     if (form.GetType() == typeof(FormServerUtils))
                     {
-                        
+
                         Application.ExitThread();
                     }
                 }
@@ -427,7 +427,7 @@ namespace AdvancedScada.Studio
 
         private void CheckEnabele_CheckedChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void CheckEnabele_Click(object sender, EventArgs e)

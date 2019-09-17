@@ -3,10 +3,8 @@ using HslCommunication.Core.IMessage;
 using HslCommunication.Core.Net;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using System.IO;
 
 namespace HslCommunication.Enthernet.Redis
 {
@@ -23,7 +21,7 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="ipAddress">服务器的ip地址</param>
         /// <param name="port">服务器的端口号</param>
         /// <param name="password">密码，如果服务器没有设置，密码设置为null</param>
-        public RedisClient( string ipAddress, int port, string password )
+        public RedisClient(string ipAddress, int port, string password)
         {
             IpAddress = ipAddress;
             Port = port;
@@ -35,7 +33,7 @@ namespace HslCommunication.Enthernet.Redis
         /// 实例化一个客户端对象，需要手动指定Ip地址和端口
         /// </summary>
         /// <param name="password">密码，如果服务器没有设置，密码设置为null</param>
-        public RedisClient( string password )
+        public RedisClient(string password)
         {
             ReceiveTimeOut = 30000;
             this.password = password;
@@ -50,21 +48,21 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="socket">网络的套接字服务</param>
         /// <returns>是否成功的对象</returns>
-        protected override OperateResult InitializationOnConnect( Socket socket )
+        protected override OperateResult InitializationOnConnect(Socket socket)
         {
-            if (!string.IsNullOrEmpty( this.password ))
+            if (!string.IsNullOrEmpty(this.password))
             {
-                byte[] command = RedisHelper.PackStringCommand( new string[] { "AUTH", this.password } );
+                byte[] command = RedisHelper.PackStringCommand(new string[] { "AUTH", this.password });
 
-                OperateResult<byte[]> read = ReadFromCoreServer(socket,  command );
-                if (!read.IsSuccess) return OperateResult.CreateFailedResult<string>( read );
+                OperateResult<byte[]> read = ReadFromCoreServer(socket, command);
+                if (!read.IsSuccess) return OperateResult.CreateFailedResult<string>(read);
 
-                string msg = Encoding.UTF8.GetString( read.Content );
-                if (!msg.StartsWith( "+" )) return new OperateResult<string>( msg );
+                string msg = Encoding.UTF8.GetString(read.Content);
+                if (!msg.StartsWith("+")) return new OperateResult<string>(msg);
 
-                return OperateResult.CreateSuccessResult( msg.Substring( 1 ).TrimEnd( '\r', '\n' ) );
+                return OperateResult.CreateSuccessResult(msg.Substring(1).TrimEnd('\r', '\n'));
             }
-            return base.InitializationOnConnect( socket );
+            return base.InitializationOnConnect(socket);
         }
 
         /// <summary>
@@ -80,19 +78,19 @@ namespace HslCommunication.Enthernet.Redis
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDoubleBase.cs" region="ReadFromCoreServerExample1" title="ReadFromCoreServer示例" />
         /// </example>
         /// <returns>接收的完整的报文信息</returns>
-        public override OperateResult<byte[]> ReadFromCoreServer( Socket socket, byte[] send )
+        public override OperateResult<byte[]> ReadFromCoreServer(Socket socket, byte[] send)
         {
-            OperateResult sendResult = Send( socket, send );
-            if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( sendResult );
+            OperateResult sendResult = Send(socket, send);
+            if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(sendResult);
 
-            string tmp = BasicFramework.SoftBasic.ByteToHexString( send, ' ' );
+            string tmp = BasicFramework.SoftBasic.ByteToHexString(send, ' ');
             // 接收超时时间大于0时才允许接收远程的数据
-            if (ReceiveTimeOut < 0) return OperateResult.CreateSuccessResult( new byte[0] );
+            if (ReceiveTimeOut < 0) return OperateResult.CreateSuccessResult(new byte[0]);
 
             // 接收数据信息
-            return RedisHelper.ReceiveCommand( socket );
+            return RedisHelper.ReceiveCommand(socket);
         }
-        
+
         #endregion
 
         #region Customer
@@ -102,14 +100,14 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="command">举例：LTRIM AAAAA 0 999 就是收缩列表，GET AAA 就是获取键值</param>
         /// <returns>从服务器返回的结果数据对象</returns>
-        public OperateResult<string> ReadCustomer( string command )
+        public OperateResult<string> ReadCustomer(string command)
         {
-            byte[] byteCommand = RedisHelper.PackStringCommand( command.Split( ' ' ) );
+            byte[] byteCommand = RedisHelper.PackStringCommand(command.Split(' '));
 
-            OperateResult<byte[]> read = ReadFromCoreServer( byteCommand );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<string>( read );
+            OperateResult<byte[]> read = ReadFromCoreServer(byteCommand);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<string>(read);
 
-            return OperateResult.CreateSuccessResult( Encoding.UTF8.GetString( read.Content ) );
+            return OperateResult.CreateSuccessResult(Encoding.UTF8.GetString(read.Content));
         }
 
         #endregion
@@ -123,15 +121,15 @@ namespace HslCommunication.Enthernet.Redis
         /// <returns>数字的结果对象</returns>
         public OperateResult<int> OperateNumberFromServer(string[] commands)
         {
-            byte[] command = RedisHelper.PackStringCommand( commands );
+            byte[] command = RedisHelper.PackStringCommand(commands);
 
-            OperateResult<byte[]> read = ReadFromCoreServer( command );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<int>( read );
+            OperateResult<byte[]> read = ReadFromCoreServer(command);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<int>(read);
 
-            string msg = Encoding.UTF8.GetString( read.Content );
-            if (!msg.StartsWith( ":" )) return new OperateResult<int>( msg );
+            string msg = Encoding.UTF8.GetString(read.Content);
+            if (!msg.StartsWith(":")) return new OperateResult<int>(msg);
 
-            return RedisHelper.GetNumberFromCommandLine( read.Content );
+            return RedisHelper.GetNumberFromCommandLine(read.Content);
         }
 
         /// <summary>
@@ -141,15 +139,15 @@ namespace HslCommunication.Enthernet.Redis
         /// <returns>long数字的结果对象</returns>
         public OperateResult<long> OperateLongNumberFromServer(string[] commands)
         {
-            byte[] command = RedisHelper.PackStringCommand( commands );
+            byte[] command = RedisHelper.PackStringCommand(commands);
 
-            OperateResult<byte[]> read = ReadFromCoreServer( command );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<long>( read );
+            OperateResult<byte[]> read = ReadFromCoreServer(command);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<long>(read);
 
-            string msg = Encoding.UTF8.GetString( read.Content );
-            if (!msg.StartsWith( ":" )) return new OperateResult<long>( msg );
+            string msg = Encoding.UTF8.GetString(read.Content);
+            if (!msg.StartsWith(":")) return new OperateResult<long>(msg);
 
-            return RedisHelper.GetLongNumberFromCommandLine( read.Content );
+            return RedisHelper.GetLongNumberFromCommandLine(read.Content);
         }
 
         /// <summary>
@@ -159,12 +157,12 @@ namespace HslCommunication.Enthernet.Redis
         /// <returns>字符串的结果对象</returns>
         public OperateResult<string> OperateStringFromServer(string[] commands)
         {
-            byte[] command = RedisHelper.PackStringCommand( commands );
+            byte[] command = RedisHelper.PackStringCommand(commands);
 
-            OperateResult<byte[]> read = ReadFromCoreServer( command );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<string>( read );
+            OperateResult<byte[]> read = ReadFromCoreServer(command);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<string>(read);
 
-            return RedisHelper.GetStringFromCommandLine( read.Content );
+            return RedisHelper.GetStringFromCommandLine(read.Content);
         }
 
         /// <summary>
@@ -174,12 +172,12 @@ namespace HslCommunication.Enthernet.Redis
         /// <returns>字符串数组的结果对象</returns>
         public OperateResult<string[]> OperateStringsFromServer(string[] commands)
         {
-            byte[] command = RedisHelper.PackStringCommand( commands );
+            byte[] command = RedisHelper.PackStringCommand(commands);
 
-            OperateResult<byte[]> read = ReadFromCoreServer( command );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<string[]>( read );
+            OperateResult<byte[]> read = ReadFromCoreServer(command);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<string[]>(read);
 
-            return RedisHelper.GetStringsFromCommandLine( read.Content );
+            return RedisHelper.GetStringsFromCommandLine(read.Content);
         }
 
         /// <summary>
@@ -189,15 +187,15 @@ namespace HslCommunication.Enthernet.Redis
         /// <returns>是否成功的结果对象</returns>
         public OperateResult<string> OperateStatusFromServer(string[] commands)
         {
-            byte[] command = RedisHelper.PackStringCommand( commands );
+            byte[] command = RedisHelper.PackStringCommand(commands);
 
-            OperateResult<byte[]> read = ReadFromCoreServer( command );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<string>( read );
+            OperateResult<byte[]> read = ReadFromCoreServer(command);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<string>(read);
 
-            string msg = Encoding.UTF8.GetString( read.Content );
-            if (!msg.StartsWith( "+" )) return new OperateResult<string>( msg );
+            string msg = Encoding.UTF8.GetString(read.Content);
+            if (!msg.StartsWith("+")) return new OperateResult<string>(msg);
 
-            return OperateResult.CreateSuccessResult( msg.Substring( 1 ).TrimEnd( '\r', '\n' ) );
+            return OperateResult.CreateSuccessResult(msg.Substring(1).TrimEnd('\r', '\n'));
         }
 
         #endregion
@@ -209,13 +207,13 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="keys">关键字</param>
         /// <returns>被删除 key 的数量。</returns>
-        public OperateResult<int> DeleteKey( string[] keys )
+        public OperateResult<int> DeleteKey(string[] keys)
         {
-            List<string> list = new List<string>( );
-            list.Add( "DEL" );
-            list.AddRange( keys );
+            List<string> list = new List<string>();
+            list.Add("DEL");
+            list.AddRange(keys);
 
-            return OperateNumberFromServer( list.ToArray( ) );
+            return OperateNumberFromServer(list.ToArray());
         }
 
         /// <summary>
@@ -223,9 +221,9 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="key">关键字</param>
         /// <returns>被删除 key 的数量。</returns>
-        public OperateResult<int> DeleteKey( string key )
+        public OperateResult<int> DeleteKey(string key)
         {
-            return DeleteKey( new string[] { key } );
+            return DeleteKey(new string[] { key });
         }
 
         /// <summary>
@@ -233,9 +231,9 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="key">关键字</param>
         /// <returns>若 key 存在，返回 1 ，否则返回 0 。</returns>
-        public OperateResult<int> ExistsKey( string key )
+        public OperateResult<int> ExistsKey(string key)
         {
-            return OperateNumberFromServer( new string[] { "EXISTS", key } );
+            return OperateNumberFromServer(new string[] { "EXISTS", key });
         }
 
         /// <summary>
@@ -245,9 +243,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <returns>
         /// 设置成功返回 1 。当 key 不存在或者不能为 key 设置生存时间时，返回 0 。
         /// </returns>
-        public OperateResult<int> ExpireKey( string key )
+        public OperateResult<int> ExpireKey(string key)
         {
-            return OperateNumberFromServer( new string[] { "EXPIRE", key } );
+            return OperateNumberFromServer(new string[] { "EXPIRE", key });
         }
 
         /// <summary>
@@ -258,9 +256,9 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="pattern">给定模式</param>
         /// <returns>符合给定模式的 key 列表。</returns>
-        public OperateResult<string[]> ReadAllKeys( string pattern )
+        public OperateResult<string[]> ReadAllKeys(string pattern)
         {
-            return OperateStringsFromServer( new string[] { "KEYS", pattern } );
+            return OperateStringsFromServer(new string[] { "KEYS", pattern });
         }
 
         /// <summary>
@@ -271,9 +269,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="db">数据块</param>
         /// <returns>是否移动成功</returns>
-        public OperateResult MoveKey( string key, int db )
+        public OperateResult MoveKey(string key, int db)
         {
-            return OperateStatusFromServer( new string[] { "MOVE", key, db.ToString( ) } );
+            return OperateStatusFromServer(new string[] { "MOVE", key, db.ToString() });
         }
 
         /// <summary>
@@ -286,9 +284,9 @@ namespace HslCommunication.Enthernet.Redis
         /// 当生存时间移除成功时，返回 1 .
         /// 如果 key 不存在或 key 没有设置生存时间，返回 0 。
         /// </returns>
-        public OperateResult<int> PersistKey( string key )
+        public OperateResult<int> PersistKey(string key)
         {
-            return OperateNumberFromServer( new string[] { "PERSIST", key } );
+            return OperateNumberFromServer(new string[] { "PERSIST", key });
         }
 
         /// <summary>
@@ -300,9 +298,9 @@ namespace HslCommunication.Enthernet.Redis
         /// 当数据库不为空时，返回一个 key 。
         /// 当数据库为空时，返回 nil 。
         /// </returns>
-        public OperateResult<string> ReadRandomKey( )
+        public OperateResult<string> ReadRandomKey()
         {
-            return OperateStringFromServer( new string[] { "RANDOMKEY" } );
+            return OperateStringFromServer(new string[] { "RANDOMKEY" });
         }
 
         /// <summary>
@@ -315,9 +313,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <returns>
         /// 改名成功时提示 OK ，失败时候返回一个错误。
         /// </returns>
-        public OperateResult RenameKey( string key1, string key2 )
+        public OperateResult RenameKey(string key1, string key2)
         {
-            return OperateStatusFromServer( new string[] { "RENAME", key1, key2 } );
+            return OperateStatusFromServer(new string[] { "RENAME", key1, key2 });
         }
 
         /// <summary>
@@ -325,9 +323,9 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="key">关键字</param>
         /// <returns>类型</returns>
-        public OperateResult<string> ReadKeyType( string key )
+        public OperateResult<string> ReadKeyType(string key)
         {
-            return OperateStatusFromServer( new string[] { "TYPE", key } );
+            return OperateStatusFromServer(new string[] { "TYPE", key });
         }
 
 
@@ -346,9 +344,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <returns>
         /// 追加 value 之后， key 中字符串的长度。
         /// </returns>
-        public OperateResult<int> AppendKey( string key, string value )
+        public OperateResult<int> AppendKey(string key, string value)
         {
-            return OperateNumberFromServer( new string[] { "APPEND", key, value } );
+            return OperateNumberFromServer(new string[] { "APPEND", key, value });
         }
 
         /// <summary>
@@ -359,9 +357,9 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="key">关键字</param>
         /// <returns>执行 DECR 命令之后 key 的值。</returns>
-        public OperateResult<long> DecrementKey( string key )
+        public OperateResult<long> DecrementKey(string key)
         {
-            return OperateLongNumberFromServer( new string[] { "DECR", key } );
+            return OperateLongNumberFromServer(new string[] { "DECR", key });
         }
 
         /// <summary>
@@ -373,9 +371,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="value">操作的值</param>
         /// <returns>返回减去 decrement 之后， key 的值。</returns>
-        public OperateResult<long> DecrementKey( string key, long value )
+        public OperateResult<long> DecrementKey(string key, long value)
         {
-            return OperateLongNumberFromServer( new string[] { "DECRBY", key, value.ToString( ) } );
+            return OperateLongNumberFromServer(new string[] { "DECRBY", key, value.ToString() });
         }
 
         /// <summary>
@@ -384,9 +382,9 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="key">关键字</param>
         /// <returns>当 key 不存在时，返回 nil ，否则，返回 key 的值。</returns>
-        public OperateResult<string> ReadKey( string key )
+        public OperateResult<string> ReadKey(string key)
         {
-            return OperateStringFromServer( new string[] { "GET", key } );
+            return OperateStringFromServer(new string[] { "GET", key });
         }
 
         /// <summary>
@@ -398,9 +396,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="start">截取开始的位置</param>
         /// <param name="end">截取结束的位置</param>
         /// <returns>返回截取得出的子字符串。</returns>
-        public OperateResult<string> ReadKeyRange( string key, int start, int end )
+        public OperateResult<string> ReadKeyRange(string key, int start, int end)
         {
-            return OperateStringFromServer( new string[] { "GETRANGE", key, start.ToString( ), end.ToString( ) } );
+            return OperateStringFromServer(new string[] { "GETRANGE", key, start.ToString(), end.ToString() });
         }
 
         /// <summary>
@@ -409,9 +407,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="value">新的值</param>
         /// <returns>返回给定 key 的旧值。当 key 没有旧值时，也即是， key 不存在时，返回 nil 。</returns>
-        public OperateResult<string> ReadAndWriteKey( string key, string value )
+        public OperateResult<string> ReadAndWriteKey(string key, string value)
         {
-            return OperateStringFromServer( new string[] { "GETSET", key, value } );
+            return OperateStringFromServer(new string[] { "GETSET", key, value });
         }
 
         /// <summary>
@@ -421,9 +419,9 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="key">关键字</param>
         /// <returns>返回执行 INCR 命令之后 key 的值。</returns>
-        public OperateResult<long> IncrementKey( string key )
+        public OperateResult<long> IncrementKey(string key)
         {
-            return OperateLongNumberFromServer( new string[] { "INCR", key } );
+            return OperateLongNumberFromServer(new string[] { "INCR", key });
         }
 
         /// <summary>
@@ -433,9 +431,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="value">增量数据</param>
         /// <returns>加上 increment 之后， key 的值。</returns>
-        public OperateResult<long> IncrementKey( string key, long value )
+        public OperateResult<long> IncrementKey(string key, long value)
         {
-            return OperateLongNumberFromServer( new string[] { "INCRBY", key, value.ToString( ) } );
+            return OperateLongNumberFromServer(new string[] { "INCRBY", key, value.ToString() });
         }
 
         /// <summary>
@@ -445,9 +443,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="value">增量数据</param>
         /// <returns>执行命令之后 key 的值。</returns>
-        public OperateResult<string> IncrementKey( string key, float value )
+        public OperateResult<string> IncrementKey(string key, float value)
         {
-            return OperateStringFromServer( new string[] { "INCRBYFLOAT", key, value.ToString( ) } );
+            return OperateStringFromServer(new string[] { "INCRBYFLOAT", key, value.ToString() });
         }
 
 
@@ -457,13 +455,13 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="keys">关键字数组</param>
         /// <returns>一个包含所有给定 key 的值的列表。</returns>
-        public OperateResult<string[]> ReadKey( string[] keys )
+        public OperateResult<string[]> ReadKey(string[] keys)
         {
-            List<string> list = new List<string>( );
-            list.Add( "MGET" );
-            list.AddRange( keys );
+            List<string> list = new List<string>();
+            list.Add("MGET");
+            list.AddRange(keys);
 
-            return OperateStringsFromServer( list.ToArray( ) );
+            return OperateStringsFromServer(list.ToArray());
         }
 
         /// <summary>
@@ -473,21 +471,21 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="keys">关键字数组</param>
         /// <param name="values">值数组</param>
         /// <returns>总是返回 OK (因为 MSET 不可能失败)</returns>
-        public OperateResult WriteKey( string[] keys, string[] values )
+        public OperateResult WriteKey(string[] keys, string[] values)
         {
-            if (keys == null) throw new ArgumentNullException( "keys" );
-            if (values == null) throw new ArgumentNullException( "values" );
-            if (keys.Length != values.Length) throw new ArgumentException( "Two arguement not same length" );
+            if (keys == null) throw new ArgumentNullException("keys");
+            if (values == null) throw new ArgumentNullException("values");
+            if (keys.Length != values.Length) throw new ArgumentException("Two arguement not same length");
 
-            List<string> list = new List<string>( );
-            list.Add( "MSET" );
+            List<string> list = new List<string>();
+            list.Add("MSET");
             for (int i = 0; i < keys.Length; i++)
             {
-                list.Add( keys[i] );
-                list.Add( values[i] );
+                list.Add(keys[i]);
+                list.Add(values[i]);
             }
 
-            return OperateStatusFromServer( list.ToArray( ) );
+            return OperateStatusFromServer(list.ToArray());
         }
 
         /// <summary>
@@ -498,9 +496,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="value">数据值</param>
         /// <returns> SET 在设置操作成功完成时，才返回 OK 。</returns>
-        public OperateResult WriteKey( string key, string value )
+        public OperateResult WriteKey(string key, string value)
         {
-            return OperateStatusFromServer( new string[] { "SET", key, value } );
+            return OperateStatusFromServer(new string[] { "SET", key, value });
         }
 
         /// <summary>
@@ -509,12 +507,12 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="value">数据值</param>
         /// <returns>是否成功的结果对象</returns>
-        public OperateResult WriteAndPublishKey(string key, string value )
+        public OperateResult WriteAndPublishKey(string key, string value)
         {
-            OperateResult write = WriteKey( key, value );
+            OperateResult write = WriteKey(key, value);
             if (!write.IsSuccess) return write;
 
-            return Publish( key, value );
+            return Publish(key, value);
         }
 
         /// <summary>
@@ -524,9 +522,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="value">数值</param>
         /// <param name="seconds">生存时间，单位秒</param>
         /// <returns>设置成功时返回 OK 。当 seconds 参数不合法时，返回一个错误。</returns>
-        public OperateResult WriteExpireKey( string key, string value, long seconds )
+        public OperateResult WriteExpireKey(string key, string value, long seconds)
         {
-            return OperateStatusFromServer( new string[] { "SETEX", key, seconds.ToString( ), value } );
+            return OperateStatusFromServer(new string[] { "SETEX", key, seconds.ToString(), value });
         }
 
         /// <summary>
@@ -535,9 +533,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="value">数据值</param>
         /// <returns>设置成功，返回 1 。设置失败，返回 0 。</returns>
-        public OperateResult<int> WriteKeyIfNotExists( string key, string value )
+        public OperateResult<int> WriteKeyIfNotExists(string key, string value)
         {
-            return OperateNumberFromServer( new string[] { "SETNX", key, value } );
+            return OperateNumberFromServer(new string[] { "SETNX", key, value });
         }
 
         /// <summary>
@@ -547,9 +545,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="value">数值</param>
         /// <param name="offset">起始的偏移量</param>
         /// <returns>被 SETRANGE 修改之后，字符串的长度。</returns>
-        public OperateResult<int> WriteKeyRange( string key, string value, int offset )
+        public OperateResult<int> WriteKeyRange(string key, string value, int offset)
         {
-            return OperateNumberFromServer( new string[] { "SETRANGE", key, offset.ToString( ), value } );
+            return OperateNumberFromServer(new string[] { "SETRANGE", key, offset.ToString(), value });
         }
 
         /// <summary>
@@ -557,9 +555,9 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="key">关键字</param>
         /// <returns>字符串值的长度。当 key 不存在时，返回 0 。</returns>
-        public OperateResult<int> ReadKeyLength( string key )
+        public OperateResult<int> ReadKeyLength(string key)
         {
-            return OperateNumberFromServer( new string[] { "STRLEN", key } );
+            return OperateNumberFromServer(new string[] { "STRLEN", key });
         }
 
         #endregion
@@ -580,9 +578,9 @@ namespace HslCommunication.Enthernet.Redis
         /// 如果没有找到 pivot ，返回 -1 。
         /// 如果 key 不存在或为空列表，返回 0 。
         /// </returns>
-        public OperateResult<int> ListInsertBefore( string key, string value, string pivot )
+        public OperateResult<int> ListInsertBefore(string key, string value, string pivot)
         {
-            return OperateNumberFromServer( new string[] { "LINSERT", key, "BEFORE", pivot, value } );
+            return OperateNumberFromServer(new string[] { "LINSERT", key, "BEFORE", pivot, value });
         }
 
         /// <summary>
@@ -599,9 +597,9 @@ namespace HslCommunication.Enthernet.Redis
         /// 如果没有找到 pivot ，返回 -1 。
         /// 如果 key 不存在或为空列表，返回 0 。
         /// </returns>
-        public OperateResult<int> ListInsertAfter( string key, string value, string pivot )
+        public OperateResult<int> ListInsertAfter(string key, string value, string pivot)
         {
-            return OperateNumberFromServer( new string[] { "LINSERT", key, "AFTER", pivot, value } );
+            return OperateNumberFromServer(new string[] { "LINSERT", key, "AFTER", pivot, value });
         }
 
         /// <summary>
@@ -609,9 +607,9 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="key">关键字</param>
         /// <returns>列表 key 的长度。</returns>
-        public OperateResult<int> GetListLength( string key )
+        public OperateResult<int> GetListLength(string key)
         {
-            return OperateNumberFromServer( new string[] { "LLEN", key } );
+            return OperateNumberFromServer(new string[] { "LLEN", key });
         }
 
         /// <summary>
@@ -621,9 +619,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="index">索引位置</param>
         /// <returns>列表中下标为 index 的元素。如果 index 参数的值不在列表的区间范围内(out of range)，返回 nil 。</returns>
-        public OperateResult<string> ReadListByIndex( string key, long index )
+        public OperateResult<string> ReadListByIndex(string key, long index)
         {
-            return OperateStringFromServer( new string[] { "LINDEX", key, index.ToString( ) } );
+            return OperateStringFromServer(new string[] { "LINDEX", key, index.ToString() });
         }
 
         /// <summary>
@@ -631,9 +629,9 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="key">关键字信息</param>
         /// <returns>列表的头元素。</returns>
-        public OperateResult<string> ListLeftPop( string key )
+        public OperateResult<string> ListLeftPop(string key)
         {
-            return OperateStringFromServer( new string[] { "LPOP", key } );
+            return OperateStringFromServer(new string[] { "LPOP", key });
         }
 
         /// <summary>
@@ -642,9 +640,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="value">值</param>
         /// <returns>执行 LPUSH 命令后，列表的长度。</returns>
-        public OperateResult<int> ListLeftPush( string key, string value )
+        public OperateResult<int> ListLeftPush(string key, string value)
         {
-            return ListLeftPush( key, new string[] { value } );
+            return ListLeftPush(key, new string[] { value });
         }
 
         /// <summary>
@@ -653,14 +651,14 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="values">值</param>
         /// <returns>执行 LPUSH 命令后，列表的长度。</returns>
-        public OperateResult<int> ListLeftPush( string key, string[] values )
+        public OperateResult<int> ListLeftPush(string key, string[] values)
         {
-            List<string> list = new List<string>( );
-            list.Add( "LPUSH" );
-            list.Add( key );
-            list.AddRange( values );
+            List<string> list = new List<string>();
+            list.Add("LPUSH");
+            list.Add(key);
+            list.AddRange(values);
 
-            return OperateNumberFromServer( list.ToArray( ) );
+            return OperateNumberFromServer(list.ToArray());
         }
 
         /// <summary>
@@ -670,9 +668,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="value">值</param>
         /// <returns>是否插入数据成功</returns>
-        public OperateResult<int> ListLeftPushX( string key, string value )
+        public OperateResult<int> ListLeftPushX(string key, string value)
         {
-            return OperateNumberFromServer( new string[] { "LPUSHX", key, value } );
+            return OperateNumberFromServer(new string[] { "LPUSHX", key, value });
         }
 
         /// <summary>
@@ -685,9 +683,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="start">开始的索引</param>
         /// <param name="stop">结束的索引</param>
         /// <returns>返回一个列表，包含指定区间内的元素。</returns>
-        public OperateResult<string[]> ListRange( string key, long start, long stop )
+        public OperateResult<string[]> ListRange(string key, long start, long stop)
         {
-            return OperateStringsFromServer( new string[] { "LRANGE", key, start.ToString( ), stop.ToString( ) } );
+            return OperateStringsFromServer(new string[] { "LRANGE", key, start.ToString(), stop.ToString() });
         }
 
         /// <summary>
@@ -701,9 +699,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="count">移除参数</param>
         /// <param name="value">匹配的值</param>
         /// <returns>被移除元素的数量。因为不存在的 key 被视作空表(empty list)，所以当 key 不存在时， LREM 命令总是返回 0 。</returns>
-        public OperateResult<int> ListRemoveElementMatch( string key, long count, string value )
+        public OperateResult<int> ListRemoveElementMatch(string key, long count, string value)
         {
-            return OperateNumberFromServer( new string[] { "LREM", key, count.ToString( ), value } );
+            return OperateNumberFromServer(new string[] { "LREM", key, count.ToString(), value });
         }
 
         /// <summary>
@@ -713,9 +711,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="index">索引位置</param>
         /// <param name="value">值</param>
         /// <returns>操作成功返回 ok ，否则返回错误信息。</returns>
-        public OperateResult ListSet( string key, long index, string value )
+        public OperateResult ListSet(string key, long index, string value)
         {
-            return OperateStatusFromServer( new string[] { "LSET", key.ToString( ), index.ToString( ), value } );
+            return OperateStatusFromServer(new string[] { "LSET", key.ToString(), index.ToString(), value });
         }
 
         /// <summary>
@@ -729,9 +727,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="start">起始的索引信息</param>
         /// <param name="end">结束的索引信息</param>
         /// <returns>操作成功返回 ok ，否则返回错误信息。</returns>
-        public OperateResult ListTrim( string key, long start, long end )
+        public OperateResult ListTrim(string key, long start, long end)
         {
-            return OperateStatusFromServer( new string[] { "LTRIM", key, start.ToString( ), end.ToString( ) } );
+            return OperateStatusFromServer(new string[] { "LTRIM", key, start.ToString(), end.ToString() });
         }
 
         /// <summary>
@@ -739,9 +737,9 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="key">关键字信息</param>
         /// <returns>列表的尾元素。</returns>
-        public OperateResult<string> ListRightPop( string key )
+        public OperateResult<string> ListRightPop(string key)
         {
-            return OperateStringFromServer( new string[] { "RPOP", key } );
+            return OperateStringFromServer(new string[] { "RPOP", key });
         }
 
         /// <summary>
@@ -755,9 +753,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key1">第一个关键字</param>
         /// <param name="key2">第二个关键字</param>
         /// <returns>返回的移除的对象</returns>
-        public OperateResult<string> ListRightPopLeftPush( string key1, string key2 )
+        public OperateResult<string> ListRightPopLeftPush(string key1, string key2)
         {
-            return OperateStringFromServer( new string[] { "RPOPLPUSH", key1, key2 } );
+            return OperateStringFromServer(new string[] { "RPOPLPUSH", key1, key2 });
         }
 
         /// <summary>
@@ -767,9 +765,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="value">值</param>
         /// <returns>返回执行 RPUSH 操作后，表的长度。</returns>
-        public OperateResult<int> ListRightPush( string key, string value )
+        public OperateResult<int> ListRightPush(string key, string value)
         {
-            return ListRightPush( key, new string[] { value } );
+            return ListRightPush(key, new string[] { value });
         }
 
         /// <summary>
@@ -781,14 +779,14 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="values">值</param>
         /// <returns>返回执行 RPUSH 操作后，表的长度。</returns>
-        public OperateResult<int> ListRightPush( string key, string[] values )
+        public OperateResult<int> ListRightPush(string key, string[] values)
         {
-            List<string> list = new List<string>( );
-            list.Add( "RPUSH" );
-            list.Add( key );
-            list.AddRange( values );
+            List<string> list = new List<string>();
+            list.Add("RPUSH");
+            list.Add(key);
+            list.AddRange(values);
 
-            return OperateNumberFromServer( list.ToArray( ) );
+            return OperateNumberFromServer(list.ToArray());
         }
 
         /// <summary>
@@ -798,9 +796,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="value">值</param>
         /// <returns>RPUSHX 命令执行之后，表的长度。</returns>
-        public OperateResult<int> ListRightPushX( string key, string value )
+        public OperateResult<int> ListRightPushX(string key, string value)
         {
-            return OperateNumberFromServer( new string[] { "RPUSHX", key, value } );
+            return OperateNumberFromServer(new string[] { "RPUSHX", key, value });
         }
 
         #endregion
@@ -813,9 +811,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="field">域</param>
         /// <returns>被成功移除的域的数量，不包括被忽略的域。</returns>
-        public OperateResult<int> DeleteHashKey( string key, string field )
+        public OperateResult<int> DeleteHashKey(string key, string field)
         {
-            return DeleteHashKey( key, new string[] { field } );
+            return DeleteHashKey(key, new string[] { field });
         }
 
         /// <summary>
@@ -824,14 +822,14 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="fields">所有的域</param>
         /// <returns>返回被成功移除的域的数量，不包括被忽略的域。</returns>
-        public OperateResult<int> DeleteHashKey( string key, string[] fields )
+        public OperateResult<int> DeleteHashKey(string key, string[] fields)
         {
-            List<string> list = new List<string>( );
-            list.Add( "HDEL" );
-            list.Add( key );
-            list.AddRange( fields );
+            List<string> list = new List<string>();
+            list.Add("HDEL");
+            list.Add(key);
+            list.AddRange(fields);
 
-            return OperateNumberFromServer( list.ToArray( ) );
+            return OperateNumberFromServer(list.ToArray());
         }
 
         /// <summary>
@@ -841,9 +839,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="key">关键字</param>
         /// <param name="field">域</param>
         /// <returns>如果哈希表含有给定域，返回 1 。如果哈希表不含有给定域，或 key 不存在，返回 0 。</returns>
-        public OperateResult<int> ExistsHashKey( string key, string field )
+        public OperateResult<int> ExistsHashKey(string key, string field)
         {
-            return OperateNumberFromServer( new string[] { "HEXISTS", key, field } );
+            return OperateNumberFromServer(new string[] { "HEXISTS", key, field });
         }
 
         /// <summary>
@@ -855,9 +853,9 @@ namespace HslCommunication.Enthernet.Redis
         /// 给定域的值。
         /// 当给定域不存在或是给定 key 不存在时，返回 nil 。
         /// </returns>
-        public OperateResult<string> ReadHashKey( string key, string field )
+        public OperateResult<string> ReadHashKey(string key, string field)
         {
-            return OperateStringFromServer( new string[] { "HGET", key, field } );
+            return OperateStringFromServer(new string[] { "HGET", key, field });
         }
 
         /// <summary>
@@ -868,9 +866,9 @@ namespace HslCommunication.Enthernet.Redis
         /// 以列表形式返回哈希表的域和域的值。
         /// 若 key 不存在，返回空列表。
         /// </returns>
-        public OperateResult<string[]> ReadHashKeyAll( string key )
+        public OperateResult<string[]> ReadHashKeyAll(string key)
         {
-            return OperateStringsFromServer( new string[] { "HGETALL", key } );
+            return OperateStringsFromServer(new string[] { "HGETALL", key });
         }
 
         /// <summary>
@@ -881,9 +879,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="field">域</param>
         /// <param name="value">增量值</param>
         /// <returns>返回执行 HINCRBY 命令之后，哈希表 key 中域 field 的值。</returns>
-        public OperateResult<long> IncrementHashKey( string key, string field, long value )
+        public OperateResult<long> IncrementHashKey(string key, string field, long value)
         {
-            return OperateLongNumberFromServer( new string[] { "HINCRBY", key, field, value.ToString( ) } );
+            return OperateLongNumberFromServer(new string[] { "HINCRBY", key, field, value.ToString() });
         }
 
         /// <summary>
@@ -894,9 +892,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="field">域</param>
         /// <param name="value">增量值</param>
         /// <returns>返回执行 HINCRBY 命令之后，哈希表 key 中域 field 的值。</returns>
-        public OperateResult<string> IncrementHashKey( string key, string field, float value )
+        public OperateResult<string> IncrementHashKey(string key, string field, float value)
         {
-            return OperateStringFromServer( new string[] { "HINCRBYFLOAT", key, field, value.ToString( ) } );
+            return OperateStringFromServer(new string[] { "HINCRBYFLOAT", key, field, value.ToString() });
         }
 
         /// <summary>
@@ -907,9 +905,9 @@ namespace HslCommunication.Enthernet.Redis
         /// 一个包含哈希表中所有域的表。
         /// 当 key 不存在时，返回一个空表。
         /// </returns>
-        public OperateResult<string[]> ReadHashKeys( string key )
+        public OperateResult<string[]> ReadHashKeys(string key)
         {
-            return OperateStringsFromServer( new string[] { "HKEYS", key } );
+            return OperateStringsFromServer(new string[] { "HKEYS", key });
         }
 
         /// <summary>
@@ -917,9 +915,9 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="key">关键字</param>
         /// <returns>哈希表中域的数量。当 key 不存在时，返回 0 。</returns>
-        public OperateResult<int> ReadHashKeyLength( string key )
+        public OperateResult<int> ReadHashKeyLength(string key)
         {
-            return OperateNumberFromServer( new string[] { "HLEN", key } );
+            return OperateNumberFromServer(new string[] { "HLEN", key });
         }
 
         /// <summary>
@@ -931,14 +929,14 @@ namespace HslCommunication.Enthernet.Redis
         /// <returns>
         /// 一个包含多个给定域的关联值的表，表值的排列顺序和给定域参数的请求顺序一样。
         /// </returns>
-        public OperateResult<string[]> ReadHashKey( string key, string[] fields )
+        public OperateResult<string[]> ReadHashKey(string key, string[] fields)
         {
-            List<string> list = new List<string>( );
-            list.Add( "HMGET" );
-            list.Add( key );
-            list.AddRange( fields );
+            List<string> list = new List<string>();
+            list.Add("HMGET");
+            list.Add(key);
+            list.AddRange(fields);
 
-            return OperateStringsFromServer( list.ToArray( ) );
+            return OperateStringsFromServer(list.ToArray());
         }
 
         /// <summary>
@@ -955,9 +953,9 @@ namespace HslCommunication.Enthernet.Redis
         /// 如果 field 是哈希表中的一个新建域，并且值设置成功，返回 1 。
         /// 如果哈希表中域 field 已经存在且旧值已被新值覆盖，返回 0 。
         /// </returns>
-        public OperateResult<int> WriteHashKey( string key, string field, string value )
+        public OperateResult<int> WriteHashKey(string key, string field, string value)
         {
-            return OperateNumberFromServer( new string[] { "HSET", key, field, value } );
+            return OperateNumberFromServer(new string[] { "HSET", key, field, value });
         }
 
         /// <summary>
@@ -972,22 +970,22 @@ namespace HslCommunication.Enthernet.Redis
         /// 如果命令执行成功，返回 OK 。
         /// 当 key 不是哈希表(hash)类型时，返回一个错误
         /// </returns>
-        public OperateResult WriteHashKey( string key, string[] fields, string[] values )
+        public OperateResult WriteHashKey(string key, string[] fields, string[] values)
         {
-            if (fields == null) throw new ArgumentNullException( "fields" );
-            if (values == null) throw new ArgumentNullException( "values" );
-            if (fields.Length != values.Length) throw new ArgumentException( "Two arguement not same length" );
+            if (fields == null) throw new ArgumentNullException("fields");
+            if (values == null) throw new ArgumentNullException("values");
+            if (fields.Length != values.Length) throw new ArgumentException("Two arguement not same length");
 
-            List<string> list = new List<string>( );
-            list.Add( "HMSET" );
-            list.Add( key );
+            List<string> list = new List<string>();
+            list.Add("HMSET");
+            list.Add(key);
             for (int i = 0; i < fields.Length; i++)
             {
-                list.Add( fields[i] );
-                list.Add( values[i] );
+                list.Add(fields[i]);
+                list.Add(values[i]);
             }
 
-            return OperateStatusFromServer( list.ToArray( ) );
+            return OperateStatusFromServer(list.ToArray());
         }
 
         /// <summary>
@@ -998,9 +996,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="field">域</param>
         /// <param name="value">数据值</param>
         /// <returns>设置成功，返回 1 。如果给定域已经存在且没有操作被执行，返回 0 。</returns>
-        public OperateResult<int> WriteHashKeyNx( string key, string field, string value )
+        public OperateResult<int> WriteHashKeyNx(string key, string field, string value)
         {
-            return OperateNumberFromServer( new string[] { "HSETNX", key, field, value } );
+            return OperateNumberFromServer(new string[] { "HSETNX", key, field, value });
         }
 
         /// <summary>
@@ -1011,9 +1009,9 @@ namespace HslCommunication.Enthernet.Redis
         /// 返回哈希表 key 中所有域的值。
         /// 当 key 不存在时，返回一个空表。
         /// </returns>
-        public OperateResult<string[]> ReadHashValues( string key )
+        public OperateResult<string[]> ReadHashValues(string key)
         {
-            return OperateStringsFromServer( new string[] { "HVALS", key } );
+            return OperateStringsFromServer(new string[] { "HVALS", key });
         }
 
 
@@ -1026,9 +1024,9 @@ namespace HslCommunication.Enthernet.Redis
         /// SAVE 命令执行一个同步保存操作，将当前 Redis 实例的所有数据快照(snapshot)以 RDB 文件的形式保存到硬盘。
         /// </summary>
         /// <returns>保存成功时返回 OK 。</returns>
-        public OperateResult Save( )
+        public OperateResult Save()
         {
-            return OperateStatusFromServer( new string[] { "SAVE" } );
+            return OperateStatusFromServer(new string[] { "SAVE" });
         }
 
         /// <summary>
@@ -1036,23 +1034,23 @@ namespace HslCommunication.Enthernet.Redis
         /// BGSAVE 命令执行之后立即返回 OK ，然后 Redis fork 出一个新子进程，原来的 Redis 进程(父进程)继续处理客户端请求，而子进程则负责将数据保存到磁盘，然后退出。
         /// </summary>
         /// <returns>反馈信息。</returns>
-        public OperateResult SaveAsync( )
+        public OperateResult SaveAsync()
         {
-            return OperateStatusFromServer( new string[] { "BGSAVE" } );
+            return OperateStatusFromServer(new string[] { "BGSAVE" });
         }
 
         /// <summary>
         /// 获取服务器的时间戳信息，可用于本地时间的数据同步问题
         /// </summary>
         /// <returns>带有服务器时间的结果对象</returns>
-        public OperateResult<DateTime> ReadServerTime( )
+        public OperateResult<DateTime> ReadServerTime()
         {
-            OperateResult<string[]> times = OperateStringsFromServer( new string[] { "TIME" } );
-            if (!times.IsSuccess) return OperateResult.CreateFailedResult<DateTime>( times );
+            OperateResult<string[]> times = OperateStringsFromServer(new string[] { "TIME" });
+            if (!times.IsSuccess) return OperateResult.CreateFailedResult<DateTime>(times);
 
-            long timeTick = long.Parse( times.Content[0] );
-            DateTime dateTime = new DateTime( 1970, 1, 1, 8, 0, 0 ).AddSeconds( timeTick );
-            return OperateResult.CreateSuccessResult( dateTime );
+            long timeTick = long.Parse(times.Content[0]);
+            DateTime dateTime = new DateTime(1970, 1, 1, 8, 0, 0).AddSeconds(timeTick);
+            return OperateResult.CreateSuccessResult(dateTime);
         }
 
         #endregion
@@ -1065,9 +1063,9 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="channel">频道，和关键字不是一回事</param>
         /// <param name="message">消息</param>
         /// <returns>接收到信息 message 的订阅者数量。</returns>
-        public OperateResult<int> Publish( string channel, string message )
+        public OperateResult<int> Publish(string channel, string message)
         {
-            return OperateNumberFromServer( new string[] { "PUBLISH", channel, message } );
+            return OperateNumberFromServer(new string[] { "PUBLISH", channel, message });
 
         }
 
@@ -1080,9 +1078,9 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="db">索引值</param>
         /// <returns>是否切换成功</returns>
-        public OperateResult SelectDB( int db )
+        public OperateResult SelectDB(int db)
         {
-            return OperateStatusFromServer( new string[] { "SELECT", db.ToString( ) } );
+            return OperateStatusFromServer(new string[] { "SELECT", db.ToString() });
         }
 
         #endregion
@@ -1099,7 +1097,7 @@ namespace HslCommunication.Enthernet.Redis
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return $"RedisClient[{IpAddress}:{Port}]";
         }

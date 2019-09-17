@@ -18,21 +18,10 @@
  * If you need to check the original source code you can download it here: http://wosk.codeplex.com/
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace KeyPad
 {
@@ -87,25 +76,25 @@ namespace KeyPad
                         foreach (UIElement elem in AlfaKeyboard.Children) //iterate the main grid
                         {
                             Grid grid = elem as Grid;
-                            if (grid != null) 
+                            if (grid != null)
                             {
                                 foreach (UIElement uiElement in grid.Children)  //iterate the single rows
                                 {
                                     btn = uiElement as Button;
                                     if (btn != null) // if button contains only 1 character
                                     {
-                                        if (btn.Content.ToString().Length == 1) 
+                                        if (btn.Content.ToString().Length == 1)
                                         {
                                             if (upperCaseRegex.Match(btn.Content.ToString()).Success) // if the char is a letter and uppercase
                                                 btn.Content = btn.Content.ToString().ToLower();
                                             else if (lowerCaseRegex.Match(button.Content.ToString()).Success) // if the char is a letter and lower case
                                                 btn.Content = btn.Content.ToString().ToUpper();
-                                        }       
-                                            
+                                        }
+
                                     }
                                 }
                             }
-                        }                        
+                        }
                         break;
 
                     case "ALT":
@@ -125,10 +114,10 @@ namespace KeyPad
                         Result += button.Content.ToString();
                         break;
                 }
-            }            
-        }    
+            }
+        }
 
-        #endregion        
+        #endregion
 
         #region INotifyPropertyChanged members
 

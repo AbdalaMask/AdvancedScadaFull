@@ -90,7 +90,7 @@ namespace SegmentsControls
         /// The width of the vert. segment's bottom part
         /// </summary>
         protected double VertSegBotPartW { get; private set; }
-      
+
         /// <summary>
         /// Points collection for the left bottom segment
         /// </summary>
@@ -104,7 +104,7 @@ namespace SegmentsControls
         /// <summary>
         /// Points collection for the top segment
         /// </summary>
-        protected PointCollection TopSegmPoints { get;  set; }
+        protected PointCollection TopSegmPoints { get; set; }
 
         /// <summary>
         /// Points collection for the bottom segment
@@ -153,12 +153,12 @@ namespace SegmentsControls
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-           base.OnRender(drawingContext);
-           CalculateMeasures();
+            base.OnRender(drawingContext);
+            CalculateMeasures();
 
-           AssignSegments();
-           ClearSegmentsSelection();
-           SetSegments();
+            AssignSegments();
+            ClearSegmentsSelection();
+            SetSegments();
 
             // Draws segments
             foreach (var entry in GeometryFigures)
@@ -167,7 +167,7 @@ namespace SegmentsControls
                 if (SegmentsBrush.Any())
                 {
                     var brush = SegmentsBrush.SingleOrDefault(s => s.Item1 == (int)entry.SegmentNumber);
-                    Pen figurePen = new Pen(new SolidColorBrush(brush != null ? brush.Item3 : PenColor), 
+                    Pen figurePen = new Pen(new SolidColorBrush(brush != null ? brush.Item3 : PenColor),
                         PenThickness);
 
 
@@ -385,7 +385,7 @@ namespace SegmentsControls
             }
         }
 
-        private PathGeometry CreateEllipseGeometry(Point centerPoint, 
+        private PathGeometry CreateEllipseGeometry(Point centerPoint,
             PathGeometry pathGeometry,
             double diameter)
         {
@@ -621,7 +621,7 @@ namespace SegmentsControls
             points.Add(new Point(VirtualWidth - LeftBottomSegmPoints[3].X, VirtualHeight - LeftBottomSegmPoints[3].Y));
             points.Add(new Point(VirtualWidth - LeftBottomSegmPoints[4].X, VirtualHeight - LeftBottomSegmPoints[4].Y));
             points.Add(new Point(VirtualWidth - LeftBottomSegmPoints[5].X, VirtualHeight - LeftBottomSegmPoints[5].Y));
-            
+
             // the point for rounded Bezier curve
             points.Add(new Point(VirtualWidth - LeftBottomSegmPoints[6].X, VirtualHeight - LeftBottomSegmPoints[6].Y));
 
@@ -629,7 +629,7 @@ namespace SegmentsControls
             points.Add(new Point(VirtualWidth - LeftBottomSegmPoints[0].X, VirtualHeight - LeftBottomSegmPoints[0].Y));
             points.Add(new Point(VirtualWidth - LeftBottomSegmPoints[1].X, VirtualHeight - LeftBottomSegmPoints[1].Y));
             points.Add(new Point(VirtualWidth - LeftBottomSegmPoints[2].X, VirtualHeight - LeftBottomSegmPoints[2].Y));
-            
+
             return points;
         }
 
@@ -653,7 +653,7 @@ namespace SegmentsControls
             // three right points, starting from the top point
             points.Add(new Point(VirtualWidth - x, RightTopSegmPoints[6].Y + GapW / 2));
             points.Add(new Point(VirtualWidth - x1, VirtualHeight / 2));
-            points.Add(new Point(VirtualWidth - x2, RightBottomSegmPoints[0].Y - GapW / 2));           
+            points.Add(new Point(VirtualWidth - x2, RightBottomSegmPoints[0].Y - GapW / 2));
             return points;
         }
 
@@ -839,7 +839,7 @@ namespace SegmentsControls
             LineSegment line7 = new LineSegment(TopSegmPoints[7], true);
 
             // The left Bezier curve for rounded corners
-            var pointsBezierLeft= new PointCollection
+            var pointsBezierLeft = new PointCollection
             {
                 TopSegmPoints[1], TopSegmPoints[2], TopSegmPoints[3]
             };
@@ -851,7 +851,7 @@ namespace SegmentsControls
 
 
             // The right Bezier curve for rounded corners
-            var pointsBezierRight= new PointCollection
+            var pointsBezierRight = new PointCollection
             {
                 TopSegmPoints[4], TopSegmPoints[5], TopSegmPoints[6]
             };
@@ -916,15 +916,15 @@ namespace SegmentsControls
             pathFigure.Segments.Add(bez);
             pathFigure.Segments.Add(line2);
             pathFigure.Segments.Add(line3);
-            pathFigure.Segments.Add(line4); 
+            pathFigure.Segments.Add(line4);
             pathFigure.Segments.Add(line5);
-            
+
 
             return pathGeometry;
         }
 
 
-        
+
 
         /// <summary>
         /// Left Bottom segment drawing
@@ -948,7 +948,7 @@ namespace SegmentsControls
                 LeftBottomSegmPoints[6]
             };
 
-            PolyBezierSegment bez = new PolyBezierSegment  
+            PolyBezierSegment bez = new PolyBezierSegment
             {
                 Points = new PointCollection(pointsBezier)
             };
@@ -964,7 +964,7 @@ namespace SegmentsControls
             pathFigure.Segments.Add(line3);
             pathFigure.Segments.Add(line4);
             pathFigure.Segments.Add(bez);
-            
+
             return pathGeometry;
         }
 

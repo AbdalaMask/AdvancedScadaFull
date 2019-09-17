@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -11,9 +9,9 @@ namespace HslCommunication
     /// </summary>
     public class Authorization
     {
-        static Authorization( )
+        static Authorization()
         {
-            niahdiahduasdbubfas = iashdagsdawbdawda( );
+            niahdiahduasdbubfas = iashdagsdawbdawda();
             if (naihsdadaasdasdiwid != 0)
             {
                 naihsdadaasdasdiwid = 0;
@@ -25,74 +23,74 @@ namespace HslCommunication
             }
         }
 
-        internal static bool nzugaydgwadawdibbas( )
+        internal static bool nzugaydgwadawdibbas()
         {
             moashdawidaisaosdas++;
             //return true;
-            if (naihsdadaasdasdiwid == niasdhasdguawdwdad) return nuasduagsdwydbasudasd( );
-            if ((iashdagsdawbdawda( ) - niahdiahduasdbubfas).TotalHours < nuasgdawydaishdgas) // .TotalHours < nuasgdawydaishdgas)
+            if (naihsdadaasdasdiwid == niasdhasdguawdwdad) return nuasduagsdwydbasudasd();
+            if ((iashdagsdawbdawda() - niahdiahduasdbubfas).TotalHours < nuasgdawydaishdgas) // .TotalHours < nuasgdawydaishdgas)
             {
-                return nuasduagsdwydbasudasd( );
+                return nuasduagsdwydbasudasd();
             }
 
-            return asdhuasdgawydaduasdgu( );
+            return asdhuasdgawydaduasdgu();
         }
 
-        internal static bool nuasduagsdwydbasudasd( )
+        internal static bool nuasduagsdwydbasudasd()
         {
             return true;
         }
 
-        internal static bool asdhuasdgawydaduasdgu( )
+        internal static bool asdhuasdgawydaduasdgu()
         {
             return false;
         }
 
-        internal static bool ashdadgawdaihdadsidas( )
+        internal static bool ashdadgawdaihdadsidas()
         {
             return niasdhasdguawdwdad == 12345;
         }
 
-        internal static DateTime iashdagsdawbdawda( )
+        internal static DateTime iashdagsdawbdawda()
         {
             return DateTime.Now;
         }
-        internal static DateTime iashdagsaawbdawda( )
+        internal static DateTime iashdagsaawbdawda()
         {
             return DateTime.Now.AddDays(1);
         }
 
-        internal static DateTime iashdagsaawadawda( )
+        internal static DateTime iashdagsaawadawda()
         {
-            return DateTime.Now.AddDays( 2 );
+            return DateTime.Now.AddDays(2);
         }
 
-        internal static string nasduabwduadawdb( string miawdiawduasdhasd )
+        internal static string nasduabwduadawdb(string miawdiawduasdhasd)
         {
-            StringBuilder asdnawdawdawd = new StringBuilder( );
-            MD5 asndiawdniad = MD5.Create( );
-            byte[] asdadawdawdas = asndiawdniad.ComputeHash( Encoding.Unicode.GetBytes( miawdiawduasdhasd ) );
-            asndiawdniad.Clear( );
+            StringBuilder asdnawdawdawd = new StringBuilder();
+            MD5 asndiawdniad = MD5.Create();
+            byte[] asdadawdawdas = asndiawdniad.ComputeHash(Encoding.Unicode.GetBytes(miawdiawduasdhasd));
+            asndiawdniad.Clear();
             for (int andiawbduawbda = 0; andiawbduawbda < asdadawdawdas.Length; andiawbduawbda++)
             {
-                asdnawdawdawd.Append( (255 - asdadawdawdas[andiawbduawbda]).ToString( "X2" ) );
+                asdnawdawdawd.Append((255 - asdadawdawdas[andiawbduawbda]).ToString("X2"));
             }
-            return asdnawdawdawd.ToString( );
+            return asdnawdawdawd.ToString();
         }
 
         /// <summary>
         /// 设置本组件系统的授权信息
         /// </summary>
         /// <param name="code">授权码</param>
-        public static bool SetAuthorizationCode( string code )
+        public static bool SetAuthorizationCode(string code)
         {
-            if (nasduabwduadawdb( code ) == "8FE65660C75D26FF5CF749B571F11764")
+            if (nasduabwduadawdb(code) == "8FE65660C75D26FF5CF749B571F11764")
             {
                 nuasgdawydbishcgas = nuasgdawydbishdgas;
                 naihsdadaasdasdiwid = niasdhasdguawdwdad;
-                return nuasduagsdwydbasudasd( );
+                return nuasduagsdwydbasudasd();
             }
-            return asdhuasdgawydaduasdgu( );
+            return asdhuasdgawydaduasdgu();
         }
 
         private static DateTime niahdiahduasdbubfas = DateTime.Now;

@@ -1,4 +1,14 @@
-﻿using AdvancedScada.Controls.Subscription;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.Display;
+using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.Monitor;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -7,20 +17,6 @@ using System.Drawing.Design;
 using System.Security.Permissions;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using AdvancedScada;
- 
- 
-using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
- 
-using AdvancedScada.DriverBase.Comm;
- 
-using AdvancedScada.Monitor;
-using AdvancedScada.Controls.AHMI.Display;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
-using AdvancedScada.Controls.DialogEditor;
 
 namespace AdvancedScada.Controls.AHMI.Display
 {

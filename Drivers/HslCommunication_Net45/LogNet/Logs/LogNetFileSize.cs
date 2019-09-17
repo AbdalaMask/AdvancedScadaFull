@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace HslCommunication.LogNet
@@ -43,13 +40,13 @@ namespace HslCommunication.LogNet
             //路径没有设置则返回空
             if (string.IsNullOrEmpty(m_filePath)) return string.Empty;
 
-            if(string.IsNullOrEmpty(m_fileName))
+            if (string.IsNullOrEmpty(m_fileName))
             {
                 //加载文件名称
                 m_fileName = GetLastAccessFileName();
             }
-            
-            if(File.Exists(m_fileName))
+
+            if (File.Exists(m_fileName))
             {
                 FileInfo fileInfo = new FileInfo(m_fileName);
 
@@ -91,11 +88,11 @@ namespace HslCommunication.LogNet
         /// 获取之前保存的日志文件
         /// </summary>
         /// <returns></returns>
-        private string GetLastAccessFileName( )
+        private string GetLastAccessFileName()
         {
-            foreach (var m in GetExistLogFileNames( ))
+            foreach (var m in GetExistLogFileNames())
             {
-                FileInfo fileInfo = new FileInfo( m );
+                FileInfo fileInfo = new FileInfo(m);
                 if (fileInfo.Length < m_fileMaxSize)
                 {
                     m_CurrentFileSize = (int)fileInfo.Length;
@@ -104,17 +101,17 @@ namespace HslCommunication.LogNet
             }
 
             //返回一个新的默认当前时间的日志名称
-            return GetDefaultFileName( );
+            return GetDefaultFileName();
         }
 
         /// <summary>
         /// 获取一个新的默认的文件名称
         /// </summary>
         /// <returns></returns>
-        private string GetDefaultFileName( )
+        private string GetDefaultFileName()
         {
             //返回一个新的默认当前时间的日志名称
-            return m_filePath + LogNetManagment.LogFileHeadString + DateTime.Now.ToString( "yyyyMMddHHmmss" ) + ".txt";
+            return m_filePath + LogNetManagment.LogFileHeadString + DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt";
         }
 
         #endregion
@@ -134,7 +131,7 @@ namespace HslCommunication.LogNet
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串数据</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return $"LogNetFileSize[{m_fileMaxSize}]";
         }

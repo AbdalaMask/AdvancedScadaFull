@@ -1,21 +1,20 @@
-﻿using AdvancedScada.Controls.DialogEditor;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.Controls.HslControl;
+using AdvancedScada.Controls.HslControl.Pipe;
 using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase.Comm;
 using HslControls;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.Drawing.Design;
 using System.Windows.Forms;
-using AdvancedScada;
-using AdvancedScada.Controls.DialogEditor;
-using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
- 
-using AdvancedScada.DriverBase.Comm;
-using AdvancedScada.Controls.HslControl.Pipe;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.HslControl;
-using MfgControl.AdvancedHMI.Controls;
 
 namespace AdvancedScada.Controls.HslControl.Pipe
 {

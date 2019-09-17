@@ -1,11 +1,5 @@
 ﻿using HslCommunication.Core;
-using HslCommunication.Core.Address;
 using HslCommunication.Serial;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HslCommunication.BasicFramework;
 
 namespace HslCommunication.Profinet.Melsec
 {
@@ -231,7 +225,7 @@ namespace HslCommunication.Profinet.Melsec
         /// <summary>
         /// 实例化默认的构造方法
         /// </summary>
-        public MelsecA3CNet1( )
+        public MelsecA3CNet1()
         {
             WordLength = 1;
         }
@@ -249,9 +243,9 @@ namespace HslCommunication.Profinet.Melsec
 
         #region Private Method
 
-        private OperateResult<byte[]> ReadWithPackCommand( byte[] command )
+        private OperateResult<byte[]> ReadWithPackCommand(byte[] command)
         {
-            return ReadBase( MelsecA3CNet1OverTcp.PackCommand( command, this.station ) );
+            return ReadBase(MelsecA3CNet1OverTcp.PackCommand(command, this.station));
         }
 
         #endregion
@@ -264,7 +258,7 @@ namespace HslCommunication.Profinet.Melsec
         /// <param name="address">地址信息</param>
         /// <param name="length">数据长度</param>
         /// <returns>读取结果信息</returns>
-        public override OperateResult<byte[]> Read( string address, ushort length ) => MelsecA3CNet1OverTcp.ReadHelper( address, length, ReadWithPackCommand );
+        public override OperateResult<byte[]> Read(string address, ushort length) => MelsecA3CNet1OverTcp.ReadHelper(address, length, ReadWithPackCommand);
 
         /// <summary>
         /// 批量写入PLC的数据，以字为单位，也就是说最少2个字节信息，支持X,Y,M,S,D,T,C，具体的地址范围需要根据PLC型号来确认
@@ -272,7 +266,7 @@ namespace HslCommunication.Profinet.Melsec
         /// <param name="address">地址信息</param>
         /// <param name="value">数据值</param>
         /// <returns>是否写入成功</returns>
-        public override OperateResult Write( string address, byte[] value ) => MelsecA3CNet1OverTcp.WriteHelper( address, value, ReadWithPackCommand );
+        public override OperateResult Write(string address, byte[] value) => MelsecA3CNet1OverTcp.WriteHelper(address, value, ReadWithPackCommand);
 
         #endregion
 
@@ -284,7 +278,7 @@ namespace HslCommunication.Profinet.Melsec
         /// <param name="address">地址信息，比如X10,Y17，注意X，Y的地址是8进制的</param>
         /// <param name="length">读取的长度</param>
         /// <returns>读取结果信息</returns>
-        public override OperateResult<bool[]> ReadBool( string address, ushort length ) => MelsecA3CNet1OverTcp.ReadBoolHelper( address, length, ReadWithPackCommand );
+        public override OperateResult<bool[]> ReadBool(string address, ushort length) => MelsecA3CNet1OverTcp.ReadBoolHelper(address, length, ReadWithPackCommand);
 
         /// <summary>
         /// 批量写入bool类型的数组，支持的类型为X,Y,S,T,C，具体的地址范围取决于PLC的类型
@@ -292,7 +286,7 @@ namespace HslCommunication.Profinet.Melsec
         /// <param name="address">PLC的地址信息</param>
         /// <param name="value">数据信息</param>
         /// <returns>是否写入成功</returns>
-        public override OperateResult Write( string address, bool[] value ) => MelsecA3CNet1OverTcp.WriteHelper( address, value, ReadWithPackCommand );
+        public override OperateResult Write(string address, bool[] value) => MelsecA3CNet1OverTcp.WriteHelper(address, value, ReadWithPackCommand);
 
         #endregion
 
@@ -302,19 +296,19 @@ namespace HslCommunication.Profinet.Melsec
         /// 远程Run操作
         /// </summary>
         /// <returns>是否成功</returns>
-        public OperateResult RemoteRun( ) => MelsecA3CNet1OverTcp.RemoteRunHelper( ReadWithPackCommand );
+        public OperateResult RemoteRun() => MelsecA3CNet1OverTcp.RemoteRunHelper(ReadWithPackCommand);
 
         /// <summary>
         /// 远程Stop操作
         /// </summary>
         /// <returns>是否成功</returns>
-        public OperateResult RemoteStop( ) => MelsecA3CNet1OverTcp.RemoteStopHelper( ReadWithPackCommand );
+        public OperateResult RemoteStop() => MelsecA3CNet1OverTcp.RemoteStopHelper(ReadWithPackCommand);
 
         /// <summary>
         /// 读取PLC的型号信息
         /// </summary>
         /// <returns>返回型号的结果对象</returns>
-        public OperateResult<string> ReadPlcType( ) => MelsecA3CNet1OverTcp.ReadPlcTypeHelper( ReadWithPackCommand );
+        public OperateResult<string> ReadPlcType() => MelsecA3CNet1OverTcp.ReadPlcTypeHelper(ReadWithPackCommand);
 
         #endregion
 

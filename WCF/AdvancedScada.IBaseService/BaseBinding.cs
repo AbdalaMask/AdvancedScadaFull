@@ -16,13 +16,13 @@ namespace AdvancedScada.IBaseService
 
         protected string URI_DRIVER = "net.tcp://{0}:{1}/DriverService/{2}";
 
-      
 
-      
+
+
         protected const string DRIVER = "Driver";
- 
 
-      
+
+
         protected NetTcpBinding GetNetTcpBinding()
         {
             return new NetTcpBinding

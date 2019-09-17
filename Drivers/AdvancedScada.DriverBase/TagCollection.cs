@@ -1,8 +1,6 @@
 ﻿using AdvancedScada.DriverBase.Devices;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 namespace AdvancedScada.DriverBase
 {
@@ -23,5 +21,5 @@ namespace AdvancedScada.DriverBase
     {
         public static Dictionary<string, Tag> Tags { get; set; } = new Dictionary<string, Tag>();
     }
-   
+
 }

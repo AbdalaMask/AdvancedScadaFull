@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Xml.Linq;
 
 namespace HslCommunication.LogNet
 {
@@ -42,7 +37,7 @@ namespace HslCommunication.LogNet
         /// 存储文件的时候指示根据日志时间来存储
         /// </summary>
         internal const int LogSaveModeByDateTime = 3;
-        
+
 
         /// <summary>
         /// 日志文件的头标志
@@ -90,20 +85,20 @@ namespace HslCommunication.LogNet
 
                 try
                 {
-                    builder.Append( StringResources.Language.ExceptionMessage );
-                    builder.Append( ex.Message );
-                    builder.Append( Environment.NewLine );
-                    builder.Append( StringResources.Language.ExceptionSourse );
-                    builder.Append( ex.Source );
-                    builder.Append( Environment.NewLine );
-                    builder.Append( StringResources.Language.ExceptionStackTrace );
-                    builder.Append( ex.StackTrace );
-                    builder.Append( Environment.NewLine );
-                    builder.Append( StringResources.Language.ExceptionType );
-                    builder.Append( ex.GetType( ).ToString( ) );
-                    builder.Append( Environment.NewLine );
-                    builder.Append( StringResources.Language.ExceptopnTargetSite );
-                    builder.Append( ex.TargetSite?.ToString( ) );
+                    builder.Append(StringResources.Language.ExceptionMessage);
+                    builder.Append(ex.Message);
+                    builder.Append(Environment.NewLine);
+                    builder.Append(StringResources.Language.ExceptionSourse);
+                    builder.Append(ex.Source);
+                    builder.Append(Environment.NewLine);
+                    builder.Append(StringResources.Language.ExceptionStackTrace);
+                    builder.Append(ex.StackTrace);
+                    builder.Append(Environment.NewLine);
+                    builder.Append(StringResources.Language.ExceptionType);
+                    builder.Append(ex.GetType().ToString());
+                    builder.Append(Environment.NewLine);
+                    builder.Append(StringResources.Language.ExceptopnTargetSite);
+                    builder.Append(ex.TargetSite?.ToString());
                 }
                 catch
                 {

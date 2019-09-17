@@ -1,4 +1,9 @@
 ﻿
+using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.ImageAll;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,11 +14,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using AdvancedScada;
-using AdvancedScada.Controls.AHMI.ImageAll;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.ImageAll
 {

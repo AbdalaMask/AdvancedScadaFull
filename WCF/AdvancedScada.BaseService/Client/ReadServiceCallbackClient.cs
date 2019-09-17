@@ -1,20 +1,20 @@
 ﻿using AdvancedScada.DriverBase.Client;
 using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.IBaseService;
 using AdvancedScada.Management.BLManager;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
-using AdvancedScada.IBaseService;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.BaseService.Client
 {
-   
+
 
     [CallbackBehavior(UseSynchronizationContext = true)]
     public class ReadServiceCallbackClient : IServiceCallback
     {
-        
+
         public static bool LoadTagCollection()
         {
 
@@ -31,13 +31,13 @@ namespace AdvancedScada.BaseService.Client
 
                 objChannelManager.Channels.Clear();
                 TagCollectionClient.Tags.Clear();
-              
+
                 var channels = objChannelManager.GetChannels(xmlFile);
 
                 foreach (var ch in channels)
                     foreach (var dv in ch.Devices)
                     {
-                    
+
                         foreach (var db in dv.DataBlocks)
                             foreach (var tg in db.Tags)
                                 TagCollectionClient.Tags.Add(
@@ -53,7 +53,7 @@ namespace AdvancedScada.BaseService.Client
 
             return true;
         }
-       
+
 
         public void DataTags(Dictionary<string, Tag> Tags)
         {

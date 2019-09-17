@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Drawing.Drawing2D;
 
 namespace HslCommunication.Controls
 {
@@ -48,7 +43,7 @@ namespace HslCommunication.Controls
 
         private void UserVerticalProgress_Paint(object sender, PaintEventArgs e)
         {
-            if (!Authorization.nzugaydgwadawdibbas( )) return;
+            if (!Authorization.nzugaydgwadawdibbas()) return;
             try
             {
                 // 根据实际值来绘制图形
@@ -58,7 +53,7 @@ namespace HslCommunication.Controls
                 g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
 
-                switch(m_progressStyle)
+                switch (m_progressStyle)
                 {
                     case ProgressStyle.Vertical:
                         {
@@ -181,7 +176,7 @@ namespace HslCommunication.Controls
         [Description("获取或设置进度条的前景色")]
         [Category("外观")]
         [Browsable(true)]
-        [DefaultValue(typeof(Color),"Tomato")]
+        [DefaultValue(typeof(Color), "Tomato")]
         public Color ProgressColor
         {
             get { return m_progressColor; }
@@ -273,7 +268,7 @@ namespace HslCommunication.Controls
         [Description("获取或设置进度条的边框颜色")]
         [Category("外观")]
         [Browsable(true)]
-        [DefaultValue(typeof(Color),"DimGray")]
+        [DefaultValue(typeof(Color), "DimGray")]
         public Color BorderColor
         {
             get { return m_borderColor; }
@@ -295,7 +290,7 @@ namespace HslCommunication.Controls
         [DefaultValue(1)]
         public int ValueChangeSpeed
         {
-            get{return m_speed;}
+            get { return m_speed; }
             set
             {
                 if (value >= 1)
@@ -327,11 +322,11 @@ namespace HslCommunication.Controls
         [Description("获取或设置进度条的样式")]
         [Category("外观")]
         [Browsable(true)]
-        [DefaultValue(typeof(ProgressStyle),"Vertical")]
+        [DefaultValue(typeof(ProgressStyle), "Vertical")]
         public ProgressStyle ProgressStyle
         {
             get { return m_progressStyle; }
-            set { m_progressStyle = value;Invalidate(); }
+            set { m_progressStyle = value; Invalidate(); }
         }
 
 
@@ -372,7 +367,7 @@ namespace HslCommunication.Controls
                     m_actual = newActual;
 
                     hybirdLock.Leave();
-                    
+
                     if (version == m_version)
                     {
                         if (IsHandleCreated) Invoke(m_UpdateAction);
@@ -383,11 +378,11 @@ namespace HslCommunication.Controls
                     }
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 // BasicFramework.SoftBasic.ShowExceptionMessage(ex);
             }
-            
+
         }
 
         private void UpdateRender()

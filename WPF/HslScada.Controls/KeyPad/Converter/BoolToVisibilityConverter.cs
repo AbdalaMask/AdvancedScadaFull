@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Data;
 
 namespace HslScada.Controls.KeyPad.Converter
@@ -21,7 +18,7 @@ namespace HslScada.Controls.KeyPad.Converter
             throw new NotImplementedException();
         }
     }
-    
+
 }
 
 

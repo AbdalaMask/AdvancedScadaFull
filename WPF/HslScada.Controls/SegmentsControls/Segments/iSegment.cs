@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Media;
 
 namespace SegmentsControls
@@ -11,12 +9,12 @@ namespace SegmentsControls
         /// A brush for not selected elements
         /// </summary>
         Brush FillBrush { get; set; }
-        
+
         /// <summary>
         /// A brush for selected elements
         /// </summary>
         Brush SelectedFillBrush { get; set; }
-        
+
         /// <summary>
         /// A brush for not selected elements
         /// </summary>

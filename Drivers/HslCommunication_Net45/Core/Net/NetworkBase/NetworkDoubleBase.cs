@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
+﻿using HslCommunication.Core.IMessage;
+using System;
 using System.Net;
-using System.Threading;
-using HslCommunication.Core.IMessage;
+using System.Net.Sockets;
 
 namespace HslCommunication.Core.Net
 {
@@ -23,11 +19,11 @@ namespace HslCommunication.Core.Net
         /// <summary>
         /// 默认的无参构造函数 -> Default no-parameter constructor
         /// </summary>
-        public NetworkDoubleBase( )
+        public NetworkDoubleBase()
         {
-            ByteTransform = new TTransform( );                                           // 实例化变换类的对象
-            InteractiveLock = new SimpleHybirdLock( );                                     // 实例化数据访问锁
-            connectionId = BasicFramework.SoftBasic.GetUniqueStringByGuidAndRandom( );  // 设备的唯一的编号
+            ByteTransform = new TTransform();                                           // 实例化变换类的对象
+            InteractiveLock = new SimpleHybirdLock();                                     // 实例化数据访问锁
+            connectionId = BasicFramework.SoftBasic.GetUniqueStringByGuidAndRandom();  // 设备的唯一的编号
         }
 
         #endregion
@@ -127,11 +123,11 @@ namespace HslCommunication.Core.Net
             }
             set
             {
-                if (!string.IsNullOrEmpty( value ))
+                if (!string.IsNullOrEmpty(value))
                 {
-                    if (!IPAddress.TryParse( value, out IPAddress address ))
+                    if (!IPAddress.TryParse(value, out IPAddress address))
                     {
-                        throw new Exception( StringResources.Language.IpAddresError );
+                        throw new Exception(StringResources.Language.IpAddresError);
                     }
                     ipAddress = value;
                 }
@@ -194,7 +190,7 @@ namespace HslCommunication.Core.Net
         /// 以下的方式演示了另一种长连接的机制
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDoubleBase.cs" region="SetPersistentConnectionExample" title="SetPersistentConnection示例" />
         /// </example>
-        public void SetPersistentConnection( )
+        public void SetPersistentConnection()
         {
             isPersistentConn = true;
         }
@@ -213,15 +209,15 @@ namespace HslCommunication.Core.Net
         ///   如果想知道是否连接成功，请参照下面的代码。
         ///   <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDoubleBase.cs" region="Connect2" title="判断连接结果" />
         /// </example> 
-        public OperateResult ConnectServer( )
+        public OperateResult ConnectServer()
         {
             isPersistentConn = true;
-            OperateResult result = new OperateResult( );
+            OperateResult result = new OperateResult();
 
             // 重新连接之前，先将旧的数据进行清空
-            CoreSocket?.Close( );
+            CoreSocket?.Close();
 
-            OperateResult<Socket> rSocket = CreateSocketAndInitialication( );
+            OperateResult<Socket> rSocket = CreateSocketAndInitialication();
 
             if (!rSocket.IsSuccess)
             {
@@ -233,7 +229,7 @@ namespace HslCommunication.Core.Net
             {
                 CoreSocket = rSocket.Content;
                 result.IsSuccess = true;
-                LogNet?.WriteDebug( ToString( ), StringResources.Language.NetEngineStart );
+                LogNet?.WriteDebug(ToString(), StringResources.Language.NetEngineStart);
             }
 
             return result;
@@ -253,7 +249,7 @@ namespace HslCommunication.Core.Net
         /// <remarks>
         /// 不能和之前的长连接和短连接混用，详细参考 Demo程序 
         /// </remarks>
-        public OperateResult ConnectServer( AlienSession session )
+        public OperateResult ConnectServer(AlienSession session)
         {
             isPersistentConn = true;
             isUseSpecifiedSocket = true;
@@ -261,9 +257,9 @@ namespace HslCommunication.Core.Net
 
             if (session != null)
             {
-                AlienSession?.Socket?.Close( );
+                AlienSession?.Socket?.Close();
 
-                if (string.IsNullOrEmpty( ConnectionId ))
+                if (string.IsNullOrEmpty(ConnectionId))
                 {
                     ConnectionId = session.DTU;
                 }
@@ -273,18 +269,18 @@ namespace HslCommunication.Core.Net
                     CoreSocket = session.Socket;
                     IsSocketError = false;
                     AlienSession = session;
-                    return InitializationOnConnect( session.Socket );
+                    return InitializationOnConnect(session.Socket);
                 }
                 else
                 {
                     IsSocketError = true;
-                    return new OperateResult( );
+                    return new OperateResult();
                 }
             }
             else
             {
                 IsSocketError = true;
-                return new OperateResult( );
+                return new OperateResult();
             }
         }
 
@@ -296,20 +292,20 @@ namespace HslCommunication.Core.Net
         /// 直接关闭连接即可，基本上是不需要进行成功的判定
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDoubleBase.cs" region="ConnectCloseExample" title="关闭连接结果" />
         /// </example>
-        public OperateResult ConnectClose( )
+        public OperateResult ConnectClose()
         {
-            OperateResult result = new OperateResult( );
+            OperateResult result = new OperateResult();
             isPersistentConn = false;
 
-            InteractiveLock.Enter( );
+            InteractiveLock.Enter();
             // 额外操作
-            result = ExtraOnDisconnect( CoreSocket );
+            result = ExtraOnDisconnect(CoreSocket);
             // 关闭信息
-            CoreSocket?.Close( );
+            CoreSocket?.Close();
             CoreSocket = null;
-            InteractiveLock.Leave( );
+            InteractiveLock.Leave();
 
-            LogNet?.WriteDebug( ToString( ), StringResources.Language.NetEngineClose );
+            LogNet?.WriteDebug(ToString(), StringResources.Language.NetEngineClose);
             return result;
         }
 
@@ -326,9 +322,9 @@ namespace HslCommunication.Core.Net
         /// 有些协议不需要握手信号，比如三菱的MC协议，Modbus协议，西门子和欧姆龙就存在握手信息，此处的例子是继承本类后重写的西门子的协议示例
         /// <code lang="cs" source="HslCommunication_Net45\Profinet\Siemens\SiemensS7Net.cs" region="NetworkDoubleBase Override" title="西门子重连示例" />
         /// </example>
-        protected virtual OperateResult InitializationOnConnect( Socket socket )
+        protected virtual OperateResult InitializationOnConnect(Socket socket)
         {
-            return OperateResult.CreateSuccessResult( );
+            return OperateResult.CreateSuccessResult();
         }
 
         /// <summary>
@@ -339,16 +335,16 @@ namespace HslCommunication.Core.Net
         /// 目前暂无相关的示例，组件支持的协议都不用实现这个方法。
         /// </example>
         /// <returns>当断开连接时额外的操作结果</returns>
-        protected virtual OperateResult ExtraOnDisconnect( Socket socket )
+        protected virtual OperateResult ExtraOnDisconnect(Socket socket)
         {
-            return OperateResult.CreateSuccessResult( );
+            return OperateResult.CreateSuccessResult();
         }
 
         /// <summary>
         /// 和服务器交互完成的时候调用的方法，无论是成功或是失败，都将会调用，具体的操作需要重写实现
         /// </summary>
         /// <param name="read">读取结果</param>
-        protected virtual void ExtraAfterReadFromCoreServer( OperateResult read )
+        protected virtual void ExtraAfterReadFromCoreServer(OperateResult read)
         {
 
         }
@@ -382,9 +378,9 @@ namespace HslCommunication.Core.Net
         /// </summary>
         /// <param name="userName">账户名</param>
         /// <param name="password">密码</param>
-        public void SetLoginAccount(string userName, string password )
+        public void SetLoginAccount(string userName, string password)
         {
-            if (!string.IsNullOrEmpty( userName.Trim( ) ))
+            if (!string.IsNullOrEmpty(userName.Trim()))
             {
                 isUseAccountCertificate = true;
                 this.userName = userName;
@@ -401,16 +397,16 @@ namespace HslCommunication.Core.Net
         /// </summary>
         /// <param name="socket">套接字</param>
         /// <returns>认证结果</returns>
-        protected OperateResult AccountCertificate(Socket socket )
+        protected OperateResult AccountCertificate(Socket socket)
         {
-            OperateResult send = SendAccountAndCheckReceive( socket, 1, this.userName, this.password );
+            OperateResult send = SendAccountAndCheckReceive(socket, 1, this.userName, this.password);
             if (!send.IsSuccess) return send;
 
-            OperateResult<int, string[]> read = ReceiveStringArrayContentFromSocket( socket );
+            OperateResult<int, string[]> read = ReceiveStringArrayContentFromSocket(socket);
             if (!read.IsSuccess) return read;
 
-            if (read.Content1 == 0) return new OperateResult( read.Content2[0] );
-            return OperateResult.CreateSuccessResult( );
+            if (read.Content1 == 0) return new OperateResult(read.Content2[0]);
+            return OperateResult.CreateSuccessResult();
         }
 
         #endregion
@@ -431,7 +427,7 @@ namespace HslCommunication.Core.Net
         /// 获取本次操作的可用的网络套接字
         /// </summary>
         /// <returns>是否成功，如果成功，使用这个套接字</returns>
-        protected OperateResult<Socket> GetAvailableSocket( )
+        protected OperateResult<Socket> GetAvailableSocket()
         {
             if (isPersistentConn)
             {
@@ -440,11 +436,11 @@ namespace HslCommunication.Core.Net
                 {
                     if (IsSocketError)
                     {
-                        return new OperateResult<Socket>( StringResources.Language.ConnectionIsNotAvailable );
+                        return new OperateResult<Socket>(StringResources.Language.ConnectionIsNotAvailable);
                     }
                     else
                     {
-                        return OperateResult.CreateSuccessResult( CoreSocket );
+                        return OperateResult.CreateSuccessResult(CoreSocket);
                     }
                 }
                 else
@@ -452,28 +448,28 @@ namespace HslCommunication.Core.Net
                     // 长连接模式
                     if (IsSocketError || CoreSocket == null)
                     {
-                        OperateResult connect = ConnectServer( );
+                        OperateResult connect = ConnectServer();
                         if (!connect.IsSuccess)
                         {
                             IsSocketError = true;
-                            return OperateResult.CreateFailedResult<Socket>( connect );
+                            return OperateResult.CreateFailedResult<Socket>(connect);
                         }
                         else
                         {
                             IsSocketError = false;
-                            return OperateResult.CreateSuccessResult( CoreSocket );
+                            return OperateResult.CreateSuccessResult(CoreSocket);
                         }
                     }
                     else
                     {
-                        return OperateResult.CreateSuccessResult( CoreSocket );
+                        return OperateResult.CreateSuccessResult(CoreSocket);
                     }
                 }
             }
             else
             {
                 // 短连接模式
-                return CreateSocketAndInitialication( );
+                return CreateSocketAndInitialication();
             }
         }
 
@@ -481,18 +477,18 @@ namespace HslCommunication.Core.Net
         /// 连接并初始化网络套接字
         /// </summary>
         /// <returns>带有socket的结果对象</returns>
-        private OperateResult<Socket> CreateSocketAndInitialication( )
+        private OperateResult<Socket> CreateSocketAndInitialication()
         {
-            OperateResult<Socket> result = CreateSocketAndConnect( new IPEndPoint( IPAddress.Parse( ipAddress ), port ), connectTimeOut );
+            OperateResult<Socket> result = CreateSocketAndConnect(new IPEndPoint(IPAddress.Parse(ipAddress), port), connectTimeOut);
             if (result.IsSuccess)
             {
                 // 初始化
-                OperateResult initi = InitializationOnConnect( result.Content );
+                OperateResult initi = InitializationOnConnect(result.Content);
                 if (!initi.IsSuccess)
                 {
-                    result.Content?.Close( );
+                    result.Content?.Close();
                     result.IsSuccess = initi.IsSuccess;
-                    result.CopyErrorFromOther( initi );
+                    result.CopyErrorFromOther(initi);
                 }
             }
             return result;
@@ -511,42 +507,42 @@ namespace HslCommunication.Core.Net
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDoubleBase.cs" region="ReadFromCoreServerExample1" title="ReadFromCoreServer示例" />
         /// </example>
         /// <returns>接收的完整的报文信息</returns>
-        public virtual OperateResult<byte[]> ReadFromCoreServer( Socket socket, byte[] send )
+        public virtual OperateResult<byte[]> ReadFromCoreServer(Socket socket, byte[] send)
         {
-            LogNet?.WriteDebug( ToString( ), StringResources.Language.Send + " : " + BasicFramework.SoftBasic.ByteToHexString( send, ' ' ) );
+            LogNet?.WriteDebug(ToString(), StringResources.Language.Send + " : " + BasicFramework.SoftBasic.ByteToHexString(send, ' '));
 
-            TNetMessage netMessage = new TNetMessage( );
+            TNetMessage netMessage = new TNetMessage();
             netMessage.SendBytes = send;
 
             // send
-            OperateResult sendResult = Send( socket, send );
+            OperateResult sendResult = Send(socket, send);
             if (!sendResult.IsSuccess)
             {
-                socket?.Close( );
-                return OperateResult.CreateFailedResult<byte[]>( sendResult );
+                socket?.Close();
+                return OperateResult.CreateFailedResult<byte[]>(sendResult);
             }
 
-            if (receiveTimeOut < 0) return OperateResult.CreateSuccessResult( new byte[0] );
+            if (receiveTimeOut < 0) return OperateResult.CreateSuccessResult(new byte[0]);
 
             // receive msg
-            OperateResult<byte[]> resultReceive = ReceiveByMessage( socket, receiveTimeOut, netMessage );
+            OperateResult<byte[]> resultReceive = ReceiveByMessage(socket, receiveTimeOut, netMessage);
             if (!resultReceive.IsSuccess)
             {
-                socket?.Close( );
-                return new OperateResult<byte[]>( StringResources.Language.ReceiveDataTimeout + receiveTimeOut );
+                socket?.Close();
+                return new OperateResult<byte[]>(StringResources.Language.ReceiveDataTimeout + receiveTimeOut);
             }
 
-            LogNet?.WriteDebug( ToString( ), StringResources.Language.Receive + " : " + BasicFramework.SoftBasic.ByteToHexString( resultReceive.Content, ' ' ) );
+            LogNet?.WriteDebug(ToString(), StringResources.Language.Receive + " : " + BasicFramework.SoftBasic.ByteToHexString(resultReceive.Content, ' '));
 
             // check
-            if (!netMessage.CheckHeadBytesLegal( Token.ToByteArray( ) ))
+            if (!netMessage.CheckHeadBytesLegal(Token.ToByteArray()))
             {
-                socket?.Close( );
-                return new OperateResult<byte[]>( StringResources.Language.CommandHeadCodeCheckFailed );
+                socket?.Close();
+                return new OperateResult<byte[]>(StringResources.Language.CommandHeadCodeCheckFailed);
             }
 
             // Success
-            return OperateResult.CreateSuccessResult( resultReceive.Content );
+            return OperateResult.CreateSuccessResult(resultReceive.Content);
         }
 
 
@@ -562,24 +558,24 @@ namespace HslCommunication.Core.Net
         /// 此处举例有个modbus服务器，有个特殊的功能码0x09，后面携带子数据0x01即可，发送字节为 0x00 0x00 0x00 0x00 0x00 0x03 0x01 0x09 0x01
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDoubleBase.cs" region="ReadFromCoreServerExample2" title="ReadFromCoreServer示例" />
         /// </example>
-        public OperateResult<byte[]> ReadFromCoreServer( byte[] send )
+        public OperateResult<byte[]> ReadFromCoreServer(byte[] send)
         {
-            var result = new OperateResult<byte[]>( );
+            var result = new OperateResult<byte[]>();
 
-            InteractiveLock.Enter( );
+            InteractiveLock.Enter();
 
             // 获取有用的网络通道，如果没有，就建立新的连接
-            OperateResult<Socket> resultSocket = GetAvailableSocket( );
+            OperateResult<Socket> resultSocket = GetAvailableSocket();
             if (!resultSocket.IsSuccess)
             {
                 IsSocketError = true;
                 if (AlienSession != null) AlienSession.IsStatusOk = false;
-                InteractiveLock.Leave( );
-                result.CopyErrorFromOther( resultSocket );
+                InteractiveLock.Leave();
+                result.CopyErrorFromOther(resultSocket);
                 return result;
             }
 
-            OperateResult<byte[]> read = ReadFromCoreServer( resultSocket.Content, send );
+            OperateResult<byte[]> read = ReadFromCoreServer(resultSocket.Content, send);
 
             if (read.IsSuccess)
             {
@@ -592,13 +588,13 @@ namespace HslCommunication.Core.Net
             {
                 IsSocketError = true;
                 if (AlienSession != null) AlienSession.IsStatusOk = false;
-                result.CopyErrorFromOther( read );
+                result.CopyErrorFromOther(read);
             }
 
-            ExtraAfterReadFromCoreServer( read );
+            ExtraAfterReadFromCoreServer(read);
 
-            InteractiveLock.Leave( );
-            if (!isPersistentConn) resultSocket.Content?.Close( );
+            InteractiveLock.Leave();
+            if (!isPersistentConn) resultSocket.Content?.Close();
             return result;
         }
 
@@ -612,15 +608,15 @@ namespace HslCommunication.Core.Net
         /// 释放当前的资源，并自动关闭长连接，如果设置了的话
         /// </summary>
         /// <param name="disposing">是否释放托管的资源信息</param>
-        protected virtual void Dispose( bool disposing )
+        protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {
                 if (disposing)
                 {
                     // TODO: 释放托管状态(托管对象)。
-                    ConnectClose( );
-                    InteractiveLock?.Dispose( );
+                    ConnectClose();
+                    InteractiveLock?.Dispose();
                 }
 
                 // TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
@@ -641,10 +637,10 @@ namespace HslCommunication.Core.Net
         /// <summary>
         /// 释放当前的资源
         /// </summary>
-        public void Dispose( )
+        public void Dispose()
         {
             // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
-            Dispose( true );
+            Dispose(true);
             // TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
             // GC.SuppressFinalize(this);
         }
@@ -656,9 +652,9 @@ namespace HslCommunication.Core.Net
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToString( )
+        public override string ToString()
         {
-            return $"NetworkDoubleBase<{typeof( TNetMessage )}, {typeof( TTransform )}>";
+            return $"NetworkDoubleBase<{typeof(TNetMessage)}, {typeof(TTransform)}>";
         }
 
         #endregion

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Windows.Forms;
-using AdvancedScada;
-using AdvancedScada.Controls.HslControl.ButtonAll;
+﻿using AdvancedScada;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.HslControl;
+using AdvancedScada.Controls.HslControl.ButtonAll;
+using System;
+using System.Windows.Forms;
 
 namespace AdvancedScada.Controls.HslControl.ButtonAll
 {

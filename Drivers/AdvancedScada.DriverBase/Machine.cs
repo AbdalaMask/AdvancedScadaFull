@@ -1,9 +1,8 @@
-﻿using AdvancedScada.DriverBase.Devices;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace AdvancedScada.DriverBase
 {
-   
+
 
     [DataContract]
     public class Machine

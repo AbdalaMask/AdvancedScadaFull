@@ -2,7 +2,6 @@
 using ComponentFactory.Krypton.Toolkit;
 using Microsoft.Win32;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace AdvancedScada.Studio.Editors
@@ -55,6 +54,6 @@ namespace AdvancedScada.Studio.Editors
                     break;
             }
 
-         }
+        }
     }
 }

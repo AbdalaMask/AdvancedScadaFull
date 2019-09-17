@@ -1,5 +1,13 @@
-﻿using AdvancedScada.Controls.AHMI.ImageAll.Symbols;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.ImageAll;
+using AdvancedScada.Controls.AHMI.ImageAll.Symbols;
+using AdvancedScada.Controls.AHMI.ImageAll.Symbols;
 using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.ImagePicker;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -7,15 +15,6 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using AdvancedScada;
-using AdvancedScada.Controls.AHMI.ImageAll.Symbols;
-using AdvancedScada.Controls.DialogEditor;
- 
-using AdvancedScada.ImagePicker;
-using AdvancedScada.Controls.AHMI.ImageAll;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.ImageAll
 {

@@ -1,17 +1,17 @@
-﻿using AdvancedScada.Controls.Subscription;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase.Comm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AdvancedScada;
- using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Controls_Net45;
-using AdvancedScada.DriverBase.Comm;
-using AdvancedScada.Controls.AHMI;
-using AdvancedScada;
-using AdvancedScada.Controls;
 
 namespace AdvancedScada.Controls.AHMI
 {

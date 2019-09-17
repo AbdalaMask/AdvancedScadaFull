@@ -1,4 +1,15 @@
 ﻿
+using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.BaseService.Client;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.IBaseService;
+using AdvancedScada.IBaseService.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,20 +24,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using AdvancedScada;
-using AdvancedScada;
-using AdvancedScada.BaseService.Client;
-using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Comm;
-
-using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.IBaseService;
-using AdvancedScada.IBaseService.Common;
-
 using static AdvancedScada.IBaseService.Common.XCollection;
-using AdvancedScada.Controls.Subscription;
-using AdvancedScada;
-using AdvancedScada.Controls;
 
 namespace AdvancedScada.Controls.Subscription
 {
@@ -138,80 +136,80 @@ namespace AdvancedScada.Controls.Subscription
 
         public int Subscribe(string plcAddress, short numberOfElements, int pollRate, EventHandler<PlcComEventArgs> callback)
         {
-            SubscriptionInfo tmpPA = new SubscriptionInfo(); 
+            SubscriptionInfo tmpPA = new SubscriptionInfo();
             try
             {
-           if (AdvancedScada.Controls.Utilities.client == null)
-            {
-                CreateDLLInstance();
-            }
-
-            if (m_PollRateOverride != 0)
-            {
-                pollRate = m_PollRateOverride;
-            }
-            else
-            {
-                //* Poll rate is in 50ms increments
-                pollRate = Convert.ToInt32(Math.Ceiling(pollRate / 50.0) * 50);
-                //* Avoid a 0 poll rate
-                if (pollRate <= 0)
+                if (AdvancedScada.Controls.Utilities.client == null)
                 {
-                    pollRate = 500;
-                }
-            }
-            //***********************************************************
-            //* Check if there was already a subscription made for this
-            //***********************************************************
-            int index = 0;
-
-            while (index < SubscriptionList.Count && (SubscriptionList[index].Address != plcAddress || SubscriptionList[index].dlgCallBack != callback))
-            {
-                index += 1;
-            }
-
-
-            //* If a subscription was already found, then returns it's ID
-            if (index < SubscriptionList.Count)
-            {
-                //* Return the subscription that already exists
-                return SubscriptionList[index].ID;
-            }
-            else
-            {
-                //* The ID is used as a reference for removing polled addresses
-                CurrentID += 1;
-
-                tmpPA = new SubscriptionInfo();
-
-                tmpPA.PollRate = pollRate;
-
-                //* Poll rate is only in increments of 50ms
-                tmpPA.PollRateDivisor = Convert.ToInt32(pollRate / 50.0);
-                if (tmpPA.PollRateDivisor <= 0)
-                {
-                    tmpPA.PollRateDivisor = 1;
+                    CreateDLLInstance();
                 }
 
-                tmpPA.dlgCallBack = callback;
-                tmpPA.ID = CurrentID;
-                tmpPA.Address = plcAddress;
-                tmpPA.ElementsToRead = numberOfElements;
+                if (m_PollRateOverride != 0)
+                {
+                    pollRate = m_PollRateOverride;
+                }
+                else
+                {
+                    //* Poll rate is in 50ms increments
+                    pollRate = Convert.ToInt32(Math.Ceiling(pollRate / 50.0) * 50);
+                    //* Avoid a 0 poll rate
+                    if (pollRate <= 0)
+                    {
+                        pollRate = 500;
+                    }
+                }
+                //***********************************************************
+                //* Check if there was already a subscription made for this
+                //***********************************************************
+                int index = 0;
 
-                SubscriptionList.Add(tmpPA);
-                SubscriptionList.Sort(SortPolledAddresses);
+                while (index < SubscriptionList.Count && (SubscriptionList[index].Address != plcAddress || SubscriptionList[index].dlgCallBack != callback))
+                {
+                    index += 1;
+                }
 
 
-               
-            }
+                //* If a subscription was already found, then returns it's ID
+                if (index < SubscriptionList.Count)
+                {
+                    //* Return the subscription that already exists
+                    return SubscriptionList[index].ID;
+                }
+                else
+                {
+                    //* The ID is used as a reference for removing polled addresses
+                    CurrentID += 1;
+
+                    tmpPA = new SubscriptionInfo();
+
+                    tmpPA.PollRate = pollRate;
+
+                    //* Poll rate is only in increments of 50ms
+                    tmpPA.PollRateDivisor = Convert.ToInt32(pollRate / 50.0);
+                    if (tmpPA.PollRateDivisor <= 0)
+                    {
+                        tmpPA.PollRateDivisor = 1;
+                    }
+
+                    tmpPA.dlgCallBack = callback;
+                    tmpPA.ID = CurrentID;
+                    tmpPA.Address = plcAddress;
+                    tmpPA.ElementsToRead = numberOfElements;
+
+                    SubscriptionList.Add(tmpPA);
+                    SubscriptionList.Sort(SortPolledAddresses);
+
+
+
+                }
             }
             catch (Exception ex)
             {
 
                 OnComError(new PlcComEventArgs(1, "INVALID VALUE!" + ex.Message));
             }
-          
-          return tmpPA.ID;
+
+            return tmpPA.ID;
 
         }
         //***************************************************************

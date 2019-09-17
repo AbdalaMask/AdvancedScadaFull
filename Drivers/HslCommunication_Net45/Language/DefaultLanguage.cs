@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HslCommunication.Language
+﻿namespace HslCommunication.Language
 {
     /// <summary>
     /// 系统的语言基类，默认也即是中文版本
@@ -162,7 +157,7 @@ namespace HslCommunication.Language
         public virtual string LogNetFatal => "致命";
         public virtual string LogNetAbandon => "放弃";
         public virtual string LogNetAll => "全部";
-        
+
         /***********************************************************************************
          * 
          *    Modbus相关

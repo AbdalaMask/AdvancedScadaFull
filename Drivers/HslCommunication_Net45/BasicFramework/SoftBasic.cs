@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Linq;
 #if !NETSTANDARD2_0
@@ -31,12 +30,12 @@ namespace HslCommunication.BasicFramework
         /// 下面举例实现获取一个文件的md5码
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="CalculateFileMD5Example" title="CalculateFileMD5示例" />
         /// </example>
-        public static string CalculateFileMD5( string filePath )
+        public static string CalculateFileMD5(string filePath)
         {
             string str_md5 = string.Empty;
-            using (FileStream fs = new FileStream( filePath, FileMode.Open, FileAccess.Read ))
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
-                str_md5 = CalculateStreamMD5( fs );
+                str_md5 = CalculateStreamMD5(fs);
             }
             return str_md5;
         }
@@ -50,14 +49,14 @@ namespace HslCommunication.BasicFramework
         /// 下面举例实现获取一个流的md5码
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="CalculateStreamMD5Example1" title="CalculateStreamMD5示例" />
         /// </example>
-        public static string CalculateStreamMD5( Stream stream )
+        public static string CalculateStreamMD5(Stream stream)
         {
             byte[] bytes_md5 = null;
-            using (MD5 md5 = new MD5CryptoServiceProvider( ))
+            using (MD5 md5 = new MD5CryptoServiceProvider())
             {
-                bytes_md5 = md5.ComputeHash( stream );
+                bytes_md5 = md5.ComputeHash(stream);
             }
-            return BitConverter.ToString( bytes_md5 ).Replace( "-", "" );
+            return BitConverter.ToString(bytes_md5).Replace("-", "");
         }
 
         /// <summary>
@@ -65,9 +64,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="data">文本数据信息</param>
         /// <returns>Md5字符串</returns>
-        public static string CalculateStreamMD5( string data )
+        public static string CalculateStreamMD5(string data)
         {
-            return CalculateStreamMD5( data, Encoding.UTF8 );
+            return CalculateStreamMD5(data, Encoding.UTF8);
         }
 
         /// <summary>
@@ -76,13 +75,13 @@ namespace HslCommunication.BasicFramework
         /// <param name="data">文本数据信息</param>
         /// <param name="encode">编码信息</param>
         /// <returns>Md5字符串</returns>
-        public static string CalculateStreamMD5( string data, Encoding encode )
+        public static string CalculateStreamMD5(string data, Encoding encode)
         {
             string str_md5 = string.Empty;
-            using (MD5 md5 = new MD5CryptoServiceProvider( ))
+            using (MD5 md5 = new MD5CryptoServiceProvider())
             {
-                byte[] bytes_md5 = md5.ComputeHash( encode.GetBytes( data ) );
-                str_md5 = BitConverter.ToString( bytes_md5 ).Replace( "-", "" );
+                byte[] bytes_md5 = md5.ComputeHash(encode.GetBytes(data));
+                str_md5 = BitConverter.ToString(bytes_md5).Replace("-", "");
             }
             return str_md5;
         }
@@ -121,7 +120,7 @@ namespace HslCommunication.BasicFramework
         /// 比如说我们获取了文件的长度，这个长度可以来自于本地，也可以来自于数据库查询
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="GetSizeDescriptionExample" title="GetSizeDescription示例" />
         /// </example>
-        public static string GetSizeDescription( long size )
+        public static string GetSizeDescription(long size)
         {
             if (size < 1000)
             {
@@ -130,17 +129,17 @@ namespace HslCommunication.BasicFramework
             else if (size < 1000 * 1000)
             {
                 float data = (float)size / 1024;
-                return data.ToString( "F2" ) + " Kb";
+                return data.ToString("F2") + " Kb";
             }
             else if (size < 1000 * 1000 * 1000)
             {
                 float data = (float)size / 1024 / 1024;
-                return data.ToString( "F2" ) + " Mb";
+                return data.ToString("F2") + " Mb";
             }
             else
             {
                 float data = (float)size / 1024 / 1024 / 1024;
-                return data.ToString( "F2" ) + " Gb";
+                return data.ToString("F2") + " Gb";
             }
         }
 
@@ -157,7 +156,7 @@ namespace HslCommunication.BasicFramework
         /// 比如说我们获取了一个时间差信息
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="GetTimeSpanDescriptionExample" title="GetTimeSpanDescription示例" />
         /// </example>
-        public static string GetTimeSpanDescription( TimeSpan ts )
+        public static string GetTimeSpanDescription(TimeSpan ts)
         {
             if (ts.TotalSeconds <= 60)
             {
@@ -165,15 +164,15 @@ namespace HslCommunication.BasicFramework
             }
             else if (ts.TotalMinutes <= 60)
             {
-                return ts.TotalMinutes.ToString( "F1" ) + " 分钟";
+                return ts.TotalMinutes.ToString("F1") + " 分钟";
             }
             else if (ts.TotalHours <= 24)
             {
-                return ts.TotalHours.ToString( "F1" ) + " 小时";
+                return ts.TotalHours.ToString("F1") + " 小时";
             }
             else
             {
-                return ts.TotalDays.ToString( "F1" ) + " 天";
+                return ts.TotalDays.ToString("F1") + " 天";
             }
         }
 
@@ -192,15 +191,15 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="AddArrayDataExample" title="AddArrayData示例" />
         /// </example>
-        public static void AddArrayData<T>( ref T[] array, T[] data, int max )
+        public static void AddArrayData<T>(ref T[] array, T[] data, int max)
         {
             if (data == null) return;           // 数据为空
             if (data.Length == 0) return;       // 数据长度为空
 
             if (array.Length == max)
             {
-                Array.Copy( array, data.Length, array, 0, array.Length - data.Length );
-                Array.Copy( data, 0, array, array.Length - data.Length, data.Length );
+                Array.Copy(array, data.Length, array, 0, array.Length - data.Length);
+                Array.Copy(data, 0, array, array.Length - data.Length, data.Length);
             }
             else
             {
@@ -246,7 +245,7 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="ArrayExpandToLengthExample" title="ArrayExpandToLength示例" />
         /// </example>
-        public static T[] ArrayExpandToLength<T>( T[] data, int length )
+        public static T[] ArrayExpandToLength<T>(T[] data, int length)
         {
             if (data == null) return new T[length];
 
@@ -254,7 +253,7 @@ namespace HslCommunication.BasicFramework
 
             T[] buffer = new T[length];
 
-            Array.Copy( data, buffer, Math.Min( data.Length, buffer.Length ) );
+            Array.Copy(data, buffer, Math.Min(data.Length, buffer.Length));
 
             return buffer;
         }
@@ -270,13 +269,13 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="ArrayExpandToLengthEvenExample" title="ArrayExpandToLengthEven示例" />
         /// </example>
-        public static T[] ArrayExpandToLengthEven<T>( T[] data )
+        public static T[] ArrayExpandToLengthEven<T>(T[] data)
         {
             if (data == null) return new T[0];
 
             if (data.Length % 2 == 1)
             {
-                return ArrayExpandToLength( data, data.Length + 1 );
+                return ArrayExpandToLength(data, data.Length + 1);
             }
             else
             {
@@ -294,27 +293,27 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="ArraySplitByLengthExample" title="ArraySplitByLength示例" />
         /// </example>
-        public static List<T[]> ArraySplitByLength<T>(T[] array, int length )
+        public static List<T[]> ArraySplitByLength<T>(T[] array, int length)
         {
-            if (array == null) return new List<T[]>( );
+            if (array == null) return new List<T[]>();
 
-            List<T[]> result = new List<T[]>( );
+            List<T[]> result = new List<T[]>();
             int index = 0;
             while (index < array.Length)
             {
                 if (index + length < array.Length)
                 {
                     T[] tmp = new T[length];
-                    Array.Copy( array, index, tmp, 0, length );
+                    Array.Copy(array, index, tmp, 0, length);
                     index += length;
-                    result.Add( tmp );
+                    result.Add(tmp);
                 }
                 else
                 {
                     T[] tmp = new T[array.Length - index];
-                    Array.Copy( array, index, tmp, 0, tmp.Length );
+                    Array.Copy(array, index, tmp, 0, tmp.Length);
                     index += length;
-                    result.Add( tmp );
+                    result.Add(tmp);
                 }
             }
             return result;
@@ -330,7 +329,7 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="SplitIntegerToArrayExample" title="SplitIntegerToArray示例" />
         /// </example>
-        public static int[] SplitIntegerToArray( int integer, int everyLength )
+        public static int[] SplitIntegerToArray(int integer, int everyLength)
         {
             int[] result = new int[(integer / everyLength) + ((integer % everyLength) == 0 ? 0 : 1)];
             for (int i = 0; i < result.Length; i++)
@@ -365,7 +364,7 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="IsTwoBytesEquelExample1" title="IsTwoBytesEquel示例" />
         /// </example>
-        public static bool IsTwoBytesEquel( byte[] b1, int start1, byte[] b2, int start2, int length )
+        public static bool IsTwoBytesEquel(byte[] b1, int start1, byte[] b2, int start2, int length)
         {
             if (b1 == null || b2 == null) return false;
             for (int i = 0; i < length; i++)
@@ -388,11 +387,11 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="IsTwoBytesEquelExample2" title="IsTwoBytesEquel示例" />
         /// </example>
-        public static bool IsTwoBytesEquel( byte[] b1, byte[] b2)
+        public static bool IsTwoBytesEquel(byte[] b1, byte[] b2)
         {
             if (b1 == null || b2 == null) return false;
             if (b1.Length != b2.Length) return false;
-            return IsTwoBytesEquel( b1, 0, b2, 0, b1.Length );
+            return IsTwoBytesEquel(b1, 0, b2, 0, b1.Length);
         }
 
 
@@ -406,9 +405,9 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="IsTwoTokenEquelExample" title="IsByteTokenEquel示例" />
         /// </example>
-        public static bool IsByteTokenEquel( byte[] head, Guid token )
+        public static bool IsByteTokenEquel(byte[] head, Guid token)
         {
-            return IsTwoBytesEquel( head, 12, token.ToByteArray( ), 0, 16 );
+            return IsTwoBytesEquel(head, 12, token.ToByteArray(), 0, 16);
         }
 
 
@@ -419,9 +418,9 @@ namespace HslCommunication.BasicFramework
         /// <param name="token1">第一个令牌</param>
         /// <param name="token2">第二个令牌</param>
         /// <returns>返回是否相等</returns>
-        public static bool IsTwoTokenEquel( Guid token1, Guid token2 )
+        public static bool IsTwoTokenEquel(Guid token1, Guid token2)
         {
-            return IsTwoBytesEquel( token1.ToByteArray( ), 0, token2.ToByteArray( ), 0, 16 );
+            return IsTwoBytesEquel(token1.ToByteArray(), 0, token2.ToByteArray(), 0, 16);
         }
 
 
@@ -429,7 +428,7 @@ namespace HslCommunication.BasicFramework
         #endregion
 
         #region Enum About
-        
+
         /// <summary>
         /// 获取一个枚举类型的所有枚举值，可直接应用于组合框数据 ->
         /// Gets all the enumeration values of an enumeration type that can be applied directly to the combo box data
@@ -439,9 +438,9 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="GetEnumValuesExample" title="GetEnumValues示例" />
         /// </example>
-        public static TEnum[] GetEnumValues<TEnum>( ) where TEnum : struct
+        public static TEnum[] GetEnumValues<TEnum>() where TEnum : struct
         {
-            return (TEnum[])Enum.GetValues( typeof( TEnum ) );
+            return (TEnum[])Enum.GetValues(typeof(TEnum));
         }
 
         /// <summary>
@@ -454,9 +453,9 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="GetEnumFromStringExample" title="GetEnumFromString示例" />
         /// </example>
-        public static TEnum GetEnumFromString<TEnum>(string value ) where TEnum : struct
+        public static TEnum GetEnumFromString<TEnum>(string value) where TEnum : struct
         {
-            return (TEnum)Enum.Parse( typeof( TEnum ), value );
+            return (TEnum)Enum.Parse(typeof(TEnum), value);
         }
 
         #endregion
@@ -475,11 +474,11 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="GetValueFromJsonObjectExample" title="GetValueFromJsonObject示例" />
         /// </example>
-        public static T GetValueFromJsonObject<T>( JObject json, string value_name, T default_value )
+        public static T GetValueFromJsonObject<T>(JObject json, string value_name, T default_value)
         {
-            if (json.Property( value_name ) != null)
+            if (json.Property(value_name) != null)
             {
-                return json.Property( value_name ).Value.Value<T>( );
+                return json.Property(value_name).Value.Value<T>();
             }
             else
             {
@@ -500,15 +499,15 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="JsonSetValueExample" title="JsonSetValue示例" />
         /// </example>
-        public static void JsonSetValue<T>( JObject json, string property, T value )
+        public static void JsonSetValue<T>(JObject json, string property, T value)
         {
-            if (json.Property( property ) != null)
+            if (json.Property(property) != null)
             {
-                json.Property( property ).Value = new JValue( value );
+                json.Property(property).Value = new JValue(value);
             }
             else
             {
-                json.Add( property, new JValue( value ) );
+                json.Add(property, new JValue(value));
             }
         }
 
@@ -526,9 +525,9 @@ namespace HslCommunication.BasicFramework
         /// <param name="ex">异常对象</param>
         /// <remarks>调用本方法可以显示一个异常的详细信息</remarks>
         /// <exception cref="NullReferenceException"></exception>
-        public static void ShowExceptionMessage( Exception ex )
+        public static void ShowExceptionMessage(Exception ex)
         {
-            MessageBox.Show( GetExceptionMessage( ex ) );
+            MessageBox.Show(GetExceptionMessage(ex));
         }
 
 
@@ -540,9 +539,9 @@ namespace HslCommunication.BasicFramework
         /// <remarks>调用本方法可以显示一个异常的详细信息</remarks>
         /// <param name="ex">异常对象</param>
         /// <exception cref="NullReferenceException"></exception>
-        public static void ShowExceptionMessage( string extraMsg, Exception ex )
+        public static void ShowExceptionMessage(string extraMsg, Exception ex)
         {
-            MessageBox.Show( GetExceptionMessage( extraMsg, ex ) );
+            MessageBox.Show(GetExceptionMessage(extraMsg, ex));
         }
 
 #endif
@@ -558,7 +557,7 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="GetExceptionMessageExample1" title="GetExceptionMessage示例" />
         /// </example>
-        public static string GetExceptionMessage( Exception ex )
+        public static string GetExceptionMessage(Exception ex)
         {
             return StringResources.Language.ExceptionMessage + ex.Message + Environment.NewLine +
                 StringResources.Language.ExceptionStackTrace + ex.StackTrace + Environment.NewLine +
@@ -576,15 +575,15 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="GetExceptionMessageExample2" title="GetExceptionMessage示例" />
         /// </example>
-        public static string GetExceptionMessage( string extraMsg, Exception ex )
+        public static string GetExceptionMessage(string extraMsg, Exception ex)
         {
-            if (string.IsNullOrEmpty( extraMsg ))
+            if (string.IsNullOrEmpty(extraMsg))
             {
-                return GetExceptionMessage( ex );
+                return GetExceptionMessage(ex);
             }
             else
             {
-                return extraMsg + Environment.NewLine + GetExceptionMessage( ex );
+                return extraMsg + Environment.NewLine + GetExceptionMessage(ex);
             }
         }
 
@@ -604,9 +603,9 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="ByteToHexStringExample1" title="ByteToHexString示例" />
         /// </example>
-        public static string ByteToHexString( byte[] InBytes )
+        public static string ByteToHexString(byte[] InBytes)
         {
-            return ByteToHexString( InBytes, (char)0 );
+            return ByteToHexString(InBytes, (char)0);
         }
 
         /// <summary>
@@ -620,20 +619,20 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="ByteToHexStringExample2" title="ByteToHexString示例" />
         /// </example>
-        public static string ByteToHexString( byte[] InBytes, char segment )
+        public static string ByteToHexString(byte[] InBytes, char segment)
         {
-            StringBuilder sb = new StringBuilder( );
+            StringBuilder sb = new StringBuilder();
             foreach (byte InByte in InBytes)
             {
-                if (segment == 0) sb.Append( string.Format( "{0:X2}", InByte ) );
-                else sb.Append( string.Format( "{0:X2}{1}", InByte, segment ) );
+                if (segment == 0) sb.Append(string.Format("{0:X2}", InByte));
+                else sb.Append(string.Format("{0:X2}{1}", InByte, segment));
             }
 
             if (segment != 0 && sb.Length > 1 && sb[sb.Length - 1] == segment)
             {
-                sb.Remove( sb.Length - 1, 1 );
+                sb.Remove(sb.Length - 1, 1);
             }
-            return sb.ToString( );
+            return sb.ToString();
         }
 
 
@@ -645,13 +644,13 @@ namespace HslCommunication.BasicFramework
         /// <param name="InString">输入的字符串数据</param>
         /// <returns>返回的字符串</returns>
         /// <exception cref="NullReferenceException"></exception>
-        public static string ByteToHexString( string InString )
+        public static string ByteToHexString(string InString)
         {
-            return ByteToHexString( Encoding.Unicode.GetBytes( InString ) );
+            return ByteToHexString(Encoding.Unicode.GetBytes(InString));
         }
 
 
-        private static List<char> hexCharList = new List<char>( )
+        private static List<char> hexCharList = new List<char>()
             {
                 '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'
             };
@@ -666,27 +665,27 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="HexStringToBytesExample" title="HexStringToBytes示例" />
         /// </example>
-        public static byte[] HexStringToBytes( string hex )
+        public static byte[] HexStringToBytes(string hex)
         {
-            hex = hex.ToUpper( );
+            hex = hex.ToUpper();
 
-            MemoryStream ms = new MemoryStream( );
+            MemoryStream ms = new MemoryStream();
 
             for (int i = 0; i < hex.Length; i++)
             {
                 if ((i + 1) < hex.Length)
                 {
-                    if (hexCharList.Contains( hex[i] ) && hexCharList.Contains( hex[i + 1] ))
+                    if (hexCharList.Contains(hex[i]) && hexCharList.Contains(hex[i + 1]))
                     {
                         // 这是一个合格的字节数据
-                        ms.WriteByte( (byte)(hexCharList.IndexOf( hex[i] ) * 16 + hexCharList.IndexOf( hex[i + 1] )) );
+                        ms.WriteByte((byte)(hexCharList.IndexOf(hex[i]) * 16 + hexCharList.IndexOf(hex[i + 1])));
                         i++;
                     }
                 }
             }
 
-            byte[] result = ms.ToArray( );
-            ms.Dispose( );
+            byte[] result = ms.ToArray();
+            ms.Dispose();
             return result;
         }
 
@@ -703,10 +702,10 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="BytesReverseByWord" title="BytesReverseByWord示例" />
         /// </example>
-        public static byte[] BytesReverseByWord(byte[] inBytes )
+        public static byte[] BytesReverseByWord(byte[] inBytes)
         {
             if (inBytes == null) return null;
-            byte[] buffer = ArrayExpandToLengthEven( inBytes );
+            byte[] buffer = ArrayExpandToLengthEven(inBytes);
 
             for (int i = 0; i < buffer.Length / 2; i++)
             {
@@ -728,9 +727,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="inBytes">等待转换的byte数组</param>
         /// <returns>转换后的数组</returns>
-        public static byte[] BytesToAsciiBytes( byte[] inBytes )
+        public static byte[] BytesToAsciiBytes(byte[] inBytes)
         {
-            return Encoding.ASCII.GetBytes( ByteToHexString( inBytes ) );
+            return Encoding.ASCII.GetBytes(ByteToHexString(inBytes));
         }
 
         /// <summary>
@@ -739,9 +738,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="inBytes">等待转换的byte数组</param>
         /// <returns>转换后的数组</returns>
-        public static byte[] AsciiBytesToBytes( byte[] inBytes )
+        public static byte[] AsciiBytesToBytes(byte[] inBytes)
         {
-            return HexStringToBytes( Encoding.ASCII.GetString( inBytes ) );
+            return HexStringToBytes(Encoding.ASCII.GetString(inBytes));
         }
 
         /// <summary>
@@ -749,9 +748,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="value">数据</param>
         /// <returns>ASCII格式的字节数组</returns>
-        public static byte[] BuildAsciiBytesFrom( byte value )
+        public static byte[] BuildAsciiBytesFrom(byte value)
         {
-            return Encoding.ASCII.GetBytes( value.ToString( "X2" ) );
+            return Encoding.ASCII.GetBytes(value.ToString("X2"));
         }
 
         /// <summary>
@@ -759,9 +758,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="value">数据</param>
         /// <returns>ASCII格式的字节数组</returns>
-        public static byte[] BuildAsciiBytesFrom( short value )
+        public static byte[] BuildAsciiBytesFrom(short value)
         {
-            return Encoding.ASCII.GetBytes( value.ToString( "X4" ) );
+            return Encoding.ASCII.GetBytes(value.ToString("X4"));
         }
 
         /// <summary>
@@ -769,9 +768,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="value">数据</param>
         /// <returns>ASCII格式的字节数组</returns>
-        public static byte[] BuildAsciiBytesFrom( ushort value )
+        public static byte[] BuildAsciiBytesFrom(ushort value)
         {
-            return Encoding.ASCII.GetBytes( value.ToString( "X4" ) );
+            return Encoding.ASCII.GetBytes(value.ToString("X4"));
         }
 
         /// <summary>
@@ -779,12 +778,12 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="value">字节信息</param>
         /// <returns>ASCII格式的地址</returns>
-        public static byte[] BuildAsciiBytesFrom( byte[] value )
+        public static byte[] BuildAsciiBytesFrom(byte[] value)
         {
             byte[] buffer = new byte[value.Length * 2];
             for (int i = 0; i < value.Length; i++)
             {
-                SoftBasic.BuildAsciiBytesFrom( value[i] ).CopyTo( buffer, 2 * i );
+                SoftBasic.BuildAsciiBytesFrom(value[i]).CopyTo(buffer, 2 * i);
             }
             return buffer;
         }
@@ -802,7 +801,7 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="BoolArrayToByte" title="BoolArrayToByte示例" />
         /// </example>
-        public static byte[] BoolArrayToByte( bool[] array )
+        public static byte[] BoolArrayToByte(bool[] array)
         {
             if (array == null) return null;
 
@@ -844,7 +843,7 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="ByteToBoolArray" title="ByteToBoolArray示例" />
         /// </example> 
-        public static bool[] ByteToBoolArray( byte[] InBytes, int length )
+        public static bool[] ByteToBoolArray(byte[] InBytes, int length)
         {
             if (InBytes == null) return null;
 
@@ -888,11 +887,11 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="ByteToBoolArray" title="ByteToBoolArray示例" />
         /// </example> 
-        public static bool[] ByteToBoolArray( byte[] InBytes )
+        public static bool[] ByteToBoolArray(byte[] InBytes)
         {
             if (InBytes == null) return null;
 
-            return ByteToBoolArray( InBytes, InBytes.Length * 8 );
+            return ByteToBoolArray(InBytes, InBytes.Length * 8);
         }
 
         #endregion
@@ -909,15 +908,15 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="SpliceTwoByteArray" title="SpliceTwoByteArray示例" />
         /// </example> 
-        public static byte[] SpliceTwoByteArray( byte[] bytes1, byte[] bytes2 )
+        public static byte[] SpliceTwoByteArray(byte[] bytes1, byte[] bytes2)
         {
             if (bytes1 == null && bytes2 == null) return null;
             if (bytes1 == null) return bytes2;
             if (bytes2 == null) return bytes1;
 
             byte[] buffer = new byte[bytes1.Length + bytes2.Length];
-            bytes1.CopyTo( buffer, 0 );
-            bytes2.CopyTo( buffer, bytes1.Length );
+            bytes1.CopyTo(buffer, 0);
+            bytes2.CopyTo(buffer, bytes1.Length);
             return buffer;
         }
 
@@ -927,10 +926,10 @@ namespace HslCommunication.BasicFramework
         /// <param name="value">原始的数据信息</param>
         /// <param name="length">数据的长度</param>
         /// <returns>选择的前面的几个数据信息</returns>
-        public static byte[] BytesArraySelectBegin( byte[] value, int length )
+        public static byte[] BytesArraySelectBegin(byte[] value, int length)
         {
-            byte[] buffer = new byte[Math.Min( value.Length, length )];
-            Array.Copy( value, 0, buffer, 0, buffer.Length );
+            byte[] buffer = new byte[Math.Min(value.Length, length)];
+            Array.Copy(value, 0, buffer, 0, buffer.Length);
             return buffer;
         }
 
@@ -944,9 +943,9 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="BytesArrayRemoveBegin" title="BytesArrayRemoveBegin示例" />
         /// </example> 
-        public static byte[] BytesArrayRemoveBegin( byte[] value, int length )
+        public static byte[] BytesArrayRemoveBegin(byte[] value, int length)
         {
-            return BytesArrayRemoveDouble( value, length, 0 );
+            return BytesArrayRemoveDouble(value, length, 0);
         }
 
         /// <summary>
@@ -959,9 +958,9 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="BytesArrayRemoveLast" title="BytesArrayRemoveLast示例" />
         /// </example> 
-        public static byte[] BytesArrayRemoveLast( byte[] value, int length )
+        public static byte[] BytesArrayRemoveLast(byte[] value, int length)
         {
-            return BytesArrayRemoveDouble( value, 0, length );
+            return BytesArrayRemoveDouble(value, 0, length);
         }
 
         /// <summary>
@@ -975,13 +974,13 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="BytesArrayRemoveDouble" title="BytesArrayRemoveDouble示例" />
         /// </example> 
-        public static byte[] BytesArrayRemoveDouble( byte[] value, int leftLength, int rightLength )
+        public static byte[] BytesArrayRemoveDouble(byte[] value, int leftLength, int rightLength)
         {
             if (value == null) return null;
             if (value.Length <= (leftLength + rightLength)) return new byte[0];
 
             byte[] buffer = new byte[value.Length - leftLength - rightLength];
-            Array.Copy( value, leftLength, buffer, 0, buffer.Length );
+            Array.Copy(value, leftLength, buffer, 0, buffer.Length);
 
             return buffer;
         }
@@ -997,7 +996,7 @@ namespace HslCommunication.BasicFramework
         /// <remarks>
         /// 当你要显示本组件框架的版本号的时候，就可以用这个属性来显示
         /// </remarks>
-        public static SystemVersion FrameworkVersion { get; set; } = new SystemVersion( "8.0.0" );
+        public static SystemVersion FrameworkVersion { get; set; } = new SystemVersion("8.0.0");
 
         #endregion
 
@@ -1019,17 +1018,17 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="DeepClone" title="DeepClone示例" />
         /// </example>
-        public static object DeepClone( object oringinal )
+        public static object DeepClone(object oringinal)
         {
-            using (System.IO.MemoryStream stream = new System.IO.MemoryStream( ))
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
             {
-                BinaryFormatter formatter = new BinaryFormatter( )
+                BinaryFormatter formatter = new BinaryFormatter()
                 {
-                    Context = new System.Runtime.Serialization.StreamingContext( System.Runtime.Serialization.StreamingContextStates.Clone )
+                    Context = new System.Runtime.Serialization.StreamingContext(System.Runtime.Serialization.StreamingContextStates.Clone)
                 };
-                formatter.Serialize( stream, oringinal );
+                formatter.Serialize(stream, oringinal);
                 stream.Position = 0;
-                return formatter.Deserialize( stream );
+                return formatter.Deserialize(stream);
             }
         }
 
@@ -1046,10 +1045,10 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="GetUniqueStringByGuidAndRandom" title="GetUniqueStringByGuidAndRandom示例" />
         /// </example>
-        public static string GetUniqueStringByGuidAndRandom( )
+        public static string GetUniqueStringByGuidAndRandom()
         {
-            Random random = new Random( );
-            return Guid.NewGuid( ).ToString( "N" ) + random.Next( 1000, 10000 );
+            Random random = new Random();
+            return Guid.NewGuid().ToString("N") + random.Next(1000, 10000);
         }
 
         #endregion

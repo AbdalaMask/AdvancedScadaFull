@@ -1,5 +1,18 @@
-﻿using AdvancedScada.Controls.DialogEditor;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.SevenSegment;
+using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Client;
+using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.Monitor;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,22 +29,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using System.Xml.Linq;
-using AdvancedScada;
-using AdvancedScada.Controls.DialogEditor;
-using AdvancedScada.Controls.Subscription;
-using MfgControl.AdvancedHMI.Controls;
-
-using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Client;
-using AdvancedScada.DriverBase.Comm;
- 
- 
-using AdvancedScada.Monitor;
-using AdvancedScada.Controls.AHMI.SevenSegment;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
-using AdvancedScada.Controls_Net45;
 
 namespace AdvancedScada.Controls.AHMI.SevenSegment
 {

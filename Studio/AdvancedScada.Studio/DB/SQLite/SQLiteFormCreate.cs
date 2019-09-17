@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
 using System.Windows.Forms;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.Studio.DB.SQLite

@@ -1,10 +1,9 @@
 ﻿using AdvancedScada.DriverBase;
+using AdvancedScada.IBaseService;
 using AdvancedScada.IODriver;
 using AdvancedScada.Management.BLManager;
 using System;
-using System.Linq;
 using System.ServiceModel;
-using AdvancedScada.IBaseService;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.BaseService

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using HslCommunication.Core.IMessage;
+using System;
 using System.Net.Sockets;
-using HslCommunication.Core.IMessage;
 using System.Threading;
-using HslCommunication.BasicFramework;
 
 namespace HslCommunication.Core.Net
 {
@@ -20,7 +16,7 @@ namespace HslCommunication.Core.Net
         /// <summary>
         /// 实例化一个默认的对象
         /// </summary>
-        public NetworkDeviceSoloBase( )
+        public NetworkDeviceSoloBase()
         {
             ReceiveTimeOut = 5000;
         }
@@ -35,35 +31,35 @@ namespace HslCommunication.Core.Net
         /// <param name="socket">串口对象</param>
         /// <param name="awaitData">是否必须要等待数据返回</param>
         /// <returns>结果数据对象</returns>
-        protected OperateResult<byte[]> ReceiveSolo( Socket socket, bool awaitData )
+        protected OperateResult<byte[]> ReceiveSolo(Socket socket, bool awaitData)
         {
-            if (!Authorization.nzugaydgwadawdibbas( )) return new OperateResult<byte[]>( StringResources.Language.AuthorizationFailed );
+            if (!Authorization.nzugaydgwadawdibbas()) return new OperateResult<byte[]>(StringResources.Language.AuthorizationFailed);
             byte[] buffer = new byte[1024];
-            System.IO.MemoryStream ms = new System.IO.MemoryStream( );
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
             DateTime start = DateTime.Now;                                  // 开始时间，用于确认是否超时的信息
 
-            HslTimeOut hslTimeOut = new HslTimeOut( )
+            HslTimeOut hslTimeOut = new HslTimeOut()
             {
                 DelayTime = ReceiveTimeOut,
                 WorkSocket = socket,
             };
-            if (ReceiveTimeOut > 0) ThreadPool.QueueUserWorkItem( new WaitCallback( ThreadPoolCheckTimeOut ), hslTimeOut );
+            if (ReceiveTimeOut > 0) ThreadPool.QueueUserWorkItem(new WaitCallback(ThreadPoolCheckTimeOut), hslTimeOut);
 
             try
             {
-                Thread.Sleep( sleepTime );
-                int receiveCount = socket.Receive( buffer );
+                Thread.Sleep(sleepTime);
+                int receiveCount = socket.Receive(buffer);
                 hslTimeOut.IsSuccessful = true;
-                ms.Write( buffer, 0, receiveCount );
+                ms.Write(buffer, 0, receiveCount);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                ms.Dispose( );
-                return new OperateResult<byte[]>( ex.Message );
+                ms.Dispose();
+                return new OperateResult<byte[]>(ex.Message);
             }
-            byte[] result = ms.ToArray( );
-            ms.Dispose( );
-            return OperateResult.CreateSuccessResult( result );
+            byte[] result = ms.ToArray();
+            ms.Dispose();
+            return OperateResult.CreateSuccessResult(result);
         }
 
         #endregion
@@ -76,33 +72,33 @@ namespace HslCommunication.Core.Net
         /// <param name="socket">网络套接字</param>
         /// <param name="send">发送的数据内容</param>
         /// <returns>读取数据的结果</returns>
-        public override OperateResult<byte[]> ReadFromCoreServer( Socket socket, byte[] send )
+        public override OperateResult<byte[]> ReadFromCoreServer(Socket socket, byte[] send)
         {
 
-            LogNet?.WriteDebug( ToString( ), StringResources.Language.Send + " : " + BasicFramework.SoftBasic.ByteToHexString( send, ' ' ) );
+            LogNet?.WriteDebug(ToString(), StringResources.Language.Send + " : " + BasicFramework.SoftBasic.ByteToHexString(send, ' '));
 
             // send
-            OperateResult sendResult = Send( socket, send );
+            OperateResult sendResult = Send(socket, send);
             if (!sendResult.IsSuccess)
             {
-                socket?.Close( );
-                return OperateResult.CreateFailedResult<byte[]>( sendResult );
+                socket?.Close();
+                return OperateResult.CreateFailedResult<byte[]>(sendResult);
             }
 
-            if (receiveTimeOut < 0) return OperateResult.CreateSuccessResult( new byte[0] );
+            if (receiveTimeOut < 0) return OperateResult.CreateSuccessResult(new byte[0]);
 
             // receive msg
-            OperateResult<byte[]> resultReceive = ReceiveSolo( socket, false );
+            OperateResult<byte[]> resultReceive = ReceiveSolo(socket, false);
             if (!resultReceive.IsSuccess)
             {
-                socket?.Close( );
-                return new OperateResult<byte[]>( StringResources.Language.ReceiveDataTimeout + receiveTimeOut );
+                socket?.Close();
+                return new OperateResult<byte[]>(StringResources.Language.ReceiveDataTimeout + receiveTimeOut);
             }
 
-            LogNet?.WriteDebug( ToString( ), StringResources.Language.Receive + " : " + BasicFramework.SoftBasic.ByteToHexString( resultReceive.Content, ' ' ) );
+            LogNet?.WriteDebug(ToString(), StringResources.Language.Receive + " : " + BasicFramework.SoftBasic.ByteToHexString(resultReceive.Content, ' '));
 
             // Success
-            return OperateResult.CreateSuccessResult( resultReceive.Content );
+            return OperateResult.CreateSuccessResult(resultReceive.Content);
         }
 
         #endregion
@@ -133,9 +129,9 @@ namespace HslCommunication.Core.Net
         /// 返回表示当前对象的字符串信息
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToString( )
+        public override string ToString()
         {
-            return $"NetworkDeviceSoloBase<{typeof( TTransform )}>[{IpAddress}:{Port}]";
+            return $"NetworkDeviceSoloBase<{typeof(TTransform)}>[{IpAddress}:{Port}]";
         }
 
         #endregion

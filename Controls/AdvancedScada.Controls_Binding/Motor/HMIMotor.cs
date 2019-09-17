@@ -1,5 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.DriverBase;
+using AdvancedScada.Monitor;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
@@ -7,7 +8,6 @@ using System.ComponentModel.Design;
 using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using AdvancedScada.Monitor;
 
 namespace AdvancedScada.Controls_Binding.Motor
 {
@@ -16,7 +16,7 @@ namespace AdvancedScada.Controls_Binding.Motor
     {
 
 
-       
+
 
         public bool HoldTimeMet;
         private int m_MaximumHoldTime = 3000;

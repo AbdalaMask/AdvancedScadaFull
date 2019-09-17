@@ -1,15 +1,14 @@
-﻿using AdvancedScada.Controls.Enum;
-using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using AdvancedScada;
- 
- using AdvancedScada.Controls.Enum;
-using AdvancedScada.Controls.AHMI.ProcessAll.DrawAll;
+﻿using AdvancedScada;
 using AdvancedScada;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
 using AdvancedScada.Controls.AHMI.ProcessAll;
+using AdvancedScada.Controls.AHMI.ProcessAll.DrawAll;
+using AdvancedScada.Controls.Enum;
+using AdvancedScada.Controls.Enum;
+using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace AdvancedScada.Controls.AHMI.ProcessAll.DrawAll
 {

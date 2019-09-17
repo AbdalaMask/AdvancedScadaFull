@@ -1,4 +1,16 @@
-﻿using AdvancedScada.Controls.Drivers;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.BaseService.Client;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.Alarm;
+using AdvancedScada.Controls.Drivers;
+using AdvancedScada.Controls.Drivers;
+using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.IBaseService;
+using AdvancedScada.IBaseService.Common;
+using AdvancedScada.Utils;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -10,18 +22,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.ServiceModel;
 using System.Windows.Forms;
-using AdvancedScada;
-using AdvancedScada.BaseService.Client;
-using AdvancedScada.Controls.Drivers;
-using AdvancedScada.Controls_Net45;
-using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.IBaseService;
-using AdvancedScada.IBaseService.Common;
-using AdvancedScada.Utils;
-using AdvancedScada.Controls.Alarm;
-using AdvancedScada;
-using AdvancedScada.Controls;
 
 namespace AdvancedScada.Controls.Alarm
 {

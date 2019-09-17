@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace HslCommunication.Controls
@@ -38,7 +34,7 @@ namespace HslCommunication.Controls
 
         private void UserSwitch_Paint(object sender, PaintEventArgs e)
         {
-            if (!Authorization.nzugaydgwadawdibbas( )) return;
+            if (!Authorization.nzugaydgwadawdibbas()) return;
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
@@ -64,10 +60,10 @@ namespace HslCommunication.Controls
             e.Graphics.FillRectangle(brush_switch_foreground, rect_switch);
 
             Rectangle rect_mini = new Rectangle(-center.X / 16, -radius - 10, center.X / 8, center.X * 3 / 8);
-            e.Graphics.FillEllipse(SwitchStatus ? Brushes.LimeGreen:Brushes.Tomato, rect_mini);
+            e.Graphics.FillEllipse(SwitchStatus ? Brushes.LimeGreen : Brushes.Tomato, rect_mini);
 
             Rectangle rect_text = new Rectangle(-50, -radius - temp - 15, 100, 15);
-            e.Graphics.DrawString(SwitchStatus? description[1] : description[0], Font, SwitchStatus ? Brushes.LimeGreen : Brushes.Tomato, rect_text, centerFormat);
+            e.Graphics.DrawString(SwitchStatus ? description[1] : description[0], Font, SwitchStatus ? Brushes.LimeGreen : Brushes.Tomato, rect_text, centerFormat);
 
             e.Graphics.ResetTransform();
         }
@@ -180,7 +176,7 @@ namespace HslCommunication.Controls
             }
             set
             {
-                if(value != switch_status)
+                if (value != switch_status)
                 {
                     switch_status = value;
                     Invalidate();

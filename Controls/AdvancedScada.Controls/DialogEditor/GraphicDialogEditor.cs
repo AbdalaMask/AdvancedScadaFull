@@ -1,4 +1,9 @@
 ﻿
+using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.ImagePicker;
 using Microsoft.Win32;
 using System;
 using System.ComponentModel;
@@ -6,12 +11,6 @@ using System.Drawing.Design;
 using System.Security.Permissions;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using AdvancedScada;
- 
-using AdvancedScada.ImagePicker;
-using AdvancedScada.Controls.DialogEditor;
-using AdvancedScada;
-using AdvancedScada.Controls;
 
 namespace AdvancedScada.Controls.DialogEditor
 {

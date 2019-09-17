@@ -284,37 +284,34 @@ namespace HslCommunication.Profinet.LSIS
                                 break;
                             default:
                                 sb.Append("B");
-                                int startIndex = int.Parse(address.Substring(2));
+                                int startIndex = 0;
                                 if (address[1] == 'B')
                                 {
-
+                                    startIndex = int.Parse(address.Substring(2));
                                     sb.Append(startIndex == 0 ? startIndex : startIndex *= 2);
                                 }
                                 else if (address[1] == 'W')
                                 {
-
+                                    startIndex = int.Parse(address.Substring(2));
                                     sb.Append(startIndex == 0 ? startIndex : startIndex *= 2);
                                 }
                                 else if (address[1] == 'D')
                                 {
-
+                                    startIndex = int.Parse(address.Substring(2));
                                     sb.Append(startIndex == 0 ? startIndex : startIndex *= 4);
                                 }
                                 else if (address[1] == 'L')
                                 {
-
+                                    startIndex = int.Parse(address.Substring(2));
                                     sb.Append(startIndex == 0 ? startIndex : startIndex *= 8);
                                 }
                                 else
                                 {
-
                                     sb.Append(int.Parse(address.Substring(1)));
                                 }
 
                                 break;
                         }
-
-
                         exsist = true;
                         break;
                     }
@@ -399,10 +396,10 @@ namespace HslCommunication.Profinet.LSIS
                 case "Bit":
                     command[2] = 0x00; break;
                 case "Word":
-                    command[2] = 0x02; break;
-                case "DWord": command[2] = 0x03; break;
-                case "LWord": command[2] = 0x04; break;
-                case "Continuous": command[2] = 0x14; break;
+                case "DWord":
+                case "LWord":
+                case "Continuous":
+                    command[2] = 0x14; break;
                 default: break;
             }
             command[0] = 0x54;    // read
@@ -434,7 +431,7 @@ namespace HslCommunication.Profinet.LSIS
             switch (DataTypeResult.Content)
             {
                 case "Bit":
-                    command[2] = 0x00; break;
+                    command[2] = 0x02; break;
                 case "Byte":
                     command[2] = 0x01; break;
                 case "Word":

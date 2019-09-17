@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace HslCommunication.Controls
 {
@@ -125,8 +121,8 @@ namespace HslCommunication.Controls
         [Description("按钮的背景色")]
         public Color OriginalColor
         {
-            get{return m_backcor; }
-            set{m_backcor = value;Invalidate(); }
+            get { return m_backcor; }
+            set { m_backcor = value; Invalidate(); }
         }
 
         private Color m_enablecolor = Color.FromArgb(190, 190, 190);
@@ -150,7 +146,7 @@ namespace HslCommunication.Controls
         [Category("外观")]
         [DefaultValue(typeof(Color), "AliceBlue")]
         [Description("按钮的活动色")]
-        public Color  ActiveColor
+        public Color ActiveColor
         {
             get { return m_active; }
             set { m_active = value; Invalidate(); }
@@ -218,7 +214,7 @@ namespace HslCommunication.Controls
 
         #endregion
 
-        
+
 
 
         /// <summary>
@@ -236,7 +232,7 @@ namespace HslCommunication.Controls
         /// <param name="e"></param>
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!Authorization.nzugaydgwadawdibbas( )) return;
+            if (!Authorization.nzugaydgwadawdibbas()) return;
 
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
@@ -261,7 +257,7 @@ namespace HslCommunication.Controls
             if (Enabled)
             {
                 brush_fore_text = new SolidBrush(TextColor);
-                if(Selected)
+                if (Selected)
                 {
                     brush_back_text = new SolidBrush(Color.DodgerBlue);
                 }

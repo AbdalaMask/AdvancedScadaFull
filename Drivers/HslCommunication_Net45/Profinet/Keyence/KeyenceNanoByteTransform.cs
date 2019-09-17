@@ -1,8 +1,5 @@
-﻿using HslCommunication.BasicFramework;
-using HslCommunication.Core;
+﻿using HslCommunication.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 
@@ -59,7 +56,7 @@ namespace HslCommunication.Profinet.Keyence
         {
             return BytesToStringArray(buffer)[index] == "1" ? true : false;
         }
-        
+
         /// <summary>
         /// 从缓存中提取出bool数组结果
         /// </summary>
@@ -104,7 +101,7 @@ namespace HslCommunication.Profinet.Keyence
             }
             return result;
         }
-        
+
         /// <summary>
         /// 从缓存中提取short结果
         /// </summary>
@@ -132,7 +129,7 @@ namespace HslCommunication.Profinet.Keyence
             }
             return result;
         }
-        
+
         /// <summary>
         /// 从缓存中提取ushort结果
         /// </summary>
@@ -404,7 +401,7 @@ namespace HslCommunication.Profinet.Keyence
         /// <param name="values">等待转化的数组</param>
         /// <returns>buffer数据</returns>
         public virtual byte[] TransByte(short[] values)
-        { 
+        {
             return Trans<short>.ToBytes(values, ".S");
         }
 
@@ -426,7 +423,7 @@ namespace HslCommunication.Profinet.Keyence
         /// <param name="values">等待转化的数组</param>
         /// <returns>buffer数据</returns>
         public virtual byte[] TransByte(ushort[] values)
-        { 
+        {
             return Trans<ushort>.ToBytes(values, ".U");
         }
 
@@ -553,7 +550,7 @@ namespace HslCommunication.Profinet.Keyence
         /// <returns>buffer数据</returns>
         public virtual byte[] TransByte(double[] values)
         {
-            return Trans<double>.ToBytes(values,".DF");
+            return Trans<double>.ToBytes(values, ".DF");
         }
 
         /// <summary>
@@ -581,7 +578,7 @@ namespace HslCommunication.Profinet.Keyence
             /// <param name="values"></param>
             /// <param name="dataFormat"></param>
             /// <returns></returns>
-            public static byte[] ToBytes(T[] values,string dataFormat)
+            public static byte[] ToBytes(T[] values, string dataFormat)
             {
                 if (values == null) return null;
                 StringBuilder stringBuilder = new StringBuilder();
@@ -589,14 +586,14 @@ namespace HslCommunication.Profinet.Keyence
                 stringBuilder.Append(" ");
                 stringBuilder.Append(values.Length.ToString());
                 for (int i = 0; i < values.Length; i++)
-                { 
-                    stringBuilder.Append(" "); 
-                    if (typeof(T)==typeof(int) )
+                {
+                    stringBuilder.Append(" ");
+                    if (typeof(T) == typeof(int))
                     {
-                        var  value = Convert.ToInt32(values[i]);
+                        var value = Convert.ToInt32(values[i]);
                         stringBuilder.Append(value.ToString());
-                    } 
-                    else if (typeof(T)== typeof(uint))
+                    }
+                    else if (typeof(T) == typeof(uint))
                     {
                         var value = Convert.ToUInt32(values[i]);
                         stringBuilder.Append(value.ToString());
@@ -643,6 +640,6 @@ namespace HslCommunication.Profinet.Keyence
         #endregion
 
 
-    } 
-  
+    }
+
 }

@@ -1,10 +1,9 @@
-﻿using AdvancedScada.DriverBase.Devices;
+﻿using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.Management;
 using ComponentFactory.Krypton.Toolkit;
 using System;
-using System.Linq;
 using static AdvancedScada.IBaseService.Common.XCollection;
-using AdvancedScada.Management;
-using AdvancedScada.DriverBase.Comm;
 
 namespace AdvancedScada.Studio.Editors
 {

@@ -1,5 +1,16 @@
-﻿using AdvancedScada.Controls.DialogEditor;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.DigitalDisplay;
+using AdvancedScada.Controls.DialogEditor;
+using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Client;
+using AdvancedScada.DriverBase.Comm;
+using MfgControl.AdvancedHMI.Controls;
 using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Collections;
@@ -13,20 +24,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using AdvancedScada;
- 
- 
-using AdvancedScada.Controls.DialogEditor;
-using AdvancedScada.Controls.Subscription;
-using MfgControl.AdvancedHMI.Controls;
-
-using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Client;
-using AdvancedScada.DriverBase.Comm;
-using AdvancedScada.Controls.AHMI.DigitalDisplay;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.DigitalDisplay
 {

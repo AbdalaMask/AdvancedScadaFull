@@ -1,8 +1,6 @@
-﻿using System;
+﻿using HslCommunication.ModBus;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HslCommunication.ModBus;
 
 namespace HslCommunication.Algorithms.ConnectPool
 {
@@ -28,13 +26,13 @@ namespace HslCommunication.Algorithms.ConnectPool
         /// 实例化一个连接池对象，需要指定如果创建新实例的方法
         /// </summary>
         /// <param name="createConnector">创建连接对象的委托</param>
-        public ConnectPool( Func<TConnector> createConnector )
+        public ConnectPool(Func<TConnector> createConnector)
         {
             this.CreateConnector = createConnector;
-            hybirdLock = new HslCommunication.Core.SimpleHybirdLock( );
-            connectors = new List<TConnector>( );
+            hybirdLock = new HslCommunication.Core.SimpleHybirdLock();
+            connectors = new List<TConnector>();
 
-            timerCheck = new System.Threading.Timer( TimerCheckBackground, null, 10000, 30000 );
+            timerCheck = new System.Threading.Timer(TimerCheckBackground, null, 10000, 30000);
         }
 
         #endregion
@@ -46,15 +44,15 @@ namespace HslCommunication.Algorithms.ConnectPool
         /// 获取可用的对象
         /// </summary>
         /// <returns>可用的连接对象</returns>
-        public TConnector GetAvailableConnector( )
+        public TConnector GetAvailableConnector()
         {
             while (!canGetConnector)
             {
-                System.Threading.Thread.Sleep( 100 );
+                System.Threading.Thread.Sleep(100);
             }
 
-            TConnector result = default( TConnector );
-            hybirdLock.Enter( );
+            TConnector result = default(TConnector);
+            hybirdLock.Enter();
 
             for (int i = 0; i < connectors.Count; i++)
             {
@@ -69,11 +67,11 @@ namespace HslCommunication.Algorithms.ConnectPool
             if (result == null)
             {
                 // 创建新的连接
-                result = CreateConnector( );
+                result = CreateConnector();
                 result.IsConnectUsing = true;
                 result.LastUseTime = DateTime.Now;
-                result.Open( );
-                connectors.Add( result );
+                result.Open();
+                connectors.Add(result);
                 usedConnector = connectors.Count;
 
                 if (usedConnector == maxConnector) canGetConnector = false;
@@ -82,7 +80,7 @@ namespace HslCommunication.Algorithms.ConnectPool
 
             result.LastUseTime = DateTime.Now;
 
-            hybirdLock.Leave( );
+            hybirdLock.Leave();
 
             return result;
         }
@@ -91,17 +89,17 @@ namespace HslCommunication.Algorithms.ConnectPool
         /// 使用完之后需要通知管理器
         /// </summary>
         /// <param name="connector">连接对象</param>
-        public void ReturnConnector( TConnector connector )
+        public void ReturnConnector(TConnector connector)
         {
-            hybirdLock.Enter( );
+            hybirdLock.Enter();
 
-            int index = connectors.IndexOf( connector );
+            int index = connectors.IndexOf(connector);
             if (index != -1)
             {
                 connectors[index].IsConnectUsing = false;
             }
 
-            hybirdLock.Leave( );
+            hybirdLock.Leave();
         }
 
         #endregion
@@ -141,25 +139,25 @@ namespace HslCommunication.Algorithms.ConnectPool
         #region Clear Timer
 
 
-        private void TimerCheckBackground( object obj )
+        private void TimerCheckBackground(object obj)
         {
             // 清理长久不用的连接对象
-            hybirdLock.Enter( );
+            hybirdLock.Enter();
 
             for (int i = connectors.Count - 1; i >= 0; i--)
             {
                 if ((DateTime.Now - connectors[i].LastUseTime).TotalSeconds > expireTime && !connectors[i].IsConnectUsing)
                 {
                     // 10分钟未使用了，就要删除掉
-                    connectors[i].Close( );
-                    connectors.RemoveAt( i );
+                    connectors[i].Close();
+                    connectors.RemoveAt(i);
                 }
             }
 
             usedConnector = connectors.Count;
             if (usedConnector < MaxConnector) canGetConnector = true;
 
-            hybirdLock.Leave( );
+            hybirdLock.Leave();
         }
 
         #endregion

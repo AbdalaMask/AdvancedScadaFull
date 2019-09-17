@@ -11,7 +11,7 @@ namespace AdvancedScada.Controls_Binding.Hydraulic
     public class HMIPneumaticBallVave : MfgControl.AdvancedHMI.Controls.PneumaticBallVave
     {
 
- 
+
 
         public bool HoldTimeMet;
         private int m_MaximumHoldTime = 3000;

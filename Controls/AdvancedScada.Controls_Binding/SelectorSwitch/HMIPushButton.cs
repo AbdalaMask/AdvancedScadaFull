@@ -1,5 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.DriverBase;
+using AdvancedScada.Monitor;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -7,7 +8,6 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using AdvancedScada.Monitor;
 
 namespace AdvancedScada.Controls_Binding.SelectorSwitch
 {

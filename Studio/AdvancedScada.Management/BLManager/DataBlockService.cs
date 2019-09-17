@@ -1,12 +1,12 @@
-﻿using System;
+﻿using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.DriverBase.Devices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
 using System.Xml;
 using static AdvancedScada.IBaseService.Common.XCollection;
-using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.DriverBase.Comm;
 
 namespace AdvancedScada.Management.BLManager
 {
@@ -100,7 +100,7 @@ namespace AdvancedScada.Management.BLManager
                         item.StartAddress = db.StartAddress;
                         item.MemoryType = db.MemoryType;
                         item.Length = db.Length;
-                        
+
                         break;
                     }
             }

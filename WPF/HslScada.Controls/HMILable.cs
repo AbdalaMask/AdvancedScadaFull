@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AdvancedScada.DriverBase.Client;
+using HslScada.Controls;
+using KeyPad;
+using System;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Data;
-using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Client;
-using KeyPad;
-using HslScada.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace HMIControl
 {
@@ -21,7 +19,7 @@ namespace HMIControl
 
 
         }
-       
+
         public static DependencyProperty BorderStyleProperty = DependencyProperty.Register("BorderStyle", typeof(BorderStyle), typeof(HMILable),
              new FrameworkPropertyMetadata(BorderStyle.None, FrameworkPropertyMetadataOptions.AffectsRender));
 
@@ -41,7 +39,7 @@ namespace HMIControl
         new FrameworkPropertyMetadata("0"));
 
 
-      
+
 
         protected override void OnRender(DrawingContext drawingContext)
         {
@@ -91,15 +89,15 @@ namespace HMIControl
             {
                 DisplayError(ex.Message);
             }
-           
-            
+
+
 
 
         }
 
         private void DisplayError(string message)
         {
-           
+
         }
 
         [Category("HMI")]
@@ -205,7 +203,7 @@ namespace HMIControl
                 {
                     Utilities.Write(PLCAddressKeypad, keypadWindow.Result);
                 }
-                    //this.Text = keypadWindow.Result;
+                //this.Text = keypadWindow.Result;
             }
         }
 
@@ -220,5 +218,5 @@ namespace HMIControl
         FixedSingle,
         None
     }
-   
+
 }

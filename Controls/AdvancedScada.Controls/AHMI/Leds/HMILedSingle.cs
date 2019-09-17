@@ -1,7 +1,20 @@
-﻿using AdvancedScada.Controls.AHMI.Leds.DrawAll;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.Leds;
+using AdvancedScada.Controls.AHMI.Leds.DrawAll;
+using AdvancedScada.Controls.AHMI.Leds.DrawAll;
+using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Enum;
+using AdvancedScada.Controls.Enum;
 using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.Monitor;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -11,20 +24,6 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using AdvancedScada;
-using AdvancedScada.Controls.AHMI.Leds.DrawAll;
- using AdvancedScada.Controls.DialogEditor;
- using AdvancedScada.Controls.Enum;
- using AdvancedScada.Controls.Subscription;
- using AdvancedScada.Controls_Net45;
- 
-using AdvancedScada.DriverBase.Comm;
-using AdvancedScada.Monitor;
-using AdvancedScada.Controls.AHMI.Leds;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
-using MfgControl.AdvancedHMI.Controls;
 
 namespace AdvancedScada.Controls.AHMI.Leds
 {

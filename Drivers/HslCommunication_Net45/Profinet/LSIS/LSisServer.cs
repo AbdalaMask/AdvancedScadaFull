@@ -59,8 +59,8 @@ namespace HslCommunication.Profinet.LSIS
             {
                 case 'P': return OperateResult.CreateSuccessResult(pBuffer.GetBytes(startIndex, length));
                 case 'Q': return OperateResult.CreateSuccessResult(qBuffer.GetBytes(startIndex, length));
-                case 'M': return OperateResult.CreateSuccessResult(SoftBasic.BoolArrayToByte(mBuffer.GetBool(startIndex , length *= 8)));
-                case 'D': return OperateResult.CreateSuccessResult(dBuffer.GetBytes(startIndex==0 ? startIndex : startIndex*=2, length));
+                case 'M': return OperateResult.CreateSuccessResult(SoftBasic.BoolArrayToByte(mBuffer.GetBool(startIndex, length *= 8)));
+                case 'D': return OperateResult.CreateSuccessResult(dBuffer.GetBytes(startIndex == 0 ? startIndex : startIndex *= 2, length));
                 default: return new OperateResult<byte[]>(StringResources.Language.NotSupportedDataType);
             }
         }
@@ -81,7 +81,7 @@ namespace HslCommunication.Profinet.LSIS
             {
                 case 'P': pBuffer.SetBytes(value, startIndex); return OperateResult.CreateSuccessResult();
                 case 'Q': qBuffer.SetBytes(value, startIndex); return OperateResult.CreateSuccessResult();
-                case 'M': mBuffer.SetBool(value[0]==1 ? true:false, startIndex); return OperateResult.CreateSuccessResult();
+                case 'M': mBuffer.SetBool(value[0] == 1 ? true : false, startIndex); return OperateResult.CreateSuccessResult();
                 case 'D': dBuffer.SetBytes(value, startIndex == 0 ? startIndex : startIndex *= 2); return OperateResult.CreateSuccessResult();
                 default: return new OperateResult<byte[]>(StringResources.Language.NotSupportedDataType);
             }
@@ -126,7 +126,7 @@ namespace HslCommunication.Profinet.LSIS
         /// <returns>带有成功标志的结果对象</returns>
         public OperateResult<bool> ReadBool(string address)
         {
-            OperateResult<string> analysis = XGBFastEnet.AnalysisAddress(address );
+            OperateResult<string> analysis = XGBFastEnet.AnalysisAddress(address);
             if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<bool>(analysis);
 
             // to do, this is not right
@@ -213,14 +213,14 @@ namespace HslCommunication.Profinet.LSIS
                     if (receive[20] == 0x54)
                     {
                         // 读数据
-                         SendData = ReadByMessage(receive);
+                        SendData = ReadByMessage(receive);
                         RaiseDataReceived(SendData);
                         session.WorkSocket.Send(SendData);
-                       
+
                     }
                     else if (receive[20] == 0x58)
                     {
-                         SendData = WriteByMessage(receive);
+                        SendData = WriteByMessage(receive);
                         RaiseDataReceived(SendData);
                         session.WorkSocket.Send(SendData);
                     }
@@ -437,7 +437,7 @@ namespace HslCommunication.Profinet.LSIS
                 serialPort.Close();
             }
         }
-       
+
         /// <summary>
         /// 接收到串口数据的时候触发
         /// </summary>
@@ -445,8 +445,8 @@ namespace HslCommunication.Profinet.LSIS
         /// <param name="e">消息</param>
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-           
-              var sp = (SerialPort)sender;
+
+            var sp = (SerialPort)sender;
 
             int rCount = 0;
             byte[] buffer = new byte[1024];
@@ -454,7 +454,7 @@ namespace HslCommunication.Profinet.LSIS
 
             while (true)
             {
-                System.Threading.Thread.Sleep(20);           
+                System.Threading.Thread.Sleep(20);
                 int count = sp.Read(buffer, rCount, sp.BytesToRead);
                 rCount += count;
                 if (count == 0) break;
@@ -480,15 +480,15 @@ namespace HslCommunication.Profinet.LSIS
                 SendData = WriteSerialByMessage(modbusCore);
                 RaiseDataReceived(SendData);
                 serialPort.Write(SendData, 0, SendData.Length);
-                
+
             }
             else
             {
                 serialPort.Close();
             }
-           
+
             if (IsStarted) RaiseDataSend(receive);
-            
+
         }
         public byte[] HexToBytes(string hex)
         {
@@ -516,13 +516,13 @@ namespace HslCommunication.Profinet.LSIS
             result.Add(0x53);    // command type: SB
             result.Add(0x42);
             result.AddRange(Encoding.ASCII.GetBytes("01"));
-           
 
-            int NameLength =int.Parse(Encoding.ASCII.GetString(command, 6, 2));
-            int RequestCount = Convert.ToInt32(Encoding.ASCII.GetString(command, 8 + NameLength, 2),16);
+
+            int NameLength = int.Parse(Encoding.ASCII.GetString(command, 6, 2));
+            int RequestCount = Convert.ToInt32(Encoding.ASCII.GetString(command, 8 + NameLength, 2), 16);
 
             string DeviceAddress = Encoding.ASCII.GetString(command, 9, NameLength - 1);
-            byte[] data = Read(DeviceAddress,(ushort) RequestCount).Content;
+            byte[] data = Read(DeviceAddress, (ushort)RequestCount).Content;
 
             result.AddRange(SoftBasic.BuildAsciiBytesFrom((byte)data.Length));
             result.AddRange(SoftBasic.BytesToAsciiBytes(data));
@@ -559,17 +559,17 @@ namespace HslCommunication.Profinet.LSIS
             else
             {
                 NameLength = Encoding.ASCII.GetString(packCommand, 6, 2);
-                DeviceAddress = Encoding.ASCII.GetString(packCommand,9, int.Parse(NameLength)-1);
-                
-                int RequestCount = int.Parse( Encoding.ASCII.GetString(packCommand, 8 + int.Parse(NameLength), 2));
-                string Value = Encoding.ASCII.GetString(packCommand, 8 + int.Parse(NameLength) +  RequestCount, RequestCount * 2);
+                DeviceAddress = Encoding.ASCII.GetString(packCommand, 9, int.Parse(NameLength) - 1);
+
+                int RequestCount = int.Parse(Encoding.ASCII.GetString(packCommand, 8 + int.Parse(NameLength), 2));
+                string Value = Encoding.ASCII.GetString(packCommand, 8 + int.Parse(NameLength) + RequestCount, RequestCount * 2);
                 var wdArys = HexToBytes(Value);
                 Write(DeviceAddress, wdArys);
-             }
+            }
 
 
-          
-            
+
+
             return result.ToArray();
         }
 

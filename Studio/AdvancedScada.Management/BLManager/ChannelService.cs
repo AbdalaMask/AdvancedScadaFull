@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Devices;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,8 +11,6 @@ using System.Transactions;
 using System.Xml;
 using System.Xml.Linq;
 using static AdvancedScada.IBaseService.Common.XCollection;
-using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Devices;
 
 namespace AdvancedScada.Management.BLManager
 {

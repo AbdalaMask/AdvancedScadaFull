@@ -1,4 +1,11 @@
-﻿using AdvancedScada.Controls.AHMI.Segment.DrawAll;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.Segment;
+using AdvancedScada.Controls.AHMI.Segment.DrawAll;
+using AdvancedScada.Controls.AHMI.Segment.DrawAll;
+using AdvancedScada.Controls.Enum;
 using AdvancedScada.Controls.Enum;
 using System;
 using System.Collections;
@@ -8,13 +15,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
-using AdvancedScada;
-using AdvancedScada.Controls.AHMI.Segment.DrawAll;
-using AdvancedScada.Controls.Enum;
-using AdvancedScada.Controls.AHMI.Segment;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.Segment
 {

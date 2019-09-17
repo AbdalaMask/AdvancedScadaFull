@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
@@ -95,9 +92,9 @@ namespace SegmentsControls
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            
+
             base.OnRender(drawingContext);
-            
+
         }
 
         /// <summary>
@@ -347,7 +344,7 @@ namespace SegmentsControls
         {
             PointCollection points = new PointCollection();
             var w = RightTopSegmPoints[0].X - LeftTopSegmPoints[2].X;
-            var botY= MiddleSegmPoints[2].Y - GapW - HorizSegH;
+            var botY = MiddleSegmPoints[2].Y - GapW - HorizSegH;
             //var segmH = figureStartPointY - botY;
             var divider = VertSegW / 2.5;
             var xMid = XByAngle(botY) + VertSegW;
@@ -384,12 +381,12 @@ namespace SegmentsControls
             var divider = VertSegW / 2.5;
 
             // four top points, starting from the left point
-            points.Add(new Point(xMid + (w/2 - divider), botY));
+            points.Add(new Point(xMid + (w / 2 - divider), botY));
             points.Add(new Point(LeftBottomSegmPoints[2].X + (w / 2 - divider / 2),
                 MiddleSegmPoints[0].Y + GapW));
             points.Add(new Point(LeftBottomSegmPoints[2].X + (w / 2 + divider / 2),
                 MiddleSegmPoints[0].Y + GapW));
-            points.Add(new Point(xMid + (w/2 + divider), botY));
+            points.Add(new Point(xMid + (w / 2 + divider), botY));
 
 
             // two bottom points, starting from the right point
@@ -412,13 +409,13 @@ namespace SegmentsControls
             PointCollection points = new PointCollection();
 
             var yBot1 = BottomSegmPoints[2].Y - GapW;
-            var xBot1 = XByAngle(yBot1) + VertSegW; 
+            var xBot1 = XByAngle(yBot1) + VertSegW;
 
-            var yBot2 = yBot1 - HorizSegH/2;
-            var xBot2 = XByAngle(yBot2) + VertSegW; 
+            var yBot2 = yBot1 - HorizSegH / 2;
+            var xBot2 = XByAngle(yBot2) + VertSegW;
 
             // three top points, starting from the left point
-            points.Add(new Point(BottomVerticalSegmPoints[1].X - GapW - DiagSegW, 
+            points.Add(new Point(BottomVerticalSegmPoints[1].X - GapW - DiagSegW,
                 BottomVerticalSegmPoints[1].Y));
             points.Add(new Point(BottomVerticalSegmPoints[1].X - GapW,
                 BottomVerticalSegmPoints[1].Y));
@@ -440,14 +437,14 @@ namespace SegmentsControls
         protected PointCollection GetTopLeftDiagSegmPoints()
         {
             PointCollection points = new PointCollection();
-            var y1 = HorizSegH + GapW + HorizSegH/2;
+            var y1 = HorizSegH + GapW + HorizSegH / 2;
             var x1 = XByAngle(y1) + VertSegW;
 
             var y2 = HorizSegH + GapW;
             var x2 = XByAngle(y2) + VertSegW;
 
             // three top points, starting from the left point
-            points.Add(new Point(x1 + GapW,y1));
+            points.Add(new Point(x1 + GapW, y1));
             points.Add(new Point(x2 + GapW, y2));
             points.Add(new Point(x2 + GapW + DiagSegW, y2));
 
@@ -560,7 +557,7 @@ namespace SegmentsControls
             RightTopHorizSegmPoints = GetRightTopHorizSegmPoints();
             Point startPoint = RightTopHorizSegmPoints[0];
             LineSegment line0 = new LineSegment(RightTopHorizSegmPoints[0], true);
-            LineSegment line1 = new LineSegment(RightTopHorizSegmPoints[1], true); 
+            LineSegment line1 = new LineSegment(RightTopHorizSegmPoints[1], true);
             LineSegment line2 = new LineSegment(RightTopHorizSegmPoints[2], true);
             LineSegment line3 = new LineSegment(RightTopHorizSegmPoints[3], true);
             LineSegment line4 = new LineSegment(RightTopHorizSegmPoints[4], true);

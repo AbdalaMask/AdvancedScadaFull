@@ -1,8 +1,8 @@
-﻿using System.Windows.Forms;
-using AdvancedScada;
-using AdvancedScada.Controls.Utility;
+﻿using AdvancedScada;
 using AdvancedScada;
 using AdvancedScada.Controls;
+using AdvancedScada.Controls.Utility;
+using System.Windows.Forms;
 
 namespace AdvancedScada.Controls.Utility
 {

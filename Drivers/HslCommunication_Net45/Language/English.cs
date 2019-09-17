@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HslCommunication.Language
+﻿namespace HslCommunication.Language
 {
     /// <summary>
     /// English Version Text
@@ -149,7 +144,7 @@ namespace HslCommunication.Language
         public override string PasswordCheckFailed => "Password validation failed";
         public override string DataTransformError => "Data conversion failed, source data: ";
         public override string RemoteClosedConnection => "Remote shutdown of connection";
-        
+
         /***********************************************************************************
          * 
          *    Log related
@@ -241,7 +236,7 @@ namespace HslCommunication.Language
          ************************************************************************************/
 
 
-        public override string AllenBradley04 => "The IOI could not be deciphered. Either it was not formed correctly or the match tag does not exist."; 
+        public override string AllenBradley04 => "The IOI could not be deciphered. Either it was not formed correctly or the match tag does not exist.";
         public override string AllenBradley05 => "The particular item referenced (usually instance) could not be found.";
         public override string AllenBradley06 => "The amount of data requested would not fit into the response buffer. Partial data transfer has occurred.";
         public override string AllenBradley0A => "An error has occurred trying to process one of the attributes.";

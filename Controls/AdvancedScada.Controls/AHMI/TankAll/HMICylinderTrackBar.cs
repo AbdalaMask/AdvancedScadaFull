@@ -1,4 +1,12 @@
-﻿using System;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.TankAll;
+using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Client;
+using AdvancedScada.Monitor;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Diagnostics;
@@ -7,16 +15,6 @@ using System.Drawing.Drawing2D;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using AdvancedScada;
- 
- 
-using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Client;
-using AdvancedScada.Monitor;
-using AdvancedScada.Controls.AHMI.TankAll;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.TankAll
 {

@@ -1,4 +1,9 @@
 ﻿
+using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.DriverBase.Comm;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,11 +13,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using AdvancedScada;
-using AdvancedScada.DriverBase.Comm;
-using AdvancedScada.Controls.Subscription;
-using AdvancedScada;
-using AdvancedScada.Controls;
 
 namespace AdvancedScada.Controls.Subscription
 {

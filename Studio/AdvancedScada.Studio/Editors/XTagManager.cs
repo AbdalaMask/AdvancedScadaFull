@@ -1,5 +1,7 @@
 ﻿using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.Management;
 using AdvancedScada.Management.BLManager;
+using AdvancedScada.Studio.IE;
 using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
@@ -9,9 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using AdvancedScada.Studio.IE;
 using static AdvancedScada.IBaseService.Common.XCollection;
-using AdvancedScada.Management;
 
 namespace AdvancedScada.Studio.Editors
 {
@@ -194,7 +194,7 @@ namespace AdvancedScada.Studio.Editors
             p.Text = name;
             p.TextTitle = name;
             p.TextDescription = name;
-            
+
 
 
             // Add the control for display inside the page

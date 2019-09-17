@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 namespace AdvancedScada.DriverBase.Devices
 {
@@ -16,13 +14,13 @@ namespace AdvancedScada.DriverBase.Devices
         }
         [DataMember]
         public string ChannelTypes { get; set; }
-      
+
         [DataMember]
         public int ChannelId { get; set; }
 
         [DataMember]
         public string ChannelName { get; set; }
-      
+
         [DataMember]
         public string CPU { get; set; }
 
@@ -44,6 +42,6 @@ namespace AdvancedScada.DriverBase.Devices
         [DataMember]
         public List<Device> Devices { get; set; }
 
-       
+
     }
 }

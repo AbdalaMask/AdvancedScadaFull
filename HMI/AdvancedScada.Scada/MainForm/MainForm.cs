@@ -1,6 +1,5 @@
-﻿using AdvancedScada.BaseService;
-using AdvancedScada.BaseService.Client;
-using AdvancedScada.DriverBase;
+﻿using AdvancedScada.DataAccess;
+using AdvancedScada.HMI.Tools;
 using AdvancedScada.IBaseService;
 using AdvancedScada.IBaseService.Common;
 using ComponentFactory.Krypton.Toolkit;
@@ -8,14 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.Net;
-using System.Net.Sockets;
 using System.ServiceModel;
 using System.Windows.Forms;
 using static AdvancedScada.HMI.Tools.Tools;
 using static AdvancedScada.IBaseService.Common.XCollection;
-using AdvancedScada.DataAccess;
-using AdvancedScada.HMI.Tools;
 
 namespace AdvancedScada.HMI.MainForm
 {
@@ -57,7 +52,7 @@ namespace AdvancedScada.HMI.MainForm
             catch (CommunicationException ex)
             {
 
-               EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
             InitializeComponent();
         }
@@ -124,7 +119,7 @@ namespace AdvancedScada.HMI.MainForm
             catch (CommunicationException ex)
             {
 
-               EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
         }
 
@@ -157,7 +152,7 @@ namespace AdvancedScada.HMI.MainForm
                 }
                 catch (Exception ex)
                 {
-                   EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                    EventscadaException?.Invoke(this.GetType().Name, ex.Message);
                 }
             }
             else
@@ -179,7 +174,7 @@ namespace AdvancedScada.HMI.MainForm
             }
             catch (Exception ex)
             {
-               EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
 
 
@@ -275,7 +270,7 @@ namespace AdvancedScada.HMI.MainForm
             }
             catch (Exception ex)
             {
-               EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
 
             return TankMixWeightFinel;
@@ -326,7 +321,7 @@ namespace AdvancedScada.HMI.MainForm
 
                 throw;
             }
-         
+
         }
 
         private void P_FRM_Advanced_Click(object sender, EventArgs e)

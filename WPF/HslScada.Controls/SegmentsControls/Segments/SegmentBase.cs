@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -114,7 +111,7 @@ namespace SegmentsControls
         {
             get { return (List<Tuple<int, Brush, Color>>)this.GetValue(SegmentsBrushProperty); }
             set { this.SetValue(SegmentsBrushProperty, value); }
-        } 
+        }
 
         /// <summary>
         /// A brush for not selected elements
@@ -261,7 +258,7 @@ namespace SegmentsControls
             SegmentBase segments = (SegmentBase)sender;
             segments.PropertyChanged(sender, e);
         }
-       
+
 
 
     }

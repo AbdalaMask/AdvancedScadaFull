@@ -5,7 +5,7 @@
     /// </summary>
     public enum Segments
     {
-        Top= 0,
+        Top = 0,
         RightTop = 1,
         RightBottom = 2,
         Bottom = 3,

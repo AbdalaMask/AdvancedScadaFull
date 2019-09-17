@@ -1,4 +1,11 @@
-﻿using AdvancedScada.Controls.Subscription;
+﻿using AdvancedScada;
+using AdvancedScada;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
+using AdvancedScada.Controls.AHMI.TankAll;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.Controls.Subscription;
+using AdvancedScada.DriverBase.Comm;
 using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Collections;
@@ -12,19 +19,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using AdvancedScada;
- 
- 
-using AdvancedScada.Controls.Subscription;
-using AdvancedScada.DriverBase.Comm;
-using AdvancedScada.Controls.AHMI.TankAll;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
 
 namespace AdvancedScada.Controls.AHMI.TankAll
 {
-    public class HMIBarLevel :  MfgControl.AdvancedHMI.Controls.BarLevel
+    public class HMIBarLevel : MfgControl.AdvancedHMI.Controls.BarLevel
     {
 
         #region Properties
@@ -64,10 +62,10 @@ namespace AdvancedScada.Controls.AHMI.TankAll
                     {
                         base.BackColor = SavedBackColor;
                     }
-             
 
-                        base.Text = value;
-                    
+
+                    base.Text = value;
+
                 }
             }
         }

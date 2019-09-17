@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace HslCommunication.Core.IMessage
 {
@@ -37,11 +34,11 @@ namespace HslCommunication.Core.IMessage
         /// </summary>
         /// <param name="token">令牌</param>
         /// <returns>是否合法的</returns>
-        public bool CheckHeadBytesLegal( byte[] token )
+        public bool CheckHeadBytesLegal(byte[] token)
         {
             if (HeadBytes == null) return false;
 
-            if (HeadBytes[0] == 0x4C )
+            if (HeadBytes[0] == 0x4C)
             {
                 return true;
             }
@@ -56,11 +53,11 @@ namespace HslCommunication.Core.IMessage
         /// 获取剩余的内容长度
         /// </summary>
         /// <returns>数据内容长度</returns>
-        public int GetContentLengthByHeadBytes( )
+        public int GetContentLengthByHeadBytes()
         {
             if (HeadBytes?.Length >= 20)
             {
-                return BitConverter.ToUInt16( HeadBytes, 16 );
+                return BitConverter.ToUInt16(HeadBytes, 16);
             }
             else
             {
@@ -72,9 +69,9 @@ namespace HslCommunication.Core.IMessage
         /// 获取消息号，此处无效
         /// </summary>
         /// <returns>消息标识</returns>
-        public int GetHeadBytesIdentity( )
+        public int GetHeadBytesIdentity()
         {
-            return BitConverter.ToUInt16( HeadBytes, 14 );
+            return BitConverter.ToUInt16(HeadBytes, 14);
         }
 
 

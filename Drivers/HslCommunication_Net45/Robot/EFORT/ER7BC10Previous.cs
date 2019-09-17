@@ -3,8 +3,6 @@ using HslCommunication.Core;
 using HslCommunication.Core.IMessage;
 using HslCommunication.Core.Net;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace HslCommunication.Robot.EFORT
@@ -21,12 +19,12 @@ namespace HslCommunication.Robot.EFORT
         /// </summary>
         /// <param name="ipAddress">Ip地址</param>
         /// <param name="port">端口号</param>
-        public ER7BC10Previous( string ipAddress, int port )
+        public ER7BC10Previous(string ipAddress, int port)
         {
             IpAddress = ipAddress;
             Port = port;
 
-            softIncrementCount = new SoftIncrementCount( ushort.MaxValue );
+            softIncrementCount = new SoftIncrementCount(ushort.MaxValue);
         }
 
         #endregion
@@ -37,15 +35,15 @@ namespace HslCommunication.Robot.EFORT
         /// 获取发送的消息的命令
         /// </summary>
         /// <returns>字节数组命令</returns>
-        public byte[] GetReadCommand( )
+        public byte[] GetReadCommand()
         {
             byte[] command = new byte[36];
 
-            Encoding.ASCII.GetBytes( "MessageHead" ).CopyTo( command, 0 );
-            BitConverter.GetBytes( (ushort)command.Length ).CopyTo( command, 15 );
-            BitConverter.GetBytes( (ushort)1001 ).CopyTo( command, 17 );
-            BitConverter.GetBytes( (ushort)softIncrementCount.GetCurrentValue( ) ).CopyTo( command, 19 );
-            Encoding.ASCII.GetBytes( "MessageTail" ).CopyTo( command, 21 );
+            Encoding.ASCII.GetBytes("MessageHead").CopyTo(command, 0);
+            BitConverter.GetBytes((ushort)command.Length).CopyTo(command, 15);
+            BitConverter.GetBytes((ushort)1001).CopyTo(command, 17);
+            BitConverter.GetBytes((ushort)softIncrementCount.GetCurrentValue()).CopyTo(command, 19);
+            Encoding.ASCII.GetBytes("MessageTail").CopyTo(command, 21);
 
             return command;
         }
@@ -59,9 +57,9 @@ namespace HslCommunication.Robot.EFORT
         /// </summary>
         /// <param name="address">无效参数</param>
         /// <returns>带有成功标识的byte[]数组</returns>
-        public OperateResult<byte[]> Read( string address )
+        public OperateResult<byte[]> Read(string address)
         {
-            return ReadFromCoreServer( GetReadCommand( ) );
+            return ReadFromCoreServer(GetReadCommand());
         }
 
         /// <summary>
@@ -69,12 +67,12 @@ namespace HslCommunication.Robot.EFORT
         /// </summary>
         /// <param name="address">地址信息</param>
         /// <returns>带有成功标识的字符串数据</returns>
-        public OperateResult<string> ReadString( string address )
+        public OperateResult<string> ReadString(string address)
         {
-            OperateResult<EfortData> read = ReadEfortData( );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<string>( read );
+            OperateResult<EfortData> read = ReadEfortData();
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<string>(read);
 
-            return OperateResult.CreateSuccessResult( Newtonsoft.Json.JsonConvert.SerializeObject( read.Content, Newtonsoft.Json.Formatting.Indented ) );
+            return OperateResult.CreateSuccessResult(Newtonsoft.Json.JsonConvert.SerializeObject(read.Content, Newtonsoft.Json.Formatting.Indented));
         }
 
         /// <summary>
@@ -83,9 +81,9 @@ namespace HslCommunication.Robot.EFORT
         /// <param name="address">指定的地址信息，有些机器人可能不支持</param>
         /// <param name="value">原始的字节数据信息</param>
         /// <returns>是否成功的写入</returns>
-        public OperateResult Write( string address, byte[] value )
+        public OperateResult Write(string address, byte[] value)
         {
-            return new OperateResult( StringResources.Language.NotSupportedFunction );
+            return new OperateResult(StringResources.Language.NotSupportedFunction);
         }
 
         /// <summary>
@@ -94,23 +92,23 @@ namespace HslCommunication.Robot.EFORT
         /// <param name="address">指定的地址信息，有些机器人可能不支持</param>
         /// <param name="value">字符串的数据信息</param>
         /// <returns>是否成功的写入</returns>
-        public OperateResult Write( string address, string value )
+        public OperateResult Write(string address, string value)
         {
-            return new OperateResult( StringResources.Language.NotSupportedFunction );
+            return new OperateResult(StringResources.Language.NotSupportedFunction);
         }
-        
+
         /// <summary>
         /// 读取机器人的详细信息
         /// </summary>
         /// <returns>结果数据信息</returns>
-        public OperateResult<EfortData> ReadEfortData( )
+        public OperateResult<EfortData> ReadEfortData()
         {
-            OperateResult<byte[]> read = Read( "" );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<EfortData>( read );
+            OperateResult<byte[]> read = Read("");
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<EfortData>(read);
 
-            return EfortData.PraseFromPrevious( read.Content );
+            return EfortData.PraseFromPrevious(read.Content);
         }
-        
+
         #endregion
 
         #region Private Member
@@ -125,7 +123,7 @@ namespace HslCommunication.Robot.EFORT
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return $"ER7BC10 Pre Robot[{IpAddress}:{Port}]";
         }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HslCommunication.Algorithms.Alarm
+﻿namespace HslCommunication.Algorithms.Alarm
 {
     /// <summary>
     /// 报警的等级，主要是区分提示性报警，错误性报警，致命性报警。
