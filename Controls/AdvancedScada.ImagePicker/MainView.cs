@@ -11,6 +11,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Resources;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -175,30 +177,90 @@ namespace AdvancedScada.ImagePicker
             pnlPictures.ImageList = il32;
 
         }
-
-        private void cboxListForder_SelectedIndexChanged(object sender, EventArgs e)
+        static void ExecuteTasks()
         {
+            // Assume this is a user-entered String.
+            String path = @"C:\";
+            List<Task> tasks = new List<Task>();
+            tasks.Add(Task.Run(() => {
+                // This should throw an UnauthorizedAccessException.
+                return Directory.GetFiles(path, "*.txt",
+                SearchOption.AllDirectories);
+            }));
+            tasks.Add(Task.Run(() => {
+                if (path == @"C:\")
+                    throw new ArgumentException("The system root is not a valid path.");
+                return new String[] { ".txt", ".dll", ".exe", ".bin", ".dat" };
+            }));
+            tasks.Add(Task.Run(() => {
+                throw new NotImplementedException("This operation has not been implemented.");
+            }));
+            try
+            {
+                Task.WaitAll(tasks.ToArray());
+            }
+            catch (AggregateException ae)
+            {
+                throw ae.Flatten();
+            }
+        }
+    
+    private void cboxListForder_SelectedIndexChanged(object sender, EventArgs e)
+        {
+             
+            
             il32 = new ImageList();
             il32.ColorDepth = ColorDepth.Depth32Bit;
             il32.ImageSize = new Size(50, 50);
-
+            int Level = 0;
             int i = 0;
             string SelectedPath = ReadKey("LibraryImage") + $@"\\{cboxListForder.SelectedItem.ToString()}";
             ImageListCurrentImage.Clear();
             ImageListCurrentTip.Clear();
-
-            var dirs = DirSearch(SelectedPath).ToArray();
-            foreach (var item in dirs)
+            try
             {
-                string newName = Path.GetFileNameWithoutExtension(item);
-                var bitmap = Image.FromFile(item);
-                ImageListCurrentImage.Add(i++, bitmap);
-                ImageListCurrentTip.Add(i, string.Format("{0}.{1}.{2}", newName, bitmap.Height, bitmap.Width));
+                
+                    var dirs = DirSearch(SelectedPath).ToArray();
+                Task t = Task.Factory.StartNew(() => {
+                    foreach (var item in dirs)
+                    {
+                        Image bitmap = null;
+                        string newName = Path.GetFileNameWithoutExtension(item);
+                        if (item.EndsWith(".wmf"))
+                        {
+                            bitmap = new Metafile(item);
+                            Bitmap pic = new Bitmap(100, 100);
+                            using (Graphics g = Graphics.FromImage(pic))
+                            {
+                                g.DrawImage(bitmap, new System.Drawing.Rectangle(0, 0, pic.Width, pic.Height)); //redraw smaller image
+                            }
+                            bitmap = pic;
+                        }
+                        else
+                        {
+                            bitmap = Image.FromFile(item);
+                        }
 
-                il32.Images.Add(newName, bitmap);
-                Application.DoEvents();
-            }
+                        ImageListCurrentImage.Add(i++, bitmap);
+                        ImageListCurrentTip.Add(i, string.Format("{0}.{1}.{2}", newName, bitmap.Height, bitmap.Width));
+                        il32.Images.Add(newName, bitmap);
+                      
+                    }
+                
+            } );
+            t.Wait();
             gc.ImageList = il32;
+                   
+                       
+               
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+                this.Text = $"{Level++}";
+            }
+         
         }
 
         private void cboxListForderSVG_SelectedIndexChanged(object sender, EventArgs e)
