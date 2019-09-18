@@ -19,7 +19,7 @@ namespace AdvancedScada.Studio.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,26 +57,6 @@ namespace AdvancedScada.Studio.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _0000157_xbc_dn32ua_500 {
-            get {
-                object obj = ResourceManager.GetObject("_0000157_xbc_dn32ua_500", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _515Oof_jXUL__AC_SY400_ {
-            get {
-                object obj = ResourceManager.GetObject("_515Oof_jXUL__AC_SY400_", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -433,16 +413,6 @@ namespace AdvancedScada.Studio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap OPC {
-            get {
-                object obj = ResourceManager.GetObject("OPC", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Open {
             get {
                 object obj = ResourceManager.GetObject("Open", resourceCulture);
@@ -453,9 +423,9 @@ namespace AdvancedScada.Studio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Panasonic {
+        internal static System.Drawing.Bitmap P00135 {
             get {
-                object obj = ResourceManager.GetObject("Panasonic", resourceCulture);
+                object obj = ResourceManager.GetObject("P00135", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -466,36 +436,6 @@ namespace AdvancedScada.Studio.Properties {
         internal static System.Drawing.Bitmap Paste_16x16 {
             get {
                 object obj = ResourceManager.GetObject("Paste_16x16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap plc_Cimon {
-            get {
-                object obj = ResourceManager.GetObject("plc_Cimon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap PLC_SIEMENS {
-            get {
-                object obj = ResourceManager.GetObject("PLC_SIEMENS", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pp_cimon_plc {
-            get {
-                object obj = ResourceManager.GetObject("pp_cimon_plc", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

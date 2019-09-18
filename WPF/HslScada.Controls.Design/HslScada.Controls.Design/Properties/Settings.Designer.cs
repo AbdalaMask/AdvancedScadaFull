@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HslScada.Controls.Properties {
+namespace HslScada.Controls.Design.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

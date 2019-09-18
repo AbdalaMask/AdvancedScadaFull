@@ -121,14 +121,8 @@
   <data name="BottomCenterHorizontalOutside_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BottomCenterHorizontalOutside_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pp_cimon_plc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pp_cimon_plc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="plc_Cimon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\plc_Cimon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Paste_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Paste_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -199,14 +193,8 @@
   <data name="New" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\New.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="_0000157_xbc_dn32ua_500" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\0000157_xbc-dn32ua_500.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="windows_menubk_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\windows_menubk_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_515Oof_jXUL__AC_SY400_" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\515Oof-jXUL._AC_SY400_.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SaveAs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SaveAs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -214,17 +202,11 @@
   <data name="HistoryItem_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\HistoryItem_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PLC_SIEMENS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PLC SIEMENS.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Image_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Image_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AddDataBlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AddDataBlock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Panasonic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Panasonic.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Database_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Database_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -268,13 +250,13 @@
   <data name="38" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\38.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="OPC" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\OPC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Modbus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Modbus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="IconTagManager" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconTagManager.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="P00135" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\P00135.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

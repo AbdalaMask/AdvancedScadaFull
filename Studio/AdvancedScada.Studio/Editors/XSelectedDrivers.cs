@@ -42,7 +42,7 @@ namespace AdvancedScada.Studio.Editors
             switch (cboxSelectedDrivers.Text)
             {
                 case "LSIS":
-                    picSelectedDrivers.Image = Properties.Resources._0000157_xbc_dn32ua_500;
+                    picSelectedDrivers.Image = Properties.Resources.P00135;
                     break;
                 case "Delta":
                     picSelectedDrivers.Image = Properties.Resources.DVP10MC11T_300x300;

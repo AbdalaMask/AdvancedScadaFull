@@ -241,3 +241,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /ImagesList
+/Drivers/HslCommunication_Net45/Profinet

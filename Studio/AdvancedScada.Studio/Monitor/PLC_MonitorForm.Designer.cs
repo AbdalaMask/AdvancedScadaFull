@@ -32,21 +32,21 @@ namespace AdvancedScada.Studio.Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node1");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node2");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node4");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node5");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Node3", new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode5});
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Node7");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Node8");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Node6", new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8});
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Node1");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Node2");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
+            treeNode10,
+            treeNode11});
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Node4");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Node5");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Node3", new System.Windows.Forms.TreeNode[] {
+            treeNode13,
+            treeNode14});
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Node7");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Node8");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Node6", new System.Windows.Forms.TreeNode[] {
+            treeNode16,
+            treeNode17});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PLC_MonitorForm));
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -54,13 +54,6 @@ namespace AdvancedScada.Studio.Monitor
             this.treeViewSI = new ComponentFactory.Krypton.Toolkit.KryptonTreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.DGMonitorForm = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.colTagId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTagName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDataType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.popupMenuLeft = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu();
             this.kryptonContextMenuHeading1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
@@ -74,6 +67,13 @@ namespace AdvancedScada.Studio.Monitor
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonDockableWorkspace1 = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
             this.kryptonDockingManager1 = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
+            this.colTagId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTagName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDataType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGMonitorForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
@@ -98,7 +98,7 @@ namespace AdvancedScada.Studio.Monitor
             this.lblSelectedTag});
             this.toolStrip2.Location = new System.Drawing.Point(0, 336);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(579, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(751, 25);
             this.toolStrip2.TabIndex = 1;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -120,29 +120,29 @@ namespace AdvancedScada.Studio.Monitor
             this.treeViewSI.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewSI.Location = new System.Drawing.Point(0, 0);
             this.treeViewSI.Name = "treeViewSI";
-            treeNode1.Name = "Node1";
-            treeNode1.Text = "Node1";
-            treeNode2.Name = "Node2";
-            treeNode2.Text = "Node2";
-            treeNode3.Name = "Node0";
-            treeNode3.Text = "Node0";
-            treeNode4.Name = "Node4";
-            treeNode4.Text = "Node4";
-            treeNode5.Name = "Node5";
-            treeNode5.Text = "Node5";
-            treeNode6.Name = "Node3";
-            treeNode6.Text = "Node3";
-            treeNode7.Name = "Node7";
-            treeNode7.Text = "Node7";
-            treeNode8.Name = "Node8";
-            treeNode8.Text = "Node8";
-            treeNode9.Name = "Node6";
-            treeNode9.Text = "Node6";
+            treeNode10.Name = "Node1";
+            treeNode10.Text = "Node1";
+            treeNode11.Name = "Node2";
+            treeNode11.Text = "Node2";
+            treeNode12.Name = "Node0";
+            treeNode12.Text = "Node0";
+            treeNode13.Name = "Node4";
+            treeNode13.Text = "Node4";
+            treeNode14.Name = "Node5";
+            treeNode14.Text = "Node5";
+            treeNode15.Name = "Node3";
+            treeNode15.Text = "Node3";
+            treeNode16.Name = "Node7";
+            treeNode16.Text = "Node7";
+            treeNode17.Name = "Node8";
+            treeNode17.Text = "Node8";
+            treeNode18.Name = "Node6";
+            treeNode18.Text = "Node6";
             this.treeViewSI.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3,
-            treeNode6,
-            treeNode9});
-            this.treeViewSI.Size = new System.Drawing.Size(110, 291);
+            treeNode12,
+            treeNode15,
+            treeNode18});
+            this.treeViewSI.Size = new System.Drawing.Size(143, 291);
             this.treeViewSI.StateImageList = this.imageList1;
             this.treeViewSI.TabIndex = 3;
             this.treeViewSI.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewSI_AfterSelect);
@@ -181,51 +181,10 @@ namespace AdvancedScada.Studio.Monitor
             this.DGMonitorForm.Name = "DGMonitorForm";
             this.DGMonitorForm.RowHeadersVisible = false;
             this.DGMonitorForm.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGMonitorForm.Size = new System.Drawing.Size(462, 310);
+            this.DGMonitorForm.Size = new System.Drawing.Size(601, 310);
             this.DGMonitorForm.TabIndex = 4;
             this.DGMonitorForm.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGMonitorForm_CellMouseDown);
             this.DGMonitorForm.SelectionChanged += new System.EventHandler(this.DGMonitorForm_SelectionChanged);
-            // 
-            // colTagId
-            // 
-            this.colTagId.HeaderText = "TagId";
-            this.colTagId.Name = "colTagId";
-            this.colTagId.ReadOnly = true;
-            // 
-            // colTagName
-            // 
-            this.colTagName.HeaderText = "TagName";
-            this.colTagName.Name = "colTagName";
-            this.colTagName.ReadOnly = true;
-            // 
-            // colAddress
-            // 
-            this.colAddress.HeaderText = "Address";
-            this.colAddress.Name = "colAddress";
-            this.colAddress.ReadOnly = true;
-            // 
-            // colDataType
-            // 
-            this.colDataType.HeaderText = "DataType";
-            this.colDataType.Name = "colDataType";
-            this.colDataType.ReadOnly = true;
-            // 
-            // colValue
-            // 
-            this.colValue.HeaderText = "Value";
-            this.colValue.Name = "colValue";
-            // 
-            // colTimeStamp
-            // 
-            this.colTimeStamp.HeaderText = "TimeStamp";
-            this.colTimeStamp.Name = "colTimeStamp";
-            this.colTimeStamp.ReadOnly = true;
-            // 
-            // colDescription
-            // 
-            this.colDescription.HeaderText = "Description";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.ReadOnly = true;
             // 
             // kryptonHeader1
             // 
@@ -233,7 +192,7 @@ namespace AdvancedScada.Studio.Monitor
             this.kryptonHeader1.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockInactive;
             this.kryptonHeader1.Location = new System.Drawing.Point(0, 0);
             this.kryptonHeader1.Name = "kryptonHeader1";
-            this.kryptonHeader1.Size = new System.Drawing.Size(462, 26);
+            this.kryptonHeader1.Size = new System.Drawing.Size(601, 26);
             this.kryptonHeader1.TabIndex = 1;
             this.kryptonHeader1.Values.Heading = "TagList";
             this.kryptonHeader1.Values.Image = global::AdvancedScada.Studio.Properties.Resources.AddTag;
@@ -296,7 +255,7 @@ namespace AdvancedScada.Studio.Monitor
             // kryptonHeaderGroup1.Panel
             // 
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.treeViewSI);
-            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(112, 336);
+            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(145, 336);
             this.kryptonHeaderGroup1.TabIndex = 3;
             this.kryptonHeaderGroup1.ValuesPrimary.Heading = "ChannelList";
             this.kryptonHeaderGroup1.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddChannel;
@@ -317,8 +276,8 @@ namespace AdvancedScada.Studio.Monitor
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.DGMonitorForm);
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonDockableWorkspace1);
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonHeader1);
-            this.kryptonSplitContainer1.Size = new System.Drawing.Size(579, 336);
-            this.kryptonSplitContainer1.SplitterDistance = 112;
+            this.kryptonSplitContainer1.Size = new System.Drawing.Size(751, 336);
+            this.kryptonSplitContainer1.SplitterDistance = 145;
             this.kryptonSplitContainer1.TabIndex = 5;
             // 
             // kryptonDockableWorkspace1
@@ -335,16 +294,61 @@ namespace AdvancedScada.Studio.Monitor
             this.kryptonDockableWorkspace1.Root.UniqueName = "78ce4b644fa644dca95ea7dcc207b106";
             this.kryptonDockableWorkspace1.Root.WorkspaceControl = this.kryptonDockableWorkspace1;
             this.kryptonDockableWorkspace1.ShowMaximizeButton = false;
-            this.kryptonDockableWorkspace1.Size = new System.Drawing.Size(462, 310);
+            this.kryptonDockableWorkspace1.Size = new System.Drawing.Size(601, 310);
             this.kryptonDockableWorkspace1.TabIndex = 0;
             this.kryptonDockableWorkspace1.TabStop = true;
+            // 
+            // colTagId
+            // 
+            this.colTagId.FillWeight = 50F;
+            this.colTagId.HeaderText = "TagId";
+            this.colTagId.Name = "colTagId";
+            this.colTagId.ReadOnly = true;
+            // 
+            // colTagName
+            // 
+            this.colTagName.HeaderText = "TagName";
+            this.colTagName.Name = "colTagName";
+            this.colTagName.ReadOnly = true;
+            // 
+            // colAddress
+            // 
+            this.colAddress.FillWeight = 70F;
+            this.colAddress.HeaderText = "Address";
+            this.colAddress.Name = "colAddress";
+            this.colAddress.ReadOnly = true;
+            // 
+            // colDataType
+            // 
+            this.colDataType.FillWeight = 50F;
+            this.colDataType.HeaderText = "DataType";
+            this.colDataType.Name = "colDataType";
+            this.colDataType.ReadOnly = true;
+            // 
+            // colValue
+            // 
+            this.colValue.HeaderText = "Value";
+            this.colValue.Name = "colValue";
+            // 
+            // colTimeStamp
+            // 
+            this.colTimeStamp.FillWeight = 120F;
+            this.colTimeStamp.HeaderText = "TimeStamp";
+            this.colTimeStamp.Name = "colTimeStamp";
+            this.colTimeStamp.ReadOnly = true;
+            // 
+            // colDescription
+            // 
+            this.colDescription.HeaderText = "Description";
+            this.colDescription.Name = "colDescription";
+            this.colDescription.ReadOnly = true;
             // 
             // PLC_MonitorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(579, 361);
+            this.ClientSize = new System.Drawing.Size(751, 361);
             this.ControlBox = false;
             this.Controls.Add(this.kryptonSplitContainer1);
             this.Controls.Add(this.toolStrip2);
@@ -381,13 +385,6 @@ namespace AdvancedScada.Studio.Monitor
         private ComponentFactory.Krypton.Toolkit.KryptonHeader kryptonHeader1;
         private ComponentFactory.Krypton.Toolkit.KryptonTreeView treeViewSI;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView DGMonitorForm;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTagId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTagName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDataType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTimeStamp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenu popupMenuLeft;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading1;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems1;
@@ -403,5 +400,12 @@ namespace AdvancedScada.Studio.Monitor
         private ComponentFactory.Krypton.Docking.KryptonDockableWorkspace kryptonDockableWorkspace1;
         private ComponentFactory.Krypton.Docking.KryptonDockingManager kryptonDockingManager1;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTagId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTagName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDataType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTimeStamp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
     }
 }
