@@ -4,8 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HslScada.Scada"
-        xmlns:HMIControl="clr-namespace:HMIControl;assembly=HslScada.Controls" x:Class="HslScada.Scada.Window1"
+        xmlns:HMIControl="clr-namespace:HMIControl;assembly=HslScada.Controls" xmlns:Controls="clr-namespace:HslScada.Controls;assembly=HslScada.Controls" x:Class="HslScada.Scada.Window1"
         mc:Ignorable="d"
         Title="Window1" Height="450" Width="800">
-    <Grid/>
+    <Grid>
+        <HMIControl:HMILable HorizontalAlignment="Left" Height="65" Margin="50,53,0,0" VerticalAlignment="Top" Width="209" PLCAddressValue="CH1.PLC1.DataBlock3.TAG00027"/>
+        <Controls:HMIMotor2 HorizontalAlignment="Left" Height="141" Margin="477,39,0,0" VerticalAlignment="Top" Width="281" PLCAddressValue="CH1.PLC1.DataBlock1.TAG00001"/>
+    </Grid>
 </Window>

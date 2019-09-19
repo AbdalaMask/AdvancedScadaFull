@@ -27,7 +27,26 @@ namespace HslScada.Controls.Design
                     "PLCAddressValue",
                     PropertyValueEditor.CreateEditorAttribute(
                         typeof(FileBrowserDialogPropertyValueEditor)));
-
+                builder.AddCustomAttributes
+                 (typeof(SegmentsControls.SevenSegmentsStack),
+                 "PLCAddressValue",
+                 PropertyValueEditor.CreateEditorAttribute(
+                     typeof(FileBrowserDialogPropertyValueEditor)));
+                builder.AddCustomAttributes
+                 (typeof(HslScada.Controls.HMIMotor2),
+                 "PLCAddressValue",
+                 PropertyValueEditor.CreateEditorAttribute(
+                     typeof(FileBrowserDialogPropertyValueEditor)));
+                builder.AddCustomAttributes
+                 (typeof(WaterPump),
+                 "PLCAddressValue",
+                 PropertyValueEditor.CreateEditorAttribute(
+                     typeof(FileBrowserDialogPropertyValueEditor)));
+                builder.AddCustomAttributes
+                 (typeof(ButtonAll.HMIAnnunciator),
+                 "PLCAddressValue",
+                 PropertyValueEditor.CreateEditorAttribute(
+                     typeof(FileBrowserDialogPropertyValueEditor)));
                 return builder.CreateTable();
             }
         }
