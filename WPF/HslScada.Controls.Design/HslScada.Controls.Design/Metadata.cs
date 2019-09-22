@@ -49,10 +49,24 @@ namespace HslScada.Controls.Design
                      typeof(FileBrowserDialogPropertyValueEditor)));
 
                 builder.AddCustomAttributes
-                   (typeof(HslScada.Controls.HMIImageContainer),
-                   "Source",
+                   (typeof(HslScada.Controls.HMIImageContainerSvg),
+                   "GraphicAllOff",
                    PropertyValueEditor.CreateEditorAttribute(
                        typeof(GraphicPropertyValueEditor)), new ReadOnlyAttribute(true));
+                builder.AddCustomAttributes
+                  (typeof(HslScada.Controls.HMIImageContainerSvg),
+                  "GraphicSelect1",
+                  PropertyValueEditor.CreateEditorAttribute(
+                      typeof(GraphicPropertyValueEditor)), new ReadOnlyAttribute(true));
+
+                builder.AddCustomAttributes
+                  (typeof(HslScada.Controls.HMIImageContainerSvg),
+                  "GraphicSelect2",
+                  PropertyValueEditor.CreateEditorAttribute(
+                      typeof(GraphicPropertyValueEditor)), new ReadOnlyAttribute(true));
+
+
+
                 return builder.CreateTable();
             }
         }

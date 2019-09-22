@@ -143,7 +143,7 @@
     <Compile Include="EnumAll.cs" />
     <Compile Include="HMIArrow.cs" />
     <Compile Include="CircleButton.cs" />
-    <Compile Include="HMIImageContainer.cs" />
+    <Compile Include="HMIImageContainerSvg.cs" />
     <Compile Include="HMILable.cs" />
     <Compile Include="HMIMotor.cs" />
     <Compile Include="KeyPad\Converter\BoolToVisibilityConverter.cs" />
