@@ -71,6 +71,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="svg\SVGParser.cs" />
     <Compile Include="Tools\DataGridViewEx.cs">
       <SubType>Component</SubType>
     </Compile>

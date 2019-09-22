@@ -47,6 +47,12 @@ namespace HslScada.Controls.Design
                  "PLCAddressValue",
                  PropertyValueEditor.CreateEditorAttribute(
                      typeof(FileBrowserDialogPropertyValueEditor)));
+
+                builder.AddCustomAttributes
+                   (typeof(HslScada.Controls.HMIImageContainer),
+                   "Source",
+                   PropertyValueEditor.CreateEditorAttribute(
+                       typeof(GraphicPropertyValueEditor)), new ReadOnlyAttribute(true));
                 return builder.CreateTable();
             }
         }

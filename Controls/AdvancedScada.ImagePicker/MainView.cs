@@ -26,17 +26,19 @@ using Rectangle = System.Windows.Shapes.Rectangle;
 namespace AdvancedScada.ImagePicker
 {
     public delegate void EventImageSelected(Image ImageName);
+    public delegate void EventImageSVGSelected(string ImageName);
     public delegate void EventStringImageSelected(string ImageName);
     public partial class MainView : KryptonForm
     {
         public EventStringImageSelected OnStringImageSelected_Clicked = null;
         public EventImageSelected OnImagSelected_Clicked = null;
+        public EventImageSVGSelected OnImagSVGSelected_Clicked = null;
         #region Fild
 
         public static System.Windows.Controls.Canvas previewTarget;
         // Create a ResXResourceReader for the file items.resx.
         private ResXResourceReader rsxr;
-        Dictionary<int, Bitmap> ImageListCurrentSVG = new Dictionary<int, Bitmap>();
+        Dictionary<int, string> ImageListCurrentSVG = new Dictionary<int, string>();
         Dictionary<int, string> ImageListCurrentTip = new Dictionary<int, string>();
         // local variable declarations
         public string CategoryName = "Category_Files\\{0}.resx";
@@ -177,35 +179,17 @@ namespace AdvancedScada.ImagePicker
             pnlPictures.ImageList = il32;
 
         }
-        static void ExecuteTasks()
-        {
-            // Assume this is a user-entered String.
-            String path = @"C:\";
-            List<Task> tasks = new List<Task>();
-            tasks.Add(Task.Run(() => {
-                // This should throw an UnauthorizedAccessException.
-                return Directory.GetFiles(path, "*.txt",
-                SearchOption.AllDirectories);
-            }));
-            tasks.Add(Task.Run(() => {
-                if (path == @"C:\")
-                    throw new ArgumentException("The system root is not a valid path.");
-                return new String[] { ".txt", ".dll", ".exe", ".bin", ".dat" };
-            }));
-            tasks.Add(Task.Run(() => {
-                throw new NotImplementedException("This operation has not been implemented.");
-            }));
-            try
-            {
-                Task.WaitAll(tasks.ToArray());
-            }
-            catch (AggregateException ae)
-            {
-                throw ae.Flatten();
-            }
-        }
-    
-    private void cboxListForder_SelectedIndexChanged(object sender, EventArgs e)
+        /// <summary>
+        /// The file path of the SVG image selected.
+        /// </summary>
+        private string selectedPath;
+
+        /// <summary>
+        /// Instance reference for the svgDocument used and updated throughout the manipulation of the image.
+        /// </summary>
+        private Svg.SvgDocument svgDocument;
+
+        private void cboxListForder_SelectedIndexChanged(object sender, EventArgs e)
         {
              
             
@@ -274,7 +258,7 @@ namespace AdvancedScada.ImagePicker
             var dirs = DirSearch(SelectedPath).ToArray();
             ImageListCurrentSVG.Clear();
             ImageListCurrentTip.Clear();
-            SvgDocument svgDocument = null;
+          
             int Level = 0;
             foreach (var item in dirs)
             {
@@ -282,9 +266,14 @@ namespace AdvancedScada.ImagePicker
 
                 try
                 {
-                    svgDocument = SvgDocument.Open(item);
-                    var bitmap = svgDocument.Draw();
-                    ImageListCurrentSVG.Add(i++, bitmap);
+                    SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
+
+                     
+                    svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(item);
+
+                    var bitmap  = SVGSample.svg.SVGParser.GetBitmapFromSVG(item);
+                  
+                    ImageListCurrentSVG.Add(i++, item);
                     ImageListCurrentTip.Add(i, string.Format("{0}.{1}.{2}", newName, bitmap.Height, bitmap.Width));
                     il32.Images.Add(newName, bitmap);
                     Application.DoEvents();
@@ -354,26 +343,50 @@ namespace AdvancedScada.ImagePicker
             try
             {
                 var bitmap = ImageListCurrentSVG[gcSVG.SelectedIndex];
+
                 var stringBitmap = ImageListCurrentTip[gcSVG.SelectedIndex].Split('.');
-                byte[] data = ImageCompression.ImageToByte(bitmap);
-                byte[] dataCompress = ImageCompression.Compress(data);
-                string FullNameBase = Convert.ToBase64String(dataCompress);
+
+              
                 var bitmapMessage = string.Format("Name:{0} Height:{1} Width:{2} ", stringBitmap[0] + Environment.NewLine, stringBitmap[1] + Environment.NewLine, stringBitmap[2]);
 
                 toolTip1.Active = true;
                 toolTip1.Show(bitmapMessage, this);
                 toolTip1.SetToolTip(gcSVG, bitmapMessage);
                 //==================================================================
-                if (OnStringImageSelected_Clicked != null)
+                if (OnImagSVGSelected_Clicked != null)
                 {
-                    OnStringImageSelected_Clicked(FullNameBase);
+
+                    SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
+                    svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(bitmap);
+
+                    var xmlDoc = new XmlDocument
+                    {
+                        XmlResolver = null
+                    };
+                    xmlDoc.Load(bitmap);
+                    var GETXML = xmlDoc.InnerXml;
+
+                
+
+                    OnImagSVGSelected_Clicked?.Invoke(GETXML);
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
                     this.Close();
                 }
                 //====================================================================================
-                if (OnImagSelected_Clicked != null)
+                if (OnStringImageSelected_Clicked != null)
                 {
-                    OnImagSelected_Clicked(bitmap);
+                    SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
+                    svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(bitmap);
+
+                    var xmlDoc = new XmlDocument
+                    {
+                        XmlResolver = null
+                    };
+                    xmlDoc.Load(bitmap);
+                    var GETXML = xmlDoc.InnerXml;
+
+ 
+                    OnStringImageSelected_Clicked?.Invoke(StringCompression.Compress(GETXML));
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
                     this.Close();
                 }

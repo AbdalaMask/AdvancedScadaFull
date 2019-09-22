@@ -49,6 +49,7 @@
     <Reference Include="Microsoft.Windows.Design.Interaction, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,6 +67,7 @@
   <ItemGroup>
     <Compile Include="EditorResources.cs" />
     <Compile Include="FileBrowserDialogPropertyValueEditor.cs" />
+    <Compile Include="GraphicPropertyValueEditor.cs" />
     <Compile Include="Metadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -96,6 +98,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Controls\AdvancedScada.ImagePicker\ImagePicker.csproj">
+      <Project>{06C4D61D-CBB1-4F3D-8599-F18099548A25}</Project>
+      <Name>ImagePicker</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Controls\AdvancedScada.Monitor\Monitor.csproj">
       <Project>{b160281b-93b1-45bd-a07e-fd75c27916ea}</Project>
       <Name>Monitor</Name>

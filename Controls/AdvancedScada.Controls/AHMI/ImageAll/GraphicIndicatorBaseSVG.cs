@@ -1,27 +1,21 @@
-﻿using AdvancedScada;
-using AdvancedScada;
-using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI;
-using AdvancedScada.Controls.AHMI.ImageAll;
-using AdvancedScada.Controls.AHMI.ImageAll.Symbols;
-using AdvancedScada.Controls.DialogEditor;
-using AdvancedScada.Controls.DialogEditor;
+﻿using AdvancedScada.Controls.DialogEditor;
+using Svg;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AdvancedScada.Controls.AHMI.ImageAll.Symbols
+namespace AdvancedScada.Controls.AHMI.ImageAll
 {
-    //****************************************************************************
-    //* 12-DEC-08 Added line in OnPaint to exit is LegendText is nothing
-    //* 05-OCT-09 Exit OnPaint if GrayPen is Nothing
-    //****************************************************************************
-    [ToolboxItem(false)]
-    public class GraphicIndicatorBase : System.Windows.Forms.Control
+    public class GraphicIndicatorBaseSVG : System.Windows.Forms.Control
     {
+        private Bitmap m_GraphicAllOff;
         //private Bitmap StaticImage;
         private Bitmap Image1;
         private Bitmap Image2;
@@ -29,12 +23,17 @@ namespace AdvancedScada.Controls.AHMI.ImageAll.Symbols
         public event EventHandler ValueSelect1Changed;
         public event EventHandler ValueSelect2Changed;
 
+      
         private void RefreshImages()
         {
             if (Width > 0 && Height > 0)
             {
                 if (m_GraphicAllOff != null)
                 {
+                    svgGraphicAllOff.Width = Width;
+                    svgGraphicAllOff.Height = Height;
+
+                    m_GraphicAllOff = svgGraphicAllOff.Draw();
                     Image1 = new Bitmap(Width, Height);
 
                     using (var gr_dest = Graphics.FromImage(Image1))
@@ -82,6 +81,10 @@ namespace AdvancedScada.Controls.AHMI.ImageAll.Symbols
 
                 if (m_GraphicSelect1 != null)
                 {
+                    svgGraphicSelect1.Width = Width;
+                    svgGraphicSelect1.Height = Height;
+
+                    m_GraphicSelect1 = svgGraphicSelect1.Draw();
                     Image2 = new Bitmap(Width, Height);
 
                     using (var gr_dest = Graphics.FromImage(Image2))
@@ -129,6 +132,10 @@ namespace AdvancedScada.Controls.AHMI.ImageAll.Symbols
 
                 if (m_GraphicSelect2 != null)
                 {
+                    svgGraphicSelect2.Width = Width;
+                    svgGraphicSelect2.Height = Height;
+
+                    m_GraphicSelect2 = svgGraphicSelect2.Draw();
                     Image3 = new Bitmap(Width, Height);
 
                     using (var gr_dest = Graphics.FromImage(Image3))
@@ -185,7 +192,7 @@ namespace AdvancedScada.Controls.AHMI.ImageAll.Symbols
 
         #region Constructor
 
-        public GraphicIndicatorBase()
+        public GraphicIndicatorBaseSVG()
         {
             //'* reduce the flicker
             SetStyle(
@@ -257,19 +264,23 @@ namespace AdvancedScada.Controls.AHMI.ImageAll.Symbols
         //* Property - Image to Show when All is off
         //*****************************************
         //Private m_LightOnColor As Color = Color.Green
-        private Bitmap m_GraphicAllOff;
-
+        private string n_GraphicAllOff;
+        SvgDocument svgGraphicAllOff = null;
         [Category("PLC Properties")]
-        [Editor(typeof(GraphicDialogEditor), typeof(UITypeEditor))]
-        public Bitmap GraphicAllOff
+        [Editor(typeof(GraphicDialogEditorString), typeof(UITypeEditor))]
+        public string GraphicAllOff
         {
-            get { return m_GraphicAllOff; }
+            get { return n_GraphicAllOff; }
             set
             {
-                if (m_GraphicAllOff != value)
+                if (n_GraphicAllOff != value)
                 {
-                    m_GraphicAllOff = value;
+                    n_GraphicAllOff = value;
+                    if (n_GraphicAllOff == null || n_GraphicAllOff == string.Empty) return;
+                    svgGraphicAllOff = SvgDocument.FromSvg<SvgDocument>(n_GraphicAllOff);
+                    SVGSample.svg.SVGParser.MaximumSize = new Size(Width, Height);
 
+                    m_GraphicAllOff = svgGraphicAllOff.Draw();
                     RefreshImages();
 
                     //Invalidate();
@@ -281,16 +292,21 @@ namespace AdvancedScada.Controls.AHMI.ImageAll.Symbols
         //* Property - Image to Show when
         //*****************************************
         //Private m_LightOnColor As Color = Color.Green
+        private string n_GraphicSelect1;
         private Bitmap m_GraphicSelect1;
-
+        SvgDocument svgGraphicSelect1 = null;
         [Category("PLC Properties")]
-        [Editor(typeof(GraphicDialogEditor), typeof(UITypeEditor))]
-        public Bitmap GraphicSelect1
+        [Editor(typeof(GraphicDialogEditorString), typeof(UITypeEditor))]
+        public string GraphicSelect1
         {
-            get { return m_GraphicSelect1; }
+            get { return n_GraphicSelect1; }
             set
             {
-                m_GraphicSelect1 = value;
+                n_GraphicSelect1 = value;
+                if (n_GraphicSelect1 == null || n_GraphicSelect1 == string.Empty) return;
+                svgGraphicSelect1 = SvgDocument.FromSvg<SvgDocument>(n_GraphicSelect1);
+                SVGSample.svg.SVGParser.MaximumSize = new Size(Width, Height);
+                m_GraphicSelect1 = svgGraphicSelect1.Draw();
                 RefreshImages();
                 //Me.Invalidate()
             }
@@ -300,16 +316,21 @@ namespace AdvancedScada.Controls.AHMI.ImageAll.Symbols
         //* Property - Image to Show when
         //*****************************************
         //Private m_LightOnColor As Color = Color.Green
+        private string n_GraphicSelect2;
         private Bitmap m_GraphicSelect2;
-
+        SvgDocument svgGraphicSelect2 = null;
         [Category("PLC Properties")]
-        [Editor(typeof(GraphicDialogEditor), typeof(UITypeEditor))]
-        public Bitmap GraphicSelect2
+        [Editor(typeof(GraphicDialogEditorString), typeof(UITypeEditor))]
+        public string GraphicSelect2
         {
-            get { return m_GraphicSelect2; }
+            get { return n_GraphicSelect2; }
             set
             {
-                m_GraphicSelect2 = value;
+                n_GraphicSelect2 = value;
+                if (n_GraphicSelect2 == null || n_GraphicSelect2 == string.Empty) return;
+                svgGraphicSelect2 = SvgDocument.FromSvg<SvgDocument>(n_GraphicSelect1);
+                SVGSample.svg.SVGParser.MaximumSize = new Size(Width, Height);
+                m_GraphicSelect2 = svgGraphicSelect2.Draw();
                 RefreshImages();
                 //Me.Invalidate()
             }
@@ -388,7 +409,7 @@ namespace AdvancedScada.Controls.AHMI.ImageAll.Symbols
             }
         }
 
- 
+
 
 
         //*****************************************
@@ -465,7 +486,7 @@ namespace AdvancedScada.Controls.AHMI.ImageAll.Symbols
             get { return m_OutputType; }
             set { m_OutputType = value; }
         }
- 
+
 
         #endregion
 

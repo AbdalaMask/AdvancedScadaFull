@@ -107,7 +107,7 @@
             this.tbImageGallerySVG,
             this.ImageGallery,
             this.tbLibraryImages});
-            this.xtbImageGallery.SelectedIndex = 1;
+            this.xtbImageGallery.SelectedIndex = 0;
             this.xtbImageGallery.Size = new System.Drawing.Size(625, 404);
             this.xtbImageGallery.TabIndex = 0;
             this.xtbImageGallery.Text = "kryptonNavigator1";

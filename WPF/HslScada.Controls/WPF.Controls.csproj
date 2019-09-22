@@ -40,8 +40,13 @@
     <Reference Include="Microsoft.Expression.Drawing">
       <HintPath>..\Microsoft.Expression.Drawing.dll</HintPath>
     </Reference>
+    <Reference Include="Svg, Version=3.0.0.0, Culture=neutral, PublicKeyToken=12a0bac221edeae2, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Svg.3.0.49\lib\net452\Svg.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -138,6 +143,7 @@
     <Compile Include="EnumAll.cs" />
     <Compile Include="HMIArrow.cs" />
     <Compile Include="CircleButton.cs" />
+    <Compile Include="HMIImageContainer.cs" />
     <Compile Include="HMILable.cs" />
     <Compile Include="HMIMotor.cs" />
     <Compile Include="KeyPad\Converter\BoolToVisibilityConverter.cs" />
@@ -239,6 +245,10 @@
     <ProjectReference Include="..\..\Drivers\AdvancedScada.DriverBase\DriverBase.csproj">
       <Project>{1d570e9a-e5b4-44dd-946d-9d73cfa4a535}</Project>
       <Name>DriverBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Util\AdvancedScada.Utils\Utils.csproj">
+      <Project>{5C361F75-32C8-487B-9EB8-0B4D627B89B4}</Project>
+      <Name>Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WCF\AdvancedScada.BaseService\BaseService.csproj">
       <Project>{5b05b8bd-b05a-4b7a-8b0d-78c8be7441e1}</Project>

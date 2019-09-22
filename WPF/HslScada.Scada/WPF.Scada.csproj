@@ -43,8 +43,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Hardcodet.NotifyIcon.Wpf.1.0.8\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
     </Reference>
-    <Reference Include="HslControls, Version=2.2.1.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\HslControls.2.2.1\lib\net45\HslControls.dll</HintPath>
+    <Reference Include="HslControls, Version=2.2.2.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\HslControls.2.2.2\lib\net45\HslControls.dll</HintPath>
     </Reference>
     <Reference Include="Krypton Docking">
       <HintPath>..\..\Lib\Krypton\Krypton Docking.dll</HintPath>
@@ -218,7 +218,7 @@
       <Name>IBaseService</Name>
     </ProjectReference>
     <ProjectReference Include="..\HslScada.Controls\WPF.Controls.csproj">
-      <Project>{9945610d-d7d3-4fb3-8148-a68016f06bed}</Project>
+      <Project>{9945610D-D7D3-4FB3-8148-A68016F06BED}</Project>
       <Name>WPF.Controls</Name>
     </ProjectReference>
   </ItemGroup>

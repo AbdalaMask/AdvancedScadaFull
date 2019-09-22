@@ -41,6 +41,9 @@
   </PropertyGroup>
   <PropertyGroup>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="HslControls, Version=2.2.2.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\HslControls.2.2.2\lib\net45\HslControls.dll</HintPath>
@@ -62,11 +65,15 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Svg, Version=3.0.0.0, Culture=neutral, PublicKeyToken=12a0bac221edeae2, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Svg.3.0.49\lib\net452\Svg.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
@@ -100,6 +107,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="AHMI\ImageAll\HMIGraphicIndicator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AHMI\ImageAll\GraphicIndicatorBaseSVG.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="AHMI\Meter\HMIMeter.cs">
@@ -367,11 +377,13 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\3-D Pump.wmf" />
+    <None Include="Resources\Cool pump.wmf" />
+    <None Include="Resources\High temp heat trans pump.wmf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AHMI\LED\" />
     <Folder Include="AHMI\Linear\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Drivers\AdvancedScada.DriverBase\DriverBase.csproj">
