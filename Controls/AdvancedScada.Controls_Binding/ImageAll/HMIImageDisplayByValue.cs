@@ -377,9 +377,9 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                 if (KeypadPopUp.Value != null && string.Compare(KeypadPopUp.Value, string.Empty) != 0)
                 {
                     if (ScaleFactor == 1)
-                        WCFChannelFactory.Write(m_PLCAddressKeypad, KeypadPopUp.Value);
+                        Utilities.Write(m_PLCAddressKeypad, KeypadPopUp.Value);
                     else
-                        WCFChannelFactory.Write(m_PLCAddressKeypad, KeypadPopUp.Value);
+                        Utilities.Write(m_PLCAddressKeypad, KeypadPopUp.Value);
 
                     KeypadPopUp.Visible = false;
                 }

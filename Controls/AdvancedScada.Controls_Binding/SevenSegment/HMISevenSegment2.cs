@@ -43,7 +43,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
                             string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Visible", true);
+                        var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
@@ -198,7 +198,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
                 if (KeypadPopUp.Value != null && string.Compare(KeypadPopUp.Value, string.Empty) != 0)
                     try
                     {
-                        WCFChannelFactory.Write(m_PLCAddressKeypad, KeypadPopUp.Value);
+                        Utilities.Write(m_PLCAddressKeypad, KeypadPopUp.Value);
                     }
                     catch (Exception ex)
                     {

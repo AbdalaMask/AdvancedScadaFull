@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="AdvancedScada.WPF.HMIControls.PilotLight.PilotLightSmall"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AdvancedScada.WPF.HMIControls.PilotLight"
+             mc:Ignorable="d" 
+             d:DesignWidth="110" Height="110">
+    <Viewbox Stretch="Fill">
+        <Canvas Width="120" Height="148">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="28"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border>
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFDBDDDC" Offset="1"/>
+                            <GradientStop Color="#FFDBDDDC"/>
+                            <GradientStop Color="#FFFAFDF7" Offset="0.5"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:PilotLightSmall}},Path=PilotLightSmallText}"
+                           VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+                <Grid Grid.RowSpan="1" Grid.Row="1">
+                    <Border BorderBrush="{x:Null}" Grid.Row="0" Background="#FF414051"/>
+                    <!--Step 1-->
+                    <Ellipse Canvas.Left="0" Canvas.Top="0" Width="100" Height="100" StrokeThickness="0.5" Stroke="#FFACABAE" Margin="10">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.5" RadiusY="0.5" Opacity="1" SpreadMethod="Reflect">
+                                <GradientStop Color="#FF071923" Offset="0"/>
+                                <GradientStop Color="DarkGray" Offset="1"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <!--Step2-->
+                    <Ellipse Canvas.Left="10" Canvas.Top="10" Width="80" Height="80">
+                        <Ellipse.Fill>
+                            <SolidColorBrush Color="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:PilotLightSmall}},Path=PilotLightSmallColor}"/>
+
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <!--Step 3-->
+                </Grid>
+            </Grid>
+        </Canvas>
+    </Viewbox>
+</UserControl>

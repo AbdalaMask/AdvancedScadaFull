@@ -132,7 +132,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
 
                     if (string.IsNullOrEmpty(m_PLCAddressVisible) || string.IsNullOrWhiteSpace(m_PLCAddressVisible) ||
                         Licenses.LicenseManager.IsInDesignMode) return;
-                    var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Visible", true);
+                    var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Value", true);
                     DataBindings.Add(bd);
                 }
             }
@@ -155,7 +155,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                     //* When address is changed, re-subscribe to new address
                     if (string.IsNullOrEmpty(m_PLCAddressEnabled) || string.IsNullOrWhiteSpace(m_PLCAddressEnabled) ||
                         Licenses.LicenseManager.IsInDesignMode) return;
-                    var bd = new Binding("Enabled", TagCollection.Tags[m_PLCAddressEnabled], "Enabled", true);
+                    var bd = new Binding("Enabled", TagCollection.Tags[m_PLCAddressEnabled], "Value", true);
                     DataBindings.Add(bd);
                 }
             }
@@ -195,8 +195,8 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
             try
             {
                 if (OutputType == OutputType.MomentarySet)
-                    WCFChannelFactory.Write(PLCAddressClick, "0");
-                else if (OutputType == OutputType.MomentaryReset) WCFChannelFactory.Write(PLCAddressClick, "1");
+                    Utilities.Write(PLCAddressClick, "0");
+                else if (OutputType == OutputType.MomentaryReset) Utilities.Write(PLCAddressClick, "1");
             }
             catch (Exception ex)
             {
@@ -293,34 +293,34 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                 {
                     if (OutputType == OutputType.MomentarySet)
                     {
-                        WCFChannelFactory.Write(PLCAddressClick, "1");
+                        Utilities.Write(PLCAddressClick, "1");
                         if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
                         if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
                     }
                     else if (OutputType == OutputType.MomentaryReset)
                     {
-                        WCFChannelFactory.Write(PLCAddressClick, "0");
+                        Utilities.Write(PLCAddressClick, "0");
                         if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
                         if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
                     }
 
                     else if (OutputType == OutputType.SetTrue)
                     {
-                        WCFChannelFactory.Write(PLCAddressClick, "1");
+                        Utilities.Write(PLCAddressClick, "1");
                     }
 
                     else if (OutputType == OutputType.SetFalse)
                     {
-                        WCFChannelFactory.Write(PLCAddressClick, "0");
+                        Utilities.Write(PLCAddressClick, "0");
                     }
 
                     else if (OutputType == OutputType.Toggle)
                     {
                         var CurrentValue = Convert.ToBoolean(Value);
                         if (CurrentValue)
-                            WCFChannelFactory.Write(PLCAddressClick, "0");
+                            Utilities.Write(PLCAddressClick, "0");
                         else
-                            WCFChannelFactory.Write(PLCAddressClick, "1");
+                            Utilities.Write(PLCAddressClick, "1");
                     }
                 }
                 catch (Exception)

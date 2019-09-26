@@ -75,7 +75,7 @@ namespace AdvancedScada.Controls_Binding.Hydraulic
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressText) || string.IsNullOrWhiteSpace(m_PLCAddressText) ||
                             Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Text", TagCollection.Tags[m_PLCAddressValue], "Text", true);
+                        var bd = new Binding("Text", TagCollection.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -103,7 +103,7 @@ namespace AdvancedScada.Controls_Binding.Hydraulic
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
                             string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Visible", true);
+                        var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
@@ -189,10 +189,10 @@ namespace AdvancedScada.Controls_Binding.Hydraulic
                 switch (OutputType)
                 {
                     case OutputType.MomentarySet:
-                        WCFChannelFactory.Write(PLCAddressClick, Convert.ToString(false));
+                        Utilities.Write(PLCAddressClick, Convert.ToString(false));
                         break;
                     case OutputType.MomentaryReset:
-                        WCFChannelFactory.Write(PLCAddressClick, Convert.ToString(true));
+                        Utilities.Write(PLCAddressClick, Convert.ToString(true));
                         break;
                 }
             }
@@ -228,24 +228,24 @@ namespace AdvancedScada.Controls_Binding.Hydraulic
                     switch (OutputType)
                     {
                         case OutputType.MomentarySet:
-                            WCFChannelFactory.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, "1");
                             break;
                         case OutputType.MomentaryReset:
-                            WCFChannelFactory.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, "0");
                             break;
                         case OutputType.SetTrue:
-                            WCFChannelFactory.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, "1");
                             break;
                         case OutputType.SetFalse:
-                            WCFChannelFactory.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, "0");
                             break;
                         case OutputType.Toggle:
 
                             var CurrentValue = Value;
                             if (CurrentValue)
-                                WCFChannelFactory.Write(m_PLCAddressClick, "0");
+                                Utilities.Write(m_PLCAddressClick, "0");
                             else
-                                WCFChannelFactory.Write(m_PLCAddressClick, "1");
+                                Utilities.Write(m_PLCAddressClick, "1");
                             break;
                         default:
 
@@ -272,10 +272,10 @@ namespace AdvancedScada.Controls_Binding.Hydraulic
                     switch (OutputType)
                     {
                         case OutputType.MomentarySet:
-                            WCFChannelFactory.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, "0");
                             break;
                         case OutputType.MomentaryReset:
-                            WCFChannelFactory.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, "1");
                             break;
                     }
                 }

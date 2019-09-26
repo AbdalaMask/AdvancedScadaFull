@@ -32,20 +32,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HslControls, Version=2.2.2.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\HslControls.2.2.2\lib\net45\HslControls.dll</HintPath>
+    </Reference>
     <Reference Include="Krypton Toolkit">
       <HintPath>..\..\Lib\Krypton\Krypton Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="MfgControl.AdvancedHMI.Controls">
       <HintPath>..\..\Lib\MfgControl.AdvancedHMI.Controls.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alarm\HMIAlarmMan.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ButtonAll\HMIAnnunciator.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -57,6 +65,62 @@
     </Compile>
     <Compile Include="ButtonAll\HMISquareIlluminatedButton.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DialogEditor\GraphicDialogEditor.cs" />
+    <Compile Include="Drivers\PLCAddressItem.cs" />
+    <Compile Include="HslControl\ButtonAll\HMIBasicButtonFlag.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\ButtonAll\HMIbutton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\Conveyer\HMIConveyer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\Conveyer\HMIConveyerRollers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\Gauge\HMIGauge.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\Lad\HMILanternSimple.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\Motor\HMIMotor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\Motor\HMIPumpOne.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\Pipe\HMIPipeLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\Pipe\HMIVacuumPump.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\ProgressBar\HMIProcessLevel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\ProgressBar\HMIProgressLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\Segment\HMILedDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\SelectorSwitch\HMISwitch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\TankAll\HMIBottle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\TankAll\HMIClassifier.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\Thermometer\HMIThermometer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HslControl\Valves\HMIValves.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Indicator\HMIIndicator.cs">
       <SubType>Component</SubType>
@@ -153,10 +217,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Utility\Utility.cs" />
-    <Compile Include="WCFChannelFactory.cs" />
+    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Drivers\AdvancedScada.DriverBase\DriverBase.csproj">
@@ -190,6 +255,23 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="LED\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Alarm\HMIAlarmMan.resx">
+      <DependentUpon>HMIAlarmMan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HslControl\Conveyer\HMIConveyer.resx">
+      <DependentUpon>HMIConveyer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HslControl\Conveyer\HMIConveyerRollers.resx">
+      <DependentUpon>HMIConveyerRollers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HslControl\Gauge\HMIGauge.resx">
+      <DependentUpon>HMIGauge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HslControl\Pipe\HMIPipeLine.resx">
+      <DependentUpon>HMIPipeLine.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

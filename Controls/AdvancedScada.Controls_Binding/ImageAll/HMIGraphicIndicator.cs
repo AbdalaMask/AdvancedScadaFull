@@ -78,7 +78,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressSelect1) ||
                             string.IsNullOrWhiteSpace(m_PLCAddressSelect1) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("ValueSelect1", TagCollection.Tags[m_PLCAddressSelect1], "ValueSelect1", true);
+                        var bd = new Binding("ValueSelect1", TagCollection.Tags[m_PLCAddressSelect1], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -112,7 +112,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
                             string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Visible", true);
+                        var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -179,10 +179,10 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                 switch (OutputType)
                 {
                     case OutputTypes.MomentarySet:
-                        WCFChannelFactory.Write(m_PLCAddressClick, Convert.ToString(false));
+                        Utilities.Write(m_PLCAddressClick, Convert.ToString(false));
                         break;
                     case OutputTypes.MomentaryReset:
-                        WCFChannelFactory.Write(m_PLCAddressClick, Convert.ToString(true));
+                        Utilities.Write(m_PLCAddressClick, Convert.ToString(true));
                         break;
                 }
             }
@@ -218,24 +218,24 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     switch (OutputType)
                     {
                         case OutputTypes.MomentarySet:
-                            WCFChannelFactory.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, "1");
                             break;
                         case OutputTypes.MomentaryReset:
-                            WCFChannelFactory.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, "0");
                             break;
                         case OutputTypes.SetTrue:
-                            WCFChannelFactory.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, "1");
                             break;
                         case OutputTypes.SetFalse:
-                            WCFChannelFactory.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, "0");
                             break;
                         case OutputTypes.Toggle:
 
                             var CurrentValue = false;
                             if (CurrentValue)
-                                WCFChannelFactory.Write(m_PLCAddressClick, "0");
+                                Utilities.Write(m_PLCAddressClick, "0");
                             else
-                                WCFChannelFactory.Write(m_PLCAddressClick, "1");
+                                Utilities.Write(m_PLCAddressClick, "1");
                             break;
                         default:
 
@@ -261,10 +261,10 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     switch (OutputType)
                     {
                         case OutputTypes.MomentarySet:
-                            WCFChannelFactory.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, "0");
                             break;
                         case OutputTypes.MomentaryReset:
-                            WCFChannelFactory.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, "1");
                             break;
                     }
                 }

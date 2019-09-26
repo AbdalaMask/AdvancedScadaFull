@@ -164,24 +164,24 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
                     switch (m_OutputType)
                     {
                         case OutputType.MomentarySet:
-                            WCFChannelFactory.Write(PLCAddress, "1");
+                            Utilities.Write(PLCAddress, "1");
                             break;
                         case OutputType.MomentaryReset:
-                            WCFChannelFactory.Write(PLCAddress, "0");
+                            Utilities.Write(PLCAddress, "0");
                             break;
                         case OutputType.SetTrue:
-                            WCFChannelFactory.Write(PLCAddress, "1");
+                            Utilities.Write(PLCAddress, "1");
                             break;
                         case OutputType.SetFalse:
-                            WCFChannelFactory.Write(PLCAddress, "0");
+                            Utilities.Write(PLCAddress, "0");
                             break;
                         case OutputType.Toggle:
                             var CurrentValue = false;
                             CurrentValue = Convert.ToBoolean(PLCAddress);
                             if (CurrentValue)
-                                WCFChannelFactory.Write(PLCAddress, "0");
+                                Utilities.Write(PLCAddress, "0");
                             else
-                                WCFChannelFactory.Write(PLCAddress, "1");
+                                Utilities.Write(PLCAddress, "1");
                             break;
                     }
                 }
@@ -199,10 +199,10 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
                     switch (OutputType)
                     {
                         case OutputType.MomentarySet:
-                            WCFChannelFactory.Write(PLCAddress, "0");
+                            Utilities.Write(PLCAddress, "0");
                             break;
                         case OutputType.MomentaryReset:
-                            WCFChannelFactory.Write(PLCAddress, "1");
+                            Utilities.Write(PLCAddress, "1");
                             break;
                     }
                 }

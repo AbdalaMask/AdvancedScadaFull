@@ -51,7 +51,7 @@ namespace AdvancedScada.Controls_Binding.Display
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressText) || string.IsNullOrWhiteSpace(m_PLCAddressText) ||
                             Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Text", TagCollection.Tags[m_PLCAddressGetFocusValue], "Text", true);
+                        var bd = new Binding("Text", TagCollection.Tags[m_PLCAddressGetFocusValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -84,7 +84,7 @@ namespace AdvancedScada.Controls_Binding.Display
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
                             string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Visible", true);
+                        var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
@@ -204,7 +204,7 @@ namespace AdvancedScada.Controls_Binding.Display
             try
             {
                 if (m_PLCAddressWriteValue != null)
-                    WCFChannelFactory.Write(m_PLCAddressWriteValue, double.Parse(Text));
+                    Utilities.Write(m_PLCAddressWriteValue, double.Parse(Text));
                 else
                     MessageBox.Show("PLCAddressWriteValue not set to anything");
             }

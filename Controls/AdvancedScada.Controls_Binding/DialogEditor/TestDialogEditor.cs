@@ -23,16 +23,6 @@ namespace AdvancedScada.Controls_Binding.DialogEditor
             // Attempts to obtain an IWindowsFormsEditorService.
             var edSvc = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
             if (ReferenceEquals(edSvc, null)) return null;
-
-            // Displays a StringInputDialog Form to get a user-adjustable
-            // string value.
-            //using (TagCollectionForm form = new TagCollectionForm((value).ToString()))
-            //{
-            //    if (edSvc.ShowDialog(form) == DialogResult.OK)
-            //    {
-            //        return form.lblValueInfo.Text;
-            //    }
-            //}
             using (var form = new MonitorForm(value.ToString()))
             {
                 if (edSvc.ShowDialog(form) == DialogResult.OK) return form.lblSelectedTagName.Text;

@@ -127,9 +127,6 @@
     <Compile Include="Alarm\HMIAlarmMan2.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Alarm\HMIAlarmMan.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="AHMI\ButtonAll\HMIBasicButtonFlag.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -344,9 +341,6 @@
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Alarm\HMIAlarmMan.resx">
-      <DependentUpon>HMIAlarmMan.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="HslControl\Conveyer\HMIConveyer.resx">
       <DependentUpon>HMIConveyer.cs</DependentUpon>
     </EmbeddedResource>

@@ -431,7 +431,6 @@ namespace HslCommunication.Profinet.LSIS
             switch (DataTypeResult.Content)
             {
                 case "Bit":
-                    command[2] = 0x02; break;
                 case "Byte":
                     command[2] = 0x01; break;
                 case "Word":

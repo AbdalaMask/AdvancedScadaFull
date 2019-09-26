@@ -58,7 +58,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     {
                         if (string.IsNullOrEmpty(m_PLCAddressSelect1) ||
                        string.IsNullOrWhiteSpace(m_PLCAddressSelect1) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("ValueSelect1", TagCollection.Tags[m_PLCAddressSelect1], "ValueSelect1", true);
+                        var bd = new Binding("ValueSelect1", TagCollection.Tags[m_PLCAddressSelect1], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -90,7 +90,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressSelect2) ||
                             string.IsNullOrWhiteSpace(m_PLCAddressSelect2) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("ValueSelect2", TagCollection.Tags[m_PLCAddressSelect2], "ValueSelect2", true);
+                        var bd = new Binding("ValueSelect2", TagCollection.Tags[m_PLCAddressSelect2], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
@@ -119,7 +119,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
                             string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Visible", true);
+                        var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
