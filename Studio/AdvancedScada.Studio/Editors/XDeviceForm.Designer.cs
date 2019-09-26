@@ -85,7 +85,7 @@
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonLabel2);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.txtChannelID);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonLabel1);
-            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(411, 215);
+            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(481, 215);
             this.kryptonHeaderGroup1.TabIndex = 4;
             this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Device";
             this.kryptonHeaderGroup1.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddDevice;
@@ -103,7 +103,7 @@
             // kryptonHeaderGroup2.Panel
             // 
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.txtDesp);
-            this.kryptonHeaderGroup2.Size = new System.Drawing.Size(409, 94);
+            this.kryptonHeaderGroup2.Size = new System.Drawing.Size(479, 94);
             this.kryptonHeaderGroup2.TabIndex = 12;
             this.kryptonHeaderGroup2.ValuesPrimary.Heading = "Description:";
             this.kryptonHeaderGroup2.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddDevice;
@@ -115,14 +115,14 @@
             this.txtDesp.Location = new System.Drawing.Point(0, 0);
             this.txtDesp.Multiline = true;
             this.txtDesp.Name = "txtDesp";
-            this.txtDesp.Size = new System.Drawing.Size(407, 70);
+            this.txtDesp.Size = new System.Drawing.Size(477, 70);
             this.txtDesp.TabIndex = 11;
             // 
             // txtSlaveId
             // 
-            this.txtSlaveId.Location = new System.Drawing.Point(60, 52);
+            this.txtSlaveId.Location = new System.Drawing.Point(83, 52);
             this.txtSlaveId.Name = "txtSlaveId";
-            this.txtSlaveId.Size = new System.Drawing.Size(341, 22);
+            this.txtSlaveId.Size = new System.Drawing.Size(382, 22);
             this.txtSlaveId.StateCommon.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Far;
             this.txtSlaveId.TabIndex = 9;
             // 
@@ -136,14 +136,14 @@
             // 
             // txtDeviceName
             // 
-            this.txtDeviceName.Location = new System.Drawing.Point(290, 20);
+            this.txtDeviceName.Location = new System.Drawing.Point(324, 20);
             this.txtDeviceName.Name = "txtDeviceName";
-            this.txtDeviceName.Size = new System.Drawing.Size(111, 20);
+            this.txtDeviceName.Size = new System.Drawing.Size(141, 20);
             this.txtDeviceName.TabIndex = 7;
             // 
             // kryptonLabel3
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(196, 20);
+            this.kryptonLabel3.Location = new System.Drawing.Point(230, 20);
             this.kryptonLabel3.Name = "kryptonLabel3";
             this.kryptonLabel3.Size = new System.Drawing.Size(85, 20);
             this.kryptonLabel3.TabIndex = 6;
@@ -153,7 +153,7 @@
             // 
             this.txtDeviceId.Location = new System.Drawing.Point(83, 20);
             this.txtDeviceId.Name = "txtDeviceId";
-            this.txtDeviceId.Size = new System.Drawing.Size(111, 20);
+            this.txtDeviceId.Size = new System.Drawing.Size(129, 20);
             this.txtDeviceId.TabIndex = 5;
             // 
             // kryptonLabel4
@@ -166,14 +166,14 @@
             // 
             // txtChannelName
             // 
-            this.txtChannelName.Location = new System.Drawing.Point(290, 3);
+            this.txtChannelName.Location = new System.Drawing.Point(324, 3);
             this.txtChannelName.Name = "txtChannelName";
-            this.txtChannelName.Size = new System.Drawing.Size(111, 20);
+            this.txtChannelName.Size = new System.Drawing.Size(141, 20);
             this.txtChannelName.TabIndex = 3;
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(196, 3);
+            this.kryptonLabel2.Location = new System.Drawing.Point(230, 3);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(94, 20);
             this.kryptonLabel2.TabIndex = 2;
@@ -183,7 +183,7 @@
             // 
             this.txtChannelID.Location = new System.Drawing.Point(83, 3);
             this.txtChannelID.Name = "txtChannelID";
-            this.txtChannelID.Size = new System.Drawing.Size(111, 20);
+            this.txtChannelID.Size = new System.Drawing.Size(129, 20);
             this.txtChannelID.TabIndex = 1;
             // 
             // kryptonLabel1
@@ -197,19 +197,20 @@
             // btnOK
             // 
             this.btnOK.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnOK.Location = new System.Drawing.Point(337, 0);
+            this.btnOK.Location = new System.Drawing.Point(407, 0);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(74, 24);
+            this.btnOK.Size = new System.Drawing.Size(74, 32);
             this.btnOK.TabIndex = 5;
             this.btnOK.Values.Text = "OK";
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCancel.Location = new System.Drawing.Point(263, 0);
+            this.btnCancel.Location = new System.Drawing.Point(333, 0);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(74, 24);
+            this.btnCancel.Size = new System.Drawing.Size(74, 32);
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Values.Text = "Cancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -222,19 +223,26 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 215);
             this.kryptonPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(411, 24);
+            this.kryptonPanel1.Size = new System.Drawing.Size(481, 32);
             this.kryptonPanel1.TabIndex = 5;
             // 
             // XDeviceForm
             // 
+            this.AcceptButton = this.btnOK;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(411, 239);
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(481, 247);
             this.Controls.Add(this.kryptonPanel1);
             this.Controls.Add(this.kryptonHeaderGroup1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(497, 285);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(497, 285);
             this.Name = "XDeviceForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DeviceForm";
             this.Load += new System.EventHandler(this.XUserDeviceForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DxErrorProvider1)).EndInit();

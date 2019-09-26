@@ -1,5 +1,5 @@
-﻿using AdvancedScada.Controls;
-using AdvancedScada.Controls.AHMI.Display;
+﻿using AdvancedScada.Controls_Binding;
+using AdvancedScada.Controls_Binding.Display;
 using AdvancedScada.DataAccess;
 using ComponentFactory.Krypton.Toolkit;
 using System;

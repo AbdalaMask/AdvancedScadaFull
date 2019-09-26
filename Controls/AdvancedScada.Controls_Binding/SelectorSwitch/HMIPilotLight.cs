@@ -1,5 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Client;
 using AdvancedScada.Monitor;
 using MfgControl.AdvancedHMI.Controls;
 using System;
@@ -13,7 +14,6 @@ using System.Windows.Forms.Design;
 namespace AdvancedScada.Controls_Binding.SelectorSwitch
 {
     [DefaultEvent("Click")]
-    [Designer(typeof(HMIPilotLightDesigner))]
     public class HMIPilotLight : MfgControl.AdvancedHMI.Controls.PilotLight
     {
 
@@ -82,7 +82,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressText) || string.IsNullOrWhiteSpace(m_PLCAddressText) ||
                             Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Text", TagCollection.Tags[m_PLCAddressValue], "Value", true);
+                        var bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -110,7 +110,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
                             string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Value", true);
+                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
@@ -138,7 +138,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressValue) || string.IsNullOrWhiteSpace(m_PLCAddressValue) ||
                             Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Value", TagCollection.Tags[m_PLCAddressValue], "Value", true);
+                        var bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -346,102 +346,5 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
         #endregion
     }
 
-    internal class HMIPilotLightDesigner : ControlDesigner
-    {
-        private DesignerActionListCollection actionLists;
-
-        // Use pull model to populate smart tag menu.
-        public override DesignerActionListCollection ActionLists
-        {
-            get
-            {
-                if (null == actionLists)
-                {
-                    actionLists = new DesignerActionListCollection();
-                    actionLists.Add(new HMIPilotLightActionList(Component));
-                }
-
-                return actionLists;
-            }
-        }
-    }
-
-    internal class HMIPilotLightActionList : DesignerActionList
-    {
-        private readonly HMIPilotLight _HMIbutton;
-
-        private DesignerActionUIService designerActionUISvc;
-
-        //The constructor associates the control with the smart tag list.
-        public HMIPilotLightActionList(IComponent component)
-            : base(component)
-        {
-            _HMIbutton = component as HMIPilotLight;
-
-            // Cache a reference to DesignerActionUIService, 
-            // so the DesigneractionList can be refreshed.
-            designerActionUISvc = GetService(typeof(DesignerActionUIService))
-                as DesignerActionUIService;
-        }
-
-
-        public string PLCAddressValue
-        {
-            get { return _HMIbutton.PLCAddressValue; }
-            set { _HMIbutton.PLCAddressValue = value; }
-        }
-
-        public Color BackColor
-        {
-            get { return _HMIbutton.BackColor; }
-            set { _HMIbutton.BackColor = value; }
-        }
-
-        public Color ForeColor
-        {
-            get { return _HMIbutton.ForeColor; }
-            set { _HMIbutton.ForeColor = value; }
-        }
-
-        public Font Font
-        {
-            get { return _HMIbutton.Font; }
-            set { _HMIbutton.Font = value; }
-        }
-
-        public string Text
-        {
-            get { return _HMIbutton.Text; }
-            set { _HMIbutton.Text = value; }
-        }
-
-        // Implementation of this abstract method creates smart tag  items, 
-        // associates their targets, and collects into list.
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            var items = new DesignerActionItemCollection();
-
-            //Define static section header entries.
-            items.Add(new DesignerActionHeaderItem("HMI Professional"));
-            items.Add(new DesignerActionMethodItem(this, "ShowTagList", "Choose Tag"));
-            items.Add(new DesignerActionPropertyItem("BackColor", "BackColor"));
-            items.Add(new DesignerActionPropertyItem("ForeColor", "ForeColor"));
-            items.Add(new DesignerActionPropertyItem("Font", "Font"));
-            items.Add(new DesignerActionPropertyItem("PLCAddressValue", "PLCAddressValue"));
-            items.Add(new DesignerActionPropertyItem("Text", "Text"));
-            return items;
-        }
-
-        private void ShowTagList()
-        {
-            var frm = new MonitorForm(PLCAddressValue);
-            frm.OnTagSelected_Clicked += tagName =>
-            {
-                var pd = TypeDescriptor.GetProperties(_HMIbutton)["PLCAddressValue"];
-                pd.SetValue(_HMIbutton, tagName);
-            };
-            frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.ShowDialog();
-        }
-    }
+    
 }

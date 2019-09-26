@@ -1,4 +1,4 @@
-﻿using AdvancedScada.Controls.AHMI.Display;
+﻿using AdvancedScada.Controls_Binding.Display;
 
 namespace AdvancedScada.HMI.MainForm
 {

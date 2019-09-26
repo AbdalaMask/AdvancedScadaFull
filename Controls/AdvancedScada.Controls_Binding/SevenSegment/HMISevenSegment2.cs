@@ -1,6 +1,7 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Net45;
 using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Client;
 using AdvancedScada.Monitor;
 using System;
 using System.ComponentModel;
@@ -12,7 +13,7 @@ using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.SevenSegment
 {
-    [Designer(typeof(SevenSegmentDesigner))]
+    
     public class HMISevenSegment2 : MfgControl.AdvancedHMI.Controls.SevenSegment
     {
 
@@ -43,7 +44,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
                             string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Value", true);
+                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
@@ -76,7 +77,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressValue) || string.IsNullOrWhiteSpace(m_PLCAddressValue) ||
                             Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Value", TagCollection.Tags[m_PLCAddressValue], "Value", true);
+                        var bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -236,93 +237,6 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         #endregion
     }
 
-    internal class SevenSegmentDesigner : ControlDesigner
-    {
-        private DesignerActionListCollection actionLists;
-
-        public override DesignerActionListCollection ActionLists
-        {
-            get
-            {
-                if (actionLists == null)
-                {
-                    actionLists = new DesignerActionListCollection();
-                    actionLists.Add(new SevenSegmentListItem(this));
-                }
-
-                return actionLists;
-            }
-        }
-    }
-
-    internal class SevenSegmentListItem : DesignerActionList
-    {
-        private readonly HMISevenSegment2 _SevenSegment;
-
-        public SevenSegmentListItem(SevenSegmentDesigner owner)
-            : base(owner.Component)
-        {
-            _SevenSegment = (HMISevenSegment2)owner.Component;
-        }
-
-        public int DecimalPosition
-        {
-            get { return _SevenSegment.DecimalPosition; }
-            set { _SevenSegment.DecimalPosition = value; }
-        }
-
-        public int NumberOfDigits
-        {
-            get { return _SevenSegment.NumberOfDigits; }
-            set { _SevenSegment.NumberOfDigits = value; }
-        }
-
-        public Color BackColor
-        {
-            get { return _SevenSegment.BackColor; }
-            set { _SevenSegment.BackColor = value; }
-        }
-
-        public Color ForeColor
-        {
-            get { return _SevenSegment.ForeColor; }
-            set { _SevenSegment.ForeColor = value; }
-        }
-
-        public string PLCAddressValue
-        {
-            get { return _SevenSegment.PLCAddressValue; }
-            set { _SevenSegment.PLCAddressValue = value; }
-        }
-
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            var items = new DesignerActionItemCollection();
-            items.Add(new DesignerActionTextItem("HMI Professional Edition", "HMI Professional Edition"));
-            items.Add(new DesignerActionMethodItem(this, "ShowTagDesignerForm", "Choote Tag"));
-            items.Add(new DesignerActionPropertyItem("DecimalPosition", "DecimalPosition"));
-            items.Add(new DesignerActionPropertyItem("NumberOfDigits", "NumberOfDigits"));
-            items.Add(new DesignerActionPropertyItem("BackColor", "BackColor"));
-            items.Add(new DesignerActionPropertyItem("ForeColor", "ForeColor"));
-            items.Add(new DesignerActionPropertyItem("PLCAddressValue", "PLCAddressValue"));
-
-            return items;
-        }
-
-        public void ShowTagDesignerForm()
-        {
-            var frm = new MonitorForm(PLCAddressValue);
-            frm.OnTagSelected_Clicked += tagName => { SetProperty(_SevenSegment, "PLCAddressValue", tagName); };
-            frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.ShowDialog();
-        }
-
-        public void SetProperty(Control control, string propertyName, object value)
-        {
-            var pd = TypeDescriptor.GetProperties(control)[propertyName];
-            pd.SetValue(control, value);
-        }
-    }
-
+    
 
 }

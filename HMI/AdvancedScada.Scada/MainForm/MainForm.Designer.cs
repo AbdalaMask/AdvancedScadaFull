@@ -1,11 +1,11 @@
-﻿using AdvancedScada.Controls.AHMI.Components;
-using AdvancedScada.Controls.AHMI.Controls;
-using AdvancedScada.Controls.AHMI.DigitalDisplay;
-using AdvancedScada.Controls.AHMI.Display;
-using AdvancedScada.Controls.AHMI.Leds;
-using AdvancedScada.Controls.AHMI.Motor;
-using AdvancedScada.Controls.AHMI.ProcessAll;
-using AdvancedScada.Controls.AHMI.SelectorSwitch;
+﻿using AdvancedScada.Controls_Binding.Components;
+using AdvancedScada.Controls_Binding.DigitalDisplay;
+using AdvancedScada.Controls_Binding.Display;
+using AdvancedScada.Controls_Binding.Indicator;
+using AdvancedScada.Controls_Binding.Leds;
+using AdvancedScada.Controls_Binding.Motor;
+using AdvancedScada.Controls_Binding.ProcessAll;
+using AdvancedScada.Controls_Binding.SelectorSwitch;
 
 namespace AdvancedScada.HMI.MainForm
 {
@@ -41,10 +41,10 @@ namespace AdvancedScada.HMI.MainForm
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.Panel3 = new System.Windows.Forms.Panel();
             this.hmiLabel54 = new HMILabel();
-            this.hmiLabel20 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel19 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel18 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel17 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
+            this.hmiLabel20 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel19 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel18 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel17 = new AdvancedScada.Controls_Binding.Display.HMILabel();
             this.DateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.txt_datar = new System.Windows.Forms.Label();
             this.Label13 = new System.Windows.Forms.Label();
@@ -77,56 +77,56 @@ namespace AdvancedScada.HMI.MainForm
             this.LBL_Name_Silo8 = new System.Windows.Forms.Label();
             this.LBL_Name_Silo1 = new System.Windows.Forms.Label();
             this.Panel14 = new System.Windows.Forms.Panel();
-            this.hmiLabel33 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel34 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_rec_4 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_set_4 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
+            this.hmiLabel33 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel34 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_rec_4 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_set_4 = new AdvancedScada.Controls_Binding.Display.HMILabel();
             this.Panel15 = new System.Windows.Forms.Panel();
-            this.hmiLabel41 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel42 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_rec_8 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_set_8 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
+            this.hmiLabel41 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel42 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_rec_8 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_set_8 = new AdvancedScada.Controls_Binding.Display.HMILabel();
             this.Panel13 = new System.Windows.Forms.Panel();
-            this.hmiLabel39 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel40 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_rec_7 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_set_7 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
+            this.hmiLabel39 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel40 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_rec_7 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_set_7 = new AdvancedScada.Controls_Binding.Display.HMILabel();
             this.Panel12 = new System.Windows.Forms.Panel();
-            this.hmiLabel37 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel38 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_rec_6 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_set_6 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
+            this.hmiLabel37 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel38 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_rec_6 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_set_6 = new AdvancedScada.Controls_Binding.Display.HMILabel();
             this.Panel11 = new System.Windows.Forms.Panel();
-            this.hmiLabel35 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel36 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_rec_5 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_set_5 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
+            this.hmiLabel35 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel36 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_rec_5 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_set_5 = new AdvancedScada.Controls_Binding.Display.HMILabel();
             this.Panel7 = new System.Windows.Forms.Panel();
-            this.hmiLabel31 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel32 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_rec_3 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_set_3 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
+            this.hmiLabel31 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel32 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_rec_3 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_set_3 = new AdvancedScada.Controls_Binding.Display.HMILabel();
             this.Panel10 = new System.Windows.Forms.Panel();
-            this.hmiLabel28 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel27 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_rec_1 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_set_1 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
+            this.hmiLabel28 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel27 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_rec_1 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_set_1 = new AdvancedScada.Controls_Binding.Display.HMILabel();
             this.Panel20 = new System.Windows.Forms.Panel();
-            this.hmiLabel29 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel30 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_rec_2 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_set_2 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
+            this.hmiLabel29 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel30 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_rec_2 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_set_2 = new AdvancedScada.Controls_Binding.Display.HMILabel();
             this.Panel2 = new System.Windows.Forms.Panel();
-            this.hmiLedDisplay1 = new AdvancedScada.Controls.HslControl.Segment.HMILedDisplay();
-            this.hmiLabel25 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
+            this.hmiLedDisplay1 = new AdvancedScada.Controls_Binding.HslControl.Segment.HMILedDisplay();
+            this.hmiLabel25 = new AdvancedScada.Controls_Binding.Display.HMILabel();
             this.msg_thnk = new System.Windows.Forms.Label();
             this.Panel21 = new System.Windows.Forms.Panel();
-            this.hmiLanternSimple2 = new AdvancedScada.Controls.HslControl.Lad.HMILanternSimple();
-            this.hmiIndicator2 = new AdvancedScada.Controls.AHMI.Controls.HMIIndicator();
-            this.hmiLabel23 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel24 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel21 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel22 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
+            this.hmiLanternSimple2 = new AdvancedScada.Controls_Binding.HslControl.Lad.HMILanternSimple();
+            this.hmiIndicator2 = new AdvancedScada.Controls_Binding.Indicator.HMIIndicator();
+            this.hmiLabel23 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel24 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel21 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel22 = new AdvancedScada.Controls_Binding.Display.HMILabel();
             this.Label4 = new System.Windows.Forms.Label();
             this.Label24 = new System.Windows.Forms.Label();
             this.Label23 = new System.Windows.Forms.Label();
@@ -141,65 +141,65 @@ namespace AdvancedScada.HMI.MainForm
             this.P_Frm_Editr = new System.Windows.Forms.Panel();
             this.lbl_frm_Editr = new System.Windows.Forms.Label();
             this.Panel1 = new System.Windows.Forms.Panel();
-            this.LBL_WeightSet = new AdvancedScada.Controls.AHMI.Display.HMILabel();
+            this.LBL_WeightSet = new AdvancedScada.Controls_Binding.Display.HMILabel();
             this.Label38 = new System.Windows.Forms.Label();
             this.Label39 = new System.Windows.Forms.Label();
             this.Label40 = new System.Windows.Forms.Label();
             this.LBL_Weight_old = new System.Windows.Forms.Label();
             this.LBL_WeightFinel = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.hmiLabel44 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.thnk_rec_oil = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel46 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
+            this.hmiLabel44 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.thnk_rec_oil = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel46 = new AdvancedScada.Controls_Binding.Display.HMILabel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.hmiLanternSimple1 = new AdvancedScada.Controls.HslControl.Lad.HMILanternSimple();
+            this.hmiLanternSimple1 = new AdvancedScada.Controls_Binding.HslControl.Lad.HMILanternSimple();
             this.Label5 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
-            this.hmiLabel53 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel52 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel51 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel50 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel49 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel48 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel47 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiLabel43 = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiPilotLight4 = new AdvancedScada.Controls.AHMI.SelectorSwitch.HMIPilotLight();
-            this.hmiPilotLight3 = new AdvancedScada.Controls.AHMI.SelectorSwitch.HMIPilotLight();
-            this.hmiPilotLight2 = new AdvancedScada.Controls.AHMI.SelectorSwitch.HMIPilotLight();
-            this.hmiPilotLight1 = new AdvancedScada.Controls.AHMI.SelectorSwitch.HMIPilotLight();
-            this.hmiDigitalPanelMeter1 = new AdvancedScada.Controls.AHMI.DigitalDisplay.HMIDigitalPanelMeter();
-            this.hmiMushroomButton1 = new AdvancedScada.Controls.AHMI.SelectorSwitch.HMIPushButton();
-            this.hmiWaterPump1 = new AdvancedScada.Controls.AHMI.Motor.HMIWaterPump();
-            this.hmiIndicator1 = new AdvancedScada.Controls.AHMI.Controls.HMIIndicator();
-            this.hmiMotor8 = new AdvancedScada.Controls.AHMI.Motor.HMIMotor();
-            this.hmiMotor7 = new AdvancedScada.Controls.AHMI.Motor.HMIMotor();
-            this.hmiMotor6 = new AdvancedScada.Controls.AHMI.Motor.HMIMotor();
-            this.hmiMotor5 = new AdvancedScada.Controls.AHMI.Motor.HMIMotor();
-            this.hmiMotor4 = new AdvancedScada.Controls.AHMI.Motor.HMIMotor();
-            this.hmiMotor3 = new AdvancedScada.Controls.AHMI.Motor.HMIMotor();
-            this.hmiMotor2 = new AdvancedScada.Controls.AHMI.Motor.HMIMotor();
-            this.hmiMotor1 = new AdvancedScada.Controls.AHMI.Motor.HMIMotor();
+            this.hmiLabel53 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel52 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel51 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel50 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel49 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel48 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel47 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiLabel43 = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiPilotLight4 = new AdvancedScada.Controls_Binding.SelectorSwitch.HMIPilotLight();
+            this.hmiPilotLight3 = new AdvancedScada.Controls_Binding.SelectorSwitch.HMIPilotLight();
+            this.hmiPilotLight2 = new AdvancedScada.Controls_Binding.SelectorSwitch.HMIPilotLight();
+            this.hmiPilotLight1 = new AdvancedScada.Controls_Binding.SelectorSwitch.HMIPilotLight();
+            this.hmiDigitalPanelMeter1 = new AdvancedScada.Controls_Binding.DigitalDisplay.HMIDigitalPanelMeter();
+            this.hmiMushroomButton1 = new AdvancedScada.Controls_Binding.SelectorSwitch.HMIPushButton();
+            this.hmiWaterPump1 = new AdvancedScada.Controls_Binding.Motor.HMIWaterPump();
+            this.hmiIndicator1 = new AdvancedScada.Controls_Binding.Indicator.HMIIndicator();
+            this.hmiMotor8 = new AdvancedScada.Controls_Binding.Motor.HMIMotor();
+            this.hmiMotor7 = new AdvancedScada.Controls_Binding.Motor.HMIMotor();
+            this.hmiMotor6 = new AdvancedScada.Controls_Binding.Motor.HMIMotor();
+            this.hmiMotor5 = new AdvancedScada.Controls_Binding.Motor.HMIMotor();
+            this.hmiMotor4 = new AdvancedScada.Controls_Binding.Motor.HMIMotor();
+            this.hmiMotor3 = new AdvancedScada.Controls_Binding.Motor.HMIMotor();
+            this.hmiMotor2 = new AdvancedScada.Controls_Binding.Motor.HMIMotor();
+            this.hmiMotor1 = new AdvancedScada.Controls_Binding.Motor.HMIMotor();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.LBL_ReportViewer = new AdvancedScada.Controls.AHMI.Display.HMILabel();
-            this.hmiProcessLevel1 = new AdvancedScada.Controls.AHMI.ProcessAll.HMIProcessIndicator();
-            this.hmiProcessLevel2 = new AdvancedScada.Controls.AHMI.ProcessAll.HMIProcessIndicator();
-            this.hmiProcessLevel3 = new AdvancedScada.Controls.AHMI.ProcessAll.HMIProcessIndicator();
+            this.LBL_ReportViewer = new AdvancedScada.Controls_Binding.Display.HMILabel();
+            this.hmiProcessLevel1 = new AdvancedScada.Controls_Binding.ProcessAll.HMIProcessIndicator();
+            this.hmiProcessLevel2 = new AdvancedScada.Controls_Binding.ProcessAll.HMIProcessIndicator();
+            this.hmiProcessLevel3 = new AdvancedScada.Controls_Binding.ProcessAll.HMIProcessIndicator();
             this.Label6 = new System.Windows.Forms.Label();
             this.Label2 = new System.Windows.Forms.Label();
             this.Panel9 = new System.Windows.Forms.Panel();
             this.Label3 = new System.Windows.Forms.Label();
-            this.hmiLedSingle1 = new AdvancedScada.Controls.AHMI.Leds.HMILedSingle();
-            this.hmiLedSingle2 = new AdvancedScada.Controls.AHMI.Leds.HMILedSingle();
-            this.hmiLedSingle3 = new AdvancedScada.Controls.AHMI.Leds.HMILedSingle();
-            this.hmiLedSingle4 = new AdvancedScada.Controls.AHMI.Leds.HMILedSingle();
-            this.hmiLedSingle5 = new AdvancedScada.Controls.AHMI.Leds.HMILedSingle();
-            this.hmiLedSingle6 = new AdvancedScada.Controls.AHMI.Leds.HMILedSingle();
-            this.hmiLedSingle7 = new AdvancedScada.Controls.AHMI.Leds.HMILedSingle();
-            this.hmiLedSingle8 = new AdvancedScada.Controls.AHMI.Leds.HMILedSingle();
-            this.hmiDigitalPanelMeter2 = new AdvancedScada.Controls.AHMI.DigitalDisplay.HMIDigitalPanelMeter();
-            this.hmiSimpleWebServer1 = new AdvancedScada.Controls.AHMI.Components.HMISimpleWebServer();
-            this.hmiLedDisplay2 = new AdvancedScada.Controls.HslControl.Segment.HMILedDisplay();
-            this.hmiVacuumPump1 = new AdvancedScada.Controls.HslControl.Pipe.HMIVacuumPump();
+            this.hmiLedSingle1 = new AdvancedScada.Controls_Binding.Leds.HMILedSingle();
+            this.hmiLedSingle2 = new AdvancedScada.Controls_Binding.Leds.HMILedSingle();
+            this.hmiLedSingle3 = new AdvancedScada.Controls_Binding.Leds.HMILedSingle();
+            this.hmiLedSingle4 = new AdvancedScada.Controls_Binding.Leds.HMILedSingle();
+            this.hmiLedSingle5 = new AdvancedScada.Controls_Binding.Leds.HMILedSingle();
+            this.hmiLedSingle6 = new AdvancedScada.Controls_Binding.Leds.HMILedSingle();
+            this.hmiLedSingle7 = new AdvancedScada.Controls_Binding.Leds.HMILedSingle();
+            this.hmiLedSingle8 = new AdvancedScada.Controls_Binding.Leds.HMILedSingle();
+            this.hmiDigitalPanelMeter2 = new AdvancedScada.Controls_Binding.DigitalDisplay.HMIDigitalPanelMeter();
+            this.hmiSimpleWebServer1 = new AdvancedScada.Controls_Binding.Components.HMISimpleWebServer();
+            this.hmiLedDisplay2 = new AdvancedScada.Controls_Binding.HslControl.Segment.HMILedDisplay();
+            this.hmiVacuumPump1 = new AdvancedScada.Controls_Binding.HslControl.Pipe.HMIVacuumPump();
             this.Panel3.SuspendLayout();
             this.Panel14.SuspendLayout();
             this.Panel15.SuspendLayout();
@@ -260,7 +260,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel54
             // 
             this.hmiLabel54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.hmiLabel54.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel54.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel54.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel54.DisplayAsTime = false;
             this.hmiLabel54.ForeColor = System.Drawing.Color.Black;
@@ -269,7 +269,6 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLabel54.HighlightForeColor = System.Drawing.Color.White;
             this.hmiLabel54.HighlightKeyCharacter = "!";
             this.hmiLabel54.InterpretValueAsBCD = false;
-            this.hmiLabel54.KeypadAlphanumeric = false;
             this.hmiLabel54.KeypadAlphaNumeric = false;
             this.hmiLabel54.KeypadFont = new System.Drawing.Font("Arial", 10F);
             this.hmiLabel54.KeypadFontColor = System.Drawing.Color.WhiteSmoke;
@@ -300,7 +299,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel20
             // 
             this.hmiLabel20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.hmiLabel20.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel20.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel20.DisplayAsTime = false;
             this.hmiLabel20.ForeColor = System.Drawing.Color.Black;
@@ -309,7 +308,6 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLabel20.HighlightForeColor = System.Drawing.Color.White;
             this.hmiLabel20.HighlightKeyCharacter = "!";
             this.hmiLabel20.InterpretValueAsBCD = false;
-            this.hmiLabel20.KeypadAlphanumeric = false;
             this.hmiLabel20.KeypadAlphaNumeric = false;
             this.hmiLabel20.KeypadFont = new System.Drawing.Font("Arial", 10F);
             this.hmiLabel20.KeypadFontColor = System.Drawing.Color.WhiteSmoke;
@@ -340,7 +338,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel19
             // 
             this.hmiLabel19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.hmiLabel19.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel19.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel19.DisplayAsTime = false;
             this.hmiLabel19.ForeColor = System.Drawing.Color.Black;
@@ -349,7 +347,6 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLabel19.HighlightForeColor = System.Drawing.Color.White;
             this.hmiLabel19.HighlightKeyCharacter = "!";
             this.hmiLabel19.InterpretValueAsBCD = false;
-            this.hmiLabel19.KeypadAlphanumeric = false;
             this.hmiLabel19.KeypadAlphaNumeric = false;
             this.hmiLabel19.KeypadFont = new System.Drawing.Font("Arial", 10F);
             this.hmiLabel19.KeypadFontColor = System.Drawing.Color.WhiteSmoke;
@@ -380,7 +377,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel18
             // 
             this.hmiLabel18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.hmiLabel18.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel18.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel18.DisplayAsTime = false;
             this.hmiLabel18.ForeColor = System.Drawing.Color.Black;
@@ -420,7 +417,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel17
             // 
             this.hmiLabel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.hmiLabel17.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel17.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel17.DisplayAsTime = false;
             this.hmiLabel17.ForeColor = System.Drawing.Color.Black;
@@ -806,7 +803,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel33
             // 
             this.hmiLabel33.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel33.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel33.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel33.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel33.DisplayAsTime = false;
             this.hmiLabel33.ForeColor = System.Drawing.Color.Black;
@@ -846,7 +843,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel34
             // 
             this.hmiLabel34.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel34.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel34.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel34.DisplayAsTime = false;
             this.hmiLabel34.ForeColor = System.Drawing.Color.Black;
@@ -886,7 +883,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_rec_4
             // 
             this.thnk_rec_4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.thnk_rec_4.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_rec_4.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_rec_4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_rec_4.DisplayAsTime = false;
             this.thnk_rec_4.ForeColor = System.Drawing.Color.Black;
@@ -926,7 +923,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_set_4
             // 
             this.thnk_set_4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.thnk_set_4.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_set_4.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_set_4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_set_4.DisplayAsTime = false;
             this.thnk_set_4.ForeColor = System.Drawing.Color.Black;
@@ -979,7 +976,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel41
             // 
             this.hmiLabel41.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel41.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel41.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel41.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel41.DisplayAsTime = false;
             this.hmiLabel41.ForeColor = System.Drawing.Color.Black;
@@ -1019,7 +1016,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel42
             // 
             this.hmiLabel42.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel42.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel42.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel42.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel42.DisplayAsTime = false;
             this.hmiLabel42.ForeColor = System.Drawing.Color.Black;
@@ -1059,7 +1056,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_rec_8
             // 
             this.thnk_rec_8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.thnk_rec_8.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_rec_8.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_rec_8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_rec_8.DisplayAsTime = false;
             this.thnk_rec_8.ForeColor = System.Drawing.Color.Black;
@@ -1099,7 +1096,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_set_8
             // 
             this.thnk_set_8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.thnk_set_8.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_set_8.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_set_8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_set_8.DisplayAsTime = false;
             this.thnk_set_8.ForeColor = System.Drawing.Color.Black;
@@ -1152,7 +1149,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel39
             // 
             this.hmiLabel39.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel39.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel39.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel39.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel39.DisplayAsTime = false;
             this.hmiLabel39.ForeColor = System.Drawing.Color.Black;
@@ -1192,7 +1189,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel40
             // 
             this.hmiLabel40.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel40.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel40.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel40.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel40.DisplayAsTime = false;
             this.hmiLabel40.ForeColor = System.Drawing.Color.Black;
@@ -1232,7 +1229,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_rec_7
             // 
             this.thnk_rec_7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.thnk_rec_7.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_rec_7.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_rec_7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_rec_7.DisplayAsTime = false;
             this.thnk_rec_7.ForeColor = System.Drawing.Color.Black;
@@ -1272,7 +1269,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_set_7
             // 
             this.thnk_set_7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.thnk_set_7.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_set_7.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_set_7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_set_7.DisplayAsTime = false;
             this.thnk_set_7.ForeColor = System.Drawing.Color.Black;
@@ -1325,7 +1322,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel37
             // 
             this.hmiLabel37.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel37.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel37.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel37.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel37.DisplayAsTime = false;
             this.hmiLabel37.ForeColor = System.Drawing.Color.Black;
@@ -1365,7 +1362,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel38
             // 
             this.hmiLabel38.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel38.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel38.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel38.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel38.DisplayAsTime = false;
             this.hmiLabel38.ForeColor = System.Drawing.Color.Black;
@@ -1405,7 +1402,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_rec_6
             // 
             this.thnk_rec_6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.thnk_rec_6.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_rec_6.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_rec_6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_rec_6.DisplayAsTime = false;
             this.thnk_rec_6.ForeColor = System.Drawing.Color.Black;
@@ -1445,7 +1442,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_set_6
             // 
             this.thnk_set_6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.thnk_set_6.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_set_6.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_set_6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_set_6.DisplayAsTime = false;
             this.thnk_set_6.ForeColor = System.Drawing.Color.Black;
@@ -1498,7 +1495,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel35
             // 
             this.hmiLabel35.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel35.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel35.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel35.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel35.DisplayAsTime = false;
             this.hmiLabel35.ForeColor = System.Drawing.Color.Black;
@@ -1538,7 +1535,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel36
             // 
             this.hmiLabel36.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel36.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel36.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel36.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel36.DisplayAsTime = false;
             this.hmiLabel36.ForeColor = System.Drawing.Color.Black;
@@ -1578,7 +1575,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_rec_5
             // 
             this.thnk_rec_5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.thnk_rec_5.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_rec_5.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_rec_5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_rec_5.DisplayAsTime = false;
             this.thnk_rec_5.ForeColor = System.Drawing.Color.Black;
@@ -1618,7 +1615,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_set_5
             // 
             this.thnk_set_5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.thnk_set_5.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_set_5.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_set_5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_set_5.DisplayAsTime = false;
             this.thnk_set_5.ForeColor = System.Drawing.Color.Black;
@@ -1671,7 +1668,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel31
             // 
             this.hmiLabel31.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel31.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel31.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel31.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel31.DisplayAsTime = false;
             this.hmiLabel31.ForeColor = System.Drawing.Color.Black;
@@ -1711,7 +1708,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel32
             // 
             this.hmiLabel32.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel32.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel32.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel32.DisplayAsTime = false;
             this.hmiLabel32.ForeColor = System.Drawing.Color.Black;
@@ -1751,7 +1748,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_rec_3
             // 
             this.thnk_rec_3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.thnk_rec_3.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_rec_3.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_rec_3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_rec_3.DisplayAsTime = false;
             this.thnk_rec_3.ForeColor = System.Drawing.Color.Black;
@@ -1791,7 +1788,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_set_3
             // 
             this.thnk_set_3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.thnk_set_3.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_set_3.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_set_3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_set_3.DisplayAsTime = false;
             this.thnk_set_3.ForeColor = System.Drawing.Color.Black;
@@ -1844,7 +1841,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel28
             // 
             this.hmiLabel28.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel28.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel28.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel28.DisplayAsTime = false;
             this.hmiLabel28.ForeColor = System.Drawing.Color.Black;
@@ -1884,7 +1881,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel27
             // 
             this.hmiLabel27.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel27.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel27.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel27.DisplayAsTime = false;
             this.hmiLabel27.ForeColor = System.Drawing.Color.Black;
@@ -1924,7 +1921,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_rec_1
             // 
             this.thnk_rec_1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.thnk_rec_1.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_rec_1.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_rec_1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_rec_1.DisplayAsTime = false;
             this.thnk_rec_1.ForeColor = System.Drawing.Color.Black;
@@ -1964,7 +1961,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_set_1
             // 
             this.thnk_set_1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.thnk_set_1.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_set_1.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_set_1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_set_1.DisplayAsTime = false;
             this.thnk_set_1.ForeColor = System.Drawing.Color.Black;
@@ -2017,7 +2014,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel29
             // 
             this.hmiLabel29.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel29.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel29.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel29.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel29.DisplayAsTime = false;
             this.hmiLabel29.ForeColor = System.Drawing.Color.Black;
@@ -2057,7 +2054,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel30
             // 
             this.hmiLabel30.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel30.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel30.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel30.DisplayAsTime = false;
             this.hmiLabel30.ForeColor = System.Drawing.Color.Black;
@@ -2097,7 +2094,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_rec_2
             // 
             this.thnk_rec_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.thnk_rec_2.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_rec_2.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_rec_2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_rec_2.DisplayAsTime = false;
             this.thnk_rec_2.ForeColor = System.Drawing.Color.Black;
@@ -2137,7 +2134,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_set_2
             // 
             this.thnk_set_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.thnk_set_2.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_set_2.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_set_2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_set_2.DisplayAsTime = false;
             this.thnk_set_2.ForeColor = System.Drawing.Color.Black;
@@ -2217,7 +2214,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel25
             // 
             this.hmiLabel25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.hmiLabel25.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel25.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel25.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel25.DisplayAsTime = false;
             this.hmiLabel25.ForeColor = System.Drawing.Color.Black;
@@ -2327,7 +2324,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel23
             // 
             this.hmiLabel23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.hmiLabel23.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel23.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel23.DisplayAsTime = false;
             this.hmiLabel23.ForeColor = System.Drawing.Color.Black;
@@ -2367,7 +2364,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel24
             // 
             this.hmiLabel24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.hmiLabel24.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel24.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel24.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel24.DisplayAsTime = false;
             this.hmiLabel24.ForeColor = System.Drawing.Color.Black;
@@ -2407,7 +2404,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel21
             // 
             this.hmiLabel21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.hmiLabel21.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel21.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel21.DisplayAsTime = false;
             this.hmiLabel21.ForeColor = System.Drawing.Color.Black;
@@ -2447,7 +2444,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel22
             // 
             this.hmiLabel22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.hmiLabel22.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel22.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel22.DisplayAsTime = false;
             this.hmiLabel22.ForeColor = System.Drawing.Color.Black;
@@ -2663,7 +2660,7 @@ namespace AdvancedScada.HMI.MainForm
             // LBL_WeightSet
             // 
             this.LBL_WeightSet.BackColor = System.Drawing.Color.Transparent;
-            this.LBL_WeightSet.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.LBL_WeightSet.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.LBL_WeightSet.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LBL_WeightSet.DisplayAsTime = false;
             this.LBL_WeightSet.ForeColor = System.Drawing.Color.Black;
@@ -2775,7 +2772,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel44
             // 
             this.hmiLabel44.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel44.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel44.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel44.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel44.DisplayAsTime = false;
             this.hmiLabel44.ForeColor = System.Drawing.Color.Black;
@@ -2814,7 +2811,7 @@ namespace AdvancedScada.HMI.MainForm
             // thnk_rec_oil
             // 
             this.thnk_rec_oil.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.thnk_rec_oil.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.thnk_rec_oil.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.thnk_rec_oil.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thnk_rec_oil.DisplayAsTime = false;
             this.thnk_rec_oil.ForeColor = System.Drawing.Color.Black;
@@ -2853,7 +2850,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel46
             // 
             this.hmiLabel46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.hmiLabel46.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel46.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel46.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hmiLabel46.DisplayAsTime = false;
             this.hmiLabel46.ForeColor = System.Drawing.Color.Black;
@@ -2939,7 +2936,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel53
             // 
             this.hmiLabel53.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel53.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel53.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel53.DisplayAsTime = false;
             this.hmiLabel53.ForeColor = System.Drawing.Color.Black;
             this.hmiLabel53.Highlight = false;
@@ -2978,7 +2975,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel52
             // 
             this.hmiLabel52.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel52.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel52.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel52.DisplayAsTime = false;
             this.hmiLabel52.ForeColor = System.Drawing.Color.Black;
             this.hmiLabel52.Highlight = false;
@@ -3017,7 +3014,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel51
             // 
             this.hmiLabel51.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel51.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel51.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel51.DisplayAsTime = false;
             this.hmiLabel51.ForeColor = System.Drawing.Color.Black;
             this.hmiLabel51.Highlight = false;
@@ -3056,7 +3053,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel50
             // 
             this.hmiLabel50.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel50.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel50.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel50.DisplayAsTime = false;
             this.hmiLabel50.ForeColor = System.Drawing.Color.Black;
             this.hmiLabel50.Highlight = false;
@@ -3095,7 +3092,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel49
             // 
             this.hmiLabel49.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel49.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel49.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel49.DisplayAsTime = false;
             this.hmiLabel49.ForeColor = System.Drawing.Color.Black;
             this.hmiLabel49.Highlight = false;
@@ -3134,7 +3131,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel48
             // 
             this.hmiLabel48.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel48.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel48.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel48.DisplayAsTime = false;
             this.hmiLabel48.ForeColor = System.Drawing.Color.Black;
             this.hmiLabel48.Highlight = false;
@@ -3173,7 +3170,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel47
             // 
             this.hmiLabel47.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel47.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel47.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel47.DisplayAsTime = false;
             this.hmiLabel47.ForeColor = System.Drawing.Color.Black;
             this.hmiLabel47.Highlight = false;
@@ -3212,7 +3209,7 @@ namespace AdvancedScada.HMI.MainForm
             // hmiLabel43
             // 
             this.hmiLabel43.BackColor = System.Drawing.Color.Transparent;
-            this.hmiLabel43.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.hmiLabel43.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.hmiLabel43.DisplayAsTime = false;
             this.hmiLabel43.ForeColor = System.Drawing.Color.Black;
             this.hmiLabel43.Highlight = false;
@@ -3574,7 +3571,7 @@ namespace AdvancedScada.HMI.MainForm
             // 
             this.LBL_ReportViewer.AutoSize = true;
             this.LBL_ReportViewer.BackColor = System.Drawing.Color.Transparent;
-            this.LBL_ReportViewer.BooleanDisplay = AdvancedScada.Controls.AHMI.Display.HMILabel.BooleanDisplayOption.TrueFalse;
+            this.LBL_ReportViewer.BooleanDisplay = AdvancedScada.Controls_Binding.Display.HMILabel.BooleanDisplayOption.TrueFalse;
             this.LBL_ReportViewer.DisplayAsTime = false;
             this.LBL_ReportViewer.ForeColor = System.Drawing.Color.Black;
             this.LBL_ReportViewer.Highlight = false;
@@ -3582,7 +3579,7 @@ namespace AdvancedScada.HMI.MainForm
             this.LBL_ReportViewer.HighlightForeColor = System.Drawing.Color.White;
             this.LBL_ReportViewer.HighlightKeyCharacter = "!";
             this.LBL_ReportViewer.InterpretValueAsBCD = false;
-            this.LBL_ReportViewer.KeypadAlphanumeric = false;
+            
             this.LBL_ReportViewer.KeypadAlphaNumeric = false;
             this.LBL_ReportViewer.KeypadFont = new System.Drawing.Font("Arial", 10F);
             this.LBL_ReportViewer.KeypadFontColor = System.Drawing.Color.WhiteSmoke;
@@ -3617,7 +3614,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel1.BkGradientAngle = 90;
             this.hmiProcessLevel1.BkGradientColor = System.Drawing.Color.White;
             this.hmiProcessLevel1.BkGradientRate = 0.5F;
-            this.hmiProcessLevel1.BkGradientType = AdvancedScada.Controls.Enum.DAS_BkGradientStyle.BKGS_Linear;
+            this.hmiProcessLevel1.BkGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BkGradientStyle.BKGS_Linear;
             this.hmiProcessLevel1.BkShinePosition = 1F;
             this.hmiProcessLevel1.BkTransparency = 0F;
             this.hmiProcessLevel1.BorderExteriorColor = System.Drawing.Color.Blue;
@@ -3626,9 +3623,9 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel1.BorderGradientLightPos1 = 1F;
             this.hmiProcessLevel1.BorderGradientLightPos2 = -1F;
             this.hmiProcessLevel1.BorderGradientRate = 0.5F;
-            this.hmiProcessLevel1.BorderGradientType = AdvancedScada.Controls.Enum.DAS_BorderGradientStyle.BGS_Ring;
+            this.hmiProcessLevel1.BorderGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BorderGradientStyle.BGS_Ring;
             this.hmiProcessLevel1.BorderLightIntermediateBrightness = 0F;
-            this.hmiProcessLevel1.BorderShape = AdvancedScada.Controls.Enum.DAS_BorderStyle.BS_RoundRect;
+            this.hmiProcessLevel1.BorderShape = AdvancedScada.Controls_Binding.Enum.DAS_BorderStyle.BS_RoundRect;
             this.hmiProcessLevel1.ControlShadow = false;
             this.hmiProcessLevel1.Gradient = true;
             this.hmiProcessLevel1.IndicatorBorderColor = System.Drawing.Color.DimGray;
@@ -3639,12 +3636,12 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel1.IndicatorGradientAngle = 90;
             this.hmiProcessLevel1.IndicatorGradientColor = System.Drawing.Color.White;
             this.hmiProcessLevel1.IndicatorGradientRate = 0.5F;
-            this.hmiProcessLevel1.IndicatorGradientType = AdvancedScada.Controls.Enum.DAS_BkGradientStyle.BKGS_Linear;
+            this.hmiProcessLevel1.IndicatorGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BkGradientStyle.BKGS_Linear;
             this.hmiProcessLevel1.IndicatorImage = null;
             this.hmiProcessLevel1.IndicatorShinePosition = 1F;
             this.hmiProcessLevel1.IndicatorSize = 20;
             this.hmiProcessLevel1.IndicatorString = "...";
-            this.hmiProcessLevel1.IndicatorType = AdvancedScada.Controls.Enum.DAS_ProcessIndicatorType.PIT_Arrow;
+            this.hmiProcessLevel1.IndicatorType = AdvancedScada.Controls_Binding.Enum.DAS_ProcessIndicatorType.PIT_Arrow;
             this.hmiProcessLevel1.InnerBorderDarkColor = System.Drawing.Color.DimGray;
             this.hmiProcessLevel1.InnerBorderLength = 2;
             this.hmiProcessLevel1.InnerBorderLightColor = System.Drawing.Color.White;
@@ -3684,7 +3681,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel2.BkGradientAngle = 90;
             this.hmiProcessLevel2.BkGradientColor = System.Drawing.Color.White;
             this.hmiProcessLevel2.BkGradientRate = 0.5F;
-            this.hmiProcessLevel2.BkGradientType = AdvancedScada.Controls.Enum.DAS_BkGradientStyle.BKGS_Linear;
+            this.hmiProcessLevel2.BkGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BkGradientStyle.BKGS_Linear;
             this.hmiProcessLevel2.BkShinePosition = 1F;
             this.hmiProcessLevel2.BkTransparency = 0F;
             this.hmiProcessLevel2.BorderExteriorColor = System.Drawing.Color.Blue;
@@ -3693,9 +3690,9 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel2.BorderGradientLightPos1 = 1F;
             this.hmiProcessLevel2.BorderGradientLightPos2 = -1F;
             this.hmiProcessLevel2.BorderGradientRate = 0.5F;
-            this.hmiProcessLevel2.BorderGradientType = AdvancedScada.Controls.Enum.DAS_BorderGradientStyle.BGS_Ring;
+            this.hmiProcessLevel2.BorderGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BorderGradientStyle.BGS_Ring;
             this.hmiProcessLevel2.BorderLightIntermediateBrightness = 0F;
-            this.hmiProcessLevel2.BorderShape = AdvancedScada.Controls.Enum.DAS_BorderStyle.BS_RoundRect;
+            this.hmiProcessLevel2.BorderShape = AdvancedScada.Controls_Binding.Enum.DAS_BorderStyle.BS_RoundRect;
             this.hmiProcessLevel2.ControlShadow = false;
             this.hmiProcessLevel2.Gradient = true;
             this.hmiProcessLevel2.IndicatorBorderColor = System.Drawing.Color.DimGray;
@@ -3706,12 +3703,12 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel2.IndicatorGradientAngle = 90;
             this.hmiProcessLevel2.IndicatorGradientColor = System.Drawing.Color.White;
             this.hmiProcessLevel2.IndicatorGradientRate = 0.5F;
-            this.hmiProcessLevel2.IndicatorGradientType = AdvancedScada.Controls.Enum.DAS_BkGradientStyle.BKGS_Linear;
+            this.hmiProcessLevel2.IndicatorGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BkGradientStyle.BKGS_Linear;
             this.hmiProcessLevel2.IndicatorImage = null;
             this.hmiProcessLevel2.IndicatorShinePosition = 1F;
             this.hmiProcessLevel2.IndicatorSize = 20;
             this.hmiProcessLevel2.IndicatorString = "...";
-            this.hmiProcessLevel2.IndicatorType = AdvancedScada.Controls.Enum.DAS_ProcessIndicatorType.PIT_Arrow;
+            this.hmiProcessLevel2.IndicatorType = AdvancedScada.Controls_Binding.Enum.DAS_ProcessIndicatorType.PIT_Arrow;
             this.hmiProcessLevel2.InnerBorderDarkColor = System.Drawing.Color.DimGray;
             this.hmiProcessLevel2.InnerBorderLength = 2;
             this.hmiProcessLevel2.InnerBorderLightColor = System.Drawing.Color.White;
@@ -3751,7 +3748,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel3.BkGradientAngle = 90;
             this.hmiProcessLevel3.BkGradientColor = System.Drawing.Color.White;
             this.hmiProcessLevel3.BkGradientRate = 0.5F;
-            this.hmiProcessLevel3.BkGradientType = AdvancedScada.Controls.Enum.DAS_BkGradientStyle.BKGS_Linear;
+            this.hmiProcessLevel3.BkGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BkGradientStyle.BKGS_Linear;
             this.hmiProcessLevel3.BkShinePosition = 1F;
             this.hmiProcessLevel3.BkTransparency = 0F;
             this.hmiProcessLevel3.BorderExteriorColor = System.Drawing.Color.Blue;
@@ -3760,9 +3757,9 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel3.BorderGradientLightPos1 = 1F;
             this.hmiProcessLevel3.BorderGradientLightPos2 = -1F;
             this.hmiProcessLevel3.BorderGradientRate = 0.5F;
-            this.hmiProcessLevel3.BorderGradientType = AdvancedScada.Controls.Enum.DAS_BorderGradientStyle.BGS_Ring;
+            this.hmiProcessLevel3.BorderGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BorderGradientStyle.BGS_Ring;
             this.hmiProcessLevel3.BorderLightIntermediateBrightness = 0F;
-            this.hmiProcessLevel3.BorderShape = AdvancedScada.Controls.Enum.DAS_BorderStyle.BS_RoundRect;
+            this.hmiProcessLevel3.BorderShape = AdvancedScada.Controls_Binding.Enum.DAS_BorderStyle.BS_RoundRect;
             this.hmiProcessLevel3.ControlShadow = false;
             this.hmiProcessLevel3.Gradient = true;
             this.hmiProcessLevel3.IndicatorBorderColor = System.Drawing.Color.DimGray;
@@ -3773,12 +3770,12 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel3.IndicatorGradientAngle = 90;
             this.hmiProcessLevel3.IndicatorGradientColor = System.Drawing.Color.White;
             this.hmiProcessLevel3.IndicatorGradientRate = 0.5F;
-            this.hmiProcessLevel3.IndicatorGradientType = AdvancedScada.Controls.Enum.DAS_BkGradientStyle.BKGS_Linear;
+            this.hmiProcessLevel3.IndicatorGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BkGradientStyle.BKGS_Linear;
             this.hmiProcessLevel3.IndicatorImage = null;
             this.hmiProcessLevel3.IndicatorShinePosition = 1F;
             this.hmiProcessLevel3.IndicatorSize = 20;
             this.hmiProcessLevel3.IndicatorString = "...";
-            this.hmiProcessLevel3.IndicatorType = AdvancedScada.Controls.Enum.DAS_ProcessIndicatorType.PIT_Arrow;
+            this.hmiProcessLevel3.IndicatorType = AdvancedScada.Controls_Binding.Enum.DAS_ProcessIndicatorType.PIT_Arrow;
             this.hmiProcessLevel3.InnerBorderDarkColor = System.Drawing.Color.DimGray;
             this.hmiProcessLevel3.InnerBorderLength = 2;
             this.hmiProcessLevel3.InnerBorderLightColor = System.Drawing.Color.White;
@@ -3865,11 +3862,11 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle1.BorderGradientLightPos1 = 1F;
             this.hmiLedSingle1.BorderGradientLightPos2 = -1F;
             this.hmiLedSingle1.BorderGradientRate = 0.5F;
-            this.hmiLedSingle1.BorderGradientType = AdvancedScada.Controls.Enum.DAS_BorderGradientStyle.BGS_Path;
+            this.hmiLedSingle1.BorderGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BorderGradientStyle.BGS_Path;
             this.hmiLedSingle1.BorderLightIntermediateBrightness = 0F;
             this.hmiLedSingle1.GradientAngle = 225;
             this.hmiLedSingle1.GradientRate = 0.6F;
-            this.hmiLedSingle1.GradientType = AdvancedScada.Controls.Enum.DAS_BkGradientStyle.BKGS_Shine;
+            this.hmiLedSingle1.GradientType = AdvancedScada.Controls_Binding.Enum.DAS_BkGradientStyle.BKGS_Shine;
             this.hmiLedSingle1.IndicatorAutoSize = true;
             this.hmiLedSingle1.IndicatorHeight = 50;
             this.hmiLedSingle1.IndicatorWidth = 50;
@@ -3877,7 +3874,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle1.InnerBorderLength = 2;
             this.hmiLedSingle1.InnerBorderLightColor = System.Drawing.Color.White;
             this.hmiLedSingle1.Location = new System.Drawing.Point(1208, 231);
-            this.hmiLedSingle1.LocationDialog = "1208; 231";
+            
             this.hmiLedSingle1.MaximumHoldTime = 3000;
             this.hmiLedSingle1.MiddleBorderColor = System.Drawing.Color.Gray;
             this.hmiLedSingle1.MiddleBorderLength = 0;
@@ -3896,12 +3893,12 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle1.PLCAddressValue = "CH2.PLC1.DataBlock1.TAG00001";
             this.hmiLedSingle1.PLCAddressVisible = "";
             this.hmiLedSingle1.RoundRadius = 30;
-            this.hmiLedSingle1.Shape = AdvancedScada.Controls.Enum.DAS_ShapeStyle.SS_Circle;
+            this.hmiLedSingle1.Shape = AdvancedScada.Controls_Binding.Enum.DAS_ShapeStyle.SS_Circle;
             this.hmiLedSingle1.ShinePosition = 0.5F;
             this.hmiLedSingle1.Size = new System.Drawing.Size(23, 28);
             this.hmiLedSingle1.TabIndex = 542;
             this.hmiLedSingle1.Text = "hmiLedSingle1";
-            this.hmiLedSingle1.TextPosition = AdvancedScada.Controls.Enum.DAS_TextPosStyle.TPS_Left;
+            this.hmiLedSingle1.TextPosition = AdvancedScada.Controls_Binding.Enum.DAS_TextPosStyle.TPS_Left;
             this.hmiLedSingle1.TextVisible = false;
             this.hmiLedSingle1.Value = false;
             this.hmiLedSingle1.ValueToWrite = 0;
@@ -3915,11 +3912,11 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle2.BorderGradientLightPos1 = 1F;
             this.hmiLedSingle2.BorderGradientLightPos2 = -1F;
             this.hmiLedSingle2.BorderGradientRate = 0.5F;
-            this.hmiLedSingle2.BorderGradientType = AdvancedScada.Controls.Enum.DAS_BorderGradientStyle.BGS_Path;
+            this.hmiLedSingle2.BorderGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BorderGradientStyle.BGS_Path;
             this.hmiLedSingle2.BorderLightIntermediateBrightness = 0F;
             this.hmiLedSingle2.GradientAngle = 225;
             this.hmiLedSingle2.GradientRate = 0.6F;
-            this.hmiLedSingle2.GradientType = AdvancedScada.Controls.Enum.DAS_BkGradientStyle.BKGS_Shine;
+            this.hmiLedSingle2.GradientType = AdvancedScada.Controls_Binding.Enum.DAS_BkGradientStyle.BKGS_Shine;
             this.hmiLedSingle2.IndicatorAutoSize = true;
             this.hmiLedSingle2.IndicatorHeight = 50;
             this.hmiLedSingle2.IndicatorWidth = 50;
@@ -3927,7 +3924,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle2.InnerBorderLength = 2;
             this.hmiLedSingle2.InnerBorderLightColor = System.Drawing.Color.White;
             this.hmiLedSingle2.Location = new System.Drawing.Point(1138, 231);
-            this.hmiLedSingle2.LocationDialog = "1138; 231";
+           
             this.hmiLedSingle2.MaximumHoldTime = 3000;
             this.hmiLedSingle2.MiddleBorderColor = System.Drawing.Color.Gray;
             this.hmiLedSingle2.MiddleBorderLength = 0;
@@ -3946,12 +3943,12 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle2.PLCAddressValue = "CH2.PLC1.DataBlock1.TAG00002";
             this.hmiLedSingle2.PLCAddressVisible = "";
             this.hmiLedSingle2.RoundRadius = 30;
-            this.hmiLedSingle2.Shape = AdvancedScada.Controls.Enum.DAS_ShapeStyle.SS_Circle;
+            this.hmiLedSingle2.Shape = AdvancedScada.Controls_Binding.Enum.DAS_ShapeStyle.SS_Circle;
             this.hmiLedSingle2.ShinePosition = 0.5F;
             this.hmiLedSingle2.Size = new System.Drawing.Size(23, 28);
             this.hmiLedSingle2.TabIndex = 543;
             this.hmiLedSingle2.Text = "hmiLedSingle2";
-            this.hmiLedSingle2.TextPosition = AdvancedScada.Controls.Enum.DAS_TextPosStyle.TPS_Left;
+            this.hmiLedSingle2.TextPosition = AdvancedScada.Controls_Binding.Enum.DAS_TextPosStyle.TPS_Left;
             this.hmiLedSingle2.TextVisible = false;
             this.hmiLedSingle2.Value = false;
             this.hmiLedSingle2.ValueToWrite = 0;
@@ -3965,11 +3962,11 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle3.BorderGradientLightPos1 = 1F;
             this.hmiLedSingle3.BorderGradientLightPos2 = -1F;
             this.hmiLedSingle3.BorderGradientRate = 0.5F;
-            this.hmiLedSingle3.BorderGradientType = AdvancedScada.Controls.Enum.DAS_BorderGradientStyle.BGS_Path;
+            this.hmiLedSingle3.BorderGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BorderGradientStyle.BGS_Path;
             this.hmiLedSingle3.BorderLightIntermediateBrightness = 0F;
             this.hmiLedSingle3.GradientAngle = 225;
             this.hmiLedSingle3.GradientRate = 0.6F;
-            this.hmiLedSingle3.GradientType = AdvancedScada.Controls.Enum.DAS_BkGradientStyle.BKGS_Shine;
+            this.hmiLedSingle3.GradientType = AdvancedScada.Controls_Binding.Enum.DAS_BkGradientStyle.BKGS_Shine;
             this.hmiLedSingle3.IndicatorAutoSize = true;
             this.hmiLedSingle3.IndicatorHeight = 50;
             this.hmiLedSingle3.IndicatorWidth = 50;
@@ -3977,7 +3974,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle3.InnerBorderLength = 2;
             this.hmiLedSingle3.InnerBorderLightColor = System.Drawing.Color.White;
             this.hmiLedSingle3.Location = new System.Drawing.Point(999, 231);
-            this.hmiLedSingle3.LocationDialog = "999; 231";
+        
             this.hmiLedSingle3.MaximumHoldTime = 3000;
             this.hmiLedSingle3.MiddleBorderColor = System.Drawing.Color.Gray;
             this.hmiLedSingle3.MiddleBorderLength = 0;
@@ -3996,12 +3993,12 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle3.PLCAddressValue = "CH1.PLC1.DataBlock2.TAG00069";
             this.hmiLedSingle3.PLCAddressVisible = "";
             this.hmiLedSingle3.RoundRadius = 30;
-            this.hmiLedSingle3.Shape = AdvancedScada.Controls.Enum.DAS_ShapeStyle.SS_Circle;
+            this.hmiLedSingle3.Shape = AdvancedScada.Controls_Binding.Enum.DAS_ShapeStyle.SS_Circle;
             this.hmiLedSingle3.ShinePosition = 0.5F;
             this.hmiLedSingle3.Size = new System.Drawing.Size(23, 28);
             this.hmiLedSingle3.TabIndex = 545;
             this.hmiLedSingle3.Text = "hmiLedSingle3";
-            this.hmiLedSingle3.TextPosition = AdvancedScada.Controls.Enum.DAS_TextPosStyle.TPS_Left;
+            this.hmiLedSingle3.TextPosition = AdvancedScada.Controls_Binding.Enum.DAS_TextPosStyle.TPS_Left;
             this.hmiLedSingle3.TextVisible = false;
             this.hmiLedSingle3.Value = false;
             this.hmiLedSingle3.ValueToWrite = 0;
@@ -4015,11 +4012,11 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle4.BorderGradientLightPos1 = 1F;
             this.hmiLedSingle4.BorderGradientLightPos2 = -1F;
             this.hmiLedSingle4.BorderGradientRate = 0.5F;
-            this.hmiLedSingle4.BorderGradientType = AdvancedScada.Controls.Enum.DAS_BorderGradientStyle.BGS_Path;
+            this.hmiLedSingle4.BorderGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BorderGradientStyle.BGS_Path;
             this.hmiLedSingle4.BorderLightIntermediateBrightness = 0F;
             this.hmiLedSingle4.GradientAngle = 225;
             this.hmiLedSingle4.GradientRate = 0.6F;
-            this.hmiLedSingle4.GradientType = AdvancedScada.Controls.Enum.DAS_BkGradientStyle.BKGS_Shine;
+            this.hmiLedSingle4.GradientType = AdvancedScada.Controls_Binding.Enum.DAS_BkGradientStyle.BKGS_Shine;
             this.hmiLedSingle4.IndicatorAutoSize = true;
             this.hmiLedSingle4.IndicatorHeight = 50;
             this.hmiLedSingle4.IndicatorWidth = 50;
@@ -4027,7 +4024,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle4.InnerBorderLength = 2;
             this.hmiLedSingle4.InnerBorderLightColor = System.Drawing.Color.White;
             this.hmiLedSingle4.Location = new System.Drawing.Point(1069, 231);
-            this.hmiLedSingle4.LocationDialog = "1069; 231";
+
             this.hmiLedSingle4.MaximumHoldTime = 3000;
             this.hmiLedSingle4.MiddleBorderColor = System.Drawing.Color.Gray;
             this.hmiLedSingle4.MiddleBorderLength = 0;
@@ -4046,12 +4043,12 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle4.PLCAddressValue = "CH2.PLC1.DataBlock1.TAG00003";
             this.hmiLedSingle4.PLCAddressVisible = "";
             this.hmiLedSingle4.RoundRadius = 30;
-            this.hmiLedSingle4.Shape = AdvancedScada.Controls.Enum.DAS_ShapeStyle.SS_Circle;
+            this.hmiLedSingle4.Shape = AdvancedScada.Controls_Binding.Enum.DAS_ShapeStyle.SS_Circle;
             this.hmiLedSingle4.ShinePosition = 0.5F;
             this.hmiLedSingle4.Size = new System.Drawing.Size(23, 28);
             this.hmiLedSingle4.TabIndex = 544;
             this.hmiLedSingle4.Text = "hmiLedSingle4";
-            this.hmiLedSingle4.TextPosition = AdvancedScada.Controls.Enum.DAS_TextPosStyle.TPS_Left;
+            this.hmiLedSingle4.TextPosition = AdvancedScada.Controls_Binding.Enum.DAS_TextPosStyle.TPS_Left;
             this.hmiLedSingle4.TextVisible = false;
             this.hmiLedSingle4.Value = false;
             this.hmiLedSingle4.ValueToWrite = 0;
@@ -4065,11 +4062,11 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle5.BorderGradientLightPos1 = 1F;
             this.hmiLedSingle5.BorderGradientLightPos2 = -1F;
             this.hmiLedSingle5.BorderGradientRate = 0.5F;
-            this.hmiLedSingle5.BorderGradientType = AdvancedScada.Controls.Enum.DAS_BorderGradientStyle.BGS_Path;
+            this.hmiLedSingle5.BorderGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BorderGradientStyle.BGS_Path;
             this.hmiLedSingle5.BorderLightIntermediateBrightness = 0F;
             this.hmiLedSingle5.GradientAngle = 225;
             this.hmiLedSingle5.GradientRate = 0.6F;
-            this.hmiLedSingle5.GradientType = AdvancedScada.Controls.Enum.DAS_BkGradientStyle.BKGS_Shine;
+            this.hmiLedSingle5.GradientType = AdvancedScada.Controls_Binding.Enum.DAS_BkGradientStyle.BKGS_Shine;
             this.hmiLedSingle5.IndicatorAutoSize = true;
             this.hmiLedSingle5.IndicatorHeight = 50;
             this.hmiLedSingle5.IndicatorWidth = 50;
@@ -4077,7 +4074,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle5.InnerBorderLength = 2;
             this.hmiLedSingle5.InnerBorderLightColor = System.Drawing.Color.White;
             this.hmiLedSingle5.Location = new System.Drawing.Point(863, 231);
-            this.hmiLedSingle5.LocationDialog = null;
+            
             this.hmiLedSingle5.MaximumHoldTime = 3000;
             this.hmiLedSingle5.MiddleBorderColor = System.Drawing.Color.Gray;
             this.hmiLedSingle5.MiddleBorderLength = 0;
@@ -4096,12 +4093,12 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle5.PLCAddressValue = "";
             this.hmiLedSingle5.PLCAddressVisible = "";
             this.hmiLedSingle5.RoundRadius = 30;
-            this.hmiLedSingle5.Shape = AdvancedScada.Controls.Enum.DAS_ShapeStyle.SS_Circle;
+            this.hmiLedSingle5.Shape = AdvancedScada.Controls_Binding.Enum.DAS_ShapeStyle.SS_Circle;
             this.hmiLedSingle5.ShinePosition = 0.5F;
             this.hmiLedSingle5.Size = new System.Drawing.Size(23, 28);
             this.hmiLedSingle5.TabIndex = 547;
             this.hmiLedSingle5.Text = "hmiLedSingle5";
-            this.hmiLedSingle5.TextPosition = AdvancedScada.Controls.Enum.DAS_TextPosStyle.TPS_Left;
+            this.hmiLedSingle5.TextPosition = AdvancedScada.Controls_Binding.Enum.DAS_TextPosStyle.TPS_Left;
             this.hmiLedSingle5.TextVisible = false;
             this.hmiLedSingle5.Value = true;
             this.hmiLedSingle5.ValueToWrite = 0;
@@ -4115,11 +4112,11 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle6.BorderGradientLightPos1 = 1F;
             this.hmiLedSingle6.BorderGradientLightPos2 = -1F;
             this.hmiLedSingle6.BorderGradientRate = 0.5F;
-            this.hmiLedSingle6.BorderGradientType = AdvancedScada.Controls.Enum.DAS_BorderGradientStyle.BGS_Path;
+            this.hmiLedSingle6.BorderGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BorderGradientStyle.BGS_Path;
             this.hmiLedSingle6.BorderLightIntermediateBrightness = 0F;
             this.hmiLedSingle6.GradientAngle = 225;
             this.hmiLedSingle6.GradientRate = 0.6F;
-            this.hmiLedSingle6.GradientType = AdvancedScada.Controls.Enum.DAS_BkGradientStyle.BKGS_Shine;
+            this.hmiLedSingle6.GradientType = AdvancedScada.Controls_Binding.Enum.DAS_BkGradientStyle.BKGS_Shine;
             this.hmiLedSingle6.IndicatorAutoSize = true;
             this.hmiLedSingle6.IndicatorHeight = 50;
             this.hmiLedSingle6.IndicatorWidth = 50;
@@ -4127,7 +4124,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle6.InnerBorderLength = 2;
             this.hmiLedSingle6.InnerBorderLightColor = System.Drawing.Color.White;
             this.hmiLedSingle6.Location = new System.Drawing.Point(933, 231);
-            this.hmiLedSingle6.LocationDialog = null;
+            
             this.hmiLedSingle6.MaximumHoldTime = 3000;
             this.hmiLedSingle6.MiddleBorderColor = System.Drawing.Color.Gray;
             this.hmiLedSingle6.MiddleBorderLength = 0;
@@ -4146,12 +4143,12 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle6.PLCAddressValue = "";
             this.hmiLedSingle6.PLCAddressVisible = "";
             this.hmiLedSingle6.RoundRadius = 30;
-            this.hmiLedSingle6.Shape = AdvancedScada.Controls.Enum.DAS_ShapeStyle.SS_Circle;
+            this.hmiLedSingle6.Shape = AdvancedScada.Controls_Binding.Enum.DAS_ShapeStyle.SS_Circle;
             this.hmiLedSingle6.ShinePosition = 0.5F;
             this.hmiLedSingle6.Size = new System.Drawing.Size(23, 28);
             this.hmiLedSingle6.TabIndex = 546;
             this.hmiLedSingle6.Text = "hmiLedSingle6";
-            this.hmiLedSingle6.TextPosition = AdvancedScada.Controls.Enum.DAS_TextPosStyle.TPS_Left;
+            this.hmiLedSingle6.TextPosition = AdvancedScada.Controls_Binding.Enum.DAS_TextPosStyle.TPS_Left;
             this.hmiLedSingle6.TextVisible = false;
             this.hmiLedSingle6.Value = true;
             this.hmiLedSingle6.ValueToWrite = 0;
@@ -4165,11 +4162,11 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle7.BorderGradientLightPos1 = 1F;
             this.hmiLedSingle7.BorderGradientLightPos2 = -1F;
             this.hmiLedSingle7.BorderGradientRate = 0.5F;
-            this.hmiLedSingle7.BorderGradientType = AdvancedScada.Controls.Enum.DAS_BorderGradientStyle.BGS_Path;
+            this.hmiLedSingle7.BorderGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BorderGradientStyle.BGS_Path;
             this.hmiLedSingle7.BorderLightIntermediateBrightness = 0F;
             this.hmiLedSingle7.GradientAngle = 225;
             this.hmiLedSingle7.GradientRate = 0.6F;
-            this.hmiLedSingle7.GradientType = AdvancedScada.Controls.Enum.DAS_BkGradientStyle.BKGS_Shine;
+            this.hmiLedSingle7.GradientType = AdvancedScada.Controls_Binding.Enum.DAS_BkGradientStyle.BKGS_Shine;
             this.hmiLedSingle7.IndicatorAutoSize = true;
             this.hmiLedSingle7.IndicatorHeight = 50;
             this.hmiLedSingle7.IndicatorWidth = 50;
@@ -4177,7 +4174,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle7.InnerBorderLength = 2;
             this.hmiLedSingle7.InnerBorderLightColor = System.Drawing.Color.White;
             this.hmiLedSingle7.Location = new System.Drawing.Point(724, 231);
-            this.hmiLedSingle7.LocationDialog = null;
+            
             this.hmiLedSingle7.MaximumHoldTime = 3000;
             this.hmiLedSingle7.MiddleBorderColor = System.Drawing.Color.Gray;
             this.hmiLedSingle7.MiddleBorderLength = 0;
@@ -4196,12 +4193,12 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle7.PLCAddressValue = "";
             this.hmiLedSingle7.PLCAddressVisible = "";
             this.hmiLedSingle7.RoundRadius = 30;
-            this.hmiLedSingle7.Shape = AdvancedScada.Controls.Enum.DAS_ShapeStyle.SS_Circle;
+            this.hmiLedSingle7.Shape = AdvancedScada.Controls_Binding.Enum.DAS_ShapeStyle.SS_Circle;
             this.hmiLedSingle7.ShinePosition = 0.5F;
             this.hmiLedSingle7.Size = new System.Drawing.Size(26, 28);
             this.hmiLedSingle7.TabIndex = 549;
             this.hmiLedSingle7.Text = "hmiLedSingle7";
-            this.hmiLedSingle7.TextPosition = AdvancedScada.Controls.Enum.DAS_TextPosStyle.TPS_Left;
+            this.hmiLedSingle7.TextPosition = AdvancedScada.Controls_Binding.Enum.DAS_TextPosStyle.TPS_Left;
             this.hmiLedSingle7.TextVisible = false;
             this.hmiLedSingle7.Value = true;
             this.hmiLedSingle7.ValueToWrite = 0;
@@ -4215,11 +4212,11 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle8.BorderGradientLightPos1 = 1F;
             this.hmiLedSingle8.BorderGradientLightPos2 = -1F;
             this.hmiLedSingle8.BorderGradientRate = 0.5F;
-            this.hmiLedSingle8.BorderGradientType = AdvancedScada.Controls.Enum.DAS_BorderGradientStyle.BGS_Path;
+            this.hmiLedSingle8.BorderGradientType = AdvancedScada.Controls_Binding.Enum.DAS_BorderGradientStyle.BGS_Path;
             this.hmiLedSingle8.BorderLightIntermediateBrightness = 0F;
             this.hmiLedSingle8.GradientAngle = 225;
             this.hmiLedSingle8.GradientRate = 0.6F;
-            this.hmiLedSingle8.GradientType = AdvancedScada.Controls.Enum.DAS_BkGradientStyle.BKGS_Shine;
+            this.hmiLedSingle8.GradientType = AdvancedScada.Controls_Binding.Enum.DAS_BkGradientStyle.BKGS_Shine;
             this.hmiLedSingle8.IndicatorAutoSize = true;
             this.hmiLedSingle8.IndicatorHeight = 50;
             this.hmiLedSingle8.IndicatorWidth = 50;
@@ -4227,7 +4224,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle8.InnerBorderLength = 2;
             this.hmiLedSingle8.InnerBorderLightColor = System.Drawing.Color.White;
             this.hmiLedSingle8.Location = new System.Drawing.Point(794, 231);
-            this.hmiLedSingle8.LocationDialog = null;
+           
             this.hmiLedSingle8.MaximumHoldTime = 3000;
             this.hmiLedSingle8.MiddleBorderColor = System.Drawing.Color.Gray;
             this.hmiLedSingle8.MiddleBorderLength = 0;
@@ -4246,12 +4243,12 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle8.PLCAddressValue = "";
             this.hmiLedSingle8.PLCAddressVisible = "";
             this.hmiLedSingle8.RoundRadius = 30;
-            this.hmiLedSingle8.Shape = AdvancedScada.Controls.Enum.DAS_ShapeStyle.SS_Circle;
+            this.hmiLedSingle8.Shape = AdvancedScada.Controls_Binding.Enum.DAS_ShapeStyle.SS_Circle;
             this.hmiLedSingle8.ShinePosition = 0.5F;
             this.hmiLedSingle8.Size = new System.Drawing.Size(23, 28);
             this.hmiLedSingle8.TabIndex = 548;
             this.hmiLedSingle8.Text = "hmiLedSingle8";
-            this.hmiLedSingle8.TextPosition = AdvancedScada.Controls.Enum.DAS_TextPosStyle.TPS_Left;
+            this.hmiLedSingle8.TextPosition = AdvancedScada.Controls_Binding.Enum.DAS_TextPosStyle.TPS_Left;
             this.hmiLedSingle8.TextVisible = false;
             this.hmiLedSingle8.Value = true;
             this.hmiLedSingle8.ValueToWrite = 0;
@@ -4616,10 +4613,10 @@ namespace AdvancedScada.HMI.MainForm
         private HMILedSingle hmiLedSingle8;
         private HMIDigitalPanelMeter hmiDigitalPanelMeter2;
         private HMISimpleWebServer hmiSimpleWebServer1;
-        private Controls.HslControl.Segment.HMILedDisplay hmiLedDisplay1;
-        private Controls.HslControl.Segment.HMILedDisplay hmiLedDisplay2;
-        private Controls.HslControl.Lad.HMILanternSimple hmiLanternSimple2;
-        private Controls.HslControl.Lad.HMILanternSimple hmiLanternSimple1;
-        private Controls.HslControl.Pipe.HMIVacuumPump hmiVacuumPump1;
+        private Controls_Binding.HslControl.Segment.HMILedDisplay hmiLedDisplay1;
+        private Controls_Binding.HslControl.Segment.HMILedDisplay hmiLedDisplay2;
+        private Controls_Binding.HslControl.Lad.HMILanternSimple hmiLanternSimple2;
+        private Controls_Binding.HslControl.Lad.HMILanternSimple hmiLanternSimple1;
+        private Controls_Binding.HslControl.Pipe.HMIVacuumPump hmiVacuumPump1;
     }
 }

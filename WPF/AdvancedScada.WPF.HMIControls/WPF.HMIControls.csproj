@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Drawing">
+      <HintPath>..\Microsoft.Expression.Drawing.dll</HintPath>
+    </Reference>
     <Reference Include="Svg, Version=3.0.0.0, Culture=neutral, PublicKeyToken=12a0bac221edeae2, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Svg.3.0.49\lib\net452\Svg.dll</HintPath>
       <Private>True</Private>
@@ -54,6 +57,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Fun\HMIFun.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Indicator\HMIIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -70,10 +77,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Page1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="PilotLight\HMIMushroomButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,6 +90,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SelectorSwitch\HMISwitchButton2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SevenSegment\HMISevenSegment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -109,6 +116,9 @@
     <Compile Include="Comm\LicenseHMI.cs" />
     <Compile Include="Comm\ProgressConverter.cs" />
     <Compile Include="Display\HMILable.cs" />
+    <Compile Include="Fun\HMIFun.xaml.cs">
+      <DependentUpon>HMIFun.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ImageAll\HMIImageContainerSvg.cs" />
     <Compile Include="Indicator\HMIIndicator.xaml.cs">
       <DependentUpon>HMIIndicator.xaml</DependentUpon>
@@ -126,9 +136,6 @@
       <DependentUpon>HMIVacuumPump.xaml</DependentUpon>
     </Compile>
     <Compile Include="Motor\WaterPump.cs" />
-    <Compile Include="Page1.xaml.cs">
-      <DependentUpon>Page1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PilotLight\HMIMushroomButton.xaml.cs">
       <DependentUpon>HMIMushroomButton.xaml</DependentUpon>
     </Compile>
@@ -156,6 +163,9 @@
     </Compile>
     <Compile Include="SevenSegment\ArrangedPanel.cs" />
     <Compile Include="SevenSegment\CharItem.cs" />
+    <Compile Include="SevenSegment\HMISevenSegment.xaml.cs">
+      <DependentUpon>HMISevenSegment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SevenSegment\HMISevenSegmentsStack.xaml.cs">
       <DependentUpon>HMISevenSegmentsStack.xaml</DependentUpon>
     </Compile>

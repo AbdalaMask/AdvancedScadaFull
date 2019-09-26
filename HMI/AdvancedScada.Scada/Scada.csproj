@@ -36,6 +36,9 @@
     <ApplicationIcon>CPU.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdvancedScada.HMIControlsBinding">
+      <HintPath>..\..\Controls\AdvancedScada.Controls_Binding\obj\Debug\AdvancedScada.HMIControlsBinding.dll</HintPath>
+    </Reference>
     <Reference Include="HslControls, Version=2.2.2.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\HslControls.2.2.2\lib\net45\HslControls.dll</HintPath>
     </Reference>
@@ -69,12 +72,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainForm\FRM_Advanced.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,9 +93,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\Tools.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm\FRM_Advanced.resx">
       <DependentUpon>FRM_Advanced.cs</DependentUpon>
     </EmbeddedResource>
@@ -133,10 +127,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Controls\AdvancedScada.Controls\Controls.csproj">
-      <Project>{61d652f9-adef-4024-b1a8-4709656068ca}</Project>
-      <Name>Controls</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Controls\AdvancedScada.Controls_Net45\Controls_Net45.vbproj">
       <Project>{6a4ea5f0-f6a7-4d58-8542-e39444a0a7c3}</Project>
       <Name>Controls_Net45</Name>

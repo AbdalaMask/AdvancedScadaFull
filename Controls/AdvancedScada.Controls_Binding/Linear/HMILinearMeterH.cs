@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Client;
 using AdvancedScada.Monitor;
 using System;
 using System.ComponentModel;
@@ -35,7 +36,7 @@ namespace AdvancedScada.Controls_Binding.Linear
                 {
                     if (string.IsNullOrEmpty(_TagName) || string.IsNullOrWhiteSpace(_TagName) ||
                         Licenses.LicenseManager.IsInDesignMode) return;
-                    var bd = new Binding("Value", TagCollection.Tags[_TagName], "Value", true);
+                    var bd = new Binding("Value", TagCollectionClient.Tags[_TagName], "Value", true);
                     if (DataBindings.Count > 0) DataBindings.Clear();
                     DataBindings.Add(bd);
                 }

@@ -1,6 +1,7 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Binding.Display;
 using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Client;
 using AdvancedScada.Monitor;
 using MfgControl.AdvancedHMI.Controls;
 using System;
@@ -76,7 +77,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                     {
                         if (string.IsNullOrEmpty(m_PLCAddressText) || string.IsNullOrWhiteSpace(m_PLCAddressText) ||
                             Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Text", TagCollection.Tags[m_PLCAddressText], "Value", true);
+                        var bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressText], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception e1)
@@ -107,7 +108,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
 
                     if (string.IsNullOrEmpty(m_PLCAddressVisible) || string.IsNullOrWhiteSpace(m_PLCAddressVisible) ||
                         Licenses.LicenseManager.IsInDesignMode) return;
-                    var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Value", true);
+                    var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                     DataBindings.Add(bd);
                 }
             }
@@ -130,7 +131,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                     //* When address is changed, re-subscribe to new address
                     if (string.IsNullOrEmpty(m_PLCAddressEnabled) || string.IsNullOrWhiteSpace(m_PLCAddressEnabled) ||
                         Licenses.LicenseManager.IsInDesignMode) return;
-                    var bd = new Binding("Enabled", TagCollection.Tags[m_PLCAddressEnabled], "Value", true);
+                    var bd = new Binding("Enabled", TagCollectionClient.Tags[m_PLCAddressEnabled], "Value", true);
                     DataBindings.Add(bd);
                 }
             }

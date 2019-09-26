@@ -61,7 +61,6 @@ namespace AdvancedScada.Studio.Editors
             this.tabPageEthernet = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cboxModeNet = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.txtIPAddress = new AdvancedScada.Utils.Net.IPAddressText();
             this.txtSlot = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.txtPort = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -72,6 +71,7 @@ namespace AdvancedScada.Studio.Editors
             this.btnBlack = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnNext = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtIPAddress = new AdvancedScada.Utils.Net.IPAddressText();
             ((System.ComponentModel.ISupportInitialize)(this.TabControlLSIS)).BeginInit();
             this.TabControlLSIS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabPageChannel)).BeginInit();
@@ -143,17 +143,17 @@ namespace AdvancedScada.Studio.Editors
             this.txtDesc.Margin = new System.Windows.Forms.Padding(4);
             this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
-            this.txtDesc.Size = new System.Drawing.Size(370, 134);
+            this.txtDesc.Size = new System.Drawing.Size(370, 145);
             this.txtDesc.TabIndex = 23;
             // 
             // cboxModel
             // 
             this.cboxModel.DropDownWidth = 163;
             this.cboxModel.IntegralHeight = false;
-            this.cboxModel.Location = new System.Drawing.Point(121, 90);
+            this.cboxModel.Location = new System.Drawing.Point(121, 81);
             this.cboxModel.Margin = new System.Windows.Forms.Padding(4);
             this.cboxModel.Name = "cboxModel";
-            this.cboxModel.Size = new System.Drawing.Size(217, 21);
+            this.cboxModel.Size = new System.Drawing.Size(247, 21);
             this.cboxModel.StateCommon.ComboBox.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.cboxModel.TabIndex = 22;
             // 
@@ -168,7 +168,7 @@ namespace AdvancedScada.Studio.Editors
             this.cboxConnType.Location = new System.Drawing.Point(121, 49);
             this.cboxConnType.Margin = new System.Windows.Forms.Padding(4);
             this.cboxConnType.Name = "cboxConnType";
-            this.cboxConnType.Size = new System.Drawing.Size(217, 21);
+            this.cboxConnType.Size = new System.Drawing.Size(247, 21);
             this.cboxConnType.StateCommon.ComboBox.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.cboxConnType.TabIndex = 21;
             // 
@@ -191,7 +191,7 @@ namespace AdvancedScada.Studio.Editors
             // 
             // kryptonLabel3
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(16, 89);
+            this.kryptonLabel3.Location = new System.Drawing.Point(18, 80);
             this.kryptonLabel3.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonLabel3.Name = "kryptonLabel3";
             this.kryptonLabel3.Size = new System.Drawing.Size(36, 20);
@@ -257,6 +257,7 @@ namespace AdvancedScada.Studio.Editors
             this.kryptonHeaderGroup1.Size = new System.Drawing.Size(498, 271);
             this.kryptonHeaderGroup1.TabIndex = 1;
             this.kryptonHeaderGroup1.ValuesPrimary.Heading = "SerialPort";
+            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddChannel;
             this.kryptonHeaderGroup1.ValuesSecondary.Heading = "";
             // 
             // kryptonLabel15
@@ -449,15 +450,6 @@ namespace AdvancedScada.Studio.Editors
             this.cboxModeNet.TabIndex = 17;
             this.cboxModeNet.Text = "FENET";
             // 
-            // txtIPAddress
-            // 
-            this.txtIPAddress.Location = new System.Drawing.Point(124, 21);
-            this.txtIPAddress.Margin = new System.Windows.Forms.Padding(4);
-            this.txtIPAddress.Name = "txtIPAddress";
-            this.txtIPAddress.Size = new System.Drawing.Size(189, 20);
-            this.txtIPAddress.TabIndex = 16;
-            this.txtIPAddress.Text = "127.0.0.1";
-            // 
             // txtSlot
             // 
             this.txtSlot.Location = new System.Drawing.Point(121, 106);
@@ -532,6 +524,7 @@ namespace AdvancedScada.Studio.Editors
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnCancel.Location = new System.Drawing.Point(138, 0);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
@@ -567,9 +560,20 @@ namespace AdvancedScada.Studio.Editors
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // txtIPAddress
+            // 
+            this.txtIPAddress.Location = new System.Drawing.Point(124, 21);
+            this.txtIPAddress.Margin = new System.Windows.Forms.Padding(4);
+            this.txtIPAddress.Name = "txtIPAddress";
+            this.txtIPAddress.Size = new System.Drawing.Size(189, 20);
+            this.txtIPAddress.TabIndex = 16;
+            this.txtIPAddress.Text = "127.0.0.1";
+            // 
             // XChannelForm
             // 
+            this.AcceptButton = this.btnNext;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(500, 327);
             this.Controls.Add(this.kryptonHeaderGroup4);
             this.Controls.Add(this.TabControlLSIS);

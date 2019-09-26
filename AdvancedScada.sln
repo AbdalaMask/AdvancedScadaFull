@@ -57,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF.HMIControls.Design", "W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF.Scada", "WPF\AdvancedScada.WPF.Scada\WPF.Scada.csproj", "{43949F78-53E8-48C9-BAD1-BB3A448349E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessEntity", "HMI\AdvancedScada.DataAccessEntity\DataAccessEntity.csproj", "{9D3F40B9-2EBA-467B-9F5F-D0058C643C31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -225,6 +227,14 @@ Global
 		{43949F78-53E8-48C9-BAD1-BB3A448349E6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{43949F78-53E8-48C9-BAD1-BB3A448349E6}.Release|x86.ActiveCfg = Release|Any CPU
 		{43949F78-53E8-48C9-BAD1-BB3A448349E6}.Release|x86.Build.0 = Release|Any CPU
+		{9D3F40B9-2EBA-467B-9F5F-D0058C643C31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D3F40B9-2EBA-467B-9F5F-D0058C643C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D3F40B9-2EBA-467B-9F5F-D0058C643C31}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9D3F40B9-2EBA-467B-9F5F-D0058C643C31}.Debug|x86.Build.0 = Debug|Any CPU
+		{9D3F40B9-2EBA-467B-9F5F-D0058C643C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D3F40B9-2EBA-467B-9F5F-D0058C643C31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D3F40B9-2EBA-467B-9F5F-D0058C643C31}.Release|x86.ActiveCfg = Release|Any CPU
+		{9D3F40B9-2EBA-467B-9F5F-D0058C643C31}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -250,6 +260,7 @@ Global
 		{7BB41A25-5526-4284-A6EB-5A2801328EB7} = {3E0B0CA0-A512-4AA6-96BA-B13DF9B8EA55}
 		{6138843F-B4AE-4043-94D3-B2A375AA0FF6} = {3E0B0CA0-A512-4AA6-96BA-B13DF9B8EA55}
 		{43949F78-53E8-48C9-BAD1-BB3A448349E6} = {3E0B0CA0-A512-4AA6-96BA-B13DF9B8EA55}
+		{9D3F40B9-2EBA-467B-9F5F-D0058C643C31} = {C78BBDA7-369E-47D7-BDCA-EB33AFE7B6DC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {204AF3B5-65D3-431D-B11A-887625B7EECD}

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AdvancedScada.WPF.HMIControls
+namespace AdvancedScada.WPF.HMIControls.Fun
 {
     /// <summary>
-    /// Interaction logic for Page1.xaml
+    /// Interaction logic for HMIFun.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class HMIFun : UserControl
     {
-        public Page1()
+        public HMIFun()
         {
             InitializeComponent();
         }

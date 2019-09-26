@@ -188,85 +188,94 @@ namespace AdvancedScada.IODriver
                     {
                         IDriverAdapter DriverAdapter = null;
                         Channel ch = (Channel)chParam;
-                        switch (ch.ChannelTypes)
+                        try
                         {
-                            case "Delta":
-                                switch (ch.Mode)
-                                {
-                                    case "RTU":
-                                        DriverAdapter = Deltartu[ch.ChannelName];
-                                        break;
-                                    case "ASCII":
-                                        DriverAdapter = Deltaascii[ch.ChannelName];
-                                        break;
-                                    case "TCP":
-                                        DriverAdapter = Deltambe[ch.ChannelName];
-                                        break;
-                                }
-                                break;
-                            case "Modbus":
-                                switch (ch.Mode)
-                                {
-                                    case "RTU":
-                                        DriverAdapter = rtu[ch.ChannelName];
-                                        break;
-                                    case "ASCII":
-                                        DriverAdapter = ascii[ch.ChannelName];
-                                        break;
-                                    case "TCP":
-                                        DriverAdapter = mbe[ch.ChannelName];
-                                        break;
-                                }
-                                break;
-                            case "LSIS":
-                                switch (ch.ConnectionType)
-                                {
-                                    case "SerialPort":
-                                        DriverAdapter = cnet[ch.ChannelName];
-                                        break;
-
-                                    case "Ethernet":
-                                        DriverAdapter = FENET[ch.ChannelName];
-                                        break;
-                                }
-                                break;
-
-
-                            default:
-                                break;
-                        }
-
-                        //======Connection to PLC==================================
-                        DriverAdapter.Connection();
-
-                        while (IsConnected)
-                        {
-                            foreach (Device dv in ch.Devices)
+                            switch (ch.ChannelTypes)
                             {
-
-                                foreach (DataBlock db in dv.DataBlocks)
-                                {
-                                    if (!IsConnected) break;
-                                    switch (ch.ChannelTypes)
+                                case "Delta":
+                                    switch (ch.Mode)
                                     {
-                                        case "Delta":
-                                            SendPackageDelta(DriverAdapter, db);
+                                        case "RTU":
+                                            DriverAdapter = Deltartu[ch.ChannelName];
                                             break;
-                                        case "Modbus":
-                                            SendPackageModbus(DriverAdapter, db);
+                                        case "ASCII":
+                                            DriverAdapter = Deltaascii[ch.ChannelName];
                                             break;
-                                        case "LSIS":
-                                            SendPackageLSIS(DriverAdapter, db);
+                                        case "TCP":
+                                            DriverAdapter = Deltambe[ch.ChannelName];
+                                            break;
+                                    }
+                                    break;
+                                case "Modbus":
+                                    switch (ch.Mode)
+                                    {
+                                        case "RTU":
+                                            DriverAdapter = rtu[ch.ChannelName];
+                                            break;
+                                        case "ASCII":
+                                            DriverAdapter = ascii[ch.ChannelName];
+                                            break;
+                                        case "TCP":
+                                            DriverAdapter = mbe[ch.ChannelName];
+                                            break;
+                                    }
+                                    break;
+                                case "LSIS":
+                                    switch (ch.ConnectionType)
+                                    {
+                                        case "SerialPort":
+                                            DriverAdapter = cnet[ch.ChannelName];
                                             break;
 
-                                        default:
+                                        case "Ethernet":
+                                            DriverAdapter = FENET[ch.ChannelName];
                                             break;
+                                    }
+                                    break;
+
+
+                                default:
+                                    break;
+                            }
+
+                            //======Connection to PLC==================================
+                            DriverAdapter.Connection();
+
+                            while (IsConnected)
+                            {
+                                foreach (Device dv in ch.Devices)
+                                {
+
+                                    foreach (DataBlock db in dv.DataBlocks)
+                                    {
+                                        if (!IsConnected) break;
+                                        switch (ch.ChannelTypes)
+                                        {
+                                            case "Delta":
+                                                SendPackageDelta(DriverAdapter, db);
+                                                break;
+                                            case "Modbus":
+                                                SendPackageModbus(DriverAdapter, db);
+                                                break;
+                                            case "LSIS":
+                                                SendPackageLSIS(DriverAdapter, db);
+                                                break;
+
+                                            default:
+                                                break;
+                                        }
+
                                     }
 
                                 }
-
                             }
                         }
+                        catch (Exception ex)
+                        {
+                            Disconnect();
+                            EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                        }
+
 
                     })
                     {
@@ -278,6 +287,7 @@ namespace AdvancedScada.IODriver
             }
             catch (Exception ex)
             {
+                Disconnect();
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
         }
@@ -582,7 +592,17 @@ namespace AdvancedScada.IODriver
                     case DataTypes.Bit:
                         lock (ILSIS)
                         {
-                            bool[] bitArys = ILSIS.Read<bool>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                            bool[] bitArys = null;
+                            if (db.IsArray)
+                            {
+                                bitArys = ILSIS.Read<bool>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+
+                            }
+                            else
+                            {
+                                bitArys = ILSIS.Read<bool>($"{db.MemoryType}{db.StartAddress}", (ushort)(db.Length));
+
+                            }
                             if (bitArys == null || bitArys.Length == 0) return;
                             if (bitArys.Length > db.Tags.Count) return;
 

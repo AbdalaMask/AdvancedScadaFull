@@ -3,6 +3,7 @@ using AdvancedScada.Controls_Binding.Enum;
 using AdvancedScada.Controls_Binding.Segment.DrawAll;
 using AdvancedScada.Controls_Net45;
 using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Client;
 using AdvancedScada.Monitor;
 using System;
 using System.ComponentModel;
@@ -21,7 +22,7 @@ namespace AdvancedScada.Controls_Binding.Segment
     [Designer(typeof(HMI_Segment7LEDDesigner))]
     public class HMISegment7LED : Control
     {
-
+        #region MyRegion
 
         private DAS_BorderStyle das_BorderStyle_0;
 
@@ -1893,7 +1894,9 @@ namespace AdvancedScada.Controls_Binding.Segment
                 MessageBox.Show(applicationException.ToString());
             }
         }
+        
 
+        #endregion
         private string OriginalText;
 
         #region propartas
@@ -1918,7 +1921,7 @@ namespace AdvancedScada.Controls_Binding.Segment
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressText) || string.IsNullOrWhiteSpace(m_PLCAddressText) ||
                             Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Text", TagCollection.Tags[m_PLCAddressValue], "Value", true);
+                        var bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -1950,7 +1953,7 @@ namespace AdvancedScada.Controls_Binding.Segment
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
                             string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollection.Tags[m_PLCAddressVisible], "Value", true);
+                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
@@ -1982,7 +1985,7 @@ namespace AdvancedScada.Controls_Binding.Segment
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressValue) || string.IsNullOrWhiteSpace(m_PLCAddressValue) ||
                             Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Value", TagCollection.Tags[m_PLCAddressValue], "Value", true);
+                        var bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)

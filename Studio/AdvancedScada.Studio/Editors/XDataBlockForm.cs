@@ -243,7 +243,7 @@ namespace AdvancedScada.Studio.Editors
                             txtDomain.Items.Clear();
                             txtDomain.Items.AddRange(DVP);
                             txtPrefix.Text = "txtPrefix :";
-
+                            GLSIS.Visible = false;
                             break;
                         case "LSIS":
                             lblTypeOfRead.Visible = false;
@@ -254,7 +254,7 @@ namespace AdvancedScada.Studio.Editors
                             chkX10.Visible = false;
                             txtDomain.Items.Clear();
                             txtPrefix.Text = "txtPrefix :";
-
+                            GLSIS.Visible = false;
                             break;
                         default:
                             break;
@@ -297,6 +297,7 @@ namespace AdvancedScada.Studio.Editors
                     txtDesc.Text = db.Description;
                     txtDataBlockId.Text = $"{db.DataBlockId}";
                     cboxDataType.SelectedItem = string.Format("{0}", db.DataType);
+                    chkIsArray.Checked = db.IsArray;
                 }
             }
             catch (Exception ex)
@@ -462,7 +463,7 @@ namespace AdvancedScada.Studio.Editors
                             Description = txtDesc.Text,
                             Length = (ushort)txtAddressLength.Value,
                             DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", cboxDataType.SelectedItem)),
-
+                            IsArray= chkIsArray.Checked,
                             Tags = new List<Tag>()
                         };
 
@@ -507,7 +508,7 @@ namespace AdvancedScada.Studio.Editors
                         db.Length = (ushort)txtAddressLength.Value;
                         db.Description = txtDesc.Text;
                         db.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", cboxDataType.SelectedItem));
-
+                        db.IsArray = chkIsArray.Checked;
 
                         switch (ch.ChannelTypes)
 

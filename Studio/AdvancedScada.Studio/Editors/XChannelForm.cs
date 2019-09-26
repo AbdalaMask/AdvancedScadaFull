@@ -64,6 +64,8 @@ namespace AdvancedScada.Studio.Editors
                             break;
                         case "LSIS":
                             cboxModel.DataSource = System.Enum.GetNames(typeof(LSCpuInfo));
+                            cboxModeNet.Text = "FEnet";
+                            cboxModeNet.Enabled = false;
                             break;
                         case "Modbus":
                             cboxModel.Visible = false;
@@ -75,7 +77,7 @@ namespace AdvancedScada.Studio.Editors
                             break;
                     }
 
-
+                    
 
 
                     cboxConnType.Enabled = false;
@@ -123,6 +125,8 @@ namespace AdvancedScada.Studio.Editors
                             break;
                         case "LSIS":
                             cboxModel.DataSource = System.Enum.GetNames(typeof(LSCpuInfo));
+                            cboxModeNet.Text = "FEnet";
+                            cboxModeNet.Enabled = false;
                             break;
                         case "Modbus":
                             cboxModel.Visible = false;
