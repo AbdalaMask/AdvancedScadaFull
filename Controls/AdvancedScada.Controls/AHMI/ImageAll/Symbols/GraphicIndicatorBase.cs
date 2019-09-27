@@ -388,7 +388,7 @@ namespace AdvancedScada.Controls.AHMI.ImageAll.Symbols
             }
         }
 
- 
+
 
 
         //*****************************************
@@ -465,7 +465,7 @@ namespace AdvancedScada.Controls.AHMI.ImageAll.Symbols
             get { return m_OutputType; }
             set { m_OutputType = value; }
         }
- 
+
 
         #endregion
 

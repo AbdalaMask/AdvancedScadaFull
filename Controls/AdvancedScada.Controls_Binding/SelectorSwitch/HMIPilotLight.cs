@@ -1,15 +1,10 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
-using AdvancedScada.Monitor;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
-using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.SelectorSwitch
 {
@@ -346,5 +341,5 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
         #endregion
     }
 
-    
+
 }

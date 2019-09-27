@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace AdvancedScada.DataAccessEntity.Models.Repositories
 {
-   public interface IBatchRepository<TEntity>
+    public interface IBatchRepository<TEntity>
     {
         IList<TEntity> List();
         TEntity Find(int id);

@@ -1,14 +1,10 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using Svg;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.ImageAll
@@ -23,7 +19,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         public event EventHandler ValueSelect1Changed;
         public event EventHandler ValueSelect2Changed;
 
-      
+
         private void RefreshImages()
         {
             if (Width > 0 && Height > 0)

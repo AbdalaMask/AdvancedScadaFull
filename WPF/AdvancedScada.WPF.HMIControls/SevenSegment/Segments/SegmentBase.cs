@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -39,14 +36,14 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
         public static DependencyProperty HorizSegDividerProperty;
 
 
-        
+
         static SegmentBase()
         {
             PenThicknessProperty = DependencyProperty.Register("PenThickness", typeof(Double),
                 typeof(SegmentBase), new PropertyMetadata(1.0, VisualChanged));
 
             PenColorProperty = DependencyProperty.Register("PenColor", typeof(Color),
-                typeof(SegmentBase), new PropertyMetadata(Color.FromRgb(234, 234, 234), 
+                typeof(SegmentBase), new PropertyMetadata(Color.FromRgb(234, 234, 234),
                     VisualChanged));
 
             SelectedPenColorProperty = DependencyProperty.Register("SelectedPenColor", typeof(Color),
@@ -54,7 +51,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
 
             FillBrushProperty = DependencyProperty.Register("FillBrush", typeof(Brush),
                 typeof(SegmentBase),
-                new PropertyMetadata(new SolidColorBrush(Color.FromRgb(248, 248, 248)), 
+                new PropertyMetadata(new SolidColorBrush(Color.FromRgb(248, 248, 248)),
                     VisualChanged));
 
             SelectedFillBrushProperty = DependencyProperty.Register("SelectedFillBrush", typeof(Brush),
@@ -113,7 +110,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
         {
             get { return (List<Tuple<int, Brush, Color>>)this.GetValue(SegmentsBrushProperty); }
             set { this.SetValue(SegmentsBrushProperty, value); }
-        } 
+        }
 
         /// <summary>
         /// A brush for not selected elements

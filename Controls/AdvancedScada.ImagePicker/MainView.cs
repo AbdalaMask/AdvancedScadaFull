@@ -2,7 +2,6 @@
 using ComponentFactory.Krypton.Toolkit;
 using ImagePicker;
 using Microsoft.Win32;
-using Svg;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +10,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Resources;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Markup;
@@ -179,10 +177,6 @@ namespace AdvancedScada.ImagePicker
             pnlPictures.ImageList = il32;
 
         }
-        /// <summary>
-        /// The file path of the SVG image selected.
-        /// </summary>
-        private string selectedPath;
 
         /// <summary>
         /// Instance reference for the svgDocument used and updated throughout the manipulation of the image.
@@ -191,8 +185,8 @@ namespace AdvancedScada.ImagePicker
 
         private void cboxListForder_SelectedIndexChanged(object sender, EventArgs e)
         {
-             
-            
+
+
             il32 = new ImageList();
             il32.ColorDepth = ColorDepth.Depth32Bit;
             il32.ImageSize = new Size(50, 50);
@@ -203,9 +197,10 @@ namespace AdvancedScada.ImagePicker
             ImageListCurrentTip.Clear();
             try
             {
-                
-                    var dirs = DirSearch(SelectedPath).ToArray();
-                Task t = Task.Factory.StartNew(() => {
+
+                var dirs = DirSearch(SelectedPath).ToArray();
+                Task t = Task.Factory.StartNew(() =>
+                {
                     foreach (var item in dirs)
                     {
                         Image bitmap = null;
@@ -228,15 +223,15 @@ namespace AdvancedScada.ImagePicker
                         ImageListCurrentImage.Add(i++, bitmap);
                         ImageListCurrentTip.Add(i, string.Format("{0}.{1}.{2}", newName, bitmap.Height, bitmap.Width));
                         il32.Images.Add(newName, bitmap);
-                      
+
                     }
-                
-            } );
-            t.Wait();
-            gc.ImageList = il32;
-                   
-                       
-               
+
+                });
+                t.Wait();
+                gc.ImageList = il32;
+
+
+
             }
             catch (Exception ex)
             {
@@ -244,7 +239,7 @@ namespace AdvancedScada.ImagePicker
                 Console.WriteLine(ex.Message);
                 this.Text = $"{Level++}";
             }
-         
+
         }
 
         private void cboxListForderSVG_SelectedIndexChanged(object sender, EventArgs e)
@@ -252,44 +247,49 @@ namespace AdvancedScada.ImagePicker
             il32 = new ImageList();
             il32.ColorDepth = ColorDepth.Depth32Bit;
             il32.ImageSize = new Size(50, 50);
-
+            int Level = 0;
             string SelectedPath = ReadKey("Symbols") + $@"\\{ cboxListForderSVG.SelectedItem.ToString()}";
             int i = 0;
             var dirs = DirSearch(SelectedPath).ToArray();
             ImageListCurrentSVG.Clear();
             ImageListCurrentTip.Clear();
-          
-            int Level = 0;
-            foreach (var item in dirs)
-            {
-                string newName = Path.GetFileNameWithoutExtension(item);
 
-                try
+            Task t = Task.Factory.StartNew(() =>
                 {
-                    SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
+                    try
+                    {
 
-                     
-                    svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(item);
+                        foreach (var item in dirs)
+                        {
+                            string newName = Path.GetFileNameWithoutExtension(item);
 
-                    var bitmap  = SVGSample.svg.SVGParser.GetBitmapFromSVG(item);
-                  
-                    ImageListCurrentSVG.Add(i++, item);
-                    ImageListCurrentTip.Add(i, string.Format("{0}.{1}.{2}", newName, bitmap.Height, bitmap.Width));
-                    il32.Images.Add(newName, bitmap);
-                    Application.DoEvents();
 
-                }
-                catch (Exception ex)
-                {
+                            SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
+                            svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(item);
+                            var bitmap = SVGSample.svg.SVGParser.GetBitmapFromSVG(item);
 
-                    Console.WriteLine(ex.Message);
-                    this.Text = $"{Level++}";
-                    //return;
-                }
+                            ImageListCurrentSVG.Add(i++, item);
+                            ImageListCurrentTip.Add(i, string.Format("{0}.{1}.{2}", newName, bitmap.Height, bitmap.Width));
+                            il32.Images.Add(newName, bitmap);
 
-            }
+                            Application.DoEvents();
 
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Console.WriteLine(ex.Message);
+                        this.Text = $"{Level++}";
+                        //return;
+                    }
+
+                });
+            t.Wait();
             gcSVG.ImageList = il32;
+
+
         }
         #endregion
         #region gc
@@ -346,7 +346,7 @@ namespace AdvancedScada.ImagePicker
 
                 var stringBitmap = ImageListCurrentTip[gcSVG.SelectedIndex].Split('.');
 
-              
+
                 var bitmapMessage = string.Format("Name:{0} Height:{1} Width:{2} ", stringBitmap[0] + Environment.NewLine, stringBitmap[1] + Environment.NewLine, stringBitmap[2]);
 
                 toolTip1.Active = true;
@@ -366,7 +366,7 @@ namespace AdvancedScada.ImagePicker
                     xmlDoc.Load(bitmap);
                     var GETXML = xmlDoc.InnerXml;
 
-                
+
 
                     OnImagSVGSelected_Clicked?.Invoke(GETXML);
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -385,7 +385,7 @@ namespace AdvancedScada.ImagePicker
                     xmlDoc.Load(bitmap);
                     var GETXML = xmlDoc.InnerXml;
 
- 
+
                     OnStringImageSelected_Clicked?.Invoke(StringCompression.Compress(GETXML));
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
                     this.Close();

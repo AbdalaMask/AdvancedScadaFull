@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
@@ -95,9 +92,9 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            
+
             base.OnRender(drawingContext);
-            
+
         }
 
         /// <summary>
@@ -109,10 +106,10 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
 
             if (tempValue == '0') SelectSegments(0, 1, 2, 3, 4, 5, 6, 7);
             else if (tempValue == '1') SelectSegments(10, 2, 3);
-            else if (tempValue == '2') SelectSegments(0, 1, 2, 11, 12, 6 , 5, 4);
+            else if (tempValue == '2') SelectSegments(0, 1, 2, 11, 12, 6, 5, 4);
             else if (tempValue == '3') SelectSegments(0, 1, 2, 3, 4, 5, 11, 12);
             else if (tempValue == '4') SelectSegments(7, 11, 12, 2, 3);
-            else if (tempValue == '5') SelectSegments(0, 1 , 12 , 11, 7 , 4, 5, 3);
+            else if (tempValue == '5') SelectSegments(0, 1, 12, 11, 7, 4, 5, 3);
             else if (tempValue == '6') SelectSegments(15, 16, 5, 6, 7, 8, 4, 17, 18, 2);
             else if (tempValue == '7') SelectSegments(0, 1, 2, 3);
             else if (tempValue == '8') SelectSegments(0, 1, 2, 3, 4, 5, 6, 7, 11, 12);
@@ -121,28 +118,28 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
             else if (tempValue == 'B') SelectSegments(0, 1, 2, 3, 4, 5, 9, 14, 12);
             else if (tempValue == 'C') SelectSegments(0, 1, 4, 5, 6, 7);
             else if (tempValue == 'D') SelectSegments(0, 1, 2, 3, 4, 5, 9, 14);
-            else if (tempValue == 'E') SelectSegments(0, 1, 4, 5, 6, 7 , 11, 12);
-            else if (tempValue == 'F') SelectSegments(0 ,1 ,6, 7, 11, 12);
+            else if (tempValue == 'E') SelectSegments(0, 1, 4, 5, 6, 7, 11, 12);
+            else if (tempValue == 'F') SelectSegments(0, 1, 6, 7, 11, 12);
             else if (tempValue == 'G') SelectSegments(0, 1, 3, 4, 5, 6, 7, 12);
-            else if (tempValue == 'H') SelectSegments(2 ,3, 6, 7 ,11, 12);
-            else if (tempValue == 'I') SelectSegments(0, 1, 4, 5, 9 ,14);
-            else if (tempValue == 'J') SelectSegments(2 ,3 ,4 ,5 ,6);
+            else if (tempValue == 'H') SelectSegments(2, 3, 6, 7, 11, 12);
+            else if (tempValue == 'I') SelectSegments(0, 1, 4, 5, 9, 14);
+            else if (tempValue == 'J') SelectSegments(2, 3, 4, 5, 6);
             else if (tempValue == 'K') SelectSegments(6, 7, 11, 10, 15);
             else if (tempValue == 'L') SelectSegments(4, 5, 6, 7);
-            else if (tempValue == 'M') SelectSegments(2, 3, 6, 7, 8 , 10);
+            else if (tempValue == 'M') SelectSegments(2, 3, 6, 7, 8, 10);
             else if (tempValue == 'N') SelectSegments(2, 3, 6, 7, 8, 15);
             else if (tempValue == 'O') SelectSegments(0, 1, 2, 3, 4, 5, 6, 7);
-            else if (tempValue == 'P') SelectSegments(6, 7, 0 ,1, 2, 11, 12);
+            else if (tempValue == 'P') SelectSegments(6, 7, 0, 1, 2, 11, 12);
             else if (tempValue == 'Q') SelectSegments(0, 1, 2, 3, 4, 5, 6, 7, 15);
-            else if (tempValue == 'R') SelectSegments(6, 7 , 0, 1, 2, 11, 12, 15 );
+            else if (tempValue == 'R') SelectSegments(6, 7, 0, 1, 2, 11, 12, 15);
             else if (tempValue == 'S') SelectSegments(0, 1, 12, 11, 7, 4, 5, 3);
             else if (tempValue == 'T') SelectSegments(0, 1, 9, 14);
             else if (tempValue == 'U') SelectSegments(2, 3, 4, 5, 6, 7);
             else if (tempValue == 'V') SelectSegments(6, 7, 13, 10);
-            else if (tempValue == 'W') SelectSegments(6 , 7,  2, 3, 13, 15);
+            else if (tempValue == 'W') SelectSegments(6, 7, 2, 3, 13, 15);
             else if (tempValue == 'X') SelectSegments(8, 15, 13, 10);
             else if (tempValue == 'Y') SelectSegments(7, 11, 12, 14, 2);
-            else if (tempValue == 'Z') SelectSegments(0 , 1, 10, 13, 4, 5);
+            else if (tempValue == 'Z') SelectSegments(0, 1, 10, 13, 4, 5);
             else if (tempValue == '-') SelectSegments(11, 12);
         }
 
@@ -347,7 +344,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
         {
             PointCollection points = new PointCollection();
             var w = RightTopSegmPoints[0].X - LeftTopSegmPoints[2].X;
-            var botY= MiddleSegmPoints[2].Y - GapW - HorizSegH;
+            var botY = MiddleSegmPoints[2].Y - GapW - HorizSegH;
             //var segmH = figureStartPointY - botY;
             var divider = VertSegW / 2.5;
             var xMid = XByAngle(botY) + VertSegW;
@@ -384,12 +381,12 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
             var divider = VertSegW / 2.5;
 
             // four top points, starting from the left point
-            points.Add(new Point(xMid + (w/2 - divider), botY));
+            points.Add(new Point(xMid + (w / 2 - divider), botY));
             points.Add(new Point(LeftBottomSegmPoints[2].X + (w / 2 - divider / 2),
                 MiddleSegmPoints[0].Y + GapW));
             points.Add(new Point(LeftBottomSegmPoints[2].X + (w / 2 + divider / 2),
                 MiddleSegmPoints[0].Y + GapW));
-            points.Add(new Point(xMid + (w/2 + divider), botY));
+            points.Add(new Point(xMid + (w / 2 + divider), botY));
 
 
             // two bottom points, starting from the right point
@@ -412,13 +409,13 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
             PointCollection points = new PointCollection();
 
             var yBot1 = BottomSegmPoints[2].Y - GapW;
-            var xBot1 = XByAngle(yBot1) + VertSegW; 
+            var xBot1 = XByAngle(yBot1) + VertSegW;
 
-            var yBot2 = yBot1 - HorizSegH/2;
-            var xBot2 = XByAngle(yBot2) + VertSegW; 
+            var yBot2 = yBot1 - HorizSegH / 2;
+            var xBot2 = XByAngle(yBot2) + VertSegW;
 
             // three top points, starting from the left point
-            points.Add(new Point(BottomVerticalSegmPoints[1].X - GapW - DiagSegW, 
+            points.Add(new Point(BottomVerticalSegmPoints[1].X - GapW - DiagSegW,
                 BottomVerticalSegmPoints[1].Y));
             points.Add(new Point(BottomVerticalSegmPoints[1].X - GapW,
                 BottomVerticalSegmPoints[1].Y));
@@ -440,14 +437,14 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
         protected PointCollection GetTopLeftDiagSegmPoints()
         {
             PointCollection points = new PointCollection();
-            var y1 = HorizSegH + GapW + HorizSegH/2;
+            var y1 = HorizSegH + GapW + HorizSegH / 2;
             var x1 = XByAngle(y1) + VertSegW;
 
             var y2 = HorizSegH + GapW;
             var x2 = XByAngle(y2) + VertSegW;
 
             // three top points, starting from the left point
-            points.Add(new Point(x1 + GapW,y1));
+            points.Add(new Point(x1 + GapW, y1));
             points.Add(new Point(x2 + GapW, y2));
             points.Add(new Point(x2 + GapW + DiagSegW, y2));
 
@@ -560,7 +557,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
             RightTopHorizSegmPoints = GetRightTopHorizSegmPoints();
             Point startPoint = RightTopHorizSegmPoints[0];
             LineSegment line0 = new LineSegment(RightTopHorizSegmPoints[0], true);
-            LineSegment line1 = new LineSegment(RightTopHorizSegmPoints[1], true); 
+            LineSegment line1 = new LineSegment(RightTopHorizSegmPoints[1], true);
             LineSegment line2 = new LineSegment(RightTopHorizSegmPoints[2], true);
             LineSegment line3 = new LineSegment(RightTopHorizSegmPoints[3], true);
             LineSegment line4 = new LineSegment(RightTopHorizSegmPoints[4], true);

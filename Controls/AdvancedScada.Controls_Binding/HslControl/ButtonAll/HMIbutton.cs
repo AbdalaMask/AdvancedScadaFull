@@ -1,5 +1,4 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.Controls_Net45;
 using AdvancedScada.DriverBase.Client;
 using AdvancedScada.DriverBase.Comm;
 using HslControls;
@@ -492,9 +491,9 @@ namespace AdvancedScada.Controls_Binding.HslControl.ButtonAll
 
 
         #endregion
-         
+
         #region Event
-       
+
         private void HoldTimer_Tick(object sender, EventArgs e)
         {
             MinHoldTimer.Enabled = false;

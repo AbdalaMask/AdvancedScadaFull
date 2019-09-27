@@ -1,5 +1,4 @@
-﻿using AdvancedScada.HMI;
-using AdvancedScada.HMI.MainForm;
+﻿using AdvancedScada.HMI.MainForm;
 using System;
 using System.Windows.Forms;
 

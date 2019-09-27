@@ -90,7 +90,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
         /// The width of the vert. segment's bottom part
         /// </summary>
         protected double VertSegBotPartW { get; private set; }
-      
+
         /// <summary>
         /// Points collection for the left bottom segment
         /// </summary>
@@ -104,7 +104,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
         /// <summary>
         /// Points collection for the top segment
         /// </summary>
-        protected PointCollection TopSegmPoints { get;  set; }
+        protected PointCollection TopSegmPoints { get; set; }
 
         /// <summary>
         /// Points collection for the bottom segment
@@ -153,12 +153,12 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-           base.OnRender(drawingContext);
-           CalculateMeasures();
+            base.OnRender(drawingContext);
+            CalculateMeasures();
 
-           AssignSegments();
-           ClearSegmentsSelection();
-           SetSegments();
+            AssignSegments();
+            ClearSegmentsSelection();
+            SetSegments();
 
             // Draws segments
             foreach (var entry in GeometryFigures)
@@ -167,7 +167,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
                 if (SegmentsBrush.Any())
                 {
                     var brush = SegmentsBrush.SingleOrDefault(s => s.Item1 == (int)entry.SegmentNumber);
-                    Pen figurePen = new Pen(new SolidColorBrush(brush != null ? brush.Item3 : PenColor), 
+                    Pen figurePen = new Pen(new SolidColorBrush(brush != null ? brush.Item3 : PenColor),
                         PenThickness);
 
 
@@ -281,73 +281,73 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
                 switch (tempValue)
                 {
                     case 0:
-                        SelectSegments((int)SevenSegmentsNumbers.LeftTop, 
-                            (int)SevenSegmentsNumbers.Top, 
+                        SelectSegments((int)SevenSegmentsNumbers.LeftTop,
+                            (int)SevenSegmentsNumbers.Top,
                             (int)SevenSegmentsNumbers.RightTop,
-                            (int)SevenSegmentsNumbers.RightBottom, 
-                            (int)SevenSegmentsNumbers.Bottom, 
+                            (int)SevenSegmentsNumbers.RightBottom,
+                            (int)SevenSegmentsNumbers.Bottom,
                             (int)SevenSegmentsNumbers.LeftBottom);
                         break;
                     case 1:
-                        SelectSegments((int)SevenSegmentsNumbers.RightTop, 
+                        SelectSegments((int)SevenSegmentsNumbers.RightTop,
                             (int)SevenSegmentsNumbers.RightBottom);
                         break;
                     case 2:
-                        SelectSegments((int)SevenSegmentsNumbers.Top, 
-                            (int)SevenSegmentsNumbers.RightTop, 
+                        SelectSegments((int)SevenSegmentsNumbers.Top,
+                            (int)SevenSegmentsNumbers.RightTop,
                             (int)SevenSegmentsNumbers.Middle,
-                            (int)SevenSegmentsNumbers.LeftBottom, 
+                            (int)SevenSegmentsNumbers.LeftBottom,
                             (int)SevenSegmentsNumbers.Bottom);
                         break;
                     case 3:
-                        SelectSegments((int)SevenSegmentsNumbers.Top, 
+                        SelectSegments((int)SevenSegmentsNumbers.Top,
                             (int)SevenSegmentsNumbers.RightTop,
-                            (int)SevenSegmentsNumbers.Middle, 
-                            (int)SevenSegmentsNumbers.RightBottom, 
+                            (int)SevenSegmentsNumbers.Middle,
+                            (int)SevenSegmentsNumbers.RightBottom,
                             (int)SevenSegmentsNumbers.Bottom);
                         break;
                     case 4:
-                        SelectSegments((int)SevenSegmentsNumbers.LeftTop, 
+                        SelectSegments((int)SevenSegmentsNumbers.LeftTop,
                             (int)SevenSegmentsNumbers.RightTop,
-                            (int)SevenSegmentsNumbers.Middle, 
+                            (int)SevenSegmentsNumbers.Middle,
                             (int)SevenSegmentsNumbers.RightBottom);
                         break;
                     case 5:
-                        SelectSegments((int)SevenSegmentsNumbers.LeftTop, 
-                            (int)SevenSegmentsNumbers.Top, 
+                        SelectSegments((int)SevenSegmentsNumbers.LeftTop,
+                            (int)SevenSegmentsNumbers.Top,
                             (int)SevenSegmentsNumbers.Middle,
-                            (int)SevenSegmentsNumbers.RightBottom, 
+                            (int)SevenSegmentsNumbers.RightBottom,
                             (int)SevenSegmentsNumbers.Bottom);
                         break;
                     case 6:
-                        SelectSegments((int)SevenSegmentsNumbers.LeftTop, 
-                            (int)SevenSegmentsNumbers.Top, 
+                        SelectSegments((int)SevenSegmentsNumbers.LeftTop,
+                            (int)SevenSegmentsNumbers.Top,
                             (int)SevenSegmentsNumbers.Middle,
-                            (int)SevenSegmentsNumbers.RightBottom, 
-                            (int)SevenSegmentsNumbers.LeftBottom, 
+                            (int)SevenSegmentsNumbers.RightBottom,
+                            (int)SevenSegmentsNumbers.LeftBottom,
                             (int)SevenSegmentsNumbers.Bottom);
                         break;
                     case 7:
-                        SelectSegments((int)SevenSegmentsNumbers.LeftTop, 
+                        SelectSegments((int)SevenSegmentsNumbers.LeftTop,
                             (int)SevenSegmentsNumbers.Top,
-                            (int)SevenSegmentsNumbers.RightTop, 
+                            (int)SevenSegmentsNumbers.RightTop,
                             (int)SevenSegmentsNumbers.RightBottom);
                         break;
                     case 8:
-                        SelectSegments((int)SevenSegmentsNumbers.LeftTop, 
-                            (int)SevenSegmentsNumbers.Top, 
+                        SelectSegments((int)SevenSegmentsNumbers.LeftTop,
+                            (int)SevenSegmentsNumbers.Top,
                             (int)SevenSegmentsNumbers.RightTop,
                             (int)SevenSegmentsNumbers.Middle,
-                            (int)SevenSegmentsNumbers.LeftBottom, 
-                            (int)SevenSegmentsNumbers.RightBottom, 
+                            (int)SevenSegmentsNumbers.LeftBottom,
+                            (int)SevenSegmentsNumbers.RightBottom,
                             (int)SevenSegmentsNumbers.Bottom);
                         break;
                     case 9:
-                        SelectSegments((int)SevenSegmentsNumbers.LeftTop, 
-                            (int)SevenSegmentsNumbers.Top, 
+                        SelectSegments((int)SevenSegmentsNumbers.LeftTop,
+                            (int)SevenSegmentsNumbers.Top,
                             (int)SevenSegmentsNumbers.RightTop,
-                             (int)SevenSegmentsNumbers.Middle, 
-                             (int)SevenSegmentsNumbers.RightBottom, 
+                             (int)SevenSegmentsNumbers.Middle,
+                             (int)SevenSegmentsNumbers.RightBottom,
                              (int)SevenSegmentsNumbers.Bottom);
                         break;
                 }
@@ -415,7 +415,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
             }
         }
 
-        private PathGeometry CreateEllipseGeometry(Point centerPoint, 
+        private PathGeometry CreateEllipseGeometry(Point centerPoint,
             PathGeometry pathGeometry,
             double diameter)
         {
@@ -651,7 +651,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
             points.Add(new Point(VirtualWidth - LeftBottomSegmPoints[3].X, VirtualHeight - LeftBottomSegmPoints[3].Y));
             points.Add(new Point(VirtualWidth - LeftBottomSegmPoints[4].X, VirtualHeight - LeftBottomSegmPoints[4].Y));
             points.Add(new Point(VirtualWidth - LeftBottomSegmPoints[5].X, VirtualHeight - LeftBottomSegmPoints[5].Y));
-            
+
             // the point for rounded Bezier curve
             points.Add(new Point(VirtualWidth - LeftBottomSegmPoints[6].X, VirtualHeight - LeftBottomSegmPoints[6].Y));
 
@@ -659,7 +659,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
             points.Add(new Point(VirtualWidth - LeftBottomSegmPoints[0].X, VirtualHeight - LeftBottomSegmPoints[0].Y));
             points.Add(new Point(VirtualWidth - LeftBottomSegmPoints[1].X, VirtualHeight - LeftBottomSegmPoints[1].Y));
             points.Add(new Point(VirtualWidth - LeftBottomSegmPoints[2].X, VirtualHeight - LeftBottomSegmPoints[2].Y));
-            
+
             return points;
         }
 
@@ -683,7 +683,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
             // three right points, starting from the top point
             points.Add(new Point(VirtualWidth - x, RightTopSegmPoints[6].Y + GapW / 2));
             points.Add(new Point(VirtualWidth - x1, VirtualHeight / 2));
-            points.Add(new Point(VirtualWidth - x2, RightBottomSegmPoints[0].Y - GapW / 2));           
+            points.Add(new Point(VirtualWidth - x2, RightBottomSegmPoints[0].Y - GapW / 2));
             return points;
         }
 
@@ -869,7 +869,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
             LineSegment line7 = new LineSegment(TopSegmPoints[7], true);
 
             // The left Bezier curve for rounded corners
-            var pointsBezierLeft= new PointCollection
+            var pointsBezierLeft = new PointCollection
             {
                 TopSegmPoints[1], TopSegmPoints[2], TopSegmPoints[3]
             };
@@ -881,7 +881,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
 
 
             // The right Bezier curve for rounded corners
-            var pointsBezierRight= new PointCollection
+            var pointsBezierRight = new PointCollection
             {
                 TopSegmPoints[4], TopSegmPoints[5], TopSegmPoints[6]
             };
@@ -946,15 +946,15 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
             pathFigure.Segments.Add(bez);
             pathFigure.Segments.Add(line2);
             pathFigure.Segments.Add(line3);
-            pathFigure.Segments.Add(line4); 
+            pathFigure.Segments.Add(line4);
             pathFigure.Segments.Add(line5);
-            
+
 
             return pathGeometry;
         }
 
 
-        
+
 
         /// <summary>
         /// Left Bottom segment drawing
@@ -978,7 +978,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
                 LeftBottomSegmPoints[6]
             };
 
-            PolyBezierSegment bez = new PolyBezierSegment  
+            PolyBezierSegment bez = new PolyBezierSegment
             {
                 Points = new PointCollection(pointsBezier)
             };
@@ -994,7 +994,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
             pathFigure.Segments.Add(line3);
             pathFigure.Segments.Add(line4);
             pathFigure.Segments.Add(bez);
-            
+
             return pathGeometry;
         }
 

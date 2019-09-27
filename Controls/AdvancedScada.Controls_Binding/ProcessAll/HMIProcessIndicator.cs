@@ -2,7 +2,6 @@
 using AdvancedScada.Controls_Binding.Enum;
 using AdvancedScada.Controls_Binding.ProcessAll.DrawAll;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using System;
 using System.ComponentModel;

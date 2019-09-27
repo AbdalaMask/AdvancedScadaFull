@@ -463,7 +463,7 @@ namespace AdvancedScada.Studio.Editors
                             Description = txtDesc.Text,
                             Length = (ushort)txtAddressLength.Value,
                             DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", cboxDataType.SelectedItem)),
-                            IsArray= chkIsArray.Checked,
+                            IsArray = chkIsArray.Checked,
                             Tags = new List<Tag>()
                         };
 

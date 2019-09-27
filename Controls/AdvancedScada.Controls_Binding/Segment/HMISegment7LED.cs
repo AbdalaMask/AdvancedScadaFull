@@ -2,7 +2,6 @@
 using AdvancedScada.Controls_Binding.Enum;
 using AdvancedScada.Controls_Binding.Segment.DrawAll;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using AdvancedScada.Monitor;
 using System;
@@ -1894,7 +1893,7 @@ namespace AdvancedScada.Controls_Binding.Segment
                 MessageBox.Show(applicationException.ToString());
             }
         }
-        
+
 
         #endregion
         private string OriginalText;

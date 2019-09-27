@@ -1,7 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Net45;
 using AdvancedScada.DriverBase.Client;
-using AdvancedScada.DriverBase.Comm;
 using HslControls;
 using System;
 using System.ComponentModel;
@@ -24,7 +23,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
             this.LedNumberSize = 2;
             this.Margin = new System.Windows.Forms.Padding(3, 11, 3, 11);
         }
-         
+
         #region PLC Related Properties
 
         //*****************************************
@@ -32,13 +31,13 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
         //*****************************************
         private string m_PLCAddressText = string.Empty;
 
-       
+
         //*****************************************
         //* Property - Address in PLC to Link to
         //*****************************************
         private string m_PLCAddressVisible = string.Empty;
 
-        
+
 
         //*****************************************
         //* Property - Address in PLC to Link to
@@ -161,7 +160,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
             if (ValueChanged != null) ValueChanged(this, e);
         }
         #endregion
-         
+
         #region Error Display
         //********************************************************
         //* Show an error via the text property for a short time

@@ -1,6 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using AdvancedScada.Monitor;
 using System;

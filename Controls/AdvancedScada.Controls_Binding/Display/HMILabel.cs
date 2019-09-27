@@ -1,16 +1,11 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
-using AdvancedScada.Monitor;
 using System;
 using System.ComponentModel;
-using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Design;
-using System.Security.Permissions;
 using System.Windows.Forms;
-using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.Display
 {
@@ -42,7 +37,7 @@ namespace AdvancedScada.Controls_Binding.Display
             {
                 if (disposing)
                 {
-                    
+
                     if (m_KeypadFont != null)
                     {
                         m_KeypadFont.Dispose();
@@ -845,7 +840,7 @@ namespace AdvancedScada.Controls_Binding.Display
         #endregion
 
         #region Events
-       
+
         protected virtual void OnvalueChanged(EventArgs e)
         {
             if (ValueChanged != null)
@@ -853,7 +848,7 @@ namespace AdvancedScada.Controls_Binding.Display
         }
         #endregion
 
-         
+
         //***************************************
         //* Call backs for returned data
         //***************************************

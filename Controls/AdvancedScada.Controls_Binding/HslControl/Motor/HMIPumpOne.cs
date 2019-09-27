@@ -12,7 +12,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Motor
 
     public class HMIPumpOne : HslPumpOne
     {
-         
+
         #region PLC Related Properties
         private bool m_Value;
         public bool HoldTimeMet;
@@ -315,7 +315,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Motor
         }
 
         #endregion
-         
+
         #region Error Display
         //********************************************************
         //* Show an error via the text property for a short time

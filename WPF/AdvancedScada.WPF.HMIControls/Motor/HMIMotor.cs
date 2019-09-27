@@ -22,6 +22,7 @@ namespace AdvancedScada.WPF.HMIControls.Motor
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(HMIMotor),
           new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+
         public static DependencyProperty MotorColorsProperty = DependencyProperty.Register(
             "MotorColors", typeof(MotorColor), typeof(HMIMotor),
          new FrameworkPropertyMetadata(MotorColor.Gray, FrameworkPropertyMetadataOptions.AffectsRender));
@@ -34,7 +35,7 @@ namespace AdvancedScada.WPF.HMIControls.Motor
             DependencyProperty.Register("OutputTypes", typeof(OutputType), typeof(HMIMotor), new PropertyMetadata(OutputType.MomentarySet));
 
 
-
+        [Category("HMI")]
         public bool SuppressErrorDisplay
         {
             get { return (bool)GetValue(SuppressErrorDisplayProperty); }

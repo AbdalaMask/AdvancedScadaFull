@@ -23,7 +23,7 @@ namespace AdvancedScada.Controls.AHMI.ImageAll
         public event EventHandler ValueSelect1Changed;
         public event EventHandler ValueSelect2Changed;
 
-      
+
         private void RefreshImages()
         {
             if (Width > 0 && Height > 0)

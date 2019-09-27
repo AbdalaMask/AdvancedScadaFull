@@ -1,6 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.DriverBase.Client;
-using AdvancedScada.DriverBase.Comm;
 using HslControls;
 using MfgControl.AdvancedHMI.Controls;
 using System;
@@ -12,7 +11,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Conveyer
 {
     public class HMIConveyer : HslConveyer
     {
-         
+
         #region PLC Related Properties
         private bool m_Value;
         public bool HoldTimeMet;
@@ -316,7 +315,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Conveyer
 
         #endregion
 
-         
+
         #region Error Display
         //********************************************************
         //* Show an error via the text property for a short time

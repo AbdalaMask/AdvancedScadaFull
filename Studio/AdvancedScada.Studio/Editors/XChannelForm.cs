@@ -77,7 +77,7 @@ namespace AdvancedScada.Studio.Editors
                             break;
                     }
 
-                    
+
 
 
                     cboxConnType.Enabled = false;

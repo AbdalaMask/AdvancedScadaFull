@@ -57,6 +57,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="ButtonAll\HMIButtonAll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Fun\HMIFun.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,6 +116,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ButtonAll\HMIAnnunciator.cs" />
+    <Compile Include="ButtonAll\HMIButton2.cs" />
+    <Compile Include="ButtonAll\HMIButtonAll.xaml.cs">
+      <DependentUpon>HMIButtonAll.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Comm\EnumAll.cs" />
     <Compile Include="Comm\LicenseHMI.cs" />
     <Compile Include="Comm\ProgressConverter.cs" />
@@ -119,6 +127,7 @@
     <Compile Include="Fun\HMIFun.xaml.cs">
       <DependentUpon>HMIFun.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HMIShapes.cs" />
     <Compile Include="ImageAll\HMIImageContainerSvg.cs" />
     <Compile Include="Indicator\HMIIndicator.xaml.cs">
       <DependentUpon>HMIIndicator.xaml</DependentUpon>
@@ -219,6 +228,10 @@
     <ProjectReference Include="..\..\Drivers\AdvancedScada.DriverBase\DriverBase.csproj">
       <Project>{1D570E9A-E5B4-44DD-946D-9D73CFA4A535}</Project>
       <Name>DriverBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Util\AdvancedScada.Utils\Utils.csproj">
+      <Project>{5C361F75-32C8-487B-9EB8-0B4D627B89B4}</Project>
+      <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

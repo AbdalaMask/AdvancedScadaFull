@@ -271,7 +271,7 @@ namespace AdvancedScada.Management.BLManager
                     db.MemoryType = $"{dbNote.Attributes[MemoryType].Value}";
                     db.Length = ushort.Parse(dbNote.Attributes[LENGTH].Value);
                     db.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", dbNote.Attributes[DATA_TYPE].Value));
-                    db.IsArray=bool.Parse(dbNote.Attributes[Is_Array].Value);
+                    db.IsArray = bool.Parse(dbNote.Attributes[Is_Array].Value);
                     db.Description = dbNote.Attributes[ChannelService.DESCRIPTION].Value;
                     db.Tags = objTagManager.GetTags(dbNote);
                     dbList.Add(db);

@@ -1,4 +1,5 @@
-﻿using Svg;
+﻿using AdvancedScada.Utils.Compression;
+using Svg;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -46,9 +47,9 @@ namespace AdvancedScada.WPF.HMIControls.ImageAll
 
         private static void OnGraphicSelect1Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            //((HMIImageContainerSvg)d).svgGraphicSelect1 = SvgDocument.FromSvg<SvgDocument>(StringCompression.Decompress($"{e.NewValue}"));
-            //((HMIImageContainerSvg)d).m_GraphicSelect1 = ((HMIImageContainerSvg)d).svgGraphicSelect1.Draw();
-            //((HMIImageContainerSvg)d).Image3 = ((HMIImageContainerSvg)d).LoadImage(((HMIImageContainerSvg)d).ImageToByteArray(((HMIImageContainerSvg)d).m_GraphicSelect1));
+            ((HMIImageContainerSvg)d).svgGraphicSelect1 = SvgDocument.FromSvg<SvgDocument>(StringCompression.Decompress($"{e.NewValue}"));
+            ((HMIImageContainerSvg)d).m_GraphicSelect1 = ((HMIImageContainerSvg)d).svgGraphicSelect1.Draw();
+            ((HMIImageContainerSvg)d).Image3 = ((HMIImageContainerSvg)d).LoadImage(((HMIImageContainerSvg)d).ImageToByteArray(((HMIImageContainerSvg)d).m_GraphicSelect1));
 
         }
 
@@ -66,17 +67,17 @@ namespace AdvancedScada.WPF.HMIControls.ImageAll
 
         private static void OnGraphicSelect2Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            //((HMIImageContainerSvg)d).svgGraphicSelect2 = SvgDocument.FromSvg<SvgDocument>(StringCompression.Decompress($"{e.NewValue}"));
-            //((HMIImageContainerSvg)d).m_GraphicSelect2 = ((HMIImageContainerSvg)d).svgGraphicSelect2.Draw();
-            //((HMIImageContainerSvg)d).Image2 = ((HMIImageContainerSvg)d).LoadImage(((HMIImageContainerSvg)d).ImageToByteArray(((HMIImageContainerSvg)d).m_GraphicSelect2));
+            ((HMIImageContainerSvg)d).svgGraphicSelect2 = SvgDocument.FromSvg<SvgDocument>(StringCompression.Decompress($"{e.NewValue}"));
+            ((HMIImageContainerSvg)d).m_GraphicSelect2 = ((HMIImageContainerSvg)d).svgGraphicSelect2.Draw();
+            ((HMIImageContainerSvg)d).Image2 = ((HMIImageContainerSvg)d).LoadImage(((HMIImageContainerSvg)d).ImageToByteArray(((HMIImageContainerSvg)d).m_GraphicSelect2));
 
         }
 
         static void OnGraphicAllOffChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            //((HMIImageContainerSvg)d).svgGraphicAllOff = SvgDocument.FromSvg<SvgDocument>(StringCompression.Decompress($"{e.NewValue}"));
-            //((HMIImageContainerSvg)d).m_GraphicAllOff = ((HMIImageContainerSvg)d).svgGraphicAllOff.Draw();
-            //((HMIImageContainerSvg)d).Image1 = ((HMIImageContainerSvg)d).LoadImage(((HMIImageContainerSvg)d).ImageToByteArray(((HMIImageContainerSvg)d).m_GraphicAllOff));
+            ((HMIImageContainerSvg)d).svgGraphicAllOff = SvgDocument.FromSvg<SvgDocument>(StringCompression.Decompress($"{e.NewValue}"));
+            ((HMIImageContainerSvg)d).m_GraphicAllOff = ((HMIImageContainerSvg)d).svgGraphicAllOff.Draw();
+            ((HMIImageContainerSvg)d).Image1 = ((HMIImageContainerSvg)d).LoadImage(((HMIImageContainerSvg)d).ImageToByteArray(((HMIImageContainerSvg)d).m_GraphicAllOff));
         }
         private Bitmap m_GraphicAllOff;
         private Bitmap m_GraphicSelect2;

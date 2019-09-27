@@ -1,10 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows;
-using Microsoft.Windows.Design.Metadata;
+﻿using AdvancedScada.Monitor;
 using Microsoft.Windows.Design.PropertyEditing;
-using Microsoft.Win32;
-using AdvancedScada.Monitor;
+using System.Windows;
 
 namespace AdvancedScada.WPF.HMIControls.Design
 {

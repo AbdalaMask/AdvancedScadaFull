@@ -1,8 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows;
-using Microsoft.Windows.Design.Metadata;
+﻿using Microsoft.Windows.Design.Metadata;
 using Microsoft.Windows.Design.PropertyEditing;
+using System.ComponentModel;
 // The ProvideMetadata assembly-level attribute indicates to designers
 // that this assembly contains a class that provides an attribute table. 
 [assembly: ProvideMetadata(typeof(AdvancedScada.WPF.HMIControls.Design.Metadata))]

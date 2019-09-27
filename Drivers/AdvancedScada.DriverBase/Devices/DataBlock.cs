@@ -64,7 +64,7 @@ namespace AdvancedScada.DriverBase.Devices
         public string TypeOfRead { get; set; }
 
         [DataMember]
-        public bool IsArray  { get; set; } 
+        public bool IsArray { get; set; }
 
 
     }

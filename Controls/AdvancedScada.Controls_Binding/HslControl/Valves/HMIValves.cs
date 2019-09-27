@@ -1,7 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.Controls_Net45;
 using AdvancedScada.DriverBase.Client;
-using AdvancedScada.DriverBase.Comm;
 using HslControls;
 using MfgControl.AdvancedHMI.Controls;
 using System;
@@ -13,7 +11,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
 {
     public class HMIValves : HslValves
     {
-         
+
         #region PLC Related Properties
         public bool HoldTimeMet;
         private int m_MaximumHoldTime = 3000;
@@ -370,7 +368,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
         }
 
         #endregion
-         
+
         #region Error Display
         //********************************************************
         //* Show an error via the text property for a short time

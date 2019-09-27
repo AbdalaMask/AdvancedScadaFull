@@ -2,13 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace AdvancedScada.DataAccessEntity
 {
-   public  class SqlDb
+    public class SqlDb
     {
         private BatchsDbContext db = new BatchsDbContext();
 
@@ -24,7 +21,7 @@ namespace AdvancedScada.DataAccessEntity
 
         #region اضافة تركيبة وتعديلها
 
-      
+
         public int ADD_Batchs(string BatchName)
         {
             var BatchID = db.Batchs.Max(b => b.BatchID) + 1;
@@ -40,7 +37,7 @@ namespace AdvancedScada.DataAccessEntity
             try
             {
 
-                var  newBTH = db.Batchs.SingleOrDefault((i) => i.BatchID == BatchID);
+                var newBTH = db.Batchs.SingleOrDefault((i) => i.BatchID == BatchID);
                 BTHD.Batchs = newBTH;
                 BTHD.BatchID = BatchID;
                 BTHD.TankID = TankID;
@@ -97,11 +94,11 @@ namespace AdvancedScada.DataAccessEntity
         /// <param name="BatchName"></param>
         private void Delete_Batch(string BatchName)
         {
-           
-           var BTH = db.Batchs.SingleOrDefault((i) => i.BatchName ==  BatchName);
+
+            var BTH = db.Batchs.SingleOrDefault((i) => i.BatchName == BatchName);
             db.Batchs.Remove(BTH);
             db.SaveChanges();
-            
+
         }
         /// <summary>
         /// حذف جميع بيانات الخلاطات
@@ -141,7 +138,7 @@ namespace AdvancedScada.DataAccessEntity
             try
             {
 
-                
+
                 var list = db.Batchs.Where((i) => i.BatchName.Contains(BatchName)).ToList();
 
             }
@@ -150,11 +147,11 @@ namespace AdvancedScada.DataAccessEntity
 
             }
         }
-       
+
 
         public IList<string> List()
         {
-            return( from BTH in db.Batchs select BTH.BatchName).Distinct().ToArray();
+            return (from BTH in db.Batchs select BTH.BatchName).Distinct().ToArray();
 
         }
         //public void Get_txt(ComboBox comBatchName, ComboBox comTankName, ref TextBox txt_MixWeight, ref TextBox txt_LowWeight, ref TextBox txt_FreeFallWeight, ref TextBox txt_HighSpeed, ref TextBox txt_LowSpeed, ref TextBox num_Orders, ref ComboBox com_Werking, int x)

@@ -1,6 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.DriverBase.Client;
-using AdvancedScada.DriverBase.Comm;
 using HslControls;
 using MfgControl.AdvancedHMI.Controls;
 using System;
@@ -12,7 +11,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Thermometer
 {
     public class HMIThermometer : HslThermometer
     {
-         
+
         #region PLC Related Properties
         //*****************************************
         //* Property - Address in PLC to Link to
@@ -139,7 +138,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Thermometer
 
 
         #endregion
-         
+
         #region Error Display
         //********************************************************
         //* Show an error via the text property for a short time

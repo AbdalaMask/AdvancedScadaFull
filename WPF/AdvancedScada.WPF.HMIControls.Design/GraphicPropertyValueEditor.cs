@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using AdvancedScada.ImagePicker;
 using Microsoft.Windows.Design.PropertyEditing;
-using AdvancedScada.ImagePicker;
+using System.Windows;
 using System.Windows.Forms;
 
 namespace AdvancedScada.WPF.HMIControls.Design

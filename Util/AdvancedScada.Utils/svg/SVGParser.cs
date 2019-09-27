@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Svg;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Svg;
 /*
  * @author  : Lasitha Ishan Petthawadu
  * @date    : 23/02/2014
@@ -29,8 +24,8 @@ namespace SVGSample.svg
         public static Bitmap GetBitmapFromSVG(string filePath)
         {
             SvgDocument document = GetSvgDocument(filePath);
-         
-            Bitmap bmp=document.Draw();
+
+            Bitmap bmp = document.Draw();
             return bmp;
         }
 
@@ -41,7 +36,7 @@ namespace SVGSample.svg
         /// <returns>Returns the SVG Document.</returns>
         public static SvgDocument GetSvgDocument(string filePath)
         {
-            SvgDocument document=SvgDocument.Open(filePath);
+            SvgDocument document = SvgDocument.Open(filePath);
             return AdjustSize(document);
         }
 

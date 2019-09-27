@@ -1,5 +1,4 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using MfgControl.AdvancedHMI.Controls;
 using System;
