@@ -9,7 +9,7 @@ namespace AdvancedScada.IODriver.Modbus.ASCII
     {
         private SerialPort serialPort;
 
-        public bool IsConnected { get; set; }
+    
         public byte Station { get; set; }
         public ModbusASCIIMaster(short slaveId, SerialPort serialPort)
         {
@@ -19,6 +19,10 @@ namespace AdvancedScada.IODriver.Modbus.ASCII
 
         private ModbusAscii busAsciiClient = null;
 
+        #region IDriverAdapter
+
+       
+        public bool IsConnected { get; set; }
         public bool Connection()
         {
 
@@ -67,46 +71,11 @@ namespace AdvancedScada.IODriver.Modbus.ASCII
             }
         }
 
-
-
-        public byte[] BuildReadByte(byte station, string address, ushort length)
-        {
-            var frame = DemoUtils.BulkReadRenderResult(busAsciiClient, address, length);
-
-
-            return frame;
-        }
-
-        public byte[] BuildWriteByte(byte station, string address, byte[] value)
-        {
-            try
-            {
-                DemoUtils.WriteResultRender(busAsciiClient.Write(address, value), address);
-            }
-            catch (Exception ex)
-            {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-            }
-            return new byte[0];
-        }
-
-
-
-        public bool[] ReadDiscrete(string address, ushort length)
-        {
-            return busAsciiClient.ReadDiscrete(address, length).Content;
-        }
-
         public bool Write(string address, dynamic value)
         {
-            if (value is bool)
-            {
+           
                 busAsciiClient.Write(address, value);
-            }
-            else
-            {
-                busAsciiClient.Write(address, value);
-            }
+           
 
             return true;
         }
@@ -170,6 +139,16 @@ namespace AdvancedScada.IODriver.Modbus.ASCII
 
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
+
+        #endregion
+
+
+        public bool[] ReadDiscrete(string address, ushort length)
+        {
+            return busAsciiClient.ReadDiscrete(address, length).Content;
+        }
+
+      
 
 
     }

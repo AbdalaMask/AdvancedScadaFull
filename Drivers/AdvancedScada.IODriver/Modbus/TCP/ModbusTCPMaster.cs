@@ -88,33 +88,7 @@ namespace AdvancedScada.IODriver.Modbus.TCP
             }
 
         }
-        public byte[] BuildReadByte(byte station, string address, ushort length)
-        {
-
-
-            var frame = DemoUtils.BulkReadRenderResult(busTcpClient, address, length);
-
-
-            return frame;
-
-
-        }
-
-        public byte[] BuildWriteByte(byte station, string address, byte[] value)
-        {
-            try
-            {
-                DemoUtils.WriteResultRender(busTcpClient.Write(address, value), address);
-            }
-            catch (Exception ex)
-            {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-            }
-            return new byte[0];
-        }
-
-
-
+       
 
         public bool[] ReadDiscrete(string address, ushort length)
         {
@@ -124,15 +98,8 @@ namespace AdvancedScada.IODriver.Modbus.TCP
 
         public bool Write(string address, dynamic value)
         {
-            if (value is bool)
-            {
-                busTcpClient.Write(address, value);
-            }
-            else
-            {
-                busTcpClient.Write(address, value);
-            }
-
+          
+           busTcpClient.Write(address, value);
             return true;
         }
 

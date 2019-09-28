@@ -10,9 +10,7 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
     {
         private SerialPort serialPort;
         private XGBCnet xGBCnet = null;
-        public event EventHandler<PlcComEventArgs> DataReceived;
-        public event EventHandler<PlcComEventArgs> ComError;
-        public event EventHandler ConnectionEstablished;
+        public byte Station { get; set; }
         private object LockObject = new object();
         public LS_CNET(short slaveId, SerialPort serialPort)
         {
@@ -20,9 +18,9 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
             this.serialPort = serialPort;
         }
 
-        #region IReadWritePLC
+        #region IDriverAdapter
         public bool IsConnected { get; set; } = false;
-        public byte Station { get; set; }
+       
         public bool Connection()
         {
 
@@ -81,40 +79,7 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
                 return IsConnected;
             }
         }
-        #endregion
-        protected virtual void OnDataReceived(PlcComEventArgs e)
-        {
-            DataReceived?.Invoke(this, e);
-        }
-
-        protected virtual void OnComError(PlcComEventArgs e)
-        {
-            ComError?.Invoke(this, e);
-        }
-
-        protected virtual void OnConnectionEstablished(System.EventArgs e)
-        {
-            ConnectionEstablished?.Invoke(this, e);
-        }
-
-        public byte[] BuildReadByte(byte station, string address, ushort length)
-        {
-            var frame = DemoUtils.BulkReadRenderResult(xGBCnet, address, length);
-            return frame;
-        }
-
-        public byte[] BuildWriteByte(byte station, string address, byte[] value)
-        {
-            try
-            {
-                DemoUtils.WriteResultRender(xGBCnet.Write(address, value), address);
-            }
-            catch (Exception ex)
-            {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-            }
-            return new byte[0];
-        }
+     
 
         public bool Write(string address, dynamic value)
         {
@@ -188,15 +153,15 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
             }
             else
             {
-                OnComError(new PlcComEventArgs(-20, "No Response from PLC", (ushort)1, 1));
+                EventscadaException?.Invoke(this.GetType().Name, "No Response from PLC");
             }
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
-
+       #endregion
         private object ReadCoil(string address, ushort length)
         {
-            var bitArys = DemoUtils.BulkReadRenderResult(xGBCnet, address, length);
-            return HslCommunication.BasicFramework.SoftBasic.ByteToBoolArray(bitArys);
+            var bitArys = xGBCnet.Read( address, length);
+            return HslCommunication.BasicFramework.SoftBasic.ByteToBoolArray(bitArys.Content);
         }
 
         public bool[] ReadDiscrete(string address, ushort length)

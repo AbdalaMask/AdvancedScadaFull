@@ -96,29 +96,7 @@ namespace AdvancedScada.IODriver.Siemens
         }
 
  
-        public byte[] BuildReadByte(byte station, string address, ushort length)
-        {
-            var frame = DemoUtils.BulkReadRenderResult(siemensPPI, address, length);
-
-
-            return frame;
-        }
-
-        public byte[] BuildWriteByte(byte station, string address, byte[] value)
-        {
-            try
-            {
-                DemoUtils.WriteResultRender(siemensPPI.Write(address, value), address);
-            }
-            catch (Exception ex)
-            {
-               EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-            }
-            return new byte[0];
-        }
-
-
-
+       
         
         public bool Write(string address, dynamic value)
         {

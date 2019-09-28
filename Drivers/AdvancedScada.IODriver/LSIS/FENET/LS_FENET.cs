@@ -10,10 +10,6 @@ namespace AdvancedScada.IODriver.LSIS.FENET
     public class LS_FENET : IDriverAdapter
     {
         private XGBFastEnet fastEnet = null;
-        public bool IsConnected { get; set; } = false;
-        public event EventHandler<PlcComEventArgs> DataReceived;
-        public event EventHandler<PlcComEventArgs> ComError;
-        public event EventHandler ConnectionEstablished;
         private readonly int Port = 2004;
         private readonly string IP = "127.0.0.1";
 
@@ -44,6 +40,9 @@ namespace AdvancedScada.IODriver.LSIS.FENET
 
         }
 
+        #endregion
+        #region IDriverAdapter
+        public bool IsConnected { get; set; } = false;
 
         public bool Connection()
         {
@@ -100,26 +99,6 @@ namespace AdvancedScada.IODriver.LSIS.FENET
 
         }
 
-        #endregion
-
-        public byte[] BuildReadByte(byte station, string address, ushort length)
-        {
-            var frame = DemoUtils.BulkReadRenderResult(fastEnet, address, length);
-            return frame;
-        }
-
-        public byte[] BuildWriteByte(byte station, string address, byte[] value)
-        {
-            try
-            {
-                DemoUtils.WriteResultRender(fastEnet.Write(address, value), address);
-            }
-            catch (Exception ex)
-            {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-            }
-            return new byte[0];
-        }
         public bool Write(string address, dynamic value)
         {
             if (value is bool)
@@ -134,20 +113,6 @@ namespace AdvancedScada.IODriver.LSIS.FENET
 
 
             return true;
-        }
-        protected virtual void OnDataReceived(PlcComEventArgs e)
-        {
-            DataReceived?.Invoke(this, e);
-        }
-
-        protected virtual void OnComError(PlcComEventArgs e)
-        {
-            ComError?.Invoke(this, e);
-        }
-
-        protected virtual void OnConnectionEstablished(System.EventArgs e)
-        {
-            ConnectionEstablished?.Invoke(this, e);
         }
 
         public TValue[] Read<TValue>(string address, ushort length)
@@ -209,11 +174,11 @@ namespace AdvancedScada.IODriver.LSIS.FENET
 
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
-
+       #endregion
         private object ReadCoil(string address, ushort length)
         {
-            var bitArys = DemoUtils.BulkReadRenderResult(fastEnet, address, length);
-            return HslCommunication.BasicFramework.SoftBasic.ByteToBoolArray(bitArys);
+            var bitArys = fastEnet.Read(address, length);
+            return HslCommunication.BasicFramework.SoftBasic.ByteToBoolArray(bitArys.Content);
         }
 
         public bool[] ReadDiscrete(string address, ushort length)

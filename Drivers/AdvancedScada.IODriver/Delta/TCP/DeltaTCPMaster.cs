@@ -87,29 +87,7 @@ namespace AdvancedScada.IODriver.Delta.TCP
             }
 
         }
-        public byte[] BuildReadByte(byte station, string address, ushort length)
-        {
-            var Address = DMT.DevToAddrW("DVP", address, station);
-            var frame = DemoUtils.BulkReadRenderResult(busTcpClient, $"{Address}", length);
-
-
-            return frame;
-        }
-
-        public byte[] BuildWriteByte(byte station, string address, byte[] value)
-        {
-            try
-            {
-                var Address = DMT.DevToAddrW("DVP", address, station);
-                DemoUtils.WriteResultRender(busTcpClient.Write($"{Address}", value), address);
-            }
-            catch (Exception ex)
-            {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-            }
-            return new byte[0];
-        }
-
+       
 
 
         public bool[] ReadDiscrete(string address, ushort length)
