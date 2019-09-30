@@ -1,4 +1,5 @@
-﻿using AdvancedScada.DriverBase.Client;
+﻿using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Client;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IBaseService;
 using AdvancedScada.Management.BLManager;
@@ -63,8 +64,13 @@ namespace AdvancedScada.BaseService.Client
                 if (tagsClient.ContainsKey(author.Key))
                 {
                     tagsClient[author.Key].Value = author.Value.Value;
-                    tagsClient[author.Key].Timestamp = author.Value.Timestamp;
+                    tagsClient[author.Key].TimeSpan = author.Value.TimeSpan;
                 }
+        }
+
+        public void UpdateCollection(ConnectionState status, Dictionary<string, Tag> collection)
+        {
+            
         }
     }
 }

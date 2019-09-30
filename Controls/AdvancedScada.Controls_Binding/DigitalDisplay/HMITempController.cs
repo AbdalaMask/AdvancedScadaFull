@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using MfgControl.AdvancedHMI.Controls;
 using System;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.DigitalDisplay
 {
-    public class HMITempController : MfgControl.AdvancedHMI.Controls.TempController
+    public class HMITempController : MfgControl.AdvancedHMI.Controls.TempController, IPropertiesControls
     {
 
 
@@ -114,6 +115,9 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
 
         [DefaultValue(false)]
         public bool SuppressErrorDisplay { get; set; }
+        public string PLCAddressClick { get ; set; }
+        public string PLCAddressVisible { get ; set ; }
+        public string PLCAddressEnabled { get ; set ; }
 
         private void _Click1(object sender, EventArgs e)
         {
@@ -220,7 +224,7 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
         private Timer ErrorDisplayTime;
         private decimal _ValueScaleFactor;
 
-        private void DisplayError(string ErrorMessage)
+        public  void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

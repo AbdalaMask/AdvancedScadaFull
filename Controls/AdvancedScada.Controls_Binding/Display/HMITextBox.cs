@@ -1,5 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using AdvancedScada.Monitor;
 using System;
@@ -14,7 +15,7 @@ using System.Windows.Forms.Design;
 namespace AdvancedScada.Controls_Binding.Display
 {
     [Designer(typeof(HMITextBoxDesigner))]
-    public class HMITextBox : System.Windows.Forms.TextBox
+    public class HMITextBox : System.Windows.Forms.TextBox, IPropertiesControls
     {
         //*****************************************
         //* Property - Address in PLC to Link to
@@ -550,7 +551,7 @@ namespace AdvancedScada.Controls_Binding.Display
         private Timer ErrorDisplayTime;
         private readonly object ErrorLock = new object();
 
-        private void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {
@@ -660,6 +661,8 @@ namespace AdvancedScada.Controls_Binding.Display
             }
         }
 
+        public string PLCAddressClick { get; set; }
+        public string PLCAddressEnabled { get ; set ; }
 
         private IKeyboard KeypadPopUp;
 

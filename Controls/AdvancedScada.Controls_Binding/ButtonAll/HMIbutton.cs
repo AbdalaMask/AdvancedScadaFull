@@ -1,5 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Binding.Display;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using AdvancedScada.Monitor;
 using MfgControl.AdvancedHMI.Controls;
@@ -14,8 +15,8 @@ using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.ButtonAll
 {
-    [Designer(typeof(HMIbuttonDesigner))]
-    public class HMIbutton : System.Windows.Forms.Button
+    
+    public class HMIbutton : System.Windows.Forms.Button, IPropertiesControls
     {
         public HMIbutton()
         {
@@ -250,6 +251,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         //**********************************************************************
 
         [Category("PLC Properties")] public int ValueToWrite { get; set; }
+        public string PLCAddressValue { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         #endregion
 
@@ -328,107 +330,13 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
             //this.Invalidate();
         }
 
+        public void DisplayError(string ErrorMessage)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 
-    [PermissionSet
-        (SecurityAction.Demand, Name = "FullTrust")]
-    internal class HMIbuttonDesigner : ControlDesigner
-    {
-        private DesignerActionListCollection actionLists;
-
-        // Use pull model to populate smart tag menu.
-        public override DesignerActionListCollection ActionLists
-        {
-            get
-            {
-                if (null == actionLists)
-                {
-                    actionLists = new DesignerActionListCollection();
-                    actionLists.Add(new HMIbuttonActionList(Component));
-                }
-
-                return actionLists;
-            }
-        }
-    }
-
-    internal class HMIbuttonActionList : DesignerActionList
-    {
-        private readonly HMIbutton _HMIbutton;
-
-        private DesignerActionUIService designerActionUISvc;
-
-        //The constructor associates the control with the smart tag list.
-        public HMIbuttonActionList(IComponent component)
-            : base(component)
-        {
-            _HMIbutton = component as HMIbutton;
-
-            // Cache a reference to DesignerActionUIService, 
-            // so the DesigneractionList can be refreshed.
-            designerActionUISvc = GetService(typeof(DesignerActionUIService))
-                as DesignerActionUIService;
-        }
-
-
-        public string PLCAddressText
-        {
-            get { return _HMIbutton.PLCAddressText; }
-            set { _HMIbutton.PLCAddressText = value; }
-        }
-
-        public Color BackColor
-        {
-            get { return _HMIbutton.BackColor; }
-            set { _HMIbutton.BackColor = value; }
-        }
-
-        public Color ForeColor
-        {
-            get { return _HMIbutton.ForeColor; }
-            set { _HMIbutton.ForeColor = value; }
-        }
-
-        public Font Font
-        {
-            get { return _HMIbutton.Font; }
-            set { _HMIbutton.Font = value; }
-        }
-
-        public string Text
-        {
-            get { return _HMIbutton.Text; }
-            set { _HMIbutton.Text = value; }
-        }
-
-        // Implementation of this abstract method creates smart tag  items, 
-        // associates their targets, and collects into list.
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            var items = new DesignerActionItemCollection();
-
-            //Define static section header entries.
-            items.Add(new DesignerActionHeaderItem("HMI Professional"));
-            items.Add(new DesignerActionMethodItem(this, "ShowTagList", "Choose Tag"));
-            items.Add(new DesignerActionPropertyItem("BackColor", "BackColor"));
-            items.Add(new DesignerActionPropertyItem("ForeColor", "ForeColor"));
-            items.Add(new DesignerActionPropertyItem("Font", "Font"));
-            items.Add(new DesignerActionPropertyItem("TagName", "TagName"));
-            items.Add(new DesignerActionPropertyItem("Text", "Text"));
-            return items;
-        }
-
-        private void ShowTagList()
-        {
-            var frm = new MonitorForm(PLCAddressText);
-            frm.OnTagSelected_Clicked += tagName =>
-            {
-                var pd = TypeDescriptor.GetProperties(_HMIbutton)["TagName"];
-                pd.SetValue(_HMIbutton, tagName);
-            };
-            frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.ShowDialog();
-        }
-    }
+    
 }

@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using AdvancedScada.DriverBase.Comm;
 using HslControls;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 namespace AdvancedScada.Controls_Binding.HslControl.ButtonAll
 {
 
-    public class HMIbutton : HslButton
+    public class HMIbutton : HslButton, IPropertiesControls
     {
         public HMIbutton()
         {
@@ -489,6 +490,8 @@ namespace AdvancedScada.Controls_Binding.HslControl.ButtonAll
             }
         }
 
+        public string PLCAddressValue { get; set ; }
+
 
         #endregion
 
@@ -586,7 +589,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.ButtonAll
         //********************************************************
         private System.Windows.Forms.Timer ErrorDisplayTime;
 
-        private void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!m_SuppressErrorDisplay)
             {

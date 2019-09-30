@@ -12,7 +12,15 @@ namespace AdvancedScada.DriverBase.Devices
         public delegate void EventValueChanged(dynamic value);
 
 
-        private dynamic m_Value;
+        private int _TagId;
+
+        private string _TagName;
+
+        private dynamic _Value;
+
+        private DateTime _TimeSpan = DateTime.Now;
+
+        private string _Description;
 
         public EventValueChanged ValueChanged = null;
 
@@ -31,45 +39,86 @@ namespace AdvancedScada.DriverBase.Devices
         [DataMember]
         public int DeviceId { get; set; }
 
-        /// <summary>
-        ///     Kiểu dữ liệu.
-        /// </summary>
+        
         [DataMember]
         public DataTypes DataType { get; set; }
 
-
         [DataMember]
-        public dynamic Value
+        public string Address { get; set; }
+        [DataMember]
+        public int TagId
         {
-            get { return m_Value; }
+            get
+            {
+                return _TagId;
+            }
+
             set
             {
-
-                m_Value = value;
-                OnPropertyChanged("Value");
-
+                _TagId = value;
+                OnPropertyChanged("TagId");
             }
         }
 
         [DataMember]
-        public string Address { get; set; }
+        public string TagName
+        {
+            get
+            {
+                return _TagName;
+            }
 
+            set
+            {
+                _TagName = value;
+                OnPropertyChanged("TagName");
+            }
+        }
 
         [DataMember]
-        public string TagName { get; set; }
+        public dynamic Value
+        {
+            get
+            {
+                return _Value;
+            }
 
+            set
+            {
+                _Value = value;
+                OnPropertyChanged("Value");
+            }
+        }
 
         [DataMember]
-        public int TagId { get; set; }
+        public DateTime TimeSpan
+        {
+            get
+            {
+                return _TimeSpan;
+            }
+
+            set
+            {
+                _TimeSpan = value;
+                OnPropertyChanged("TimeSpan");
+            }
+        }
 
         [DataMember]
-        public DateTime Timestamp { get; set; }
+        public string Description
+        {
+            get
+            {
+                return _Description;
+            }
 
-        [DataMember]
-        public string Description { get; set; }
-
-
-
+            set
+            {
+                _Description = value;
+                OnPropertyChanged("Description");
+            }
+        }
 
 
 
@@ -77,13 +126,11 @@ namespace AdvancedScada.DriverBase.Devices
 
         protected virtual void OnPropertyChanged(string newName)
         {
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(newName));
-            if (ValueChanged != null) ValueChanged(Value);
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(newName));
+            }
         }
-
-
-
-
 
     }
 }

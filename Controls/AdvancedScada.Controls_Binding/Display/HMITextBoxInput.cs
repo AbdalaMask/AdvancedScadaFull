@@ -1,10 +1,11 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using System.ComponentModel;
 using System.Drawing.Design;
 
 namespace AdvancedScada.Controls_Binding.Display
 {
-    public class HMITextBoxInput : System.Windows.Forms.TextBox
+    public class HMITextBoxInput : System.Windows.Forms.TextBox, IPropertiesControls
     {   //*****************************************
         //* Property - Address in PLC to Link to
         //*****************************************
@@ -18,6 +19,16 @@ namespace AdvancedScada.Controls_Binding.Display
             set { m_PLCAddressValueToWrite = value; }
 
 
+        }
+
+        public string PLCAddressValue { get ; set ; }
+        public string PLCAddressClick { get ; set ; }
+        public string PLCAddressVisible { get ; set ; }
+        public string PLCAddressEnabled { get ; set ; }
+
+        public void DisplayError(string ErrorMessage)
+        {
+            throw new System.NotImplementedException();
         }
 
         public void ValueToWrite()

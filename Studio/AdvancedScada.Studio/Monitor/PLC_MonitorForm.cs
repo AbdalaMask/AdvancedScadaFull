@@ -113,14 +113,14 @@ namespace AdvancedScada.Studio.Monitor
                                 row[2] = string.Format("{0}", tg.Address);
                                 row[3] = string.Format("{0}", tg.DataType);
                                 row[4] = "0";
-                                row[5] = string.Format("{0}", tg.Timestamp);
+                                row[5] = string.Format("{0}", tg.TimeSpan);
                                 row[6] = tg.Description;
 
                                 DGMonitorForm.Rows.Add(row);
                             }
                             else
                             {
-                                string[] row1 = { string.Format("{0}", tg.TagId), tg.TagName, string.Format("{0}", tg.Address), string.Format("{0}", tg.DataType), string.Format("{0}", tg.Value), string.Format("{0}", tg.Timestamp), tg.Description };
+                                string[] row1 = { string.Format("{0}", tg.TagId), tg.TagName, string.Format("{0}", tg.Address), string.Format("{0}", tg.DataType), string.Format("{0}", tg.Value), string.Format("{0}", tg.TimeSpan), tg.Description };
 
                                 DGMonitorForm.Rows.Add(row1);
                             }
@@ -513,6 +513,11 @@ namespace AdvancedScada.Studio.Monitor
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
+        }
+
+        public void UpdateCollection(ConnectionState status, Dictionary<string, Tag> collection)
+        {
+             
         }
         #endregion
     }

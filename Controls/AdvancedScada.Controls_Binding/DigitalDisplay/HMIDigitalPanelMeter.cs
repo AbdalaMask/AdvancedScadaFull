@@ -1,5 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using System;
 using System.ComponentModel;
@@ -11,7 +12,7 @@ using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.DigitalDisplay
 {
-    public class HMIDigitalPanelMeter : MfgControl.AdvancedHMI.Controls.DigitalPanelMeter
+    public class HMIDigitalPanelMeter : MfgControl.AdvancedHMI.Controls.DigitalPanelMeter, IPropertiesControls
     {
 
 
@@ -129,7 +130,7 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        private void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {
@@ -215,7 +216,8 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
         public double KeypadMinValue { get; set; }
 
         public double KeypadMaxValue { get; set; }
-
+        public string PLCAddressClick { get ; set; }
+        public string PLCAddressEnabled { get; set; }
 
         private void KeypadPopUp_ButtonClick(object sender, KeypadEventArgs e)
         {

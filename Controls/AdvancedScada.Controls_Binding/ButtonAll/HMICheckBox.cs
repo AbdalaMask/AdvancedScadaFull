@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using MfgControl.AdvancedHMI.Controls;
 using System;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.ButtonAll
 {
-    public class HMICheckBox : System.Windows.Forms.CheckBox
+    public class HMICheckBox : System.Windows.Forms.CheckBox, IPropertiesControls
     {
         #region PLC Related Properties
 
@@ -135,7 +136,9 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         }
 
         [DefaultValue(false)] public bool SuppressErrorDisplay { get; set; }
-
+        public string PLCAddressValue { get ; set ; }
+        public string PLCAddressClick { get ; set; }
+        public string PLCAddressEnabled { get; set; }
 
         //***************************************
         //* Call backs for returned data
@@ -149,7 +152,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        private void DisplayError(string ErrorMessage)
+        public   void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

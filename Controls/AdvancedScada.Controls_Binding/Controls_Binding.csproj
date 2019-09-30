@@ -35,6 +35,15 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DasNetGauge">
+      <HintPath>..\..\Lib\DasNetGauge.dll</HintPath>
+    </Reference>
+    <Reference Include="DasNetIndicator">
+      <HintPath>..\..\Lib\DasNetIndicator.dll</HintPath>
+    </Reference>
+    <Reference Include="DasNetLED">
+      <HintPath>..\..\Lib\DasNetLED.dll</HintPath>
+    </Reference>
     <Reference Include="HslControls, Version=2.2.2.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\HslControls.2.2.2\lib\net45\HslControls.dll</HintPath>
     </Reference>
@@ -192,8 +201,10 @@
     <Compile Include="ImageAll\HMIImageSelectByBit.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Leds\DrawAll\DrawGraphics.cs" />
     <Compile Include="Leds\HMILedSingle.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LED\LedBulb.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Licenses\LicenseManager.cs" />
@@ -212,16 +223,10 @@
     <Compile Include="Motor\HMIWaterPump.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ProcessAll\DrawAll\DrawGraphics.cs" />
-    <Compile Include="ProcessAll\DrawAll\DrawGraphics2.cs" />
     <Compile Include="ProcessAll\HMIProcessIndicator.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ProcessAll\HMIProcessLevel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Segment\DrawAll\DrawGraphics.cs" />
     <Compile Include="Segment\HMILCDMatrix.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -241,6 +246,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="SevenSegment\HMISevenSegment2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SevenSegment\LxLedControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Utility\Utility.cs" />
@@ -280,9 +288,7 @@
       <Name>Monitor</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LED\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Alarm\HMIAlarmMan.resx">
       <DependentUpon>HMIAlarmMan.cs</DependentUpon>

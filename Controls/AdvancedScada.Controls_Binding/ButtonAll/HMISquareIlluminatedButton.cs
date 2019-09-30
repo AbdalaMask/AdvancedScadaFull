@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using MfgControl.AdvancedHMI.Controls;
 using System;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.ButtonAll
 {
-    public class HMISquareIlluminatedButton : MfgControl.AdvancedHMI.Controls.SquareIlluminatedButton
+    public class HMISquareIlluminatedButton : SquareIlluminatedButton, IPropertiesControls
     {
 
 
@@ -317,6 +318,8 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
             }
         }
 
+        public string PLCAddressEnabled { get; set; }
+
         #endregion
 
         #region "Error Display"
@@ -326,7 +329,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        private void DisplayError(string ErrorMessage)
+        public  void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using HslControls;
 using MfgControl.AdvancedHMI.Controls;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.HslControl.Conveyer
 {
-    public class HMIConveyerRollers : HslConveyerRollers
+    public class HMIConveyerRollers : HslConveyerRollers, IPropertiesControls
     {
 
         #region PLC Related Properties
@@ -312,6 +313,8 @@ namespace AdvancedScada.Controls_Binding.HslControl.Conveyer
             }
         }
 
+        public string PLCAddressEnabled { get ; set ; }
+
         #endregion
 
 
@@ -320,7 +323,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Conveyer
         //* Show an error via the text property for a short time
         //********************************************************
         private System.Windows.Forms.Timer ErrorDisplayTime;
-        private void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

@@ -39,6 +39,15 @@
     <Reference Include="AdvancedScada.HMIControlsBinding">
       <HintPath>..\..\Controls\AdvancedScada.Controls_Binding\obj\Debug\AdvancedScada.HMIControlsBinding.dll</HintPath>
     </Reference>
+    <Reference Include="DasNetGauge">
+      <HintPath>..\..\Lib\DasNetGauge.dll</HintPath>
+    </Reference>
+    <Reference Include="DasNetIndicator">
+      <HintPath>..\..\Lib\DasNetIndicator.dll</HintPath>
+    </Reference>
+    <Reference Include="DasNetLED">
+      <HintPath>..\..\Lib\DasNetLED.dll</HintPath>
+    </Reference>
     <Reference Include="HslControls, Version=2.2.2.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\HslControls.2.2.2\lib\net45\HslControls.dll</HintPath>
     </Reference>

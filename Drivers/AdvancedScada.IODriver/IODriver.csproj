@@ -45,6 +45,7 @@
     <Compile Include="Delta\RTU\DeltaRTUMaster.cs" />
     <Compile Include="Delta\TCP\DeltaTCPMaster.cs" />
     <Compile Include="DriverHelper.cs" />
+    <Compile Include="GenericDictionary.cs" />
     <Compile Include="LSIS\Cnet\LS_CNET.cs" />
     <Compile Include="LSIS\FENET\LS_FENET.cs" />
     <Compile Include="Modbus\ASCII\ModbusASCIIMaster.cs" />
@@ -56,6 +57,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RequestWrite.cs" />
     <Compile Include="Siemens\SiemensComPPI.cs" />
     <Compile Include="Siemens\SiemensNet.cs" />
   </ItemGroup>

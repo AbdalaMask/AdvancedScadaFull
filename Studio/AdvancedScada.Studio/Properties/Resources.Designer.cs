@@ -173,6 +173,16 @@ namespace AdvancedScada.Studio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Connect16px {
+            get {
+                object obj = ResourceManager.GetObject("Connect16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Convert_16x16 {
             get {
                 object obj = ResourceManager.GetObject("Convert_16x16", resourceCulture);
@@ -226,6 +236,16 @@ namespace AdvancedScada.Studio.Properties {
         internal static System.Drawing.Bitmap Device {
             get {
                 object obj = ResourceManager.GetObject("Device", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Disconnect16px {
+            get {
+                object obj = ResourceManager.GetObject("Disconnect16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

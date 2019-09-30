@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using AdvancedScada.Monitor;
 using MfgControl.AdvancedHMI.Controls;
@@ -11,8 +12,8 @@ using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.Motor
 {
-    [Designer(typeof(HMIWaterPumpDesigner))]
-    public class HMIWaterPump : MfgControl.AdvancedHMI.Controls.WaterPump
+    
+    public class HMIWaterPump : MfgControl.AdvancedHMI.Controls.WaterPump, IPropertiesControls
     {
 
 
@@ -299,6 +300,7 @@ namespace AdvancedScada.Controls_Binding.Motor
         #region "Basic Properties"
 
         public OutputType OutputType { get; set; }
+        public string PLCAddressEnabled { get ; set ; }
 
 
         #endregion
@@ -310,7 +312,7 @@ namespace AdvancedScada.Controls_Binding.Motor
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        private void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {
@@ -348,74 +350,5 @@ namespace AdvancedScada.Controls_Binding.Motor
         #endregion
     }
 
-    internal class HMIWaterPumpDesigner : ControlDesigner
-    {
-        private DesignerActionListCollection actionLists;
-
-        // Use pull model to populate smart tag menu.
-        public override DesignerActionListCollection ActionLists
-        {
-            get
-            {
-                if (null == actionLists)
-                {
-                    actionLists = new DesignerActionListCollection();
-                    actionLists.Add(new HMIWaterPumpActionList(Component));
-                }
-
-                return actionLists;
-            }
-        }
-    }
-
-    internal class HMIWaterPumpActionList : DesignerActionList
-    {
-        private readonly HMIWaterPump _HMIWaterPump;
-
-        private DesignerActionUIService designerActionUISvc;
-
-        //The constructor associates the control with the smart tag list.
-        public HMIWaterPumpActionList(IComponent component)
-            : base(component)
-        {
-            _HMIWaterPump = component as HMIWaterPump;
-
-            // Cache a reference to DesignerActionUIService, 
-            // so the DesigneractionList can be refreshed.
-            designerActionUISvc = GetService(typeof(DesignerActionUIService))
-                as DesignerActionUIService;
-        }
-
-        public string PLCAddressClick
-        {
-            get { return _HMIWaterPump.PLCAddressClick; }
-            set { _HMIWaterPump.PLCAddressClick = value; }
-        }
-
-        // Implementation of this abstract method creates smart tag  items, 
-        // associates their targets, and collects into list.
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            var items = new DesignerActionItemCollection();
-
-            //Define static section header entries.
-            items.Add(new DesignerActionHeaderItem("HMI Professional"));
-            items.Add(new DesignerActionMethodItem(this, "ShowTagClick", "Click Tag"));
-            items.Add(new DesignerActionPropertyItem("PLCAddressClick", "PLCAddressClick"));
-            return items;
-        }
-
-
-        private void ShowTagClick()
-        {
-            var frm = new MonitorForm(this.PLCAddressClick);
-            frm.OnTagSelected_Clicked += PLCAddressClick =>
-            {
-                var pd = TypeDescriptor.GetProperties(_HMIWaterPump)["PLCAddressClick"];
-                pd.SetValue(_HMIWaterPump, PLCAddressClick);
-            };
-            frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.ShowDialog();
-        }
-    }
+    
 }

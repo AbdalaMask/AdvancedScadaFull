@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using System;
 using System.ComponentModel;
@@ -11,7 +12,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.ImageAll
 {
-    public class HMIGraphicIndicator : MfgControl.AdvancedHMI.Controls.GraphicIndicator
+    public class HMIGraphicIndicator : MfgControl.AdvancedHMI.Controls.GraphicIndicator, IPropertiesControls
     {
 
         public bool HoldTimeMet;
@@ -170,7 +171,8 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         [Category("PLC Properties")]
         public int ValueToWrite { get; set; }
-
+        public string PLCAddressValue { get; set; }
+        public string PLCAddressEnabled { get ; set ; }
 
         private void ReleaseValue()
         {
@@ -284,7 +286,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        private void DisplayError(string ErrorMessage)
+        public  void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

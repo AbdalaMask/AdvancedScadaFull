@@ -1,8 +1,10 @@
 ﻿using AdvancedScada.BaseService;
+using AdvancedScada.DriverBase;
 using AdvancedScada.IBaseService.Common;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.ServiceModel;
+using System.Windows.Forms;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.Studio.Service
 {
@@ -22,10 +24,13 @@ namespace AdvancedScada.Studio.Service
             try
             {
 
-                new DriverService().GetStartService();
+                new DriverService().InitializePLC();
                 host = new DriverService().InitializeReadService();
                 host.Opened += host_Opened;
                 host.Open();
+
+                eventAddMessage += new EventUOSListenning(AddMessage);
+                eventUOSAccepting += new EventUOSAccepting(SetConnectionState);
 
                 foreach (var se in host.Description.Endpoints)
                 {
@@ -50,6 +55,75 @@ namespace AdvancedScada.Studio.Service
 
             this.Text = "ServerUtils : AdvancedScada";
             return host;
+        }
+        private ConnectionState _ConnState = ConnectionState.DISCONNECT;
+
+        private void SetConnectionState(ConnectionState connState, string msg)
+        {
+
+            try
+            {
+
+                if (!this.IsDisposed)
+                {
+                    this.Invoke((MethodInvoker)delegate ()
+                    {
+                        if (connState != _ConnState)
+                        {
+                            switch (connState)
+                            {
+                                case ConnectionState.CONNECT:
+                                    lblConnectState.Image = Properties.Resources.Connect16px;
+                                    lblConnectState.Text = "Connected";
+                                    break;
+                                case ConnectionState.DISCONNECT:
+                                    lblConnectState.Image = Properties.Resources.Disconnect16px;
+                                    lblConnectState.Text = "Disonnect";
+                                    break;
+                            }
+                            this.AddLog(msg);
+                            _ConnState = connState;
+                        }
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            }
+
+        }
+        private static void AddMessage(string msg)
+        {
+            try
+            {
+                DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> BusinessHelper(AddMessage): '{1}'", DateTime.Now, msg));
+            }
+            catch (Exception ex)
+            {
+                DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenPumpServiceHost): '{1}'", DateTime.Now, ex.Message));
+            }
+        }
+
+        private void AddLog(string msg)
+        {
+            try
+            {
+                if (!this.IsDisposed)
+                {
+                    this.Invoke((MethodInvoker)delegate ()
+                    {
+                        ///*txtLog.Text +=*/ string.Format("At {0: dd/MM/yyyy HH:mm:ss}--> {1}" + Environment.NewLine, DateTime.Now, msg);
+                    });
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            }
         }
         private void FormServerUtils_Load(object sender, EventArgs e)
         {
@@ -102,6 +176,11 @@ namespace AdvancedScada.Studio.Service
         {
 
             txtStatus.Text = "The Server is running";
+        }
+
+        private void DGServerUtils_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

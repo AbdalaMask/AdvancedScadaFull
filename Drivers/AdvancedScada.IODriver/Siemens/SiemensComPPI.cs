@@ -177,9 +177,6 @@ namespace AdvancedScada.IODriver.Siemens
             throw new NotImplementedException();
         }
 
-        public ConnectionState GetConnectionState()
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

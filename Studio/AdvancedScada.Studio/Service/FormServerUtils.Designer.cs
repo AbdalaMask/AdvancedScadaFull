@@ -35,6 +35,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.txtChannelCount = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.lblConnectState = new System.Windows.Forms.ToolStripLabel();
             this.DGServerUtils = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.ColDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColBinding = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,7 +54,8 @@
             this.tsChannelCount,
             this.toolStripSeparator2,
             this.txtChannelCount,
-            this.toolStripSeparator3});
+            this.toolStripSeparator3,
+            this.lblConnectState});
             this.toolStrip1.Location = new System.Drawing.Point(0, 325);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(693, 25);
@@ -93,6 +95,13 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
+            // lblConnectState
+            // 
+            this.lblConnectState.Image = global::AdvancedScada.Studio.Properties.Resources.Disconnect16px;
+            this.lblConnectState.Name = "lblConnectState";
+            this.lblConnectState.Size = new System.Drawing.Size(76, 22);
+            this.lblConnectState.Text = "Disonnect";
+            // 
             // DGServerUtils
             // 
             this.DGServerUtils.AllowUserToAddRows = false;
@@ -106,10 +115,11 @@
             this.ColAddress});
             this.DGServerUtils.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DGServerUtils.Location = new System.Drawing.Point(0, 0);
-            this.DGServerUtils.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGServerUtils.Margin = new System.Windows.Forms.Padding(4);
             this.DGServerUtils.Name = "DGServerUtils";
             this.DGServerUtils.Size = new System.Drawing.Size(693, 325);
             this.DGServerUtils.TabIndex = 1;
+            this.DGServerUtils.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGServerUtils_CellContentClick);
             // 
             // ColDateTime
             // 
@@ -137,8 +147,7 @@
             this.Controls.Add(this.DGServerUtils);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockActive;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormServerUtils";
             this.ShowIcon = false;
             this.Text = "FormServerUtils";
@@ -164,5 +173,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripLabel txtChannelCount;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripLabel lblConnectState;
     }
 }

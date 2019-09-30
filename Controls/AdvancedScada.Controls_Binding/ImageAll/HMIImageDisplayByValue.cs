@@ -1,5 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using MfgControl.AdvancedHMI.Controls;
 using System;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.ImageAll
 {
-    public class HMIImageDisplayByValue : MfgControl.AdvancedHMI.Controls.ImageDisplayByValue
+    public class HMIImageDisplayByValue : MfgControl.AdvancedHMI.Controls.ImageDisplayByValue, IPropertiesControls
     {
 
         #region Basic Properties
@@ -310,7 +311,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        private void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {
@@ -368,6 +369,9 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                 if (value != null) _KeypadPopUp.ButtonClick += KeypadPopUp_ButtonClick;
             }
         }
+
+        public string PLCAddressClick { get ; set ; }
+        public string PLCAddressEnabled { get ; set ; }
 
         private void KeypadPopUp_ButtonClick(object sender, KeypadEventArgs e)
         {

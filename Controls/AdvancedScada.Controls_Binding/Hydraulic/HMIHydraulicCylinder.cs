@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using MfgControl.AdvancedHMI.Controls;
 using System;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.Hydraulic
 {
-    public class HMIHydraulicCylinder : MfgControl.AdvancedHMI.Controls.HydraulicCylinder
+    public class HMIHydraulicCylinder : MfgControl.AdvancedHMI.Controls.HydraulicCylinder, IPropertiesControls
     {
 
         #region PLC
@@ -189,7 +190,7 @@ namespace AdvancedScada.Controls_Binding.Hydraulic
 
         [Category("PLC Properties")]
         public int ValueToWrite { get; set; }
-
+        public string PLCAddressEnabled { get; set ; }
 
         private void ReleaseValue()
         {
@@ -303,7 +304,7 @@ namespace AdvancedScada.Controls_Binding.Hydraulic
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        private void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using AdvancedScada.Monitor;
 using MfgControl.AdvancedHMI.Controls;
@@ -11,8 +12,8 @@ using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.Motor
 {
-    [Designer(typeof(HMIMotorDesigner))]
-    public class HMIMotor : MfgControl.AdvancedHMI.Controls.Motor
+   
+    public class HMIMotor : MfgControl.AdvancedHMI.Controls.Motor, IPropertiesControls
     {
 
 
@@ -184,6 +185,7 @@ namespace AdvancedScada.Controls_Binding.Motor
 
         [Category("PLC Properties")]
         public int ValueToWrite { get; set; }
+        public string PLCAddressEnabled { get ; set; }
 
         public event EventHandler ValueChanged;
 
@@ -308,7 +310,7 @@ namespace AdvancedScada.Controls_Binding.Motor
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        private void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {
@@ -345,94 +347,6 @@ namespace AdvancedScada.Controls_Binding.Motor
 
         #endregion
     }
-    internal class HMIMotorDesigner : ControlDesigner
-    {
-        private DesignerActionListCollection actionLists;
-
-        // Use pull model to populate smart tag menu.
-        public override DesignerActionListCollection ActionLists
-        {
-            get
-            {
-                if (null == actionLists)
-                {
-                    actionLists = new DesignerActionListCollection();
-                    actionLists.Add(new HMIMotorActionList(Component));
-                }
-
-                return actionLists;
-            }
-        }
-    }
-
-    internal class HMIMotorActionList : DesignerActionList
-    {
-        private readonly HMIMotor _HMIMotor;
-
-        private DesignerActionUIService designerActionUISvc;
-
-        //The constructor associates the control with the smart tag list.
-        public HMIMotorActionList(IComponent component)
-            : base(component)
-        {
-            _HMIMotor = component as HMIMotor;
-
-            // Cache a reference to DesignerActionUIService, 
-            // so the DesigneractionList can be refreshed.
-            designerActionUISvc = GetService(typeof(DesignerActionUIService))
-                as DesignerActionUIService;
-        }
-
-        public string PLCAddressValue
-        {
-            get { return _HMIMotor.PLCAddressValue; }
-            set { _HMIMotor.PLCAddressValue = value; }
-        }
-
-        public string PLCAddressClick
-        {
-            get { return _HMIMotor.PLCAddressClick; }
-            set { _HMIMotor.PLCAddressClick = value; }
-        }
-
-        // Implementation of this abstract method creates smart tag  items, 
-        // associates their targets, and collects into list.
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            var items = new DesignerActionItemCollection();
-
-            //Define static section header entries.
-            items.Add(new DesignerActionHeaderItem("HMI Professional"));
-            items.Add(new DesignerActionMethodItem(this, "ShowTagList", "Choose Tag"));
-            items.Add(new DesignerActionMethodItem(this, "ShowTagClick", "Click Tag"));
-            items.Add(new DesignerActionPropertyItem("PLCAddressValue", "PLCAddressValue"));
-            items.Add(new DesignerActionPropertyItem("PLCAddressClick", "PLCAddressClick"));
-            return items;
-        }
-
-        private void ShowTagList()
-        {
-            var frm = new MonitorForm(PLCAddressValue);
-            frm.OnTagSelected_Clicked += tagName =>
-            {
-                var pd = TypeDescriptor.GetProperties(_HMIMotor)["PLCAddressValue"];
-                pd.SetValue(_HMIMotor, tagName);
-            };
-            frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.ShowDialog();
-        }
-
-        private void ShowTagClick()
-        {
-            var frm = new MonitorForm(this.PLCAddressClick);
-            frm.OnTagSelected_Clicked += PLCAddressClick =>
-            {
-                var pd = TypeDescriptor.GetProperties(_HMIMotor)["PLCAddressClick"];
-                pd.SetValue(_HMIMotor, PLCAddressClick);
-            };
-            frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.ShowDialog();
-        }
-    }
+   
 
 }

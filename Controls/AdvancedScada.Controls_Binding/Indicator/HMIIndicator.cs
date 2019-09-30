@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using MfgControl.AdvancedHMI.Controls;
 using System;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.Indicator
 {
-    public class HMIIndicator : MfgControl.AdvancedHMI.Controls.Indicator
+    public class HMIIndicator : MfgControl.AdvancedHMI.Controls.Indicator, IPropertiesControls
     {
 
         #region PLC Related Properties
@@ -140,6 +141,7 @@ namespace AdvancedScada.Controls_Binding.Indicator
 
         [DefaultValue(false)]
         public bool SuppressErrorDisplay { get; set; }
+        public string PLCAddressEnabled { get; set ; }
 
 
         //***************************************
@@ -154,7 +156,7 @@ namespace AdvancedScada.Controls_Binding.Indicator
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        private void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseBinding.cs" />
+    <Compile Include="Common\MyEvents.cs" />
     <Compile Include="Common\XCollection.cs" />
     <Compile Include="IReadService.cs" />
     <Compile Include="IServiceCallback.cs" />

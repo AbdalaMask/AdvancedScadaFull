@@ -153,10 +153,7 @@ namespace AdvancedScada.IODriver.Delta.RTU
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
 
-        public ConnectionState GetConnectionState()
-        {
-            return ConnectionState.Broken;
-        }
+        
 
         public TValue[] Read<TValue>(DataBlock db)
         {

@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using MfgControl.AdvancedHMI.Controls;
 using System;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 namespace AdvancedScada.Controls_Binding.SelectorSwitch
 {
     [DefaultEvent("Click")]
-    public class HMIPilotLight : MfgControl.AdvancedHMI.Controls.PilotLight
+    public class HMIPilotLight : MfgControl.AdvancedHMI.Controls.PilotLight, IPropertiesControls
     {
 
 
@@ -182,9 +183,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
 
         [Category("PLC Properties")]
         public int ValueToWrite { get; set; }
-
-
-
+        public string PLCAddressEnabled { get ; set; }
 
         private void ReleaseValue()
         {
@@ -303,7 +302,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        private void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

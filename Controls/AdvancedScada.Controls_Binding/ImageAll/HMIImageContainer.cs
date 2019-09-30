@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using AdvancedScada.ImagePicker;
 using System;
@@ -11,9 +12,9 @@ using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.ImageAll
 {
-    [Designer(typeof(ImageContainerDesigner))]
+   
     [ToolboxItem(true)]
-    public class HMIImageContainer : MfgControl.AdvancedHMI.Controls.GraphicIndicator
+    public class HMIImageContainer : MfgControl.AdvancedHMI.Controls.GraphicIndicator, IPropertiesControls
     {
         //*****************************************
         //* Property - Address in PLC to Link to
@@ -152,6 +153,8 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         [DefaultValue(false)]
         public bool SuppressErrorDisplay { get; set; }
+        public string PLCAddressValue { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string PLCAddressEnabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         #region "Error Display"
 
@@ -160,7 +163,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        private void DisplayError(string ErrorMessage)
+        public  void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {
@@ -198,77 +201,5 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         #endregion
     }
 
-    internal class ImageContainerDesigner : ControlDesigner
-    {
-        private DesignerActionListCollection actionLists;
-
-        public override DesignerActionListCollection ActionLists
-        {
-            get
-            {
-                if (actionLists == null)
-                {
-                    actionLists = new DesignerActionListCollection();
-                    actionLists.Add(new ImageContainerListItem(this));
-                }
-
-                return actionLists;
-            }
-        }
-    }
-
-    internal class ImageContainerListItem : DesignerActionList
-    {
-        private readonly HMIImageContainer _HMIImageContainer;
-
-        public ImageContainerListItem(ImageContainerDesigner owner)
-            : base(owner.Component)
-        {
-            _HMIImageContainer = (HMIImageContainer)owner.Component;
-        }
-
-
-        public Color BackColor
-        {
-            get { return _HMIImageContainer.BackColor; }
-            set { _HMIImageContainer.BackColor = value; }
-        }
-
-        public Color ForeColor
-        {
-            get { return _HMIImageContainer.ForeColor; }
-            set { _HMIImageContainer.ForeColor = value; }
-        }
-
-        public System.Drawing.Image ImageName
-        {
-            get { return _HMIImageContainer.BackgroundImage; }
-            set { _HMIImageContainer.BackgroundImage = value; }
-        }
-
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            var items = new DesignerActionItemCollection();
-            items.Add(new DesignerActionTextItem("DXLibraryImages", "DXLibraryImages"));
-            items.Add(new DesignerActionMethodItem(this, "ShowTagDesignerForm", "Choote Tag"));
-            items.Add(new DesignerActionPropertyItem("BackColor", "BackColor"));
-            items.Add(new DesignerActionPropertyItem("ForeColor", "ForeColor"));
-
-            return items;
-        }
-
-        public void ShowTagDesignerForm()
-        {
-            var frm = new MainView(ImageName);
-            frm.OnImagSelected_Clicked += ImageName1 => { SetProperty(_HMIImageContainer, "Image", ImageName1); };
-            frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.ShowDialog();
-        }
-
-        public void SetProperty(Control control, string propertyName, object value)
-        {
-            var pd = TypeDescriptor.GetProperties(control)[propertyName];
-            pd.SetValue(control, value);
-        }
-    }
+   
 }

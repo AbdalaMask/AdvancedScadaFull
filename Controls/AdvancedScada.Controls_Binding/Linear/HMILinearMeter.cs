@@ -1,5 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using AdvancedScada.Monitor;
 using System;
@@ -12,10 +13,8 @@ using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.Linear
 {
-    [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(HMILinearMeter), "HMI7Segment.ico")]
-    [Designer(typeof(HMILinearMeterDesigner))]
-    public class HMILinearMeter : MfgControl.AdvancedHMI.Controls.LinearMeter
+    
+    public class HMILinearMeter : MfgControl.AdvancedHMI.Controls.LinearMeter, IPropertiesControls
     {
 
         private string OriginalText;
@@ -132,7 +131,7 @@ namespace AdvancedScada.Controls_Binding.Linear
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        private void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {
@@ -218,7 +217,8 @@ namespace AdvancedScada.Controls_Binding.Linear
         public double KeypadMinValue { get; set; }
 
         public double KeypadMaxValue { get; set; }
-
+        public string PLCAddressClick { get ; set ; }
+        public string PLCAddressEnabled { get ; set ; }
 
         private void KeypadPopUp_ButtonClick(object sender, KeypadEventArgs e)
         {
@@ -291,66 +291,6 @@ namespace AdvancedScada.Controls_Binding.Linear
         #endregion
     }
 
-    internal class HMILinearMeterDesigner : ControlDesigner
-    {
-        private DesignerActionListCollection actionLists;
-
-        public override DesignerActionListCollection ActionLists
-        {
-            get
-            {
-                if (actionLists == null)
-                {
-                    actionLists = new DesignerActionListCollection();
-                    actionLists.Add(new HMILinearMeterListItem(this));
-                }
-
-                return actionLists;
-            }
-        }
-    }
-
-    internal class HMILinearMeterListItem : DesignerActionList
-    {
-        private readonly HMILinearMeter _HMILinearMeter;
-
-        public HMILinearMeterListItem(HMILinearMeterDesigner owner)
-            : base(owner.Component)
-        {
-            _HMILinearMeter = (HMILinearMeter)owner.Component;
-        }
-
-
-        public string TagName
-        {
-            get { return _HMILinearMeter.PLCAddressValue; }
-            set { _HMILinearMeter.PLCAddressValue = value; }
-        }
-
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            var items = new DesignerActionItemCollection();
-            items.Add(new DesignerActionTextItem("HMI Professional Edition", "HMI Professional Edition"));
-            items.Add(new DesignerActionMethodItem(this, "ShowTagDesignerForm", "Choote Tag"));
-            items.Add(new DesignerActionPropertyItem("TagName", "TagName"));
-
-            return items;
-        }
-
-        public void ShowTagDesignerForm()
-        {
-            var frm = new MonitorForm(TagName);
-            frm.OnTagSelected_Clicked += tagName => { SetProperty(_HMILinearMeter, "TagName", tagName); };
-            frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.ShowDialog();
-        }
-
-        public void SetProperty(Control control, string propertyName, object value)
-        {
-            var pd = TypeDescriptor.GetProperties(control)[propertyName];
-            pd.SetValue(control, value);
-        }
-    }
-
+    
 
 }

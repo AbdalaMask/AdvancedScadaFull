@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using MfgControl.AdvancedHMI.Controls;
 using System;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.ButtonAll
 {
-    public class HMIAnnunciator : MfgControl.AdvancedHMI.Controls.Annunciator
+    public class HMIAnnunciator : Annunciator, IPropertiesControls
     {
 
 
@@ -344,7 +345,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
 
         private Timer ErrorDisplayTime;
 
-        private void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

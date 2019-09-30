@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using Svg;
 using System;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.ImageAll
 {
-    public class GraphicIndicatorBaseSVG : System.Windows.Forms.Control
+    public class GraphicIndicatorBaseSVG : System.Windows.Forms.Control, IPropertiesControls
     {
         private Bitmap m_GraphicAllOff;
         //private Bitmap StaticImage;
@@ -483,6 +484,11 @@ namespace AdvancedScada.Controls_Binding.ImageAll
             set { m_OutputType = value; }
         }
 
+        public string PLCAddressValue { get ; set ; }
+        public string PLCAddressClick { get ; set ; }
+        public string PLCAddressVisible { get ; set ; }
+        public string PLCAddressEnabled { get ; set ; }
+
 
         #endregion
 
@@ -631,6 +637,11 @@ namespace AdvancedScada.Controls_Binding.ImageAll
             Text2Rect = new Rectangle(0, Convert.ToInt32(Height / 1.9), Width, Convert.ToInt32(Height / 2.1));
 
             RefreshImages();
+        }
+
+        public void DisplayError(string ErrorMessage)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

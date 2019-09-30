@@ -2,6 +2,7 @@
 using AdvancedScada.IBaseService;
 using AdvancedScada.IODriver;
 using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Threading;
@@ -12,85 +13,127 @@ namespace AdvancedScada.BaseService
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.PerSession)]
     public class ReadService : IReadService
     {
-        private bool RUN_APPLICATION;
+       
+        private List<IServiceCallback> listCallbackChannels = new List<IServiceCallback>();
 
         public IServiceCallback EventDataChanged;
         DriverHelper driverHelper = new DriverHelper();
 
-        public void Connect(Machine mac)
+        public ReadService()
         {
-            try
+            ThreadPool.QueueUserWorkItem((th) =>
             {
-
-
-                EventDataChanged = OperationContext.Current.GetCallbackChannel<IServiceCallback>();
-                eventLoggingMessage?.Invoke(string.Format("Added Callback Channel: {0}, IP Address: {1}.", mac.MachineName, mac.IPAddress));
-                EventChannelCount?.Invoke(1, true);
-                RUN_APPLICATION = true;
-
-                ThreadPool.QueueUserWorkItem((WaitCallback)delegate
+                while (true)
                 {
-                    while (RUN_APPLICATION)
+                    try
                     {
-                        try
+                        lock (listCallbackChannels)
                         {
-                            if (EventDataChanged != null)
+                            if (listCallbackChannels.Count > 0)
                             {
-                                // Query the channel state. For example:-
+                                
 
-                                var state = (EventDataChanged as IChannel).State;
-                                if (state == CommunicationState.Closed || state == CommunicationState.Faulted)
+                                foreach (IServiceCallback item in listCallbackChannels)
                                 {
-                                    // Channel has closed, or has faulted...
-                                    EventDataChanged = null;
-                                    EventChannelCount?.Invoke(1, false);
-                                }
-                                else
-                                {
+                                    try
+                                    {
+                                        if (((ICommunicationObject)item).State == CommunicationState.Opened)
+                                        {
+                                            item.UpdateCollection(DriverHelper.objConnectionState, TagCollection.Tags);
+                                            item.DataTags(TagCollection.Tags);
+                                        }
+                                           
+                                        Thread.Sleep(100);
 
-                                    EventDataChanged?.DataTags(TagCollection.Tags);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        if (listCallbackChannels.Remove(item))
+                                        {
+                                            DriverService.AddLog(string.Format("Removed Callback Channel: {0} | Exception: {1}", item.GetHashCode(), ex.Message));
+                                        }
+                                    }
 
                                 }
                             }
-                            Thread.Sleep(100);
-                        }
-                        catch (Exception ex)
-                        {
-                            RUN_APPLICATION = false;
-
-                            eventLoggingMessage?.Invoke(string.Format("Removed Callback Channel: {0}, IP Address: {1}| Message Exception: {2}.", mac.MachineName, mac.IPAddress, ex.Message));
-
-                            EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                            else
+                            {
+                                Thread.Sleep(500);
+                            }
                         }
                     }
-                });
-            }
-            catch (System.Exception ex)
+                    catch (Exception ex)
+                    {
+                        if (ex.InnerException == null)
+                            DriverService.AddLog("+ Event S7ConnectorServiceCallback: " + ex.Message);
+                    }
+                    finally
+                    {
+                        Thread.Sleep(100);
+                    }
+                }
+            });
+        }
+        public void Connect(Machine mac)
+        {
+           
+            try
             {
+                lock (listCallbackChannels)
+                {
+                    IServiceCallback callbackChannel = OperationContext.Current.GetCallbackChannel<IServiceCallback>();
+                    if (!listCallbackChannels.Contains(callbackChannel))
+                    {
+                        listCallbackChannels.Add(callbackChannel);
+                        DriverService.AddLog(string.Format("Added Callback Channel: {0}", callbackChannel.GetHashCode()));
+                        eventLoggingMessage?.Invoke(string.Format("Added Callback Channel: {0}, IP Address: {1}.", mac.MachineName, mac.IPAddress));
+                        EventChannelCount?.Invoke(1, true);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                eventLoggingMessage?.Invoke(string.Format("Removed Callback Channel: {0}, IP Address: {1}| Message Exception: {2}.", mac.MachineName, mac.IPAddress, ex.Message));
 
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                throw new FaultException<IFaultException>(new IFaultException(ex.Message));
             }
         }
 
         public void Disconnect(Machine mac)
         {
 
+            
             try
             {
-                RUN_APPLICATION = false;
-                EventChannelCount?.Invoke(1, false);
-                EventDataChanged = null;
-                eventLoggingMessage?.Invoke(string.Format("Removed Callback Channel: {0}, IP Address: {1}.", mac.MachineName, mac.IPAddress));
+                lock (listCallbackChannels)
+                {
+                    if (listCallbackChannels.Count > 0)
+                    {
+                        IServiceCallback callbackChannel = OperationContext.Current.GetCallbackChannel<IServiceCallback>();
+                        if (listCallbackChannels.Contains(callbackChannel))
+                        {
+                            if (listCallbackChannels.Remove(callbackChannel))
+                            {
+                                DriverService.AddLog(string.Format("Removed Callback Channel: {0}", callbackChannel.GetHashCode()));
+                                EventChannelCount?.Invoke(1, false);
+                                eventLoggingMessage?.Invoke(string.Format("Removed Callback Channel: {0}, IP Address: {1}.", mac.MachineName, mac.IPAddress));
 
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Disconnect-Removed Callback Channel: {0}", ex.Message);
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                DriverService.AddLog(string.Format("Disconnect-Removed Callback Channel: {0}", ex.Message));
+                EventChannelCount?.Invoke(1, false);
+                eventLoggingMessage?.Invoke(string.Format("Removed Callback Channel: {0}, IP Address: {1}.", mac.MachineName, mac.IPAddress));
+
             }
             finally
             {
-                GC.SuppressFinalize(this);
+                GC.SuppressFinalize((object)this);
             }
         }
 
@@ -98,18 +141,15 @@ namespace AdvancedScada.BaseService
         {
             try
             {
-
-
-
-
                 driverHelper?.WriteTag(tagName, value);
-
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                throw new FaultException<IFaultException>(new IFaultException(ex.Message));
+                
             }
+            
         }
     }
 }

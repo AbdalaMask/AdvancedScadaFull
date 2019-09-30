@@ -93,6 +93,9 @@
     <Compile Include="Controls\Indicator.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\LedSingleControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DigitalPanel\Odometer.vb">
       <SubType>Component</SubType>
     </Compile>

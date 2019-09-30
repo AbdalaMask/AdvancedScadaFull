@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using System;
 using System.ComponentModel;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 namespace AdvancedScada.Controls_Binding.SelectorSwitch
 {
     [DefaultEvent("Click")]
-    public class HMIPushButton : MfgControl.AdvancedHMI.Controls.PushButton
+    public class HMIPushButton : MfgControl.AdvancedHMI.Controls.PushButton, IPropertiesControls
     {
 
         #region PLC Properties
@@ -313,6 +314,8 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
             }
         }
 
+        public string PLCAddressEnabled { get ; set ; }
+
         #endregion
 
         #region "Error Display"
@@ -322,7 +325,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        private void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

@@ -7,6 +7,7 @@ namespace AdvancedScada.DriverBase
     [DataContract]
     public class Machine
     {
+
         private int _MachineId;
 
         private string _MachineName;
@@ -22,6 +23,7 @@ namespace AdvancedScada.DriverBase
             {
                 return _MachineId;
             }
+
             set
             {
                 _MachineId = value;
@@ -35,6 +37,7 @@ namespace AdvancedScada.DriverBase
             {
                 return _MachineName;
             }
+
             set
             {
                 _MachineName = value;
@@ -48,6 +51,7 @@ namespace AdvancedScada.DriverBase
             {
                 return _IPAddress;
             }
+
             set
             {
                 _IPAddress = value;
@@ -61,6 +65,7 @@ namespace AdvancedScada.DriverBase
             {
                 return _Description;
             }
+
             set
             {
                 _Description = value;

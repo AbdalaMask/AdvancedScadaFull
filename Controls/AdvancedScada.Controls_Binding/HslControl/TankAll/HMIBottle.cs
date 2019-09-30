@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using HslControls;
 using MfgControl.AdvancedHMI.Controls;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.HslControl.TankAll
 {
-    public class HMIBottle : HslBottle
+    public class HMIBottle : HslBottle, IPropertiesControls
     {
 
         #region PLC Related Properties
@@ -128,6 +129,8 @@ namespace AdvancedScada.Controls_Binding.HslControl.TankAll
         #region "Basic Properties"
 
         public OutputType OutputType { get; set; }
+        public string PLCAddressClick { get ; set ; }
+        public string PLCAddressEnabled { get ; set ; }
 
 
 
@@ -138,7 +141,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.TankAll
         //* Show an error via the text property for a short time
         //********************************************************
         private System.Windows.Forms.Timer ErrorDisplayTime;
-        private void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

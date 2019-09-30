@@ -15,49 +15,66 @@ namespace AdvancedScada.IBaseService
         protected ushort PORT = 8086;
 
         protected string URI_DRIVER = "net.tcp://{0}:{1}/DriverService/{2}";
-
-
-
-
         protected const string DRIVER = "Driver";
 
 
 
-        protected NetTcpBinding GetNetTcpBinding()
+        protected static NetTcpBinding GetNetTcpBinding()
         {
-            return new NetTcpBinding
-            {
-                ReceiveTimeout = TimeSpan.FromMinutes(2.0),
-                SendTimeout = TimeSpan.FromMinutes(2.0),
-                OpenTimeout = TimeSpan.FromDays(15.0),
-                CloseTimeout = TimeSpan.FromDays(15.0),
-                MaxReceivedMessageSize = int.MaxValue
-            };
+            NetTcpBinding objNetTcpBinding = new NetTcpBinding(SecurityMode.Transport);
+            objNetTcpBinding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
+            objNetTcpBinding.ReceiveTimeout = TimeSpan.FromDays(7);
+            objNetTcpBinding.SendTimeout = TimeSpan.FromDays(7);
+            objNetTcpBinding.MaxReceivedMessageSize = Int32.MaxValue;
+            objNetTcpBinding.MaxBufferPoolSize = Int32.MaxValue;
+            objNetTcpBinding.MaxBufferSize = Int32.MaxValue;
+            return objNetTcpBinding;
         }
 
-        protected BasicHttpBinding GetBasicHttpBinding()
+        /// <summary>
+        /// Hàm trả về đối tượng WebHttpBinding
+        /// </summary>
+        /// <returns>WebHttpBinding</returns>
+        public static WebHttpBinding GetWebHttpBinding()
         {
-            return new BasicHttpBinding
+            try
             {
-                ReceiveTimeout = TimeSpan.FromMinutes(2.0),
-                SendTimeout = TimeSpan.FromMinutes(2.0),
-                OpenTimeout = TimeSpan.FromDays(15.0),
-                CloseTimeout = TimeSpan.FromDays(15.0),
-                MaxReceivedMessageSize = int.MaxValue
-            };
+                WebHttpBinding objWebHttpBinding = new WebHttpBinding();
+                objWebHttpBinding.ReceiveTimeout = TimeSpan.FromHours(2);
+                objWebHttpBinding.SendTimeout = TimeSpan.FromHours(2);
+                objWebHttpBinding.MaxReceivedMessageSize = 2000000;
+                //objWebHttpBinding.Security.Mode = WebHttpSecurityMode.None;
+                return objWebHttpBinding;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        protected WebHttpBinding GetWebHttpBinding()
+        /// <summary>
+        /// Hàm trả về đối tượng WSHttpBinding
+        /// </summary>
+        /// <returns>WSHttpBinding</returns>
+        public static WSHttpBinding GetWSHttpBinding()
         {
-            return new WebHttpBinding
+            try
             {
-                ReceiveTimeout = TimeSpan.FromMinutes(2.0),
-                SendTimeout = TimeSpan.FromMinutes(2.0),
-                OpenTimeout = TimeSpan.FromDays(15.0),
-                CloseTimeout = TimeSpan.FromDays(15.0),
-                MaxReceivedMessageSize = int.MaxValue
-            };
+                WSHttpBinding objWSHttpBinding = new WSHttpBinding();
+                objWSHttpBinding.ReceiveTimeout = TimeSpan.FromHours(2);
+                objWSHttpBinding.SendTimeout = TimeSpan.FromHours(2);
+                objWSHttpBinding.MaxReceivedMessageSize = 2000000;
+                //objWSHttpBinding.Security.Mode = SecurityMode.Message;
+                //objWSHttpBinding.Security.Message.ClientCredentialType = MessageCredentialType.Windows;
+                return objWSHttpBinding;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
+         
 
         public ServiceThrottlingBehavior GetServiceThrottlingBehaviorByHost(ServiceHost host)
         {

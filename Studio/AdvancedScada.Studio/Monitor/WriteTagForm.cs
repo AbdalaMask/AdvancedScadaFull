@@ -57,21 +57,16 @@ namespace AdvancedScada.Studio.Monitor
                 case DriverBase.Comm.DataTypes.Byte:
                     break;
                 case DriverBase.Comm.DataTypes.Short:
+                case DriverBase.Comm.DataTypes.UShort:
+                case DriverBase.Comm.DataTypes.Int:                   
+                case DriverBase.Comm.DataTypes.UInt:
+                case DriverBase.Comm.DataTypes.Long:
+                case DriverBase.Comm.DataTypes.ULong:
                     txtValue.Text = "0";
                     break;
-                case DriverBase.Comm.DataTypes.UShort:
-                    break;
-                case DriverBase.Comm.DataTypes.Int:
-                    break;
-                case DriverBase.Comm.DataTypes.UInt:
-                    break;
-                case DriverBase.Comm.DataTypes.Long:
-                    break;
-                case DriverBase.Comm.DataTypes.ULong:
-                    break;
                 case DriverBase.Comm.DataTypes.Float:
-                    break;
                 case DriverBase.Comm.DataTypes.Double:
+                    txtValue.Text = "0.0";
                     break;
                 case DriverBase.Comm.DataTypes.String:
                     txtValue.Text = "Test";

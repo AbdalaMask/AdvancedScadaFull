@@ -1,5 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Net45;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
 using System;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.Display
 {
-    public class HMILabel : System.Windows.Forms.Label
+    public class HMILabel : System.Windows.Forms.Label, IPropertiesControls
     {
         public event EventHandler ValueChanged;
 
@@ -864,7 +865,7 @@ namespace AdvancedScada.Controls_Binding.Display
         //********************************************************
         private System.Windows.Forms.Timer ErrorDisplayTime;
         private object ErrorLock = new object();
-        private void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!m_SuppressErrorDisplay)
             {
@@ -928,6 +929,8 @@ namespace AdvancedScada.Controls_Binding.Display
 
         public bool KeypadAlphaNumeric { get; set; }
         public int PollRate { get; set; }
+        public string PLCAddressClick { get ; set ; }
+        public string PLCAddressEnabled { get ; set ; }
 
         private Color m_KeypadFontColor = Color.WhiteSmoke;
 
