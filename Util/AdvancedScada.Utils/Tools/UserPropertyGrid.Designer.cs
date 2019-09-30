@@ -35,6 +35,9 @@
             this.PvGridDevice = new System.Windows.Forms.PropertyGrid();
             this.HeaderGroupChannel = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.PvGridChannel = new System.Windows.Forms.PropertyGrid();
+            this.buttonSpecHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
+            this.buttonSpecHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
+            this.buttonSpecHeaderGroup3 = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
             this.kryptonPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeaderGroupDataBlock)).BeginInit();
@@ -64,8 +67,11 @@
             // 
             // HeaderGroupDataBlock
             // 
+            this.HeaderGroupDataBlock.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
+            this.buttonSpecHeaderGroup3});
             this.HeaderGroupDataBlock.Dock = System.Windows.Forms.DockStyle.Top;
             this.HeaderGroupDataBlock.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockInactive;
+            this.HeaderGroupDataBlock.HeaderVisibleSecondary = false;
             this.HeaderGroupDataBlock.Location = new System.Drawing.Point(0, 359);
             this.HeaderGroupDataBlock.Margin = new System.Windows.Forms.Padding(2);
             this.HeaderGroupDataBlock.Name = "HeaderGroupDataBlock";
@@ -73,7 +79,7 @@
             // HeaderGroupDataBlock.Panel
             // 
             this.HeaderGroupDataBlock.Panel.Controls.Add(this.PvGridDataBlock);
-            this.HeaderGroupDataBlock.Size = new System.Drawing.Size(211, 175);
+            this.HeaderGroupDataBlock.Size = new System.Drawing.Size(211, 156);
             this.HeaderGroupDataBlock.TabIndex = 4;
             this.HeaderGroupDataBlock.ValuesPrimary.Heading = "DataBlock";
             this.HeaderGroupDataBlock.ValuesPrimary.Image = global::AdvancedScada.Utils.Properties.Resources.AddGoup;
@@ -84,14 +90,17 @@
             this.PvGridDataBlock.HelpVisible = false;
             this.PvGridDataBlock.Location = new System.Drawing.Point(0, 0);
             this.PvGridDataBlock.Name = "PvGridDataBlock";
-            this.PvGridDataBlock.Size = new System.Drawing.Size(209, 130);
+            this.PvGridDataBlock.Size = new System.Drawing.Size(209, 132);
             this.PvGridDataBlock.TabIndex = 2;
             this.PvGridDataBlock.ToolbarVisible = false;
             // 
             // HeaderGroupDevice
             // 
+            this.HeaderGroupDevice.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
+            this.buttonSpecHeaderGroup2});
             this.HeaderGroupDevice.Dock = System.Windows.Forms.DockStyle.Top;
             this.HeaderGroupDevice.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockInactive;
+            this.HeaderGroupDevice.HeaderVisibleSecondary = false;
             this.HeaderGroupDevice.Location = new System.Drawing.Point(0, 214);
             this.HeaderGroupDevice.Margin = new System.Windows.Forms.Padding(2);
             this.HeaderGroupDevice.Name = "HeaderGroupDevice";
@@ -110,14 +119,17 @@
             this.PvGridDevice.HelpVisible = false;
             this.PvGridDevice.Location = new System.Drawing.Point(0, 0);
             this.PvGridDevice.Name = "PvGridDevice";
-            this.PvGridDevice.Size = new System.Drawing.Size(209, 100);
+            this.PvGridDevice.Size = new System.Drawing.Size(209, 121);
             this.PvGridDevice.TabIndex = 2;
             this.PvGridDevice.ToolbarVisible = false;
             // 
             // HeaderGroupChannel
             // 
+            this.HeaderGroupChannel.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
+            this.buttonSpecHeaderGroup1});
             this.HeaderGroupChannel.Dock = System.Windows.Forms.DockStyle.Top;
             this.HeaderGroupChannel.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockInactive;
+            this.HeaderGroupChannel.HeaderVisibleSecondary = false;
             this.HeaderGroupChannel.Location = new System.Drawing.Point(0, 0);
             this.HeaderGroupChannel.Margin = new System.Windows.Forms.Padding(2);
             this.HeaderGroupChannel.Name = "HeaderGroupChannel";
@@ -136,9 +148,24 @@
             this.PvGridChannel.HelpVisible = false;
             this.PvGridChannel.Location = new System.Drawing.Point(0, 0);
             this.PvGridChannel.Name = "PvGridChannel";
-            this.PvGridChannel.Size = new System.Drawing.Size(209, 169);
+            this.PvGridChannel.Size = new System.Drawing.Size(209, 190);
             this.PvGridChannel.TabIndex = 2;
             this.PvGridChannel.ToolbarVisible = false;
+            // 
+            // buttonSpecHeaderGroup1
+            // 
+            this.buttonSpecHeaderGroup1.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.ArrowUp;
+            this.buttonSpecHeaderGroup1.UniqueName = "5f529c53e6bf47fbaec9d9e1caebad1b";
+            // 
+            // buttonSpecHeaderGroup2
+            // 
+            this.buttonSpecHeaderGroup2.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.ArrowUp;
+            this.buttonSpecHeaderGroup2.UniqueName = "cdba6a708f8448a9997d95d0a104777c";
+            // 
+            // buttonSpecHeaderGroup3
+            // 
+            this.buttonSpecHeaderGroup3.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.ArrowUp;
+            this.buttonSpecHeaderGroup3.UniqueName = "8004093246734f43aa3b1a55f2011ce0";
             // 
             // UserPropertyGrid
             // 
@@ -175,5 +202,8 @@
         public System.Windows.Forms.PropertyGrid PvGridDataBlock;
         public System.Windows.Forms.PropertyGrid PvGridChannel;
         public System.Windows.Forms.PropertyGrid PvGridDevice;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup buttonSpecHeaderGroup3;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup buttonSpecHeaderGroup2;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup buttonSpecHeaderGroup1;
     }
 }
