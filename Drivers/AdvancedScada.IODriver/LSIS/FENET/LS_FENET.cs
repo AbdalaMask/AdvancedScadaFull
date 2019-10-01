@@ -182,9 +182,9 @@ namespace AdvancedScada.IODriver.LSIS.FENET
             return HslCommunication.BasicFramework.SoftBasic.ByteToBoolArray(bitArys.Content);
         }
 
-        public bool[] ReadDiscrete(string address, ushort length)
+        public bool[] ReadSingle(string address, ushort length)
         {
-            throw new NotImplementedException();
+            return  fastEnet.ReadBool(address, length).Content;
         }
 
 

@@ -148,8 +148,9 @@ namespace AdvancedScada.IODriver.Modbus.ASCII
             return busAsciiClient.ReadDiscrete(address, length).Content;
         }
 
-      
-
-
+        public bool[] ReadSingle(string address, ushort length)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

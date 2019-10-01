@@ -2,6 +2,8 @@
 {
     public enum DataTypes
     {
+        BitOnByte,
+        BitOnWord,
         Bit,
         Byte,
         Short,

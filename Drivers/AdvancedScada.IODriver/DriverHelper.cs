@@ -1,7 +1,6 @@
 ﻿using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.IBaseService.Common;
 using AdvancedScada.IODriver.Delta.ASCII;
 using AdvancedScada.IODriver.Delta.RTU;
 using AdvancedScada.IODriver.Delta.TCP;
@@ -10,7 +9,6 @@ using AdvancedScada.IODriver.LSIS.FENET;
 using AdvancedScada.IODriver.Modbus.ASCII;
 using AdvancedScada.IODriver.Modbus.RTU;
 using AdvancedScada.IODriver.Modbus.TCP;
-using HslCommunication.Profinet.LSIS;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -629,24 +627,82 @@ namespace AdvancedScada.IODriver
         {
             try
             {
-                SendDone.WaitOne(-1);
+                int baseAddress = db.StartAddress;
                 switch (db.DataType)
                 {
+                    case DataTypes.BitOnByte:
+                        baseAddress = ((db.StartAddress >= 2) ? (db.StartAddress / 2) : 0) * 2;
+                        break;
+                    case DataTypes.BitOnWord:
+                        baseAddress = db.StartAddress * 2;
+                        break;
+                    case DataTypes.Bit:
+                        baseAddress = ((db.StartAddress >= 16) ? (db.StartAddress / 16) : 0) * 2;
+                        break;
+                    case DataTypes.Byte:
+                        baseAddress = db.StartAddress;
+                        break;
+                    case DataTypes.Short:
+                    case DataTypes.UShort:
+                        baseAddress = db.StartAddress * 2;
+                        break;
+                    case DataTypes.Int:
+                    case DataTypes.UInt:
+                        baseAddress = db.StartAddress * 4;
+                        break;
+                    case DataTypes.Long:
+                    case DataTypes.ULong:
+                        baseAddress = db.StartAddress * 8;
+                        break;
+                    case DataTypes.Float:
+                        baseAddress = db.StartAddress * 4;
+                        break;
+                    case DataTypes.Double:
+                        baseAddress = db.StartAddress * 8;
+                        break;
+                }
+                //SendDone.WaitOne(-1);
+                switch (db.DataType)
+                {
+                    case DataTypes.BitOnByte:
+                    case DataTypes.BitOnWord:
+                       
+                        var bitArys2 = ILSIS.Read<bool>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", (ushort)(2 * db.Length));
+                        if (bitArys2 == null || bitArys2.Length == 0) return;
+                        if (bitArys2.Length > db.Tags.Count) return;
+
+                        for (var j = 0; j <= db.Tags.Count - 1; j++)
+                        {
+                            db.Tags[j].Value = bitArys2[j];
+
+                            db.Tags[j].TimeSpan = DateTime.Now;
+                        }
+                        break;
                     case DataTypes.Bit:
                         lock (ILSIS)
                         {
                             bool[] bitArys = null;
                             if (db.IsArray)
                             {
-                                bitArys = ILSIS.Read<bool>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                                bitArys = ILSIS.Read<bool>($"{db.MemoryType.Substring(0, 1)}{db.StartAddress}", (ushort)(2 * db.Length));
 
                             }
                             else
                             {
-                                bitArys = ILSIS.Read<bool>($"{db.MemoryType}{db.StartAddress}", (ushort)(db.Length));
+                                if (db.Length > 1)
+                                {
+                                   
+                                    
+                                    bitArys = ILSIS.ReadSingle($"{db.MemoryType.Substring(0, 1)}{baseAddress}", (ushort)(db.Length));
+                                }
+                                else
+                                {
+                                bitArys = ILSIS.ReadSingle($"{db.MemoryType}{db.StartAddress}", (ushort)(db.Length));
+
+                                }
 
                             }
-                            if (bitArys == null || bitArys.Length == 0) return;
+                            if (bitArys == null || bitArys.Length == 0) return ;
                             if (bitArys.Length > db.Tags.Count) return;
 
                             for (var j = 0; j <= db.Tags.Count - 1; j++)
@@ -661,7 +717,7 @@ namespace AdvancedScada.IODriver
                     case DataTypes.Byte:
                         lock (ILSIS)
                         {
-                            byte[] bitArys = ILSIS.Read<byte>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", (ushort)(2 * db.Length));
+                            byte[] bitArys = ILSIS.Read<byte>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", (ushort)(2 * db.Length));
                             if (bitArys == null || bitArys.Length == 0) return;
                             if (bitArys.Length > db.Tags.Count)
                                 return;
@@ -677,7 +733,7 @@ namespace AdvancedScada.IODriver
                     case DataTypes.Short:
                         lock (ILSIS)
                         {
-                            short[] IntRs = ILSIS.Read<short>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", db.Length);
+                            short[] IntRs = ILSIS.Read<short>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
                             if (IntRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < IntRs.Length; j++)
                             {
@@ -689,7 +745,7 @@ namespace AdvancedScada.IODriver
                     case DataTypes.UShort:
                         lock (ILSIS)
                         {
-                            ushort[] bitArys = ILSIS.Read<ushort>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", db.Length);
+                            ushort[] bitArys = ILSIS.Read<ushort>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
                             if (bitArys == null || bitArys.Length == 0) return;
                             if (bitArys.Length > db.Tags.Count)
                                 return;
@@ -704,7 +760,7 @@ namespace AdvancedScada.IODriver
                     case DataTypes.Int:
                         lock (ILSIS)
                         {
-                            int[] DIntRs = ILSIS.Read<Int32>($"{db.MemoryType.Substring(0, 1)}{4 * db.StartAddress}", db.Length);
+                            int[] DIntRs = ILSIS.Read<int>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
                             if (DIntRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < DIntRs.Length; j++)
                             {
@@ -716,7 +772,7 @@ namespace AdvancedScada.IODriver
                     case DataTypes.UInt:
                         lock (ILSIS)
                         {
-                            var wdRs = ILSIS.Read<uint>($"{db.MemoryType.Substring(0, 1)}{4 * db.StartAddress}", db.Length);
+                            var wdRs = ILSIS.Read<uint>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
                             if (wdRs == null) return;
                             for (int j = 0; j < db.Tags.Count; j++)
                             {
@@ -728,7 +784,7 @@ namespace AdvancedScada.IODriver
                     case DataTypes.Long:
                         lock (ILSIS)
                         {
-                            long[] dwRs = ILSIS.Read<long>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", db.Length);
+                            long[] dwRs = ILSIS.Read<long>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
 
                             for (int j = 0; j < dwRs.Length; j++)
                             {
@@ -740,7 +796,7 @@ namespace AdvancedScada.IODriver
                     case DataTypes.ULong:
                         lock (ILSIS)
                         {
-                            ulong[] dwRs = ILSIS.Read<ulong>($"{db.MemoryType.Substring(0, 1)}{2 * db.StartAddress}", db.Length);
+                            ulong[] dwRs = ILSIS.Read<ulong>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
 
                             for (int j = 0; j < dwRs.Length; j++)
                             {
@@ -752,7 +808,7 @@ namespace AdvancedScada.IODriver
                     case DataTypes.Float:
                         lock (ILSIS)
                         {
-                            float[] rl1Rs = ILSIS.Read<float>($"{db.MemoryType.Substring(0, 1)}{4 * db.StartAddress}", db.Length);
+                            float[] rl1Rs = ILSIS.Read<float>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
 
                             for (int j = 0; j < rl1Rs.Length; j++)
                             {
@@ -764,7 +820,7 @@ namespace AdvancedScada.IODriver
                     case DataTypes.Double:
                         lock (ILSIS)
                         {
-                            double[] rl2Rs = ILSIS.Read<double>($"{db.MemoryType.Substring(0, 1)}{4 * db.StartAddress}", db.Length);
+                            double[] rl2Rs = ILSIS.Read<double>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
 
                             for (int j = 0; j < rl2Rs.Length; j++)
                             {

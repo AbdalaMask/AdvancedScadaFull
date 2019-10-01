@@ -372,51 +372,39 @@ namespace HslCommunication.Profinet.LSIS
                         if (types[i] == address[0])
                         {
                             sb.Append(types[i]);
-                            switch (address[1])
+                            sb.Append("B");
+                            if (address[1] == 'B')
                             {
-                                case 'X':
-                                    sb.Append("X");
-                                    sb.Append(address.Substring(2));
-                                    break;
-                                default:
-                                    sb.Append("B");
-                                    int startIndex = 0;
-                                    if (address[1] == 'B')
-                                    {
-                                        startIndex = int.Parse(address.Substring(2));
-                                        sb.Append(startIndex == 0 ? startIndex : startIndex *= 2);
-                                    }
-                                    else if (address[1] == 'W')
-                                    {
-                                        startIndex = int.Parse(address.Substring(2));
-                                        sb.Append(startIndex == 0 ? startIndex : startIndex *= 2);
-                                    }
-                                    else if (address[1] == 'D')
-                                    {
-                                        startIndex = int.Parse(address.Substring(2));
-                                        sb.Append(startIndex == 0 ? startIndex : startIndex *= 4);
-                                    }
-                                    else if (address[1] == 'L')
-                                    {
-                                        startIndex = int.Parse(address.Substring(2));
-                                        sb.Append(startIndex == 0 ? startIndex : startIndex *= 8);
-                                    }
-                                    else
-                                    {
-                                        sb.Append(int.Parse(address.Substring(1)));
-                                    }
-
-                                    break;
+                                sb.Append(int.Parse(address.Substring(2)) * 2);
                             }
+                            else if (address[1] == 'W')
+                            {
+                                sb.Append(int.Parse(address.Substring(2)) * 2);
+                            }
+                            else if (address[1] == 'D')
+                            {
+                                sb.Append(int.Parse(address.Substring(2)) * 4);
+                            }
+                            else if (address[1] == 'L')
+                            {
+                                sb.Append(int.Parse(address.Substring(2)) * 8);
+                            }
+                            else
+                            {
+                                sb.Append(int.Parse(address.Substring(1)));
+                            }
+
                             exsist = true;
                             break;
                         }
                     }
+
                 }
                 else
                 {
                     sb.Append(address);
                     exsist = true;
+
                 }
                 if (!exsist) throw new Exception(StringResources.Language.NotSupportedDataType);
             }

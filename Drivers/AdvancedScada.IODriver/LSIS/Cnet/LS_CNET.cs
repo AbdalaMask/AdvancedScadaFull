@@ -169,6 +169,9 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
             return xGBCnet.ReadBool(address, length).Content;
         }
 
-
+        public bool[] ReadSingle(string address, ushort length)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

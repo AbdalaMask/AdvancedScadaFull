@@ -163,6 +163,36 @@
     <Compile Include="IE\FormImport.Designer.cs">
       <DependentUpon>FormImport.cs</DependentUpon>
     </Compile>
+    <Compile Include="LinkToSQL\XAddServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LinkToSQL\XAddServer.Designer.cs">
+      <DependentUpon>XAddServer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LinkToSQL\XAddTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LinkToSQL\XAddTable.Designer.cs">
+      <DependentUpon>XAddTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LinkToSQL\XAddDataBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LinkToSQL\XAddDataBase.Designer.cs">
+      <DependentUpon>XAddDataBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LinkToSQL\XSQLMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LinkToSQL\XSQLMaster.Designer.cs">
+      <DependentUpon>XSQLMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LinkToSQL\XAddColumn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LinkToSQL\XAddColumn.Designer.cs">
+      <DependentUpon>XAddColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Logging\XtraFormLogging.cs">
       <SubType>Form</SubType>
@@ -231,6 +261,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IE\FormImport.resx">
       <DependentUpon>FormImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LinkToSQL\XAddServer.resx">
+      <DependentUpon>XAddServer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LinkToSQL\XAddTable.resx">
+      <DependentUpon>XAddTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LinkToSQL\XAddDataBase.resx">
+      <DependentUpon>XAddDataBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LinkToSQL\XSQLMaster.resx">
+      <DependentUpon>XSQLMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LinkToSQL\XAddColumn.resx">
+      <DependentUpon>XAddColumn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Logging\XtraFormLogging.resx">
       <DependentUpon>XtraFormLogging.cs</DependentUpon>
@@ -469,6 +514,7 @@
   <ItemGroup>
     <None Include="Resources\Disconnect16px.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\System.Data.SQLite.Core.1.0.111.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\..\packages\System.Data.SQLite.Core.1.0.111.0\build\net46\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

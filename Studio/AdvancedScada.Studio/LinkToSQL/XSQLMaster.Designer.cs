@@ -1,7 +1,7 @@
 ﻿
-namespace AdvancedScada.Studio.Editors
+namespace AdvancedScada.Studio.LinkToSQL
 {
-    partial class XTagManager
+    partial class XSQLMaster
     {
         /// <summary>
         /// Required designer variable.
@@ -45,7 +45,7 @@ namespace AdvancedScada.Studio.Editors
             System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Node6", new System.Windows.Forms.TreeNode[] {
             treeNode7,
             treeNode8});
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XTagManager));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XSQLMaster));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.barButtonNew = new System.Windows.Forms.ToolStripButton();
@@ -557,7 +557,7 @@ namespace AdvancedScada.Studio.Editors
             this.RItemPaste.Text = "Paste";
             this.RItemPaste.Click += new System.EventHandler(this.RItemPaste_Click);
             // 
-            // XTagManager
+            // XSQLMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -569,9 +569,9 @@ namespace AdvancedScada.Studio.Editors
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockActive;
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "XTagManager";
+            this.Name = "XSQLMaster";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TagManager";
+            this.Text = "SQLMaster";
             this.Load += new System.EventHandler(this.XTagManager_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
