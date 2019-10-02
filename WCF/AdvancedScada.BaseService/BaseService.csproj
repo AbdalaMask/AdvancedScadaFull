@@ -37,10 +37,10 @@
     <Reference Include="System.ServiceModel.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\BusinessHelper.cs" />
-    <Compile Include="Client\DriverHelper.cs" />
+    <Compile Include="Client\ClientDriverWebHelper.cs" />
+    <Compile Include="Client\ClientDriverHelper.cs" />
     <Compile Include="Client\ReadServiceCallbackClient.cs" />
-    <Compile Include="DriverService.cs" />
+    <Compile Include="ServiceDriverHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadService.cs" />
     <Compile Include="Web\ReadServiceWeb.cs" />

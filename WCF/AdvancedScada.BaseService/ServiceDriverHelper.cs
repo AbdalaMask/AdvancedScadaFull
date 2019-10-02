@@ -14,11 +14,11 @@ using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.BaseService
 {
-    public class DriverService : BaseBinding
+    public class ServiceDriverHelper : BaseBinding
     {
         public static ConnectionState objConnectionState = ConnectionState.DISCONNECT;
         private static string FILE_LOG = @"C:\AdvancedScada.txt";
-        DriverHelper driverHelper = new DriverHelper();
+        IODriverHelper driverHelper = new IODriverHelper();
 
         public void OpenWebServiceHost()
         {
@@ -35,7 +35,7 @@ namespace AdvancedScada.BaseService
                 foreach (ServiceEndpoint item in objWebServiceHost.Description.Endpoints)
                 {
                    
-                    DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> Service is host with endpoint: '{1}'", DateTime.Now, item.Address));
+                    //DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> Service is host with endpoint: '{1}'", DateTime.Now, item.Address));
                 }
 
                 // Kết nối PLC.
@@ -43,7 +43,7 @@ namespace AdvancedScada.BaseService
             }
             catch (Exception ex)
             {
-                AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenWebServiceHost): '{1}'", DateTime.Now, ex.Message));
+                //AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenWebServiceHost): '{1}'", DateTime.Now, ex.Message));
             }
 
         }
@@ -87,8 +87,8 @@ namespace AdvancedScada.BaseService
                 {
                     driverHelper.Connect();
                 });
-                eventAddMessage += new EventListenning(AddMessage);
-                eventConnectionState += new EventConnectionState(SetConnectionState);
+                //eventAddMessage += new EventListenning(AddMessage);
+                //eventConnectionState += new EventConnectionState(SetConnectionState);
                 return true;
 
 
@@ -129,17 +129,17 @@ namespace AdvancedScada.BaseService
                 switch (connState)
                 {
                     case ConnectionState.CONNECT:
-                        DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> Connection State: '{1}'", DateTime.Now, "Connect"));
+                        ServiceDriverHelper.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> Connection State: '{1}'", DateTime.Now, "Connect"));
                         break;
                     case ConnectionState.DISCONNECT:
-                        DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> Connection State: '{1}'", DateTime.Now, "Disconnect"));
+                        ServiceDriverHelper.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> Connection State: '{1}'", DateTime.Now, "Disconnect"));
                         break;
                 }
 
             }
             catch (Exception ex)
             {
-                DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenWebServiceHost): '{1}'", DateTime.Now, ex.Message));
+                ServiceDriverHelper.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenWebServiceHost): '{1}'", DateTime.Now, ex.Message));
             }
 
         }
@@ -148,11 +148,11 @@ namespace AdvancedScada.BaseService
         {
             try
             {
-                DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> DriverService(AddMessage): '{1}'", DateTime.Now, msg));
+                ServiceDriverHelper.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> DriverService(AddMessage): '{1}'", DateTime.Now, msg));
             }
             catch (Exception ex)
             {
-                DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenWebServiceHost): '{1}'", DateTime.Now, ex.Message));
+                ServiceDriverHelper.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenWebServiceHost): '{1}'", DateTime.Now, ex.Message));
             }
         }
 

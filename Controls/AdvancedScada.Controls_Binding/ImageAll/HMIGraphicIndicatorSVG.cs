@@ -1,5 +1,6 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Client;
 using Svg;
 using System;
 using System.ComponentModel;
@@ -217,8 +218,55 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         #endregion
 
         #region Properties
-
-
+        private string m_PLCAddressSelect1 = string.Empty;
+        public string PLCAddressValueSelect1
+        {
+            get { return m_PLCAddressSelect1; }
+            set
+            {
+                if (m_PLCAddressSelect1 != value)
+                {
+                    m_PLCAddressSelect1 = value;
+                    try
+                    {
+                        //* When address is changed, re-subscribe to new address
+                        if (string.IsNullOrEmpty(m_PLCAddressSelect1) ||
+                            string.IsNullOrWhiteSpace(m_PLCAddressSelect1) || Licenses.LicenseManager.IsInDesignMode) return;
+                        var bd = new Binding("ValueSelect1", TagCollectionClient.Tags[m_PLCAddressSelect1], "Value", true);
+                        DataBindings.Add(bd);
+                    }
+                    catch (Exception ex)
+                    {
+                        DisplayError(ex.Message);
+                    }
+                }
+            }
+        }
+        private string m_PLCAddressVisible = string.Empty;
+        public string PLCAddressVisible
+        {
+            get { return m_PLCAddressVisible; }
+            set
+            {
+                if (m_PLCAddressVisible != value)
+                {
+                    m_PLCAddressVisible = value;
+                    //* When address is changed, re-subscribe to new address
+                    try
+                    {
+                        //* When address is changed, re-subscribe to new address
+                        if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
+                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
+                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                        DataBindings.Add(bd);
+                    }
+                    catch (Exception ex)
+                    {
+                        DisplayError(ex.Message);
+                    }
+                }
+            }
+        }
         private bool m_ValueSelect1;
 
         public bool ValueSelect1
@@ -486,7 +534,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public string PLCAddressValue { get; set; }
         public string PLCAddressClick { get; set; }
-        public string PLCAddressVisible { get; set; }
+       
         public string PLCAddressEnabled { get; set; }
 
 

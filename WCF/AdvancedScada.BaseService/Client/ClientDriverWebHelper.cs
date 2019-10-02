@@ -6,7 +6,7 @@ using System.ServiceModel;
 
 namespace AdvancedScada.BaseService.Client
 {
-    public class BusinessHelper : BaseBinding
+    public class ClientDriverWebHelper : BaseBinding
     {
         public static string HOST = "127.0.0.1";
 
@@ -29,7 +29,7 @@ namespace AdvancedScada.BaseService.Client
             {
                 //string.Format("http://{0}:{1}/", HOST_NAME, PORT);
                 EndpointAddress objEndpointAddress = new EndpointAddress(string.Format("http://{0}:{1}/", HOST, PORT) + "ReadServiceWeb");
-                WSHttpBinding objWSHttpBinding = BusinessHelper.GetWSHttpBinding();
+                WSHttpBinding objWSHttpBinding = GetWSHttpBinding();
                 ChannelFactory<IReadServiceWeb> cf = new ChannelFactory<IReadServiceWeb>(objWSHttpBinding, objEndpointAddress);
                 cf.Credentials.Windows.ClientCredential.UserName = USER_NAME; // string.Format("administrator");
                 cf.Credentials.Windows.ClientCredential.Password = PASSWORD;
@@ -46,7 +46,7 @@ namespace AdvancedScada.BaseService.Client
             try
             {
                 InstanceContext objInstanceContext = new InstanceContext(new ReadServiceCallbackClient());
-                NetTcpBinding objNetTcpBinding = BusinessHelper.GetNetTcpBinding();
+                NetTcpBinding objNetTcpBinding = ClientDriverWebHelper.GetNetTcpBinding();
                 EndpointAddress objEndpointAddress = new EndpointAddress(string.Format("net.tcp://{0}:{1}/", HOST, PORT_TCP) + "ConnectorService");
                 DuplexChannelFactory<IReadService> factory = new DuplexChannelFactory<IReadService>(objInstanceContext, objNetTcpBinding, objEndpointAddress);
 

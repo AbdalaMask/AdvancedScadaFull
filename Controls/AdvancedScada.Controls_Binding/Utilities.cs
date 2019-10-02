@@ -23,7 +23,7 @@ namespace AdvancedScada.Controls_Binding
             {
                 lock (myLockRead)
                 {
-                    client = DriverHelper.GetInstance().GetReadService();
+                    client = ClientDriverHelper.GetInstance().GetReadService();
                     if (client != null)
                         client.WriteTag(PLCAddressClick, Value);
                 }

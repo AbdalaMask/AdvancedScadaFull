@@ -233,6 +233,14 @@
       <Project>{5C361F75-32C8-487B-9EB8-0B4D627B89B4}</Project>
       <Name>Utils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\WCF\AdvancedScada.BaseService\BaseService.csproj">
+      <Project>{5B05B8BD-B05A-4B7A-8B0D-78C8BE7441E1}</Project>
+      <Name>BaseService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WCF\AdvancedScada.IBaseService\IBaseService.csproj">
+      <Project>{F47222C0-6B69-4FF1-AEC3-B4C668B0A55A}</Project>
+      <Name>IBaseService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

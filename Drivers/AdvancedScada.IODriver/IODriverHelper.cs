@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.IODriver
 {
-    public partial class DriverHelper
+    public partial class IODriverHelper
     {
         public static readonly ManualResetEvent SendDone = new ManualResetEvent(true);
         public static List<Channel> Channels;
@@ -310,13 +310,18 @@ namespace AdvancedScada.IODriver
 
             try
             {
-                Channels = null;
+                IsConnected = false;
+                DriverDictionary = null;
+                TagCollection.Tags.Clear();
+                   Channels = null;
                 for (int i = 0; i < taskArray.Length; i++)
                 {
-                    taskArray[i].Dispose();
+                    taskArray[i].Wait(1000);
+                    //taskArray[i].Dispose();
                 }
 
                 objConnectionState = ConnectionState.DISCONNECT;
+                eventConnectionState?.Invoke(objConnectionState, string.Format("Server disconnect with PLC."));
             }
             catch (Exception ex)
             {
@@ -486,7 +491,7 @@ namespace AdvancedScada.IODriver
         {
             try
             {
-                SendDone.WaitOne(-1);
+                //SendDone.WaitOne(-1);
                 switch (db.DataType)
                 {
                     case DataTypes.Bit:

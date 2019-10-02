@@ -46,7 +46,7 @@
     <Compile Include="Delta\RTU\DeltaRTUMaster.cs" />
     <Compile Include="Delta\TCP\DeltaTCPMaster.cs" />
     <Compile Include="DemoUtils.cs" />
-    <Compile Include="DriverHelper.cs" />
+    <Compile Include="IODriverHelper.cs" />
     <Compile Include="GenericDictionary.cs" />
     <Compile Include="LSIS\Cnet\LS_CNET.cs" />
     <Compile Include="LSIS\FENET\LS_FENET.cs" />

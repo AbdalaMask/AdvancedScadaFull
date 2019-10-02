@@ -150,6 +150,10 @@
       <Project>{78569a8d-4c84-4174-89d2-58d3f30acbbe}</Project>
       <Name>IODriver</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Util\AdvancedScada.Utils\Utils.csproj">
+      <Project>{5c361f75-32c8-487b-9eb8-0b4d627b89b4}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WCF\AdvancedScada.BaseService\BaseService.csproj">
       <Project>{5b05b8bd-b05a-4b7a-8b0d-78c8be7441e1}</Project>
       <Name>BaseService</Name>

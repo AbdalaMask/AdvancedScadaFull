@@ -49,7 +49,7 @@ namespace AdvancedScada.HMI.MainForm
                         break;
                     }
                 }
-                client = DriverHelper.GetInstance().GetReadService();
+                client = ClientDriverHelper.GetInstance().GetReadService();
                 client.Connect(XCollection.CURRENT_MACHINE);
 
             }

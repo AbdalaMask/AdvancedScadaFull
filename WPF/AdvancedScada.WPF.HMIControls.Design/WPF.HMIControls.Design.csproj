@@ -115,6 +115,10 @@
       <Project>{b160281b-93b1-45bd-a07e-fd75c27916ea}</Project>
       <Name>Monitor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Util\AdvancedScada.Utils\Utils.csproj">
+      <Project>{5c361f75-32c8-487b-9eb8-0b4d627b89b4}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WCF\AdvancedScada.IBaseService\IBaseService.csproj">
       <Project>{f47222c0-6b69-4ff1-aec3-b4c668b0a55a}</Project>
       <Name>IBaseService</Name>

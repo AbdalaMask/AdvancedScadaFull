@@ -23,14 +23,14 @@ namespace AdvancedScada.Studio.Service
 
             try
             {
-
-                new DriverService().InitializePLC();
-                host = new DriverService().InitializeReadService();
+                eventAddMessage += new EventListenning(AddMessage);
+                eventConnectionState += new EventConnectionState(SetConnectionState);
+                new ServiceDriverHelper().InitializePLC();
+                host = new ServiceDriverHelper().InitializeReadService();
                 host.Opened += host_Opened;
                 host.Open();
 
-                eventAddMessage += new EventListenning(AddMessage);
-                eventConnectionState += new EventConnectionState(SetConnectionState);
+              
 
                 foreach (var se in host.Description.Endpoints)
                 {
@@ -98,11 +98,11 @@ namespace AdvancedScada.Studio.Service
         {
             try
             {
-                DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> BusinessHelper(AddMessage): '{1}'", DateTime.Now, msg));
+                ServiceDriverHelper.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> BusinessHelper(AddMessage): '{1}'", DateTime.Now, msg));
             }
             catch (Exception ex)
             {
-                DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenPumpServiceHost): '{1}'", DateTime.Now, ex.Message));
+                ServiceDriverHelper.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenPumpServiceHost): '{1}'", DateTime.Now, ex.Message));
             }
         }
 

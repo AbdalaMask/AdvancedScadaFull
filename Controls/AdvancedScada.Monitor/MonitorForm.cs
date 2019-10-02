@@ -244,7 +244,7 @@ namespace AdvancedScada.Monitor
                         break;
                     }
                 }
-                client = DriverHelper.GetInstance().GetReadService(ic);
+                client = ClientDriverHelper.GetInstance().GetReadService(ic);
                 client.Connect(XCollection.CURRENT_MACHINE);
 
                 IsConnected = true;

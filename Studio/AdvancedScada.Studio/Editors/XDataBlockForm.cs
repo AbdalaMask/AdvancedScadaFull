@@ -251,7 +251,7 @@ namespace AdvancedScada.Studio.Editors
 
                             break;
                         case "Modbus":
-                            chkX10.Visible = false;
+                            
                             txtDomain.Items.Clear();
                             txtPrefix.Text = "txtPrefix :";
                             GLSIS.Visible = false;
@@ -269,19 +269,20 @@ namespace AdvancedScada.Studio.Editors
 
                     {
                         case "Delta":
-                            chkX10.Visible = false;
+                           
                             txtDomain.Items.Clear();
                             txtDomain.Items.AddRange(DVP);
                             txtPrefix.Text = "txtPrefix :";
-
+                            GLSIS.Visible = false;
                             break;
                         case "LSIS":
                             lblTypeOfRead.Visible = false;
                             CboxTypeOfRead.Visible = false;
                             break;
                         case "Modbus":
-                            chkX10.Visible = false;
                             txtDomain.Items.Clear();
+                            txtPrefix.Text = "txtPrefix :";
+                            GLSIS.Visible = false;
                             break;
                         default:
                             break;

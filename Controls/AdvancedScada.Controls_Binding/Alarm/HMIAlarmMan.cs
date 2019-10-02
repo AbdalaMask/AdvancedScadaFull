@@ -102,7 +102,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
                     break;
                 }
             }
-            client = DriverHelper.GetInstance().GetReadService(ic);
+            client = ClientDriverHelper.GetInstance().GetReadService(ic);
             client.Connect(XCollection.CURRENT_MACHINE);
         }
 

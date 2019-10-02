@@ -254,8 +254,8 @@ namespace AdvancedScada.ImagePicker
             ImageListCurrentSVG.Clear();
             ImageListCurrentTip.Clear();
 
-            Task t = Task.Factory.StartNew(() =>
-                {
+            //Task t = Task.Factory.StartNew(() =>
+            //    {
                     try
                     {
 
@@ -285,8 +285,8 @@ namespace AdvancedScada.ImagePicker
                         //return;
                     }
 
-                });
-            t.Wait();
+            //    });
+            //t.Wait();
             gcSVG.ImageList = il32;
 
 

@@ -5,9 +5,9 @@ using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.BaseService.Client
 {
-    public class DriverHelper : BaseBinding
+    public class ClientDriverHelper : BaseBinding
     {
-        private static DriverHelper objDriverHelper = null;
+        private static ClientDriverHelper objDriverHelper = null;
 
         public static string IP_ADDRESS = "127.0.0.1";
 
@@ -17,13 +17,13 @@ namespace AdvancedScada.BaseService.Client
 
 
 
-        public static DriverHelper GetInstance()
+        public static ClientDriverHelper GetInstance()
         {
             if (objDriverHelper != null)
             {
                 return objDriverHelper;
             }
-            return new DriverHelper();
+            return new ClientDriverHelper();
         }
 
         public IReadService GetReadService()

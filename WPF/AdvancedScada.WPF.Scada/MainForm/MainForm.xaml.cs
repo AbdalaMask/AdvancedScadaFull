@@ -35,7 +35,7 @@ namespace AdvancedScada.WPF.Scada.MainForm
                         break;
                     }
                 }
-                client = DriverHelper.GetInstance().GetReadService();
+                client = ClientDriverHelper.GetInstance().GetReadService();
                 client.Connect(XCollection.CURRENT_MACHINE);
             }
             catch (Exception ex)

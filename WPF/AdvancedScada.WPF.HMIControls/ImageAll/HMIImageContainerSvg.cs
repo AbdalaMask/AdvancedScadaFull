@@ -1,4 +1,6 @@
-﻿using AdvancedScada.Utils.Compression;
+﻿using AdvancedScada.DriverBase.Client;
+using AdvancedScada.Utils.Compression;
+using AdvancedScada.WPF.HMIControls.Comm;
 using Svg;
 using System;
 using System.ComponentModel;
@@ -6,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -19,8 +22,24 @@ namespace AdvancedScada.WPF.HMIControls.ImageAll
             this.SnapsToDevicePixels = true;
         }
         #region Property PLC
+        public static readonly DependencyProperty PLCAddressValueSelect1Property = DependencyProperty.Register(
+           "PLCAddressValueSelect1", typeof(string), typeof(HMIImageContainerSvg), new FrameworkPropertyMetadata("0"));
+
+        [Category("HMI")]
+        public string PLCAddressValueSelect1
+        {
+            get
+            {
+                return (string)base.GetValue(PLCAddressValueSelect1Property);
+            }
+            set
+            {
+                base.SetValue(PLCAddressValueSelect1Property, value);
 
 
+
+            }
+        }
         [Category("HMI")]
         public string GraphicAllOff
         {
@@ -194,9 +213,27 @@ namespace AdvancedScada.WPF.HMIControls.ImageAll
                 if (Image1 != null) g.DrawImage(Image1, new Rect(0, 0, width, height));
             }
             g.Close();
+            try
+            {
+                //* When address is changed, re-subscribe to new address
+                if (string.IsNullOrEmpty(PLCAddressValueSelect1) || string.IsNullOrWhiteSpace(PLCAddressValueSelect1) ||
+                           LicenseHMI.IsInDesignMode) return;
+                Binding binding = new Binding("Value");
+                binding.Source = TagCollectionClient.Tags[PLCAddressValueSelect1];
+                this.SetBinding(ValueSelect1Property, binding);
+
+
+            }
+            catch (Exception ex)
+            {
+                DisplayError(ex.Message);
+            }
+           
+        }
+        private void DisplayError(string message)
+        {
 
         }
-
 
         #region Property
 

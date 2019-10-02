@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.DriverBase.Client;
+using AdvancedScada.WPF.HMIControls.KeyPad.Converter;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -195,12 +196,12 @@ namespace AdvancedScada.WPF.HMIControls.Display
             base.OnPreviewMouseDown(e);
             if (PLCAddressKeypad != null && (string.Compare(PLCAddressKeypad, string.Empty) != 0) & IsEnabled)
             {
-                //Keypad keypadWindow = new Keypad(this, null);
-                //if (keypadWindow.ShowDialog() == true)
-                //{
-                //    Utilities.Write(PLCAddressKeypad, keypadWindow.Result);
-                //}
-                ////this.Text = keypadWindow.Result;
+                Keypad keypadWindow = new Keypad(this, null);
+                if (keypadWindow.ShowDialog() == true)
+                {
+                    Utilities.Write(PLCAddressKeypad, keypadWindow.Result);
+                }
+                //this.Text = keypadWindow.Result;
             }
         }
 
