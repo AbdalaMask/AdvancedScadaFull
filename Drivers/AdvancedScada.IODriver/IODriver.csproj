@@ -38,12 +38,14 @@
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Delta\ASCII\DeltaASCIIMaster.cs" />
     <Compile Include="Delta\DMT.cs" />
     <Compile Include="Delta\RTU\DeltaRTUMaster.cs" />
     <Compile Include="Delta\TCP\DeltaTCPMaster.cs" />
+    <Compile Include="DemoUtils.cs" />
     <Compile Include="DriverHelper.cs" />
     <Compile Include="GenericDictionary.cs" />
     <Compile Include="LSIS\Cnet\LS_CNET.cs" />
@@ -81,9 +83,9 @@
       <Project>{1d570e9a-e5b4-44dd-946d-9d73cfa4a535}</Project>
       <Name>DriverBase</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HslCommunication_Net45\HslCommunication_Net45.csproj">
+    <ProjectReference Include="..\HslCommunication_Net45\HslCommunication.csproj">
       <Project>{7f8029da-1b94-4b1d-b91f-5b21dbf2f3a2}</Project>
-      <Name>HslCommunication_Net45</Name>
+      <Name>HslCommunication</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

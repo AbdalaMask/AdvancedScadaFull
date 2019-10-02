@@ -1,4 +1,8 @@
-﻿using System;
+﻿using AdvancedScada.XamlToCode.DOM;
+using AdvancedScada.XamlToCode.Properties;
+using Microsoft.CSharp;
+using Microsoft.VisualBasic;
+using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections;
@@ -8,15 +12,10 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Windows.Media;
 using System.Xaml;
 using System.Xml;
-using AdvancedScada.XamlToCode.DOM;
-using Microsoft.CSharp;
-using Microsoft.VisualBasic;
 using x2006 = System.Windows.Markup;
-using System.Windows.Controls;
-using AdvancedScada.XamlToCode.Properties;
-using System.Windows.Media;
 
 namespace AdvancedScada.XamlToCode
 {
@@ -109,7 +108,7 @@ namespace AdvancedScada.XamlToCode
         public CompilerResults CompileAssemblyFromLastCodeCompileUnit()
         {
             // Compile the code
-            var comparam = new CompilerParameters(new[] {"mscorlib.dll", "System.dll", "System.Core.dll"});
+            var comparam = new CompilerParameters(new[] { "mscorlib.dll", "System.dll", "System.Core.dll" });
             comparam.GenerateInMemory = true;
 
             // Add all the required referenced assemblies
@@ -784,7 +783,7 @@ namespace AdvancedScada.XamlToCode
                             //TODO: don't forget to make sure a using happens for the referencedXamlType
                             var typeName = resolvedType != null ? resolvedType.Name : xamlTypeReference;
 
-                            Debug.WriteLine("Type Ref={0}", new object[] {typeName});
+                            Debug.WriteLine("Type Ref={0}", new object[] { typeName });
                         }
                         else if (xamlType == XamlLanguage.Reference)
                         {

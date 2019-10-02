@@ -190,7 +190,7 @@ namespace AdvancedScada.Controls_Binding.Hydraulic
 
         [Category("PLC Properties")]
         public int ValueToWrite { get; set; }
-        public string PLCAddressEnabled { get; set ; }
+        public string PLCAddressEnabled { get; set; }
 
         private void ReleaseValue()
         {

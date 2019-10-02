@@ -6,6 +6,7 @@ using AdvancedScada.Studio.DB;
 using AdvancedScada.Studio.DB.SQL;
 using AdvancedScada.Studio.DB.SQLite;
 using AdvancedScada.Studio.Editors;
+using AdvancedScada.Studio.LinkToSQL;
 using AdvancedScada.Studio.Logging;
 using AdvancedScada.Studio.Monitor;
 using AdvancedScada.Studio.Properties;
@@ -221,6 +222,14 @@ namespace AdvancedScada.Studio
 
         private void SQLManagerItem_Click(object sender, EventArgs e)
         {
+            foreach (Form form in Application.OpenForms)
+                if (form.GetType() == typeof(XSQLMaster))
+                {
+                    form.Activate();
+                    return;
+                }
+            KryptonPage page = NewPage("SQLMaster ", 0, new XSQLMaster());
+            TabForm.Pages.Add(page);
 
         }
 

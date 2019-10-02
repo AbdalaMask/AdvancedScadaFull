@@ -1,4 +1,5 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.BaseService.Web;
+using AdvancedScada.DriverBase;
 using AdvancedScada.IBaseService;
 using AdvancedScada.IBaseService.Common;
 using AdvancedScada.IODriver;
@@ -19,21 +20,21 @@ namespace AdvancedScada.BaseService
         private static string FILE_LOG = @"C:\AdvancedScada.txt";
         DriverHelper driverHelper = new DriverHelper();
 
-        public  void OpenWebServiceHost()
+        public void OpenWebServiceHost()
         {
             try
             {
-                Uri uriWeb = new Uri("http://localhost:8086/PumpService");
-                Uri uriWS = new Uri("http://localhost:8088/PumpService");
-                WebServiceHost objWebServiceHost = new WebServiceHost(typeof(ReadService));
-                WebHttpBinding objWebHttpBinding = DriverService.GetWebHttpBinding();
-                WSHttpBinding objWSHttpBinding = DriverService.GetWSHttpBinding();
-                objWebServiceHost.AddServiceEndpoint(typeof(IReadService), objWebHttpBinding, uriWeb);
-                objWebServiceHost.AddServiceEndpoint(typeof(IReadService), objWSHttpBinding, uriWS);
+                Uri uriWeb = new Uri("http://localhost:8086/Driver");
+                Uri uriWS = new Uri("http://localhost:8088/Driver");
+                WebServiceHost objWebServiceHost = new WebServiceHost(typeof(ReadServiceWeb));
+                WebHttpBinding objWebHttpBinding = GetWebHttpBinding();
+                WSHttpBinding objWSHttpBinding = GetWSHttpBinding();
+                objWebServiceHost.AddServiceEndpoint(typeof(IReadServiceWeb), objWebHttpBinding, uriWeb);
+                objWebServiceHost.AddServiceEndpoint(typeof(IReadServiceWeb), objWSHttpBinding, uriWS);
                 objWebServiceHost.Open();
                 foreach (ServiceEndpoint item in objWebServiceHost.Description.Endpoints)
                 {
-                    //Console.WriteLine("Service is host with endpoint: " + item.Address);
+                   
                     DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> Service is host with endpoint: '{1}'", DateTime.Now, item.Address));
                 }
 
@@ -42,7 +43,7 @@ namespace AdvancedScada.BaseService
             }
             catch (Exception ex)
             {
-                AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenPumpServiceHost): '{1}'", DateTime.Now, ex.Message));
+                AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenWebServiceHost): '{1}'", DateTime.Now, ex.Message));
             }
 
         }
@@ -52,7 +53,7 @@ namespace AdvancedScada.BaseService
 
             try
             {
-              
+
 
                 string address = string.Format(URI_DRIVER, Environment.MachineName, PORT, "Driver");
                 NetTcpBinding netTcpBinding = GetNetTcpBinding();
@@ -86,8 +87,8 @@ namespace AdvancedScada.BaseService
                 {
                     driverHelper.Connect();
                 });
-                eventAddMessage += new EventUOSListenning(AddMessage);
-                eventUOSAccepting += new EventUOSAccepting(SetConnectionState);
+                eventAddMessage += new EventListenning(AddMessage);
+                eventConnectionState += new EventConnectionState(SetConnectionState);
                 return true;
 
 
@@ -138,7 +139,7 @@ namespace AdvancedScada.BaseService
             }
             catch (Exception ex)
             {
-                DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenPumpServiceHost): '{1}'", DateTime.Now, ex.Message));
+                DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenWebServiceHost): '{1}'", DateTime.Now, ex.Message));
             }
 
         }
@@ -147,11 +148,11 @@ namespace AdvancedScada.BaseService
         {
             try
             {
-                DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> BusinessHelper(AddMessage): '{1}'", DateTime.Now, msg));
+                DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> DriverService(AddMessage): '{1}'", DateTime.Now, msg));
             }
             catch (Exception ex)
             {
-                DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenPumpServiceHost): '{1}'", DateTime.Now, ex.Message));
+                DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenWebServiceHost): '{1}'", DateTime.Now, ex.Message));
             }
         }
 
@@ -161,7 +162,7 @@ namespace AdvancedScada.BaseService
             try
             {
                 // Write single line to new file.
-                FILE_LOG = string.Format(@"C:\{0:MM-yyyy}_IndustrialNetworks.txt", DateTime.Now);
+                FILE_LOG = string.Format(@"C:\{0:MM-yyyy}_AdvancedScada.txt", DateTime.Now);
                 using (StreamWriter writer = new StreamWriter(FILE_LOG, true))
                 {
                     writer.WriteLine(msg);

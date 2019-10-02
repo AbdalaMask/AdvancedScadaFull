@@ -527,7 +527,7 @@ namespace AdvancedScada.Monitor
 
         public void UpdateCollection(ConnectionState status, Dictionary<string, Tag> collection)
         {
-            
+
         }
     }
 

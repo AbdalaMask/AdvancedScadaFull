@@ -314,7 +314,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
             }
         }
 
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressEnabled { get; set; }
 
         #endregion
 

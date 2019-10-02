@@ -135,8 +135,8 @@ namespace AdvancedScada.Controls_Binding.HslControl.Thermometer
         #region "Basic Properties"
 
         public OutputType OutputType { get; set; }
-        public string PLCAddressClick { get ; set ; }
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressClick { get; set; }
+        public string PLCAddressEnabled { get; set; }
 
 
 

@@ -20,7 +20,7 @@ namespace AdvancedScada.ConvertControls
 
         private static IEnumerable<Assembly> GetReferenceAssemblies()
         {
-            return new[] {"WindowsBase", "PresentationCore", "PresentationFramework"}.Select(an => Assembly.LoadWithPartialName(an));
+            return new[] { "WindowsBase", "PresentationCore", "PresentationFramework" }.Select(an => Assembly.LoadWithPartialName(an));
         }
 
         protected override Assembly OnAssemblyResolve(string assemblyName)

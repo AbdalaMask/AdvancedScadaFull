@@ -39,7 +39,7 @@ namespace AdvancedScada.DriverBase.Devices
         [DataMember]
         public int DeviceId { get; set; }
 
-        
+
         [DataMember]
         public DataTypes DataType { get; set; }
 

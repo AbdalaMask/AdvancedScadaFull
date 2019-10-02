@@ -172,7 +172,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         [Category("PLC Properties")]
         public int ValueToWrite { get; set; }
         public string PLCAddressValue { get; set; }
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressEnabled { get; set; }
 
         private void ReleaseValue()
         {
@@ -286,7 +286,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        public  void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

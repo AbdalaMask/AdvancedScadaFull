@@ -2,20 +2,15 @@
 using AdvancedScada.Controls_Binding.Display;
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
-using AdvancedScada.Monitor;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Drawing;
 using System.Drawing.Design;
-using System.Security.Permissions;
 using System.Windows.Forms;
-using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.ButtonAll
 {
-    
+
     public class HMIbutton : System.Windows.Forms.Button, IPropertiesControls
     {
         public HMIbutton()
@@ -338,5 +333,5 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         #endregion
     }
 
-    
+
 }

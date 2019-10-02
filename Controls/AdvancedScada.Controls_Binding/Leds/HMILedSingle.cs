@@ -190,7 +190,7 @@ namespace AdvancedScada.Controls_Binding.Leds
 
         [Category("PLC Properties")]
         public int ValueToWrite { get; set; }
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressEnabled { get; set; }
 
         private void ReleaseValue()
         {
@@ -342,5 +342,5 @@ namespace AdvancedScada.Controls_Binding.Leds
         #endregion
     }
 
-    
+
 }

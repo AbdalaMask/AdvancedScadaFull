@@ -12,7 +12,7 @@ namespace AdvancedScada.Controls_Binding.Segment
 
     public class HMISegment7LED : DasNetLED.DAS_Net_Segment7LED
     {
-       
+
         private string OriginalText;
 
         #region propartas
@@ -351,5 +351,5 @@ namespace AdvancedScada.Controls_Binding.Segment
         #endregion
 
     }
-   
+
 }

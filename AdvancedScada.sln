@@ -49,7 +49,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scada", "HMI\AdvancedScada.
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Controls_Net35", "Controls\AdvancedScada.Controls_Net35\Controls_Net35.vbproj", "{31B3F32B-550A-445D-8AC4-5F8A37A12124}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HslCommunication_Net45", "Drivers\HslCommunication_Net45\HslCommunication_Net45.csproj", "{7F8029DA-1B94-4B1D-B91F-5B21DBF2F3A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HslCommunication", "Drivers\HslCommunication_Net45\HslCommunication.csproj", "{7F8029DA-1B94-4B1D-B91F-5B21DBF2F3A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF.HMIControls", "WPF\AdvancedScada.WPF.HMIControls\WPF.HMIControls.csproj", "{7BB41A25-5526-4284-A6EB-5A2801328EB7}"
 EndProject

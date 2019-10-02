@@ -2,18 +2,17 @@
 using HslCommunication;
 using HslCommunication.Profinet.Siemens;
 using System;
-using System.Data;
 using System.Diagnostics;
 using System.Net.Sockets;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.IODriver.Siemens
 {
-    public   class SiemensNet: IDriverAdapter
+    public class SiemensNet : IDriverAdapter
     {
         private SiemensS7Net siemensTcpNet = null;
         private SiemensPLCS siemensPLCSelected = SiemensPLCS.S1200;
         private const int DELAY = 10;
-        
+
         public bool _IsConnected = false;
         public byte station;
         private SiemensPLCS cpu;
@@ -50,21 +49,21 @@ namespace AdvancedScada.IODriver.Siemens
         {
         }
 
-        public SiemensNet(SiemensPLCS cpu, string iPAddress, short rack, short slot) 
+        public SiemensNet(SiemensPLCS cpu, string iPAddress, short rack, short slot)
             : this()
         {
-            
+
             this.cpu = cpu;
             this.iPAddress = iPAddress;
             this.rack = rack;
             this.slot = slot;
-              siemensPLCSelected = cpu;
-               siemensTcpNet = new SiemensS7Net(cpu);
-            
+            siemensPLCSelected = cpu;
+            siemensTcpNet = new SiemensS7Net(cpu);
+
         }
 
-       
-        
+
+
 
         public bool Connection()
         {
@@ -76,8 +75,8 @@ namespace AdvancedScada.IODriver.Siemens
                 siemensTcpNet.IpAddress = iPAddress;
                 if (siemensPLCSelected != SiemensPLCS.S200Smart)
                 {
-                    siemensTcpNet.Rack = (byte) rack;
-                    siemensTcpNet.Slot = (byte) slot;
+                    siemensTcpNet.Rack = (byte)rack;
+                    siemensTcpNet.Slot = (byte)slot;
                 }
 
 
@@ -85,7 +84,7 @@ namespace AdvancedScada.IODriver.Siemens
 
                 try
                 {
-                    
+
                     if (connect.IsSuccess)
                     {
 
@@ -98,18 +97,18 @@ namespace AdvancedScada.IODriver.Siemens
                 }
                 catch (Exception ex)
                 {
-                   EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                    EventscadaException?.Invoke(this.GetType().Name, ex.Message);
                 }
 
 
-                
+
                 stopwatch.Stop();
                 return IsConnected;
             }
             catch (SocketException ex)
             {
                 stopwatch.Stop();
-               EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
 
             }
             return IsConnected;
@@ -125,14 +124,14 @@ namespace AdvancedScada.IODriver.Siemens
             }
             catch (SocketException ex)
             {
-               EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
             return IsConnected;
         }
-       
 
 
-       
+
+
         public bool Write(string address, dynamic value)
         {
             if (value is bool)

@@ -21,10 +21,10 @@ namespace AdvancedScada.Controls_Binding.Display
 
         }
 
-        public string PLCAddressValue { get ; set ; }
-        public string PLCAddressClick { get ; set ; }
-        public string PLCAddressVisible { get ; set ; }
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressValue { get; set; }
+        public string PLCAddressClick { get; set; }
+        public string PLCAddressVisible { get; set; }
+        public string PLCAddressEnabled { get; set; }
 
         public void DisplayError(string ErrorMessage)
         {

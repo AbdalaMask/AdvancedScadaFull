@@ -329,7 +329,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        public  void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

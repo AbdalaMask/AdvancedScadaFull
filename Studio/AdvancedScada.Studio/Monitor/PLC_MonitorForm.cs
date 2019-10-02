@@ -517,7 +517,7 @@ namespace AdvancedScada.Studio.Monitor
 
         public void UpdateCollection(ConnectionState status, Dictionary<string, Tag> collection)
         {
-             
+
         }
         #endregion
     }

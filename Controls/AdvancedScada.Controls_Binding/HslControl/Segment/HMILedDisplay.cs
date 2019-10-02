@@ -254,8 +254,8 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
         public double KeypadMinValue { get; set; }
 
         public double KeypadMaxValue { get; set; }
-        public string PLCAddressClick { get ; set ; }
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressClick { get; set; }
+        public string PLCAddressEnabled { get; set; }
 
         private void KeypadPopUp_ButtonClick(object sender, KeypadEventArgs e)
         {

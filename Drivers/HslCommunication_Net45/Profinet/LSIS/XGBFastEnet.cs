@@ -49,7 +49,7 @@ namespace HslCommunication.Profinet.LSIS
         /// <param name="slotNo"></param>
         public XGBFastEnet(string CpuType, string ipAddress, int port, byte slotNo)
         {
-           this.XCpuType = CpuType;
+            this.XCpuType = CpuType;
             WordLength = 2;
             IpAddress = ipAddress;
             Port = port;
@@ -66,7 +66,7 @@ namespace HslCommunication.Profinet.LSIS
         /// <summary>
         /// CPU TYPE
         /// </summary>
-        public  string CpuType { get; private  set; }
+        public string CpuType { get; private set; }
 
         /// <summary>
         /// Cpu is error
@@ -299,7 +299,7 @@ namespace HslCommunication.Profinet.LSIS
                     if (types[i] == address[0])
                     {
                         sb.Append(types[i]);
-                       
+
                         switch (address[1])
                         {
                             case 'X':
@@ -350,12 +350,12 @@ namespace HslCommunication.Profinet.LSIS
             return OperateResult.CreateSuccessResult(sb.ToString());
         }
         /// <summary>
-        /// AnalysisAddress IsRead
+        /// AnalysisAddress IsRead PLC XGB
         /// </summary>
         /// <param name="address"></param>
         /// <param name="IsRead"></param>
         /// <returns></returns>
-        public static OperateResult<string> AnalysisAddress(string address,bool IsRead)
+        public static OperateResult<string> AnalysisAddress(string address, bool IsRead)
         {
             // P,M,L,K,F,T
             // P,M,L,K,F,T,C,D,S
@@ -508,13 +508,13 @@ namespace HslCommunication.Profinet.LSIS
             return OperateResult.CreateSuccessResult(command);
         }
         private static OperateResult<string> analysisResult;
-        private  OperateResult<byte[]> BuildWriteByteCommand(string address, byte[] data)
+        private OperateResult<byte[]> BuildWriteByteCommand(string address, byte[] data)
         {
-            
+
             switch (XCpuType)
             {
                 case "XGK":
-                     analysisResult = AnalysisAddress(address);
+                    analysisResult = AnalysisAddress(address);
                     break;
                 case "XGI":
                     break;
@@ -525,7 +525,7 @@ namespace HslCommunication.Profinet.LSIS
                 case "XGB_IEC":
                     break;
                 case "XGB":
-                     analysisResult = AnalysisAddress(address, false);
+                    analysisResult = AnalysisAddress(address, false);
                     break;
                 default:
                     break;

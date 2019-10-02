@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdvancedScada.DriverBase
+﻿namespace AdvancedScada.DriverBase
 {
-   public  interface IPropertiesControls
+    public interface IPropertiesControls
     {
         string PLCAddressValue { get; set; }
         string PLCAddressClick { get; set; }

@@ -61,6 +61,7 @@
             this.txtHistory.Location = new System.Drawing.Point(0, 0);
             this.txtHistory.Multiline = true;
             this.txtHistory.Name = "txtHistory";
+            this.txtHistory.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtHistory.Size = new System.Drawing.Size(332, 85);
             this.txtHistory.TabIndex = 0;
             // 

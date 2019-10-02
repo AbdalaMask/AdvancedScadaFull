@@ -315,7 +315,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
             }
         }
 
-        public string PLCAddressEnabled { get; set ; }
+        public string PLCAddressEnabled { get; set; }
 
         #endregion
 
@@ -363,7 +363,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
             }
         }
 
-       
+
         #endregion
     }
 

@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 namespace AdvancedScada.IODriver
-{
-    public class GenericDictionary
+{ 
+
+public class GenericDictionary
     {
         private Dictionary<string, object> _dict = new Dictionary<string, object>();
 

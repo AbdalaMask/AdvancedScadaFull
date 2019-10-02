@@ -65,26 +65,19 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.popupMenuLeft = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu();
             this.kryptonContextMenuHeading1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
             this.kryptonContextMenuItems4 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
-            this.ItemAddChannel = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.ItemAddDevice = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.ItemAddDataBlock = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuHeading2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
-            this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
-            this.ItemImport = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.ItemExport = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuHeading4 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
-            this.kryptonContextMenuItems3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
-            this.ItemCopy = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.ItemPaste = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.ItemDelete = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.ItemSQLServer = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.ItemDataBase = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.ItemTable = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonHeader2 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.DGMonitorForm = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.colTagId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTagName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDataType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDataBlock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDevice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColChannel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColCylce = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColDescripton = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kryptonDockableWorkspace1 = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.kryptonContextMenuItems2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
@@ -95,12 +88,8 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.ItemAddTag = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.ItemEditor = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.mDeleteTag = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuHeading6 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
-            this.kryptonContextMenuItems6 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
-            this.ItemCopyToTag = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.RItemCopy = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.RItemPaste = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonDockingManager1 = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -227,7 +216,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.kryptonSplitContainer1.Cursor = System.Windows.Forms.Cursors.Default;
             this.kryptonSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonSplitContainer1.Location = new System.Drawing.Point(0, 25);
-            this.kryptonSplitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kryptonSplitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonSplitContainer1.Name = "kryptonSplitContainer1";
             // 
             // kryptonSplitContainer1.Panel1
@@ -250,7 +239,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.treeViewSI.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewSI.KryptonContextMenu = this.popupMenuLeft;
             this.treeViewSI.Location = new System.Drawing.Point(0, 23);
-            this.treeViewSI.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.treeViewSI.Margin = new System.Windows.Forms.Padding(4);
             this.treeViewSI.Name = "treeViewSI";
             treeNode1.Name = "Node1";
             treeNode1.Text = "Node1";
@@ -275,7 +264,6 @@ namespace AdvancedScada.Studio.LinkToSQL
             treeNode6,
             treeNode9});
             this.treeViewSI.Size = new System.Drawing.Size(168, 566);
-            this.treeViewSI.StateImageList = this.imageList1;
             this.treeViewSI.TabIndex = 1;
             this.treeViewSI.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewSI_AfterSelect);
             this.treeViewSI.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewSI_NodeMouseClick);
@@ -287,115 +275,50 @@ namespace AdvancedScada.Studio.LinkToSQL
             // 
             this.popupMenuLeft.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
             this.kryptonContextMenuHeading1,
-            this.kryptonContextMenuItems4,
-            this.kryptonContextMenuHeading2,
-            this.kryptonContextMenuItems1,
-            this.kryptonContextMenuHeading4,
-            this.kryptonContextMenuItems3});
+            this.kryptonContextMenuItems4});
             // 
             // kryptonContextMenuHeading1
             // 
             this.kryptonContextMenuHeading1.ExtraText = "";
-            this.kryptonContextMenuHeading1.Image = global::AdvancedScada.Studio.Properties.Resources.AddChannel;
-            this.kryptonContextMenuHeading1.Text = "Channel";
+            this.kryptonContextMenuHeading1.Image = global::AdvancedScada.Studio.Properties.Resources.AddDataBlock;
+            this.kryptonContextMenuHeading1.Text = "SQLServer";
             // 
             // kryptonContextMenuItems4
             // 
             this.kryptonContextMenuItems4.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
-            this.ItemAddChannel,
-            this.ItemAddDevice,
-            this.ItemAddDataBlock});
+            this.ItemSQLServer,
+            this.ItemDataBase,
+            this.ItemTable});
             // 
-            // ItemAddChannel
+            // ItemSQLServer
             // 
-            this.ItemAddChannel.Image = global::AdvancedScada.Studio.Properties.Resources.AddChannel;
-            this.ItemAddChannel.Text = "AddChannel";
-            this.ItemAddChannel.Click += new System.EventHandler(this.ItemAddChannel_Click);
+            this.ItemSQLServer.Image = global::AdvancedScada.Studio.Properties.Resources.AddChannel;
+            this.ItemSQLServer.Text = "AddSQLServer";
+            this.ItemSQLServer.Click += new System.EventHandler(this.ItemAddChannel_Click);
             // 
-            // ItemAddDevice
+            // ItemDataBase
             // 
-            this.ItemAddDevice.Image = global::AdvancedScada.Studio.Properties.Resources.AddDevice;
-            this.ItemAddDevice.Text = "AddDevice";
-            this.ItemAddDevice.Click += new System.EventHandler(this.ItemAddDevice_Click);
+            this.ItemDataBase.Image = global::AdvancedScada.Studio.Properties.Resources.BottomCenterHorizontalOutside_16x16;
+            this.ItemDataBase.Text = "AddDataBase";
+            this.ItemDataBase.Click += new System.EventHandler(this.ItemAddDevice_Click);
             // 
-            // ItemAddDataBlock
+            // ItemTable
             // 
-            this.ItemAddDataBlock.Image = global::AdvancedScada.Studio.Properties.Resources.AddGoup;
-            this.ItemAddDataBlock.Text = "AddDataBlock";
-            this.ItemAddDataBlock.Click += new System.EventHandler(this.ItemAddDataBlock_Click);
-            // 
-            // kryptonContextMenuHeading2
-            // 
-            this.kryptonContextMenuHeading2.ExtraText = "";
-            this.kryptonContextMenuHeading2.Image = global::AdvancedScada.Studio.Properties.Resources.Tag;
-            this.kryptonContextMenuHeading2.Text = "Excel";
-            // 
-            // kryptonContextMenuItems1
-            // 
-            this.kryptonContextMenuItems1.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
-            this.ItemImport,
-            this.ItemExport});
-            // 
-            // ItemImport
-            // 
-            this.ItemImport.Image = global::AdvancedScada.Studio.Properties.Resources.ExportToXLS_16x16;
-            this.ItemImport.Text = "Import";
-            this.ItemImport.Click += new System.EventHandler(this.ItemImport_Click);
-            // 
-            // ItemExport
-            // 
-            this.ItemExport.Image = global::AdvancedScada.Studio.Properties.Resources.SaveAs;
-            this.ItemExport.Text = "Export";
-            this.ItemExport.Click += new System.EventHandler(this.ItemExport_Click);
-            // 
-            // kryptonContextMenuHeading4
-            // 
-            this.kryptonContextMenuHeading4.ExtraText = "";
-            // 
-            // kryptonContextMenuItems3
-            // 
-            this.kryptonContextMenuItems3.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
-            this.ItemCopy,
-            this.ItemPaste,
-            this.ItemDelete});
-            // 
-            // ItemCopy
-            // 
-            this.ItemCopy.Image = global::AdvancedScada.Studio.Properties.Resources.Copy_16x16;
-            this.ItemCopy.Text = "Copy";
-            this.ItemCopy.Click += new System.EventHandler(this.ItemCopy_Click);
-            // 
-            // ItemPaste
-            // 
-            this.ItemPaste.Image = global::AdvancedScada.Studio.Properties.Resources.Paste_16x16;
-            this.ItemPaste.Text = "Paste";
-            this.ItemPaste.Click += new System.EventHandler(this.ItemPaste_Click);
-            // 
-            // ItemDelete
-            // 
-            this.ItemDelete.Image = global::AdvancedScada.Studio.Properties.Resources.Exit;
-            this.ItemDelete.Text = "Delete";
-            this.ItemDelete.Click += new System.EventHandler(this.ItemDelete_Click);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "Phone_16x16.png");
-            this.imageList1.Images.SetKeyName(1, "BottomCenterHorizontalOutside_16x16.png");
-            this.imageList1.Images.SetKeyName(2, "Database_16x16.png");
+            this.ItemTable.Image = global::AdvancedScada.Studio.Properties.Resources.Database_16x16;
+            this.ItemTable.Text = "AddTable";
+            this.ItemTable.Click += new System.EventHandler(this.ItemAddDataBlock_Click);
             // 
             // kryptonHeader2
             // 
             this.kryptonHeader2.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonHeader2.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockInactive;
             this.kryptonHeader2.Location = new System.Drawing.Point(0, 0);
-            this.kryptonHeader2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kryptonHeader2.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonHeader2.Name = "kryptonHeader2";
             this.kryptonHeader2.Size = new System.Drawing.Size(168, 23);
             this.kryptonHeader2.TabIndex = 0;
             this.kryptonHeader2.Values.Description = "";
-            this.kryptonHeader2.Values.Heading = "ChannelList";
+            this.kryptonHeader2.Values.Heading = "SQLServerList";
             this.kryptonHeader2.Values.Image = global::AdvancedScada.Studio.Properties.Resources.AddTag;
             // 
             // DGMonitorForm
@@ -406,14 +329,17 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.DGMonitorForm.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGMonitorForm.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colTagId,
+            this.ColumnName,
             this.colTagName,
-            this.colAddress,
-            this.colDataType,
-            this.colDescription});
+            this.colDataBlock,
+            this.colDevice,
+            this.ColChannel,
+            this.ColCylce,
+            this.ColDescripton});
             this.DGMonitorForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DGMonitorForm.HideOuterBorders = true;
             this.DGMonitorForm.Location = new System.Drawing.Point(0, 23);
-            this.DGMonitorForm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGMonitorForm.Margin = new System.Windows.Forms.Padding(4);
             this.DGMonitorForm.MultiSelect = false;
             this.DGMonitorForm.Name = "DGMonitorForm";
             this.DGMonitorForm.RowHeadersVisible = false;
@@ -429,29 +355,44 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.colTagId.Name = "colTagId";
             this.colTagId.ReadOnly = true;
             // 
+            // ColumnName
+            // 
+            this.ColumnName.HeaderText = "Name";
+            this.ColumnName.Name = "ColumnName";
+            this.ColumnName.ReadOnly = true;
+            // 
             // colTagName
             // 
             this.colTagName.HeaderText = "TagName";
             this.colTagName.Name = "colTagName";
             this.colTagName.ReadOnly = true;
             // 
-            // colAddress
+            // colDataBlock
             // 
-            this.colAddress.HeaderText = "Address";
-            this.colAddress.Name = "colAddress";
-            this.colAddress.ReadOnly = true;
+            this.colDataBlock.HeaderText = "DataBlock";
+            this.colDataBlock.Name = "colDataBlock";
+            this.colDataBlock.ReadOnly = true;
             // 
-            // colDataType
+            // colDevice
             // 
-            this.colDataType.HeaderText = "DataType";
-            this.colDataType.Name = "colDataType";
-            this.colDataType.ReadOnly = true;
+            this.colDevice.HeaderText = "Device";
+            this.colDevice.Name = "colDevice";
+            this.colDevice.ReadOnly = true;
             // 
-            // colDescription
+            // ColChannel
             // 
-            this.colDescription.HeaderText = "Description";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.ReadOnly = true;
+            this.ColChannel.HeaderText = "Channel";
+            this.ColChannel.Name = "ColChannel";
+            // 
+            // ColCylce
+            // 
+            this.ColCylce.HeaderText = "Cylce";
+            this.ColCylce.Name = "ColCylce";
+            // 
+            // ColDescripton
+            // 
+            this.ColDescripton.HeaderText = "Descripton";
+            this.ColDescripton.Name = "ColDescripton";
             // 
             // kryptonDockableWorkspace1
             // 
@@ -476,7 +417,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.kryptonHeader1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonHeader1.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockInactive;
             this.kryptonHeader1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonHeader1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kryptonHeader1.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonHeader1.Name = "kryptonHeader1";
             this.kryptonHeader1.Size = new System.Drawing.Size(790, 23);
             this.kryptonHeader1.TabIndex = 1;
@@ -492,9 +433,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             // 
             this.popupMenuRight.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
             this.kryptonContextMenuHeading5,
-            this.kryptonContextMenuItems5,
-            this.kryptonContextMenuHeading6,
-            this.kryptonContextMenuItems6});
+            this.kryptonContextMenuItems5});
             // 
             // kryptonContextMenuHeading5
             // 
@@ -527,35 +466,18 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.mDeleteTag.Text = "Delete Tag";
             this.mDeleteTag.Click += new System.EventHandler(this.mDeleteTag_Click);
             // 
-            // kryptonContextMenuHeading6
+            // imageList1
             // 
-            this.kryptonContextMenuHeading6.ExtraText = "";
-            this.kryptonContextMenuHeading6.Text = "To PLC";
-            // 
-            // kryptonContextMenuItems6
-            // 
-            this.kryptonContextMenuItems6.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
-            this.ItemCopyToTag,
-            this.RItemCopy,
-            this.RItemPaste});
-            // 
-            // ItemCopyToTag
-            // 
-            this.ItemCopyToTag.Image = global::AdvancedScada.Studio.Properties.Resources.Tag;
-            this.ItemCopyToTag.Text = "CopyToTag";
-            this.ItemCopyToTag.Click += new System.EventHandler(this.ItemCopyToTag_Click);
-            // 
-            // RItemCopy
-            // 
-            this.RItemCopy.Image = global::AdvancedScada.Studio.Properties.Resources.Copy_16x16;
-            this.RItemCopy.Text = "Copy";
-            this.RItemCopy.Click += new System.EventHandler(this.RItemCopy_Click);
-            // 
-            // RItemPaste
-            // 
-            this.RItemPaste.Image = global::AdvancedScada.Studio.Properties.Resources.Paste_16x16;
-            this.RItemPaste.Text = "Paste";
-            this.RItemPaste.Click += new System.EventHandler(this.RItemPaste_Click);
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "Convert_16x16.png");
+            this.imageList1.Images.SetKeyName(1, "TreeView_16x16.png");
+            this.imageList1.Images.SetKeyName(2, "PublicFix_16x16.png");
+            this.imageList1.Images.SetKeyName(3, "User_16x16.png");
+            this.imageList1.Images.SetKeyName(4, "HistoryItem_16x16.png");
+            this.imageList1.Images.SetKeyName(5, "Tag_16x16.png");
+            this.imageList1.Images.SetKeyName(6, "ManageDatasource_16x16.png");
+            this.imageList1.Images.SetKeyName(7, "Database_16x16.png");
             // 
             // XSQLMaster
             // 
@@ -568,7 +490,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.Controls.Add(this.toolStrip2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockActive;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "XSQLMaster";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SQLMaster";
@@ -610,19 +532,10 @@ namespace AdvancedScada.Studio.LinkToSQL
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenu popupMenuLeft;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading1;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems4;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ItemAddDevice;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ItemAddDataBlock;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ItemAddChannel;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ItemDataBase;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ItemTable;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ItemSQLServer;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView DGMonitorForm;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading2;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems1;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ItemImport;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ItemExport;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading4;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems3;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ItemCopy;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ItemPaste;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ItemDelete;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems2;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading3;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenu popupMenuRight;
@@ -631,23 +544,21 @@ namespace AdvancedScada.Studio.LinkToSQL
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ItemAddTag;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ItemEditor;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem mDeleteTag;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading6;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems6;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ItemCopyToTag;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem RItemCopy;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem RItemPaste;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripLabel lblTagCount;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripLabel lblSelectedTagName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTagId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTagName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDataType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private ComponentFactory.Krypton.Docking.KryptonDockableWorkspace kryptonDockableWorkspace1;
         private ComponentFactory.Krypton.Docking.KryptonDockingManager kryptonDockingManager1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTagId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTagName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDataBlock;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDevice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColChannel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColCylce;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColDescripton;
         private System.Windows.Forms.ImageList imageList1;
     }
 }

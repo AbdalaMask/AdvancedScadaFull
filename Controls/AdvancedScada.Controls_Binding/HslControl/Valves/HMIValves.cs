@@ -368,7 +368,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
             }
         }
 
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressEnabled { get; set; }
 
         #endregion
 

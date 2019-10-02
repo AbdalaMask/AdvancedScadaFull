@@ -58,7 +58,7 @@ namespace AdvancedScada.Studio.Monitor
                     break;
                 case DriverBase.Comm.DataTypes.Short:
                 case DriverBase.Comm.DataTypes.UShort:
-                case DriverBase.Comm.DataTypes.Int:                   
+                case DriverBase.Comm.DataTypes.Int:
                 case DriverBase.Comm.DataTypes.UInt:
                 case DriverBase.Comm.DataTypes.Long:
                 case DriverBase.Comm.DataTypes.ULong:

@@ -490,7 +490,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.ButtonAll
             }
         }
 
-        public string PLCAddressValue { get; set ; }
+        public string PLCAddressValue { get; set; }
 
 
         #endregion

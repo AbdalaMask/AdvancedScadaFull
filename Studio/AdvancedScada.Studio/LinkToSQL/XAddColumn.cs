@@ -1,106 +1,86 @@
-﻿using AdvancedScada.DriverBase.Comm;
-using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.Management;
+﻿using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.Management.BLManager;
+using AdvancedScada.Management.SQLManager;
 using ComponentFactory.Krypton.Toolkit;
 using System;
+using System.ComponentModel;
+using System.Linq;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.Studio.LinkToSQL
 {
     public partial class XAddColumn : KryptonForm
     {
-        public Channel ch;
-        public DataBlock db;
-        public Device dv;
-        public EventTagChanged eventTagChanged = null;
-        public Tag tg;
+        public delegate void EventColumnChanged(Column tg);
+        private BindingList<Tag> bS7Tags;
+
+        private Channel ch;
+        private readonly Column Co;
+        private readonly DataBase DBS;
+
+        public EventColumnChanged eventColumnChanged = null;
+        private readonly ChannelService objChannelManager;
+        private readonly DataBlockService objDataBlockManager;
+        private readonly DeviceService objDeviceManager;
+        private TagService objTagManager;
+        private readonly Server SQL;
+        private readonly Table Tb;
         public XAddColumn()
         {
+            objChannelManager = ChannelService.GetChannelManager();
+            objDeviceManager = DeviceService.GetDeviceManager();
+            objDataBlockManager = DataBlockService.GetDataBlockManager();
+            objTagManager = TagService.GetTagManager();
             InitializeComponent();
         }
-        public XAddColumn(Channel chParam, Device dvParam, DataBlock dbParam, Tag tgParam = null)
+
+        public XAddColumn(Server SQLParam, DataBase dbsParam, Table tbParam, Column coParam = null)
+
         {
             InitializeComponent();
-            this.dv = dvParam;
-            this.db = dbParam;
-            this.ch = chParam;
-            this.tg = tgParam;
+            DBS = dbsParam;
+            Tb = tbParam;
+            SQL = SQLParam;
+            Co = coParam;
+            objChannelManager = ChannelService.GetChannelManager();
+            objDeviceManager = DeviceService.GetDeviceManager();
+            objDataBlockManager = DataBlockService.GetDataBlockManager();
+            objTagManager = TagService.GetTagManager();
+
+
         }
-        public string GetIDTag()
-        {
-            return $"{db.Tags.Count + 1}";
-        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             try
             {
-                if (tg == null)
+                if (Co == null)
                 {
-                    Tag newTg = new Tag();
-                    newTg.ChannelId = int.Parse(txtChannelId.Text);
-                    newTg.DeviceId = int.Parse(txtDeviceId.Text);
-                    newTg.DataBlockId = int.Parse(txtDataBlockId.Text);
-                    newTg.TagId = db.Tags.Count + 1;
-                    newTg.TagName = txtTagName.Text;
-                    newTg.Address = txtAddress.Text;
-                    newTg.Description = txtDesc.Text;
-                    newTg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString());
-
-                    if (eventTagChanged != null) eventTagChanged(newTg, true);
+                    var newColumn = new Column();
+                    newColumn.ColumnId = Tb.Columns.Count + 1; ;
+                    newColumn.TagName = txtTagName.Text;
+                    newColumn.Channel = txtChannel.Text;
+                    newColumn.ColumnName = txtColumnName.Text;
+                    newColumn.DataBlock = txtDataBlock.Text;
+                    newColumn.Device = txtDevice.Text;
+                    newColumn.Cycle = txtCycle.Text;
+                    newColumn.Description = txtDesc.Text;
+                    ColumnManager.Add(Tb, newColumn);
+                    eventColumnChanged?.Invoke(newColumn);
                 }
                 else
                 {
-                    tg.ChannelId = int.Parse(txtChannelId.Text);
-                    tg.DeviceId = int.Parse(txtDeviceId.Text);
-                    tg.DataBlockId = int.Parse(txtDataBlockId.Text);
-                    tg.TagName = txtTagName.Text;
-                    tg.Address = txtAddress.Text;
-                    tg.Description = txtDesc.Text;
-                    tg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString());
+                    Co.ColumnId = Tb.Columns.Count + 1; ;
+                    Co.TagName = txtTagName.Text;
+                    Co.Channel = txtChannel.Text;
+                    Co.ColumnName = txtColumnName.Text;
+                    Co.DataBlock = txtDataBlock.Text;
+                    Co.Device = txtDevice.Text;
+                    Co.Cycle = txtCycle.Text;
+                    Co.Description = txtDesc.Text;
+                    ColumnManager.Update(Tb, Co);
+                    eventColumnChanged?.Invoke(Co);
 
-                    if (eventTagChanged != null) eventTagChanged(tg, false);
-
-                }
-                Close();
-            }
-            catch (Exception ex)
-            {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-            }
-
-        }
-
-        private void XTagForm_Load(object sender, EventArgs e)
-        {
-            try
-            {
-
-                cboxDataType.SelectedItem = $"{this.db.DataType}";
-                this.txtChannelName.Text = this.ch.ChannelName;
-                this.txtDeviceName.Text = this.dv.DeviceName;
-                this.txtDataBlock.Text = this.db.DataBlockName;
-                txtChannelId.Text = ch.ChannelId.ToString();
-                txtDeviceId.Text = Convert.ToString(ch.Devices.Count);
-                txtDataBlockId.Text = Convert.ToString(db.DataBlockId);
-
-                if (tg == null)
-                {
-
-                    this.Text = "Add Tag";
-                    txtTagId.Text = GetIDTag();
-                }
-                else
-                {
-
-
-
-                    this.Text = "Edit Tag";
-                    txtTagId.Text = tg.TagId.ToString();
-                    txtAddress.Text = tg.Address;
-                    txtAddress.Enabled = true;
-                    cboxDataType.SelectedItem = $"{tg.DataType}";
-                    txtTagName.Text = tg.TagName;
-                    txtDesc.Text = tg.Description;
                 }
             }
             catch (Exception ex)
@@ -112,6 +92,97 @@ namespace AdvancedScada.Studio.LinkToSQL
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void AddColumn_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                txtSQLDataBase.Text = DBS.DataBaseName;
+                txtSQLTable.Text = Tb.TableName;
+
+                txtChannel.DataSource = objChannelManager.Channels.ToList();
+                txtChannel.DisplayMember = "ChannelName";
+                txtChannel.ValueMember = "ChannelId";
+                var linkToSql = new AdvancedScada.Utils.DriverLinkToSQL.LinkToSQL();
+
+                txtColumnName.DataSource = linkToSql.AddColumn(txtSQLTable.Text, SQL.ServerName, DBS.DataBaseName);
+                txtColumnName.DisplayMember = "ColumnName";
+                txtColumnName.ValueMember = "ColumnName";
+                if (Co == null)
+                {
+                    Text = "Add Column";
+                }
+                else
+                {
+                    Text = "Edit Column";
+                    txtTagName.Text = Co.TagName;
+
+                    txtChannel.Text = Co.Channel;
+                    txtColumnName.Text = Co.ColumnName;
+                    txtDataBlock.Text = Co.DataBlock;
+                    txtDevice.Text = Co.Device;
+                    txtDesc.Text = Co.Description;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            }
+        }
+
+
+
+
+
+        private void TxtChannel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ch = objChannelManager.GetByChannelName(txtChannel.Text);
+                txtDevice.DataSource = ch.Devices.ToList();
+                txtDevice.DisplayMember = "DeviceName";
+                txtDevice.ValueMember = "DeviceId";
+            }
+            catch (Exception ex)
+            {
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            }
+        }
+
+        private void TxtDevice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var chCurrent = objChannelManager.GetByChannelName(txtChannel.Text);
+                var dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, txtDevice.Text);
+                txtDataBlock.DataSource = dvCurrent.DataBlocks.ToList();
+                txtDataBlock.DisplayMember = "DataBlockName";
+                txtDataBlock.ValueMember = "DataBlockId";
+            }
+            catch (Exception ex)
+            {
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            }
+        }
+
+        private void TxtDataBlock_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var chCurrent = objChannelManager.GetByChannelName(txtChannel.Text);
+                var dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, txtDevice.Text);
+                var dbCurrent = objDataBlockManager.GetByDataBlockName(dvCurrent, txtDataBlock.Text);
+                bS7Tags = new BindingList<Tag>(dbCurrent.Tags);
+                txtTagName.DataSource = dbCurrent.Tags.ToList();
+                txtTagName.DisplayMember = "TagName";
+                txtTagName.ValueMember = "TagId";
+            }
+            catch (Exception ex)
+            {
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            }
         }
     }
 }

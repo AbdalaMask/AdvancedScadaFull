@@ -662,7 +662,7 @@ namespace AdvancedScada.Controls_Binding.Display
         }
 
         public string PLCAddressClick { get; set; }
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressEnabled { get; set; }
 
         private IKeyboard KeypadPopUp;
 

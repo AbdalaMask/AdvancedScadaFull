@@ -2,7 +2,6 @@
 using AdvancedScada.DriverBase.Devices;
 using HslCommunication.ModBus;
 using System;
-using System.Data;
 using System.IO.Ports;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.IODriver.Delta.RTU
@@ -68,7 +67,7 @@ namespace AdvancedScada.IODriver.Delta.RTU
 
 
 
-     
+
 
 
         public bool[] ReadDiscrete(string address, ushort length)
@@ -153,7 +152,7 @@ namespace AdvancedScada.IODriver.Delta.RTU
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
 
-        
+
 
         public TValue[] Read<TValue>(DataBlock db)
         {

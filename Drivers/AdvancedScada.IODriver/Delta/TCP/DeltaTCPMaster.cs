@@ -87,7 +87,7 @@ namespace AdvancedScada.IODriver.Delta.TCP
             }
 
         }
-       
+
 
 
         public bool[] ReadDiscrete(string address, ushort length)

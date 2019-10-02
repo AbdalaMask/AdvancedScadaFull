@@ -1,4 +1,6 @@
-﻿using AdvancedScada.DataAccess;
+﻿using AdvancedScada.BaseService.Client;
+using AdvancedScada.DataAccess;
+using AdvancedScada.DriverBase;
 using AdvancedScada.HMI.Tools;
 using AdvancedScada.IBaseService;
 using AdvancedScada.IBaseService.Common;
@@ -7,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Net;
+using System.Net.Sockets;
 using System.ServiceModel;
 using System.Windows.Forms;
 using static AdvancedScada.HMI.Tools.Tools;
@@ -30,23 +34,23 @@ namespace AdvancedScada.HMI.MainForm
             try
             {
 
-                //ReadServiceCallbackClient.LoadTagCollection();
-                //XCollection.CURRENT_MACHINE = new Machine
-                //{
-                //    MachineName = Environment.MachineName,
-                //    Description = "Free"
-                //};
-                //IPAddress[] hostAddresses = Dns.GetHostAddresses(Dns.GetHostName());
-                //foreach (IPAddress iPAddress in hostAddresses)
-                //{
-                //    if (iPAddress.AddressFamily == AddressFamily.InterNetwork)
-                //    {
-                //        XCollection.CURRENT_MACHINE.IPAddress = $"{iPAddress}";
-                //        break;
-                //    }
-                //}
-                //client = DriverHelper.GetInstance().GetReadService();
-                //client.Connect(XCollection.CURRENT_MACHINE);
+                ReadServiceCallbackClient.LoadTagCollection();
+                XCollection.CURRENT_MACHINE = new Machine
+                {
+                    MachineName = Environment.MachineName,
+                    Description = "Free"
+                };
+                IPAddress[] hostAddresses = Dns.GetHostAddresses(Dns.GetHostName());
+                foreach (IPAddress iPAddress in hostAddresses)
+                {
+                    if (iPAddress.AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        XCollection.CURRENT_MACHINE.IPAddress = $"{iPAddress}";
+                        break;
+                    }
+                }
+                client = DriverHelper.GetInstance().GetReadService();
+                client.Connect(XCollection.CURRENT_MACHINE);
 
             }
             catch (CommunicationException ex)

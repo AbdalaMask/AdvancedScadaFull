@@ -184,7 +184,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
 
         public double KeypadMaxValue { get; set; }
         public string PLCAddressClick { get; set; }
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressEnabled { get; set; }
 
         private void KeypadPopUp_ButtonClick(object sender, KeypadEventArgs e)
         {

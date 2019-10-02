@@ -315,7 +315,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Motor
             }
         }
 
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressEnabled { get; set; }
 
         #endregion
 

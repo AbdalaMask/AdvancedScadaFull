@@ -11,11 +11,11 @@ using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.BaseService.Client
 {
 
-
-    [CallbackBehavior(UseSynchronizationContext = true)]
+   
+    [CallbackBehavior(UseSynchronizationContext = false)]
     public class ReadServiceCallbackClient : IServiceCallback
     {
-
+        
         public static bool LoadTagCollection()
         {
 
@@ -67,10 +67,19 @@ namespace AdvancedScada.BaseService.Client
                     tagsClient[author.Key].TimeSpan = author.Value.TimeSpan;
                 }
         }
-
-        public void UpdateCollection(ConnectionState status, Dictionary<string, Tag> collection)
+        [OperationContract(IsOneWay = true)]
+        public void UpdateCollection(ConnectionState status, Dictionary<string, Tag> Tags)
         {
-            
+            eventConnectionChanged?.Invoke(status);
+            var tagsClient = TagCollectionClient.Tags;
+            if (tagsClient == null) throw new ArgumentNullException(nameof(tagsClient));
+            foreach (var author in Tags)
+                if (tagsClient.ContainsKey(author.Key))
+                {
+                    tagsClient[author.Key].Value = author.Value.Value;
+                    tagsClient[author.Key].TimeSpan = author.Value.TimeSpan;
+                }
+
         }
     }
 }

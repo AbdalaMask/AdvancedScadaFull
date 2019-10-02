@@ -2,18 +2,17 @@
 using HslCommunication;
 using HslCommunication.Profinet.Siemens;
 using System;
-using System.Data;
 using System.Diagnostics;
 using System.IO.Ports;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.IODriver.Siemens
 {
-    public  class SiemensComPPI : IDriverAdapter
+    public class SiemensComPPI : IDriverAdapter
     {
         private SiemensPPI siemensPPI = null;
         private const int DELAY = 100; // delay 100 ms
-         private SerialPort serialPort;
-       
+        private SerialPort serialPort;
+
         public bool IsConnected { get => _IsConnected; set => _IsConnected = value; }
         private byte station;
         public byte Station { get => station; set => station = value; }
@@ -67,7 +66,7 @@ namespace AdvancedScada.IODriver.Siemens
                 siemensPPI.Open();
                 siemensPPI.Station = station;
                 IsConnected = true;
-              
+
                 stopwatch.Stop();
                 return IsConnected;
             }
@@ -75,7 +74,7 @@ namespace AdvancedScada.IODriver.Siemens
             {
                 stopwatch.Stop();
 
-               EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
                 return IsConnected;
             }
         }
@@ -90,14 +89,14 @@ namespace AdvancedScada.IODriver.Siemens
             catch (TimeoutException ex)
             {
 
-               EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
             return IsConnected;
         }
 
- 
-       
-        
+
+
+
         public bool Write(string address, dynamic value)
         {
             if (value is bool)

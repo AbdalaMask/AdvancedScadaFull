@@ -1,11 +1,11 @@
-﻿using System;
+﻿using AdvancedScada.ConvertControls.Parsers;
+using Microsoft.CSharp;
+using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
-using AdvancedScada.ConvertControls.Parsers;
-using Microsoft.CSharp;
 namespace AdvancedScada.ConvertControls
 {
     public class XamlConvertor
@@ -17,7 +17,7 @@ namespace AdvancedScada.ConvertControls
             var dom = ConvertToDom(xamlCode);
             var compiler = new CSharpCodeProvider();
             var stringWriter = new StringWriter();
-            compiler.GenerateCodeFromMember(dom, stringWriter, new CodeGeneratorOptions {BracingStyle = "C"});
+            compiler.GenerateCodeFromMember(dom, stringWriter, new CodeGeneratorOptions { BracingStyle = "C" });
             return stringWriter.ToString();
         }
 
@@ -37,7 +37,7 @@ namespace AdvancedScada.ConvertControls
 
             public State()
             {
-                Method = new CodeMemberMethod {Name = "Get"};
+                Method = new CodeMemberMethod { Name = "Get" };
             }
 
             public CodeMemberMethod Method { get; set; }

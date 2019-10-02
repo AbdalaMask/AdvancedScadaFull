@@ -1,5 +1,4 @@
-using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Comm;
+﻿using AdvancedScada.DriverBase;
 using HslCommunication;
 using HslCommunication.Profinet.LSIS;
 using System;
@@ -14,12 +13,13 @@ namespace AdvancedScada.IODriver.LSIS.FENET
         private readonly string IP = "127.0.0.1";
 
         private object slotNo;
-        private string CpuType="XGB";
+        private string CpuType = "XGB";
 
         #region construction
 
         public LS_FENET()
         {
+            fastEnet = new XGBFastEnet();
         }
         public LS_FENET(string ip, int port)
             : this()
@@ -36,7 +36,6 @@ namespace AdvancedScada.IODriver.LSIS.FENET
 
             IP = ip;
             Port = port;
-            fastEnet = new XGBFastEnet();
             this.slotNo = slotNo;
             this.CpuType = CpuType;
         }
@@ -46,8 +45,26 @@ namespace AdvancedScada.IODriver.LSIS.FENET
         public bool IsConnected { get; set; } = false;
 
         public bool Connection()
-        {
+        { 
+            if (!System.Net.IPAddress.TryParse(IP, out System.Net.IPAddress address))
+            {
+                EventscadaException?.Invoke(this.GetType().Name,DemoUtils.IpAddressInputWrong);
+                return false;
+            }
 
+            if (!int.TryParse($"{Port}", out int port))
+            {
+                EventscadaException?.Invoke(this.GetType().Name, DemoUtils.PortInputWrong);
+                return false;
+            }
+
+            if (!byte.TryParse($"{slotNo}", out byte slot))
+            {
+                EventscadaException?.Invoke(this.GetType().Name, DemoUtils.SlotInputWrong);
+                return false;
+            }
+
+            fastEnet = new XGBFastEnet();
             try
             {
 
@@ -60,7 +77,12 @@ namespace AdvancedScada.IODriver.LSIS.FENET
                     OperateResult connect = fastEnet.ConnectServer();
                     if (connect.IsSuccess)
                     {
-                        IsConnected = true;
+                        EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedSuccess);
+                           IsConnected = true;
+                    }
+                    else
+                    {
+                        EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedFailed);
                     }
                     return IsConnected;
                 }
@@ -125,9 +147,10 @@ namespace AdvancedScada.IODriver.LSIS.FENET
             }
             if (typeof(TValue) == typeof(ushort))
             {
-                var b = fastEnet.ReadUInt16(address, length).Content;
-
-                return (TValue[])(object)b;
+               
+                var result = fastEnet.ReadUInt16(address, length).Content;
+                
+                return (TValue[])(object)result;
             }
             if (typeof(TValue) == typeof(int))
             {
@@ -175,7 +198,7 @@ namespace AdvancedScada.IODriver.LSIS.FENET
 
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
-       #endregion
+        #endregion
         private object ReadCoil(string address, ushort length)
         {
             var bitArys = fastEnet.Read(address, length);
@@ -184,7 +207,7 @@ namespace AdvancedScada.IODriver.LSIS.FENET
 
         public bool[] ReadSingle(string address, ushort length)
         {
-            return  fastEnet.ReadBool(address, length).Content;
+            return fastEnet.ReadBool(address, length).Content;
         }
 
 

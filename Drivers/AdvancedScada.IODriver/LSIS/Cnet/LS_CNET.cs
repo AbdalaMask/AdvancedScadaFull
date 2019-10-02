@@ -1,5 +1,4 @@
 ﻿using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Comm;
 using HslCommunication.Profinet.LSIS;
 using System;
 using System.IO.Ports;
@@ -20,7 +19,7 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
 
         #region IDriverAdapter
         public bool IsConnected { get; set; } = false;
-       
+
         public bool Connection()
         {
 
@@ -68,7 +67,6 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
             try
             {
                 xGBCnet.Close();
-
                 IsConnected = false;
                 return IsConnected;
             }
@@ -79,7 +77,7 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
                 return IsConnected;
             }
         }
-     
+
 
         public bool Write(string address, dynamic value)
         {
@@ -157,10 +155,10 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
             }
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
-       #endregion
+        #endregion
         private object ReadCoil(string address, ushort length)
         {
-            var bitArys = xGBCnet.Read( address, length);
+            var bitArys = xGBCnet.Read(address, length);
             return HslCommunication.BasicFramework.SoftBasic.ByteToBoolArray(bitArys.Content);
         }
 
@@ -171,7 +169,7 @@ namespace AdvancedScada.IODriver.LSIS.Cnet
 
         public bool[] ReadSingle(string address, ushort length)
         {
-            throw new NotImplementedException();
+            return xGBCnet.ReadBool(address, length).Content;
         }
     }
 }

@@ -1,96 +1,65 @@
-﻿using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.Management;
+﻿using AdvancedScada.Management.SQLManager;
 using ComponentFactory.Krypton.Toolkit;
 using System;
-using System.Collections.Generic;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.Studio.LinkToSQL
 {
+    public delegate void EventDataBaseChanged(DataBase dbs);
     public partial class XAddDataBase : KryptonForm
     {
-        private readonly Channel ch;
-
-        private readonly Device dv;
-        public EventDeviceChanged eventDeviceChanged = null;
-
+        private readonly DataBase dbs;
+        public EventDataBaseChanged eventDataBaseChanged = null;
+        private readonly Server SQl;
+        public XAddDataBase(Server chParam, DataBase dvPara = null)
+        {
+            InitializeComponent();
+            SQl = chParam;
+            dbs = dvPara;
+        }
         public XAddDataBase()
         {
             InitializeComponent();
         }
-        public XAddDataBase(Channel chParam, Device dvPara = null)
-        {
-            InitializeComponent();
-            ch = chParam;
-            dv = dvPara;
-        }
-
-
 
         private void btnOK_Click(object sender, EventArgs e)
         {
             try
             {
-                if (string.IsNullOrEmpty(txtDeviceName.Text)
-                               || string.IsNullOrWhiteSpace(txtDeviceName.Text))
-                    DxErrorProvider1.SetError(txtDeviceName, "The device name is empty");
+                if (string.IsNullOrEmpty(txtDataBaseName.Text)
+                    || string.IsNullOrWhiteSpace(txtDataBaseName.Text))
+                {
+                    DxErrorProvider1.SetError(txtDataBaseName, "The DataBase name is empty");
+                }
                 else
                 {
                     DxErrorProvider1.Clear();
-                    if (dv == null)
+                    if (dbs == null)
                     {
-                        Device dvNew = new Device();
-                        dvNew.DeviceId = ch.Devices.Count + 1;
-                        dvNew.SlaveId = (short)txtSlaveId.Value;
-                        dvNew.DeviceName = txtDeviceName.Text;
-                        dvNew.Description = txtDesp.Text;
-                        dvNew.DataBlocks = new List<DataBlock>();
-                        EventscadaLogger?.Invoke(1, "DeviceManager", $"{DateTime.Now}", "Add Device");
-
-                        if (eventDeviceChanged != null) eventDeviceChanged(dvNew, true);
-
+                        var dbsNew = new DataBase();
+                        dbsNew.DataBaseId = SQl.DataBase.Count + 1;
+                        dbsNew.DataBaseName = txtDataBaseName.Text;
+                        dbsNew.Description = txtDesc.Text;
+                        //dvNew.DataBlocks = new List<DataBlock>();
+                        DataBaseManager.Add(SQl, dbsNew);
+                        if (eventDataBaseChanged != null) eventDataBaseChanged(dbsNew);
+                        Close();
                     }
                     else
                     {
-                        dv.SlaveId = (short)txtSlaveId.Value;
-                        dv.DeviceName = txtDeviceName.Text;
-                        dv.Description = txtDesp.Text;
-                        EventscadaLogger?.Invoke(1, "DeviceManager", $"{DateTime.Now}", "Editor Device");
+                        dbs.DataBaseId = short.Parse(txtDataBaseId.Text);
+                        dbs.DataBaseName = txtDataBaseName.Text;
+                        dbs.Description = txtDesc.Text;
 
-                        if (eventDeviceChanged != null) eventDeviceChanged(dv, false);
+                        DataBaseManager.Update(SQl, dbs);
+                        if (eventDataBaseChanged != null) eventDataBaseChanged(dbs);
+
+                        Close();
                     }
-                    Close();
                 }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-            }
-        }
 
-        private void XUserDeviceForm_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                txtChannelName.Text = ch.ChannelName;
-                txtChannelID.Text = ch.ChannelId.ToString();
-
-                if (dv != null)
-                {
-                    this.Text = "Edit Device  " + ch.ChannelTypes;
-                    txtSlaveId.Value = dv.SlaveId;
-                    txtDeviceName.Text = dv.DeviceName;
-                    txtDeviceId.Text = $"{dv.DeviceId}";
-                    txtDesp.Text = dv.Description;
-                }
-                else
-                {
-                    this.Text = "Add Device  " + ch.ChannelTypes;
-                    txtDeviceId.Text = Convert.ToString(ch.Devices.Count + 1);
-                    txtDeviceName.Text = "PLC" + Convert.ToString(ch.Devices.Count + 1);
-                }
-            }
-            catch (Exception ex)
-            {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
         }
@@ -98,6 +67,35 @@ namespace AdvancedScada.Studio.LinkToSQL
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void XtraSQLAddDataBase_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                txtServerName.Text = SQl.ServerName;
+                txtServerId.Text = SQl.ServerId.ToString();
+
+                if (dbs != null)
+                {
+                    Text = "Edit DataBase";
+                    txtDataBaseId.Text = $"{ dbs.DataBaseId}";
+                    txtDataBaseName.Text = dbs.DataBaseName;
+
+                    txtDesc.Text = dbs.Description;
+                }
+                else
+                {
+                    Text = "Add DataBase";
+                    txtDataBaseId.Text = Convert.ToString(SQl.DataBase.Count + 1);
+                    txtDataBaseName.Items.AddRange(AdvancedScada.Utils.DriverLinkToSQL.LinkToSQL.AddDatabaseNames(SQl.ServerName).ToArray());
+                }
+            }
+            catch (Exception ex)
+            {
+
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            }
         }
     }
 }

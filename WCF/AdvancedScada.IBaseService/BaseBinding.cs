@@ -1,11 +1,12 @@
-﻿using System;
+﻿using AdvancedScada.DriverBase;
+using System;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 namespace AdvancedScada.IBaseService
 {
     public delegate void ScadaLogger(int _Id, string _logType, string _time, string _message);
     public delegate void ScadaException(string classname, string erorr);
-
+    public delegate void EventConnectionChanged(ConnectionState status);
     public delegate void PvGridChannelGet(object Value, bool Visible);
     public delegate void PvGridDeviceGet(object Value, bool Visible);
     public delegate void PvGridDataBlockGet(object Value, bool Visible);
@@ -74,7 +75,7 @@ namespace AdvancedScada.IBaseService
             }
         }
 
-         
+
 
         public ServiceThrottlingBehavior GetServiceThrottlingBehaviorByHost(ServiceHost host)
         {

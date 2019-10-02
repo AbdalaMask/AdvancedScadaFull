@@ -9,7 +9,7 @@ namespace AdvancedScada.IODriver.Modbus.ASCII
     {
         private SerialPort serialPort;
 
-    
+
         public byte Station { get; set; }
         public ModbusASCIIMaster(short slaveId, SerialPort serialPort)
         {
@@ -21,7 +21,7 @@ namespace AdvancedScada.IODriver.Modbus.ASCII
 
         #region IDriverAdapter
 
-       
+
         public bool IsConnected { get; set; }
         public bool Connection()
         {
@@ -73,9 +73,9 @@ namespace AdvancedScada.IODriver.Modbus.ASCII
 
         public bool Write(string address, dynamic value)
         {
-           
-                busAsciiClient.Write(address, value);
-           
+
+            busAsciiClient.Write(address, value);
+
 
             return true;
         }

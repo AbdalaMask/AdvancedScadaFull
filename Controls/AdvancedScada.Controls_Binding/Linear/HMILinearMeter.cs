@@ -2,18 +2,15 @@
 using AdvancedScada.Controls_Net45;
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
-using AdvancedScada.Monitor;
 using System;
 using System.ComponentModel;
-using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
-using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.Linear
 {
-    
+
     public class HMILinearMeter : MfgControl.AdvancedHMI.Controls.LinearMeter, IPropertiesControls
     {
 
@@ -217,8 +214,8 @@ namespace AdvancedScada.Controls_Binding.Linear
         public double KeypadMinValue { get; set; }
 
         public double KeypadMaxValue { get; set; }
-        public string PLCAddressClick { get ; set ; }
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressClick { get; set; }
+        public string PLCAddressEnabled { get; set; }
 
         private void KeypadPopUp_ButtonClick(object sender, KeypadEventArgs e)
         {
@@ -291,6 +288,6 @@ namespace AdvancedScada.Controls_Binding.Linear
         #endregion
     }
 
-    
+
 
 }

@@ -37,9 +37,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseBinding.cs" />
+    <Compile Include="Common\Extension.cs" />
     <Compile Include="Common\MyEvents.cs" />
     <Compile Include="Common\XCollection.cs" />
     <Compile Include="IReadService.cs" />
+    <Compile Include="IReadServiceWeb.cs" />
     <Compile Include="IServiceCallback.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -48,9 +50,6 @@
       <Project>{1d570e9a-e5b4-44dd-946d-9d73cfa4a535}</Project>
       <Name>DriverBase</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

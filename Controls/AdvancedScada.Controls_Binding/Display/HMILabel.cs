@@ -929,8 +929,8 @@ namespace AdvancedScada.Controls_Binding.Display
 
         public bool KeypadAlphaNumeric { get; set; }
         public int PollRate { get; set; }
-        public string PLCAddressClick { get ; set ; }
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressClick { get; set; }
+        public string PLCAddressEnabled { get; set; }
 
         private Color m_KeypadFontColor = Color.WhiteSmoke;
 

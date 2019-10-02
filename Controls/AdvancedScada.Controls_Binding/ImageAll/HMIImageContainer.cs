@@ -1,18 +1,14 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
-using AdvancedScada.ImagePicker;
 using System;
 using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
-using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.ImageAll
 {
-   
+
     [ToolboxItem(true)]
     public class HMIImageContainer : MfgControl.AdvancedHMI.Controls.GraphicIndicator, IPropertiesControls
     {
@@ -163,7 +159,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        public  void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {
@@ -201,5 +197,5 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         #endregion
     }
 
-   
+
 }

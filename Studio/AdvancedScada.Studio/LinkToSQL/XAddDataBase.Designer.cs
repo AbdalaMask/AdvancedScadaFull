@@ -31,254 +31,257 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XAddDataBase));
             this.DxErrorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
-            this.txtDesp = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.txtSlaveId = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
-            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.txtDeviceName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonSeparator2 = new ComponentFactory.Krypton.Toolkit.KryptonSeparator();
+            this.kryptonSeparator1 = new ComponentFactory.Krypton.Toolkit.KryptonSeparator();
+            this.txtServerName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.txtDataBaseName = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonLabel16 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txtDataBaseId = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.txtDeviceId = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.txtDesc = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.txtServerId = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.txtChannelName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.txtChannelID = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.btnOK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonHeaderGroup4 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.btnCancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btnOK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.DxErrorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
-            this.kryptonHeaderGroup1.Panel.SuspendLayout();
-            this.kryptonHeaderGroup1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).BeginInit();
             this.kryptonHeaderGroup2.Panel.SuspendLayout();
             this.kryptonHeaderGroup2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSeparator2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSeparator1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDataBaseName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup4.Panel)).BeginInit();
+            this.kryptonHeaderGroup4.Panel.SuspendLayout();
+            this.kryptonHeaderGroup4.SuspendLayout();
             this.SuspendLayout();
             // 
             // DxErrorProvider1
             // 
             this.DxErrorProvider1.ContainerControl = this;
             // 
-            // kryptonHeaderGroup1
-            // 
-            this.kryptonHeaderGroup1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonHeaderGroup1.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
-            this.kryptonHeaderGroup1.HeaderVisibleSecondary = false;
-            this.kryptonHeaderGroup1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonHeaderGroup1.Name = "kryptonHeaderGroup1";
-            // 
-            // kryptonHeaderGroup1.Panel
-            // 
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonHeaderGroup2);
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.txtSlaveId);
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonLabel5);
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.txtDeviceName);
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonLabel3);
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.txtDeviceId);
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonLabel4);
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.txtChannelName);
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonLabel2);
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.txtChannelID);
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonLabel1);
-            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(481, 215);
-            this.kryptonHeaderGroup1.TabIndex = 4;
-            this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Device";
-            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddDevice;
-            this.kryptonHeaderGroup1.ValuesSecondary.Heading = "";
-            // 
             // kryptonHeaderGroup2
             // 
-            this.kryptonHeaderGroup2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonHeaderGroup2.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockInactive;
-            this.kryptonHeaderGroup2.HeaderVisibleSecondary = false;
-            this.kryptonHeaderGroup2.Location = new System.Drawing.Point(0, 98);
-            this.kryptonHeaderGroup2.Margin = new System.Windows.Forms.Padding(2);
+            this.kryptonHeaderGroup2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonHeaderGroup2.Location = new System.Drawing.Point(0, 0);
             this.kryptonHeaderGroup2.Name = "kryptonHeaderGroup2";
             // 
             // kryptonHeaderGroup2.Panel
             // 
-            this.kryptonHeaderGroup2.Panel.Controls.Add(this.txtDesp);
-            this.kryptonHeaderGroup2.Size = new System.Drawing.Size(479, 94);
-            this.kryptonHeaderGroup2.TabIndex = 12;
-            this.kryptonHeaderGroup2.ValuesPrimary.Heading = "Description:";
-            this.kryptonHeaderGroup2.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddDevice;
-            this.kryptonHeaderGroup2.ValuesSecondary.Heading = "";
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.kryptonSeparator2);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.kryptonSeparator1);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.txtServerName);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.txtDataBaseName);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.kryptonLabel16);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.txtDataBaseId);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.kryptonLabel3);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.txtDesc);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.txtServerId);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.kryptonLabel4);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.kryptonLabel2);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.kryptonLabel1);
+            this.kryptonHeaderGroup2.Size = new System.Drawing.Size(609, 280);
+            this.kryptonHeaderGroup2.TabIndex = 8;
             // 
-            // txtDesp
+            // kryptonSeparator2
             // 
-            this.txtDesp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDesp.Location = new System.Drawing.Point(0, 0);
-            this.txtDesp.Multiline = true;
-            this.txtDesp.Name = "txtDesp";
-            this.txtDesp.Size = new System.Drawing.Size(477, 70);
-            this.txtDesp.TabIndex = 11;
+            this.kryptonSeparator2.Location = new System.Drawing.Point(1, 71);
+            this.kryptonSeparator2.Name = "kryptonSeparator2";
+            this.kryptonSeparator2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.kryptonSeparator2.Size = new System.Drawing.Size(608, 12);
+            this.kryptonSeparator2.TabIndex = 40;
             // 
-            // txtSlaveId
+            // kryptonSeparator1
             // 
-            this.txtSlaveId.Location = new System.Drawing.Point(83, 52);
-            this.txtSlaveId.Name = "txtSlaveId";
-            this.txtSlaveId.Size = new System.Drawing.Size(382, 22);
-            this.txtSlaveId.StateCommon.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Far;
-            this.txtSlaveId.TabIndex = 9;
+            this.kryptonSeparator1.Location = new System.Drawing.Point(0, 27);
+            this.kryptonSeparator1.Name = "kryptonSeparator1";
+            this.kryptonSeparator1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.kryptonSeparator1.Size = new System.Drawing.Size(608, 12);
+            this.kryptonSeparator1.TabIndex = 39;
             // 
-            // kryptonLabel5
+            // txtServerName
             // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(8, 52);
-            this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(52, 20);
-            this.kryptonLabel5.TabIndex = 8;
-            this.kryptonLabel5.Values.Text = "SlaveId:";
+            this.txtServerName.Location = new System.Drawing.Point(406, 4);
+            this.txtServerName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtServerName.Name = "txtServerName";
+            this.txtServerName.Size = new System.Drawing.Size(191, 20);
+            this.txtServerName.TabIndex = 38;
             // 
-            // txtDeviceName
+            // txtDataBaseName
             // 
-            this.txtDeviceName.Location = new System.Drawing.Point(324, 20);
-            this.txtDeviceName.Name = "txtDeviceName";
-            this.txtDeviceName.Size = new System.Drawing.Size(141, 20);
-            this.txtDeviceName.TabIndex = 7;
+            this.txtDataBaseName.DropDownWidth = 163;
+            this.txtDataBaseName.IntegralHeight = false;
+            this.txtDataBaseName.Location = new System.Drawing.Point(406, 43);
+            this.txtDataBaseName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDataBaseName.Name = "txtDataBaseName";
+            this.txtDataBaseName.Size = new System.Drawing.Size(191, 21);
+            this.txtDataBaseName.StateCommon.ComboBox.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
+            this.txtDataBaseName.TabIndex = 37;
+            // 
+            // kryptonLabel16
+            // 
+            this.kryptonLabel16.Location = new System.Drawing.Point(302, 44);
+            this.kryptonLabel16.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonLabel16.Name = "kryptonLabel16";
+            this.kryptonLabel16.Size = new System.Drawing.Size(96, 20);
+            this.kryptonLabel16.TabIndex = 36;
+            this.kryptonLabel16.Values.Text = "DataBaseName:";
+            // 
+            // txtDataBaseId
+            // 
+            this.txtDataBaseId.Location = new System.Drawing.Point(101, 44);
+            this.txtDataBaseId.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDataBaseId.Name = "txtDataBaseId";
+            this.txtDataBaseId.Size = new System.Drawing.Size(191, 20);
+            this.txtDataBaseId.TabIndex = 35;
             // 
             // kryptonLabel3
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(230, 20);
+            this.kryptonLabel3.Location = new System.Drawing.Point(7, 44);
+            this.kryptonLabel3.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(85, 20);
-            this.kryptonLabel3.TabIndex = 6;
-            this.kryptonLabel3.Values.Text = "Device Name:";
+            this.kryptonLabel3.Size = new System.Drawing.Size(74, 20);
+            this.kryptonLabel3.TabIndex = 34;
+            this.kryptonLabel3.Values.Text = "DataBaseId:";
             // 
-            // txtDeviceId
+            // txtDesc
             // 
-            this.txtDeviceId.Location = new System.Drawing.Point(83, 20);
-            this.txtDeviceId.Name = "txtDeviceId";
-            this.txtDeviceId.Size = new System.Drawing.Size(129, 20);
-            this.txtDeviceId.TabIndex = 5;
+            this.txtDesc.Location = new System.Drawing.Point(101, 95);
+            this.txtDesc.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDesc.Multiline = true;
+            this.txtDesc.Name = "txtDesc";
+            this.txtDesc.Size = new System.Drawing.Size(496, 119);
+            this.txtDesc.TabIndex = 33;
+            // 
+            // txtServerId
+            // 
+            this.txtServerId.Location = new System.Drawing.Point(101, 4);
+            this.txtServerId.Margin = new System.Windows.Forms.Padding(4);
+            this.txtServerId.Name = "txtServerId";
+            this.txtServerId.Size = new System.Drawing.Size(191, 20);
+            this.txtServerId.TabIndex = 31;
             // 
             // kryptonLabel4
             // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(7, 20);
+            this.kryptonLabel4.Location = new System.Drawing.Point(12, 95);
+            this.kryptonLabel4.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(63, 20);
-            this.kryptonLabel4.TabIndex = 4;
-            this.kryptonLabel4.Values.Text = "Device Id:";
-            // 
-            // txtChannelName
-            // 
-            this.txtChannelName.Location = new System.Drawing.Point(324, 3);
-            this.txtChannelName.Name = "txtChannelName";
-            this.txtChannelName.Size = new System.Drawing.Size(141, 20);
-            this.txtChannelName.TabIndex = 3;
+            this.kryptonLabel4.Size = new System.Drawing.Size(75, 20);
+            this.kryptonLabel4.TabIndex = 30;
+            this.kryptonLabel4.Values.Text = "Description:";
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(230, 3);
+            this.kryptonLabel2.Location = new System.Drawing.Point(301, 4);
+            this.kryptonLabel2.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(94, 20);
-            this.kryptonLabel2.TabIndex = 2;
-            this.kryptonLabel2.Values.Text = "Channel Name:";
-            // 
-            // txtChannelID
-            // 
-            this.txtChannelID.Location = new System.Drawing.Point(83, 3);
-            this.txtChannelID.Name = "txtChannelID";
-            this.txtChannelID.Size = new System.Drawing.Size(129, 20);
-            this.txtChannelID.TabIndex = 1;
+            this.kryptonLabel2.Size = new System.Drawing.Size(80, 20);
+            this.kryptonLabel2.TabIndex = 29;
+            this.kryptonLabel2.Values.Text = "ServerName:";
             // 
             // kryptonLabel1
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(7, 3);
+            this.kryptonLabel1.Location = new System.Drawing.Point(7, 4);
+            this.kryptonLabel1.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(72, 20);
-            this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "Channel Id:";
+            this.kryptonLabel1.Size = new System.Drawing.Size(61, 20);
+            this.kryptonLabel1.TabIndex = 28;
+            this.kryptonLabel1.Values.Text = "Server Id:";
             // 
-            // btnOK
+            // kryptonHeaderGroup4
             // 
-            this.btnOK.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnOK.Location = new System.Drawing.Point(407, 0);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(74, 32);
-            this.btnOK.TabIndex = 5;
-            this.btnOK.Values.Text = "OK";
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.kryptonHeaderGroup4.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockInactive;
+            this.kryptonHeaderGroup4.HeaderVisibleSecondary = false;
+            this.kryptonHeaderGroup4.Location = new System.Drawing.Point(0, 282);
+            this.kryptonHeaderGroup4.Margin = new System.Windows.Forms.Padding(4);
+            this.kryptonHeaderGroup4.Name = "kryptonHeaderGroup4";
+            // 
+            // kryptonHeaderGroup4.Panel
+            // 
+            this.kryptonHeaderGroup4.Panel.Controls.Add(this.btnCancel);
+            this.kryptonHeaderGroup4.Panel.Controls.Add(this.btnOK);
+            this.kryptonHeaderGroup4.Size = new System.Drawing.Size(609, 57);
+            this.kryptonHeaderGroup4.TabIndex = 9;
+            this.kryptonHeaderGroup4.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddChannel;
+            this.kryptonHeaderGroup4.ValuesSecondary.Heading = "";
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCancel.Location = new System.Drawing.Point(333, 0);
+            this.btnCancel.Location = new System.Drawing.Point(367, 0);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(74, 32);
-            this.btnCancel.TabIndex = 6;
+            this.btnCancel.Size = new System.Drawing.Size(120, 33);
+            this.btnCancel.TabIndex = 2;
             this.btnCancel.Values.Text = "Cancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // kryptonPanel1
+            // btnOK
             // 
-            this.kryptonPanel1.Controls.Add(this.btnCancel);
-            this.kryptonPanel1.Controls.Add(this.btnOK);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 215);
-            this.kryptonPanel1.Margin = new System.Windows.Forms.Padding(2);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(481, 32);
-            this.kryptonPanel1.TabIndex = 5;
+            this.btnOK.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnOK.Location = new System.Drawing.Point(487, 0);
+            this.btnOK.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(120, 33);
+            this.btnOK.TabIndex = 3;
+            this.btnOK.Values.Text = "Next >";
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // XDeviceForm
+            // XAddDataBase
             // 
-            this.AcceptButton = this.btnOK;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(481, 247);
-            this.Controls.Add(this.kryptonPanel1);
-            this.Controls.Add(this.kryptonHeaderGroup1);
+            this.ClientSize = new System.Drawing.Size(609, 340);
+            this.Controls.Add(this.kryptonHeaderGroup4);
+            this.Controls.Add(this.kryptonHeaderGroup2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(497, 285);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(497, 285);
-            this.Name = "XDeviceForm";
+            this.Name = "XAddDataBase";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DeviceForm";
-            this.Load += new System.EventHandler(this.XUserDeviceForm_Load);
+            this.Text = "SQLDataBase:Add New";
+            this.Load += new System.EventHandler(this.XtraSQLAddDataBase_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DxErrorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).EndInit();
-            this.kryptonHeaderGroup1.Panel.ResumeLayout(false);
-            this.kryptonHeaderGroup1.Panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).EndInit();
-            this.kryptonHeaderGroup1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).EndInit();
             this.kryptonHeaderGroup2.Panel.ResumeLayout(false);
             this.kryptonHeaderGroup2.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).EndInit();
             this.kryptonHeaderGroup2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSeparator2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSeparator1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDataBaseName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup4.Panel)).EndInit();
+            this.kryptonHeaderGroup4.Panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup4)).EndInit();
+            this.kryptonHeaderGroup4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.ErrorProvider DxErrorProvider1;
+        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup2;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel16;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtDataBaseId;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtDesc;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtServerId;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup4;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnCancel;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnOK;
-        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup1;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtDesp;
-        private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown txtSlaveId;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtDeviceName;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtDeviceId;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtChannelName;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtChannelID;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup2;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtServerName;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox txtDataBaseName;
+        private ComponentFactory.Krypton.Toolkit.KryptonSeparator kryptonSeparator2;
+        private ComponentFactory.Krypton.Toolkit.KryptonSeparator kryptonSeparator1;
     }
 }

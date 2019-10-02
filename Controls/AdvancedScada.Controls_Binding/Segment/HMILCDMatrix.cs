@@ -5,4 +5,4 @@ namespace AdvancedScada.Controls_Binding.Segment
     public class HMILCDMatrix : DasNetLED.DAS_Net_LCDMatrix
     {
     }
-    }
+}

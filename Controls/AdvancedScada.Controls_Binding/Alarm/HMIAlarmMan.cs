@@ -372,7 +372,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
 
         public void UpdateCollection(ConnectionState status, Dictionary<string, Tag> collection)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

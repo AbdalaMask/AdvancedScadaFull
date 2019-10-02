@@ -4,7 +4,6 @@ using AdvancedScada.IODriver;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
-using System.ServiceModel.Channels;
 using System.Threading;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
@@ -13,7 +12,7 @@ namespace AdvancedScada.BaseService
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.PerSession)]
     public class ReadService : IReadService
     {
-       
+
         private List<IServiceCallback> listCallbackChannels = new List<IServiceCallback>();
 
         public IServiceCallback EventDataChanged;
@@ -31,7 +30,7 @@ namespace AdvancedScada.BaseService
                         {
                             if (listCallbackChannels.Count > 0)
                             {
-                                
+
 
                                 foreach (IServiceCallback item in listCallbackChannels)
                                 {
@@ -42,7 +41,7 @@ namespace AdvancedScada.BaseService
                                             item.UpdateCollection(DriverHelper.objConnectionState, TagCollection.Tags);
                                             item.DataTags(TagCollection.Tags);
                                         }
-                                           
+
                                         Thread.Sleep(100);
 
                                     }
@@ -76,7 +75,7 @@ namespace AdvancedScada.BaseService
         }
         public void Connect(Machine mac)
         {
-           
+
             try
             {
                 lock (listCallbackChannels)
@@ -103,7 +102,7 @@ namespace AdvancedScada.BaseService
         public void Disconnect(Machine mac)
         {
 
-            
+
             try
             {
                 lock (listCallbackChannels)
@@ -147,9 +146,9 @@ namespace AdvancedScada.BaseService
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
                 throw new FaultException<IFaultException>(new IFaultException(ex.Message));
-                
+
             }
-            
+
         }
     }
 }

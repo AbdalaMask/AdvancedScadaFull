@@ -1,16 +1,12 @@
 ﻿using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
-using AdvancedScada.Monitor;
 using System;
 using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Drawing;
 using System.Windows.Forms;
-using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.Linear
 {
-    
+
     public class HMILinearMeterV : MfgControl.AdvancedHMI.Controls.LinearMeterVertical, IPropertiesControls
     {
 
@@ -55,5 +51,5 @@ namespace AdvancedScada.Controls_Binding.Linear
         #endregion
     }
 
-   
+
 }

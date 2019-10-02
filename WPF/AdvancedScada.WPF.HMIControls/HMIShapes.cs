@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -13,9 +8,9 @@ namespace AdvancedScada.WPF.HMIControls
 {
     public enum ShapesE
     {
-        Chevron, Diamond, Hexagon, Label, RoundedSidesRectangle, SpeechBubble, Triangle,Rectangle
+        Chevron, Diamond, Hexagon, Label, RoundedSidesRectangle, SpeechBubble, Triangle, Rectangle
     }
-   public  class HMIShapes : Shape
+    public class HMIShapes : Shape
     {
         public HMIShapes()
         {
@@ -73,17 +68,17 @@ namespace AdvancedScada.WPF.HMIControls
                         return GetGeometryChevron();
                     case ShapesE.Diamond:
                         return GetGeometryDiamond();
-                        
-                    case ShapesE.Hexagon:return GetGeometryHexagon();
+
+                    case ShapesE.Hexagon: return GetGeometryHexagon();
                     case ShapesE.Label:
                         break;
-                    case ShapesE.RoundedSidesRectangle:return GetGeometryRoundedSidesRectangle();
-                      
-                    case ShapesE.SpeechBubble:return GetGeometrySpeechBubble();
-                        
-                    case ShapesE.Triangle:return GetGeometryTriangle();
+                    case ShapesE.RoundedSidesRectangle: return GetGeometryRoundedSidesRectangle();
+
+                    case ShapesE.SpeechBubble: return GetGeometrySpeechBubble();
+
+                    case ShapesE.Triangle: return GetGeometryTriangle();
                     case ShapesE.Rectangle:
-                       
+
                         break;
                     default:
                         break;
@@ -103,7 +98,7 @@ namespace AdvancedScada.WPF.HMIControls
         //    {
         //        case ShapesE.Chevron:
         //            // Create a rectangle and draw it in the DrawingContext.
-                   
+
         //            drawingContext.DrawGeometry(System.Windows.Media.Brushes.LightBlue, (System.Windows.Media.Pen)null, GetGeometryChevron());
 
         //            break;

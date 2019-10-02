@@ -136,8 +136,8 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         }
 
         [DefaultValue(false)] public bool SuppressErrorDisplay { get; set; }
-        public string PLCAddressValue { get ; set ; }
-        public string PLCAddressClick { get ; set; }
+        public string PLCAddressValue { get; set; }
+        public string PLCAddressClick { get; set; }
         public string PLCAddressEnabled { get; set; }
 
         //***************************************
@@ -152,7 +152,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         //********************************************************
         private Timer ErrorDisplayTime;
 
-        public   void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

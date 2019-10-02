@@ -10,7 +10,7 @@ namespace AdvancedScada.Controls_Binding
     {
         Green, Red
     }
-    /// <inheritdoc />
+   
     public class Utilities
     {
         private static IReadService client;

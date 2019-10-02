@@ -313,7 +313,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Conveyer
             }
         }
 
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressEnabled { get; set; }
 
         #endregion
 

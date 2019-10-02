@@ -69,7 +69,7 @@ namespace AdvancedScada.IODriver.Delta.ASCII
 
 
 
-        
+
 
 
         public bool[] ReadDiscrete(string address, ushort length)

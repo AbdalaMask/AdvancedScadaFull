@@ -29,8 +29,8 @@ namespace AdvancedScada.Studio.Service
                 host.Opened += host_Opened;
                 host.Open();
 
-                eventAddMessage += new EventUOSListenning(AddMessage);
-                eventUOSAccepting += new EventUOSAccepting(SetConnectionState);
+                eventAddMessage += new EventListenning(AddMessage);
+                eventConnectionState += new EventConnectionState(SetConnectionState);
 
                 foreach (var se in host.Description.Endpoints)
                 {

@@ -141,7 +141,7 @@ namespace AdvancedScada.Controls_Binding.Indicator
 
         [DefaultValue(false)]
         public bool SuppressErrorDisplay { get; set; }
-        public string PLCAddressEnabled { get; set ; }
+        public string PLCAddressEnabled { get; set; }
 
 
         //***************************************

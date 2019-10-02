@@ -115,9 +115,9 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
 
         [DefaultValue(false)]
         public bool SuppressErrorDisplay { get; set; }
-        public string PLCAddressClick { get ; set; }
-        public string PLCAddressVisible { get ; set ; }
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressClick { get; set; }
+        public string PLCAddressVisible { get; set; }
+        public string PLCAddressEnabled { get; set; }
 
         private void _Click1(object sender, EventArgs e)
         {
@@ -224,7 +224,7 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
         private Timer ErrorDisplayTime;
         private decimal _ValueScaleFactor;
 
-        public  void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

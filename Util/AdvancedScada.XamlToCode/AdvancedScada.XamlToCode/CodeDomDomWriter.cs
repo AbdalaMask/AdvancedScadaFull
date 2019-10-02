@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using AdvancedScada.XamlToCode.DOM;
+using System.Collections.Generic;
 using System.Xaml;
-using AdvancedScada.XamlToCode.DOM;
 namespace AdvancedScada.XamlToCode
 {
     public class CodeDomDomWriter : XamlWriter

@@ -130,8 +130,8 @@ namespace AdvancedScada.Controls_Binding.HslControl.ProgressBar
         #region "Basic Properties"
 
         public OutputType OutputType { get; set; }
-        public string PLCAddressClick { get; set ; }
-        public string PLCAddressEnabled { get ; set; }
+        public string PLCAddressClick { get; set; }
+        public string PLCAddressEnabled { get; set; }
 
 
 
@@ -143,7 +143,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.ProgressBar
         //* Show an error via the text property for a short time
         //********************************************************
         private System.Windows.Forms.Timer ErrorDisplayTime;
-        public  void DisplayError(string ErrorMessage)
+        public void DisplayError(string ErrorMessage)
         {
             if (!SuppressErrorDisplay)
             {

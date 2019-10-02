@@ -1,18 +1,15 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Client;
-using AdvancedScada.Monitor;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
-using System.ComponentModel.Design;
 using System.Drawing.Design;
 using System.Windows.Forms;
-using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.Motor
 {
-    
+
     public class HMIWaterPump : MfgControl.AdvancedHMI.Controls.WaterPump, IPropertiesControls
     {
 
@@ -300,7 +297,7 @@ namespace AdvancedScada.Controls_Binding.Motor
         #region "Basic Properties"
 
         public OutputType OutputType { get; set; }
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressEnabled { get; set; }
 
 
         #endregion
@@ -350,5 +347,5 @@ namespace AdvancedScada.Controls_Binding.Motor
         #endregion
     }
 
-    
+
 }
