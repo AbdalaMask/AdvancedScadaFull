@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HslControls">
+      <HintPath>..\..\packages\HslControls.2.2.3\lib\net45\HslControls.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Expression.Drawing">
       <HintPath>..\Microsoft.Expression.Drawing.dll</HintPath>
     </Reference>
@@ -62,6 +65,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Fun\HMIFun.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HslControl\TankAll\HMIBottle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -128,6 +135,9 @@
       <DependentUpon>HMIFun.xaml</DependentUpon>
     </Compile>
     <Compile Include="HMIShapes.cs" />
+    <Compile Include="HslControl\TankAll\HMIBottle.xaml.cs">
+      <DependentUpon>HMIBottle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ImageAll\HMIImageContainerSvg.cs" />
     <Compile Include="Indicator\HMIIndicator.xaml.cs">
       <DependentUpon>HMIIndicator.xaml</DependentUpon>

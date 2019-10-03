@@ -22,8 +22,21 @@ namespace AdvancedScada.IODriver
     {
         public static readonly ManualResetEvent SendDone = new ManualResetEvent(true);
         public static List<Channel> Channels;
-        //==================================All===================================================
-        private static GenericDictionary DriverDictionary = null;
+        //==================================Delta===================================================
+        private static Dictionary<string, DeltaTCPMaster> Deltambe = null;
+        private static Dictionary<string, DeltaRTUMaster> Deltartu = null;
+        private static Dictionary<string, DeltaASCIIMaster> Deltaascii = null;
+        //==================================Modbus===================================================
+        private static Dictionary<string, ModbusTCPMaster> mbe = null;
+        private static Dictionary<string, ModbusRTUMaster> rtu = null;
+        private static Dictionary<string, ModbusASCIIMaster> ascii = null;
+        //==================================LS===================================================
+        private static Dictionary<string, LS_CNET> cnet = null;
+        private static Dictionary<string, LS_FENET> FENET = null;
+        //==================================Panasonic===================================================
+
+
+        private static int COUNTER;
         private static bool IsConnected;
         private static Task[] taskArray;
         public static ConnectionState objConnectionState = ConnectionState.DISCONNECT;
@@ -31,7 +44,19 @@ namespace AdvancedScada.IODriver
         #region IServiceDriver
         public void InitializeService(List<Channel> chns)
         {
-            DriverDictionary = new GenericDictionary();
+            //===============================================================
+            Deltambe = new Dictionary<string, DeltaTCPMaster>();
+            Deltartu = new Dictionary<string, DeltaRTUMaster>();
+            Deltaascii = new Dictionary<string, DeltaASCIIMaster>();
+            //===============================================================
+            mbe = new Dictionary<string, ModbusTCPMaster>();
+            rtu = new Dictionary<string, ModbusRTUMaster>();
+            ascii = new Dictionary<string, ModbusASCIIMaster>();
+            //==================================================================
+            cnet = new Dictionary<string, LS_CNET>();
+            FENET = new Dictionary<string, LS_FENET>();
+            //=================================================================
+
 
             try
             {
@@ -63,11 +88,11 @@ namespace AdvancedScada.IODriver
                                             {
                                                 case "RTU":
                                                     DriverAdapter = new DeltaRTUMaster(dv.SlaveId, sp);
-                                                    DriverDictionary.Add(ch.ChannelName, (DeltaRTUMaster)DriverAdapter);
+                                                    Deltartu.Add(ch.ChannelName, (DeltaRTUMaster)DriverAdapter);
                                                     break;
                                                 case "ASCII":
                                                     DriverAdapter = new DeltaASCIIMaster(dv.SlaveId, sp);
-                                                    DriverDictionary.Add(ch.ChannelName, (DeltaASCIIMaster)DriverAdapter);
+                                                    Deltaascii.Add(ch.ChannelName, (DeltaASCIIMaster)DriverAdapter);
                                                     break;
                                             }
                                             break;
@@ -76,17 +101,17 @@ namespace AdvancedScada.IODriver
                                             {
                                                 case "RTU":
                                                     DriverAdapter = new ModbusRTUMaster(dv.SlaveId, sp);
-                                                    DriverDictionary.Add(ch.ChannelName, (ModbusRTUMaster)DriverAdapter);
+                                                    rtu.Add(ch.ChannelName, (ModbusRTUMaster)DriverAdapter);
                                                     break;
                                                 case "ASCII":
                                                     DriverAdapter = new ModbusASCIIMaster(dv.SlaveId, sp);
-                                                    DriverDictionary.Add(ch.ChannelName, (ModbusASCIIMaster)DriverAdapter);
+                                                    ascii.Add(ch.ChannelName, (ModbusASCIIMaster)DriverAdapter);
                                                     break;
                                             }
                                             break;
                                         case "LSIS":
                                             DriverAdapter = new LS_CNET(dv.SlaveId, sp);
-                                            DriverDictionary.Add(ch.ChannelName, (LS_CNET)DriverAdapter);
+                                            cnet.Add(ch.ChannelName, (LS_CNET)DriverAdapter);
                                             break;
 
                                         default:
@@ -99,15 +124,15 @@ namespace AdvancedScada.IODriver
                                     {
                                         case "Delta":
                                             DriverAdapter = new DeltaTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
-                                            DriverDictionary.Add(ch.ChannelName, (DeltaTCPMaster)DriverAdapter);
+                                            Deltambe.Add(ch.ChannelName, (DeltaTCPMaster)DriverAdapter);
                                             break;
                                         case "Modbus":
                                             DriverAdapter = new ModbusTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
-                                            DriverDictionary.Add(ch.ChannelName, (ModbusTCPMaster)DriverAdapter);
+                                            mbe.Add(ch.ChannelName, (ModbusTCPMaster)DriverAdapter);
                                             break;
                                         case "LSIS":
                                             DriverAdapter = new LS_FENET(die.CPU, die.IPAddress, die.Port, die.Slot);
-                                            DriverDictionary.Add(ch.ChannelName, (LS_FENET)DriverAdapter);
+                                            FENET.Add(ch.ChannelName, (LS_FENET)DriverAdapter);
                                             break;
 
                                         default:
@@ -166,47 +191,46 @@ namespace AdvancedScada.IODriver
                             switch (ch.ChannelTypes)
                             {
                                 case "Delta":
-                                    switch (ch.Mode)
-                                    {
-                                        case "RTU":
-                                            DriverAdapter = DriverDictionary.GetValue<DeltaRTUMaster>(ch.ChannelName);
-                                            break;
-                                        case "ASCII":
-                                            DriverAdapter = DriverDictionary.GetValue<DeltaASCIIMaster>(ch.ChannelName);
-                                            break;
-                                        case "TCP":
-                                            DriverAdapter = DriverDictionary.GetValue<DeltaTCPMaster>(ch.ChannelName);
-                                            break;
-                                    }
-                                    break;
-                                case "Modbus":
-                                    switch (ch.Mode)
-                                    {
-                                        case "RTU":
-                                            DriverAdapter = DriverDictionary.GetValue<ModbusRTUMaster>(ch.ChannelName);
-                                            break;
-                                        case "ASCII":
-                                            DriverAdapter = DriverDictionary.GetValue<ModbusASCIIMaster>(ch.ChannelName);
-                                            break;
-                                        case "TCP":
+                                switch (ch.Mode)
+                                {
+                                    case "RTU":
+                                        DriverAdapter = Deltartu[ch.ChannelName];
+                                        break;
+                                    case "ASCII":
+                                        DriverAdapter = Deltaascii[ch.ChannelName];
+                                        break;
+                                    case "TCP":
+                                        DriverAdapter = Deltambe[ch.ChannelName];
+                                        break;
+                                }
+                                break;
+                            case "Modbus":
+                                switch (ch.Mode)
+                                {
+                                    case "RTU":
+                                        DriverAdapter = rtu[ch.ChannelName];
+                                        break;
+                                    case "ASCII":
+                                        DriverAdapter = ascii[ch.ChannelName];
+                                        break;
+                                    case "TCP":
+                                        DriverAdapter = mbe[ch.ChannelName];
+                                        break;
+                                }
+                                break;
+                            case "LSIS":
+                                switch (ch.ConnectionType)
+                                {
+                                    case "SerialPort":
+                                        DriverAdapter = cnet[ch.ChannelName];
+                                        break;
 
-                                            DriverAdapter = DriverDictionary.GetValue<ModbusTCPMaster>(ch.ChannelName);
-                                            break;
-                                    }
-                                    break;
-                                case "LSIS":
-                                    switch (ch.ConnectionType)
-                                    {
-                                        case "SerialPort":
-                                            DriverAdapter = DriverDictionary.GetValue<LS_CNET>(ch.ChannelName);
-                                            break;
-
-                                        case "Ethernet":
-                                            DriverAdapter = DriverDictionary.GetValue<LS_FENET>(ch.ChannelName);
-                                            break;
-                                    }
-                                    break;
-                                default:
+                                    case "Ethernet":
+                                        DriverAdapter = FENET[ch.ChannelName];
+                                        break;
+                                }
+                                break;
+                            default:
                                     break;
                             }
 
@@ -311,7 +335,7 @@ namespace AdvancedScada.IODriver
             try
             {
                 IsConnected = false;
-                DriverDictionary = null;
+                Deltambe = null;
                 TagCollection.Tags.Clear();
                    Channels = null;
                 for (int i = 0; i < taskArray.Length; i++)
@@ -855,13 +879,13 @@ namespace AdvancedScada.IODriver
                                     switch (ch.Mode)
                                     {
                                         case "RTU":
-                                            DriverAdapter = DriverDictionary.GetValue<DeltaRTUMaster>(ch.ChannelName);
+                                            DriverAdapter = Deltartu[ch.ChannelName];
                                             break;
                                         case "ASCII":
-                                            DriverAdapter = DriverDictionary.GetValue<DeltaASCIIMaster>(ch.ChannelName);
+                                            DriverAdapter = Deltaascii[ch.ChannelName];
                                             break;
                                         case "TCP":
-                                            DriverAdapter = DriverDictionary.GetValue<ModbusTCPMaster>(ch.ChannelName);
+                                            DriverAdapter = Deltambe[ch.ChannelName];
                                             break;
                                     }
                                     break;
@@ -869,13 +893,13 @@ namespace AdvancedScada.IODriver
                                     switch (ch.Mode)
                                     {
                                         case "RTU":
-                                            DriverAdapter = DriverDictionary.GetValue<ModbusRTUMaster>(ch.ChannelName);
+                                            DriverAdapter = rtu[ch.ChannelName];
                                             break;
                                         case "ASCII":
-                                            DriverAdapter = DriverDictionary.GetValue<ModbusASCIIMaster>(ch.ChannelName);
+                                            DriverAdapter = ascii[ch.ChannelName];
                                             break;
                                         case "TCP":
-                                            DriverAdapter = DriverDictionary.GetValue<ModbusTCPMaster>(ch.ChannelName);
+                                            DriverAdapter = mbe[ch.ChannelName];
                                             break;
                                     }
                                     break;
@@ -883,11 +907,11 @@ namespace AdvancedScada.IODriver
                                     switch (ch.ConnectionType)
                                     {
                                         case "SerialPort":
-                                            DriverAdapter = DriverDictionary.GetValue<LS_CNET>(ch.ChannelName);
+                                            DriverAdapter = cnet[ch.ChannelName];
                                             break;
 
                                         case "Ethernet":
-                                            DriverAdapter = DriverDictionary.GetValue<LS_FENET>(ch.ChannelName);
+                                            DriverAdapter = FENET[ch.ChannelName];
                                             break;
                                     }
                                     break;

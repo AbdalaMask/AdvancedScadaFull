@@ -44,8 +44,8 @@
     <Reference Include="DasNetLED">
       <HintPath>..\..\Lib\DasNetLED.dll</HintPath>
     </Reference>
-    <Reference Include="HslControls, Version=2.2.2.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\HslControls.2.2.2\lib\net45\HslControls.dll</HintPath>
+    <Reference Include="HslControls, Version=2.2.3.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\HslControls.2.2.3\lib\net45\HslControls.dll</HintPath>
     </Reference>
     <Reference Include="Krypton Docking">
       <HintPath>..\..\Lib\Krypton\Krypton Docking.dll</HintPath>
