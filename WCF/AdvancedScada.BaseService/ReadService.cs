@@ -13,8 +13,7 @@ namespace AdvancedScada.BaseService
     public class ReadService : IReadService
     {
 
-        private static List<IServiceCallback> listCallbackChannels = new List<IServiceCallback>();
-        private bool RUN_APPLICATION;
+         private bool RUN_APPLICATION;
         public IServiceCallback EventDataChanged;
         IODriverHelper driverHelper = new IODriverHelper();
 
@@ -38,7 +37,7 @@ namespace AdvancedScada.BaseService
                     {
                         try
                         {
-                            lock (listCallbackChannels)
+                            lock (objCallbackChannels)
                             {
                                 if (EventDataChanged != null)
                                 {
@@ -48,7 +47,7 @@ namespace AdvancedScada.BaseService
                                         {
                                             if (((ICommunicationObject)EventDataChanged).State == CommunicationState.Opened)
                                             {
-                                            //EventDataChanged.UpdateCollection(IODriverHelper.objConnectionState, TagCollection.Tags);
+                                           EventDataChanged.UpdateCollection(IODriverHelper.objConnectionState, TagCollection.Tags);
                                             EventDataChanged.DataTags(TagCollection.Tags);
                                             }
 
