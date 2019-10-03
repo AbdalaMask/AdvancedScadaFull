@@ -48,7 +48,7 @@ namespace AdvancedScada.BaseService
                                         {
                                             if (((ICommunicationObject)EventDataChanged).State == CommunicationState.Opened)
                                             {
-                                            EventDataChanged.UpdateCollection(IODriverHelper.objConnectionState, TagCollection.Tags);
+                                            //EventDataChanged.UpdateCollection(IODriverHelper.objConnectionState, TagCollection.Tags);
                                             EventDataChanged.DataTags(TagCollection.Tags);
                                             }
 
