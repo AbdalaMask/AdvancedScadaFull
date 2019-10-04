@@ -12,7 +12,6 @@ using AdvancedScada.IODriver.Modbus.TCP;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
-using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using static AdvancedScada.IBaseService.Common.XCollection;
@@ -33,12 +32,9 @@ namespace AdvancedScada.IODriver
         //==================================LS===================================================
         private static Dictionary<string, LS_CNET> cnet = null;
         private static Dictionary<string, LS_FENET> FENET = null;
-        //==================================Panasonic===================================================
 
-
-       
         private static bool IsConnected;
-        private static Task[] taskArray;
+        private static int COUNTER;
         public static ConnectionState objConnectionState = ConnectionState.DISCONNECT;
         private static Queue<RequestWrite> RequestWriteToClient = new Queue<RequestWrite>();
         #region IServiceDriver
@@ -167,27 +163,25 @@ namespace AdvancedScada.IODriver
             }
         }
 
-
         private static Thread[] threads;
-
         public void Connect()
         {
+
             try
             {
+                IsConnected = true;
 
-                //  threads = new Thread[Channels.Count];
-                taskArray = new Task[Channels.Count];
-                int SendSuccess = 0;
-                if (taskArray == null) throw new NullReferenceException("No Data");
-                for (var i = 0; i < Channels.Count; i++)
+
+                Console.WriteLine(string.Format("STARTED: {0}", ++COUNTER));
+                threads = new Thread[Channels.Count];
+
+                if (threads == null) throw new NullReferenceException("No Data");
+                for (int i = 0; i < Channels.Count; i++)
                 {
-                    //threads[i] = new Thread((chParam) =>
-                    //{
-                    taskArray[i] = new Task((chParam) =>
+                    threads[i] = new Thread((chParam) =>
                     {
-
                         IDriverAdapter DriverAdapter = null;
-                        var ch = (Channel)chParam;
+                        Channel ch = (Channel)chParam;
                         switch (ch.ChannelTypes)
                         {
                             case "Delta":
@@ -230,74 +224,51 @@ namespace AdvancedScada.IODriver
                                         break;
                                 }
                                 break;
+
+
                             default:
                                 break;
                         }
 
                         //======Connection to PLC==================================
-                        IsConnected = DriverAdapter.Connection();
+                        DriverAdapter.Connection();
+
                         while (IsConnected)
                         {
                             try
                             {
-                                if (RequestWriteToClient.Count > 0)
+                                foreach (Device dv in ch.Devices)
                                 {
-                                    if (IsConnected)
+
+                                    foreach (DataBlock db in dv.DataBlocks)
                                     {
-                                        foreach (RequestWrite item1 in RequestWriteToClient)
+                                        if (!IsConnected) break;
+                                        switch (ch.ChannelTypes)
                                         {
-                                            SendSuccess = write(item1);
-                                            break;
-                                        }
-                                        if (SendSuccess > 0)
-                                            RequestWriteToClient.Dequeue();
-                                    }
-                                }
-                                else
-                                {
-                                    try
-                                    {
-                                        foreach (Device dv in ch.Devices)
-                                        {
-                                            foreach (DataBlock db in dv.DataBlocks)
-                                            {
+                                            case "Delta":
+                                                SendPackageDelta(DriverAdapter, db);
+                                                break;
+                                            case "Modbus":
+                                                SendPackageModbus(DriverAdapter, db);
+                                                break;
+                                            case "LSIS":
+                                                SendPackageLSIS(DriverAdapter, db);
+                                                break;
 
-                                                switch (ch.ChannelTypes)
-                                                {
-                                                    case "Delta":
-                                                        SendPackageDelta(DriverAdapter, db);
-                                                        break;
-                                                    case "Modbus":
-                                                        SendPackageModbus(DriverAdapter, db);
-                                                        break;
-                                                    case "LSIS":
-                                                        SendPackageLSIS(DriverAdapter, db);
-                                                        break;
-
-                                                    default:
-                                                        break;
-                                                }
-
-                                            }
-
+                                            default:
+                                                break;
                                         }
 
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Disconnect();
-                                        EventscadaException?.Invoke(this.GetType().Name, ex.Message);
                                     }
 
                                 }
                             }
                             catch (Exception)
                             {
-                                DriverAdapter = null;
+                                Disconnect();
                                 objConnectionState = ConnectionState.DISCONNECT;
                                 eventConnectionState?.Invoke(objConnectionState, string.Format("Server disconnect with PLC."));
                             }
-
                             if (IsConnected && objConnectionState == ConnectionState.DISCONNECT)
                             {
                                 objConnectionState = ConnectionState.CONNECT;
@@ -308,26 +279,21 @@ namespace AdvancedScada.IODriver
                                 objConnectionState = ConnectionState.DISCONNECT;
                                 eventConnectionState?.Invoke(objConnectionState, string.Format("Server disconnect with PLC."));
                             }
-
                         }
 
-                        //});
-                        //threads[i].IsBackground = true;
-                        //threads[i].Start(Channels[i]);
-                    }, Channels[i]);
-                    taskArray[i].Start();
+                    })
+                    {
+                        IsBackground = true
+                    };
+                    threads[i].Start(Channels[i]);
                 }
 
             }
             catch (Exception ex)
             {
-
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
-
         }
-
-
 
         public void Disconnect()
         {
@@ -338,10 +304,10 @@ namespace AdvancedScada.IODriver
                 Deltambe = null;
                 TagCollection.Tags.Clear();
                 Channels = null;
-                for (int i = 0; i < taskArray.Length; i++)
+                for (int i = 0; i < threads.Length; i++)
                 {
-                    taskArray[i].Wait(1000);
-                    //taskArray[i].Dispose();
+
+                    threads[i].Abort();
                 }
 
                 objConnectionState = ConnectionState.DISCONNECT;
@@ -355,19 +321,17 @@ namespace AdvancedScada.IODriver
         }
 
         #endregion
-
         #region SendPackage All
         private void SendPackageDelta(IDriverAdapter DriverAdapter, DataBlock db)
         {
             try
             {
-                SendDone.WaitOne(-1);
+
                 switch (db.DataType)
                 {
                     case DataTypes.Bit:
                         lock (DriverAdapter)
                         {
-
                             bool[] bitRs = DriverAdapter.Read<bool>($"{db.MemoryType}{db.StartAddress}", db.Length);
                             if (bitRs == null) return;
                             int length = bitRs.Length;
@@ -382,15 +346,13 @@ namespace AdvancedScada.IODriver
                     case DataTypes.Byte:
                         lock (DriverAdapter)
                         {
-                            Byte[] IntRs = DriverAdapter.Read<Byte>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                            byte[] IntRs = DriverAdapter.Read<byte>($"{db.MemoryType}{db.StartAddress}", db.Length);
                             if (IntRs == null) return;
                             if (IntRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < IntRs.Length; j++)
                             {
 
                                 db.Tags[j].Value = IntRs[j];
-
-
                                 db.Tags[j].TimeSpan = DateTime.Now;
                             }
                         }
@@ -412,14 +374,12 @@ namespace AdvancedScada.IODriver
                         lock (DriverAdapter)
                         {
                             var wdRs = DriverAdapter.Read<ushort>($"{db.MemoryType}{db.StartAddress}", db.Length);
-
                             if (wdRs == null) return;
                             if (wdRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < wdRs.Length; j++)
                             {
 
                                 db.Tags[j].Value = wdRs[j];
-
                                 db.Tags[j].TimeSpan = DateTime.Now;
                             }
                         }
@@ -515,7 +475,7 @@ namespace AdvancedScada.IODriver
         {
             try
             {
-                //SendDone.WaitOne(-1);
+                SendDone.WaitOne(-1);
                 switch (db.DataType)
                 {
                     case DataTypes.Bit:
@@ -524,9 +484,8 @@ namespace AdvancedScada.IODriver
 
                             bool[] bitRs = DriverAdapter.Read<bool>($"{db.StartAddress}", db.Length);
                             if (bitRs == null) return;
-                            int length = bitRs.Length;
-                            if (bitRs.Length > db.Tags.Count) length = db.Tags.Count;
-                            for (int j = 0; j < length; j++)
+                            if (bitRs.Length > db.Tags.Count) return;
+                            for (int j = 0; j < db.Tags.Count; j++)
                             {
                                 db.Tags[j].Value = bitRs[j];
                                 db.Tags[j].TimeSpan = DateTime.Now;
@@ -534,29 +493,48 @@ namespace AdvancedScada.IODriver
                         }
                         break;
                     case DataTypes.Byte:
+                        lock (DriverAdapter)
+                        {
+                            byte[] byteRs = DriverAdapter.Read<byte>($"{db.StartAddress}", db.Length);
+                            if (byteRs == null) return;
+                            if (byteRs.Length > db.Tags.Count) return;
+                            for (int j = 0; j < db.Tags.Count; j++)
+                            {
+                                db.Tags[j].Value = byteRs[j];
+                                db.Tags[j].TimeSpan = DateTime.Now;
+                            }
+                        }
                         break;
                     case DataTypes.Short:
                         lock (DriverAdapter)
                         {
-                            short[] IntRs = DriverAdapter.Read<Int16>($"{db.StartAddress}", db.Length);
+                            short[] IntRs = DriverAdapter.Read<short>($"{db.StartAddress}", db.Length);
                             if (IntRs == null) return;
                             if (IntRs.Length > db.Tags.Count) return;
-                            for (int j = 0; j < IntRs.Length; j++)
+                            for (int j = 0; j < db.Tags.Count; j++)
                             {
-
                                 db.Tags[j].Value = IntRs[j];
-
-
                                 db.Tags[j].TimeSpan = DateTime.Now;
                             }
                         }
                         break;
                     case DataTypes.UShort:
+                        lock (DriverAdapter)
+                        {
+                            ushort[] IntRs = DriverAdapter.Read<ushort>($"{db.StartAddress}", db.Length);
+                            if (IntRs == null) return;
+                            if (IntRs.Length > db.Tags.Count) return;
+                            for (int j = 0; j < db.Tags.Count; j++)
+                            {
+                                db.Tags[j].Value = IntRs[j];
+                                db.Tags[j].TimeSpan = DateTime.Now;
+                            }
+                        }
                         break;
                     case DataTypes.Int:
                         lock (DriverAdapter)
                         {
-                            int[] DIntRs = DriverAdapter.Read<Int32>(string.Format("{0}", db.StartAddress), db.Length);
+                            int[] DIntRs = DriverAdapter.Read<int>(string.Format("{0}", db.StartAddress), db.Length);
                             if (DIntRs == null) return;
                             if (DIntRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < DIntRs.Length; j++)
@@ -577,7 +555,6 @@ namespace AdvancedScada.IODriver
                             {
 
                                 db.Tags[j].Value = wdRs[j];
-
                                 db.Tags[j].TimeSpan = DateTime.Now;
                             }
                         }
@@ -595,6 +572,16 @@ namespace AdvancedScada.IODriver
                         }
                         break;
                     case DataTypes.ULong:
+                        lock (DriverAdapter)
+                        {
+                            ulong[] dwRs = DriverAdapter.Read<ulong>(string.Format("{0}", db.StartAddress), db.Length);
+                            if (dwRs == null) return;
+                            for (int j = 0; j < dwRs.Length; j++)
+                            {
+                                db.Tags[j].Value = dwRs[j];
+                                db.Tags[j].TimeSpan = DateTime.Now;
+                            }
+                        }
                         break;
                     case DataTypes.Float:
                         lock (DriverAdapter)
@@ -673,19 +660,21 @@ namespace AdvancedScada.IODriver
                         baseAddress = db.StartAddress * 8;
                         break;
                 }
-
+                SendDone.WaitOne(-1);
                 switch (db.DataType)
                 {
                     case DataTypes.BitOnByte:
                     case DataTypes.BitOnWord:
-                        var bitArys2 = DriverAdapter.Read<bool>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", (ushort)(2 * db.Length));
-                        if (bitArys2 == null || bitArys2.Length == 0) return;
-                        if (bitArys2.Length > db.Tags.Count) return;
-
-                        for (var j = 0; j <= db.Tags.Count - 1; j++)
+                        lock (DriverAdapter)
                         {
-                            db.Tags[j].Value = bitArys2[j];
-                            db.Tags[j].TimeSpan = DateTime.Now;
+                            var bitArys2 = DriverAdapter.Read<bool>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", (ushort)(2 * db.Length));
+                            if (bitArys2 == null || bitArys2.Length == 0) return;
+                            if (bitArys2.Length > db.Tags.Count) return;
+                            for (var j = 0; j <= db.Tags.Count - 1; j++)
+                            {
+                                db.Tags[j].Value = bitArys2[j];
+                                db.Tags[j].TimeSpan = DateTime.Now;
+                            }
                         }
                         break;
                     case DataTypes.Bit:
@@ -698,50 +687,37 @@ namespace AdvancedScada.IODriver
 
                             }
                             else
-                            {
-                                if (db.Length > 1)
-                                {
-                                    bitArys = DriverAdapter.Read<bool>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", (ushort)(2 * db.Length));
-                                }
-                                else
-                                {
-                                    bitArys = DriverAdapter.ReadSingle($"{db.MemoryType}{db.StartAddress}", (ushort)(db.Length));
-                                }
-
+                            { 
+                              bitArys = DriverAdapter.ReadSingle($"{db.MemoryType}{db.StartAddress}", (ushort)(db.Length));
                             }
                             if (bitArys == null || bitArys.Length == 0) return;
                             if (bitArys.Length > db.Tags.Count) return;
-
                             for (var j = 0; j <= db.Tags.Count - 1; j++)
                             {
                                 db.Tags[j].Value = bitArys[j];
                                 db.Tags[j].TimeSpan = DateTime.Now;
                             }
                         }
-
                         break;
                     case DataTypes.Byte:
                         lock (DriverAdapter)
                         {
                             byte[] bitArys = DriverAdapter.Read<byte>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", (ushort)(2 * db.Length));
                             if (bitArys == null || bitArys.Length == 0) return;
-                            if (bitArys.Length > db.Tags.Count)
-                                return;
+                            if (bitArys.Length > db.Tags.Count) return;
                             for (var j = 0; j <= db.Tags.Count - 1; j++)
                             {
                                 db.Tags[j].Value = bitArys[j];
                                 db.Tags[j].TimeSpan = DateTime.Now;
                             }
                         }
-
                         break;
                     case DataTypes.Short:
                         lock (DriverAdapter)
                         {
                             short[] IntRs = DriverAdapter.Read<short>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
                             if (IntRs == null || IntRs.Length == 0) return;
-                            if (IntRs.Length > db.Tags.Count)
-                                return;
+                            if (IntRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < IntRs.Length; j++)
                             {
                                 db.Tags[j].Value = IntRs[j];
@@ -754,23 +730,20 @@ namespace AdvancedScada.IODriver
                         {
                             ushort[] ushortArys = DriverAdapter.Read<ushort>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
                             if (ushortArys == null || ushortArys.Length == 0) return;
-                            if (ushortArys.Length > db.Tags.Count)
-                                return;
+                            if (ushortArys.Length > db.Tags.Count) return;
                             for (var j = 0; j <= db.Tags.Count - 1; j++)
                             {
                                 db.Tags[j].Value = ushortArys[j];
                                 db.Tags[j].TimeSpan = DateTime.Now;
                             }
                         }
-
                         break;
                     case DataTypes.Int:
                         lock (DriverAdapter)
                         {
                             int[] DIntRs = DriverAdapter.Read<int>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
                             if (DIntRs == null || DIntRs.Length == 0) return;
-                            if (DIntRs.Length > db.Tags.Count)
-                                return;
+                            if (DIntRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < DIntRs.Length; j++)
                             {
                                 db.Tags[j].Value = DIntRs[j];
@@ -783,8 +756,7 @@ namespace AdvancedScada.IODriver
                         {
                             var wdRs = DriverAdapter.Read<uint>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
                             if (wdRs == null || wdRs.Length == 0) return;
-                            if (wdRs.Length > db.Tags.Count)
-                                return;
+                            if (wdRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < db.Tags.Count; j++)
                             {
                                 db.Tags[j].Value = wdRs[j];
@@ -797,8 +769,7 @@ namespace AdvancedScada.IODriver
                         {
                             long[] dwRs = DriverAdapter.Read<long>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
                             if (dwRs == null || dwRs.Length == 0) return;
-                            if (dwRs.Length > db.Tags.Count)
-                                return;
+                            if (dwRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < dwRs.Length; j++)
                             {
                                 db.Tags[j].Value = dwRs[j];
@@ -811,8 +782,7 @@ namespace AdvancedScada.IODriver
                         {
                             ulong[] dwRs = DriverAdapter.Read<ulong>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
                             if (dwRs == null || dwRs.Length == 0) return;
-                            if (dwRs.Length > db.Tags.Count)
-                                return;
+                            if (dwRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < dwRs.Length; j++)
                             {
                                 db.Tags[j].Value = dwRs[j];
@@ -825,8 +795,7 @@ namespace AdvancedScada.IODriver
                         {
                             float[] rl1Rs = DriverAdapter.Read<float>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
                             if (rl1Rs == null || rl1Rs.Length == 0) return;
-                            if (rl1Rs.Length > db.Tags.Count)
-                                return;
+                            if (rl1Rs.Length > db.Tags.Count) return;
                             for (int j = 0; j < rl1Rs.Length; j++)
                             {
                                 db.Tags[j].Value = rl1Rs[j];
@@ -839,8 +808,7 @@ namespace AdvancedScada.IODriver
                         {
                             double[] rl2Rs = DriverAdapter.Read<double>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
                             if (rl2Rs == null || rl2Rs.Length == 0) return;
-                            if (rl2Rs.Length > db.Tags.Count)
-                                return;
+                            if (rl2Rs.Length > db.Tags.Count) return;
                             for (int j = 0; j < rl2Rs.Length; j++)
                             {
                                 db.Tags[j].Value = rl2Rs[j];
@@ -858,7 +826,6 @@ namespace AdvancedScada.IODriver
             catch (Exception ex)
             {
                 Disconnect();
-                if (ex.Message == "Hex Character Count Not Even") return;
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
 
@@ -866,13 +833,13 @@ namespace AdvancedScada.IODriver
 
         #endregion
         #region Write All
-        public int write(RequestWrite data)
+
+
+        public void WriteTag(string tagName, dynamic value)
         {
-            var tagName = data.tagName;
-            var value = data.value;
             try
             {
-                //SendDone.Reset();
+                SendDone.Reset();
                 string[] ary = tagName.Split('.');
                 string tagDevice = string.Format("{0}.{1}", ary[0], ary[1]);
                 foreach (Channel ch in Channels)
@@ -931,7 +898,7 @@ namespace AdvancedScada.IODriver
                                     break;
                             }
 
-                            if (DriverAdapter == null) return 0;
+                            if (DriverAdapter == null) return;
                             lock (DriverAdapter)
                                 switch (TagCollection.Tags[tagName].DataType)
                                 {
@@ -990,19 +957,10 @@ namespace AdvancedScada.IODriver
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
-
-            return 1;
-        }
-        public void WriteTag(string tagName, dynamic value)
-        {
-            RequestWrite request = new RequestWrite()
+            finally
             {
-                tagName = tagName,
-                value = value
-
-            };
-            RequestWriteToClient.Enqueue(request);
-
+                SendDone.Set();
+            }
         }
 
         #endregion

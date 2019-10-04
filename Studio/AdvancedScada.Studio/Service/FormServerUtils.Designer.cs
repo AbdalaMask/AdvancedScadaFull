@@ -119,7 +119,6 @@
             this.DGServerUtils.Name = "DGServerUtils";
             this.DGServerUtils.Size = new System.Drawing.Size(693, 325);
             this.DGServerUtils.TabIndex = 1;
-            this.DGServerUtils.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGServerUtils_CellContentClick);
             // 
             // ColDateTime
             // 

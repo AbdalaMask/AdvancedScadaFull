@@ -129,11 +129,7 @@ namespace AdvancedScada.Studio.Service
         {
             try
             {
-
-
-
-                XCollection.EventChannelCount += ServiceBase_eventChannelCount;
-
+                EventChannelCount += ServiceBase_eventChannelCount;
             }
             catch (Exception ex)
             {
@@ -176,11 +172,6 @@ namespace AdvancedScada.Studio.Service
         {
 
             txtStatus.Text = "The Server is running";
-        }
-
-        private void DGServerUtils_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }
