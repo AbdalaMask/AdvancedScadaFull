@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HslControls">
+    <Reference Include="HslControls, Version=2.2.3.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\HslControls.2.2.3\lib\net45\HslControls.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Drawing">

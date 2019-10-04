@@ -38,6 +38,9 @@
     <ApplicationIcon>CPU.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HslControls">
+      <HintPath>..\..\packages\HslControls.2.2.3\lib\net45\HslControls.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />

@@ -350,12 +350,12 @@ namespace HslCommunication.Profinet.LSIS
             return OperateResult.CreateSuccessResult(sb.ToString());
         }
         /// <summary>
-        /// AnalysisAddress IsRead PLC XGB
+        /// AnalysisAddress Write PLC XGB
         /// </summary>
         /// <param name="address"></param>
         /// <param name="IsRead"></param>
         /// <returns></returns>
-        public static OperateResult<string> AnalysisAddress(string address, bool IsRead)
+        public static OperateResult<string> AnalysisAddressWrite(string address, bool IsRead)
         {
             // P,M,L,K,F,T
             // P,M,L,K,F,T,C,D,S
@@ -525,7 +525,7 @@ namespace HslCommunication.Profinet.LSIS
                 case "XGB_IEC":
                     break;
                 case "XGB":
-                    analysisResult = AnalysisAddress(address, false);
+                    analysisResult = AnalysisAddressWrite(address, false);
                     break;
                 default:
                     break;

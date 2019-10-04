@@ -60,5 +60,10 @@ namespace AdvancedScada.WPF.Scada
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            t.PLCAddressValue = "Ch1.PLC1.DataBlock1.TAG00005";
+        }
     }
 }

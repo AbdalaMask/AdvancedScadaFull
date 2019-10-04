@@ -6,8 +6,9 @@
              xmlns:local="clr-namespace:AdvancedScada.WPF.HMIControls.HslControl.TankAll"
              xmlns:hsl="clr-namespace:HslControls.WPF;assembly=HslControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="450" d:DesignWidth="200"  Loaded="UserControl_Loaded">
+           <hsl:HslBottle x:Name="Bottle"   Value="{Binding Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:HMIBottle}}}"/>
+
+
+
 </UserControl>
