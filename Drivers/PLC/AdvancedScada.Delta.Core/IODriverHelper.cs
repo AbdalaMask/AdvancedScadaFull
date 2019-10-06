@@ -17,9 +17,9 @@ namespace AdvancedScada.Delta.Core
         public static readonly ManualResetEvent SendDone = new ManualResetEvent(true);
         public static List<Channel> Channels = new List<Channel>();
         //==================================Delta===================================================
-        private static Dictionary<string, DeltaTCPMaster> Deltambe = null;
-        private static Dictionary<string, DeltaRTUMaster> Deltartu = null;
-        private static Dictionary<string, DeltaASCIIMaster> Deltaascii = null;
+        private static Dictionary<string, DeltaTCPMaster> Deltambe = new Dictionary<string, DeltaTCPMaster>();
+        private static Dictionary<string, DeltaRTUMaster> Deltartu = new Dictionary<string, DeltaRTUMaster>();
+        private static Dictionary<string, DeltaASCIIMaster> Deltaascii = new Dictionary<string, DeltaASCIIMaster>();
 
 
         private static bool IsConnected;
@@ -29,12 +29,7 @@ namespace AdvancedScada.Delta.Core
         public string Name => "Delta";
         public void InitializeService(Channel chns)
         {
-            //===============================================================
-            Deltambe = new Dictionary<string, DeltaTCPMaster>();
-            Deltartu = new Dictionary<string, DeltaRTUMaster>();
-            Deltaascii = new Dictionary<string, DeltaASCIIMaster>();
-            //===============================================================
-
+            
             try
             {
 
@@ -43,17 +38,16 @@ namespace AdvancedScada.Delta.Core
             if (Channels == null) return;
                 Channels.Add(chns);
                
-                foreach (Channel ch in Channels)
-                {
+               
                     IDriverAdapter DriverAdapter = null;
-                    foreach (var dv in ch.Devices)
+                    foreach (var dv in chns.Devices)
                     {
                         try
                         {
-                            switch (ch.ConnectionType)
+                            switch (chns.ConnectionType)
                             {
                                 case "SerialPort":
-                                    var dis = (DISerialPort)ch;
+                                    var dis = (DISerialPort)chns;
                                     var sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
                                     {
                                         Handshake = dis.Handshake
@@ -63,20 +57,20 @@ namespace AdvancedScada.Delta.Core
                                     {
                                         case "RTU":
                                             DriverAdapter = new DeltaRTUMaster(dv.SlaveId, sp);
-                                            Deltartu.Add(ch.ChannelName, (DeltaRTUMaster)DriverAdapter);
+                                            Deltartu.Add(chns.ChannelName, (DeltaRTUMaster)DriverAdapter);
                                             break;
                                         case "ASCII":
                                             DriverAdapter = new DeltaASCIIMaster(dv.SlaveId, sp);
-                                            Deltaascii.Add(ch.ChannelName, (DeltaASCIIMaster)DriverAdapter);
+                                            Deltaascii.Add(chns.ChannelName, (DeltaASCIIMaster)DriverAdapter);
                                             break;
                                     }
                                     break;
                                 case "Ethernet":
-                                    var die = (DIEthernet)ch;
+                                    var die = (DIEthernet)chns;
 
 
                                     DriverAdapter = new DeltaTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
-                                    Deltambe.Add(ch.ChannelName, (DeltaTCPMaster)DriverAdapter);
+                                    Deltambe.Add(chns.ChannelName, (DeltaTCPMaster)DriverAdapter);
 
 
                                     break;
@@ -93,12 +87,12 @@ namespace AdvancedScada.Delta.Core
                             foreach (var tg in db.Tags)
                             {
                                 TagCollection.Tags.Add(
-                                    $"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
+                                    $"{chns.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
 
                             }
                         }
                     }
-                }
+                 
 
             }
             catch (Exception ex)

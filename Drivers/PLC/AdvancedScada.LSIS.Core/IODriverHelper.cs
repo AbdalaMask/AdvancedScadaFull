@@ -17,8 +17,8 @@ namespace AdvancedScada.LSIS.Core
         public static List<Channel> Channels = new List<Channel>();
 
         //==================================LS===================================================
-        private static Dictionary<string, LS_CNET> cnet = null;
-        private static Dictionary<string, LS_FENET> FENET = null;
+        private static Dictionary<string, LS_CNET> cnet = new Dictionary<string, LS_CNET>();
+        private static Dictionary<string, LS_FENET> FENET = new Dictionary<string, LS_FENET>();
 
         private static bool IsConnected;
         private static int COUNTER;
@@ -26,25 +26,18 @@ namespace AdvancedScada.LSIS.Core
 
         #region IServiceDriver
         public string Name => "LSIS";
-        public void InitializeService(Channel chns)
+        public void InitializeService(Channel ch)
         {
-
-            //==================================================================
-            cnet = new Dictionary<string, LS_CNET>();
-            FENET = new Dictionary<string, LS_FENET>();
-            //=================================================================
-
-
+ 
             try
             {
 
                 //=================================================================
 
             if (Channels == null) return;
-                Channels.Add(chns);
+                Channels.Add(ch);
               
-                foreach (Channel ch in Channels)
-                {
+                
                     IDriverAdapter DriverAdapter = null;
                     foreach (var dv in ch.Devices)
                     {
@@ -87,7 +80,7 @@ namespace AdvancedScada.LSIS.Core
                             }
                         }
                     }
-                }
+                 
 
             }
             catch (Exception ex)

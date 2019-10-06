@@ -17,25 +17,19 @@ namespace AdvancedScada.Modbus.Core
         public static List<Channel> Channels = new List<Channel>();
 
         //==================================Modbus===================================================
-        private static Dictionary<string, ModbusTCPMaster> mbe = null;
-        private static Dictionary<string, ModbusRTUMaster> rtu = null;
-        private static Dictionary<string, ModbusASCIIMaster> ascii = null;
+        private static Dictionary<string, ModbusTCPMaster> mbe = new Dictionary<string, ModbusTCPMaster>();
+        private static Dictionary<string, ModbusRTUMaster> rtu = new Dictionary<string, ModbusRTUMaster>();
+        private static Dictionary<string, ModbusASCIIMaster> ascii = new Dictionary<string, ModbusASCIIMaster>();
 
 
         private static bool IsConnected;
         private static int COUNTER;
          #region IServiceDriver
         public string Name => "Modbus";
-        public void InitializeService(Channel chns)
+        public void InitializeService(Channel ch)
         {
 
-            //===============================================================
-            mbe = new Dictionary<string, ModbusTCPMaster>();
-            rtu = new Dictionary<string, ModbusRTUMaster>();
-            ascii = new Dictionary<string, ModbusASCIIMaster>();
-
-
-
+            
             try
             {
 
@@ -44,9 +38,7 @@ namespace AdvancedScada.Modbus.Core
 
              
                 if (Channels == null) return;
-                Channels.Add(chns);
-                foreach (Channel ch in Channels)
-                {
+                Channels.Add(ch);
                     IDriverAdapter DriverAdapter = null;
                     foreach (var dv in ch.Devices)
                     {
@@ -77,8 +69,6 @@ namespace AdvancedScada.Modbus.Core
                                     break;
                                 case "Ethernet":
                                     var die = (DIEthernet)ch;
-
-
                                     DriverAdapter = new ModbusTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
                                     mbe.Add(ch.ChannelName, (ModbusTCPMaster)DriverAdapter);
                                     break;
@@ -100,7 +90,7 @@ namespace AdvancedScada.Modbus.Core
                             }
                         }
                     }
-                }
+                
 
             }
             catch (Exception ex)

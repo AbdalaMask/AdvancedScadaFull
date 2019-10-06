@@ -1,5 +1,6 @@
 ﻿using AdvancedScada.BaseService.Web;
 using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IBaseService;
 using AdvancedScada.IBaseService.Common;
 using AdvancedScada.Management.BLManager;
@@ -97,14 +98,20 @@ namespace AdvancedScada.BaseService
                 TagCollection.Tags.Clear();
                 var channels = objChannelManager.GetChannels(xmlFile);
                 var objFunctions = GetIODriver.GetFunctions();
+                ////Sort.
+                channels.Sort(delegate (Channel x, Channel y)
+                {
+                    return x.ChannelTypes.CompareTo(y.ChannelTypes);
+                });
                 foreach (var item in channels)
                 {
+                   
                     driverHelper = GetDriver(item.ChannelTypes);
                     if (driverHelper != null)
                         driverHelper.InitializeService(item);
                 }
                 foreach (var item in channels)
-                {
+                {  
                     _SerialNo = (ushort)(_SerialNo++ % 255 + 1);
                     driverHelper = GetDriver(item.ChannelTypes);
 

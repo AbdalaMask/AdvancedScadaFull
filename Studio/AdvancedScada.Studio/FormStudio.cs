@@ -331,7 +331,7 @@ namespace AdvancedScada.Studio
             kryptonDockingManager.ManageFloating(this);
 
             // Add initial docking pages
-            kryptonDockingManager.AddAutoHiddenGroup("Control", DockingEdge.Bottom, new KryptonPage[] { NewInput() });
+            kryptonDockingManager.AddDockspace("Control", DockingEdge.Bottom, new KryptonPage[] { NewInput() });
 
 
 
