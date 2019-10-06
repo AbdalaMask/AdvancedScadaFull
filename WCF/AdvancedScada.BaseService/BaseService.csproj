@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AdvancedScada.BaseService</RootNamespace>
     <AssemblyName>AdvancedScada.BaseService</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,10 +50,6 @@
     <ProjectReference Include="..\..\Drivers\AdvancedScada.DriverBase\DriverBase.csproj">
       <Project>{1d570e9a-e5b4-44dd-946d-9d73cfa4a535}</Project>
       <Name>DriverBase</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Drivers\AdvancedScada.IODriver\IODriver.csproj">
-      <Project>{78569a8d-4c84-4174-89d2-58d3f30acbbe}</Project>
-      <Name>IODriver</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Studio\AdvancedScada.Management\Management.csproj">
       <Project>{8feab090-6b9a-4c8d-ad4a-b5c9062152a0}</Project>

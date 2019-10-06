@@ -115,35 +115,12 @@
       <DependentUpon>SQLFormCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="DB\UtilsTableSQLite.cs" />
-    <Compile Include="Editors\XChannelForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editors\XChannelForm.Designer.cs">
-      <DependentUpon>XChannelForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Editors\XDataBlockForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editors\XDataBlockForm.Designer.cs">
-      <DependentUpon>XDataBlockForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Editors\XDeviceForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editors\XDeviceForm.Designer.cs">
-      <DependentUpon>XDeviceForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Editors\GetChannelForm.cs" />
     <Compile Include="Editors\XSelectedDrivers.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editors\XSelectedDrivers.Designer.cs">
       <DependentUpon>XSelectedDrivers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Editors\XTagForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editors\XTagForm.Designer.cs">
-      <DependentUpon>XTagForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Editors\XTagManager.cs">
       <SubType>Form</SubType>
@@ -238,20 +215,8 @@
     <EmbeddedResource Include="DB\SQL\SQLFormCreate.resx">
       <DependentUpon>SQLFormCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\XChannelForm.resx">
-      <DependentUpon>XChannelForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editors\XDataBlockForm.resx">
-      <DependentUpon>XDataBlockForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editors\XDeviceForm.resx">
-      <DependentUpon>XDeviceForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Editors\XSelectedDrivers.resx">
       <DependentUpon>XSelectedDrivers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editors\XTagForm.resx">
-      <DependentUpon>XTagForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editors\XTagManager.resx">
       <DependentUpon>XTagManager.cs</DependentUpon>

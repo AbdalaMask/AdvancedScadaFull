@@ -1,8 +1,8 @@
 ﻿using AdvancedScada.DriverBase;
 using AdvancedScada.IBaseService;
-using AdvancedScada.IODriver;
+using AdvancedScada.IBaseService.Common;
+using AdvancedScada.Management.BLManager;
 using System;
-using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading;
 using static AdvancedScada.IBaseService.Common.XCollection;
@@ -15,11 +15,20 @@ namespace AdvancedScada.BaseService
 
          private bool RUN_APPLICATION;
         public IServiceCallback EventDataChanged;
-        IODriverHelper driverHelper = new IODriverHelper();
-
+        IODriver driverHelper = null;
+        private ChannelService objChannelManager;
         public ReadService()
         {
-           
+            objChannelManager = ChannelService.GetChannelManager();
+        }
+        private IODriver GetDriver(string ChannelTypes)
+        {
+            IODriver DriverHelper = null;
+            var objFunctions = GetIODriver.GetFunctions();
+            DriverHelper =
+                       objFunctions.GetAssembly($@"\AdvancedScada.{ChannelTypes}.Core.dll",
+                           $"AdvancedScada.{ChannelTypes}.Core.IODriverHelper");
+            return DriverHelper;
         }
         public void Connect(Machine mac)
         {
@@ -47,7 +56,7 @@ namespace AdvancedScada.BaseService
                                         {
                                             if (((ICommunicationObject)EventDataChanged).State == CommunicationState.Opened)
                                             {
-                                           EventDataChanged.UpdateCollection(IODriverHelper.objConnectionState, TagCollection.Tags);
+                                           EventDataChanged.UpdateCollection(XCollection.objConnectionState, TagCollection.Tags);
                                             EventDataChanged.DataTags(TagCollection.Tags);
                                             }
 
@@ -123,9 +132,28 @@ namespace AdvancedScada.BaseService
 
         public void WriteTag(string tagName, dynamic value)
         {
+            
             try
             {
-                driverHelper?.WriteTag(tagName, value);
+                if (objChannelManager == null) return;
+               
+                    var strArrays = tagName.Split('.');
+                    var str = $"{strArrays[0]}.{strArrays[1]}";
+                    foreach (var Channels in objChannelManager.Channels)
+                    {
+                        foreach (var dv in Channels.Devices)
+                        {
+                            var bEquals = $"{Channels.ChannelName}.{dv.DeviceName}".Equals(str);
+                            if (bEquals)
+                            {
+                            driverHelper = GetDriver(Channels.ChannelTypes);
+
+                            driverHelper?.WriteTag(tagName, value);
+
+                            }
+                        }
+                    }
+                
             }
             catch (Exception ex)
             {

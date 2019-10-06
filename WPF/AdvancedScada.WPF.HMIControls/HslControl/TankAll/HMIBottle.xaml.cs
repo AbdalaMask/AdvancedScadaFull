@@ -1,20 +1,10 @@
 ﻿using AdvancedScada.DriverBase.Client;
 using AdvancedScada.WPF.HMIControls.Comm;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AdvancedScada.WPF.HMIControls.HslControl.TankAll
 {
@@ -30,7 +20,7 @@ namespace AdvancedScada.WPF.HMIControls.HslControl.TankAll
         #endregion
         public HMIBottle()
         {
-            
+
             InitializeComponent();
 
         }
@@ -52,19 +42,19 @@ namespace AdvancedScada.WPF.HMIControls.HslControl.TankAll
             }
         }
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
-        "Value", typeof(double), typeof(HMIBottle), new PropertyMetadata(0d, new PropertyChangedCallback(MoveSpeedDependencyPropertyChanged)));
+        "Value", typeof(string), typeof(HMIBottle), new PropertyMetadata("50", new PropertyChangedCallback(MoveSpeedDependencyPropertyChanged)));
 
         private static void MoveSpeedDependencyPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            
+
         }
 
         [Category("HMI")]
-        public double Value
+        public string Value
         {
             get
             {
-                return (double)base.GetValue(ValueProperty);
+                return (string)base.GetValue(ValueProperty);
             }
             set
             {
@@ -74,14 +64,14 @@ namespace AdvancedScada.WPF.HMIControls.HslControl.TankAll
 
             }
         }
-        
+
 
         private void UserControl_Initialized(object sender, EventArgs e)
         {
-           
+
         }
 
-      
+
 
         private void DisplayError(string message)
         {

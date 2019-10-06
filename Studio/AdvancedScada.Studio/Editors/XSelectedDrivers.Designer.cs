@@ -66,10 +66,6 @@
             // 
             this.cboxSelectedDrivers.DropDownWidth = 376;
             this.cboxSelectedDrivers.IntegralHeight = false;
-            this.cboxSelectedDrivers.Items.AddRange(new object[] {
-            "LSIS",
-            "Modbus",
-            "Delta"});
             this.cboxSelectedDrivers.Location = new System.Drawing.Point(95, 3);
             this.cboxSelectedDrivers.Name = "cboxSelectedDrivers";
             this.cboxSelectedDrivers.Size = new System.Drawing.Size(376, 21);

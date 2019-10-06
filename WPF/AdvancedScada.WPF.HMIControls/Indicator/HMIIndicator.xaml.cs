@@ -92,7 +92,7 @@ namespace AdvancedScada.WPF.HMIControls.Indicator
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
             try
             {
                 //* When address is changed, re-subscribe to new address

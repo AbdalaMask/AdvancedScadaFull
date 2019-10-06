@@ -228,7 +228,7 @@ namespace AdvancedScada.WPF.HMIControls.ImageAll
             {
                 DisplayError(ex.Message);
             }
-           
+
         }
         private void DisplayError(string message)
         {

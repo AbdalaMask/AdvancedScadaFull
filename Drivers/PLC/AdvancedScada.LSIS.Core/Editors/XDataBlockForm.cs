@@ -7,17 +7,13 @@ using System;
 using System.Collections.Generic;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
-namespace AdvancedScada.Studio.Editors
+namespace AdvancedScada.LSIS.Core.Editors
 {
-    public partial class XDataBlockForm : KryptonForm
+    public partial class XDataBlockForm : AdvancedScada.Management.Editors.XDataBlockForm
     {
         private int IDX;
         int TagsCount = 1;
-        private readonly Channel ch;
-        private readonly DataBlock db;
-        private readonly Device dv;
-        public EventDataBlockChanged eventDataBlockChanged = null;
-
+       
 
         public XDataBlockForm()
         {
@@ -31,45 +27,7 @@ namespace AdvancedScada.Studio.Editors
             db = dbParam;
         }
 
-        #region Modbus
-        public void AddressCreateTagModbus(DataBlock db, bool IsNew, int TagsCount = 1)
-        {
-
-            if (IsNew == false) db.Tags.Clear();
-            foreach (var item in dv.DataBlocks)
-            {
-
-                TagsCount += item.Tags.Count;
-                if (db != null)
-                {
-                    if (db.DataBlockName.Equals(item.DataBlockName)) break;
-                }
-
-            }
-            if (chkCreateTag.Checked)
-            {
-
-                for (var i = 0; i < txtAddressLength.Value; i++)
-                {
-                    var tg = new Tag()
-                    {
-                        ChannelId = int.Parse(txtChannelId.Text),
-                        DeviceId = int.Parse(txtDeviceId.Text),
-                        DataBlockId = int.Parse(txtDataBlockId.Text),
-                        TagId = i + 1,
-                        TagName = $"TAG{i + TagsCount:d5}",
-                        Address = $"{txtStartAddress.Value + i}",
-                        DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString()),
-                        Description = $"{txtDesc.Text} {i + 1}"
-                    };
-                    db.Tags.Add(tg);
-                }
-            }
-
-
-        }
-        #endregion
-
+       
         #region LSIS
         public void AddressCreateTagWord(DataBlock db, bool IsNew)
         {
@@ -188,110 +146,33 @@ namespace AdvancedScada.Studio.Editors
         }
         #endregion
 
-        #region DVP
-        public void AddressCreateTagDVP(DataBlock db, bool IsNew, int TagsCount = 1)
-        {
-            if (IsNew == false) db.Tags.Clear();
-            foreach (var item in dv.DataBlocks)
-            {
-
-                TagsCount += item.Tags.Count;
-                if (db != null)
-                {
-                    if (db.DataBlockName.Equals(item.DataBlockName)) break;
-                }
-
-            }
-            if (chkCreateTag.Checked)
-                for (var i = 0; i < txtAddressLength.Value; i++)
-                {
-                    var tg = new Tag()
-                    {
-                        TagId = i + 1,
-                        ChannelId = int.Parse(txtChannelId.Text),
-                        DeviceId = int.Parse(txtDeviceId.Text),
-                        DataBlockId = int.Parse(txtDataBlockId.Text),
-                        TagName =
-                        $"TAG{i + TagsCount:d5}",
-                        Address = $"{txtDomain.Text}{txtStartAddress.Value + i}",
-                        DataType =
-                        (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString()),
-                        Description = $"{txtDesc.Text} {i + 1}"
-                    };
-                    db.Tags.Add(tg);
-                }
-        }
-        #endregion
+     
         private void XDataBlockForm_Load(object sender, EventArgs e)
         {
-            string[] DVP = new string[5] { "M", "Y", "X", "D", "T" };
+           
             try
             {
                 txtDeviceName.Text = dv.DeviceName;
                 txtChannelName.Text = ch.ChannelName;
                 txtChannelId.Text = ch.ChannelId.ToString();
                 txtDeviceId.Text = dv.DeviceId.ToString();
-                CboxTypeOfRead.SelectedIndex = 0;
+                
                 cboxDataType.DataSource = System.Enum.GetNames(typeof(DataTypes));
                 if (db == null)
                 {
-                    switch (ch.ChannelTypes)
-
-                    {
-                        case "Delta":
-                            chkX10.Visible = false;
-                            txtDomain.Items.Clear();
-                            txtDomain.Items.AddRange(DVP);
-                            txtPrefix.Text = "txtPrefix :";
-                            GLSIS.Visible = false;
-                            break;
-                        case "LSIS":
-                            lblTypeOfRead.Visible = false;
-                            CboxTypeOfRead.Visible = false;
-
-                            break;
-                        case "Modbus":
-                            
-                            txtDomain.Items.Clear();
-                            txtPrefix.Text = "txtPrefix :";
-                            GLSIS.Visible = false;
-                            break;
-                        default:
-                            break;
-                    }
+                  
                     Text = "Add DataBlock   " + ch.ChannelTypes;
                     txtDataBlockId.Text = Convert.ToString(dv.DataBlocks.Count + 1);
                     txtDataBlock.Text = "DataBlock" + Convert.ToString(dv.DataBlocks.Count + 1);
                 }
                 else
                 {
-                    switch (ch.ChannelTypes)
-
-                    {
-                        case "Delta":
-                           
-                            txtDomain.Items.Clear();
-                            txtDomain.Items.AddRange(DVP);
-                            txtPrefix.Text = "txtPrefix :";
-                            GLSIS.Visible = false;
-                            break;
-                        case "LSIS":
-                            lblTypeOfRead.Visible = false;
-                            CboxTypeOfRead.Visible = false;
-                            break;
-                        case "Modbus":
-                            txtDomain.Items.Clear();
-                            txtPrefix.Text = "txtPrefix :";
-                            GLSIS.Visible = false;
-                            break;
-                        default:
-                            break;
-                    }
+                   
                     Text = "Edit DataBlock    " + ch.ChannelTypes;
                     txtChannelId.Text = db.ChannelId.ToString();
                     txtDeviceId.Text = db.DeviceId.ToString();
                     txtDataBlock.Text = db.DataBlockName;
-                    CboxTypeOfRead.Text = db.TypeOfRead;
+                  
                     txtStartAddress.Value = db.StartAddress;
                     txtAddressLength.Value = db.Length;
                     txtDomain.Text = db.MemoryType;
@@ -410,10 +291,7 @@ namespace AdvancedScada.Studio.Editors
             {
                 var Address = 0;
                 var Save_BufAddr = 0;
-                switch (ch.ChannelTypes)
-
-                {
-                    case "LSIS":
+               
 
                         switch (cboxDataType.Text)
                         {
@@ -425,14 +303,7 @@ namespace AdvancedScada.Studio.Editors
                                 break;
                         }
                         Address = chkX10.Checked ? 10 * (int)txtStartAddress.Value : (int)txtStartAddress.Value;
-                        break;
-                    case "Modbus":
-
-                        break;
-                    default:
-                        break;
-                }
-
+                    
 
 
 
@@ -458,7 +329,7 @@ namespace AdvancedScada.Studio.Editors
                             DeviceId = dv.DeviceId,
                             DataBlockId = dv.DataBlocks.Count + 1,
                             DataBlockName = txtDataBlock.Text,
-                            TypeOfRead = CboxTypeOfRead.Text,
+                            TypeOfRead = "",
                             StartAddress = (ushort)txtStartAddress.Value,
                             MemoryType = txtDomain.Text,
                             Description = txtDesc.Text,
@@ -468,13 +339,7 @@ namespace AdvancedScada.Studio.Editors
                             Tags = new List<Tag>()
                         };
 
-                        switch (ch.ChannelTypes)
-
-                        {
-                            case "Delta":
-                                AddressCreateTagDVP(dbNew, true, TagsCount);
-                                break;
-                            case "LSIS":
+                       
                                 switch (cboxDataType.Text)
                                 {
                                     case "Bit":
@@ -486,13 +351,7 @@ namespace AdvancedScada.Studio.Editors
                                         if (chkCreateTag.Checked) AddressCreateTagWord(dbNew, true);
                                         break;
                                 }
-                                break;
-                            case "Modbus":
-                                AddressCreateTagModbus(dbNew, true, TagsCount);
-                                break;
-                            default:
-                                break;
-                        }
+                          
 
                         eventDataBlockChanged?.Invoke(dbNew, true);
                         Close();
@@ -503,7 +362,7 @@ namespace AdvancedScada.Studio.Editors
                         db.DeviceId = db.DeviceId;
                         db.DataBlockId = int.Parse(txtDataBlockId.Text);
                         db.DataBlockName = txtDataBlock.Text;
-                        db.TypeOfRead = CboxTypeOfRead.Text;
+                        db.TypeOfRead = "";
                         db.StartAddress = (ushort)txtStartAddress.Value;
                         db.MemoryType = txtDomain.Text;
                         db.Length = (ushort)txtAddressLength.Value;
@@ -511,13 +370,7 @@ namespace AdvancedScada.Studio.Editors
                         db.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", cboxDataType.SelectedItem));
                         db.IsArray = chkIsArray.Checked;
 
-                        switch (ch.ChannelTypes)
-
-                        {
-                            case "Delta":
-                                AddressCreateTagDVP(db, false, TagsCount);
-                                break;
-                            case "LSIS":
+                     
                                 switch (cboxDataType.Text)
                                 {
                                     case "Bit":
@@ -529,14 +382,7 @@ namespace AdvancedScada.Studio.Editors
                                         if (chkCreateTag.Checked) AddressCreateTagWord(db, false);
                                         break;
                                 }
-                                break;
-                            case "Modbus":
-                                AddressCreateTagModbus(db, false);
-                                break;
-                            default:
-                                break;
-                        }
-
+                            
                         eventDataBlockChanged?.Invoke(db, false);
                         Close();
                     }

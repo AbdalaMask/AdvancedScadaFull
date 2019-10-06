@@ -2,6 +2,8 @@
 using ComponentFactory.Krypton.Toolkit;
 using Microsoft.Win32;
 using System;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace AdvancedScada.Studio.Editors
@@ -14,10 +16,26 @@ namespace AdvancedScada.Studio.Editors
         {
             InitializeComponent();
         }
-
+        public void LoadPlug()
+        {
+            DirectoryInfo di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+            foreach (FileInfo fi in di.GetFiles("AdvancedScada.*.Core.dll"))
+            {
+                Assembly lib = Assembly.LoadFrom(fi.FullName);
+                foreach (Type t in lib.GetExportedTypes())
+                {
+                    if (t.GetInterface(typeof(AdvancedScada.DriverBase.IODriver).FullName) != null)
+                    {
+                        AdvancedScada.DriverBase.IODriver plug = (AdvancedScada.DriverBase.IODriver)Activator.CreateInstance(t);
+                        cboxSelectedDrivers.Items.Add(plug.Name);
+                    }
+                }
+            }
+        }
         private void XSelectedDrivers_Load(object sender, EventArgs e)
         {
-
+            cboxSelectedDrivers.Items.Clear();
+            LoadPlug();
         }
 
         private void btnOK_Click(object sender, EventArgs e)

@@ -34,12 +34,14 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseBinding.cs" />
     <Compile Include="Common\Extension.cs" />
     <Compile Include="Common\MyEvents.cs" />
     <Compile Include="Common\XCollection.cs" />
+    <Compile Include="GetIODriver.cs" />
     <Compile Include="IReadService.cs" />
     <Compile Include="IReadServiceWeb.cs" />
     <Compile Include="IServiceCallback.cs" />

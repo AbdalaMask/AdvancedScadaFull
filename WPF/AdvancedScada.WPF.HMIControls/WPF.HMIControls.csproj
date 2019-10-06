@@ -150,6 +150,7 @@
     <Compile Include="KeyPad\VirtualKeyboard.xaml.cs">
       <DependentUpon>VirtualKeyboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Led\LedControl.cs" />
     <Compile Include="Motor\HMIMotor.cs" />
     <Compile Include="Motor\HMIVacuumPump.xaml.cs">
       <DependentUpon>HMIVacuumPump.xaml</DependentUpon>

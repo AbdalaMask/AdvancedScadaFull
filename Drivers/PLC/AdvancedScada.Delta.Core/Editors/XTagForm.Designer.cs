@@ -1,4 +1,4 @@
-﻿namespace AdvancedScada.Studio.Editors
+﻿namespace AdvancedScada.Delta.Core.Editors
 {
     partial class XTagForm
     {
@@ -296,7 +296,7 @@
             this.kryptonHeaderGroup1.Size = new System.Drawing.Size(526, 253);
             this.kryptonHeaderGroup1.TabIndex = 5;
             this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Tag";
-            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddTag;
+            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::AdvancedScada.Delta.Core.Properties.Resources.AddTag;
             // 
             // txtDesc
             // 

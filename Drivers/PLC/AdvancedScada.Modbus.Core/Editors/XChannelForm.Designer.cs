@@ -1,6 +1,6 @@
 ﻿using AdvancedScada.Utils.Net;
 
-namespace AdvancedScada.Studio.Editors
+namespace AdvancedScada.Modbus.Core.Editors
 {
     partial class XChannelForm
     {
@@ -35,11 +35,9 @@ namespace AdvancedScada.Studio.Editors
             this.TabControlLSIS = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.tabPageChannel = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.txtDesc = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.cboxModel = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.cboxConnType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.txtChannelName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.tabPageSerialPort = new ComponentFactory.Krypton.Navigator.KryptonPage();
@@ -59,11 +57,8 @@ namespace AdvancedScada.Studio.Editors
             this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.tabPageEthernet = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.kryptonLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cboxModeNet = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.txtSlot = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
+            this.txtIPAddress = new AdvancedScada.Utils.Net.IPAddressText();
             this.txtPort = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
-            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonHeaderGroup4 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
@@ -71,12 +66,10 @@ namespace AdvancedScada.Studio.Editors
             this.btnBlack = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnNext = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtIPAddress = new AdvancedScada.Utils.Net.IPAddressText();
             ((System.ComponentModel.ISupportInitialize)(this.TabControlLSIS)).BeginInit();
             this.TabControlLSIS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabPageChannel)).BeginInit();
             this.tabPageChannel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cboxModel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboxConnType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabPageSerialPort)).BeginInit();
             this.tabPageSerialPort.SuspendLayout();
@@ -93,7 +86,6 @@ namespace AdvancedScada.Studio.Editors
             ((System.ComponentModel.ISupportInitialize)(this.cboxPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabPageEthernet)).BeginInit();
             this.tabPageEthernet.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cboxModeNet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup4.Panel)).BeginInit();
             this.kryptonHeaderGroup4.Panel.SuspendLayout();
@@ -120,11 +112,9 @@ namespace AdvancedScada.Studio.Editors
             // 
             this.tabPageChannel.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.tabPageChannel.Controls.Add(this.txtDesc);
-            this.tabPageChannel.Controls.Add(this.cboxModel);
             this.tabPageChannel.Controls.Add(this.cboxConnType);
             this.tabPageChannel.Controls.Add(this.txtChannelName);
             this.tabPageChannel.Controls.Add(this.kryptonLabel4);
-            this.tabPageChannel.Controls.Add(this.kryptonLabel3);
             this.tabPageChannel.Controls.Add(this.kryptonLabel2);
             this.tabPageChannel.Controls.Add(this.kryptonLabel1);
             this.tabPageChannel.Flags = 65534;
@@ -139,23 +129,12 @@ namespace AdvancedScada.Studio.Editors
             // 
             // txtDesc
             // 
-            this.txtDesc.Location = new System.Drawing.Point(121, 119);
+            this.txtDesc.Location = new System.Drawing.Point(121, 89);
             this.txtDesc.Margin = new System.Windows.Forms.Padding(4);
             this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(370, 145);
             this.txtDesc.TabIndex = 23;
-            // 
-            // cboxModel
-            // 
-            this.cboxModel.DropDownWidth = 163;
-            this.cboxModel.IntegralHeight = false;
-            this.cboxModel.Location = new System.Drawing.Point(121, 81);
-            this.cboxModel.Margin = new System.Windows.Forms.Padding(4);
-            this.cboxModel.Name = "cboxModel";
-            this.cboxModel.Size = new System.Drawing.Size(247, 21);
-            this.cboxModel.StateCommon.ComboBox.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
-            this.cboxModel.TabIndex = 22;
             // 
             // cboxConnType
             // 
@@ -182,21 +161,12 @@ namespace AdvancedScada.Studio.Editors
             // 
             // kryptonLabel4
             // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(16, 122);
+            this.kryptonLabel4.Location = new System.Drawing.Point(16, 92);
             this.kryptonLabel4.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonLabel4.Name = "kryptonLabel4";
             this.kryptonLabel4.Size = new System.Drawing.Size(75, 20);
             this.kryptonLabel4.TabIndex = 19;
             this.kryptonLabel4.Values.Text = "Description:";
-            // 
-            // kryptonLabel3
-            // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(18, 80);
-            this.kryptonLabel3.Margin = new System.Windows.Forms.Padding(4);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(36, 20);
-            this.kryptonLabel3.TabIndex = 18;
-            this.kryptonLabel3.Values.Text = "CPU:";
             // 
             // kryptonLabel2
             // 
@@ -257,7 +227,7 @@ namespace AdvancedScada.Studio.Editors
             this.kryptonHeaderGroup1.Size = new System.Drawing.Size(498, 271);
             this.kryptonHeaderGroup1.TabIndex = 1;
             this.kryptonHeaderGroup1.ValuesPrimary.Heading = "SerialPort";
-            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddChannel;
+            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::AdvancedScada.Modbus.Core.Properties.Resources.AddChannel;
             this.kryptonHeaderGroup1.ValuesSecondary.Heading = "";
             // 
             // kryptonLabel15
@@ -274,14 +244,12 @@ namespace AdvancedScada.Studio.Editors
             this.cboxModeSP.IntegralHeight = false;
             this.cboxModeSP.Items.AddRange(new object[] {
             "RTU",
-            "ASCII",
-            "CNET"});
+            "ASCII"});
             this.cboxModeSP.Location = new System.Drawing.Point(319, 14);
             this.cboxModeSP.Name = "cboxModeSP";
             this.cboxModeSP.Size = new System.Drawing.Size(121, 21);
             this.cboxModeSP.StateCommon.ComboBox.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.cboxModeSP.TabIndex = 12;
-            this.cboxModeSP.Text = "CNET";
             // 
             // cboxHandshake
             // 
@@ -410,12 +378,8 @@ namespace AdvancedScada.Studio.Editors
             // tabPageEthernet
             // 
             this.tabPageEthernet.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.tabPageEthernet.Controls.Add(this.kryptonLabel14);
-            this.tabPageEthernet.Controls.Add(this.cboxModeNet);
             this.tabPageEthernet.Controls.Add(this.txtIPAddress);
-            this.tabPageEthernet.Controls.Add(this.txtSlot);
             this.tabPageEthernet.Controls.Add(this.txtPort);
-            this.tabPageEthernet.Controls.Add(this.kryptonLabel7);
             this.tabPageEthernet.Controls.Add(this.kryptonLabel6);
             this.tabPageEthernet.Controls.Add(this.kryptonLabel5);
             this.tabPageEthernet.Flags = 65534;
@@ -428,35 +392,14 @@ namespace AdvancedScada.Studio.Editors
             this.tabPageEthernet.ToolTipTitle = "Page ToolTip";
             this.tabPageEthernet.UniqueName = "BCC78D39E7E54B47709379D54EC0D2B1";
             // 
-            // kryptonLabel14
+            // txtIPAddress
             // 
-            this.kryptonLabel14.Location = new System.Drawing.Point(20, 154);
-            this.kryptonLabel14.Name = "kryptonLabel14";
-            this.kryptonLabel14.Size = new System.Drawing.Size(45, 20);
-            this.kryptonLabel14.TabIndex = 18;
-            this.kryptonLabel14.Values.Text = "Mode:";
-            // 
-            // cboxModeNet
-            // 
-            this.cboxModeNet.DropDownWidth = 88;
-            this.cboxModeNet.IntegralHeight = false;
-            this.cboxModeNet.Items.AddRange(new object[] {
-            "FENET",
-            "TCP"});
-            this.cboxModeNet.Location = new System.Drawing.Point(121, 154);
-            this.cboxModeNet.Name = "cboxModeNet";
-            this.cboxModeNet.Size = new System.Drawing.Size(88, 21);
-            this.cboxModeNet.StateCommon.ComboBox.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
-            this.cboxModeNet.TabIndex = 17;
-            this.cboxModeNet.Text = "FENET";
-            // 
-            // txtSlot
-            // 
-            this.txtSlot.Location = new System.Drawing.Point(121, 106);
-            this.txtSlot.Margin = new System.Windows.Forms.Padding(4);
-            this.txtSlot.Name = "txtSlot";
-            this.txtSlot.Size = new System.Drawing.Size(88, 22);
-            this.txtSlot.TabIndex = 15;
+            this.txtIPAddress.Location = new System.Drawing.Point(124, 21);
+            this.txtIPAddress.Margin = new System.Windows.Forms.Padding(4);
+            this.txtIPAddress.Name = "txtIPAddress";
+            this.txtIPAddress.Size = new System.Drawing.Size(189, 20);
+            this.txtIPAddress.TabIndex = 16;
+            this.txtIPAddress.Text = "127.0.0.1";
             // 
             // txtPort
             // 
@@ -471,19 +414,10 @@ namespace AdvancedScada.Studio.Editors
             this.txtPort.Size = new System.Drawing.Size(88, 22);
             this.txtPort.TabIndex = 14;
             this.txtPort.Value = new decimal(new int[] {
-            2004,
+            502,
             0,
             0,
             0});
-            // 
-            // kryptonLabel7
-            // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(20, 108);
-            this.kryptonLabel7.Margin = new System.Windows.Forms.Padding(4);
-            this.kryptonLabel7.Name = "kryptonLabel7";
-            this.kryptonLabel7.Size = new System.Drawing.Size(34, 20);
-            this.kryptonLabel7.TabIndex = 13;
-            this.kryptonLabel7.Values.Text = "Slot:";
             // 
             // kryptonLabel6
             // 
@@ -519,7 +453,7 @@ namespace AdvancedScada.Studio.Editors
             this.kryptonHeaderGroup4.Panel.Controls.Add(this.btnNext);
             this.kryptonHeaderGroup4.Size = new System.Drawing.Size(500, 54);
             this.kryptonHeaderGroup4.TabIndex = 6;
-            this.kryptonHeaderGroup4.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddChannel;
+            this.kryptonHeaderGroup4.ValuesPrimary.Image = global::AdvancedScada.Modbus.Core.Properties.Resources.AddChannel;
             this.kryptonHeaderGroup4.ValuesSecondary.Heading = "";
             // 
             // btnCancel
@@ -560,15 +494,6 @@ namespace AdvancedScada.Studio.Editors
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // txtIPAddress
-            // 
-            this.txtIPAddress.Location = new System.Drawing.Point(124, 21);
-            this.txtIPAddress.Margin = new System.Windows.Forms.Padding(4);
-            this.txtIPAddress.Name = "txtIPAddress";
-            this.txtIPAddress.Size = new System.Drawing.Size(189, 20);
-            this.txtIPAddress.TabIndex = 16;
-            this.txtIPAddress.Text = "127.0.0.1";
-            // 
             // XChannelForm
             // 
             this.AcceptButton = this.btnNext;
@@ -584,14 +509,12 @@ namespace AdvancedScada.Studio.Editors
             this.MinimumSize = new System.Drawing.Size(516, 365);
             this.Name = "XChannelForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "XChannelForm";
             this.Load += new System.EventHandler(this.XChannelForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TabControlLSIS)).EndInit();
             this.TabControlLSIS.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabPageChannel)).EndInit();
             this.tabPageChannel.ResumeLayout(false);
             this.tabPageChannel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cboxModel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboxConnType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabPageSerialPort)).EndInit();
             this.tabPageSerialPort.ResumeLayout(false);
@@ -610,7 +533,6 @@ namespace AdvancedScada.Studio.Editors
             ((System.ComponentModel.ISupportInitialize)(this.tabPageEthernet)).EndInit();
             this.tabPageEthernet.ResumeLayout(false);
             this.tabPageEthernet.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cboxModeNet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup4.Panel)).EndInit();
             this.kryptonHeaderGroup4.Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup4)).EndInit();
@@ -627,17 +549,13 @@ namespace AdvancedScada.Studio.Editors
         private ComponentFactory.Krypton.Navigator.KryptonPage tabPageEthernet;
         private ComponentFactory.Krypton.Navigator.KryptonPage tabPageSerialPort;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtDesc;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox cboxModel;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cboxConnType;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtChannelName;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private IPAddressText txtIPAddress;
-        private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown txtSlot;
         private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown txtPort;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
         private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup1;
@@ -658,8 +576,6 @@ namespace AdvancedScada.Studio.Editors
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnBlack;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnNext;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox cboxModeNet;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel14;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel15;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cboxModeSP;
     }

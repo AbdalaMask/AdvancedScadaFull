@@ -1,4 +1,4 @@
-﻿namespace AdvancedScada.Studio.Editors
+﻿namespace AdvancedScada.LSIS.Core.Editors
 {
     partial class XDeviceForm
     {
@@ -88,7 +88,7 @@
             this.kryptonHeaderGroup1.Size = new System.Drawing.Size(481, 215);
             this.kryptonHeaderGroup1.TabIndex = 4;
             this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Device";
-            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddDevice;
+            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::AdvancedScada.LSIS.Core.Properties.Resources.AddDevice;
             this.kryptonHeaderGroup1.ValuesSecondary.Heading = "";
             // 
             // kryptonHeaderGroup2
@@ -106,7 +106,7 @@
             this.kryptonHeaderGroup2.Size = new System.Drawing.Size(479, 94);
             this.kryptonHeaderGroup2.TabIndex = 12;
             this.kryptonHeaderGroup2.ValuesPrimary.Heading = "Description:";
-            this.kryptonHeaderGroup2.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddDevice;
+            this.kryptonHeaderGroup2.ValuesPrimary.Image = global::AdvancedScada.LSIS.Core.Properties.Resources.AddDevice;
             this.kryptonHeaderGroup2.ValuesSecondary.Heading = "";
             // 
             // txtDesp

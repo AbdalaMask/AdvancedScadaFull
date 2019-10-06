@@ -25,6 +25,11 @@ namespace AdvancedScada.WPF.HMIControls.Design
                     PropertyValueEditor.CreateEditorAttribute(
                         typeof(FileBrowserDialogPropertyValueEditor)));
                 builder.AddCustomAttributes
+                   (typeof(AdvancedScada.WPF.HMIControls.HslControl.TankAll.HMIBottle),
+                   "PLCAddressValue",
+                   PropertyValueEditor.CreateEditorAttribute(
+                       typeof(FileBrowserDialogPropertyValueEditor)));
+                builder.AddCustomAttributes
                   (typeof(AdvancedScada.WPF.HMIControls.Indicator.HMIIndicator),
                   "PLCAddressValue",
                   PropertyValueEditor.CreateEditorAttribute(

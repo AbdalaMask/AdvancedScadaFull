@@ -231,7 +231,7 @@ namespace AdvancedScada.IODriver
                         }
 
                         //======Connection to PLC==================================
-                        DriverAdapter.Connection();
+                       DriverAdapter.Connection();
 
                         while (IsConnected)
                         {

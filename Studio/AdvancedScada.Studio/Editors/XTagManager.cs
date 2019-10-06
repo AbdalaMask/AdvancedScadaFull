@@ -375,7 +375,7 @@ namespace AdvancedScada.Studio.Editors
             try
             {
                 Channel chCurrent = null;
-                XDeviceForm dvFrm = null;
+                
                 if (treeViewSI.SelectedNode == null) return;
                 int Level = treeViewSI.SelectedNode.Level;
                 switch (Level)
@@ -387,7 +387,7 @@ namespace AdvancedScada.Studio.Editors
                         chCurrent = objChannelManager.GetByChannelName(treeViewSI.SelectedNode.Parent.Text);
                         break;
                 }
-                dvFrm = new XDeviceForm(chCurrent);
+               var dvFrm = new GetDeviceForm().XDeviceFormLoad(chCurrent);
                 dvFrm.eventDeviceChanged += new EventDeviceChanged((dv, isNew) =>
                 {
                     try
@@ -429,7 +429,7 @@ namespace AdvancedScada.Studio.Editors
             {
                 Channel chCurrent = null;
                 Device dvCurrent = null;
-                XDataBlockForm dbFrm = null;
+               
                 if (treeViewSI.SelectedNode == null) return;
                 int Level = treeViewSI.SelectedNode.Level;
                 switch (Level)
@@ -443,7 +443,7 @@ namespace AdvancedScada.Studio.Editors
                         dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
                         break;
                 }
-                dbFrm = new XDataBlockForm(chCurrent, dvCurrent);
+              var  dbFrm = new GetDataBlockForm().XDataBlockFormLoad(chCurrent, dvCurrent);
                 dbFrm.eventDataBlockChanged += new EventDataBlockChanged((db, isNew) =>
                 {
                     try
@@ -487,7 +487,7 @@ namespace AdvancedScada.Studio.Editors
                 Channel chCurrent = objChannelManager.GetByChannelName(treeViewSI.SelectedNode.Parent.Parent.Text);
                 Device dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
                 DataBlock dbCurrent = objDataBlockManager.GetByDataBlockName(dvCurrent, treeViewSI.SelectedNode.Text);
-                XTagForm tgFrm = new XTagForm(chCurrent, dvCurrent, dbCurrent);
+                var tgFrm = new GetTagForm().XTagFormLoad(chCurrent, dvCurrent, dbCurrent);
                 tgFrm.eventTagChanged += new EventTagChanged((tg, isNew) =>
                 {
                     try
@@ -526,7 +526,7 @@ namespace AdvancedScada.Studio.Editors
 
                 if (DriverFrm.ShowDialog() == DialogResult.OK)
                 {
-                    var chFrm = new XChannelForm(DriverFrm.cboxSelectedDrivers.Text, objChannelManager, null);
+                    var chFrm = new GetChannelForm().XChannelFormLoad(DriverFrm.cboxSelectedDrivers.Text, objChannelManager, null);
                     chFrm.eventChannelChanged += new EventChannelChanged((ch, isNew) =>
                     {
                         try
@@ -568,7 +568,7 @@ namespace AdvancedScada.Studio.Editors
                 {
                     case 0:
                         chCurrent = objChannelManager.GetByChannelName(selectedNode);
-                        XChannelForm chFrm = new XChannelForm(chCurrent.ChannelTypes, objChannelManager, chCurrent);
+                        var chFrm = new GetChannelForm().XChannelFormLoad(chCurrent.ChannelTypes, objChannelManager, chCurrent);
                         chFrm.eventChannelChanged += new EventChannelChanged((ch, isNew) =>
                         {
                             if (isNew) objChannelManager.Add(ch);
@@ -581,7 +581,7 @@ namespace AdvancedScada.Studio.Editors
                     case 1:
                         chCurrent = objChannelManager.GetByChannelName(treeViewSI.SelectedNode.Parent.Text);
                         dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, selectedNode);
-                        XDeviceForm dvFrm = new XDeviceForm(chCurrent, dvCurrent);
+                        var dvFrm = new GetDeviceForm().XDeviceFormLoad(chCurrent, dvCurrent);
                         dvFrm.eventDeviceChanged += new EventDeviceChanged((dv, isNew) =>
                         {
                             if (isNew) objDeviceManager.Add(chCurrent, dv);
@@ -595,7 +595,7 @@ namespace AdvancedScada.Studio.Editors
                         chCurrent = objChannelManager.GetByChannelName(treeViewSI.SelectedNode.Parent.Parent.Text);
                         dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
                         dbCurrent = objDataBlockManager.GetByDataBlockName(dvCurrent, selectedNode);
-                        XDataBlockForm dbFrm = new XDataBlockForm(chCurrent, dvCurrent, dbCurrent);
+                        var dbFrm = new GetDataBlockForm().XDataBlockFormLoad(chCurrent, dvCurrent, dbCurrent);
                         dbFrm.eventDataBlockChanged += new EventDataBlockChanged((db, isNew) =>
                         {
                             if (isNew) objDataBlockManager.Add(dvCurrent, db);
@@ -944,7 +944,7 @@ namespace AdvancedScada.Studio.Editors
 
                         var tgCurrent = objTagManager.GetByTagName(dbCurrent, tgName);
 
-                        var tgFrm = new XTagForm(chCurrent, dvCurrent, dbCurrent, tgCurrent);
+                        var tgFrm = new GetTagForm().XTagFormLoad(chCurrent, dvCurrent, dbCurrent, tgCurrent);
                         tgFrm.eventTagChanged += (tg, isNew) =>
                         {
                             objTagManager.Update(dbCurrent, tgCurrent);
@@ -1016,7 +1016,7 @@ namespace AdvancedScada.Studio.Editors
 
                         var tgCurrent = objTagManager.GetByTagName(dbCurrent, tgName);
 
-                        var tgFrm = new XTagForm(chCurrent, dvCurrent, dbCurrent, tgCurrent);
+                        var tgFrm = new GetTagForm().XTagFormLoad(chCurrent, dvCurrent, dbCurrent, tgCurrent);
                         tgFrm.eventTagChanged += (tg, isNew) =>
                         {
                             objTagManager.Update(dbCurrent, tgCurrent);

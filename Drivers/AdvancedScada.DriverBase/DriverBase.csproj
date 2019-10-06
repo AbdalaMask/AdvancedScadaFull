@@ -55,6 +55,7 @@
     <Compile Include="IControls.cs" />
     <Compile Include="IDriverAdapter.cs" />
     <Compile Include="IFaultException.cs" />
+    <Compile Include="IODriver.cs" />
     <Compile Include="Machine.cs" />
     <Compile Include="ObjectExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,9 +5,9 @@ using ComponentFactory.Krypton.Toolkit;
 using System;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
-namespace AdvancedScada.Studio.Editors
+namespace AdvancedScada.Modbus.Core.Editors
 {
-    public partial class XTagForm : KryptonForm
+    public partial class XTagForm : AdvancedScada.Management.Editors.XTagForm
     {
         public Channel ch;
         public DataBlock db;

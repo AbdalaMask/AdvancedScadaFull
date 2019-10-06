@@ -56,6 +56,7 @@
     <Compile Include="Compression\ImageCompression.cs" />
     <Compile Include="Compression\StringCompression.cs" />
     <Compile Include="Databases\ClassSQL.cs" />
+    <Compile Include="DemoUtils.cs" />
     <Compile Include="DriverLinkToSQL\LinkToSQL.cs" />
     <Compile Include="Excel\ExcelUtils.cs" />
     <Compile Include="IniClass.cs" />
@@ -123,6 +124,10 @@
     <None Include="Resources\FolderOpen_32x32_72.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Drivers\HslCommunication_Net45\HslCommunication.csproj">
+      <Project>{7F8029DA-1B94-4B1D-B91F-5B21DBF2F3A2}</Project>
+      <Name>HslCommunication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WCF\AdvancedScada.IBaseService\IBaseService.csproj">
       <Project>{f47222c0-6b69-4ff1-aec3-b4c668b0a55a}</Project>
       <Name>IBaseService</Name>

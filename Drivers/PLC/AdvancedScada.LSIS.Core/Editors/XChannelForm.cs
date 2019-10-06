@@ -8,15 +8,14 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
-namespace AdvancedScada.Studio.Editors
+namespace AdvancedScada.LSIS.Core.Editors
 {
-    public partial class XChannelForm : KryptonForm
+    public partial class XChannelForm : AdvancedScada.Management.Editors.XChannelForm
     {
-        private readonly Channel ch;
+        
         private string _DriverTypes;
 
-        public EventChannelChanged eventChannelChanged = null;
-        private readonly ChannelService objChannelManager;
+       
         public XChannelForm()
         {
             InitializeComponent();
@@ -53,33 +52,9 @@ namespace AdvancedScada.Studio.Editors
                 if (ch != null)
                 {
 
-                    switch (_DriverTypes)
-
-                    {
-                        case "Delta":
-                            cboxModel.Items.Clear();
-                            cboxModel.Text = "DVP";
-                            cboxModeNet.Text = "TCP";
-                            cboxModeNet.Enabled = false;
-                            break;
-                        case "LSIS":
+                 
                             cboxModel.DataSource = System.Enum.GetNames(typeof(LSCpuInfo));
-                            cboxModeNet.Text = "FEnet";
-                            cboxModeNet.Enabled = false;
-                            break;
-                        case "Modbus":
-                            cboxModel.Visible = false;
-                            cboxModel.Text = "Modbus";
-                            cboxModeNet.Text = "TCP";
-                            cboxModeNet.Enabled = false;
-                            break;
-                        default:
-                            break;
-                    }
-
-
-
-
+                           
                     cboxConnType.Enabled = false;
                     this.Text = "Edit Channel   " + ch.ChannelTypes;
                     this.txtChannelName.Text = ch.ChannelName;
@@ -96,7 +71,7 @@ namespace AdvancedScada.Studio.Editors
                             cboxParity.SelectedItem = $"{dis.Parity}";
                             cboxStopBits.SelectedItem = $"{dis.StopBits}";
                             cboxHandshake.SelectedItem = $"{dis.Handshake}";
-                            cboxModeSP.SelectedItem = $"{dis.Mode}";
+                          
 
                             break;
                         case "Ethernet":
@@ -105,7 +80,7 @@ namespace AdvancedScada.Studio.Editors
                             txtIPAddress.Text = die.IPAddress;
                             txtPort.Value = die.Port;
                             txtSlot.Value = die.Slot;
-                            cboxModeNet.Text = $"{die.Mode}";
+                           
                             break;
 
 
@@ -114,29 +89,9 @@ namespace AdvancedScada.Studio.Editors
                 }
                 else
                 {
-                    switch (_DriverTypes)
-
-                    {
-                        case "Delta":
-                            cboxModel.Items.Clear();
-                            cboxModel.Text = "DVP";
-                            cboxModeNet.Text = "TCP";
-                            cboxModeNet.Enabled = false;
-                            break;
-                        case "LSIS":
+                    
                             cboxModel.DataSource = System.Enum.GetNames(typeof(LSCpuInfo));
-                            cboxModeNet.Text = "FEnet";
-                            cboxModeNet.Enabled = false;
-                            break;
-                        case "Modbus":
-                            cboxModel.Visible = false;
-                            cboxModel.Text = "Modbus";
-                            cboxModeNet.Text = "TCP";
-                            cboxModeNet.Enabled = false;
-                            break;
-                        default:
-                            break;
-                    }
+                        
                     cboxConnType.Enabled = true;
                     this.Text = "Add Channel    " + _DriverTypes;
                     this.cboxConnType.SelectedIndex = 0;
@@ -174,7 +129,7 @@ namespace AdvancedScada.Studio.Editors
                     return;
                 }
                 var ConnType = $"{cboxConnType.SelectedItem}";
-                TabControlLSIS.SelectedIndex = cboxConnType.SelectedIndex;
+                TabControlModbus.SelectedIndex = cboxConnType.SelectedIndex;
                 errorProvider1.Clear();
                 switch (ConnType)
                 {
@@ -195,7 +150,7 @@ namespace AdvancedScada.Studio.Editors
                                 Handshake = (Handshake)System.Enum.Parse(typeof(Handshake),
                                     $"{cboxHandshake.SelectedItem}"),
                                 ConnectionType = ConnType,
-                                Mode = $"{cboxModeSP.SelectedItem}",
+                                Mode = $"CNET",
                                 Description = txtDesc.Text
                             };
                             if (ch == null)
@@ -236,7 +191,7 @@ namespace AdvancedScada.Studio.Editors
                                 IPAddress = txtIPAddress.Text,
                                 Port = (short)txtPort.Value,
                                 ConnectionType = ConnType,
-                                Mode = $"{cboxModeNet.SelectedItem}",
+                                Mode = $"FENET",
                             };
 
                             if (ch == null)
@@ -276,7 +231,7 @@ namespace AdvancedScada.Studio.Editors
         {
             try
             {
-                TabControlLSIS.SelectedIndex = 0;
+                TabControlModbus.SelectedIndex = 0;
                 btnBlack.Enabled = false;
                 btnNext.Text = "Next >";
             }

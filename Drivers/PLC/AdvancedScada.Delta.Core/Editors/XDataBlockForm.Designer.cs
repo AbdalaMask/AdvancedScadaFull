@@ -1,4 +1,4 @@
-﻿namespace AdvancedScada.Studio.Editors
+﻿namespace AdvancedScada.Delta.Core.Editors
 {
     partial class XDataBlockForm
     {
@@ -39,7 +39,6 @@
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txtDomain = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.txtPrefix = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.chkX10 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.txtStartAddress = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cboxDataType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
@@ -58,10 +57,6 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnOK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
-            this.GLSIS = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
-            this.chkIsArray = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.chkIsHex = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.chkX16 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.lblTypeOfRead = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.CboxTypeOfRead = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
@@ -76,10 +71,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
             this.kryptonHeaderGroup1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GLSIS)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GLSIS.Panel)).BeginInit();
-            this.GLSIS.Panel.SuspendLayout();
-            this.GLSIS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CboxTypeOfRead)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -101,10 +92,10 @@
             // kryptonHeaderGroup2.Panel
             // 
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.txtDesc);
-            this.kryptonHeaderGroup2.Size = new System.Drawing.Size(626, 82);
+            this.kryptonHeaderGroup2.Size = new System.Drawing.Size(556, 82);
             this.kryptonHeaderGroup2.TabIndex = 25;
             this.kryptonHeaderGroup2.ValuesPrimary.Heading = "Description:";
-            this.kryptonHeaderGroup2.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddGoup;
+            this.kryptonHeaderGroup2.ValuesPrimary.Image = global::AdvancedScada.Delta.Core.Properties.Resources.AddGoup;
             this.kryptonHeaderGroup2.ValuesSecondary.Heading = "Heading";
             // 
             // txtDesc
@@ -114,13 +105,13 @@
             this.txtDesc.Margin = new System.Windows.Forms.Padding(2);
             this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
-            this.txtDesc.Size = new System.Drawing.Size(624, 58);
+            this.txtDesc.Size = new System.Drawing.Size(554, 58);
             this.txtDesc.TabIndex = 0;
             // 
             // btnCancel
             // 
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCancel.Location = new System.Drawing.Point(509, 0);
+            this.btnCancel.Location = new System.Drawing.Point(439, 0);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(119, 28);
@@ -187,15 +178,6 @@
             this.txtPrefix.Size = new System.Drawing.Size(85, 20);
             this.txtPrefix.TabIndex = 20;
             this.txtPrefix.Values.Text = "MemoryType:";
-            // 
-            // chkX10
-            // 
-            this.chkX10.Location = new System.Drawing.Point(2, 2);
-            this.chkX10.Margin = new System.Windows.Forms.Padding(2);
-            this.chkX10.Name = "chkX10";
-            this.chkX10.Size = new System.Drawing.Size(44, 20);
-            this.chkX10.TabIndex = 19;
-            this.chkX10.Values.Text = "X10";
             // 
             // txtStartAddress
             // 
@@ -345,7 +327,7 @@
             // btnOK
             // 
             this.btnOK.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnOK.Location = new System.Drawing.Point(384, 0);
+            this.btnOK.Location = new System.Drawing.Point(314, 0);
             this.btnOK.Margin = new System.Windows.Forms.Padding(2);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(125, 28);
@@ -364,7 +346,6 @@
             // 
             // kryptonHeaderGroup1.Panel
             // 
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.GLSIS);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.lblTypeOfRead);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.CboxTypeOfRead);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonHeaderGroup2);
@@ -389,57 +370,10 @@
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.txtChannelId);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonLabel2);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonLabel1);
-            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(628, 291);
+            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(558, 291);
             this.kryptonHeaderGroup1.TabIndex = 3;
-            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddGoup;
+            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::AdvancedScada.Delta.Core.Properties.Resources.AddGoup;
             this.kryptonHeaderGroup1.ValuesSecondary.Heading = "Heading";
-            // 
-            // GLSIS
-            // 
-            this.GLSIS.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockInactive;
-            this.GLSIS.HeaderVisibleSecondary = false;
-            this.GLSIS.Location = new System.Drawing.Point(473, 2);
-            this.GLSIS.Margin = new System.Windows.Forms.Padding(2);
-            this.GLSIS.Name = "GLSIS";
-            // 
-            // GLSIS.Panel
-            // 
-            this.GLSIS.Panel.Controls.Add(this.chkIsArray);
-            this.GLSIS.Panel.Controls.Add(this.chkIsHex);
-            this.GLSIS.Panel.Controls.Add(this.chkX16);
-            this.GLSIS.Panel.Controls.Add(this.chkX10);
-            this.GLSIS.Size = new System.Drawing.Size(149, 75);
-            this.GLSIS.TabIndex = 30;
-            this.GLSIS.ValuesPrimary.Heading = "Tools PLC LSIS";
-            this.GLSIS.ValuesPrimary.Image = global::AdvancedScada.Studio.Properties.Resources.AddGoup;
-            this.GLSIS.ValuesSecondary.Heading = "Heading";
-            // 
-            // chkIsArray
-            // 
-            this.chkIsArray.Location = new System.Drawing.Point(92, 26);
-            this.chkIsArray.Margin = new System.Windows.Forms.Padding(2);
-            this.chkIsArray.Name = "chkIsArray";
-            this.chkIsArray.Size = new System.Drawing.Size(61, 20);
-            this.chkIsArray.TabIndex = 30;
-            this.chkIsArray.Values.Text = "IsArray";
-            // 
-            // chkIsHex
-            // 
-            this.chkIsHex.Location = new System.Drawing.Point(92, 2);
-            this.chkIsHex.Margin = new System.Windows.Forms.Padding(2);
-            this.chkIsHex.Name = "chkIsHex";
-            this.chkIsHex.Size = new System.Drawing.Size(53, 20);
-            this.chkIsHex.TabIndex = 28;
-            this.chkIsHex.Values.Text = "IsHex";
-            // 
-            // chkX16
-            // 
-            this.chkX16.Location = new System.Drawing.Point(50, 2);
-            this.chkX16.Margin = new System.Windows.Forms.Padding(2);
-            this.chkX16.Name = "chkX16";
-            this.chkX16.Size = new System.Drawing.Size(44, 20);
-            this.chkX16.TabIndex = 29;
-            this.chkX16.Values.Text = "X16";
             // 
             // lblTypeOfRead
             // 
@@ -472,20 +406,19 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 291);
             this.kryptonPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(628, 28);
+            this.kryptonPanel1.Size = new System.Drawing.Size(558, 28);
             this.kryptonPanel1.TabIndex = 6;
             // 
             // XDataBlockForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(628, 319);
+            this.ClientSize = new System.Drawing.Size(558, 319);
             this.Controls.Add(this.kryptonPanel1);
             this.Controls.Add(this.kryptonHeaderGroup1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "XDataBlockForm";
-            this.Text = "XDataBlockForm";
             this.Load += new System.EventHandler(this.XDataBlockForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DxErrorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).EndInit();
@@ -500,11 +433,6 @@
             this.kryptonHeaderGroup1.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).EndInit();
             this.kryptonHeaderGroup1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.GLSIS.Panel)).EndInit();
-            this.GLSIS.Panel.ResumeLayout(false);
-            this.GLSIS.Panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GLSIS)).EndInit();
-            this.GLSIS.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.CboxTypeOfRead)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
@@ -525,7 +453,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel10;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox txtDomain;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel txtPrefix;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chkX10;
         private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown txtStartAddress;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel8;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cboxDataType;
@@ -545,9 +472,5 @@
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblTypeOfRead;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox CboxTypeOfRead;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chkIsHex;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chkX16;
-        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup GLSIS;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chkIsArray;
     }
 }

@@ -2,9 +2,9 @@
 using AdvancedScada.DriverBase;
 using AdvancedScada.IBaseService;
 using AdvancedScada.IBaseService.Common;
-using AdvancedScada.IODriver;
 using AdvancedScada.Management.BLManager;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Description;
@@ -18,7 +18,14 @@ namespace AdvancedScada.BaseService
     {
         public static ConnectionState objConnectionState = ConnectionState.DISCONNECT;
         private static string FILE_LOG = @"C:\AdvancedScada.txt";
-        IODriverHelper driverHelper = new IODriverHelper();
+        IODriver driverHelper = null;
+        private ushort _SerialNo;
+        public Dictionary<string, IODriver> RequestsDriver { get; set; }
+
+        public ServiceDriverHelper()
+        {
+            RequestsDriver = new Dictionary<string, IODriver>(1024);
+        }
 
         public void OpenWebServiceHost()
         {
@@ -69,24 +76,59 @@ namespace AdvancedScada.BaseService
             }
             return serviceHost;
         }
+        private IODriver GetDriver(string ChannelTypes)
+        {
+            IODriver DriverHelper = null;
+            var objFunctions = GetIODriver.GetFunctions();
+            DriverHelper =
+                       objFunctions.GetAssembly($@"\AdvancedScada.{ChannelTypes}.Core.dll",
+                           $"AdvancedScada.{ChannelTypes}.Core.IODriverHelper");
+            return DriverHelper;
+        }
         public bool InitializePLC()
         {
             var objChannelManager = ChannelService.GetChannelManager();
             try
             {
-
+                RequestsDriver.Clear();
                 var xmlFile = objChannelManager.ReadKey(objChannelManager.XML_NAME_DEFAULT);
                 if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile)) return false;
                 objChannelManager.Channels.Clear();
                 TagCollection.Tags.Clear();
                 var channels = objChannelManager.GetChannels(xmlFile);
-
-                driverHelper.InitializeService(channels);
-
-                ThreadPool.QueueUserWorkItem((th) =>
+                var objFunctions = GetIODriver.GetFunctions();
+                foreach (var item in channels)
                 {
-                    driverHelper.Connect();
-                });
+                    driverHelper = GetDriver(item.ChannelTypes);
+                    if (driverHelper != null)
+                        driverHelper.InitializeService(item);
+                }
+                foreach (var item in channels)
+                {
+                    _SerialNo = (ushort)(_SerialNo++ % 255 + 1);
+                    driverHelper = GetDriver(item.ChannelTypes);
+
+                    if (RequestsDriver.ContainsKey(item.ChannelTypes))
+                    {
+                    }
+                    else
+                    {
+                        RequestsDriver.Add(item.ChannelTypes, driverHelper);
+                        if (driverHelper != null)
+                                driverHelper?.Connect();
+                          
+                    }
+
+                }
+                eventAddMessage += new EventListenning(AddMessage);
+                eventConnectionState += new EventConnectionState(SetConnectionState);
+
+                //driverHelper.InitializeService(channels);
+
+                //ThreadPool.QueueUserWorkItem((th) =>
+                //{
+                //    driverHelper.Connect();
+                //});
                 //eventAddMessage += new EventListenning(AddMessage);
                 //eventConnectionState += new EventConnectionState(SetConnectionState);
                 return true;
@@ -108,7 +150,7 @@ namespace AdvancedScada.BaseService
 
 
 
-                driverHelper.Disconnect();
+                //driverHelper.Disconnect();
 
                 return true;
             }

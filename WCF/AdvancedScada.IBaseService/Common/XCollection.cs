@@ -18,6 +18,7 @@ namespace AdvancedScada.IBaseService.Common
         public static PvGridDeviceGet EventPvGridDeviceGet;
         public static PvGridChannelGet EventPvGridDataBlockGet;
 
+        public static ConnectionState objConnectionState = ConnectionState.DISCONNECT;
 
     }
 }

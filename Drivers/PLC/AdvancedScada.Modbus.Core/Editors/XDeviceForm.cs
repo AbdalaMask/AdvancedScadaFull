@@ -4,14 +4,11 @@ using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
 using static AdvancedScada.IBaseService.Common.XCollection;
-namespace AdvancedScada.Studio.Editors
+namespace AdvancedScada.Modbus.Core.Editors
 {
-    public partial class XDeviceForm : KryptonForm
+    public partial class XDeviceForm : AdvancedScada.Management.Editors.XDeviceForm
     {
-        private readonly Channel ch;
-
-        private readonly Device dv;
-        public EventDeviceChanged eventDeviceChanged = null;
+        
 
         public XDeviceForm()
         {
