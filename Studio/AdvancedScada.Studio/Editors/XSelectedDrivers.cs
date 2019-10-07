@@ -59,6 +59,9 @@ namespace AdvancedScada.Studio.Editors
 
             switch (cboxSelectedDrivers.Text)
             {
+                case "Siemens":
+                    picSelectedDrivers.Image = Properties.Resources.PLC_SIEMENS;
+                    break;
                 case "LSIS":
                     picSelectedDrivers.Image = Properties.Resources.P00135;
                     break;

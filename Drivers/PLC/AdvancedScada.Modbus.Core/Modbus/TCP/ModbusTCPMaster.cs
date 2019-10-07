@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.DriverBase;
+using AdvancedScada.Utils;
 using HslCommunication;
 using HslCommunication.ModBus;
 using System;
@@ -29,7 +30,19 @@ namespace AdvancedScada.Modbus.Core.Modbus.TCP
 
         public bool Connection()
         {
+            if (!System.Net.IPAddress.TryParse(IP, out System.Net.IPAddress address))
+            {
+                EventscadaException?.Invoke(this.GetType().Name, DemoUtils.IpAddressInputWrong);
+                return false;
+            }
 
+            if (!int.TryParse($"{Port}", out int port))
+            {
+                EventscadaException?.Invoke(this.GetType().Name, DemoUtils.PortInputWrong);
+                return false;
+            }
+
+            
 
             try
             {
@@ -46,12 +59,12 @@ namespace AdvancedScada.Modbus.Core.Modbus.TCP
                     OperateResult connect = busTcpClient.ConnectServer();
                     if (connect.IsSuccess)
                     {
-
+                        EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedSuccess);
                         IsConnected = true;
                     }
                     else
                     {
-                        IsConnected = false;
+                        EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedFailed);
                     }
                     return IsConnected;
                 }

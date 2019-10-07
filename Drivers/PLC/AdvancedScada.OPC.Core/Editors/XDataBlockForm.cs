@@ -130,24 +130,22 @@ namespace AdvancedScada.OPC.Core.Editors
                 if (values[i].Value is bool)
                     ReturnValues[i] = "Bit";
                 else if (values[i].Value is byte)
-                    ReturnValues[i] = "byte";
+                    ReturnValues[i] = "Byte";
                 else if (values[i].Value is float)
                     ReturnValues[i] = "Float";
                 else if (values[i].Value is char)
                     ReturnValues[i] = "char";
                 else if (values[i].Value is short)
-                    ReturnValues[i] = "Word";
+                    ReturnValues[i] = "Short";
                 else if (values[i].Value is int)
-                    ReturnValues[i] = "Long";
+                    ReturnValues[i] = "Int";
                 else if (values[i].Value is double)
-                    ReturnValues[i] = "double";
+                    ReturnValues[i] = "Double";
                 else if (values[i].Value is Array)
                     ReturnValues[i] = "Array";
                 else if (values[i].Value is uint)
-                    ReturnValues[i] = "DWord";
-                else if (values[i].Value is short)
-                    ReturnValues[i] = "short";
-                else if (values[i].Value is ushort) ReturnValues[i] = "ushort";
+                    ReturnValues[i] = "UInt";
+                else if (values[i].Value is ushort) ReturnValues[i] = "UShort";
                 //else
                 //{
                 //    ReturnValues[i] = "null";

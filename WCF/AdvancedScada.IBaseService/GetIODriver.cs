@@ -12,7 +12,6 @@ namespace AdvancedScada.IBaseService
         private static readonly object mutex = new object();
         private static GetIODriver _instance;
        
-
         public static GetIODriver GetFunctions()
         {
             lock (mutex)
@@ -22,9 +21,7 @@ namespace AdvancedScada.IBaseService
 
             return _instance;
         }
-     
-
-
+    
         public IODriver GetAssemblyDrivers(string Path, string NameSpaceAndClass)
         {
             IODriver iODriver = null;
@@ -64,15 +61,14 @@ namespace AdvancedScada.IBaseService
             }
             catch (Exception ex)
             {
-                //var err = new ErorrPLC.ErorrPLC(GetType().Name, ex.Message);
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
 
 
             return iODriver;
         }
 
-       
-
+        #region CreateInstance
         public static T CreateInstance<T>(params object[] Params) where T : class // params keyword for array
         {
             var argTypes = new List<Type>();
@@ -108,7 +104,6 @@ namespace AdvancedScada.IBaseService
                     return Node;
             return null;
         }
-
         public object CreateInstance(Type pContext, object[] Params)
         {
             var argTypes = new List<Type>();
@@ -159,5 +154,6 @@ namespace AdvancedScada.IBaseService
             //delegate type to Activator.CreateInstance if unable to find a suitable constructor
             return Activator.CreateInstance(pContext);
         }
+        #endregion
     }
 }

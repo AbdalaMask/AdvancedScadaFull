@@ -62,19 +62,17 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCancel.Location = new System.Drawing.Point(379, 130);
+            this.btnCancel.Location = new System.Drawing.Point(235, 130);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(77, 30);
+            this.btnCancel.Size = new System.Drawing.Size(110, 30);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Values.Text = "Cancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSend
             // 
-            this.btnSend.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSend.Location = new System.Drawing.Point(269, 130);
+            this.btnSend.Location = new System.Drawing.Point(346, 130);
             this.btnSend.Margin = new System.Windows.Forms.Padding(4);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(110, 30);
@@ -119,9 +117,8 @@
             // 
             // WriteTagForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 160);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(456, 161);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.kryptonHeaderGroup1);
@@ -129,7 +126,9 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(472, 199);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(472, 199);
             this.Name = "WriteTagForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WriteTag";
