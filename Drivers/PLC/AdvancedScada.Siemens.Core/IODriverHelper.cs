@@ -1,61 +1,80 @@
 ﻿using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.DriverBase.Devices;
-using S7.Net;
+using AdvancedScada.Siemens.Core.Siemens;
+using HslCommunication.Profinet.Siemens;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO.Ports;
 using System.Threading;
-using System.Threading.Tasks;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.Siemens.Core
 {
     public class IODriverHelper : AdvancedScada.DriverBase.IODriver
     {
-        #region Flad
-
-        private static Dictionary<string, Profinet.Plc> _PLCS7 = new Dictionary<string, Profinet.Plc>();
         public static readonly ManualResetEvent SendDone = new ManualResetEvent(true);
         public static List<Channel> Channels = new List<Channel>();
-        private static Thread[] threads;
-       
 
+        //==================================Siemens===================================================
+        private static Dictionary<string, SiemensNet> _PLCS7 = new Dictionary<string, SiemensNet>();
+        private static Dictionary<string, SiemensComPPI> _PLCPPI = new Dictionary<string, SiemensComPPI>();
+        private static bool IsConnected;
         private static int COUNTER;
-        public static bool IsConnected;
 
-        public string Name => "Siemens";
-
-      
-        #endregion
 
         #region IServiceDriver
-
-        public void InitializeService(Channel chns)
+        public string Name => "Siemens";
+        public void InitializeService(Channel ch)
         {
+
             try
             {
-              
 
+                //=================================================================
 
-               
                 if (Channels == null) return;
-                Channels.Add(chns);
-                Profinet.Plc DriverAdapter = null;
+                Channels.Add(ch);
 
-                var die = (DIEthernet)chns;
-                var cpu = (CpuType)Enum.Parse(typeof(CpuType), die.CPU);
-                DriverAdapter = new Profinet.Plc(cpu, die.IPAddress, (short)die.Rack, (short)die.Slot);
 
-                foreach (Device dv in chns.Devices)
+                IDriverAdapter DriverAdapter = null;
+                foreach (var dv in ch.Devices)
                 {
-                    _PLCS7.Add(chns.ChannelName, DriverAdapter);
-                    foreach (DataBlock db in dv.DataBlocks)
+                    try
                     {
-                        foreach (Tag tg in db.Tags)
+                        switch (ch.ConnectionType)
                         {
-                            TagCollection.Tags.Add(string.Format("{0}.{1}.{2}.{3}", chns.ChannelName, dv.DeviceName, db.DataBlockName,
-                                                                    tg.TagName), tg);
+                            case "SerialPort":
+                                var dis = (DISerialPort)ch;
+                                var sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
+                                {
+                                    Handshake = dis.Handshake
+                                };
+
+                                DriverAdapter = new SiemensComPPI(dv.SlaveId, sp);
+                                _PLCPPI.Add(ch.ChannelName, (SiemensComPPI)DriverAdapter);
+                                break;
+                            case "Ethernet":
+                                var die = (DIEthernet)ch;
+                                var cpu = (SiemensPLCS)Enum.Parse(typeof(SiemensPLCS), die.CPU);
+                                DriverAdapter = new SiemensNet(cpu, die.IPAddress, (short)die.Rack, (short)die.Slot);
+                                _PLCS7.Add(ch.ChannelName, (SiemensNet)DriverAdapter);
+
+                                break;
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                    }
+                    foreach (var db in dv.DataBlocks)
+                    {
+
+                        foreach (var tg in db.Tags)
+                        {
+                            TagCollection.Tags.Add(
+                                $"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
 
                         }
                     }
@@ -66,11 +85,14 @@ namespace AdvancedScada.Siemens.Core
             catch (Exception ex)
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+
             }
         }
 
+        private static Thread[] threads;
         public void Connect()
         {
+
             try
             {
                 IsConnected = true;
@@ -84,9 +106,21 @@ namespace AdvancedScada.Siemens.Core
                 {
                     threads[i] = new Thread((chParam) =>
                     {
-                        Profinet.Plc DriverAdapter = null;
+                        IDriverAdapter DriverAdapter = null;
                         Channel ch = (Channel)chParam;
-                        DriverAdapter = _PLCS7[ch.ChannelName];
+
+                        switch (ch.ConnectionType)
+                        {
+                            case "SerialPort":
+                                DriverAdapter = _PLCPPI[ch.ChannelName];
+                                break;
+
+                            case "Ethernet":
+                                DriverAdapter = _PLCS7[ch.ChannelName];
+                                break;
+                        }
+
+
                         //======Connection to PLC==================================
                         DriverAdapter.Connection();
 
@@ -101,9 +135,7 @@ namespace AdvancedScada.Siemens.Core
                                     {
                                         if (!IsConnected) break;
 
-                                        SendPackage(DriverAdapter,dv, db);
-
-
+                                        SendPackageSiemens(DriverAdapter, dv, db);
                                     }
 
                                 }
@@ -138,19 +170,155 @@ namespace AdvancedScada.Siemens.Core
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
-         
-
         }
 
         public void Disconnect()
         {
-            IsConnected = false;
+
+            try
+            {
+                IsConnected = false;
+
+                TagCollection.Tags.Clear();
+                Channels = null;
+                for (int i = 0; i < threads.Length; i++)
+                {
+
+                    threads[i].Abort();
+                }
+
+                objConnectionState = ConnectionState.DISCONNECT;
+                eventConnectionState?.Invoke(objConnectionState, string.Format("Server disconnect with PLC."));
+            }
+            catch (Exception ex)
+            {
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+
+            }
         }
+
+        #endregion
+        #region SendPackage All
+        private void SendPackageSiemens(IDriverAdapter ISiemens, Device dv, DataBlock db)
+        {
+            try
+            {
+
+                switch (db.DataType)
+                {
+                    case DataTypes.Bit:
+
+                        lock (ISiemens)
+                        {
+
+                            bool[] bitRs = ISiemens.Read<bool>($"{db.MemoryType}{db.StartAddress}", db.Length);
+
+                            int length = bitRs.Length;
+                            if (bitRs.Length > db.Tags.Count) length = db.Tags.Count;
+                            for (int j = 0; j < length; j++)
+                            {
+                                db.Tags[j].Value = bitRs[j];
+                                db.Tags[j].TimeSpan = DateTime.Now;
+                            }
+                        }
+                        break;
+                    case DataTypes.Short:
+
+                        lock (ISiemens)
+                        {
+                            short[] IntRs = ISiemens.Read<Int16>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                            if (IntRs.Length > db.Tags.Count) return;
+                            for (int j = 0; j < IntRs.Length; j++)
+                            {
+                                
+                                    db.Tags[j].Value = IntRs[j];
+                                db.Tags[j].TimeSpan = DateTime.Now;
+                            }
+                        }
+                        break;
+                    case DataTypes.Int:
+
+                        lock (ISiemens)
+                        {
+                            int[] DIntRs = ISiemens.Read<Int32>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                            if (DIntRs.Length > db.Tags.Count) return;
+                            for (int j = 0; j < DIntRs.Length; j++)
+                            {
+                                db.Tags[j].Value = DIntRs[j];
+                                db.Tags[j].TimeSpan = DateTime.Now;
+                            }
+                        }
+                        break;
+                    case DataTypes.UInt:
+
+                        lock (ISiemens)
+                        {
+                            var wdRs = ISiemens.Read<uint>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                            if (wdRs == null) return;
+                            if (wdRs.Length > db.Tags.Count) return;
+                            for (int j = 0; j < wdRs.Length; j++)
+                            {
+                                
+                                    db.Tags[j].Value = wdRs[j];
+                                
+                                db.Tags[j].TimeSpan = DateTime.Now;
+                            }
+                        }
+                        break;
+                    case DataTypes.Long:
+
+                        lock (ISiemens)
+                        {
+                            long[] dwRs = ISiemens.Read<long>($"{db.MemoryType}{db.StartAddress}", (ushort)db.Length);
+
+                            for (int j = 0; j < dwRs.Length; j++)
+                            {
+                                db.Tags[j].Value = dwRs[j];
+                                db.Tags[j].TimeSpan = DateTime.Now;
+                            }
+                        }
+                        break;
+                    case DataTypes.Float:
+
+                        lock (ISiemens)
+                        {
+                            float[] rl1Rs = ISiemens.Read<float>($"{db.MemoryType}{db.StartAddress}", (ushort)db.Length);
+
+                            for (int j = 0; j < rl1Rs.Length; j++)
+                            {
+                                db.Tags[j].Value = rl1Rs[j];
+                                db.Tags[j].TimeSpan = DateTime.Now;
+                            }
+                        }
+                        break;
+                    case DataTypes.Double:
+
+                        lock (ISiemens)
+                        {
+                            double[] rl2Rs = ISiemens.Read<double>($"{db.MemoryType}{db.StartAddress}", (ushort)db.Length);
+
+                            for (int j = 0; j < rl2Rs.Length; j++)
+                            {
+                                db.Tags[j].Value = rl2Rs[j];
+                                db.Tags[j].TimeSpan = DateTime.Now;
+                            }
+                        }
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Disconnect();
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            }
+        }
+       
+        #endregion
+        #region Write All
+
+
         public void WriteTag(string tagName, dynamic value)
         {
-
-          
-            var dataPacket = new List<byte>();
             try
             {
                 SendDone.Reset();
@@ -158,83 +326,84 @@ namespace AdvancedScada.Siemens.Core
                 string tagDevice = string.Format("{0}.{1}", ary[0], ary[1]);
                 foreach (Channel ch in Channels)
                 {
-                    foreach (var dv in ch.Devices)
+                    foreach (Device dv in ch.Devices)
                     {
-                        var flag = string.Format("{0}.{1}", ch.ChannelName, dv.DeviceName).Equals(tagDevice);
-                        if (flag)
+
+                        if (string.Format("{0}.{1}", ch.ChannelName, dv.DeviceName).Equals(tagDevice))
                         {
-                            Profinet.Plc PLC_S7 = null;
-                            PLC_S7 = _PLCS7[ch.ChannelName];
-
-                            if (PLC_S7 == null) return;
-                            var obj = PLC_S7;
-                            lock (obj)
+                            IDriverAdapter DriverAdapter = null;
+                            switch (ch.ConnectionType)
                             {
-                                var dType = TagCollection.Tags[tagName].DataType;
+                                case "SerialPort":
+                                    DriverAdapter = _PLCPPI[ch.ChannelName];
+                                    break;
 
-                                switch (dType)
+                                case "Ethernet":
+                                    DriverAdapter = _PLCS7[ch.ChannelName];
+                                    break;
+                            }
+                            if (DriverAdapter == null) return;
+                            lock (DriverAdapter)
+                                switch (TagCollection.Tags[tagName].DataType)
                                 {
-                                    case AdvancedScada.DriverBase.Comm.DataTypes.Bit:
-
-                                        PLC_S7.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), value == "1" ? true : false);
+                                    case DataTypes.Bit:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), value == "1" ? true : false);
                                         break;
-                                    case AdvancedScada.DriverBase.Comm.DataTypes.Short:
-                                    case AdvancedScada.DriverBase.Comm.DataTypes.Int:
-
-                                        short db1IntVariable = short.Parse(value);
-                                        PLC_S7.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), db1IntVariable.ConvertToUshort());
+                                    case DataTypes.Byte:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), byte.Parse(value));
 
                                         break;
-                                    case AdvancedScada.DriverBase.Comm.DataTypes.Double:
+                                    case DataTypes.Short:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), short.Parse(value));
 
-                                        double db1RealVariable = double.Parse(value);
-                                         PLC_S7.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), db1RealVariable.ConvertToUInt());
- 
                                         break;
-                                    case AdvancedScada.DriverBase.Comm.DataTypes.String:
-                                        string db1stringVariable = string.Format("{0}", value);
+                                    case DataTypes.UShort:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), ushort.Parse(value));
 
-                                        PLC_S7.WriteString(string.Format("{0}", TagCollection.Tags[tagName].Address), db1stringVariable);
+                                        break;
+                                    case DataTypes.Int:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), int.Parse(value));
+
+                                        break;
+                                    case DataTypes.UInt:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), uint.Parse(value));
+
+                                        break;
+                                    case DataTypes.Long:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), long.Parse(value));
+
+                                        break;
+                                    case DataTypes.ULong:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), ulong.Parse(value));
+
+                                        break;
+                                    case DataTypes.Float:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), float.Parse(value));
+
+                                        break;
+                                    case DataTypes.Double:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), double.Parse(value));
+
+                                        break;
+                                    case DataTypes.String:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), $"{value}");
+
+                                        break;
+                                    default:
                                         break;
                                 }
-                            }
+
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                //* Return an error code
-                EventscadaException?.Invoke(this.GetType().Name, "Data Error : " + ex.Message);
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
             finally
             {
                 SendDone.Set();
-            }
-        }
-
-        #endregion
-
-
-
-        #region SendPackage
-
-        private void SendPackage(Profinet.Plc PLCS7, Device dv, DataBlock db)
-        {
-
-            try
-            {
-                SendDone.WaitOne(-1);
-                var ibyteArray1 = PLCS7.ReadStruct(db, db.StartAddress);
-
-
-            }
-
-            catch (Exception ex)
-            {
-                //IsConnected = false;
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-
             }
         }
 

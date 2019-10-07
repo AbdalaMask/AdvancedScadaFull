@@ -1,4 +1,4 @@
-﻿namespace AdvancedScada.LSIS.Core.Editors
+﻿namespace AdvancedScada.Siemens.Core.Editors
 {
     partial class XTagForm
     {

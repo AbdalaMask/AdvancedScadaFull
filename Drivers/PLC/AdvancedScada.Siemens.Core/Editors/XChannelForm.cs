@@ -1,6 +1,6 @@
 ﻿using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.Management.BLManager;
-using S7.Net;
+using HslCommunication.Profinet.Siemens;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -46,10 +46,10 @@ namespace AdvancedScada.Siemens.Core.Editors
                 cboxStopBits.Items.AddRange(System.Enum.GetNames(typeof(StopBits)));
                 cboxHandshake.Items.AddRange(System.Enum.GetNames(typeof(Handshake)));
 
+                    cboxModel.DataSource = System.Enum.GetNames(typeof(SiemensPLCS));
 
                 if (ch != null)
                 {
-                    cboxModel.DataSource = System.Enum.GetNames(typeof(CpuType));
                     cboxConnType.Enabled = false;
                     this.Text = "Edit Channel   " + ch.ChannelTypes;
                     this.txtChannelName.Text = ch.ChannelName;
@@ -85,8 +85,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                 else
                 {
                     
-                            cboxModel.DataSource = System.Enum.GetNames(typeof(CpuType));
-                        
+                         
                     cboxConnType.Enabled = true;
                     this.Text = "Add Channel    " + _DriverTypes;
                     this.cboxConnType.SelectedIndex = 0;
@@ -145,7 +144,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                                 Handshake = (Handshake)System.Enum.Parse(typeof(Handshake),
                                     $"{cboxHandshake.SelectedItem}"),
                                 ConnectionType = ConnType,
-                                Mode = $"CNET",
+                                Mode = $"PPI",
                                 Description = txtDesc.Text
                             };
                             if (ch == null)

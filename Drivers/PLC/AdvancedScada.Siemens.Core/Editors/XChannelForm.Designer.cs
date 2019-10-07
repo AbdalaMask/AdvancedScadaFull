@@ -401,7 +401,7 @@ namespace AdvancedScada.Siemens.Core.Editors
             // 
             // txtRack
             // 
-            this.txtRack.Location = new System.Drawing.Point(121, 145);
+            this.txtRack.Location = new System.Drawing.Point(121, 99);
             this.txtRack.Margin = new System.Windows.Forms.Padding(4);
             this.txtRack.Name = "txtRack";
             this.txtRack.Size = new System.Drawing.Size(88, 22);
@@ -409,7 +409,7 @@ namespace AdvancedScada.Siemens.Core.Editors
             // 
             // kryptonLabel14
             // 
-            this.kryptonLabel14.Location = new System.Drawing.Point(20, 147);
+            this.kryptonLabel14.Location = new System.Drawing.Point(20, 101);
             this.kryptonLabel14.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonLabel14.Name = "kryptonLabel14";
             this.kryptonLabel14.Size = new System.Drawing.Size(39, 20);
@@ -427,7 +427,7 @@ namespace AdvancedScada.Siemens.Core.Editors
             // 
             // txtSlot
             // 
-            this.txtSlot.Location = new System.Drawing.Point(121, 106);
+            this.txtSlot.Location = new System.Drawing.Point(121, 127);
             this.txtSlot.Margin = new System.Windows.Forms.Padding(4);
             this.txtSlot.Name = "txtSlot";
             this.txtSlot.Size = new System.Drawing.Size(88, 22);
@@ -455,7 +455,7 @@ namespace AdvancedScada.Siemens.Core.Editors
             // 
             // kryptonLabel7
             // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(20, 108);
+            this.kryptonLabel7.Location = new System.Drawing.Point(20, 129);
             this.kryptonLabel7.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonLabel7.Name = "kryptonLabel7";
             this.kryptonLabel7.Size = new System.Drawing.Size(34, 20);

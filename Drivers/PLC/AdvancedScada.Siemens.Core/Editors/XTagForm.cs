@@ -1,12 +1,9 @@
 ﻿using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.Management;
-using ComponentFactory.Krypton.Toolkit;
-using S7.Net;
 using System;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
-namespace AdvancedScada.LSIS.Core.Editors
+namespace AdvancedScada.Siemens.Core.Editors
 {
     public partial class XTagForm : AdvancedScada.Management.Editors.XTagForm
     {

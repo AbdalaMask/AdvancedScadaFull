@@ -1,9 +1,5 @@
 ﻿using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.Management;
-using AdvancedScada.Utils.LSIS;
-using ComponentFactory.Krypton.Toolkit;
-using S7.Net;
 using System;
 using System.Collections.Generic;
 using static AdvancedScada.IBaseService.Common.XCollection;
@@ -12,7 +8,7 @@ namespace AdvancedScada.Siemens.Core.Editors
 {
     public partial class XDataBlockForm : AdvancedScada.Management.Editors.XDataBlockForm
     {
-        private int IDX;
+      
         int TagsCount = 1;
        
 
@@ -41,8 +37,8 @@ namespace AdvancedScada.Siemens.Core.Editors
                 txtChannelName.Text = ch.ChannelName;
                 txtChannelId.Text = ch.ChannelId.ToString();
                 txtDeviceId.Text = dv.DeviceId.ToString();
-                
-                cboxDataType.DataSource = System.Enum.GetNames(typeof(DataType));
+                cboxDataType2.DataSource = System.Enum.GetNames(typeof(DataTypes));
+                cboxDataType.DataSource = System.Enum.GetNames(typeof(DataTypes));
                 if (db == null)
                 {
                   
@@ -111,7 +107,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                             StartAddress = ushort.Parse(txtDBNumber.Text),
                             MemoryType = txtDBNumber.Text,
                             Description = txtDesc.Text,
-                            Length = 0,
+                            Length = (ushort)txtAddressLength.Value,
                             DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", cboxDataType.SelectedItem)),
                             IsArray = false,
                             Tags = new List<Tag>()
@@ -131,7 +127,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                         db.TypeOfRead = "";
                         db.StartAddress = ushort.Parse(txtDBNumber.Text);
                         db.MemoryType = txtDBNumber.Text;
-                        db.Length = 0;
+                        db.Length = (ushort)txtAddressLength.Value;
                         db.Description = txtDesc.Text;
                         db.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", cboxDataType.SelectedItem));
                         db.IsArray = false;
