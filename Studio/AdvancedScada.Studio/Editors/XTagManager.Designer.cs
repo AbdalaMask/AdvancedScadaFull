@@ -126,7 +126,7 @@ namespace AdvancedScada.Studio.Editors
             this.toolStripSeparator4});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(963, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1284, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -187,9 +187,9 @@ namespace AdvancedScada.Studio.Editors
             this.toolStripSeparator5,
             this.toolStripLabel2,
             this.lblSelectedTagName});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 614);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 761);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(963, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(1284, 25);
             this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -227,7 +227,7 @@ namespace AdvancedScada.Studio.Editors
             this.kryptonSplitContainer1.Cursor = System.Windows.Forms.Cursors.Default;
             this.kryptonSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonSplitContainer1.Location = new System.Drawing.Point(0, 25);
-            this.kryptonSplitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kryptonSplitContainer1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.kryptonSplitContainer1.Name = "kryptonSplitContainer1";
             // 
             // kryptonSplitContainer1.Panel1
@@ -240,8 +240,8 @@ namespace AdvancedScada.Studio.Editors
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.DGMonitorForm);
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonDockableWorkspace1);
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonHeader1);
-            this.kryptonSplitContainer1.Size = new System.Drawing.Size(963, 589);
-            this.kryptonSplitContainer1.SplitterDistance = 168;
+            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1284, 736);
+            this.kryptonSplitContainer1.SplitterDistance = 224;
             this.kryptonSplitContainer1.TabIndex = 6;
             // 
             // treeViewSI
@@ -250,7 +250,7 @@ namespace AdvancedScada.Studio.Editors
             this.treeViewSI.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewSI.KryptonContextMenu = this.popupMenuLeft;
             this.treeViewSI.Location = new System.Drawing.Point(0, 23);
-            this.treeViewSI.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.treeViewSI.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.treeViewSI.Name = "treeViewSI";
             treeNode1.Name = "Node1";
             treeNode1.Text = "Node1";
@@ -274,7 +274,7 @@ namespace AdvancedScada.Studio.Editors
             treeNode3,
             treeNode6,
             treeNode9});
-            this.treeViewSI.Size = new System.Drawing.Size(168, 566);
+            this.treeViewSI.Size = new System.Drawing.Size(224, 713);
             this.treeViewSI.StateImageList = this.imageList1;
             this.treeViewSI.TabIndex = 1;
             this.treeViewSI.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewSI_AfterSelect);
@@ -390,9 +390,9 @@ namespace AdvancedScada.Studio.Editors
             this.kryptonHeader2.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonHeader2.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockInactive;
             this.kryptonHeader2.Location = new System.Drawing.Point(0, 0);
-            this.kryptonHeader2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kryptonHeader2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.kryptonHeader2.Name = "kryptonHeader2";
-            this.kryptonHeader2.Size = new System.Drawing.Size(168, 23);
+            this.kryptonHeader2.Size = new System.Drawing.Size(224, 23);
             this.kryptonHeader2.TabIndex = 0;
             this.kryptonHeader2.Values.Description = "";
             this.kryptonHeader2.Values.Heading = "ChannelList";
@@ -413,12 +413,12 @@ namespace AdvancedScada.Studio.Editors
             this.DGMonitorForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DGMonitorForm.HideOuterBorders = true;
             this.DGMonitorForm.Location = new System.Drawing.Point(0, 23);
-            this.DGMonitorForm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGMonitorForm.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.DGMonitorForm.MultiSelect = false;
             this.DGMonitorForm.Name = "DGMonitorForm";
             this.DGMonitorForm.RowHeadersVisible = false;
             this.DGMonitorForm.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGMonitorForm.Size = new System.Drawing.Size(790, 566);
+            this.DGMonitorForm.Size = new System.Drawing.Size(1055, 713);
             this.DGMonitorForm.TabIndex = 3;
             this.DGMonitorForm.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DGMonitorForm_MouseDoubleClick);
             this.DGMonitorForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DGMonitorForm_MouseDown);
@@ -460,6 +460,7 @@ namespace AdvancedScada.Studio.Editors
             | ComponentFactory.Krypton.Workspace.CompactFlags.PromoteLeafs)));
             this.kryptonDockableWorkspace1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonDockableWorkspace1.Location = new System.Drawing.Point(0, 23);
+            this.kryptonDockableWorkspace1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kryptonDockableWorkspace1.Name = "kryptonDockableWorkspace1";
             // 
             // 
@@ -467,7 +468,7 @@ namespace AdvancedScada.Studio.Editors
             this.kryptonDockableWorkspace1.Root.UniqueName = "5b53109fabe9406dadf51391b1e3d4f6";
             this.kryptonDockableWorkspace1.Root.WorkspaceControl = this.kryptonDockableWorkspace1;
             this.kryptonDockableWorkspace1.ShowMaximizeButton = false;
-            this.kryptonDockableWorkspace1.Size = new System.Drawing.Size(790, 566);
+            this.kryptonDockableWorkspace1.Size = new System.Drawing.Size(1055, 713);
             this.kryptonDockableWorkspace1.TabIndex = 0;
             this.kryptonDockableWorkspace1.TabStop = true;
             // 
@@ -476,9 +477,9 @@ namespace AdvancedScada.Studio.Editors
             this.kryptonHeader1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonHeader1.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockInactive;
             this.kryptonHeader1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonHeader1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kryptonHeader1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.kryptonHeader1.Name = "kryptonHeader1";
-            this.kryptonHeader1.Size = new System.Drawing.Size(790, 23);
+            this.kryptonHeader1.Size = new System.Drawing.Size(1055, 23);
             this.kryptonHeader1.TabIndex = 1;
             this.kryptonHeader1.Values.Description = "";
             this.kryptonHeader1.Values.Heading = "TagList";
@@ -559,16 +560,16 @@ namespace AdvancedScada.Studio.Editors
             // 
             // XTagManager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(963, 639);
+            this.ClientSize = new System.Drawing.Size(1284, 786);
             this.ControlBox = false;
             this.Controls.Add(this.kryptonSplitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.toolStrip2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockActive;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "XTagManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TagManager";

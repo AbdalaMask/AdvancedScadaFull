@@ -73,9 +73,10 @@ namespace AdvancedScada.Delta.Core.Editors
                 txtDeviceId.Text = dv.DeviceId.ToString();
                 CboxTypeOfRead.SelectedIndex = 0;
                 cboxDataType.DataSource = System.Enum.GetNames(typeof(DataTypes));
+               
                 if (db == null)
                 {
-
+                    
                     txtDomain.Items.Clear();
                     txtDomain.Items.AddRange(DVP);
                     txtPrefix.Text = "txtPrefix :";

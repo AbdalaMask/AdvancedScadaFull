@@ -68,7 +68,11 @@ namespace AdvancedScada.Studio.Editors
                 case "Modbus":
                     picSelectedDrivers.Image = Properties.Resources.Modbus;
                     break;
+               case "OPC":
+                    picSelectedDrivers.Image = Properties.Resources.OPC;
+                    break;
                 default:
+                    picSelectedDrivers.Image = Properties.Resources.img_wemx_designer_5;
                     break;
             }
 

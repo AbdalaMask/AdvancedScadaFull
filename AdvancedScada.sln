@@ -69,6 +69,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modbus.Core", "Drivers\PLC\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delta.Core", "Drivers\PLC\AdvancedScada.Delta.Core\Delta.Core.csproj", "{075F9844-3E24-4A6B-A2C9-8EE26AF90FAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPC.Core", "Drivers\PLC\AdvancedScada.OPC.Core\OPC.Core.csproj", "{B8DED61A-3A82-44D5-8868-4DBF8BF0AAA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -277,6 +279,14 @@ Global
 		{075F9844-3E24-4A6B-A2C9-8EE26AF90FAA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{075F9844-3E24-4A6B-A2C9-8EE26AF90FAA}.Release|x86.ActiveCfg = Release|Any CPU
 		{075F9844-3E24-4A6B-A2C9-8EE26AF90FAA}.Release|x86.Build.0 = Release|Any CPU
+		{B8DED61A-3A82-44D5-8868-4DBF8BF0AAA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8DED61A-3A82-44D5-8868-4DBF8BF0AAA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8DED61A-3A82-44D5-8868-4DBF8BF0AAA9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B8DED61A-3A82-44D5-8868-4DBF8BF0AAA9}.Debug|x86.Build.0 = Debug|Any CPU
+		{B8DED61A-3A82-44D5-8868-4DBF8BF0AAA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8DED61A-3A82-44D5-8868-4DBF8BF0AAA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8DED61A-3A82-44D5-8868-4DBF8BF0AAA9}.Release|x86.ActiveCfg = Release|Any CPU
+		{B8DED61A-3A82-44D5-8868-4DBF8BF0AAA9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -308,6 +318,7 @@ Global
 		{5ECD768D-0EA3-4F1C-A226-63E88328EE4C} = {9F97F4FB-4099-44D0-B971-C9DACA762611}
 		{506D5556-FFEB-4896-A599-91BA9F16B241} = {9F97F4FB-4099-44D0-B971-C9DACA762611}
 		{075F9844-3E24-4A6B-A2C9-8EE26AF90FAA} = {9F97F4FB-4099-44D0-B971-C9DACA762611}
+		{B8DED61A-3A82-44D5-8868-4DBF8BF0AAA9} = {9F97F4FB-4099-44D0-B971-C9DACA762611}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {204AF3B5-65D3-431D-B11A-887625B7EECD}
