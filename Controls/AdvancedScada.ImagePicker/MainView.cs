@@ -10,6 +10,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Resources;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Markup;
@@ -253,31 +254,38 @@ namespace AdvancedScada.ImagePicker
             var dirs = DirSearch(SelectedPath).ToArray();
             ImageListCurrentSVG.Clear();
             ImageListCurrentTip.Clear();
-
-            //Task t = Task.Factory.StartNew(() =>
-            //    {
+ 
                     try
                     {
 
-                        foreach (var item in dirs)
+                ThreadPool.QueueUserWorkItem((th) =>
+                {
+
+                    foreach (var item in dirs)
+                    {
+                        string newName = Path.GetFileNameWithoutExtension(item);
+                        SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
+                        svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(item);
+                        var bitmap = SVGSample.svg.SVGParser.GetBitmapFromSVG(item);
+                        if (bitmap == null)
                         {
-                            string newName = Path.GetFileNameWithoutExtension(item);
-
-
-                            SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
-                            svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(item);
-                            var bitmap = SVGSample.svg.SVGParser.GetBitmapFromSVG(item);
-
+                            continue;
+                        }
+                        else
+                        {
                             ImageListCurrentSVG.Add(i++, item);
                             ImageListCurrentTip.Add(i, string.Format("{0}.{1}.{2}", newName, bitmap.Height, bitmap.Width));
                             il32.Images.Add(newName, bitmap);
-
-                            Application.DoEvents();
-
                         }
-
                     }
-                    catch (Exception ex)
+                });
+                //Application.DoEvents();
+
+
+            
+                
+            }
+            catch (Exception ex)
                     {
 
                         Console.WriteLine(ex.Message);
@@ -285,8 +293,7 @@ namespace AdvancedScada.ImagePicker
                         //return;
                     }
 
-            //    });
-            //t.Wait();
+           
             gcSVG.ImageList = il32;
 
 

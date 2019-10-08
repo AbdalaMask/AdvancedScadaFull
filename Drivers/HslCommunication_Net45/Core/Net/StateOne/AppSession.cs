@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
 namespace HslCommunication.Core.Net
 {
@@ -17,8 +20,8 @@ namespace HslCommunication.Core.Net
         /// </summary>
         public AppSession()
         {
-            ClientUniqueID = Guid.NewGuid().ToString("N");
-            HybirdLockSend = new SimpleHybirdLock();
+            ClientUniqueID = Guid.NewGuid( ).ToString( "N" );
+            HybirdLockSend = new SimpleHybirdLock( );
         }
 
 
@@ -87,7 +90,7 @@ namespace HslCommunication.Core.Net
         /// <summary>
         /// 清除本次的接收内容
         /// </summary>
-        internal void Clear()
+        internal void Clear( )
         {
             BytesHead = new byte[HslProtocol.HeadByteLength];
             AlreadyReceivedHead = 0;
@@ -104,7 +107,7 @@ namespace HslCommunication.Core.Net
         /// <returns>字符串数据</returns>
         public override string ToString()
         {
-            if (string.IsNullOrEmpty(LoginAlias))
+            if (string.IsNullOrEmpty( LoginAlias ))
             {
                 return $"AppSession[{IpEndPoint}]";
             }

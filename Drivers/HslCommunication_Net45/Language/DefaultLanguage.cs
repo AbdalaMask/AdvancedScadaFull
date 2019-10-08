@@ -1,4 +1,9 @@
-﻿namespace HslCommunication.Language
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace HslCommunication.Language
 {
     /// <summary>
     /// 系统的语言基类，默认也即是中文版本
@@ -157,7 +162,7 @@
         public virtual string LogNetFatal => "致命";
         public virtual string LogNetAbandon => "放弃";
         public virtual string LogNetAll => "全部";
-
+        
         /***********************************************************************************
          * 
          *    Modbus相关
@@ -317,6 +322,12 @@
         public virtual string FujiSpbStatus09 => "由于故障程序无法执行（RUN）";
         public virtual string FujiSpbStatus0C => "密码不一致";
 
+        /***********************************************************************************
+         * 
+         *   MQTT相关
+         * 
+         ************************************************************************************/
+        public virtual string MQTTDataTooLong => "当前的数据长度超出了协议的限制";
 
 #pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
     }

@@ -1,8 +1,10 @@
-﻿using HslCommunication.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using HslCommunication.Core;
 using HslCommunication.Core.IMessage;
 using HslCommunication.Core.Net;
-using System;
-using System.Linq;
 
 namespace HslCommunication.Profinet.Melsec
 {
@@ -114,7 +116,7 @@ namespace HslCommunication.Profinet.Melsec
         /// PLC编号
         /// </summary>
         public byte PLCNumber { get; set; } = 0xFF;
-
+    
         #endregion
 
         #region Read Support
@@ -125,7 +127,7 @@ namespace HslCommunication.Profinet.Melsec
         /// <param name="address">读取地址，格式为"M100","D100","W1A0"</param>
         /// <param name="length">读取的数据长度，字最大值960，位最大值7168</param>
         /// <returns>带成功标志的结果数据对象</returns>
-        public override OperateResult<byte[]> Read(string address, ushort length)
+        public override OperateResult<byte[]> Read( string address, ushort length )
         {
             // 获取指令
             var command = BuildReadCommand(address, length, false, PLCNumber);
@@ -151,49 +153,49 @@ namespace HslCommunication.Profinet.Melsec
         public override OperateResult<bool[]> ReadBool(string address, ushort length)
         {
             // 获取指令
-            var command = BuildReadCommand(address, length, true, PLCNumber);
-            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(command);
+            var command = BuildReadCommand( address, length, true, PLCNumber );
+            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( command );
 
             // 核心交互
-            var read = ReadFromCoreServer(command.Content);
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(read);
+            var read = ReadFromCoreServer( command.Content );
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( read );
 
             // 错误代码验证
-            if (read.Content[1] != 0) return new OperateResult<bool[]>(read.Content[1], StringResources.Language.MelsecPleaseReferToManulDocument);
+            if (read.Content[1] != 0) return new OperateResult<bool[]>( read.Content[1], StringResources.Language.MelsecPleaseReferToManulDocument );
 
             // 数据解析，需要传入是否使用位的参数
-            var extract = ExtractActualData(read.Content, true);
-            if (!extract.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(extract);
+            var extract = ExtractActualData( read.Content, true );
+            if(!extract.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( extract );
 
             // 转化bool数组
-            return OperateResult.CreateSuccessResult(extract.Content.Select(m => m == 0x01).Take(length).ToArray());
+            return OperateResult.CreateSuccessResult( extract.Content.Select( m => m == 0x01 ).Take( length ).ToArray( ) );
         }
 
         #endregion
 
         #region Write Override
-
+        
         /// <summary>
         /// 向PLC写入数据，数据格式为原始的字节类型
         /// </summary>
         /// <param name="address">初始地址</param>
         /// <param name="value">原始的字节数据</param>
         /// <returns>返回写入结果</returns>
-        public override OperateResult Write(string address, byte[] value)
+        public override OperateResult Write( string address, byte[] value )
         {
             // 解析指令
-            OperateResult<byte[]> command = BuildWriteCommand(address, value, PLCNumber);
+            OperateResult<byte[]> command = BuildWriteCommand( address, value, PLCNumber );
             if (!command.IsSuccess) return command;
 
             // 核心交互
-            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
+            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
             if (!read.IsSuccess) return read;
 
             // 错误码校验 (在A兼容1E协议中，结束代码后面紧跟的是异常信息的代码)
-            if (read.Content[1] != 0) return new OperateResult(read.Content[1], StringResources.Language.MelsecPleaseReferToManulDocument);
+            if (read.Content[1] != 0) return new OperateResult( read.Content[1], StringResources.Language.MelsecPleaseReferToManulDocument );
 
             // 成功
-            return OperateResult.CreateSuccessResult();
+            return OperateResult.CreateSuccessResult( );
         }
 
 
@@ -202,7 +204,7 @@ namespace HslCommunication.Profinet.Melsec
         #endregion
 
         #region Write bool[]
-
+        
         /// <summary>
         /// 向PLC中位软元件写入bool数组，返回值说明，比如你写入M100,values[0]对应M100
         /// </summary>
@@ -215,7 +217,7 @@ namespace HslCommunication.Profinet.Melsec
         }
 
         #endregion
-
+        
         #region Object Override
 
         /// <summary>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
@@ -239,7 +241,7 @@ namespace HslCommunication.Profinet.Melsec
         /// <param name="isBit">指示是否按照位成批的读出</param>
         /// <param name="plcNumber">PLC编号</param>
         /// <returns>带有成功标志的指令数据</returns>
-        public static OperateResult<byte[]> BuildReadCommand(string address, ushort length, bool isBit, byte plcNumber)
+        public static OperateResult<byte[]> BuildReadCommand(string address, ushort length, bool isBit, byte plcNumber )
         {
             var analysis = MelsecHelper.McA1EAnalysisAddress(address);
             if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(analysis);
@@ -249,16 +251,16 @@ namespace HslCommunication.Profinet.Melsec
             byte subtitle = isBit ? (byte)0x00 : (byte)0x01;
 
             byte[] _PLCCommand = new byte[12];
-            _PLCCommand[0] = subtitle;                              // 副标题
-            _PLCCommand[1] = plcNumber;                             // PLC号
-            _PLCCommand[2] = 0x0A;                                  // CPU监视定时器（L）这里设置为0x00,0x0A，等待CPU返回的时间为10*250ms=2.5秒
-            _PLCCommand[3] = 0x00;                                  // CPU监视定时器（H）
-            _PLCCommand[4] = (byte)(analysis.Content2 % 256);       // 起始软元件（开始读取的地址）
-            _PLCCommand[5] = (byte)(analysis.Content2 / 256);
-            _PLCCommand[6] = 0x00;
-            _PLCCommand[7] = 0x00;
-            _PLCCommand[8] = analysis.Content1.DataCode[1];         // 软元件代码（L）
-            _PLCCommand[9] = analysis.Content1.DataCode[0];         // 软元件代码（H）
+            _PLCCommand[ 0] = subtitle;                              // 副标题
+            _PLCCommand[ 1] = plcNumber;                             // PLC号
+            _PLCCommand[ 2] = 0x0A;                                  // CPU监视定时器（L）这里设置为0x00,0x0A，等待CPU返回的时间为10*250ms=2.5秒
+            _PLCCommand[ 3] = 0x00;                                  // CPU监视定时器（H）
+            _PLCCommand[ 4] = (byte)(analysis.Content2 % 256);       // 起始软元件（开始读取的地址）
+            _PLCCommand[ 5] = (byte)(analysis.Content2 / 256);
+            _PLCCommand[ 6] = 0x00;
+            _PLCCommand[ 7] = 0x00;
+            _PLCCommand[ 8] = analysis.Content1.DataCode[1];         // 软元件代码（L）
+            _PLCCommand[ 9] = analysis.Content1.DataCode[0];         // 软元件代码（H）
             _PLCCommand[10] = (byte)(length % 256);                  // 软元件点数
             _PLCCommand[11] = 0x00;
 
@@ -289,16 +291,16 @@ namespace HslCommunication.Profinet.Melsec
             byte subtitle = analysis.Content1.DataType == 0x01 ? (byte)0x02 : (byte)0x03;
 
             byte[] _PLCCommand = new byte[12 + value.Length];
-            _PLCCommand[0] = subtitle;                              // 副标题
-            _PLCCommand[1] = plcNumber;                             // PLC号
-            _PLCCommand[2] = 0x0A;                                  // CPU监视定时器（L）这里设置为0x00,0x0A，等待CPU返回的时间为10*250ms=2.5秒
-            _PLCCommand[3] = 0x00;                                  // CPU监视定时器（H）
-            _PLCCommand[4] = (byte)(analysis.Content2 % 256);       // 起始软元件（开始读取的地址）
-            _PLCCommand[5] = (byte)(analysis.Content2 / 256);
-            _PLCCommand[6] = 0x00;
-            _PLCCommand[7] = 0x00;
-            _PLCCommand[8] = analysis.Content1.DataCode[1];         // 软元件代码（L）
-            _PLCCommand[9] = analysis.Content1.DataCode[0];         // 软元件代码（H）
+            _PLCCommand[ 0] = subtitle;                              // 副标题
+            _PLCCommand[ 1] = plcNumber;                             // PLC号
+            _PLCCommand[ 2] = 0x0A;                                  // CPU监视定时器（L）这里设置为0x00,0x0A，等待CPU返回的时间为10*250ms=2.5秒
+            _PLCCommand[ 3] = 0x00;                                  // CPU监视定时器（H）
+            _PLCCommand[ 4] = (byte)(analysis.Content2 % 256);       // 起始软元件（开始读取的地址）
+            _PLCCommand[ 5] = (byte)(analysis.Content2 / 256);
+            _PLCCommand[ 6] = 0x00;
+            _PLCCommand[ 7] = 0x00;
+            _PLCCommand[ 8] = analysis.Content1.DataCode[1];         // 软元件代码（L）
+            _PLCCommand[ 9] = analysis.Content1.DataCode[0];         // 软元件代码（H）
             _PLCCommand[10] = (byte)(length % 256);                  // 软元件点数
             _PLCCommand[11] = 0x00;
 

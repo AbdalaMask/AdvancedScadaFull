@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace HslCommunication.Algorithms.ConnectPool
 {
@@ -34,13 +37,13 @@ namespace HslCommunication.Algorithms.ConnectPool
         /// <summary>
         /// 打开连接
         /// </summary>
-        void Open();
+        void Open( );
 
 
         /// <summary>
         /// 关闭并释放
         /// </summary>
-        void Close();
+        void Close( );
 
     }
 }

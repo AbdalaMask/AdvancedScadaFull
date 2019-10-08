@@ -1,4 +1,11 @@
-﻿/*************************************************************************************
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+
+
+/*************************************************************************************
  * 
  *    文件名：ClassNetHandle.cs
  *    功能：  网络通信头，标识消息的内容
@@ -6,6 +13,9 @@
  *    这个类公开在HslCommunication下面
  * 
  *************************************************************************************/
+
+
+
 
 namespace HslCommunication
 {
@@ -56,7 +66,7 @@ namespace HslCommunication
         /// <param name="netHandle1">第一个数</param>
         /// <param name="netHandle2">第二个数</param>
         /// <returns>等于返回<c>True</c>，否则<c>False</c></returns>
-        public static bool operator ==(NetHandle netHandle1, NetHandle netHandle2)
+        public static bool operator == (NetHandle netHandle1, NetHandle netHandle2)
         {
             return netHandle1.CodeValue == netHandle2.CodeValue;
         }
@@ -67,7 +77,7 @@ namespace HslCommunication
         /// <param name="netHandle1">第一个对象</param>
         /// <param name="netHandle2">第二个对象</param>
         /// <returns>等于返回<c>False</c>，否则<c>True</c></returns>
-        public static bool operator !=(NetHandle netHandle1, NetHandle netHandle2)
+        public static bool operator != (NetHandle netHandle1, NetHandle netHandle2)
         {
             return netHandle1.CodeValue != netHandle2.CodeValue;
         }
@@ -78,7 +88,7 @@ namespace HslCommunication
         /// <param name="netHandle1">第一个对象</param>
         /// <param name="netHandle2">第二个对象</param>
         /// <returns>返回两个指令的和</returns>
-        public static NetHandle operator +(NetHandle netHandle1, NetHandle netHandle2)
+        public static NetHandle operator + (NetHandle netHandle1, NetHandle netHandle2)
         {
             return new NetHandle(netHandle1.CodeValue + netHandle2.CodeValue);
         }
@@ -89,7 +99,7 @@ namespace HslCommunication
         /// <param name="netHandle1">第一个对象</param>
         /// <param name="netHandle2">第二个对象</param>
         /// <returns>返回两个指令的差</returns>
-        public static NetHandle operator -(NetHandle netHandle1, NetHandle netHandle2)
+        public static NetHandle operator - (NetHandle netHandle1, NetHandle netHandle2)
         {
             return new NetHandle(netHandle1.CodeValue - netHandle2.CodeValue);
         }
@@ -100,7 +110,7 @@ namespace HslCommunication
         /// <param name="netHandle1">第一个对象</param>
         /// <param name="netHandle2">第二个对象</param>
         /// <returns>小于则返回<c>True</c>，否则返回<c>False</c></returns>
-        public static bool operator <(NetHandle netHandle1, NetHandle netHandle2)
+        public static bool operator < (NetHandle netHandle1, NetHandle netHandle2)
         {
             return netHandle1.CodeValue < netHandle2.CodeValue;
         }
@@ -111,7 +121,7 @@ namespace HslCommunication
         /// <param name="netHandle1">第一个对象</param>
         /// <param name="netHandle2">第二个对象</param>
         /// <returns>大于则返回<c>True</c>，否则返回<c>False</c></returns>
-        public static bool operator >(NetHandle netHandle1, NetHandle netHandle2)
+        public static bool operator > (NetHandle netHandle1, NetHandle netHandle2)
         {
             return netHandle1.CodeValue > netHandle2.CodeValue;
         }
@@ -186,7 +196,7 @@ namespace HslCommunication
 
         #region Public Members
 
-
+        
         /// <summary>
         /// 完整的暗号值
         /// </summary>
@@ -209,7 +219,7 @@ namespace HslCommunication
         #endregion
 
         #region Object Override
-
+        
         /// <summary>
         /// 获取完整的暗号数据
         /// </summary>

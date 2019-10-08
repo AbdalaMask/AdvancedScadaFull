@@ -1,6 +1,8 @@
 ﻿using HslCommunication.Core;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace HslCommunication.BasicFramework
@@ -30,25 +32,25 @@ namespace HslCommunication.BasicFramework
         /// 获取需要保存的数据，需要重写实现
         /// </summary>
         /// <returns>需要存储的信息</returns>
-        string ToSaveString();
+        string ToSaveString( );
 
         /// <summary>
         /// 从字符串加载数据，需要重写实现
         /// </summary>
         /// <param name="content">字符串数据</param>
-        void LoadByString(string content);
+        void LoadByString( string content );
 
 
         /// <summary>
         /// 不使用解密方法从文件读取数据
         /// </summary>
-        void LoadByFile();
+        void LoadByFile( );
 
 
         /// <summary>
         /// 不使用加密方法保存数据到文件
         /// </summary>
-        void SaveToFile();
+        void SaveToFile( );
 
 
         /// <summary>
@@ -80,9 +82,9 @@ namespace HslCommunication.BasicFramework
         /// <summary>
         /// 实例化一个文件存储的基类
         /// </summary>
-        public SoftFileSaveBase()
+        public SoftFileSaveBase( )
         {
-            HybirdLock = new SimpleHybirdLock();
+            HybirdLock = new SimpleHybirdLock( );
         }
 
         #endregion
@@ -110,7 +112,7 @@ namespace HslCommunication.BasicFramework
         /// 获取需要保存的数据，需要重写实现
         /// </summary>
         /// <returns>需要存储的信息</returns>
-        public virtual string ToSaveString()
+        public virtual string ToSaveString( )
         {
             return string.Empty;
         }
@@ -120,7 +122,7 @@ namespace HslCommunication.BasicFramework
         /// 从字符串加载数据，需要重写实现
         /// </summary>
         /// <param name="content">字符串数据</param>
-        public virtual void LoadByString(string content)
+        public virtual void LoadByString( string content )
         {
 
         }
@@ -133,9 +135,9 @@ namespace HslCommunication.BasicFramework
         /// <summary>
         /// 不使用解密方法从文件读取数据
         /// </summary>
-        public virtual void LoadByFile()
+        public virtual void LoadByFile( )
         {
-            LoadByFile(m => m);
+            LoadByFile( m => m );
         }
 
 
@@ -144,27 +146,27 @@ namespace HslCommunication.BasicFramework
         /// 使用用户自定义的解密方法从文件读取数据
         /// </summary>
         /// <param name="decrypt">用户自定义的解密方法</param>
-        public void LoadByFile(Converter<string, string> decrypt)
+        public void LoadByFile( Converter<string, string> decrypt )
         {
             if (FileSavePath != "")
             {
-                if (File.Exists(FileSavePath))
+                if (File.Exists( FileSavePath ))
                 {
-                    HybirdLock.Enter();
+                    HybirdLock.Enter( );
                     try
                     {
-                        using (StreamReader sr = new StreamReader(FileSavePath, Encoding.Default))
+                        using (StreamReader sr = new StreamReader( FileSavePath, Encoding.Default ))
                         {
-                            LoadByString(decrypt(sr.ReadToEnd()));
+                            LoadByString( decrypt( sr.ReadToEnd( ) ) );
                         }
                     }
                     catch (Exception ex)
                     {
-                        ILogNet?.WriteException(LogHeaderText, StringResources.Language.FileLoadFailed, ex);
+                        ILogNet?.WriteException( LogHeaderText, StringResources.Language.FileLoadFailed, ex );
                     }
                     finally
                     {
-                        HybirdLock.Leave();
+                        HybirdLock.Leave( );
                     }
                 }
             }
@@ -175,9 +177,9 @@ namespace HslCommunication.BasicFramework
         /// <summary>
         /// 不使用加密方法保存数据到文件
         /// </summary>
-        public virtual void SaveToFile()
+        public virtual void SaveToFile( )
         {
-            SaveToFile(m => m);
+            SaveToFile( m => m );
         }
 
 
@@ -185,26 +187,26 @@ namespace HslCommunication.BasicFramework
         /// 使用用户自定义的加密方法保存数据到文件
         /// </summary>
         /// <param name="encrypt">用户自定义的加密方法</param>
-        public void SaveToFile(Converter<string, string> encrypt)
+        public void SaveToFile( Converter<string, string> encrypt )
         {
             if (FileSavePath != "")
             {
-                HybirdLock.Enter();
+                HybirdLock.Enter( );
                 try
                 {
-                    using (StreamWriter sw = new StreamWriter(FileSavePath, false, Encoding.Default))
+                    using (StreamWriter sw = new StreamWriter( FileSavePath, false, Encoding.Default ))
                     {
-                        sw.Write(encrypt(ToSaveString()));
-                        sw.Flush();
+                        sw.Write( encrypt( ToSaveString( ) ) );
+                        sw.Flush( );
                     }
                 }
                 catch (Exception ex)
                 {
-                    ILogNet?.WriteException(LogHeaderText, StringResources.Language.FileSaveFailed, ex);
+                    ILogNet?.WriteException( LogHeaderText, StringResources.Language.FileSaveFailed, ex );
                 }
                 finally
                 {
-                    HybirdLock.Leave();
+                    HybirdLock.Leave( );
                 }
             }
         }

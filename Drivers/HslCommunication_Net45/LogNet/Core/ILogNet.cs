@@ -14,7 +14,7 @@ namespace HslCommunication.LogNet
     /// </remarks>
     /// <example>
     /// 实现类就不放示例代码了，存储日志的使用都是一样的，就是实例化的时候不一致，以下示例代码以单文件日志为例
-    /// <code lang="cs" source="TestProject\HslCommunicationDemo\FormLogNet.cs" region="ILogNet" title="ILogNet示例" />
+    /// <code lang="cs" source="TestProject\HslCommunicationDemo\Hsl\FormLogNet.cs" region="ILogNet" title="ILogNet示例" />
     /// </example>
     public interface ILogNet : IDisposable
     {
@@ -114,13 +114,13 @@ namespace HslCommunication.LogNet
         /// 写入一行换行符
         /// </summary>
         void WriteNewLine();
-
+        
         /// <summary>
         /// 写入任意字符串
         /// </summary>
         /// <param name="text">文本</param>
         void WriteAnyString(string text);
-
+        
         /// <summary>
         /// 写入一条警告日志
         /// </summary>
@@ -150,6 +150,6 @@ namespace HslCommunication.LogNet
         /// 过滤掉指定的关键字的日志，该信息不存储，但仍然触发BeforeSaveToFile事件
         /// </summary>
         /// <param name="keyword">关键字</param>
-        void FiltrateKeyword(string keyword);
+        void FiltrateKeyword( string keyword );
     }
 }

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace HslCommunication.Core.IMessage
 {
@@ -20,12 +23,12 @@ namespace HslCommunication.Core.IMessage
         /// <summary>
         /// 头子节信息
         /// </summary>
-        public byte[] HeadBytes { get; set; }
+        public byte[] HeadBytes { get ; set; }
 
         /// <summary>
         /// 内容字节信息
         /// </summary>
-        public byte[] ContentBytes { get; set; }
+        public byte[] ContentBytes { get ; set ; }
 
 
         /// <summary>
@@ -37,7 +40,7 @@ namespace HslCommunication.Core.IMessage
         {
             if (HeadBytes == null) return false;
 
-            if (HeadBytes?.Length >= 32)
+            if (HeadBytes?.Length>=32)
             {
                 return BasicFramework.SoftBasic.IsTwoBytesEquel(HeadBytes, 12, token, 0, 16);
             }

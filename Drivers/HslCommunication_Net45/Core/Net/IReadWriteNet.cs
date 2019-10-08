@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace HslCommunication.Core
 {
@@ -15,21 +18,21 @@ namespace HslCommunication.Core
     public interface IReadWriteNet
     {
         #region Read Support
-
+        
         /// <summary>
         /// 批量读取底层的数据信息，需要指定地址和长度，具体的结果取决于实现
         /// </summary>
         /// <param name="address">数据地址</param>
         /// <param name="length">数据长度</param>
         /// <returns>带有成功标识的byte[]数组</returns>
-        OperateResult<byte[]> Read(string address, ushort length);
+        OperateResult<byte[]> Read( string address, ushort length );
 
         /// <summary>
         /// 读取16位的有符号整型
         /// </summary>
         /// <param name="address">起始地址</param>
         /// <returns>带有成功标识的short数据</returns>
-        OperateResult<short> ReadInt16(string address);
+        OperateResult<short> ReadInt16( string address );
 
         /// <summary>
         /// 读取16位的有符号整型数组
@@ -37,14 +40,14 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="length">读取的数组长度</param>
         /// <returns>带有成功标识的short数组</returns>
-        OperateResult<short[]> ReadInt16(string address, ushort length);
+        OperateResult<short[]> ReadInt16( string address, ushort length );
 
         /// <summary>
         /// 读取16位的无符号整型
         /// </summary>
         /// <param name="address">起始地址</param>
         /// <returns>带有成功标识的ushort数据</returns>
-        OperateResult<ushort> ReadUInt16(string address);
+        OperateResult<ushort> ReadUInt16( string address );
 
         /// <summary>
         /// 读取16位的无符号整型数组
@@ -52,14 +55,14 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="length">读取的数组长度</param>
         /// <returns>带有成功标识的ushort数组</returns>
-        OperateResult<ushort[]> ReadUInt16(string address, ushort length);
+        OperateResult<ushort[]> ReadUInt16( string address, ushort length );
 
         /// <summary>
         /// 读取32位的有符号整型
         /// </summary>
         /// <param name="address">起始地址</param>
         /// <returns>带有成功标识的int数据</returns>
-        OperateResult<int> ReadInt32(string address);
+        OperateResult<int> ReadInt32( string address );
 
         /// <summary>
         /// 读取32位有符号整型的数组
@@ -67,14 +70,14 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="length">数组长度</param>
         /// <returns>带成功标志的结果数据对象</returns>
-        OperateResult<int[]> ReadInt32(string address, ushort length);
+        OperateResult<int[]> ReadInt32( string address, ushort length );
 
         /// <summary>
         /// 读取32位的无符号整型
         /// </summary>
         /// <param name="address">起始地址</param>
         /// <returns>带有成功标识的uint数据</returns>
-        OperateResult<uint> ReadUInt32(string address);
+        OperateResult<uint> ReadUInt32( string address );
 
         /// <summary>
         /// 读取设备的uint类型的数组
@@ -82,14 +85,14 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="length">数组长度</param>
         /// <returns>带成功标志的结果数据对象</returns>
-        OperateResult<uint[]> ReadUInt32(string address, ushort length);
+        OperateResult<uint[]> ReadUInt32( string address, ushort length );
 
         /// <summary>
         /// 读取64位的有符号整型
         /// </summary>
         /// <param name="address">起始地址</param>
         /// <returns>带有成功标识的long数据</returns>
-        OperateResult<long> ReadInt64(string address);
+        OperateResult<long> ReadInt64( string address );
 
         /// <summary>
         /// 读取64位的有符号整型数组
@@ -97,14 +100,14 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="length">数组长度</param>
         /// <returns>带成功标志的结果数据对象</returns>
-        OperateResult<long[]> ReadInt64(string address, ushort length);
+        OperateResult<long[]> ReadInt64( string address, ushort length );
 
         /// <summary>
         /// 读取64位的无符号整型
         /// </summary>
         /// <param name="address">起始地址</param>
         /// <returns>带有成功标识的ulong数据</returns>
-        OperateResult<ulong> ReadUInt64(string address);
+        OperateResult<ulong> ReadUInt64( string address );
 
         /// <summary>
         /// 读取64位的无符号整型的数组
@@ -112,14 +115,14 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="length">数组长度</param>
         /// <returns>带成功标志的结果数据对象</returns>
-        OperateResult<ulong[]> ReadUInt64(string address, ushort length);
+        OperateResult<ulong[]> ReadUInt64( string address, ushort length );
 
         /// <summary>
         /// 读取单浮点精度的数据
         /// </summary>
         /// <param name="address">起始地址</param>
         /// <returns>带有成功标识的float数据</returns>
-        OperateResult<float> ReadFloat(string address);
+        OperateResult<float> ReadFloat( string address );
 
         /// <summary>
         /// 读取单浮点精度的数组
@@ -127,14 +130,14 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="length">数组长度</param>
         /// <returns>带成功标志的结果数据对象</returns>
-        OperateResult<float[]> ReadFloat(string address, ushort length);
+        OperateResult<float[]> ReadFloat( string address, ushort length );
 
         /// <summary>
         /// 读取双浮点精度的数据
         /// </summary>
         /// <param name="address">起始地址</param>
         /// <returns>带有成功标识的double数据</returns>
-        OperateResult<double> ReadDouble(string address);
+        OperateResult<double> ReadDouble( string address );
 
         /// <summary>
         /// 读取双浮点精度的数据的数组
@@ -142,7 +145,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="length">数组长度</param>
         /// <returns>带成功标志的结果数据对象</returns>
-        OperateResult<double[]> ReadDouble(string address, ushort length);
+        OperateResult<double[]> ReadDouble( string address, ushort length );
 
         /// <summary>
         /// 读取字符串数据，
@@ -150,7 +153,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="length">数据长度</param>
         /// <returns>带有成功标识的string数据</returns>
-        OperateResult<string> ReadString(string address, ushort length);
+        OperateResult<string> ReadString( string address, ushort length );
 
         /// <summary>
         /// 读取自定义的数据类型，需要继承自IDataTransfer接口
@@ -158,14 +161,14 @@ namespace HslCommunication.Core
         /// <typeparam name="T">自定义的类型</typeparam>
         /// <param name="address">起始地址</param>
         /// <returns>带有成功标识的自定义类型数据</returns>
-        OperateResult<T> ReadCustomer<T>(string address) where T : IDataTransfer, new();
+        OperateResult<T> ReadCustomer<T>( string address ) where T : IDataTransfer, new();
 
         /// <summary>
         /// 从设备里读取支持Hsl特性的数据内容，该特性为<see cref="HslDeviceAddressAttribute"/>，详细参考论坛的操作说明。
         /// </summary>
         /// <typeparam name="T">自定义的数据类型对象</typeparam>
         /// <returns>包含是否成功的结果对象</returns>
-        OperateResult<T> Read<T>() where T : class, new();
+        OperateResult<T> Read<T>( ) where T : class, new();
 
         #endregion
 
@@ -177,7 +180,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="value">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, byte[] value);
+        OperateResult Write( string address, byte[] value );
 
         /// <summary>
         /// 写入short数据
@@ -185,7 +188,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="value">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, short value);
+        OperateResult Write( string address, short value );
 
         /// <summary>
         /// 写入short数组
@@ -193,7 +196,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="values">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, short[] values);
+        OperateResult Write( string address, short[] values );
 
         /// <summary>
         /// 写入ushort数据
@@ -201,7 +204,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="value">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, ushort value);
+        OperateResult Write( string address, ushort value );
 
         /// <summary>
         /// 写入ushort数组
@@ -209,7 +212,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="values">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, ushort[] values);
+        OperateResult Write( string address, ushort[] values );
 
         /// <summary>
         /// 写入int数据
@@ -217,7 +220,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="value">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, int value);
+        OperateResult Write( string address, int value );
 
         /// <summary>
         /// 写入int[]数组
@@ -225,7 +228,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="values">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, int[] values);
+        OperateResult Write( string address, int[] values );
 
         /// <summary>
         /// 写入uint数据
@@ -233,7 +236,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="value">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, uint value);
+        OperateResult Write( string address, uint value );
 
         /// <summary>
         /// 写入uint[]数组
@@ -241,7 +244,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="values">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, uint[] values);
+        OperateResult Write( string address, uint[] values );
 
         /// <summary>
         /// 写入long数据
@@ -249,7 +252,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="value">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, long value);
+        OperateResult Write( string address, long value );
 
         /// <summary>
         /// 写入long数组
@@ -257,7 +260,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="values">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, long[] values);
+        OperateResult Write( string address, long[] values );
 
         /// <summary>
         /// 写入ulong数据
@@ -265,7 +268,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="value">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, ulong value);
+        OperateResult Write( string address, ulong value );
 
         /// <summary>
         /// 写入ulong数组
@@ -273,7 +276,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="values">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, ulong[] values);
+        OperateResult Write( string address, ulong[] values );
 
         /// <summary>
         /// 写入float数据
@@ -281,7 +284,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="value">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, float value);
+        OperateResult Write( string address, float value );
 
         /// <summary>
         /// 写入float数组
@@ -289,7 +292,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="values">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, float[] values);
+        OperateResult Write( string address, float[] values );
 
         /// <summary>
         /// 写入double数据
@@ -297,7 +300,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="value">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, double value);
+        OperateResult Write( string address, double value );
 
         /// <summary>
         /// 写入double数组
@@ -305,7 +308,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="values">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, double[] values);
+        OperateResult Write( string address, double[] values );
 
         /// <summary>
         /// 写入字符串信息，编码为ASCII
@@ -313,7 +316,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="value">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, string value);
+        OperateResult Write( string address, string value );
 
         /// <summary>
         /// 写入指定长度的字符串信息，编码为ASCII
@@ -322,7 +325,7 @@ namespace HslCommunication.Core
         /// <param name="value">写入值</param>
         /// <param name="length">字符串的长度</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, string value, int length);
+        OperateResult Write( string address, string value, int length );
 
         /// <summary>
         /// 写入自定义类型的数据，该类型必须继承自IDataTransfer接口
@@ -331,7 +334,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="value">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult WriteCustomer<T>(string address, T value) where T : IDataTransfer, new();
+        OperateResult WriteCustomer<T>( string address, T value ) where T : IDataTransfer, new();
 
         /// <summary>
         /// 从设备里读取支持Hsl特性的数据内容，该特性为<see cref="HslDeviceAddressAttribute"/>，详细参考论坛的操作说明。
@@ -339,7 +342,7 @@ namespace HslCommunication.Core
         /// <typeparam name="T">自定义的数据类型对象</typeparam>
         /// <returns>包含是否成功的结果对象</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        OperateResult Write<T>(T data) where T : class, new();
+        OperateResult Write<T>( T data ) where T : class, new();
 
         #endregion
 
@@ -353,14 +356,14 @@ namespace HslCommunication.Core
         /// <param name="address">数据地址</param>
         /// <param name="length">数据长度</param>
         /// <returns>带有成功标识的byte[]数组</returns>
-        OperateResult<bool[]> ReadBool(string address, ushort length);
+        OperateResult<bool[]> ReadBool( string address, ushort length );
 
         /// <summary>
         /// 读取底层的bool数据信息，具体的结果取决于实现
         /// </summary>
         /// <param name="address">数据地址</param>
         /// <returns>带有成功标识的byte[]数组</returns>
-        OperateResult<bool> ReadBool(string address);
+        OperateResult<bool> ReadBool( string address );
 
         /// <summary>
         /// 写入bool数组数据
@@ -368,7 +371,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="value">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, bool[] value);
+        OperateResult Write( string address, bool[] value );
 
         /// <summary>
         /// 写入bool数据
@@ -376,7 +379,7 @@ namespace HslCommunication.Core
         /// <param name="address">起始地址</param>
         /// <param name="value">写入值</param>
         /// <returns>带有成功标识的结果类对象</returns>
-        OperateResult Write(string address, bool value);
+        OperateResult Write( string address, bool value );
 
         #endregion
     }

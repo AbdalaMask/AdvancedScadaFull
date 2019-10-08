@@ -1,4 +1,9 @@
-﻿namespace HslCommunication.Enthernet
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace HslCommunication.Enthernet
 {
     /// <summary>
     /// 文件的基础信息

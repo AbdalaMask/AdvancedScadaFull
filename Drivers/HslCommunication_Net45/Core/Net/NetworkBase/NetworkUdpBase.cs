@@ -1,7 +1,10 @@
-﻿using System;
+﻿using HslCommunication.BasicFramework;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
 namespace HslCommunication.Core.Net
 {
@@ -13,9 +16,9 @@ namespace HslCommunication.Core.Net
         /// <summary>
         /// 实例化一个默认的方法
         /// </summary>
-        public NetworkUdpBase()
+        public NetworkUdpBase( )
         {
-            hybirdLock = new SimpleHybirdLock();
+            hybirdLock = new SimpleHybirdLock( );
             ReceiveTimeout = 5000;
         }
 
@@ -44,29 +47,29 @@ namespace HslCommunication.Core.Net
         /// </summary>
         /// <param name="value">完整的报文内容</param>
         /// <returns>是否成功的结果对象</returns>
-        public virtual OperateResult<byte[]> ReadFromCoreServer(byte[] value)
+        public virtual OperateResult<byte[]> ReadFromCoreServer( byte[] value )
         {
-            hybirdLock.Enter();
+            hybirdLock.Enter( );
             try
             {
-                IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IpAddress), Port);
-                Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                server.SendTo(value, value.Length, SocketFlags.None, endPoint);
-                IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
+                IPEndPoint endPoint = new IPEndPoint( IPAddress.Parse( IpAddress ), Port );
+                Socket server = new Socket( AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp );
+                server.SendTo( value, value.Length, SocketFlags.None, endPoint );
+                IPEndPoint sender = new IPEndPoint( IPAddress.Any, 0 );
                 EndPoint Remote = (EndPoint)sender;
 
                 // 对于不存在的IP地址，加入此行代码后，可以在指定时间内解除阻塞模式限制
-                server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, ReceiveTimeout);
+                server.SetSocketOption( SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, ReceiveTimeout );
                 byte[] buffer = new byte[ReceiveCacheLength];
-                int recv = server.ReceiveFrom(buffer, ref Remote);
+                int recv = server.ReceiveFrom( buffer, ref Remote );
 
-                hybirdLock.Leave();
-                return OperateResult.CreateSuccessResult(buffer.Take(recv).ToArray());
+                hybirdLock.Leave( );
+                return OperateResult.CreateSuccessResult( buffer.Take( recv ).ToArray( ) );
             }
             catch (Exception ex)
             {
-                hybirdLock.Leave();
-                return new OperateResult<byte[]>(ex.Message);
+                hybirdLock.Leave( );
+                return new OperateResult<byte[]>( ex.Message );
             }
         }
 

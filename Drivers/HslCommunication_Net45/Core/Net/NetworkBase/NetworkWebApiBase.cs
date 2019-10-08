@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Net;
 #if !NET35
 using System.Net.Http;
@@ -10,6 +13,9 @@ namespace HslCommunication.Core.Net
     /// <summary>
     /// 基于webapi的数据访问的基类
     /// </summary>
+    /// <remarks>
+    /// 当前的基类在.net framework上存在问题，在.net framework4.5及.net standard上运行稳定而且正常
+    /// </remarks>
     public class NetworkWebApiBase
     {
 
@@ -19,12 +25,12 @@ namespace HslCommunication.Core.Net
         /// 使用指定的ip地址来初始化对象
         /// </summary>
         /// <param name="ipAddress">Ip地址信息</param>
-        public NetworkWebApiBase(string ipAddress)
+        public NetworkWebApiBase( string ipAddress )
         {
             this.ipAddress = ipAddress;
 
 #if !NET35
-            this.httpClient = new HttpClient();
+            this.httpClient = new HttpClient( );
 #endif
         }
 
@@ -33,12 +39,12 @@ namespace HslCommunication.Core.Net
         /// </summary>
         /// <param name="ipAddress">Ip地址信息</param>
         /// <param name="port">端口号信息</param>
-        public NetworkWebApiBase(string ipAddress, int port)
+        public NetworkWebApiBase( string ipAddress, int port )
         {
             this.ipAddress = ipAddress;
             this.port = port;
 #if !NET35
-            this.httpClient = new HttpClient();
+            this.httpClient = new HttpClient( );
 #endif
         }
 
@@ -49,7 +55,7 @@ namespace HslCommunication.Core.Net
         /// <param name="port">端口号信息</param>
         /// <param name="name">用户名</param>
         /// <param name="password">密码</param>
-        public NetworkWebApiBase(string ipAddress, int port, string name, string password)
+        public NetworkWebApiBase( string ipAddress, int port, string name, string password )
         {
             this.ipAddress = ipAddress;
             this.port = port;
@@ -57,17 +63,17 @@ namespace HslCommunication.Core.Net
             this.password = password;
 
 #if !NET35
-            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(password))
+            if (!string.IsNullOrEmpty( name ) && !string.IsNullOrEmpty( password ))
             {
-                var handler = new HttpClientHandler { Credentials = new NetworkCredential(name, password) };
+                var handler = new HttpClientHandler { Credentials = new NetworkCredential( name, password ) };
                 handler.Proxy = null;
                 handler.UseProxy = false;
 
-                this.httpClient = new HttpClient(handler);
+                this.httpClient = new HttpClient( handler );
             }
             else
             {
-                this.httpClient = new HttpClient();
+                this.httpClient = new HttpClient( );
             }
 
 #endif
@@ -84,7 +90,7 @@ namespace HslCommunication.Core.Net
         /// <returns>是否读取成功的内容</returns>
         protected virtual OperateResult<string> ReadByAddress(string address)
         {
-            return new OperateResult<string>(StringResources.Language.NotSupportedFunction);
+            return new OperateResult<string>( StringResources.Language.NotSupportedFunction );
         }
 
         #endregion
@@ -96,12 +102,12 @@ namespace HslCommunication.Core.Net
         /// </summary>
         /// <param name="address">无效参数</param>
         /// <returns>带有成功标识的byte[]数组</returns>
-        public virtual OperateResult<byte[]> Read(string address)
+        public virtual OperateResult<byte[]> Read( string address )
         {
-            OperateResult<string> read = ReadString(address);
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(read);
+            OperateResult<string> read = ReadString( address );
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( read );
 
-            return OperateResult.CreateSuccessResult(Encoding.UTF8.GetBytes(read.Content));
+            return OperateResult.CreateSuccessResult( Encoding.UTF8.GetBytes( read.Content ) );
         }
 
         /// <summary>
@@ -109,25 +115,25 @@ namespace HslCommunication.Core.Net
         /// </summary>
         /// <param name="address">地址信息</param>
         /// <returns>带有成功标识的字符串数据</returns>
-        public virtual OperateResult<string> ReadString(string address)
+        public virtual OperateResult<string> ReadString( string address )
         {
-            if (!Authorization.nzugaydgwadawdibbas()) return new OperateResult<string>(StringResources.Language.AuthorizationFailed);
+            if (!Authorization.nzugaydgwadawdibbas( )) return new OperateResult<string>( StringResources.Language.AuthorizationFailed );
 
-            if (address.StartsWith("url=") || address.StartsWith("URL="))
+            if (address.StartsWith( "url=" ) || address.StartsWith( "URL=" ))
             {
-                address = address.Substring(4);
-                string url = $"http://{ipAddress}:{port}/{ (address.StartsWith("/") ? address.Substring(1) : address) }";
+                address = address.Substring( 4 );
+                string url = $"http://{ipAddress}:{port}/{ (address.StartsWith( "/" ) ? address.Substring( 1 ) : address) }";
 
                 try
                 {
 #if !NET35
-                    using (HttpResponseMessage response = httpClient.GetAsync(url).Result)
+                    using (HttpResponseMessage response = httpClient.GetAsync( url ).Result)
                     using (HttpContent content = response.Content)
                     {
-                        response.EnsureSuccessStatusCode();
-                        string result = content.ReadAsStringAsync().Result;
+                        response.EnsureSuccessStatusCode( );
+                        string result = content.ReadAsStringAsync( ).Result;
 
-                        return OperateResult.CreateSuccessResult(result);
+                        return OperateResult.CreateSuccessResult( result );
                     }
 #else
                     WebClient webClient = new WebClient( );
@@ -141,12 +147,12 @@ namespace HslCommunication.Core.Net
                 }
                 catch (Exception ex)
                 {
-                    return new OperateResult<string>(ex.Message);
+                    return new OperateResult<string>( ex.Message );
                 }
             }
             else
             {
-                return ReadByAddress(address);
+                return ReadByAddress( address );
             }
         }
 
@@ -156,9 +162,9 @@ namespace HslCommunication.Core.Net
         /// <param name="address">指定的地址信息，有些设备可能不支持</param>
         /// <param name="value">原始的字节数据信息</param>
         /// <returns>是否成功的写入</returns>
-        public virtual OperateResult Write(string address, byte[] value)
+        public virtual OperateResult Write( string address, byte[] value )
         {
-            return Write(address, Encoding.Default.GetString(value));
+            return Write( address, Encoding.Default.GetString( value ) );
         }
 
         /// <summary>
@@ -167,24 +173,24 @@ namespace HslCommunication.Core.Net
         /// <param name="address">指定的地址信息</param>
         /// <param name="value">字符串的数据信息</param>
         /// <returns>是否成功的写入</returns>
-        public virtual OperateResult Write(string address, string value)
+        public virtual OperateResult Write( string address, string value )
         {
-            if (address.StartsWith("url=") || address.StartsWith("URL="))
+            if (address.StartsWith( "url=" ) || address.StartsWith( "URL=" ))
             {
-                address = address.Substring(4);
-                string url = $"http://{ipAddress}:{port}/{ (address.StartsWith("/") ? address.Substring(1) : address) }";
+                address = address.Substring( 4 );
+                string url = $"http://{ipAddress}:{port}/{ (address.StartsWith( "/" ) ? address.Substring( 1 ) : address) }";
 
                 try
                 {
 #if !NET35
-                    using (StringContent stringContent = new StringContent(value))
-                    using (HttpResponseMessage response = httpClient.PostAsync(url, stringContent).Result)
+                    using (StringContent stringContent = new StringContent( value ))
+                    using (HttpResponseMessage response = httpClient.PostAsync( url, stringContent ).Result)
                     using (HttpContent content = response.Content)
                     {
-                        response.EnsureSuccessStatusCode();
-                        string result = content.ReadAsStringAsync().Result;
+                        response.EnsureSuccessStatusCode( );
+                        string result = content.ReadAsStringAsync( ).Result;
 
-                        return OperateResult.CreateSuccessResult(result);
+                        return OperateResult.CreateSuccessResult( result );
                     }
 #else
                     WebClient webClient = new WebClient( );
@@ -199,13 +205,35 @@ namespace HslCommunication.Core.Net
                 }
                 catch (Exception ex)
                 {
-                    return new OperateResult<string>(ex.Message);
+                    return new OperateResult<string>( ex.Message );
                 }
             }
             else
             {
-                return new OperateResult<string>(StringResources.Language.NotSupportedFunction);
+                return new OperateResult<string>( StringResources.Language.NotSupportedFunction );
             }
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// 获取或设置当前连接的IP地址
+        /// </summary>
+        public string IpAddress
+        {
+            get => ipAddress;
+            set => ipAddress = value;
+        }
+
+        /// <summary>
+        /// 获取或设置当前的端口号信息
+        /// </summary>
+        public int Port
+        {
+            get => port;
+            set => port = value;
         }
 
         #endregion

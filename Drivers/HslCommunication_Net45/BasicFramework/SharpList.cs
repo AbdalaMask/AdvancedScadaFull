@@ -1,6 +1,8 @@
-﻿using HslCommunication.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using HslCommunication.Core;
 
 namespace HslCommunication.BasicFramework
 {
@@ -17,12 +19,12 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="count">数据的个数</param>
         /// <param name="appendLast">是否从最后一个数添加</param>
-        public SharpList(int count, bool appendLast = false)
+        public SharpList( int count, bool appendLast = false )
         {
             if (count > 8192) capacity = 4096;
 
             this.array = new T[capacity + count];
-            this.hybirdLock = new SimpleHybirdLock();
+            this.hybirdLock = new SimpleHybirdLock( );
             this.count = count;
             if (appendLast) this.lastIndex = count;
         }
@@ -44,11 +46,11 @@ namespace HslCommunication.BasicFramework
         /// 新增一个数据值
         /// </summary>
         /// <param name="value">数据值</param>
-        public void Add(T value)
+        public void Add( T value )
         {
-            hybirdLock.Enter();
+            hybirdLock.Enter( );
 
-            if (lastIndex < (capacity + count))
+            if(lastIndex < (capacity + count))
             {
                 array[lastIndex++] = value;
             }
@@ -56,23 +58,23 @@ namespace HslCommunication.BasicFramework
             {
                 // 需要重新挪位置了
                 T[] buffer = new T[capacity + count];
-                Array.Copy(array, capacity, buffer, 0, count);
+                Array.Copy( array, capacity, buffer, 0, count );
                 array = buffer;
                 lastIndex = count;
             }
 
-            hybirdLock.Leave();
+            hybirdLock.Leave( );
         }
 
         /// <summary>
         /// 批量的增加数据
         /// </summary>
         /// <param name="values">批量数据信息</param>
-        public void Add(IEnumerable<T> values)
+        public void Add( IEnumerable<T> values )
         {
-            foreach (var m in values)
+            foreach(var m in values)
             {
-                Add(m);
+                Add( m );
             }
         }
 
@@ -80,22 +82,22 @@ namespace HslCommunication.BasicFramework
         /// 获取数据的数组值
         /// </summary>
         /// <returns>数组值</returns>
-        public T[] ToArray()
+        public T[] ToArray( )
         {
             T[] result = null;
-            hybirdLock.Enter();
+            hybirdLock.Enter( );
 
             if (lastIndex < count)
             {
                 result = new T[lastIndex];
-                Array.Copy(array, 0, result, 0, lastIndex);
+                Array.Copy( array, 0, result, 0, lastIndex );
             }
             else
             {
                 result = new T[count];
-                Array.Copy(array, lastIndex - count, result, 0, count);
+                Array.Copy( array, lastIndex - count, result, 0, count );
             }
-            hybirdLock.Leave();
+            hybirdLock.Leave( );
             return result;
         }
 
@@ -108,10 +110,10 @@ namespace HslCommunication.BasicFramework
         {
             get
             {
-                if (index < 0) throw new IndexOutOfRangeException("Index must larger than zero");
-                if (index >= count) throw new IndexOutOfRangeException("Index must smaller than array length");
-                T tmp = default(T);
-                hybirdLock.Enter();
+                if (index < 0) throw new IndexOutOfRangeException( "Index must larger than zero" );
+                if (index >= count) throw new IndexOutOfRangeException( "Index must smaller than array length" );
+                T tmp = default( T );
+                hybirdLock.Enter( );
 
                 if (lastIndex < count)
                 {
@@ -122,14 +124,14 @@ namespace HslCommunication.BasicFramework
                     tmp = array[index + lastIndex - count];
                 }
 
-                hybirdLock.Leave();
+                hybirdLock.Leave( );
                 return tmp;
             }
             set
             {
-                if (index < 0) throw new IndexOutOfRangeException("Index must larger than zero");
-                if (index >= count) throw new IndexOutOfRangeException("Index must smaller than array length");
-                hybirdLock.Enter();
+                if (index < 0) throw new IndexOutOfRangeException( "Index must larger than zero" );
+                if (index >= count) throw new IndexOutOfRangeException( "Index must smaller than array length" );
+                hybirdLock.Enter( );
 
                 if (lastIndex < count)
                 {
@@ -140,7 +142,7 @@ namespace HslCommunication.BasicFramework
                     array[index + lastIndex - count] = value;
                 }
 
-                hybirdLock.Leave();
+                hybirdLock.Leave( );
             }
         }
 

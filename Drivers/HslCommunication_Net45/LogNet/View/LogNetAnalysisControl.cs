@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace HslCommunication.LogNet
 {
@@ -62,7 +64,7 @@ namespace HslCommunication.LogNet
                     MessageBox.Show("起始时间的格式不正确，请重新输入");
                     return;
                 }
-                if (!DateTime.TryParse(textBox3.Text, out DateTime end))
+                if(!DateTime.TryParse(textBox3.Text,out DateTime end))
                 {
                     MessageBox.Show("结束时间的格式不正确，请重新输入");
                     return;
@@ -77,12 +79,12 @@ namespace HslCommunication.LogNet
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <param name="degree"></param>
-        private void AnalysisLogSource(DateTime start, DateTime end, string degree)
+        private void AnalysisLogSource(DateTime start,DateTime end,string degree)
         {
             if (!string.IsNullOrEmpty(m_LogSource))
             {
                 StringBuilder sb = new StringBuilder();
-
+                
                 List<Match> collection = new List<Match>(Regex.Matches(m_LogSource, "\u0002\\[[^\u0002]+").OfType<Match>());
                 int debug = 0;
                 int info = 0;
@@ -97,8 +99,8 @@ namespace HslCommunication.LogNet
                 for (int i = 0; i < collection.Count; i++)
                 {
                     Match m = collection[i];
-                    string deg = m.Value.Substring(2, 5);
-                    DateTime dateTime = Convert.ToDateTime(m.Value.Substring(m.Value.IndexOf('2'), 19));
+                    string deg = m.Value.Substring( 2, 5 );
+                    DateTime dateTime = Convert.ToDateTime( m.Value.Substring( m.Value.IndexOf('2'), 19 ) );
 
 
 
@@ -107,13 +109,13 @@ namespace HslCommunication.LogNet
                         if (i == 0)
                         {
                             // 提取第一个时间
-                            textBox2.Text = m.Value.Substring(m.Value.IndexOf('2'), 19);
+                            textBox2.Text = m.Value.Substring( m.Value.IndexOf( '2' ), 19 );
                         }
 
                         if (i == collection.Count - 1)
                         {
                             // 提取最后一个时间
-                            textBox3.Text = m.Value.Substring(m.Value.IndexOf('2'), 19);
+                            textBox3.Text = m.Value.Substring( m.Value.IndexOf( '2' ), 19 );
                         }
                     }
 
@@ -123,27 +125,27 @@ namespace HslCommunication.LogNet
                         if (checkBox1.Checked)
                         {
                             // 正则表达式过滤
-                            if (!Regex.IsMatch(m.Value, textBox4.Text))
+                            if (!Regex.IsMatch( m.Value, textBox4.Text ))
                             {
                                 continue;
                             }
                         }
 
-                        if (deg.StartsWith(StringResources.Language.LogNetDebug))
+                        if (deg.StartsWith( StringResources.Language.LogNetDebug ))
                             debug++;
-                        else if (deg.StartsWith(StringResources.Language.LogNetInfo))
+                        else if (deg.StartsWith( StringResources.Language.LogNetInfo ))
                             info++;
-                        else if (deg.StartsWith(StringResources.Language.LogNetWarn))
+                        else if (deg.StartsWith( StringResources.Language.LogNetWarn ))
                             warn++;
-                        else if (deg.StartsWith(StringResources.Language.LogNetError))
+                        else if (deg.StartsWith( StringResources.Language.LogNetError ))
                             error++;
-                        else if (deg.StartsWith(StringResources.Language.LogNetFatal))
+                        else if (deg.StartsWith( StringResources.Language.LogNetFatal ))
                             fatal++;
                         all++;
                         if (degree == StringResources.Language.LogNetAll || deg.StartsWith(degree))
                         {
-                            sb.Append(m.Value.Substring(1));
-                            list.Add(dateTime);
+                            sb.Append( m.Value.Substring( 1 ) );
+                            list.Add( dateTime );
                         }
                     }
                 }
@@ -172,7 +174,7 @@ namespace HslCommunication.LogNet
 
         private void UserButtonSetSelected(Controls.UserButton userButton)
         {
-            if (!ReferenceEquals(selectButton, userButton))
+            if(!ReferenceEquals(selectButton,userButton))
             {
                 if (selectButton != null) selectButton.Selected = false;
                 userButton.Selected = true;
@@ -184,35 +186,35 @@ namespace HslCommunication.LogNet
         {
             // 调试
             UserButtonSetSelected(userButton_Debug);
-            FilterLogSource(StringResources.Language.LogNetDebug);
+            FilterLogSource( StringResources.Language.LogNetDebug );
         }
 
         private void userButton_Info_Click(object sender, EventArgs e)
         {
             // 信息
             UserButtonSetSelected(userButton_Info);
-            FilterLogSource(StringResources.Language.LogNetInfo);
+            FilterLogSource( StringResources.Language.LogNetInfo );
         }
 
         private void userButton_Warn_Click(object sender, EventArgs e)
         {
             // 警告
             UserButtonSetSelected(userButton_Warn);
-            FilterLogSource(StringResources.Language.LogNetWarn);
+            FilterLogSource( StringResources.Language.LogNetWarn );
         }
 
         private void userButton_Error_Click(object sender, EventArgs e)
         {
             // 错误
             UserButtonSetSelected(userButton_Error);
-            FilterLogSource(StringResources.Language.LogNetError);
+            FilterLogSource( StringResources.Language.LogNetError );
         }
 
         private void userButton_Fatal_Click(object sender, EventArgs e)
         {
             // 致命
             UserButtonSetSelected(userButton_Fatal);
-            FilterLogSource(StringResources.Language.LogNetFatal);
+            FilterLogSource( StringResources.Language.LogNetFatal );
 
         }
 
@@ -220,7 +222,7 @@ namespace HslCommunication.LogNet
         {
             // 全部
             UserButtonSetSelected(userButton_All);
-            FilterLogSource(StringResources.Language.LogNetAll);
+            FilterLogSource( StringResources.Language.LogNetAll );
         }
 
         private void userButton_source_Click(object sender, EventArgs e)
@@ -238,7 +240,7 @@ namespace HslCommunication.LogNet
 
         private List<PaintItem> listRender = new List<PaintItem>();
 
-        private Bitmap PaintData(int width, int height)
+        private Bitmap PaintData(int width,int height)
         {
             if (width < 200) width = 200;
             if (height < 100) height = 100;
@@ -261,7 +263,7 @@ namespace HslCommunication.LogNet
 
             if (listPaint.Count <= 5)
             {
-                g.DrawString("数据太少了", font12, Brushes.DeepSkyBlue, new Rectangle(0, 0, width, height), sf);
+                g.DrawString("数据太少了", font12, Brushes.DeepSkyBlue, new Rectangle(0,0,width, height), sf);
                 goto P1;
             }
 
@@ -269,7 +271,7 @@ namespace HslCommunication.LogNet
             int count = (width - 60) / 6;
 
             TimeSpan sp = listPaint.Max() - listPaint.Min();
-            DateTime datetime_min = listPaint.Min();
+            DateTime datetime_min= listPaint.Min();
             double sep = sp.TotalSeconds / count;
 
             int[] counts = new int[count];
@@ -372,7 +374,7 @@ namespace HslCommunication.LogNet
             BasicFramework.SoftPainting.PaintTriangle(g, Brushes.DimGray, new Point(paint_x, up - 10), 5, BasicFramework.GraphDirection.Upward);
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
 
-        P1:
+            P1:
             sf.Dispose();
             font12.Dispose();
             dash.Dispose();
@@ -380,7 +382,7 @@ namespace HslCommunication.LogNet
             return bitmap;
 
         }
-
+        
 
 
 

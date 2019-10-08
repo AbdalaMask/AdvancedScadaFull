@@ -1,5 +1,9 @@
 ﻿using HslCommunication.Core.Address;
 using HslCommunication.Profinet.Melsec;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace HslCommunication.Profinet.Panasonic
 {
@@ -106,7 +110,7 @@ namespace HslCommunication.Profinet.Panasonic
         /// <summary>
         /// 实例化松下的的Qna兼容3E帧协议的通讯对象
         /// </summary>
-        public PanasonicMcNet() : base()
+        public PanasonicMcNet( ) : base( )
         {
 
         }
@@ -116,7 +120,7 @@ namespace HslCommunication.Profinet.Panasonic
         /// </summary>
         /// <param name="ipAddress">PLC的Ip地址</param>
         /// <param name="port">PLC的端口</param>
-        public PanasonicMcNet(string ipAddress, int port) : base(ipAddress, port)
+        public PanasonicMcNet( string ipAddress, int port ) : base( ipAddress, port )
         {
 
         }
@@ -131,9 +135,9 @@ namespace HslCommunication.Profinet.Panasonic
         /// <param name="address">地址信息</param>
         /// <param name="length">数据长度</param>
         /// <returns>解析后的数据信息</returns>
-        protected override OperateResult<McAddressData> McAnalysisAddress(string address, ushort length)
+        protected override OperateResult<McAddressData> McAnalysisAddress( string address, ushort length )
         {
-            return McAddressData.ParsePanasonicFrom(address, length);
+            return McAddressData.ParsePanasonicFrom( address, length );
         }
 
         #endregion
@@ -144,7 +148,7 @@ namespace HslCommunication.Profinet.Panasonic
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToString()
+        public override string ToString( )
         {
             return $"PanasonicMcNet[{IpAddress}:{Port}]";
         }

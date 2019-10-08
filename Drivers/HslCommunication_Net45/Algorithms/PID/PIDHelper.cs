@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace HslCommunication.Algorithms.PID
 {
@@ -12,9 +15,9 @@ namespace HslCommunication.Algorithms.PID
         /// <summary>
         /// 实例化一个默认的对象
         /// </summary>
-        public PIDHelper()
+        public PIDHelper( )
         {
-            PidInit();
+            PidInit( );
         }
 
         #endregion
@@ -24,7 +27,7 @@ namespace HslCommunication.Algorithms.PID
         /// <summary>
         /// 初始化PID的数据信息
         /// </summary>
-        private void PidInit()
+        private void PidInit( )
         {
             prakp = 0;
             praki = 0;
@@ -116,7 +119,7 @@ namespace HslCommunication.Algorithms.PID
         /// 计算Pid数据的值
         /// </summary>
         /// <returns>计算值</returns>
-        public double PidCalculate()
+        public double PidCalculate( )
         {
             err_next = err_last;        //前两次的误差  
             err_last = err;             //前一次的误差  
@@ -152,13 +155,13 @@ namespace HslCommunication.Algorithms.PID
             // 积分分离  
             else
             {
-                if (Math.Abs(err) > 0.8 * setValue)
+                if (Math.Abs( err ) > 0.8 * setValue)
                     index = 0;
                 else
                     index = 1;
             }
             // 死区  
-            if (Math.Abs(err) > deadband)
+            if (Math.Abs( err ) > deadband)
                 prvalue += prakp * ((err - err_last) + index * praki * err + prakd * (err - 2 * err_last + err_next));
 
             else

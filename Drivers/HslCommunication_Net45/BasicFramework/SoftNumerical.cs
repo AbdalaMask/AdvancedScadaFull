@@ -1,5 +1,7 @@
 ﻿using HslCommunication.Core;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 
@@ -40,25 +42,25 @@ namespace HslCommunication.BasicFramework
         /// <param name="timeFormate">流水号带的时间信息</param>
         /// <param name="numberLength">流水号数字的标准长度，不够补0</param>
         /// <param name="fileSavePath">流水号存储的文本位置</param>
-        public SoftNumericalOrder(string textHead, string timeFormate, int numberLength, string fileSavePath)
+        public SoftNumericalOrder( string textHead, string timeFormate, int numberLength, string fileSavePath )
         {
             LogHeaderText = "SoftNumericalOrder";
             TextHead = textHead;
             TimeFormate = timeFormate;
             NumberLength = numberLength;
             FileSavePath = fileSavePath;
-            LoadByFile();
+            LoadByFile( );
 
-            AsyncCoordinator = new HslAsyncCoordinator(() =>
-              {
-                  if (!string.IsNullOrEmpty(FileSavePath))
-                  {
-                      using (System.IO.StreamWriter sw = new System.IO.StreamWriter(FileSavePath, false, Encoding.Default))
-                      {
-                          sw.Write(CurrentIndex);
-                      }
-                  }
-              });
+            AsyncCoordinator = new HslAsyncCoordinator( ( ) =>
+               {
+                   if (!string.IsNullOrEmpty( FileSavePath ))
+                   {
+                       using (System.IO.StreamWriter sw = new System.IO.StreamWriter( FileSavePath, false, Encoding.Default ))
+                       {
+                           sw.Write( CurrentIndex );
+                       }
+                   }
+               } );
 
         }
 
@@ -86,49 +88,49 @@ namespace HslCommunication.BasicFramework
         #endregion
 
         #region Public Method
-
+        
         /// <summary>
         /// 获取流水号的值
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToSaveString()
+        public override string ToSaveString( )
         {
-            return CurrentIndex.ToString();
+            return CurrentIndex.ToString( );
         }
-
+        
         /// <summary>
         /// 加载流水号
         /// </summary>
         /// <param name="content">源字符串信息</param>
-        public override void LoadByString(string content)
+        public override void LoadByString( string content )
         {
-            CurrentIndex = Convert.ToInt64(content);
+            CurrentIndex = Convert.ToInt64( content );
         }
 
         /// <summary>
         /// 清除流水号计数，进行重新计数
         /// </summary>
-        public void ClearNumericalOrder()
+        public void ClearNumericalOrder( )
         {
-            Interlocked.Exchange(ref CurrentIndex, 0);
-            AsyncCoordinator.StartOperaterInfomation();
+            Interlocked.Exchange( ref CurrentIndex, 0 );
+            AsyncCoordinator.StartOperaterInfomation( );
         }
 
         /// <summary>
         /// 获取流水号数据
         /// </summary>
         /// <returns>新增计数后的信息</returns>
-        public string GetNumericalOrder()
+        public string GetNumericalOrder( )
         {
-            long number = Interlocked.Increment(ref CurrentIndex);
-            AsyncCoordinator.StartOperaterInfomation();
-            if (string.IsNullOrEmpty(TimeFormate))
+            long number = Interlocked.Increment( ref CurrentIndex );
+            AsyncCoordinator.StartOperaterInfomation( );
+            if (string.IsNullOrEmpty( TimeFormate ))
             {
-                return TextHead + number.ToString().PadLeft(NumberLength, '0');
+                return TextHead + number.ToString( ).PadLeft( NumberLength, '0' );
             }
             else
             {
-                return TextHead + DateTime.Now.ToString(TimeFormate) + number.ToString().PadLeft(NumberLength, '0');
+                return TextHead + DateTime.Now.ToString( TimeFormate ) + number.ToString( ).PadLeft( NumberLength, '0' );
             }
         }
 
@@ -137,17 +139,17 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="textHead">指定一个新的文本头</param>
         /// <returns>带头信息的计数后的信息</returns>
-        public string GetNumericalOrder(string textHead)
+        public string GetNumericalOrder( string textHead )
         {
-            long number = Interlocked.Increment(ref CurrentIndex);
-            AsyncCoordinator.StartOperaterInfomation();
-            if (string.IsNullOrEmpty(TimeFormate))
+            long number = Interlocked.Increment( ref CurrentIndex );
+            AsyncCoordinator.StartOperaterInfomation( );
+            if (string.IsNullOrEmpty( TimeFormate ))
             {
-                return textHead + number.ToString().PadLeft(NumberLength, '0');
+                return textHead + number.ToString( ).PadLeft( NumberLength, '0' );
             }
             else
             {
-                return textHead + DateTime.Now.ToString(TimeFormate) + number.ToString().PadLeft(NumberLength, '0');
+                return textHead + DateTime.Now.ToString( TimeFormate ) + number.ToString( ).PadLeft( NumberLength, '0' );
             }
         }
 
@@ -155,10 +157,10 @@ namespace HslCommunication.BasicFramework
         /// 单纯的获取数字形式的流水号
         /// </summary>
         /// <returns>新增计数后的信息</returns>
-        public long GetLongOrder()
+        public long GetLongOrder( )
         {
-            long number = Interlocked.Increment(ref CurrentIndex);
-            AsyncCoordinator.StartOperaterInfomation();
+            long number = Interlocked.Increment( ref CurrentIndex );
+            AsyncCoordinator.StartOperaterInfomation( );
             return number;
         }
 
@@ -189,12 +191,12 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="max">数据的最大值，必须指定</param>
         /// <param name="start">数据的起始值，默认为0</param>
-        public SoftIncrementCount(long max, long start = 0)
+        public SoftIncrementCount( long max, long start = 0 )
         {
             this.start = start;
             this.max = max;
-            current = start;
-            hybirdLock = new SimpleHybirdLock();
+            this.current = start;
+            this.hybirdLock = new SimpleHybirdLock( );
         }
 
         #endregion
@@ -214,10 +216,10 @@ namespace HslCommunication.BasicFramework
         /// 获取自增信息
         /// </summary>
         /// <returns>计数自增后的值</returns>
-        public long GetCurrentValue()
+        public long GetCurrentValue( )
         {
             long value = 0;
-            hybirdLock.Enter();
+            hybirdLock.Enter( );
 
             value = current;
             current += IncreaseTick;
@@ -226,7 +228,7 @@ namespace HslCommunication.BasicFramework
                 current = start;
             }
 
-            hybirdLock.Leave();
+            hybirdLock.Leave( );
             return value;
         }
 
@@ -234,9 +236,9 @@ namespace HslCommunication.BasicFramework
         /// 重置当前序号的最大值
         /// </summary>
         /// <param name="max">最大值</param>
-        public void ResetMaxNumber(long max)
+        public void ResetMaxNumber(long max )
         {
-            hybirdLock.Enter();
+            hybirdLock.Enter( );
 
             if (max > start)
             {
@@ -245,7 +247,19 @@ namespace HslCommunication.BasicFramework
                 this.max = max;
             }
 
-            hybirdLock.Leave();
+            hybirdLock.Leave( );
+        }
+
+        /// <summary>
+        /// 将当前的值重置为初始值，初始值为对象实例化的时候就确定了。
+        /// </summary>
+        public void ResetCurrentValue( )
+        {
+            hybirdLock.Enter( );
+
+            this.current = this.start;
+
+            hybirdLock.Leave( );
         }
 
         #endregion
@@ -265,7 +279,7 @@ namespace HslCommunication.BasicFramework
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>返回具体的值信息</returns>
-        public override string ToString()
+        public override string ToString( )
         {
             return $"SoftIncrementCount[{this.current}]";
         }
@@ -276,7 +290,7 @@ namespace HslCommunication.BasicFramework
 
         private bool disposedValue = false; // 要检测冗余调用
 
-        void Dispose(bool disposing)
+        void Dispose( bool disposing )
         {
             if (!disposedValue)
             {
@@ -284,7 +298,7 @@ namespace HslCommunication.BasicFramework
                 {
                     // TODO: 释放托管状态(托管对象)。
 
-                    hybirdLock.Dispose();
+                    hybirdLock.Dispose( );
                 }
 
                 // TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
@@ -305,10 +319,10 @@ namespace HslCommunication.BasicFramework
         /// <summary>
         /// 释放当前对象所占用的资源
         /// </summary>
-        public void Dispose()
+        public void Dispose( )
         {
             // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
-            Dispose(true);
+            Dispose( true );
             // TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
             // GC.SuppressFinalize(this);
         }

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace HslCommunication
 {
@@ -42,7 +45,7 @@ namespace HslCommunication
         /// 使用指定的消息实例化一个默认的结果对象
         /// </summary>
         /// <param name="msg">错误消息</param>
-        public OperateResult(string msg)
+        public OperateResult( string msg )
         {
             this.Message = msg;
         }
@@ -52,29 +55,29 @@ namespace HslCommunication
         /// </summary>
         /// <param name="err">错误代码</param>
         /// <param name="msg">错误消息</param>
-        public OperateResult(int err, string msg)
+        public OperateResult( int err, string msg )
         {
             this.ErrorCode = err;
             this.Message = msg;
         }
 
         #endregion
-
+        
         /// <summary>
         /// 指示本次访问是否成功
         /// </summary>
         public bool IsSuccess { get; set; }
-
+        
         /// <summary>
         /// 具体的错误描述
         /// </summary>
         public string Message { get; set; } = StringResources.Language.UnknownError;
-
+        
         /// <summary>
         /// 具体的错误代码
         /// </summary>
         public int ErrorCode { get; set; } = 10000;
-
+        
         /// <summary>
         /// 获取错误代号及文本描述
         /// </summary>
@@ -97,7 +100,7 @@ namespace HslCommunication
                 ErrorCode = result.ErrorCode;
                 Message = result.Message;
             }
-
+            
         }
 
         #region Static Method
@@ -107,7 +110,7 @@ namespace HslCommunication
          *    主要是方便获取到一些特殊状态的结果对象
          * 
          ******************************************************************************************************/
-
+         
 
         /// <summary>
         /// 创建并返回一个失败的结果对象，该对象复制另一个结果对象的错误信息
@@ -115,9 +118,9 @@ namespace HslCommunication
         /// <typeparam name="T">目标数据类型</typeparam>
         /// <param name="result">之前的结果对象</param>
         /// <returns>带默认泛型对象的失败结果类</returns>
-        public static OperateResult<T> CreateFailedResult<T>(OperateResult result)
+        public static OperateResult<T> CreateFailedResult<T>( OperateResult result ) 
         {
-            return new OperateResult<T>()
+            return new OperateResult<T>( )
             {
                 ErrorCode = result.ErrorCode,
                 Message = result.Message,
@@ -131,9 +134,9 @@ namespace HslCommunication
         /// <typeparam name="T2">目标数据类型二</typeparam>
         /// <param name="result">之前的结果对象</param>
         /// <returns>带默认泛型对象的失败结果类</returns>
-        public static OperateResult<T1, T2> CreateFailedResult<T1, T2>(OperateResult result)
+        public static OperateResult<T1, T2> CreateFailedResult<T1, T2>( OperateResult result )
         {
-            return new OperateResult<T1, T2>()
+            return new OperateResult<T1, T2>( )
             {
                 ErrorCode = result.ErrorCode,
                 Message = result.Message,
@@ -149,9 +152,9 @@ namespace HslCommunication
         /// <typeparam name="T3">目标数据类型三</typeparam>
         /// <param name="result">之前的结果对象</param>
         /// <returns>带默认泛型对象的失败结果类</returns>
-        public static OperateResult<T1, T2, T3> CreateFailedResult<T1, T2, T3>(OperateResult result)
+        public static OperateResult<T1, T2, T3> CreateFailedResult<T1, T2, T3>( OperateResult result )
         {
-            return new OperateResult<T1, T2, T3>()
+            return new OperateResult<T1, T2, T3>( )
             {
                 ErrorCode = result.ErrorCode,
                 Message = result.Message,
@@ -168,9 +171,9 @@ namespace HslCommunication
         /// <typeparam name="T4">目标数据类型四</typeparam>
         /// <param name="result">之前的结果对象</param>
         /// <returns>带默认泛型对象的失败结果类</returns>
-        public static OperateResult<T1, T2, T3, T4> CreateFailedResult<T1, T2, T3, T4>(OperateResult result)
+        public static OperateResult<T1, T2, T3, T4> CreateFailedResult<T1, T2, T3, T4>( OperateResult result )
         {
-            return new OperateResult<T1, T2, T3, T4>()
+            return new OperateResult<T1, T2, T3, T4>( )
             {
                 ErrorCode = result.ErrorCode,
                 Message = result.Message,
@@ -188,9 +191,9 @@ namespace HslCommunication
         /// <typeparam name="T5">目标数据类型五</typeparam>
         /// <param name="result">之前的结果对象</param>
         /// <returns>带默认泛型对象的失败结果类</returns>
-        public static OperateResult<T1, T2, T3, T4, T5> CreateFailedResult<T1, T2, T3, T4, T5>(OperateResult result)
+        public static OperateResult<T1, T2, T3, T4, T5> CreateFailedResult<T1, T2, T3, T4, T5>( OperateResult result )
         {
-            return new OperateResult<T1, T2, T3, T4, T5>()
+            return new OperateResult<T1, T2, T3, T4, T5>( )
             {
                 ErrorCode = result.ErrorCode,
                 Message = result.Message,
@@ -209,9 +212,9 @@ namespace HslCommunication
         /// <typeparam name="T6">目标数据类型六</typeparam>
         /// <param name="result">之前的结果对象</param>
         /// <returns>带默认泛型对象的失败结果类</returns>
-        public static OperateResult<T1, T2, T3, T4, T5, T6> CreateFailedResult<T1, T2, T3, T4, T5, T6>(OperateResult result)
+        public static OperateResult<T1, T2, T3, T4, T5, T6> CreateFailedResult<T1, T2, T3, T4, T5, T6>( OperateResult result )
         {
-            return new OperateResult<T1, T2, T3, T4, T5, T6>()
+            return new OperateResult<T1, T2, T3, T4, T5, T6>( )
             {
                 ErrorCode = result.ErrorCode,
                 Message = result.Message,
@@ -230,9 +233,9 @@ namespace HslCommunication
         /// <typeparam name="T7">目标数据类型七</typeparam>
         /// <param name="result">之前的结果对象</param>
         /// <returns>带默认泛型对象的失败结果类</returns>
-        public static OperateResult<T1, T2, T3, T4, T5, T6, T7> CreateFailedResult<T1, T2, T3, T4, T5, T6, T7>(OperateResult result)
+        public static OperateResult<T1, T2, T3, T4, T5, T6, T7> CreateFailedResult<T1, T2, T3, T4, T5, T6, T7>( OperateResult result )
         {
-            return new OperateResult<T1, T2, T3, T4, T5, T6, T7>()
+            return new OperateResult<T1, T2, T3, T4, T5, T6, T7>( )
             {
                 ErrorCode = result.ErrorCode,
                 Message = result.Message,
@@ -252,9 +255,9 @@ namespace HslCommunication
         /// <typeparam name="T8">目标数据类型八</typeparam>
         /// <param name="result">之前的结果对象</param>
         /// <returns>带默认泛型对象的失败结果类</returns>
-        public static OperateResult<T1, T2, T3, T4, T5, T6, T7, T8> CreateFailedResult<T1, T2, T3, T4, T5, T6, T7, T8>(OperateResult result)
+        public static OperateResult<T1, T2, T3, T4, T5, T6, T7, T8> CreateFailedResult<T1, T2, T3, T4, T5, T6, T7, T8>( OperateResult result )
         {
-            return new OperateResult<T1, T2, T3, T4, T5, T6, T7, T8>()
+            return new OperateResult<T1, T2, T3, T4, T5, T6, T7, T8>( )
             {
                 ErrorCode = result.ErrorCode,
                 Message = result.Message,
@@ -276,9 +279,9 @@ namespace HslCommunication
         /// <typeparam name="T9">目标数据类型九</typeparam>
         /// <param name="result">之前的结果对象</param>
         /// <returns>带默认泛型对象的失败结果类</returns>
-        public static OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFailedResult<T1, T2, T3, T4, T5, T6, T7, T8, T9>(OperateResult result)
+        public static OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFailedResult<T1, T2, T3, T4, T5, T6, T7, T8, T9>( OperateResult result )
         {
-            return new OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9>()
+            return new OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9>( )
             {
                 ErrorCode = result.ErrorCode,
                 Message = result.Message,
@@ -301,9 +304,9 @@ namespace HslCommunication
         /// <typeparam name="T10">目标数据类型十</typeparam>
         /// <param name="result">之前的结果对象</param>
         /// <returns>带默认泛型对象的失败结果类</returns>
-        public static OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFailedResult<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(OperateResult result)
+        public static OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFailedResult<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>( OperateResult result )
         {
-            return new OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>()
+            return new OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>( )
             {
                 ErrorCode = result.ErrorCode,
                 Message = result.Message,
@@ -400,9 +403,9 @@ namespace HslCommunication
         /// <param name="value3">类型三对象</param>
         /// <param name="value4">类型四对象</param>
         /// <returns>成的结果对象</returns>
-        public static OperateResult<T1, T2, T3, T4> CreateSuccessResult<T1, T2, T3, T4>(T1 value1, T2 value2, T3 value3, T4 value4)
+        public static OperateResult<T1, T2, T3, T4> CreateSuccessResult<T1, T2, T3, T4>( T1 value1, T2 value2, T3 value3, T4 value4 )
         {
-            return new OperateResult<T1, T2, T3, T4>()
+            return new OperateResult<T1, T2, T3, T4>( )
             {
                 IsSuccess = true,
                 ErrorCode = 0,
@@ -429,9 +432,9 @@ namespace HslCommunication
         /// <param name="value4">类型四对象</param>
         /// <param name="value5">类型五对象</param>
         /// <returns>成的结果对象</returns>
-        public static OperateResult<T1, T2, T3, T4, T5> CreateSuccessResult<T1, T2, T3, T4, T5>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5)
+        public static OperateResult<T1, T2, T3, T4, T5> CreateSuccessResult<T1, T2, T3, T4, T5>( T1 value1, T2 value2, T3 value3, T4 value4, T5 value5 )
         {
-            return new OperateResult<T1, T2, T3, T4, T5>()
+            return new OperateResult<T1, T2, T3, T4, T5>( )
             {
                 IsSuccess = true,
                 ErrorCode = 0,
@@ -460,9 +463,9 @@ namespace HslCommunication
         /// <param name="value5">类型五对象</param>
         /// <param name="value6">类型六对象</param>
         /// <returns>成的结果对象</returns>
-        public static OperateResult<T1, T2, T3, T4, T5, T6> CreateSuccessResult<T1, T2, T3, T4, T5, T6>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6)
+        public static OperateResult<T1, T2, T3, T4, T5, T6> CreateSuccessResult<T1, T2, T3, T4, T5, T6>( T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6 )
         {
-            return new OperateResult<T1, T2, T3, T4, T5, T6>()
+            return new OperateResult<T1, T2, T3, T4, T5, T6>( )
             {
                 IsSuccess = true,
                 ErrorCode = 0,
@@ -494,9 +497,9 @@ namespace HslCommunication
         /// <param name="value6">类型六对象</param>
         /// <param name="value7">类型七对象</param>
         /// <returns>成的结果对象</returns>
-        public static OperateResult<T1, T2, T3, T4, T5, T6, T7> CreateSuccessResult<T1, T2, T3, T4, T5, T6, T7>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7)
+        public static OperateResult<T1, T2, T3, T4, T5, T6, T7> CreateSuccessResult<T1, T2, T3, T4, T5, T6, T7>( T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7 )
         {
-            return new OperateResult<T1, T2, T3, T4, T5, T6, T7>()
+            return new OperateResult<T1, T2, T3, T4, T5, T6, T7>( )
             {
                 IsSuccess = true,
                 ErrorCode = 0,
@@ -532,9 +535,9 @@ namespace HslCommunication
         /// <param name="value7">类型七对象</param>
         /// <param name="value8">类型八对象</param>
         /// <returns>成的结果对象</returns>
-        public static OperateResult<T1, T2, T3, T4, T5, T6, T7, T8> CreateSuccessResult<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7, T8 value8)
+        public static OperateResult<T1, T2, T3, T4, T5, T6, T7, T8> CreateSuccessResult<T1, T2, T3, T4, T5, T6, T7, T8>( T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7, T8 value8 )
         {
-            return new OperateResult<T1, T2, T3, T4, T5, T6, T7, T8>()
+            return new OperateResult<T1, T2, T3, T4, T5, T6, T7, T8>( )
             {
                 IsSuccess = true,
                 ErrorCode = 0,
@@ -573,9 +576,9 @@ namespace HslCommunication
         /// <param name="value8">类型八对象</param>
         /// <param name="value9">类型九对象</param>
         /// <returns>成的结果对象</returns>
-        public static OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSuccessResult<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7, T8 value8, T9 value9)
+        public static OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSuccessResult<T1, T2, T3, T4, T5, T6, T7, T8, T9>( T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7, T8 value8, T9 value9 )
         {
-            return new OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9>()
+            return new OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9>( )
             {
                 IsSuccess = true,
                 ErrorCode = 0,
@@ -616,9 +619,9 @@ namespace HslCommunication
         /// <param name="value9">类型九对象</param>
         /// <param name="value10">类型十对象</param>
         /// <returns>成的结果对象</returns>
-        public static OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSuccessResult<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7, T8 value8, T9 value9, T10 value10)
+        public static OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSuccessResult<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>( T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7, T8 value8, T9 value9, T10 value10 )
         {
-            return new OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>()
+            return new OperateResult<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>( )
             {
                 IsSuccess = true,
                 ErrorCode = 0,
@@ -651,7 +654,7 @@ namespace HslCommunication
         /// <summary>
         /// 实例化一个默认的结果对象
         /// </summary>
-        public OperateResult() : base()
+        public OperateResult( ) : base( )
         {
         }
 
@@ -659,7 +662,7 @@ namespace HslCommunication
         /// 使用指定的消息实例化一个默认的结果对象
         /// </summary>
         /// <param name="msg">错误消息</param>
-        public OperateResult(string msg) : base(msg)
+        public OperateResult( string msg ) : base( msg )
         {
 
         }
@@ -669,7 +672,7 @@ namespace HslCommunication
         /// </summary>
         /// <param name="err">错误代码</param>
         /// <param name="msg">错误消息</param>
-        public OperateResult(int err, string msg) : base(err, msg)
+        public OperateResult( int err, string msg ) : base( err, msg )
         {
 
         }
@@ -694,7 +697,7 @@ namespace HslCommunication
         /// <summary>
         /// 实例化一个默认的结果对象
         /// </summary>
-        public OperateResult() : base()
+        public OperateResult( ) : base( )
         {
         }
 
@@ -702,7 +705,7 @@ namespace HslCommunication
         /// 使用指定的消息实例化一个默认的结果对象
         /// </summary>
         /// <param name="msg">错误消息</param>
-        public OperateResult(string msg) : base(msg)
+        public OperateResult( string msg ) : base( msg )
         {
 
         }
@@ -712,7 +715,7 @@ namespace HslCommunication
         /// </summary>
         /// <param name="err">错误代码</param>
         /// <param name="msg">错误消息</param>
-        public OperateResult(int err, string msg) : base(err, msg)
+        public OperateResult( int err, string msg ) : base( err, msg )
         {
 
         }
@@ -743,7 +746,7 @@ namespace HslCommunication
         /// <summary>
         /// 实例化一个默认的结果对象
         /// </summary>
-        public OperateResult() : base()
+        public OperateResult( ) : base( )
         {
         }
 
@@ -751,7 +754,7 @@ namespace HslCommunication
         /// 使用指定的消息实例化一个默认的结果对象
         /// </summary>
         /// <param name="msg">错误消息</param>
-        public OperateResult(string msg) : base(msg)
+        public OperateResult( string msg ) : base( msg )
         {
 
         }
@@ -761,7 +764,7 @@ namespace HslCommunication
         /// </summary>
         /// <param name="err">错误代码</param>
         /// <param name="msg">错误消息</param>
-        public OperateResult(int err, string msg) : base(err, msg)
+        public OperateResult( int err, string msg ) : base( err, msg )
         {
 
         }
@@ -777,13 +780,13 @@ namespace HslCommunication
         /// 用户自定义的泛型数据2
         /// </summary>
         public T2 Content2 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据3
         /// </summary>
         public T3 Content3 { get; set; }
     }
-
+    
     /// <summary>
     /// 操作结果的泛型类，允许带四个用户自定义的泛型对象，推荐使用这个类
     /// </summary>
@@ -798,7 +801,7 @@ namespace HslCommunication
         /// <summary>
         /// 实例化一个默认的结果对象
         /// </summary>
-        public OperateResult() : base()
+        public OperateResult( ) : base( )
         {
         }
 
@@ -806,7 +809,7 @@ namespace HslCommunication
         /// 使用指定的消息实例化一个默认的结果对象
         /// </summary>
         /// <param name="msg">错误消息</param>
-        public OperateResult(string msg) : base(msg)
+        public OperateResult( string msg ) : base( msg )
         {
 
         }
@@ -816,7 +819,7 @@ namespace HslCommunication
         /// </summary>
         /// <param name="err">错误代码</param>
         /// <param name="msg">错误消息</param>
-        public OperateResult(int err, string msg) : base(err, msg)
+        public OperateResult( int err, string msg ) : base( err, msg )
         {
 
         }
@@ -832,7 +835,7 @@ namespace HslCommunication
         /// 用户自定义的泛型数据2
         /// </summary>
         public T2 Content2 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据3
         /// </summary>
@@ -843,7 +846,7 @@ namespace HslCommunication
         /// </summary>
         public T4 Content4 { get; set; }
     }
-
+    
     /// <summary>
     /// 操作结果的泛型类，允许带五个用户自定义的泛型对象，推荐使用这个类
     /// </summary>
@@ -859,7 +862,7 @@ namespace HslCommunication
         /// <summary>
         /// 实例化一个默认的结果对象
         /// </summary>
-        public OperateResult() : base()
+        public OperateResult( ) : base( )
         {
         }
 
@@ -867,7 +870,7 @@ namespace HslCommunication
         /// 使用指定的消息实例化一个默认的结果对象
         /// </summary>
         /// <param name="msg">错误消息</param>
-        public OperateResult(string msg) : base(msg)
+        public OperateResult( string msg ) : base( msg )
         {
 
         }
@@ -877,7 +880,7 @@ namespace HslCommunication
         /// </summary>
         /// <param name="err">错误代码</param>
         /// <param name="msg">错误消息</param>
-        public OperateResult(int err, string msg) : base(err, msg)
+        public OperateResult( int err, string msg ) : base( err, msg )
         {
 
         }
@@ -893,7 +896,7 @@ namespace HslCommunication
         /// 用户自定义的泛型数据2
         /// </summary>
         public T2 Content2 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据3
         /// </summary>
@@ -908,7 +911,7 @@ namespace HslCommunication
         /// 用户自定义的泛型数据5
         /// </summary>
         public T5 Content5 { get; set; }
-
+        
     }
 
     /// <summary>
@@ -927,7 +930,7 @@ namespace HslCommunication
         /// <summary>
         /// 实例化一个默认的结果对象
         /// </summary>
-        public OperateResult() : base()
+        public OperateResult( ) : base( )
         {
         }
 
@@ -935,7 +938,7 @@ namespace HslCommunication
         /// 使用指定的消息实例化一个默认的结果对象
         /// </summary>
         /// <param name="msg">错误消息</param>
-        public OperateResult(string msg) : base(msg)
+        public OperateResult( string msg ) : base( msg )
         {
 
         }
@@ -945,7 +948,7 @@ namespace HslCommunication
         /// </summary>
         /// <param name="err">错误代码</param>
         /// <param name="msg">错误消息</param>
-        public OperateResult(int err, string msg) : base(err, msg)
+        public OperateResult( int err, string msg ) : base( err, msg )
         {
 
         }
@@ -961,7 +964,7 @@ namespace HslCommunication
         /// 用户自定义的泛型数据2
         /// </summary>
         public T2 Content2 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据3
         /// </summary>
@@ -976,12 +979,12 @@ namespace HslCommunication
         /// 用户自定义的泛型数据5
         /// </summary>
         public T5 Content5 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据5
         /// </summary>
         public T6 Content6 { get; set; }
-
+        
     }
 
     /// <summary>
@@ -1001,7 +1004,7 @@ namespace HslCommunication
         /// <summary>
         /// 实例化一个默认的结果对象
         /// </summary>
-        public OperateResult() : base()
+        public OperateResult( ) : base( )
         {
         }
 
@@ -1009,7 +1012,7 @@ namespace HslCommunication
         /// 使用指定的消息实例化一个默认的结果对象
         /// </summary>
         /// <param name="msg">错误消息</param>
-        public OperateResult(string msg) : base(msg)
+        public OperateResult( string msg ) : base( msg )
         {
 
         }
@@ -1019,7 +1022,7 @@ namespace HslCommunication
         /// </summary>
         /// <param name="err">错误代码</param>
         /// <param name="msg">错误消息</param>
-        public OperateResult(int err, string msg) : base(err, msg)
+        public OperateResult( int err, string msg ) : base( err, msg )
         {
 
         }
@@ -1035,7 +1038,7 @@ namespace HslCommunication
         /// 用户自定义的泛型数据2
         /// </summary>
         public T2 Content2 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据3
         /// </summary>
@@ -1050,12 +1053,12 @@ namespace HslCommunication
         /// 用户自定义的泛型数据5
         /// </summary>
         public T5 Content5 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据6
         /// </summary>
         public T6 Content6 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据7
         /// </summary>
@@ -1082,7 +1085,7 @@ namespace HslCommunication
         /// <summary>
         /// 实例化一个默认的结果对象
         /// </summary>
-        public OperateResult() : base()
+        public OperateResult( ) : base( )
         {
         }
 
@@ -1090,7 +1093,7 @@ namespace HslCommunication
         /// 使用指定的消息实例化一个默认的结果对象
         /// </summary>
         /// <param name="msg">错误消息</param>
-        public OperateResult(string msg) : base(msg)
+        public OperateResult( string msg ) : base( msg )
         {
 
         }
@@ -1100,7 +1103,7 @@ namespace HslCommunication
         /// </summary>
         /// <param name="err">错误代码</param>
         /// <param name="msg">错误消息</param>
-        public OperateResult(int err, string msg) : base(err, msg)
+        public OperateResult( int err, string msg ) : base( err, msg )
         {
 
         }
@@ -1116,7 +1119,7 @@ namespace HslCommunication
         /// 用户自定义的泛型数据2
         /// </summary>
         public T2 Content2 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据3
         /// </summary>
@@ -1131,12 +1134,12 @@ namespace HslCommunication
         /// 用户自定义的泛型数据5
         /// </summary>
         public T5 Content5 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据6
         /// </summary>
         public T6 Content6 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据7
         /// </summary>
@@ -1167,7 +1170,7 @@ namespace HslCommunication
         /// <summary>
         /// 实例化一个默认的结果对象
         /// </summary>
-        public OperateResult() : base()
+        public OperateResult( ) : base( )
         {
         }
 
@@ -1175,7 +1178,7 @@ namespace HslCommunication
         /// 使用指定的消息实例化一个默认的结果对象
         /// </summary>
         /// <param name="msg">错误消息</param>
-        public OperateResult(string msg) : base(msg)
+        public OperateResult( string msg ) : base( msg )
         {
 
         }
@@ -1185,7 +1188,7 @@ namespace HslCommunication
         /// </summary>
         /// <param name="err">错误代码</param>
         /// <param name="msg">错误消息</param>
-        public OperateResult(int err, string msg) : base(err, msg)
+        public OperateResult( int err, string msg ) : base( err, msg )
         {
 
         }
@@ -1201,7 +1204,7 @@ namespace HslCommunication
         /// 用户自定义的泛型数据2
         /// </summary>
         public T2 Content2 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据3
         /// </summary>
@@ -1216,12 +1219,12 @@ namespace HslCommunication
         /// 用户自定义的泛型数据5
         /// </summary>
         public T5 Content5 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据6
         /// </summary>
         public T6 Content6 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据7
         /// </summary>
@@ -1258,7 +1261,7 @@ namespace HslCommunication
         /// <summary>
         /// 实例化一个默认的结果对象
         /// </summary>
-        public OperateResult() : base()
+        public OperateResult( ) : base( )
         {
         }
 
@@ -1266,7 +1269,7 @@ namespace HslCommunication
         /// 使用指定的消息实例化一个默认的结果对象
         /// </summary>
         /// <param name="msg">错误消息</param>
-        public OperateResult(string msg) : base(msg)
+        public OperateResult( string msg ) : base( msg )
         {
 
         }
@@ -1276,7 +1279,7 @@ namespace HslCommunication
         /// </summary>
         /// <param name="err">错误代码</param>
         /// <param name="msg">错误消息</param>
-        public OperateResult(int err, string msg) : base(err, msg)
+        public OperateResult( int err, string msg ) : base( err, msg )
         {
 
         }
@@ -1292,7 +1295,7 @@ namespace HslCommunication
         /// 用户自定义的泛型数据2
         /// </summary>
         public T2 Content2 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据3
         /// </summary>
@@ -1307,12 +1310,12 @@ namespace HslCommunication
         /// 用户自定义的泛型数据5
         /// </summary>
         public T5 Content5 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据6
         /// </summary>
         public T6 Content6 { get; set; }
-
+        
         /// <summary>
         /// 用户自定义的泛型数据7
         /// </summary>

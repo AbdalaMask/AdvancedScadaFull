@@ -2,6 +2,7 @@
 using HslCommunication.Core.Net;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -28,8 +29,8 @@ namespace HslCommunication.Enthernet
         /// </summary>
         public NetComplexServer()
         {
-            appSessions = new List<AppSession>();
-            lockSessions = new SimpleHybirdLock();
+            appSessions = new List<AppSession>( );
+            lockSessions = new SimpleHybirdLock( );
         }
 
         #endregion
@@ -78,13 +79,13 @@ namespace HslCommunication.Enthernet
         /// </summary>
         protected override void StartInitialization()
         {
-            Thread_heart_check = new Thread(new ThreadStart(ThreadHeartCheck))
+            Thread_heart_check = new Thread( new ThreadStart( ThreadHeartCheck ) )
             {
                 IsBackground = true,
                 Priority = ThreadPriority.AboveNormal
             };
-            Thread_heart_check.Start();
-            base.StartInitialization();
+            Thread_heart_check.Start( );
+            base.StartInitialization( );
         }
 
         /// <summary>
@@ -92,15 +93,15 @@ namespace HslCommunication.Enthernet
         /// </summary>
         protected override void CloseAction()
         {
-            Thread_heart_check?.Abort();
+            Thread_heart_check?.Abort( );
             ClientOffline = null;
             ClientOnline = null;
             AcceptString = null;
             AcceptByte = null;
 
             //关闭所有的网络
-            appSessions.ForEach(m => m.WorkSocket?.Close());
-            base.CloseAction();
+            appSessions.ForEach( m => m.WorkSocket?.Close( ) );
+            base.CloseAction( );
         }
 
 
@@ -109,12 +110,12 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="session">会话信息</param>
         /// <param name="ex">异常</param>
-        internal override void SocketReceiveException(AppSession session, Exception ex)
+        internal override void SocketReceiveException( AppSession session, Exception ex )
         {
-            if (ex.Message.Contains(StringResources.Language.SocketRemoteCloseException))
+            if (ex.Message.Contains( StringResources.Language.SocketRemoteCloseException ))
             {
                 //异常掉线
-                TcpStateDownLine(session, false);
+                TcpStateDownLine( session, false );
             }
         }
 
@@ -123,9 +124,9 @@ namespace HslCommunication.Enthernet
         /// 正常下线
         /// </summary>
         /// <param name="session">会话信息</param>
-        internal override void AppSessionRemoteClose(AppSession session)
+        internal override void AppSessionRemoteClose( AppSession session )
         {
-            TcpStateDownLine(session, true);
+            TcpStateDownLine( session, true );
         }
 
 
@@ -134,45 +135,45 @@ namespace HslCommunication.Enthernet
 
         #region Client Online Offline
 
-        private void TcpStateUpLine(AppSession state)
+        private void TcpStateUpLine( AppSession state )
         {
-            lockSessions.Enter();
-            appSessions.Add(state);
-            lockSessions.Leave();
+            lockSessions.Enter( );
+            appSessions.Add( state );
+            lockSessions.Leave( );
 
             // 提示上线
-            ClientOnline?.Invoke(state);
+            ClientOnline?.Invoke( state );
 
-            AllClientsStatusChange?.Invoke(ClientCount);
+            AllClientsStatusChange?.Invoke( ClientCount );
             // 是否保存上线信息
             if (IsSaveLogClientLineChange)
             {
-                LogNet?.WriteInfo(ToString(), $"[{state.IpEndPoint}] Name:{ state?.LoginAlias } { StringResources.Language.NetClientOnline }");
+                LogNet?.WriteInfo( ToString( ), $"[{state.IpEndPoint}] Name:{ state?.LoginAlias } { StringResources.Language.NetClientOnline }" );
             }
         }
 
-        private void TcpStateClose(AppSession state)
+        private void TcpStateClose( AppSession state )
         {
-            state?.WorkSocket?.Close();
+            state?.WorkSocket?.Close( );
         }
 
-        private void TcpStateDownLine(AppSession state, bool is_regular, bool logSave = true)
+        private void TcpStateDownLine( AppSession state, bool is_regular, bool logSave = true )
         {
-            lockSessions.Enter();
-            bool success = appSessions.Remove(state);
-            lockSessions.Leave();
+            lockSessions.Enter( );
+            bool success = appSessions.Remove( state );
+            lockSessions.Leave( );
 
             if (!success) return;
             // 关闭连接
-            TcpStateClose(state);
+            TcpStateClose( state );
             // 判断是否正常下线
             string str = is_regular ? StringResources.Language.NetClientOffline : StringResources.Language.NetClientBreak;
-            ClientOffline?.Invoke(state, str);
-            AllClientsStatusChange?.Invoke(ClientCount);
+            ClientOffline?.Invoke( state, str );
+            AllClientsStatusChange?.Invoke( ClientCount );
             // 是否保存上线信息
             if (IsSaveLogClientLineChange && logSave)
             {
-                LogNet?.WriteInfo(ToString(), $"[{state.IpEndPoint}] Name:{ state?.LoginAlias } { str }");
+                LogNet?.WriteInfo( ToString( ), $"[{state.IpEndPoint}] Name:{ state?.LoginAlias } { str }" );
             }
         }
 
@@ -214,23 +215,23 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="socket">异步对象</param>
         /// <param name="endPoint">终结点</param>
-        protected override void ThreadPoolLogin(Socket socket, IPEndPoint endPoint)
+        protected override void ThreadPoolLogin( Socket socket, IPEndPoint endPoint )
         {
             // 判断连接数是否超出规定
             if (appSessions.Count > ConnectMax)
             {
-                socket?.Close();
-                LogNet?.WriteWarn(ToString(), StringResources.Language.NetClientFull);
+                socket?.Close( );
+                LogNet?.WriteWarn( ToString( ), StringResources.Language.NetClientFull );
                 return;
             }
 
             // 接收用户别名并验证令牌
-            OperateResult result = new OperateResult();
-            OperateResult<int, string> readResult = ReceiveStringContentFromSocket(socket);
+            OperateResult result = new OperateResult( );
+            OperateResult<int, string> readResult = ReceiveStringContentFromSocket( socket );
             if (!readResult.IsSuccess) return;
 
             // 登录成功
-            AppSession session = new AppSession()
+            AppSession session = new AppSession( )
             {
                 WorkSocket = socket,
                 LoginAlias = readResult.Content2,
@@ -240,11 +241,11 @@ namespace HslCommunication.Enthernet
             try
             {
                 session.IpEndPoint = (IPEndPoint)socket.RemoteEndPoint;
-                session.IpAddress = ((IPEndPoint)socket.RemoteEndPoint).Address.ToString();
+                session.IpAddress = ((IPEndPoint)socket.RemoteEndPoint).Address.ToString( );
             }
             catch (Exception ex)
             {
-                LogNet?.WriteException(ToString(), StringResources.Language.GetClientIpaddressFailed, ex);
+                LogNet?.WriteException( ToString( ), StringResources.Language.GetClientIpaddressFailed, ex );
             }
 
             if (readResult.Content1 == 1)
@@ -261,17 +262,17 @@ namespace HslCommunication.Enthernet
 
             try
             {
-                session.WorkSocket.BeginReceive(session.BytesHead, session.AlreadyReceivedHead,
+                session.WorkSocket.BeginReceive( session.BytesHead, session.AlreadyReceivedHead,
                     session.BytesHead.Length - session.AlreadyReceivedHead, SocketFlags.None,
-                    new AsyncCallback(HeadBytesReceiveCallback), session);
-                TcpStateUpLine(session);
-                Thread.Sleep(100);// 留下一些时间进行反应
+                    new AsyncCallback( HeadBytesReceiveCallback ), session );
+                TcpStateUpLine( session );
+                Thread.Sleep( 100 );// 留下一些时间进行反应
             }
             catch (Exception ex)
             {
                 // 登录前已经出错
-                TcpStateClose(session);
-                LogNet?.WriteException(ToString(), StringResources.Language.NetClientLoginFailed, ex);
+                TcpStateClose( session );
+                LogNet?.WriteException( ToString( ), StringResources.Language.NetClientLoginFailed, ex );
             }
         }
 
@@ -285,9 +286,9 @@ namespace HslCommunication.Enthernet
         /// <param name="session">数据发送对象</param>
         /// <param name="customer">用户自定义的数据对象，如不需要，赋值为0</param>
         /// <param name="str">发送的文本</param>
-        public void Send(AppSession session, NetHandle customer, string str)
+        public void Send( AppSession session, NetHandle customer, string str )
         {
-            SendBytes(session, HslProtocol.CommandBytes(customer, Token, str));
+            SendBytes( session, HslProtocol.CommandBytes( customer, Token, str ) );
         }
         /// <summary>
         /// 服务器端用于发送字节的方法
@@ -295,14 +296,14 @@ namespace HslCommunication.Enthernet
         /// <param name="session">数据发送对象</param>
         /// <param name="customer">用户自定义的数据对象，如不需要，赋值为0</param>
         /// <param name="bytes">实际发送的数据</param>
-        public void Send(AppSession session, NetHandle customer, byte[] bytes)
+        public void Send( AppSession session, NetHandle customer, byte[] bytes )
         {
-            SendBytes(session, HslProtocol.CommandBytes(customer, Token, bytes));
+            SendBytes( session, HslProtocol.CommandBytes( customer, Token, bytes ) );
         }
 
-        private void SendBytes(AppSession session, byte[] content)
+        private void SendBytes( AppSession session, byte[] content )
         {
-            SendBytesAsync(session, content);
+            SendBytesAsync( session, content );
         }
 
 
@@ -311,11 +312,11 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="customer">用户自定义的命令头</param>
         /// <param name="str">需要传送的实际的数据</param>
-        public void SendAllClients(NetHandle customer, string str)
+        public void SendAllClients( NetHandle customer, string str )
         {
             for (int i = 0; i < appSessions.Count; i++)
             {
-                Send(appSessions[i], customer, str);
+                Send( appSessions[i], customer, str );
             }
         }
 
@@ -324,11 +325,11 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="customer">用户自定义的命令头</param>
         /// <param name="data">需要群发客户端的字节数据</param>
-        public void SendAllClients(NetHandle customer, byte[] data)
+        public void SendAllClients( NetHandle customer, byte[] data )
         {
             for (int i = 0; i < appSessions.Count; i++)
             {
-                Send(appSessions[i], customer, data);
+                Send( appSessions[i], customer, data );
             }
         }
 
@@ -338,13 +339,13 @@ namespace HslCommunication.Enthernet
         /// <param name="Alias">客户端上线的别名</param>
         /// <param name="customer">用户自定义的命令头</param>
         /// <param name="str">需要传送的实际的数据</param>
-        public void SendClientByAlias(string Alias, NetHandle customer, string str)
+        public void SendClientByAlias( string Alias, NetHandle customer, string str )
         {
             for (int i = 0; i < appSessions.Count; i++)
             {
                 if (appSessions[i].LoginAlias == Alias)
                 {
-                    Send(appSessions[i], customer, str);
+                    Send( appSessions[i], customer, str );
                 }
             }
         }
@@ -356,13 +357,13 @@ namespace HslCommunication.Enthernet
         /// <param name="Alias">客户端上线的别名</param>
         /// <param name="customer">用户自定义的命令头</param>
         /// <param name="data">需要传送的实际的数据</param>
-        public void SendClientByAlias(string Alias, NetHandle customer, byte[] data)
+        public void SendClientByAlias( string Alias, NetHandle customer, byte[] data )
         {
             for (int i = 0; i < appSessions.Count; i++)
             {
                 if (appSessions[i].LoginAlias == Alias)
                 {
-                    Send(appSessions[i], customer, data);
+                    Send( appSessions[i], customer, data );
                 }
             }
         }
@@ -379,28 +380,28 @@ namespace HslCommunication.Enthernet
         /// <param name="protocol">消息的代码</param>
         /// <param name="customer">用户消息</param>
         /// <param name="content">数据内容</param>
-        internal override void DataProcessingCenter(AppSession session, int protocol, int customer, byte[] content)
+        internal override void DataProcessingCenter( AppSession session, int protocol, int customer, byte[] content )
         {
             if (protocol == HslProtocol.ProtocolCheckSecends)
             {
-                BitConverter.GetBytes(DateTime.Now.Ticks).CopyTo(content, 8);
-                SendBytes(session, HslProtocol.CommandBytes(HslProtocol.ProtocolCheckSecends, customer, Token, content));
+                BitConverter.GetBytes( DateTime.Now.Ticks ).CopyTo( content, 8 );
+                SendBytes( session, HslProtocol.CommandBytes( HslProtocol.ProtocolCheckSecends, customer, Token, content ) );
                 session.HeartTime = DateTime.Now;
             }
             else if (protocol == HslProtocol.ProtocolClientQuit)
             {
-                TcpStateDownLine(session, true);
+                TcpStateDownLine( session, true );
             }
             else if (protocol == HslProtocol.ProtocolUserBytes)
             {
                 //接收到字节数据
-                AcceptByte?.Invoke(session, customer, content);
+                AcceptByte?.Invoke( session, customer, content );
             }
             else if (protocol == HslProtocol.ProtocolUserString)
             {
                 //接收到文本数据
-                string str = Encoding.Unicode.GetString(content);
-                AcceptString?.Invoke(session, customer, str);
+                string str = Encoding.Unicode.GetString( content );
+                AcceptString?.Invoke( session, customer, str );
             }
             else
             {
@@ -420,7 +421,7 @@ namespace HslCommunication.Enthernet
         {
             while (true)
             {
-                Thread.Sleep(2000);
+                Thread.Sleep( 2000 );
 
                 try
                 {
@@ -428,21 +429,21 @@ namespace HslCommunication.Enthernet
                     {
                         if (appSessions[i] == null)
                         {
-                            appSessions.RemoveAt(i);
+                            appSessions.RemoveAt( i );
                             continue;
                         }
 
                         if ((DateTime.Now - appSessions[i].HeartTime).TotalSeconds > 1 * 8)//8次没有收到失去联系
                         {
-                            LogNet?.WriteWarn(ToString(), StringResources.Language.NetHeartCheckTimeout + appSessions[i].IpAddress.ToString());
-                            TcpStateDownLine(appSessions[i], false, false);
+                            LogNet?.WriteWarn( ToString( ), StringResources.Language.NetHeartCheckTimeout + appSessions[i].IpAddress.ToString( ) );
+                            TcpStateDownLine( appSessions[i], false, false );
                             continue;
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    LogNet?.WriteException(ToString(), StringResources.Language.NetHeartCheckFailed, ex);
+                    LogNet?.WriteException( ToString( ), StringResources.Language.NetHeartCheckFailed, ex );
                 }
 
 

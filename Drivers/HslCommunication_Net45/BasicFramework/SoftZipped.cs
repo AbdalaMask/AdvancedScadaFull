@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
+using System.Text;
 
 namespace HslCommunication.BasicFramework
 {
@@ -32,7 +35,7 @@ namespace HslCommunication.BasicFramework
                 return compressStream.ToArray();
             }
         }
-
+        
 
         // 解压缩字节
         // 1.创建被压缩的数据流

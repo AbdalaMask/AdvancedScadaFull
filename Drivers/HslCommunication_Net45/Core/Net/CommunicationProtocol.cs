@@ -1,6 +1,7 @@
 ﻿using HslCommunication.BasicFramework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace HslCommunication
@@ -127,7 +128,7 @@ namespace HslCommunication
         /// <summary>
         /// 压缩数据字节
         /// </summary>
-        internal const int ProtocolZipped = 3002;
+        internal const int ProtocolZipped  = 3002;
 
 
 
@@ -139,7 +140,7 @@ namespace HslCommunication
         /// <param name="token">令牌</param>
         /// <param name="data">字节数据</param>
         /// <returns>包装后的数据信息</returns>
-        internal static byte[] CommandBytes(int command, int customer, Guid token, byte[] data)
+        internal static byte[] CommandBytes( int command, int customer, Guid token, byte[] data )
         {
             byte[] _temp = null;
             int _zipped = ProtocolNoZipped;
@@ -151,24 +152,24 @@ namespace HslCommunication
             else
             {
                 // 加密
-                data = HslSecurity.ByteEncrypt(data);
+                data = HslSecurity.ByteEncrypt( data );
                 if (data.Length > 102400)
                 {
                     // 100K以上的数据，进行数据压缩
-                    data = SoftZipped.CompressBytes(data);
+                    data = SoftZipped.CompressBytes( data );
                     _zipped = ProtocolZipped;
                 }
                 _temp = new byte[HeadByteLength + data.Length];
                 _sendLength = data.Length;
             }
-            BitConverter.GetBytes(command).CopyTo(_temp, 0);
-            BitConverter.GetBytes(customer).CopyTo(_temp, 4);
-            BitConverter.GetBytes(_zipped).CopyTo(_temp, 8);
-            token.ToByteArray().CopyTo(_temp, 12);
-            BitConverter.GetBytes(_sendLength).CopyTo(_temp, 28);
+            BitConverter.GetBytes( command ).CopyTo( _temp, 0 );
+            BitConverter.GetBytes( customer ).CopyTo( _temp, 4 );
+            BitConverter.GetBytes( _zipped ).CopyTo( _temp, 8 );
+            token.ToByteArray( ).CopyTo( _temp, 12 );
+            BitConverter.GetBytes( _sendLength ).CopyTo( _temp, 28 );
             if (_sendLength > 0)
             {
-                Array.Copy(data, 0, _temp, 32, _sendLength);
+                Array.Copy( data, 0, _temp, 32, _sendLength );
             }
             return _temp;
         }
@@ -180,18 +181,18 @@ namespace HslCommunication
         /// <param name="head">指令头</param>
         /// <param name="content">指令的内容</param>
         /// <return>真实的数据内容</return>
-        internal static byte[] CommandAnalysis(byte[] head, byte[] content)
+        internal static byte[] CommandAnalysis( byte[] head, byte[] content )
         {
             if (content != null)
             {
-                int _zipped = BitConverter.ToInt32(head, 8);
+                int _zipped = BitConverter.ToInt32( head, 8 );
                 // 先进行解压
                 if (_zipped == ProtocolZipped)
                 {
-                    content = SoftZipped.Decompress(content);
+                    content = SoftZipped.Decompress( content );
                 }
                 // 进行解密
-                return HslSecurity.ByteDecrypt(content);
+                return HslSecurity.ByteDecrypt( content );
             }
             else
             {
@@ -207,9 +208,9 @@ namespace HslCommunication
         /// <param name="token">令牌</param>
         /// <param name="data">字节信息</param>
         /// <returns>包装后的指令信息</returns>
-        internal static byte[] CommandBytes(int customer, Guid token, byte[] data)
+        internal static byte[] CommandBytes( int customer, Guid token, byte[] data )
         {
-            return CommandBytes(ProtocolUserBytes, customer, token, data);
+            return CommandBytes( ProtocolUserBytes, customer, token, data );
         }
 
 
@@ -220,10 +221,10 @@ namespace HslCommunication
         /// <param name="token">令牌</param>
         /// <param name="data">字符串数据信息</param>
         /// <returns>包装后的指令信息</returns>
-        internal static byte[] CommandBytes(int customer, Guid token, string data)
+        internal static byte[] CommandBytes( int customer, Guid token, string data )
         {
-            if (data == null) return CommandBytes(ProtocolUserString, customer, token, null);
-            else return CommandBytes(ProtocolUserString, customer, token, Encoding.Unicode.GetBytes(data));
+            if (data == null) return CommandBytes( ProtocolUserString, customer, token, null );
+            else return CommandBytes( ProtocolUserString, customer, token, Encoding.Unicode.GetBytes( data ) );
         }
 
         /// <summary>
@@ -233,9 +234,9 @@ namespace HslCommunication
         /// <param name="token">令牌</param>
         /// <param name="data">字符串数据信息</param>
         /// <returns>包装后的指令信息</returns>
-        internal static byte[] CommandBytes(int customer, Guid token, string[] data)
+        internal static byte[] CommandBytes( int customer, Guid token, string[] data )
         {
-            return CommandBytes(ProtocolUserStringArray, customer, token, PackStringArrayToByte(data));
+            return CommandBytes( ProtocolUserStringArray, customer, token, PackStringArrayToByte( data ) );
         }
 
         /// <summary>
@@ -243,28 +244,28 @@ namespace HslCommunication
         /// </summary>
         /// <param name="data">字符串数组</param>
         /// <returns>打包后的原始数据内容</returns>
-        internal static byte[] PackStringArrayToByte(string[] data)
+        internal static byte[] PackStringArrayToByte( string[] data )
         {
             if (data == null) data = new string[0];
 
-            List<byte> buffer = new List<byte>();
-            buffer.AddRange(BitConverter.GetBytes(data.Length));
+            List<byte> buffer = new List<byte>( );
+            buffer.AddRange( BitConverter.GetBytes( data.Length ) );
 
             for (int i = 0; i < data.Length; i++)
             {
-                if (!string.IsNullOrEmpty(data[i]))
+                if (!string.IsNullOrEmpty( data[i] ))
                 {
-                    byte[] tmp = Encoding.Unicode.GetBytes(data[i]);
-                    buffer.AddRange(BitConverter.GetBytes(tmp.Length));
-                    buffer.AddRange(tmp);
+                    byte[] tmp = Encoding.Unicode.GetBytes( data[i] );
+                    buffer.AddRange( BitConverter.GetBytes( tmp.Length ) );
+                    buffer.AddRange( tmp );
                 }
                 else
                 {
-                    buffer.AddRange(BitConverter.GetBytes(0));
+                    buffer.AddRange( BitConverter.GetBytes( 0 ) );
                 }
             }
 
-            return buffer.ToArray();
+            return buffer.ToArray( );
         }
 
         /// <summary>
@@ -272,19 +273,19 @@ namespace HslCommunication
         /// </summary>
         /// <param name="content">原始字节数组</param>
         /// <returns>解析后的字符串内容</returns>
-        internal static string[] UnPackStringArrayFromByte(byte[] content)
+        internal static string[] UnPackStringArrayFromByte( byte[] content )
         {
             if (content?.Length < 4) return null;
 
             int index = 0;
-            int count = BitConverter.ToInt32(content, index);
+            int count = BitConverter.ToInt32( content, index );
             string[] result = new string[count];
             index += 4;
             for (int i = 0; i < count; i++)
             {
-                int length = BitConverter.ToInt32(content, index);
+                int length = BitConverter.ToInt32( content, index );
                 index += 4;
-                if (length > 0) result[i] = Encoding.Unicode.GetString(content, index, length);
+                if (length > 0) result[i] = Encoding.Unicode.GetString( content, index, length );
                 else result[i] = string.Empty;
                 index += length;
             }

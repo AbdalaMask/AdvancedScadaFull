@@ -1,5 +1,7 @@
 ﻿using HslCommunication.Core.Net;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -49,19 +51,19 @@ namespace HslCommunication.Enthernet
         public event Action<AppSession, NetHandle, byte[]> ReceivedBytesEvent;
 
 
-        private void OnReceiveStringEvent(AppSession session, int customer, string str)
+        private void OnReceiveStringEvent( AppSession session, int customer, string str )
         {
-            ReceiveStringEvent?.Invoke(session, customer, str);
+            ReceiveStringEvent?.Invoke( session, customer, str );
         }
 
-        private void OnReceivedBytesEvent(AppSession session, int customer, byte[] temp)
+        private void OnReceivedBytesEvent( AppSession session, int customer, byte[] temp )
         {
-            ReceivedBytesEvent?.Invoke(session, customer, temp);
+            ReceivedBytesEvent?.Invoke( session, customer, temp );
         }
 
-        private void OnReceiveStringArrayEvent(AppSession session, int customer, string[] str)
+        private void OnReceiveStringArrayEvent( AppSession session, int customer, string[] str )
         {
-            ReceiveStringArrayEvent?.Invoke(session, customer, str);
+            ReceiveStringArrayEvent?.Invoke( session, customer, str );
         }
 
         #endregion
@@ -74,9 +76,9 @@ namespace HslCommunication.Enthernet
         /// <param name="session">通信对象</param>
         /// <param name="customer">用户的指令头</param>
         /// <param name="str">实际发送的字符串数据</param>
-        public void SendMessage(AppSession session, int customer, string str)
+        public void SendMessage( AppSession session, int customer, string str )
         {
-            SendBytesAsync(session, HslProtocol.CommandBytes(customer, Token, str));
+            SendBytesAsync( session, HslProtocol.CommandBytes( customer, Token, str ) );
         }
 
         /// <summary>
@@ -85,9 +87,9 @@ namespace HslCommunication.Enthernet
         /// <param name="session">通信对象</param>
         /// <param name="customer">用户的指令头</param>
         /// <param name="str">实际发送的字符串数组</param>
-        public void SendMessage(AppSession session, int customer, string[] str)
+        public void SendMessage( AppSession session, int customer, string[] str )
         {
-            SendBytesAsync(session, HslProtocol.CommandBytes(customer, Token, str));
+            SendBytesAsync( session, HslProtocol.CommandBytes( customer, Token, str ) );
         }
 
         /// <summary>
@@ -96,9 +98,9 @@ namespace HslCommunication.Enthernet
         /// <param name="session">连接对象</param>
         /// <param name="customer">用户的指令头</param>
         /// <param name="bytes">实际的数据</param>
-        public void SendMessage(AppSession session, int customer, byte[] bytes)
+        public void SendMessage( AppSession session, int customer, byte[] bytes )
         {
-            SendBytesAsync(session, HslProtocol.CommandBytes(customer, Token, bytes));
+            SendBytesAsync( session, HslProtocol.CommandBytes( customer, Token, bytes ) );
         }
 
         #endregion
@@ -112,7 +114,7 @@ namespace HslCommunication.Enthernet
         {
             ReceivedBytesEvent = null;
             ReceiveStringEvent = null;
-            base.CloseAction();
+            base.CloseAction( );
         }
 
 
@@ -121,24 +123,24 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="socket">异步对象</param>
         /// <param name="endPoint">终结点</param>
-        protected override void ThreadPoolLogin(Socket socket, IPEndPoint endPoint)
+        protected override void ThreadPoolLogin( Socket socket, IPEndPoint endPoint )
         {
-            AppSession session = new AppSession();
+            AppSession session = new AppSession( );
 
             session.WorkSocket = socket;
             try
             {
                 session.IpEndPoint = endPoint;
-                session.IpAddress = session.IpEndPoint.Address.ToString();
+                session.IpAddress = session.IpEndPoint.Address.ToString( );
             }
             catch (Exception ex)
             {
-                LogNet?.WriteException(ToString(), StringResources.Language.GetClientIpaddressFailed, ex);
+                LogNet?.WriteException( ToString( ), StringResources.Language.GetClientIpaddressFailed, ex );
             }
 
-            LogNet?.WriteDebug(ToString(), string.Format(StringResources.Language.ClientOnlineInfo, session.IpEndPoint));
-            System.Threading.Interlocked.Increment(ref clientCount);
-            ReBeginReceiveHead(session, false);
+            LogNet?.WriteDebug( ToString( ), string.Format( StringResources.Language.ClientOnlineInfo, session.IpEndPoint ) );
+            System.Threading.Interlocked.Increment( ref clientCount );
+            ReBeginReceiveHead( session, false );
         }
 
         /// <summary>
@@ -146,22 +148,22 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="session">会话</param>
         /// <param name="ex">异常信息</param>
-        internal override void SocketReceiveException(AppSession session, Exception ex)
+        internal override void SocketReceiveException( AppSession session, Exception ex )
         {
-            session.WorkSocket?.Close();
-            System.Threading.Interlocked.Decrement(ref clientCount);
-            LogNet?.WriteDebug(ToString(), string.Format(StringResources.Language.ClientOfflineInfo, session.IpEndPoint));
+            session.WorkSocket?.Close( );
+            System.Threading.Interlocked.Decrement( ref clientCount );
+            LogNet?.WriteDebug( ToString( ), string.Format( StringResources.Language.ClientOfflineInfo, session.IpEndPoint ) );
         }
 
         /// <summary>
         /// 正常下线
         /// </summary>
         /// <param name="session">会话</param>
-        internal override void AppSessionRemoteClose(AppSession session)
+        internal override void AppSessionRemoteClose( AppSession session )
         {
-            session.WorkSocket?.Close();
-            System.Threading.Interlocked.Decrement(ref clientCount);
-            LogNet?.WriteDebug(ToString(), string.Format(StringResources.Language.ClientOfflineInfo, session.IpEndPoint));
+            session.WorkSocket?.Close( );
+            System.Threading.Interlocked.Decrement( ref clientCount );
+            LogNet?.WriteDebug( ToString( ), string.Format( StringResources.Language.ClientOfflineInfo, session.IpEndPoint ) );
         }
 
         /// <summary>
@@ -171,34 +173,34 @@ namespace HslCommunication.Enthernet
         /// <param name="protocol">协议指令头</param>
         /// <param name="customer">客户端信号</param>
         /// <param name="content">触发的消息内容</param>
-        internal override void DataProcessingCenter(AppSession session, int protocol, int customer, byte[] content)
+        internal override void DataProcessingCenter( AppSession session, int protocol, int customer, byte[] content )
         {
             //接收数据完成，进行事件通知，优先进行解密操作
             if (protocol == HslProtocol.ProtocolCheckSecends)
             {
                 // 初始化时候的测试消息
                 session.HeartTime = DateTime.Now;
-                SendMessage(session, customer, content);
+                SendMessage( session, customer, content );
             }
             else if (protocol == HslProtocol.ProtocolUserBytes)
             {
                 // 字节数据
-                OnReceivedBytesEvent(session, customer, content);
+                OnReceivedBytesEvent( session, customer, content );
             }
             else if (protocol == HslProtocol.ProtocolUserString)
             {
                 // 字符串数据
-                OnReceiveStringEvent(session, customer, Encoding.Unicode.GetString(content));
+                OnReceiveStringEvent( session, customer, Encoding.Unicode.GetString( content ) );
             }
             else if (protocol == HslProtocol.ProtocolUserStringArray)
             {
                 // 字符串数组
-                OnReceiveStringArrayEvent(session, customer, HslProtocol.UnPackStringArrayFromByte(content));
+                OnReceiveStringArrayEvent( session, customer, HslProtocol.UnPackStringArrayFromByte( content ) );
             }
             else
             {
                 // 数据异常
-                AppSessionRemoteClose(session);
+                AppSessionRemoteClose( session );
             }
         }
 
@@ -226,7 +228,7 @@ namespace HslCommunication.Enthernet
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
+        public override string ToString( )
         {
             return "NetSimplifyServer";
         }

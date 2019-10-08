@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace HslCommunication.Core.IMessage
 {
-
+    
     /// <summary>
     /// 三菱的Qna兼容3E帧协议解析规则
     /// </summary>
@@ -27,7 +30,7 @@ namespace HslCommunication.Core.IMessage
         /// <returns>返回接下来的数据内容长度</returns>
         public int GetContentLengthByHeadBytes()
         {
-            return BitConverter.ToUInt16(HeadBytes, 7);
+            return BitConverter.ToUInt16( HeadBytes, 7 );
         }
 
 
@@ -36,7 +39,7 @@ namespace HslCommunication.Core.IMessage
         /// </summary>
         /// <param name="token">特殊的令牌，有些特殊消息的验证</param>
         /// <returns>是否成功的结果</returns>
-        public bool CheckHeadBytesLegal(byte[] token)
+        public bool CheckHeadBytesLegal( byte[] token )
         {
             if (HeadBytes == null) return false;
 

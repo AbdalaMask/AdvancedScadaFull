@@ -1,5 +1,12 @@
-﻿using HslCommunication.ModBus;
+﻿using HslCommunication.Core.Address;
+using HslCommunication.ModBus;
+using HslCommunication.Serial;
+using System;
+using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
+using System.Text;
+using System.Threading;
 
 namespace HslCommunication.Instrument.Temperature
 {
@@ -16,7 +23,7 @@ namespace HslCommunication.Instrument.Temperature
         /// <summary>
         /// 实例化一个默认的对象
         /// </summary>
-        public DAM3601() : base()
+        public DAM3601( ) : base( )
         {
             SleepTime = 200;
         }
@@ -25,7 +32,7 @@ namespace HslCommunication.Instrument.Temperature
         /// 使用站号实例化默认的对象
         /// </summary>
         /// <param name="station">站号信息</param>
-        public DAM3601(byte station) : base(station)
+        public DAM3601( byte station ) : base( station )
         {
             SleepTime = 200;
         }
@@ -38,15 +45,15 @@ namespace HslCommunication.Instrument.Temperature
         /// 读取所有的温度数据，并转化成相关的信息
         /// </summary>
         /// <returns>结果数据对象</returns>
-        public OperateResult<float[]> ReadAllTemperature()
+        public OperateResult<float[]> ReadAllTemperature( )
         {
             string address = "x=4;1";
             if (AddressStartWithZero) address = "x=4;0";
 
-            OperateResult<short[]> read = ReadInt16(address, 128);
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<float[]>(read);
+            OperateResult<short[]> read = ReadInt16( address, 128 );
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<float[]>( read );
 
-            return OperateResult.CreateSuccessResult(read.Content.Select(m => TransformValue(m)).ToArray());
+            return OperateResult.CreateSuccessResult( read.Content.Select( m => TransformValue( m ) ).ToArray( ) );
         }
 
         /// <summary>
@@ -54,7 +61,7 @@ namespace HslCommunication.Instrument.Temperature
         /// </summary>
         /// <param name="value">读取的值</param>
         /// <returns>转换后的值</returns>
-        private float TransformValue(short value)
+        private float TransformValue(short value )
         {
             if ((value & 0x800) > 0)
             {
@@ -80,16 +87,16 @@ namespace HslCommunication.Instrument.Temperature
         /// 此处演示批量读取的示例
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Modbus\Modbus.cs" region="ReadExample2" title="Read示例" />
         /// </example>
-        public override OperateResult<byte[]> Read(string address, ushort length)
+        public override OperateResult<byte[]> Read( string address, ushort length )
         {
             // 解析指令
-            OperateResult<byte[]> command = ModbusInfo.BuildReadModbusCommand(address, length, Station, AddressStartWithZero, ModbusInfo.WriteRegister);
+            OperateResult<byte[]> command = ModbusInfo.BuildReadModbusCommand( address, length, Station, AddressStartWithZero, ModbusInfo.WriteRegister );
             if (!command.IsSuccess) return command;
 
             // 核心交互
-            return CheckModbusTcpResponse(command.Content);
+            return CheckModbusTcpResponse( command.Content );
         }
-
+        
         #endregion
 
         #region Object Override
@@ -98,7 +105,7 @@ namespace HslCommunication.Instrument.Temperature
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串</returns>
-        public override string ToString()
+        public override string ToString( )
         {
             return $"DAM3601[{PortName}:{BaudRate}]";
         }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace HslCommunication.BasicFramework
@@ -175,11 +177,11 @@ namespace HslCommunication.BasicFramework
         {
             if (InnerVersion == 0)
             {
-                return ToString("N");
+                return ToString( "N" );
             }
             else
             {
-                return ToString("C");
+                return ToString( "C" );
             }
         }
 
@@ -189,9 +191,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="obj">版本号</param>
         /// <returns>是否一致</returns>
-        public override bool Equals(object obj)
+        public override bool Equals( object obj )
         {
-            return base.Equals(obj);
+            return base.Equals( obj );
         }
 
 
@@ -199,9 +201,9 @@ namespace HslCommunication.BasicFramework
         /// 获取哈希值
         /// </summary>
         /// <returns>哈希值</returns>
-        public override int GetHashCode()
+        public override int GetHashCode( )
         {
-            return base.GetHashCode();
+            return base.GetHashCode( );
         }
 
         #endregion
@@ -214,7 +216,7 @@ namespace HslCommunication.BasicFramework
         /// <param name="SV1">第一个版本</param>
         /// <param name="SV2">第二个版本</param>
         /// <returns>是否相同</returns>
-        public static bool operator ==(SystemVersion SV1, SystemVersion SV2)
+        public static bool operator == (SystemVersion SV1, SystemVersion SV2)
         {
             if (SV1.MainVersion != SV2.MainVersion)
             {
@@ -244,7 +246,7 @@ namespace HslCommunication.BasicFramework
         /// <param name="SV1">第一个版本号</param>
         /// <param name="SV2">第二个版本号</param>
         /// <returns>是否相同</returns>
-        public static bool operator !=(SystemVersion SV1, SystemVersion SV2)
+        public static bool operator != (SystemVersion SV1, SystemVersion SV2)
         {
             if (SV1.MainVersion != SV2.MainVersion)
             {
@@ -274,7 +276,7 @@ namespace HslCommunication.BasicFramework
         /// <param name="SV1">第一个版本</param>
         /// <param name="SV2">第二个版本</param>
         /// <returns>是否相同</returns>
-        public static bool operator >(SystemVersion SV1, SystemVersion SV2)
+        public static bool operator > (SystemVersion SV1, SystemVersion SV2)
         {
             if (SV1.MainVersion > SV2.MainVersion)
             {
@@ -325,7 +327,7 @@ namespace HslCommunication.BasicFramework
         /// <param name="SV1">第一个版本号</param>
         /// <param name="SV2">第二个版本号</param>
         /// <returns>是否小于</returns>
-        public static bool operator <(SystemVersion SV1, SystemVersion SV2)
+        public static bool operator < (SystemVersion SV1, SystemVersion SV2)
         {
             if (SV1.MainVersion < SV2.MainVersion)
             {

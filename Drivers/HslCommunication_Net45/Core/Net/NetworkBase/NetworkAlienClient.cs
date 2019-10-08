@@ -1,10 +1,12 @@
-﻿using HslCommunication.Core.IMessage;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using HslCommunication.Core.IMessage;
 
 namespace HslCommunication.Core.Net
 {
@@ -19,14 +21,14 @@ namespace HslCommunication.Core.Net
         /// <summary>
         /// 默认的无参构造方法
         /// </summary>
-        public NetworkAlienClient()
+        public NetworkAlienClient( )
         {
             password = new byte[6];
-            alreadyLock = new SimpleHybirdLock();
-            alreadyOnline = new List<AlienSession>();
-            trustOnline = new List<string>();
-            trustLock = new SimpleHybirdLock();
-            ThreadCheckStart();
+            alreadyLock = new SimpleHybirdLock( );
+            alreadyOnline = new List<AlienSession>( );
+            trustOnline = new List<string>( );
+            trustLock = new SimpleHybirdLock( );
+            ThreadCheckStart( );
         }
 
         #endregion
@@ -38,7 +40,7 @@ namespace HslCommunication.Core.Net
         /// </summary>
         /// <param name="socket">异步对象</param>
         /// <param name="endPoint">终结点</param>
-        protected override void ThreadPoolLogin(Socket socket, IPEndPoint endPoint)
+        protected override void ThreadPoolLogin( Socket socket, IPEndPoint endPoint )
         {
             // 注册包
             // 0x48 0x73 0x6E 0x00 0x17 0x31 0x32 0x33 0x34 0x35 0x36 0x37 0x38 0x39 0x30 0x31 0x00 0x00 0x00 0x00 0x00 0x00 0xC0 0xA8 0x00 0x01 0x17 0x10
@@ -57,13 +59,13 @@ namespace HslCommunication.Core.Net
             // 0x02: DTU禁止登录
             // 0x03: 密码验证失败 
 
-            OperateResult<byte[]> check = ReceiveByMessage(socket, 5000, new AlienMessage());
+            OperateResult<byte[]> check = ReceiveByMessage( socket, 5000, new AlienMessage( ) );
             if (!check.IsSuccess) return;
 
             if (check.Content[4] != 0x17 || check.Content.Length != 0x1C)
             {
-                socket?.Close();
-                LogNet?.WriteWarn(ToString(), "Length Check Failed");
+                socket?.Close( );
+                LogNet?.WriteWarn( ToString( ), "Length Check Failed" );
                 return;
             }
 
@@ -78,48 +80,48 @@ namespace HslCommunication.Core.Net
                 }
             }
 
-            string dtu = Encoding.ASCII.GetString(check.Content, 5, 11).Trim();
+            string dtu = Encoding.ASCII.GetString( check.Content, 5, 11 ).Trim( );
 
             // 密码失败的情况
             if (!isPasswrodRight)
             {
-                OperateResult send = Send(socket, GetResponse(StatusPasswodWrong));
-                if (send.IsSuccess) socket?.Close();
-                LogNet?.WriteWarn(ToString(), "Login Password Wrong, Id:" + dtu);
+                OperateResult send = Send( socket, GetResponse( StatusPasswodWrong ) );
+                if (send.IsSuccess) socket?.Close( );
+                LogNet?.WriteWarn( ToString( ), "Login Password Wrong, Id:" + dtu );
                 return;
             }
 
-            AlienSession session = new AlienSession()
+            AlienSession session = new AlienSession( )
             {
                 DTU = dtu,
                 Socket = socket,
             };
 
             // 检测是否禁止登录
-            if (!IsClientPermission(session))
+            if (!IsClientPermission( session ))
             {
-                OperateResult send = Send(socket, GetResponse(StatusLoginForbidden));
-                if (send.IsSuccess) socket?.Close();
-                LogNet?.WriteWarn(ToString(), "Login Forbidden, Id:" + session.DTU);
+                OperateResult send = Send( socket, GetResponse( StatusLoginForbidden ) );
+                if (send.IsSuccess) socket?.Close( );
+                LogNet?.WriteWarn( ToString( ), "Login Forbidden, Id:" + session.DTU );
                 return;
             }
 
             // 检测是否重复登录，不重复的话，也就是意味着登录成功了
-            if (IsClientOnline(session))
+            if (IsClientOnline( session ))
             {
-                OperateResult send = Send(socket, GetResponse(StatusLoginRepeat));
-                if (send.IsSuccess) socket?.Close();
-                LogNet?.WriteWarn(ToString(), "Login Repeat, Id:" + session.DTU);
+                OperateResult send = Send( socket, GetResponse( StatusLoginRepeat ) );
+                if (send.IsSuccess) socket?.Close( );
+                LogNet?.WriteWarn( ToString( ), "Login Repeat, Id:" + session.DTU );
                 return;
             }
             else
             {
-                OperateResult send = Send(socket, GetResponse(StatusOk));
+                OperateResult send = Send( socket, GetResponse( StatusOk ) );
                 if (!send.IsSuccess) return;
             }
 
             // 触发上线消息
-            OnClientConnected?.Invoke(this, session);
+            OnClientConnected?.Invoke( this, session );
         }
 
 
@@ -172,10 +174,10 @@ namespace HslCommunication.Core.Net
         /// </summary>
         /// <param name="session"></param>
         /// <returns></returns>
-        private bool IsClientOnline(AlienSession session)
+        private bool IsClientOnline( AlienSession session )
         {
             bool result = false;
-            alreadyLock.Enter();
+            alreadyLock.Enter( );
 
             for (int i = 0; i < alreadyOnline.Count; i++)
             {
@@ -189,10 +191,10 @@ namespace HslCommunication.Core.Net
 
             if (!result)
             {
-                alreadyOnline.Add(session);
+                alreadyOnline.Add( session );
             }
 
-            alreadyLock.Leave();
+            alreadyLock.Leave( );
 
             return result;
         }
@@ -202,11 +204,11 @@ namespace HslCommunication.Core.Net
         /// </summary>
         /// <param name="session"></param>
         /// <returns></returns>
-        private bool IsClientPermission(AlienSession session)
+        private bool IsClientPermission( AlienSession session )
         {
             bool result = false;
 
-            trustLock.Enter();
+            trustLock.Enter( );
 
             if (trustOnline.Count == 0)
             {
@@ -224,7 +226,7 @@ namespace HslCommunication.Core.Net
                 }
             }
 
-            trustLock.Leave();
+            trustLock.Leave( );
 
             return result;
         }
@@ -233,7 +235,7 @@ namespace HslCommunication.Core.Net
         #endregion
 
         #region Public Method
-
+        
 
         /// <summary>
         /// 设置密码，长度为6
@@ -241,9 +243,9 @@ namespace HslCommunication.Core.Net
         /// <param name="password"></param>
         public void SetPassword(byte[] password)
         {
-            if (password?.Length == 6)
+            if(password?.Length == 6)
             {
-                password.CopyTo(this.password, 0);
+                password.CopyTo( this.password, 0 );
             }
         }
 
@@ -253,11 +255,11 @@ namespace HslCommunication.Core.Net
         /// <param name="clients"></param>
         public void SetTrustClients(string[] clients)
         {
-            trustLock.Enter();
+            trustLock.Enter( );
 
-            trustOnline = new List<string>(clients);
+            trustOnline = new List<string>( clients );
 
-            trustLock.Leave();
+            trustLock.Leave( );
         }
 
 
@@ -265,13 +267,13 @@ namespace HslCommunication.Core.Net
         /// 退出异形客户端
         /// </summary>
         /// <param name="session">异形客户端的会话</param>
-        public void AlienSessionLoginOut(AlienSession session)
+        public void AlienSessionLoginOut( AlienSession session )
         {
-            alreadyLock.Enter();
+            alreadyLock.Enter( );
 
-            alreadyOnline.Remove(session);
+            alreadyOnline.Remove( session );
 
-            alreadyLock.Leave();
+            alreadyLock.Leave( );
         }
 
 
@@ -281,36 +283,36 @@ namespace HslCommunication.Core.Net
 
         private void ThreadCheckStart()
         {
-            threadCheck = new Thread(new ThreadStart(ThreadCheckAlienClient));
+            threadCheck = new Thread(new ThreadStart( ThreadCheckAlienClient ));
             threadCheck.IsBackground = true;
             threadCheck.Priority = ThreadPriority.AboveNormal;
-            threadCheck.Start();
+            threadCheck.Start( );
         }
 
-        private void ThreadCheckAlienClient()
+        private void ThreadCheckAlienClient( )
         {
-            Thread.Sleep(1000);
+            Thread.Sleep( 1000 );
             while (true)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep( 1000 );
 
-                alreadyLock.Enter();
+                alreadyLock.Enter( );
 
                 for (int i = alreadyOnline.Count - 1; i >= 0; i--)
                 {
                     if (!alreadyOnline[i].IsStatusOk)
                     {
-                        alreadyOnline.RemoveAt(i);
+                        alreadyOnline.RemoveAt( i );
                     }
                 }
 
 
-                alreadyLock.Leave();
+                alreadyLock.Leave( );
             }
         }
 
         #endregion
-
+        
         #region Private Member
 
         private byte[] password;                    // 密码设置
@@ -328,7 +330,7 @@ namespace HslCommunication.Core.Net
         /// 获取本对象的字符串表示形式
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
+        public override string ToString( )
         {
             return "NetworkAlienBase";
         }

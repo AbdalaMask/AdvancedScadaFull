@@ -1,4 +1,8 @@
-﻿using HslCommunication.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using HslCommunication.Core;
 
 namespace HslCommunication
 {
@@ -6,7 +10,7 @@ namespace HslCommunication
     /// 一个工业物联网的底层架构框架，专注于底层的技术通信及跨平台，跨语言通信功能，实现各种主流的PLC数据读写，实现modbus的各种协议读写等等，
     /// 支持快速搭建工业上位机软件，组态软件，SCADA软件，工厂MES系统，助力企业工业4.0腾飞，实现智能制造，智慧工厂的目标。
     /// <br /><br />
-    /// 本组件免费开源，使用之前请认真的阅读本API文档，对于本文档中警告部分的内容务必理解，部署生产之前请详细测试，如果在测试的过程中，
+    /// 本组件付费开源，使用之前请认真的阅读本API文档，对于本文档中警告部分的内容务必理解，部署生产之前请详细测试，如果在测试的过程中，
     /// 发现了BUG，或是有问题的地方，欢迎联系作者进行修改，或是直接在github上进行提问。统一声明：对于操作设备造成的任何损失，作者概不负责。
     /// <br /><br />
     /// 官方网站：<a href="http://www.hslcommunication.cn/">http://www.hslcommunication.cn/</a>，包含组件的在线API地址以及一个MES DEMO的项目展示。
@@ -18,11 +22,25 @@ namespace HslCommunication
     /// 本库提供了C#版本和java版本和python版本，java，python版本的使用和C#几乎是一模一样的，都是可以相互通讯的。
     /// </summary>
     /// <remarks>
-    /// 本软件著作权归Richard.Hu所有，开源项目地址：<a href="https://github.com/dathlin/HslCommunication">https://github.com/dathlin/HslCommunication</a>  开源协议：LGPL-3.0
+    /// 本软件著作权归Richard.Hu所有。
     /// <br />
     /// 博客地址：<a href="https://www.cnblogs.com/dathlin/p/7703805.html">https://www.cnblogs.com/dathlin/p/7703805.html</a>
     /// <br />
-    /// 打赏请扫码：<br />
+    /// 授权付费模式：超级VIP群 : 189972948
+    /// <br />
+    /// <list type="bullet">
+    ///     <item>本群提供专业版通讯库的所有更新版的 HslCommunication 源代码。包含 .Net Java Python 三大平台。</item>
+    ///     <item>本群支持对特殊需求而进行修改，更新源代码的服务，配合企业客户修复源代码错误的服务。</item>
+    ///     <item>本群成员拥有对通讯库商用的权利，拥有自己修改源代码并商业使用的权利，组件版权仍归属原作者。</item>
+    ///     <item>本群成员需要对源代码保密。禁止公开源代码，禁止对源代码的商业用途。</item>
+    ///     <item>本群成员可以免费获得官网的 MES DEMO源代码。</item>
+    ///     <item>本群成员可以免费体验作者采集框架程序。</item>
+    ///     <item>个人商业授权 个人付费 2400 rmb 个人即可拥有商用版权，不限制项目数量，开放源代码，支持源代码更新，长期支持。</item>
+    ///     <item>企业商业授权 企业付费 5000 rmb，公司即可拥有商用版权，支持任意的开发人员数量，项目数量，支持源代码更新，长达10年，商用软件必须冠名公司标识，官网显示合作伙伴logo。</item>
+    ///     <item>赠送一次两小时的远程1对1的讲解答疑。</item>
+    /// </list>
+    /// 
+    /// 付费二维码：<br />
     /// <img src="https://raw.githubusercontent.com/dathlin/HslCommunication/master/imgs/support.png" />
     /// </remarks>
     /// <revisionHistory>
@@ -817,8 +835,50 @@ namespace HslCommunication
     ///             <item>今天是2019年9月10日，祝天下所有的教师节日快乐。</item>
     ///         </list>
     ///     </revision>
+    ///     <revision date="2019-9-17" version="8.0.1" author="Richard.Hu">
+    ///         <list type="bullet">
+    ///             <item>所有网口透传类对象完善实例化的方法，都新增一个指定ip及端口的实例方法。</item>
+    ///             <item>ABBWebClient: 完善实例化方法，修改ToString的格式化内容，提炼了webapi的基类，开放ip地址和端口。</item>
+    ///             <item>ABBWebClient: 新增提供了机器人自身IO，扩展IO，最新的报警日志的数据读取API。</item>
+    ///             <item>NetSimplifyClient: 修复了当ReceiveTimeOut小于0，但是实际接收时会发生奔溃的bug。</item>
+    ///             <item>NetPlainSocket: 新增一个基于socket的明文的网络发送和接收类，采用事件驱动的机制。</item>
+    ///             <item>LogNet: 日志类对象新增一个特性，当日志的文件名设置为空的时候，将不会创建文件，仅仅触发 BeforSaveToFile 事件，方便日志显示。</item>
+    ///             <item>XGBCnet: Lsis的plc的串口类修复一个bug，感谢埃及朋友的贡献。</item>
+    ///             <item>SoftIncrementCount: 消息号自增类新增一个方法，重置当前的消息号。</item>
+    ///             <item>PanasonicMewtocol: 修复松下的串口类读写单个bool时异常的bug，地址支持字+位的表示方式，R33=R2.1，方便大家输入测试。</item>
+    ///             <item>MqttClient: 新增一个Mqtt协议的客户端类，支持用户名密码，支持发布，支持订阅，支持重连，欢迎一起测试。</item>
+    ///             <item>本组件从v8.0.0开始进入付费授权模式，详细参考官方：http://www.hslcommunication.cn 。</item>
+    ///         </list>
+    ///     </revision>
+    ///     <revision date="2019-9-19" version="8.0.2" author="Richard.Hu">
+    ///         <list type="bullet">
+    ///             <item>ABBWebClient: abb机器人的api读取日志的接口新增一个参数，读取最近的日志数量。默认为10条。</item>
+    ///             <item>MQTTClient: 修复mqtt客户端类的消息重复bug，修复发送空订阅的bug。</item>
+    ///             <item>SiemensS7Net: 西门子的s7协议的类新增一个api，支持时间的读写，支持异步，时间格式和s7net一致。</item>
+    ///             <item>本组件从v8.0.0开始进入付费授权模式，详细参考官方：http://www.hslcommunication.cn 。</item>
+    ///         </list>
+    ///     </revision>
+    ///     <revision date="2019-9-26" version="8.0.3" author="Richard.Hu">
+    ///         <list type="bullet">
+    ///             <item>Networkbase: 修复套接字网络授权失败时不关闭网络的bug。</item>
+    ///             <item>SoftBasic: 新增一个数组数据格式化的方法信息。</item>
+    ///             <item>MqttServer: 新增一个mqtt的服务器，初步支持订阅，发布订阅，强制发布订阅，在线客户端数量功能等等。</item>
+    ///             <item>Demo: 所有的PLC的demo和modbus协议的demo，支持批量读取各种类型的数组数据。</item>
+    ///             <item>Nuget: 新增本项目的图标，在nuget上搜索时会显示图标。</item>
+    ///             <item>本组件从v8.0.0开始进入付费授权模式，详细参考官方：http://www.hslcommunication.cn 。</item>
+    ///         </list>
+    ///     </revision>
+    ///     <revision date="2019-10-7" version="8.1.0" author="Richard.Hu">
+    ///         <list type="bullet">
+    ///             <item>ModbusUdp: 新增一个Modbus的基于udp的协议类，使用的tcp的报文的机制。</item>
+    ///             <item>HttpServer: 新增一个http的服务器封装类，方便实现基于webapi的后台功能，集成GET，POST的接口操作。</item>
+    ///             <item>Serial Ports: standard项目依赖官方串口库，实现所有的设备的串口支持，可应用于跨平台。</item>
+    ///             <item>standard: 在nuget上提供.net standard2.1版本的库。</item>
+    ///             <item>本组件从v8.0.0开始进入付费授权模式，详细参考官方：http://www.hslcommunication.cn 。</item>
+    ///         </list>
+    ///     </revision>
     /// </revisionHistory>
-    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [System.Runtime.CompilerServices.CompilerGeneratedAttribute( )]
     public class NamespaceDoc
     {
 

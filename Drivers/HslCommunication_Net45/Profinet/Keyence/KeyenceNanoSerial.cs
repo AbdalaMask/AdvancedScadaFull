@@ -1,4 +1,9 @@
-﻿using HslCommunication.Serial;
+﻿using HslCommunication.BasicFramework;
+using HslCommunication.Core;
+using HslCommunication.Serial;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace HslCommunication.Profinet.Keyence
@@ -111,7 +116,7 @@ namespace HslCommunication.Profinet.Keyence
     /// </list>
     /// </remarks>
     public class KeyenceNanoSerial : SerialDeviceBase<KeyenceNanoByteTransform>
-    {
+    { 
         #region Constructor
 
         /// <summary>
@@ -146,9 +151,9 @@ namespace HslCommunication.Profinet.Keyence
         /// <returns>带成功标志的结果数据对象</returns>
         public new OperateResult<short> ReadInt16(string address)
         {
-            var result = ReadInt16(address, 1);
-            if (!result.IsSuccess) return OperateResult.CreateFailedResult<short>(result);
-            return OperateResult.CreateSuccessResult(result.Content[0]);
+            var result= ReadInt16(address, 1);
+            if (!result.IsSuccess) return OperateResult.CreateFailedResult<short>(result); 
+            return OperateResult.CreateSuccessResult(result.Content[0]); 
         }
 
         /// <summary>
@@ -158,7 +163,7 @@ namespace HslCommunication.Profinet.Keyence
         /// <param name="length">数组长度</param>
         /// <returns>带成功标志的结果数据对象</returns>
         public new OperateResult<short[]> ReadInt16(string address, ushort length)
-        {
+        { 
             address += ".S";
             return base.ReadInt16(address, length);
         }
@@ -182,7 +187,7 @@ namespace HslCommunication.Profinet.Keyence
         /// <param name="length">数组长度</param>
         /// <returns>带成功标志的结果数据对象</returns>
         public new OperateResult<ushort[]> ReadUInt16(string address, ushort length)
-        {
+        { 
             address += ".U";
             return base.ReadUInt16(address, length);
         }
@@ -206,7 +211,7 @@ namespace HslCommunication.Profinet.Keyence
         /// <param name="length">数组长度</param>
         /// <returns>带成功标志的结果数据对象</returns>
         public new OperateResult<int[]> ReadInt32(string address, ushort length)
-        {
+        { 
             address += ".L";
             return base.ReadInt32(address, length);
         }
@@ -230,7 +235,7 @@ namespace HslCommunication.Profinet.Keyence
         /// <param name="length">数组长度</param>
         /// <returns>带成功标志的结果数据对象</returns>
         public new OperateResult<uint[]> ReadUInt32(string address, ushort length)
-        {
+        { 
             address += ".D";
             return base.ReadUInt32(address, length);
         }
@@ -241,7 +246,7 @@ namespace HslCommunication.Profinet.Keyence
         public override OperateResult<byte[]> Read(string address, ushort length)
         {
             // 获取指令
-            OperateResult<byte[]> command = KeyenceNanoSerialOverTcp.BuildReadCommand(address, length);
+            OperateResult<byte[]> command = KeyenceNanoSerialOverTcp.BuildReadCommand( address, length);
             if (!command.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(command);
 
             // 核心交互
@@ -265,7 +270,7 @@ namespace HslCommunication.Profinet.Keyence
         public override OperateResult<bool[]> ReadBool(string address, ushort length)
         {
             var strBuffer = Encoding.Default.GetString(Read(address, length).Content).Split(' ');
-
+         
             var result = new bool[strBuffer.Length];
             for (int i = 0; i < length; i++)
             {
@@ -310,7 +315,7 @@ namespace HslCommunication.Profinet.Keyence
         public override OperateResult Write(string address, bool value)
         {
             //value=true时:指令尾部命令为" 1 1";value=false:指令尾部命令为" 1 0";
-            var byteTemp = value ? new byte[] { 0x20, 0x31, 0x20, 0x31 } : new byte[] { 0x20, 0x31, 0x20, 0x30 };
+            var byteTemp = value ? new byte[] {0x20, 0x31,0x20,0x31 } : new byte[] { 0x20, 0x31, 0x20, 0x30 };
             // 先获取指令
             OperateResult<byte[]> command = KeyenceNanoSerialOverTcp.BuildWriteCommand(address, byteTemp);
             if (!command.IsSuccess) return command;
@@ -341,7 +346,7 @@ namespace HslCommunication.Profinet.Keyence
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToString()
+        public override string ToString( )
         {
             return $"KeyenceNanoSerial[{PortName}:{BaudRate}]";
         }

@@ -313,6 +313,7 @@ namespace AdvancedScada.OPC.Core.Editors
                 }
                 catch (COMException) { };
                 channelsTree.Nodes.Clear();
+
                 ImportOPCChannels(srv, channelsTree.Nodes);
             }
             channelsTree.AfterCheck += new TreeViewEventHandler(ChannelsTree_AfterCheck);

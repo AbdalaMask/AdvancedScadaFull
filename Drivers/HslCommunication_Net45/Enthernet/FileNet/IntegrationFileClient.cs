@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net.Sockets;
+using System.Text;
 
 
 namespace HslCommunication.Enthernet
@@ -14,7 +17,7 @@ namespace HslCommunication.Enthernet
     /// </remarks>
     /// <example>
     /// 此处只演示创建实例，具体的上传，下载，删除的例子请参照对应的方法
-    /// <code lang="cs" source="TestProject\HslCommunicationDemo\FormFileClient.cs" region="Intergration File Client" title="IntegrationFileClient示例" />
+    /// <code lang="cs" source="TestProject\HslCommunicationDemo\Hsl\FormFileClient.cs" region="Intergration File Client" title="IntegrationFileClient示例" />
     /// </example>
     public class IntegrationFileClient : FileClientBase
     {
@@ -22,7 +25,7 @@ namespace HslCommunication.Enthernet
         /// <summary>
         /// 实例化一个对象
         /// </summary>
-        public IntegrationFileClient()
+        public IntegrationFileClient( )
         {
 
         }
@@ -43,9 +46,9 @@ namespace HslCommunication.Enthernet
             string fileName,
             string factory,
             string group,
-            string id)
+            string id )
         {
-            return DeleteFileBase(fileName, factory, group, id);
+            return DeleteFileBase( fileName, factory, group, id );
         }
 
 
@@ -72,7 +75,7 @@ namespace HslCommunication.Enthernet
         /// </note>
         /// </remarks>
         /// <example>
-        /// <code lang="cs" source="TestProject\HslCommunicationDemo\FormFileClient.cs" region="Download File" title="DownloadFile示例" />
+        /// <code lang="cs" source="TestProject\HslCommunicationDemo\Hsl\FormFileClient.cs" region="Download File" title="DownloadFile示例" />
         /// </example>
         public OperateResult DownloadFile(
             string fileName,
@@ -83,7 +86,7 @@ namespace HslCommunication.Enthernet
             string fileSaveName
             )
         {
-            return DownloadFileBase(factory, group, id, fileName, processReport, fileSaveName);
+            return DownloadFileBase( factory, group, id, fileName, processReport, fileSaveName );
         }
 
         /// <summary>
@@ -104,7 +107,7 @@ namespace HslCommunication.Enthernet
         /// </note>
         /// </remarks>
         /// <example>
-        /// <code lang="cs" source="TestProject\HslCommunicationDemo\FormFileClient.cs" region="Download File" title="DownloadFile示例" />
+        /// <code lang="cs" source="TestProject\HslCommunicationDemo\Hsl\FormFileClient.cs" region="Download File" title="DownloadFile示例" />
         /// </example>
         public OperateResult DownloadFile(
             string fileName,
@@ -115,10 +118,10 @@ namespace HslCommunication.Enthernet
             Stream stream
             )
         {
-            return DownloadFileBase(factory, group, id, fileName, processReport, stream);
+            return DownloadFileBase( factory, group, id, fileName, processReport, stream );
         }
 
-#if !NETSTANDARD2_0
+#if !NETSTANDARD2_0 && !NETSTANDARD2_1
 
         /// <summary>
         /// 下载服务器的文件到本地的数据流中
@@ -138,7 +141,7 @@ namespace HslCommunication.Enthernet
         /// </note>
         /// </remarks>
         /// <example>
-        /// <code lang="cs" source="TestProject\HslCommunicationDemo\FormFileClient.cs" region="Download File" title="DownloadFile示例" />
+        /// <code lang="cs" source="TestProject\HslCommunicationDemo\Hsl\FormFileClient.cs" region="Download File" title="DownloadFile示例" />
         /// </example>
         public OperateResult DownloadFile(
             string fileName,
@@ -149,18 +152,18 @@ namespace HslCommunication.Enthernet
             out Bitmap bitmap
             )
         {
-            MemoryStream stream = new MemoryStream();
-            OperateResult result = DownloadFileBase(factory, group, id, fileName, processReport, stream);
+            MemoryStream stream = new MemoryStream( );
+            OperateResult result = DownloadFileBase( factory, group, id, fileName, processReport, stream );
             if (result.IsSuccess)
             {
-                bitmap = new Bitmap(stream);
+                bitmap = new Bitmap( stream );
             }
             else
             {
                 bitmap = null;
                 result.IsSuccess = false;
             }
-            stream.Dispose();
+            stream.Dispose( );
             return result;
         }
 
@@ -190,7 +193,7 @@ namespace HslCommunication.Enthernet
         /// </note>
         /// </remarks>
         /// <example>
-        /// <code lang="cs" source="TestProject\HslCommunicationDemo\FormFileClient.cs" region="Upload File" title="UploadFile示例" />
+        /// <code lang="cs" source="TestProject\HslCommunicationDemo\Hsl\FormFileClient.cs" region="Upload File" title="UploadFile示例" />
         /// </example>
         public OperateResult UploadFile(
             string fileName,
@@ -200,9 +203,9 @@ namespace HslCommunication.Enthernet
             string id,
             string fileTag,
             string fileUpload,
-            Action<long, long> processReport)
+            Action<long, long> processReport )
         {
-            return UploadFileBase(fileName, serverName, factory, group, id, fileTag, fileUpload, processReport);
+            return UploadFileBase( fileName, serverName, factory, group, id, fileTag, fileUpload, processReport );
         }
 
         /// <summary>
@@ -225,7 +228,7 @@ namespace HslCommunication.Enthernet
         /// </note>
         /// </remarks>
         /// <example>
-        /// <code lang="cs" source="TestProject\HslCommunicationDemo\FormFileClient.cs" region="Upload File" title="UploadFile示例" />
+        /// <code lang="cs" source="TestProject\HslCommunicationDemo\Hsl\FormFileClient.cs" region="Upload File" title="UploadFile示例" />
         /// </example>
         public OperateResult UploadFile(
             Stream stream,
@@ -235,12 +238,12 @@ namespace HslCommunication.Enthernet
             string id,
             string fileTag,
             string fileUpload,
-            Action<long, long> processReport)
+            Action<long, long> processReport )
         {
-            return UploadFileBase(stream, serverName, factory, group, id, fileTag, fileUpload, processReport);
+            return UploadFileBase( stream, serverName, factory, group, id, fileTag, fileUpload, processReport );
         }
 
-#if !NETSTANDARD2_0
+#if !NETSTANDARD2_0 && !NETSTANDARD2_1
         /// <summary>
         /// 上传内存图片到服务器操作
         /// </summary>
@@ -262,7 +265,7 @@ namespace HslCommunication.Enthernet
         /// </note>
         /// </remarks>
         /// <example>
-        /// <code lang="cs" source="TestProject\HslCommunicationDemo\FormFileClient.cs" region="Upload File" title="UploadFile示例" />
+        /// <code lang="cs" source="TestProject\HslCommunicationDemo\Hsl\FormFileClient.cs" region="Upload File" title="UploadFile示例" />
         /// </example>
         public OperateResult UploadFile(
             Bitmap bitmap,
@@ -272,13 +275,13 @@ namespace HslCommunication.Enthernet
             string id,
             string fileTag,
             string fileUpload,
-            Action<long, long> processReport)
+            Action<long, long> processReport )
         {
-            MemoryStream stream = new MemoryStream();
-            if (bitmap.RawFormat != null) bitmap.Save(stream, bitmap.RawFormat);
-            else bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
-            OperateResult result = UploadFileBase(stream, serverName, factory, group, id, fileTag, fileUpload, processReport);
-            stream.Dispose();
+            MemoryStream stream = new MemoryStream( );
+            if (bitmap.RawFormat != null) bitmap.Save( stream, bitmap.RawFormat );
+            else bitmap.Save( stream, System.Drawing.Imaging.ImageFormat.Bmp );
+            OperateResult result = UploadFileBase( stream, serverName, factory, group, id, fileTag, fileUpload, processReport );
+            stream.Dispose( );
             return result;
         }
 #endif
@@ -295,13 +298,13 @@ namespace HslCommunication.Enthernet
         /// <param name="group">第二类</param>
         /// <param name="id">第三类</param>
         /// <returns>是否成功的结果对象</returns>
-        private string TranslateFileName(string fileName, string factory, string group, string id)
+        private string TranslateFileName( string fileName, string factory, string group, string id )
         {
             string file_save_server_name = fileName;
 
-            if (id.IndexOf('\\') >= 0) id = id.Replace('\\', '_');
-            if (group.IndexOf('\\') >= 0) group = id.Replace('\\', '_');
-            if (factory.IndexOf('\\') >= 0) id = factory.Replace('\\', '_');
+            if (id.IndexOf( '\\' ) >= 0) id = id.Replace( '\\', '_' );
+            if (group.IndexOf( '\\' ) >= 0) group = id.Replace( '\\', '_' );
+            if (factory.IndexOf( '\\' ) >= 0) id = factory.Replace( '\\', '_' );
 
 
             if (id?.Length > 0) file_save_server_name = id + @"\" + file_save_server_name;
@@ -320,13 +323,13 @@ namespace HslCommunication.Enthernet
         /// <param name="group">第二类</param>
         /// <param name="id">第三类</param>
         /// <returns>是否成功的结果对象</returns>
-        private string TranslatePathName(string factory, string group, string id)
+        private string TranslatePathName( string factory, string group, string id )
         {
             string file_save_server_name = "";
 
-            if (id.IndexOf('\\') >= 0) id = id.Replace('\\', '_');
-            if (group.IndexOf('\\') >= 0) group = id.Replace('\\', '_');
-            if (factory.IndexOf('\\') >= 0) id = factory.Replace('\\', '_');
+            if (id.IndexOf( '\\' ) >= 0) id = id.Replace( '\\', '_' );
+            if (group.IndexOf( '\\' ) >= 0) group = id.Replace( '\\', '_' );
+            if (factory.IndexOf( '\\' ) >= 0) id = factory.Replace( '\\', '_' );
 
             if (id?.Length > 0) file_save_server_name = @"\" + id;
 
@@ -358,7 +361,7 @@ namespace HslCommunication.Enthernet
         /// </note>
         /// </remarks>
         /// <example>
-        /// <code lang="cs" source="TestProject\HslCommunicationDemo\FormFileClient.cs" region="DownloadPathFileNames" title="DownloadPathFileNames示例" />
+        /// <code lang="cs" source="TestProject\HslCommunicationDemo\Hsl\FormFileClient.cs" region="DownloadPathFileNames" title="DownloadPathFileNames示例" />
         /// </example>
         public OperateResult DownloadPathFileNames(
             out GroupFileItem[] fileNames,
@@ -397,7 +400,7 @@ namespace HslCommunication.Enthernet
         /// </note>
         /// </remarks>
         /// <example>
-        /// <code lang="cs" source="TestProject\HslCommunicationDemo\FormFileClient.cs" region="DownloadPathFolders" title="DownloadPathFolders示例" />
+        /// <code lang="cs" source="TestProject\HslCommunicationDemo\Hsl\FormFileClient.cs" region="DownloadPathFolders" title="DownloadPathFolders示例" />
         /// </example>
         public OperateResult DownloadPathFolders(
             out string[] folders,
@@ -411,7 +414,7 @@ namespace HslCommunication.Enthernet
                 HslProtocol.ProtocolFileDirectories,
                 factory,
                 group,
-                id);
+                id );
         }
 
 
@@ -437,10 +440,10 @@ namespace HslCommunication.Enthernet
             string id
             )
         {
-            OperateResult result = new OperateResult();
+            OperateResult result = new OperateResult( );
             // 连接服务器
             // connect server
-            OperateResult<Socket> socketResult = CreateSocketAndConnect(ServerIpEndPoint, ConnectTimeOut);
+            OperateResult<Socket> socketResult = CreateSocketAndConnect( ServerIpEndPoint, ConnectTimeOut );
             if (!socketResult.IsSuccess)
             {
                 arrays = new T[0];
@@ -449,7 +452,7 @@ namespace HslCommunication.Enthernet
 
 
             // 上传信息
-            OperateResult send = SendStringAndCheckReceive(socketResult.Content, protocol, "nosense");
+            OperateResult send = SendStringAndCheckReceive( socketResult.Content, protocol, "nosense" );
             if (!send.IsSuccess)
             {
                 arrays = new T[0];
@@ -457,7 +460,7 @@ namespace HslCommunication.Enthernet
             }
 
             // 上传三级分类
-            OperateResult sendClass = SendFactoryGroupId(socketResult.Content, factory, group, id);
+            OperateResult sendClass = SendFactoryGroupId( socketResult.Content, factory, group, id );
             if (!sendClass.IsSuccess)
             {
                 arrays = new T[0];
@@ -465,24 +468,24 @@ namespace HslCommunication.Enthernet
             }
 
             // 接收数据信息
-            OperateResult<int, string> receive = ReceiveStringContentFromSocket(socketResult.Content);
+            OperateResult<int, string> receive = ReceiveStringContentFromSocket( socketResult.Content );
             if (!receive.IsSuccess)
             {
                 arrays = new T[0];
                 return receive;
             }
-            socketResult.Content?.Close();
+            socketResult.Content?.Close( );
 
             // 数据转化
             try
             {
-                arrays = Newtonsoft.Json.Linq.JArray.Parse(receive.Content2).ToObject<T[]>();
-                return OperateResult.CreateSuccessResult();
+                arrays = Newtonsoft.Json.Linq.JArray.Parse( receive.Content2 ).ToObject<T[]>( );
+                return OperateResult.CreateSuccessResult( );
             }
             catch (Exception ex)
             {
                 arrays = new T[0];
-                return new OperateResult()
+                return new OperateResult( )
                 {
                     Message = ex.Message
                 };

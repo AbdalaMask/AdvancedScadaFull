@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 
 namespace HslCommunication.BasicFramework
 {
@@ -21,19 +23,19 @@ namespace HslCommunication.BasicFramework
         /// <summary>
         /// 向上
         /// </summary>
-        Upward = 1,
+        Upward=1,
         /// <summary>
         /// 向下
         /// </summary>
-        Downward = 2,
+        Downward=2,
         /// <summary>
         /// 向左
         /// </summary>
-        Ledtward = 3,
+        Ledtward=3,
         /// <summary>
         /// 向右
         /// </summary>
-        Rightward = 4,
+        Rightward=4,
 
     }
 
@@ -193,7 +195,7 @@ namespace HslCommunication.BasicFramework
         /// <param name="height">实际绘图区域的高度</param>
         /// <param name="value">需要绘制数据的当前值</param>
         /// <returns>相对于0的位置，还需要增加上面的偏值</returns>
-        public static float ComputePaintLocationY(float max, float min, int height, float value)
+        public static float ComputePaintLocationY( float max, float min, int height, float value )
         {
             return height - (value - min) / (max - min) * height;
         }
@@ -218,7 +220,7 @@ namespace HslCommunication.BasicFramework
         /// <param name="up"></param>
         /// <param name="down"></param>
         public static void PaintCoordinateDivide(
-            Graphics g,
+            Graphics g,       
             Pen penLine,
             Pen penDash,
             Font font,
@@ -230,7 +232,7 @@ namespace HslCommunication.BasicFramework
             int width,
             int height,
             int left = 60,
-            int right = 8,
+            int right = 8, 
             int up = 8,
             int down = 8
             )
@@ -326,6 +328,6 @@ namespace HslCommunication.BasicFramework
             return null;
         }
 
-
+        
     }
 }

@@ -23,10 +23,21 @@ namespace SVGSample.svg
         /// <returns>Returns the converted Bitmap image.</returns>
         public static Bitmap GetBitmapFromSVG(string filePath)
         {
-            SvgDocument document = GetSvgDocument(filePath);
+            try
+            {
+                SvgDocument document = GetSvgDocument(filePath);
+                Bitmap bmp = document.Draw();
+                return bmp;
+            }
+            catch (System.Exception ex)
+            {
 
-            Bitmap bmp = document.Draw();
-            return bmp;
+                
+            }
+            return null;
+
+           
+           
         }
 
         /// <summary>

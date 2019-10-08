@@ -290,10 +290,6 @@
       <Project>{1d570e9a-e5b4-44dd-946d-9d73cfa4a535}</Project>
       <Name>DriverBase</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Drivers\HslCommunication_Net45\HslCommunication.csproj">
-      <Project>{7F8029DA-1B94-4B1D-B91F-5B21DBF2F3A2}</Project>
-      <Name>HslCommunication</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Util\AdvancedScada.Utils\Utils.csproj">
       <Project>{5c361f75-32c8-487b-9eb8-0b4d627b89b4}</Project>
       <Name>Utils</Name>

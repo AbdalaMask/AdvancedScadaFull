@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace HslCommunication.Core.IMessage
 {
@@ -20,14 +23,14 @@ namespace HslCommunication.Core.IMessage
         /// 从当前的头子节文件中提取出接下来需要接收的数据长度
         /// </summary>
         /// <returns>返回接下来的数据内容长度</returns>
-        public int GetContentLengthByHeadBytes()
+        public int GetContentLengthByHeadBytes( )
         {
             byte[] buffer = new byte[4];
             buffer[0] = HeadBytes[7];
             buffer[1] = HeadBytes[6];
             buffer[2] = HeadBytes[5];
             buffer[3] = HeadBytes[4];
-            return BitConverter.ToInt32(buffer, 0);
+            return BitConverter.ToInt32( buffer, 0 );
         }
 
 
@@ -36,7 +39,7 @@ namespace HslCommunication.Core.IMessage
         /// </summary>
         /// <param name="token">特殊的令牌，有些特殊消息的验证</param>
         /// <returns>是否成功的结果</returns>
-        public bool CheckHeadBytesLegal(byte[] token)
+        public bool CheckHeadBytesLegal( byte[] token )
         {
             if (HeadBytes == null) return false;
 
@@ -55,7 +58,7 @@ namespace HslCommunication.Core.IMessage
         /// 获取头子节里的消息标识
         /// </summary>
         /// <returns>消息id</returns>
-        public int GetHeadBytesIdentity()
+        public int GetHeadBytesIdentity( )
         {
             return 0;
         }

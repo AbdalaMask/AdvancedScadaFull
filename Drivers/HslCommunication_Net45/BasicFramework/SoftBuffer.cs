@@ -1,5 +1,8 @@
-﻿using HslCommunication.Core;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using HslCommunication.Core;
 
 namespace HslCommunication.BasicFramework
 {
@@ -21,23 +24,23 @@ namespace HslCommunication.BasicFramework
         /// <summary>
         /// 使用默认的大小初始化缓存空间
         /// </summary>
-        public SoftBuffer()
+        public SoftBuffer( )
         {
             buffer = new byte[capacity];
-            hybirdLock = new SimpleHybirdLock();
-            byteTransform = new RegularByteTransform();
+            hybirdLock = new SimpleHybirdLock( );
+            byteTransform = new RegularByteTransform( );
         }
 
         /// <summary>
         /// 使用指定的容量初始化缓存数据块
         /// </summary>
         /// <param name="capacity">初始化的容量</param>
-        public SoftBuffer(int capacity)
+        public SoftBuffer(int capacity )
         {
             buffer = new byte[capacity];
             this.capacity = capacity;
-            hybirdLock = new SimpleHybirdLock();
-            byteTransform = new RegularByteTransform();
+            hybirdLock = new SimpleHybirdLock( );
+            byteTransform = new RegularByteTransform( );
         }
 
         #endregion
@@ -50,9 +53,9 @@ namespace HslCommunication.BasicFramework
         /// <param name="value">bool值</param>
         /// <param name="destIndex">目标存储的索引</param>
         /// <exception cref="IndexOutOfRangeException"></exception>
-        public void SetBool(bool value, int destIndex)
+        public void SetBool( bool value, int destIndex )
         {
-            SetBool(new bool[] { value }, destIndex);
+            SetBool( new bool[] { value }, destIndex );
         }
 
         /// <summary>
@@ -61,13 +64,13 @@ namespace HslCommunication.BasicFramework
         /// <param name="value">bool数组值</param>
         /// <param name="destIndex">目标存储的索引</param>
         /// <exception cref="IndexOutOfRangeException"></exception>
-        public void SetBool(bool[] value, int destIndex)
+        public void SetBool( bool[] value, int destIndex )
         {
             if (value != null)
             {
                 try
                 {
-                    hybirdLock.Enter();
+                    hybirdLock.Enter( );
                     for (int i = 0; i < value.Length; i++)
                     {
                         int byteIndex = (destIndex + i) / 8;
@@ -75,19 +78,19 @@ namespace HslCommunication.BasicFramework
 
                         if (value[i])
                         {
-                            buffer[byteIndex] = (byte)(buffer[byteIndex] | getOrByte(offect));
+                            buffer[byteIndex] = (byte)(buffer[byteIndex] | getOrByte( offect ));
                         }
                         else
                         {
-                            buffer[byteIndex] = (byte)(buffer[byteIndex] & getAndByte(offect));
+                            buffer[byteIndex] = (byte)(buffer[byteIndex] & getAndByte( offect ));
                         }
                     }
 
-                    hybirdLock.Leave();
+                    hybirdLock.Leave( );
                 }
                 catch
                 {
-                    hybirdLock.Leave();
+                    hybirdLock.Leave( );
                     throw;
                 }
             }
@@ -100,9 +103,9 @@ namespace HslCommunication.BasicFramework
         /// <param name="destIndex">目标存储的索引</param>
         /// <returns>获取索引位置的bool数据值</returns>
         /// <exception cref="IndexOutOfRangeException"></exception>
-        public bool GetBool(int destIndex)
+        public bool GetBool( int destIndex )
         {
-            return GetBool(destIndex, 1)[0];
+            return GetBool( destIndex, 1 )[0];
         }
 
         /// <summary>
@@ -112,31 +115,31 @@ namespace HslCommunication.BasicFramework
         /// <param name="length">读取的数组长度</param>
         /// <exception cref="IndexOutOfRangeException"></exception>
         /// <returns>bool数组值</returns>
-        public bool[] GetBool(int destIndex, int length)
+        public bool[] GetBool( int destIndex, int length )
         {
             bool[] result = new bool[length];
             try
             {
-                hybirdLock.Enter();
+                hybirdLock.Enter( );
                 for (int i = 0; i < length; i++)
                 {
                     int byteIndex = (destIndex + i) / 8;
                     int offect = (destIndex + i) % 8;
 
-                    result[i] = (buffer[byteIndex] & getOrByte(offect)) == getOrByte(offect);
+                    result[i] = (buffer[byteIndex] & getOrByte( offect )) == getOrByte( offect );
                 }
 
-                hybirdLock.Leave();
+                hybirdLock.Leave( );
             }
             catch
             {
-                hybirdLock.Leave();
+                hybirdLock.Leave( );
                 throw;
             }
             return result;
         }
 
-        private byte getAndByte(int offect)
+        private byte getAndByte(int offect )
         {
             switch (offect)
             {
@@ -153,7 +156,7 @@ namespace HslCommunication.BasicFramework
         }
 
 
-        private byte getOrByte(int offect)
+        private byte getOrByte( int offect )
         {
             switch (offect)
             {
@@ -168,7 +171,7 @@ namespace HslCommunication.BasicFramework
                 default: return 0x00;
             }
         }
-
+        
 
         #endregion
 
@@ -179,22 +182,22 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="data">数据块信息</param>
         /// <param name="destIndex">目标存储的索引</param>
-        public void SetBytes(byte[] data, int destIndex)
+        public void SetBytes( byte[] data, int destIndex )
         {
             if (destIndex < capacity && destIndex >= 0 && data != null)
             {
-                hybirdLock.Enter();
+                hybirdLock.Enter( );
 
                 if ((data.Length + destIndex) > buffer.Length)
                 {
-                    Array.Copy(data, 0, buffer, destIndex, (buffer.Length - destIndex));
+                    Array.Copy( data, 0, buffer, destIndex, (buffer.Length - destIndex) );
                 }
                 else
                 {
-                    data.CopyTo(buffer, destIndex);
+                    data.CopyTo( buffer, destIndex );
                 }
 
-                hybirdLock.Leave();
+                hybirdLock.Leave( );
             }
         }
 
@@ -204,24 +207,24 @@ namespace HslCommunication.BasicFramework
         /// <param name="data">数据块信息</param>
         /// <param name="destIndex">目标存储的索引</param>
         /// <param name="length">准备拷贝的数据长度</param>
-        public void SetBytes(byte[] data, int destIndex, int length)
+        public void SetBytes( byte[] data, int destIndex, int length )
         {
             if (destIndex < capacity && destIndex >= 0 && data != null)
             {
                 if (length > data.Length) length = data.Length;
 
-                hybirdLock.Enter();
+                hybirdLock.Enter( );
 
                 if ((length + destIndex) > buffer.Length)
                 {
-                    Array.Copy(data, 0, buffer, destIndex, (buffer.Length - destIndex));
+                    Array.Copy( data, 0, buffer, destIndex, (buffer.Length - destIndex) );
                 }
                 else
                 {
-                    Array.Copy(data, 0, buffer, destIndex, length);
+                    Array.Copy( data, 0, buffer, destIndex, length );
                 }
 
-                hybirdLock.Leave();
+                hybirdLock.Leave( );
             }
         }
 
@@ -233,17 +236,17 @@ namespace HslCommunication.BasicFramework
         /// <param name="destIndex">目标存储的索引</param>
         /// <param name="length">准备拷贝的数据长度</param>
         /// <exception cref="IndexOutOfRangeException"></exception>
-        public void SetBytes(byte[] data, int sourceIndex, int destIndex, int length)
+        public void SetBytes( byte[] data, int sourceIndex, int destIndex, int length )
         {
             if (destIndex < capacity && destIndex >= 0 && data != null)
             {
                 if (length > data.Length) length = data.Length;
 
-                hybirdLock.Enter();
+                hybirdLock.Enter( );
 
-                Array.Copy(data, sourceIndex, buffer, destIndex, length);
+                Array.Copy( data, sourceIndex, buffer, destIndex, length );
 
-                hybirdLock.Leave();
+                hybirdLock.Leave( );
             }
         }
 
@@ -253,17 +256,17 @@ namespace HslCommunication.BasicFramework
         /// <param name="index">起始位置</param>
         /// <param name="length">数组长度</param>
         /// <returns>返回实际的数据信息</returns>
-        public byte[] GetBytes(int index, int length)
+        public byte[] GetBytes(int index, int length )
         {
             byte[] result = new byte[length];
             if (length > 0)
             {
-                hybirdLock.Enter();
+                hybirdLock.Enter( );
                 if (index >= 0 && (index + length) <= buffer.Length)
                 {
-                    Array.Copy(buffer, index, result, 0, length);
+                    Array.Copy( buffer, index, result, 0, length );
                 }
-                hybirdLock.Leave();
+                hybirdLock.Leave( );
             }
             return result;
         }
@@ -272,9 +275,9 @@ namespace HslCommunication.BasicFramework
         /// 获取内存所有的数据信息
         /// </summary>
         /// <returns>实际的数据信息</returns>
-        public byte[] GetBytes()
+        public byte[] GetBytes( )
         {
-            return GetBytes(0, capacity);
+            return GetBytes( 0, capacity );
         }
 
         #endregion
@@ -286,19 +289,19 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="value">byte数值</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(byte value, int index)
+        public void SetValue(byte value, int index )
         {
-            SetBytes(new byte[] { value }, index);
+            SetBytes( new byte[] { value }, index );
         }
-
+ 
         /// <summary>
         /// 设置short类型的数据到缓存区
         /// </summary>
         /// <param name="values">short数组</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(short[] values, int index)
+        public void SetValue( short[] values, int index )
         {
-            SetBytes(byteTransform.TransByte(values), index);
+            SetBytes( byteTransform.TransByte( values ), index );
         }
 
         /// <summary>
@@ -306,9 +309,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="value">short数值</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(short value, int index)
+        public void SetValue( short value, int index )
         {
-            SetValue(new short[] { value }, index);
+            SetValue( new short[] { value }, index );
         }
 
         /// <summary>
@@ -316,9 +319,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="values">ushort数组</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(ushort[] values, int index)
+        public void SetValue( ushort[] values, int index )
         {
-            SetBytes(byteTransform.TransByte(values), index);
+            SetBytes( byteTransform.TransByte( values ), index );
         }
 
         /// <summary>
@@ -326,9 +329,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="value">ushort数值</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(ushort value, int index)
+        public void SetValue( ushort value, int index )
         {
-            SetValue(new ushort[] { value }, index);
+            SetValue( new ushort[] { value }, index );
         }
 
         /// <summary>
@@ -336,9 +339,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="values">int数组</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(int[] values, int index)
+        public void SetValue( int[] values, int index )
         {
-            SetBytes(byteTransform.TransByte(values), index);
+            SetBytes( byteTransform.TransByte( values ), index );
         }
 
         /// <summary>
@@ -346,9 +349,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="value">int数值</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(int value, int index)
+        public void SetValue( int value, int index )
         {
-            SetValue(new int[] { value }, index);
+            SetValue( new int[] { value }, index );
         }
 
         /// <summary>
@@ -356,9 +359,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="values">uint数组</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(uint[] values, int index)
+        public void SetValue(uint[] values, int index )
         {
-            SetBytes(byteTransform.TransByte(values), index);
+            SetBytes( byteTransform.TransByte( values ), index );
         }
 
         /// <summary>
@@ -366,9 +369,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="value">uint数值</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(uint value, int index)
+        public void SetValue( uint value, int index )
         {
-            SetValue(new uint[] { value }, index);
+            SetValue( new uint[] { value }, index );
         }
 
         /// <summary>
@@ -376,9 +379,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="values">float数组</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(float[] values, int index)
+        public void SetValue( float[] values, int index )
         {
-            SetBytes(byteTransform.TransByte(values), index);
+            SetBytes( byteTransform.TransByte( values ), index );
         }
 
         /// <summary>
@@ -386,9 +389,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="value">float数值</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(float value, int index)
+        public void SetValue( float value, int index )
         {
-            SetValue(new float[] { value }, index);
+            SetValue( new float[] { value }, index );
         }
 
         /// <summary>
@@ -396,9 +399,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="values">long数组</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(long[] values, int index)
+        public void SetValue( long[] values, int index )
         {
-            SetBytes(byteTransform.TransByte(values), index);
+            SetBytes( byteTransform.TransByte( values ), index );
         }
 
         /// <summary>
@@ -406,9 +409,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="value">long数值</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(long value, int index)
+        public void SetValue( long value, int index )
         {
-            SetValue(new long[] { value }, index);
+            SetValue( new long[] { value }, index );
         }
 
         /// <summary>
@@ -416,9 +419,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="values">ulong数组</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(ulong[] values, int index)
+        public void SetValue( ulong[] values, int index )
         {
-            SetBytes(byteTransform.TransByte(values), index);
+            SetBytes( byteTransform.TransByte( values ), index );
         }
 
         /// <summary>
@@ -426,9 +429,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="value">ulong数值</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(ulong value, int index)
+        public void SetValue( ulong value, int index )
         {
-            SetValue(new ulong[] { value }, index);
+            SetValue( new ulong[] { value }, index );
         }
 
         /// <summary>
@@ -436,9 +439,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="values">double数组</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(double[] values, int index)
+        public void SetValue( double[] values, int index )
         {
-            SetBytes(byteTransform.TransByte(values), index);
+            SetBytes( byteTransform.TransByte( values ), index );
         }
 
         /// <summary>
@@ -446,9 +449,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="value">double数值</param>
         /// <param name="index">索引位置</param>
-        public void SetValue(double value, int index)
+        public void SetValue( double value, int index )
         {
-            SetValue(new double[] { value }, index);
+            SetValue( new double[] { value }, index );
         }
 
         #endregion
@@ -460,9 +463,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="index">索引位置</param>
         /// <returns>byte数值</returns>
-        public byte GetByte(int index)
+        public byte GetByte( int index )
         {
-            return GetBytes(index, 1)[0];
+            return GetBytes( index, 1 )[0];
         }
 
         /// <summary>
@@ -471,10 +474,10 @@ namespace HslCommunication.BasicFramework
         /// <param name="index">索引位置</param>
         /// <param name="length">数组长度</param>
         /// <returns>short数组</returns>
-        public short[] GetInt16(int index, int length)
+        public short[] GetInt16( int index, int length )
         {
-            byte[] tmp = GetBytes(index, length * 2);
-            return byteTransform.TransInt16(tmp, 0, length);
+            byte[] tmp = GetBytes( index, length * 2 );
+            return byteTransform.TransInt16( tmp, 0, length );
         }
 
         /// <summary>
@@ -482,9 +485,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="index">索引位置</param>
         /// <returns>short数据</returns>
-        public short GetInt16(int index)
+        public short GetInt16( int index )
         {
-            return GetInt16(index, 1)[0];
+            return GetInt16( index, 1 )[0];
         }
 
         /// <summary>
@@ -493,10 +496,10 @@ namespace HslCommunication.BasicFramework
         /// <param name="index">索引位置</param>
         /// <param name="length">数组长度</param>
         /// <returns>ushort数组</returns>
-        public ushort[] GetUInt16(int index, int length)
+        public ushort[] GetUInt16( int index, int length )
         {
-            byte[] tmp = GetBytes(index, length * 2);
-            return byteTransform.TransUInt16(tmp, 0, length);
+            byte[] tmp = GetBytes( index, length * 2 );
+            return byteTransform.TransUInt16( tmp, 0, length );
         }
 
         /// <summary>
@@ -504,9 +507,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="index">索引位置</param>
         /// <returns>ushort数据</returns>
-        public ushort GetUInt16(int index)
+        public ushort GetUInt16( int index )
         {
-            return GetUInt16(index, 1)[0];
+            return GetUInt16( index, 1 )[0];
         }
 
         /// <summary>
@@ -515,10 +518,10 @@ namespace HslCommunication.BasicFramework
         /// <param name="index">索引位置</param>
         /// <param name="length">数组长度</param>
         /// <returns>int数组</returns>
-        public int[] GetInt32(int index, int length)
+        public int[] GetInt32( int index, int length )
         {
-            byte[] tmp = GetBytes(index, length * 4);
-            return byteTransform.TransInt32(tmp, 0, length);
+            byte[] tmp = GetBytes( index, length * 4 );
+            return byteTransform.TransInt32( tmp, 0, length );
         }
 
         /// <summary>
@@ -526,9 +529,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="index">索引位置</param>
         /// <returns>int数据</returns>
-        public int GetInt32(int index)
+        public int GetInt32( int index )
         {
-            return GetInt32(index, 1)[0];
+            return GetInt32( index, 1 )[0];
         }
 
         /// <summary>
@@ -537,10 +540,10 @@ namespace HslCommunication.BasicFramework
         /// <param name="index">索引位置</param>
         /// <param name="length">数组长度</param>
         /// <returns>uint数组</returns>
-        public uint[] GetUInt32(int index, int length)
+        public uint[] GetUInt32( int index, int length )
         {
-            byte[] tmp = GetBytes(index, length * 4);
-            return byteTransform.TransUInt32(tmp, 0, length);
+            byte[] tmp = GetBytes( index, length * 4 );
+            return byteTransform.TransUInt32( tmp, 0, length );
         }
 
         /// <summary>
@@ -548,9 +551,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="index">索引位置</param>
         /// <returns>uint数据</returns>
-        public uint GetUInt32(int index)
+        public uint GetUInt32( int index )
         {
-            return GetUInt32(index, 1)[0];
+            return GetUInt32( index, 1 )[0];
         }
 
         /// <summary>
@@ -559,10 +562,10 @@ namespace HslCommunication.BasicFramework
         /// <param name="index">索引位置</param>
         /// <param name="length">数组长度</param>
         /// <returns>float数组</returns>
-        public float[] GetSingle(int index, int length)
+        public float[] GetSingle( int index, int length )
         {
-            byte[] tmp = GetBytes(index, length * 4);
-            return byteTransform.TransSingle(tmp, 0, length);
+            byte[] tmp = GetBytes( index, length * 4 );
+            return byteTransform.TransSingle( tmp, 0, length );
         }
 
         /// <summary>
@@ -570,9 +573,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="index">索引位置</param>
         /// <returns>float数据</returns>
-        public float GetSingle(int index)
+        public float GetSingle( int index )
         {
-            return GetSingle(index, 1)[0];
+            return GetSingle( index, 1 )[0];
         }
 
         /// <summary>
@@ -581,10 +584,10 @@ namespace HslCommunication.BasicFramework
         /// <param name="index">索引位置</param>
         /// <param name="length">数组长度</param>
         /// <returns>long数组</returns>
-        public long[] GetInt64(int index, int length)
+        public long[] GetInt64( int index, int length )
         {
-            byte[] tmp = GetBytes(index, length * 8);
-            return byteTransform.TransInt64(tmp, 0, length);
+            byte[] tmp = GetBytes( index, length * 8 );
+            return byteTransform.TransInt64( tmp, 0, length );
         }
 
         /// <summary>
@@ -592,9 +595,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="index">索引位置</param>
         /// <returns>long数据</returns>
-        public long GetInt64(int index)
+        public long GetInt64( int index )
         {
-            return GetInt64(index, 1)[0];
+            return GetInt64( index, 1 )[0];
         }
 
         /// <summary>
@@ -603,10 +606,10 @@ namespace HslCommunication.BasicFramework
         /// <param name="index">索引位置</param>
         /// <param name="length">数组长度</param>
         /// <returns>ulong数组</returns>
-        public ulong[] GetUInt64(int index, int length)
+        public ulong[] GetUInt64( int index, int length )
         {
-            byte[] tmp = GetBytes(index, length * 8);
-            return byteTransform.TransUInt64(tmp, 0, length);
+            byte[] tmp = GetBytes( index, length * 8 );
+            return byteTransform.TransUInt64( tmp, 0, length );
         }
 
         /// <summary>
@@ -614,9 +617,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="index">索引位置</param>
         /// <returns>ulong数据</returns>
-        public ulong GetUInt64(int index)
+        public ulong GetUInt64( int index )
         {
-            return GetUInt64(index, 1)[0];
+            return GetUInt64( index, 1 )[0];
         }
 
         /// <summary>
@@ -625,10 +628,10 @@ namespace HslCommunication.BasicFramework
         /// <param name="index">索引位置</param>
         /// <param name="length">数组长度</param>
         /// <returns>ulong数组</returns>
-        public double[] GetDouble(int index, int length)
+        public double[] GetDouble( int index, int length )
         {
-            byte[] tmp = GetBytes(index, length * 8);
-            return byteTransform.TransDouble(tmp, 0, length);
+            byte[] tmp = GetBytes( index, length * 8 );
+            return byteTransform.TransDouble( tmp, 0, length );
         }
 
         /// <summary>
@@ -636,9 +639,9 @@ namespace HslCommunication.BasicFramework
         /// </summary>
         /// <param name="index">索引位置</param>
         /// <returns>double数据</returns>
-        public double GetDouble(int index)
+        public double GetDouble( int index )
         {
-            return GetDouble(index, 1)[0];
+            return GetDouble( index, 1 )[0];
         }
 
         #endregion
@@ -651,11 +654,11 @@ namespace HslCommunication.BasicFramework
         /// <typeparam name="T">类型名称</typeparam>
         /// <param name="index">起始索引</param>
         /// <returns>自定义的数据类型</returns>
-        public T GetCustomer<T>(int index) where T : IDataTransfer, new()
+        public T GetCustomer<T>( int index ) where T : IDataTransfer, new()
         {
-            T Content = new T();
-            byte[] read = GetBytes(index, Content.ReadCount);
-            Content.ParseSource(read);
+            T Content = new T( );
+            byte[] read = GetBytes( index, Content.ReadCount );
+            Content.ParseSource( read );
             return Content;
         }
 
@@ -665,9 +668,9 @@ namespace HslCommunication.BasicFramework
         /// <typeparam name="T">自定义类型</typeparam>
         /// <param name="data">实例对象</param>
         /// <param name="index">起始地址</param>
-        public void SetCustomer<T>(T data, int index) where T : IDataTransfer, new()
+        public void SetCustomer<T>( T data, int index ) where T : IDataTransfer, new()
         {
-            SetBytes(data.ToSource(), index);
+            SetBytes( data.ToSource( ), index );
         }
 
         #endregion
@@ -702,14 +705,14 @@ namespace HslCommunication.BasicFramework
         /// 释放当前的对象
         /// </summary>
         /// <param name="disposing"></param>
-        protected virtual void Dispose(bool disposing)
+        protected virtual void Dispose( bool disposing )
         {
             if (!disposedValue)
             {
                 if (disposing)
                 {
                     // TODO: 释放托管状态(托管对象)。
-                    hybirdLock?.Dispose();
+                    hybirdLock?.Dispose( );
                     buffer = null;
                 }
 
@@ -732,10 +735,10 @@ namespace HslCommunication.BasicFramework
         /// <summary>
         /// 释放当前的对象
         /// </summary>
-        public void Dispose()
+        public void Dispose( )
         {
             // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
-            Dispose(true);
+            Dispose( true );
             // TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
             // GC.SuppressFinalize(this);
         }

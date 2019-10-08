@@ -1,4 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace HslCommunication.BasicFramework
@@ -14,7 +20,7 @@ namespace HslCommunication.BasicFramework
         /// <param name="authorize"></param>
         /// <param name="aboutCode">提示关于怎么获取注册码的信息</param>
         /// <param name="encrypt">加密的方法</param>
-        public FormAuthorize(SoftAuthorize authorize, string aboutCode, Func<string, string> encrypt)
+        public FormAuthorize(SoftAuthorize authorize,string aboutCode,Func<string,string> encrypt)
         {
             InitializeComponent();
             softAuthorize = authorize;

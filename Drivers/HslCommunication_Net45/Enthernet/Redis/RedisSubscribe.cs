@@ -1,6 +1,7 @@
 ﻿using HslCommunication.Core.Net;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -20,14 +21,14 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="ipAddress">服务器的IP地址</param>
         /// <param name="port">服务器的端口号</param>
         /// <param name="keys">订阅关键字</param>
-        public RedisSubscribe(string ipAddress, int port, string[] keys)
+        public RedisSubscribe( string ipAddress, int port, string[] keys )
         {
-            endPoint = new IPEndPoint(IPAddress.Parse(ipAddress), port);
+            endPoint = new IPEndPoint( IPAddress.Parse( ipAddress ), port );
             keyWords = keys;
 
             if (keys == null)
             {
-                throw new Exception(StringResources.Language.KeyIsNotAllowedNull);
+                throw new Exception( StringResources.Language.KeyIsNotAllowedNull );
             }
         }
 
@@ -37,14 +38,14 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="ipAddress">服务器的IP地址</param>
         /// <param name="port">服务器的端口号</param>
         /// <param name="key">订阅关键字</param>
-        public RedisSubscribe(string ipAddress, int port, string key)
+        public RedisSubscribe( string ipAddress, int port, string key )
         {
-            endPoint = new IPEndPoint(IPAddress.Parse(ipAddress), port);
+            endPoint = new IPEndPoint( IPAddress.Parse( ipAddress ), port );
             keyWords = new string[] { key };
 
-            if (string.IsNullOrEmpty(key))
+            if (string.IsNullOrEmpty( key ))
             {
-                throw new Exception(StringResources.Language.KeyIsNotAllowedNull);
+                throw new Exception( StringResources.Language.KeyIsNotAllowedNull );
             }
         }
 
@@ -52,84 +53,83 @@ namespace HslCommunication.Enthernet.Redis
 
         #region Private Method
 
-        private OperateResult CreatePush()
+        private OperateResult CreatePush( )
         {
-            CoreSocket?.Close();
+            CoreSocket?.Close( );
 
-            OperateResult<Socket> connect = CreateSocketAndConnect(endPoint, 5000);
+            OperateResult<Socket> connect = CreateSocketAndConnect( endPoint, 5000 );
             if (!connect.IsSuccess) return connect;
 
             // 密码的验证
-            if (!string.IsNullOrEmpty(this.Password))
+            if (!string.IsNullOrEmpty( this.Password ))
             {
-                OperateResult check = Send(connect.Content, RedisHelper.PackStringCommand(new string[] { "AUTH", this.Password }));
+                OperateResult check = Send( connect.Content, RedisHelper.PackStringCommand( new string[] { "AUTH", this.Password } ) );
                 if (!check.IsSuccess) return check;
 
-                OperateResult<byte[]> checkResult = RedisHelper.ReceiveCommand(connect.Content);
+                OperateResult<byte[]> checkResult = RedisHelper.ReceiveCommand( connect.Content );
                 if (!checkResult.IsSuccess) return checkResult;
 
-                string msg = Encoding.UTF8.GetString(checkResult.Content);
-                if (!msg.StartsWith("+OK")) return new OperateResult(msg);
+                string msg = Encoding.UTF8.GetString( checkResult.Content );
+                if (!msg.StartsWith( "+OK" )) return new OperateResult( msg );
             }
 
-            List<string> lists = new List<string>();
-            lists.Add("SUBSCRIBE");
-            lists.AddRange(keyWords);
+            List<string> lists = new List<string>( );
+            lists.Add( "SUBSCRIBE" );
+            lists.AddRange( keyWords );
 
 
-            OperateResult send = Send(connect.Content, RedisHelper.PackStringCommand(lists.ToArray()));
+            OperateResult send = Send( connect.Content, RedisHelper.PackStringCommand( lists.ToArray( ) ) );
             if (!send.IsSuccess) return send;
             CoreSocket = connect.Content;
 
             try
             {
-                connect.Content.BeginReceive(new byte[0], 0, 0, SocketFlags.None, new AsyncCallback(ReceiveCallBack), connect.Content);
+                connect.Content.BeginReceive( new byte[0], 0, 0, SocketFlags.None, new AsyncCallback( ReceiveCallBack ), connect.Content );
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                return new OperateResult(ex.Message);
+                return new OperateResult( ex.Message );
             }
 
-            return OperateResult.CreateSuccessResult();
+            return OperateResult.CreateSuccessResult( );
         }
 
 
-        private void ReceiveCallBack(IAsyncResult ar)
+        private void ReceiveCallBack( IAsyncResult ar )
         {
-            if (ar.AsyncState is Socket socket)
+            if(ar.AsyncState is Socket socket)
             {
                 try
                 {
-                    int receive = socket.EndReceive(ar);
-                    OperateResult<byte[]> read = RedisHelper.ReceiveCommand(socket);
+                    int receive = socket.EndReceive( ar );
+                    OperateResult<byte[]> read = RedisHelper.ReceiveCommand( socket );
                     if (!read.IsSuccess)
                     {
-                        SocketReceiveException(null);
+                        SocketReceiveException( null );
                         return;
                     }
                     else
                     {
-                        socket.BeginReceive(new byte[0], 0, 0, SocketFlags.None, new AsyncCallback(ReceiveCallBack), socket);
+                        socket.BeginReceive( new byte[0], 0, 0, SocketFlags.None, new AsyncCallback( ReceiveCallBack ), socket );
                     }
 
-                    OperateResult<string[]> data = RedisHelper.GetStringsFromCommandLine(read.Content);
-                    if (!data.IsSuccess)
-                    {
-                        LogNet?.WriteWarn(data.Message);
+                    OperateResult<string[]> data = RedisHelper.GetStringsFromCommandLine( read.Content );
+                    if (!data.IsSuccess) {
+                        LogNet?.WriteWarn( data.Message );
                         return;
                     }
 
-                    if (data.Content[0].ToUpper() == "SUBSCRIBE")
+                    if(data.Content[0].ToUpper() == "SUBSCRIBE")
                     {
                         return;
                     }
-                    else if (data.Content[0].ToUpper() == "MESSAGE")
+                    else if(data.Content[0].ToUpper( ) == "MESSAGE")
                     {
-                        action?.Invoke(data.Content[1], data.Content[2]);
+                        action?.Invoke( data.Content[1], data.Content[2] );
                     }
                     else
                     {
-                        LogNet?.WriteWarn(data.Content[0]);
+                        LogNet?.WriteWarn( data.Content[0] );
                     }
 
                 }
@@ -138,26 +138,26 @@ namespace HslCommunication.Enthernet.Redis
                     // 通常是主动退出
                     return;
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
-                    SocketReceiveException(ex);
+                    SocketReceiveException( ex );
                 }
             }
         }
 
-        private void SocketReceiveException(Exception ex)
+        private void SocketReceiveException( Exception ex )
         {
             // 发生异常的时候需要进行重新连接
             while (true)
             {
-                if (ex != null) LogNet?.WriteException("Offline", ex);
+                if (ex != null) LogNet?.WriteException( "Offline", ex );
 
-                Console.WriteLine(StringResources.Language.ReConnectServerAfterTenSeconds);
-                System.Threading.Thread.Sleep(this.reconnectTime);
+                Console.WriteLine( StringResources.Language.ReConnectServerAfterTenSeconds );
+                System.Threading.Thread.Sleep( this.reconnectTime );
 
-                if (CreatePush().IsSuccess)
+                if (CreatePush( ).IsSuccess)
                 {
-                    Console.WriteLine(StringResources.Language.ReConnectServerSuccess);
+                    Console.WriteLine( StringResources.Language.ReConnectServerSuccess );
                     break;
                 }
             }
@@ -181,19 +181,19 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="pushCallBack">触发数据推送的委托</param>
         /// <returns>是否创建成功</returns>
-        public OperateResult CreatePush(Action<string, string> pushCallBack)
+        public OperateResult CreatePush( Action<string, string> pushCallBack )
         {
             action = pushCallBack;
-            return CreatePush();
+            return CreatePush( );
         }
 
         /// <summary>
         /// 关闭消息推送的界面
         /// </summary>
-        public void ClosePush()
+        public void ClosePush( )
         {
             action = null;
-            CoreSocket?.Close();
+            CoreSocket?.Close( );
         }
 
         #endregion
@@ -213,7 +213,7 @@ namespace HslCommunication.Enthernet.Redis
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToString()
+        public override string ToString( )
         {
             return $"RedisSubscribe[{endPoint}]";
         }

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace HslCommunication.Serial
 {
@@ -22,9 +25,9 @@ namespace HslCommunication.Serial
         /// </summary>
         /// <param name="value">需要校验的数据，带CRC校验码</param>
         /// <returns>返回校验成功与否</returns>
-        public static bool CheckCRC16(byte[] value)
+        public static bool CheckCRC16(byte[] value )
         {
-            return CheckCRC16(value, 0xA0, 0x01);
+            return CheckCRC16( value, 0xA0, 0x01);
         }
 
         /// <summary>
@@ -58,9 +61,9 @@ namespace HslCommunication.Serial
         /// </summary>
         /// <param name="value">需要校验的数据，不包含CRC字节</param>
         /// <returns>返回带CRC校验码的字节数组，可用于串口发送</returns>
-        public static byte[] CRC16(byte[] value)
+        public static byte[] CRC16(byte[] value )
         {
-            return CRC16(value, 0xA0, 0x01);
+            return CRC16( value, 0xA0, 0x01);
         }
 
         /// <summary>

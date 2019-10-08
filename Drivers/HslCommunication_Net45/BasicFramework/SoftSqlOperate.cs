@@ -1,10 +1,12 @@
 ﻿
-#if !NETSTANDARD2_0
+#if !NETSTANDARD2_0 && !NETSTANDARD2_1
 
 using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Linq;
+using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 #if NET45
 using System.Threading.Tasks;

@@ -1,5 +1,9 @@
 ﻿using HslCommunication.Core;
 using HslCommunication.Serial;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace HslCommunication.Profinet.Panasonic
 {
@@ -157,7 +161,7 @@ namespace HslCommunication.Profinet.Panasonic
         /// 实例化一个默认的松下PLC通信对象，默认站号为1
         /// </summary>
         /// <param name="station">站号信息，默认为0xEE</param>
-        public PanasonicMewtocol(byte station = 238)
+        public PanasonicMewtocol( byte station = 238 )
         {
             this.Station = station;
             this.ByteTransform.DataFormat = DataFormat.DCBA;
@@ -166,7 +170,7 @@ namespace HslCommunication.Profinet.Panasonic
         #endregion
 
         #region Public Properties
-
+        
         /// <summary>
         /// 设备的目标站号
         /// </summary>
@@ -182,18 +186,18 @@ namespace HslCommunication.Profinet.Panasonic
         /// <param name="address">起始地址</param>
         /// <param name="length">长度</param>
         /// <returns>返回数据信息</returns>
-        public override OperateResult<byte[]> Read(string address, ushort length)
+        public override OperateResult<byte[]> Read( string address, ushort length )
         {
             // 创建指令
-            OperateResult<byte[]> command = PanasonicMewtocolOverTcp.BuildReadCommand(Station, address, length);
+            OperateResult<byte[]> command = PanasonicMewtocolOverTcp.BuildReadCommand( Station, address, length );
             if (!command.IsSuccess) return command;
 
             // 数据交互
-            OperateResult<byte[]> read = ReadBase(command.Content);
+            OperateResult<byte[]> read = ReadBase( command.Content );
             if (!read.IsSuccess) return read;
 
             // 提取数据
-            return PanasonicMewtocolOverTcp.ExtraActualData(read.Content);
+            return PanasonicMewtocolOverTcp.ExtraActualData( read.Content );
         }
 
         /// <summary>
@@ -202,18 +206,18 @@ namespace HslCommunication.Profinet.Panasonic
         /// <param name="address">起始地址</param>
         /// <param name="value">真实数据</param>
         /// <returns>是否写入成功</returns>
-        public override OperateResult Write(string address, byte[] value)
+        public override OperateResult Write( string address, byte[] value )
         {
             // 创建指令
-            OperateResult<byte[]> command = PanasonicMewtocolOverTcp.BuildWriteCommand(Station, address, value);
+            OperateResult<byte[]> command = PanasonicMewtocolOverTcp.BuildWriteCommand( Station, address, value );
             if (!command.IsSuccess) return command;
 
             // 数据交互
-            OperateResult<byte[]> read = ReadBase(command.Content);
+            OperateResult<byte[]> read = ReadBase( command.Content );
             if (!read.IsSuccess) return read;
 
             // 提取结果
-            return PanasonicMewtocolOverTcp.ExtraActualData(read.Content);
+            return PanasonicMewtocolOverTcp.ExtraActualData( read.Content );
         }
 
         #endregion
@@ -226,15 +230,34 @@ namespace HslCommunication.Profinet.Panasonic
         /// <param name="address">起始地址</param>
         /// <param name="length">数据长度</param>
         /// <returns>读取结果对象</returns>
-        public override OperateResult<bool[]> ReadBool(string address, ushort length)
+        public override OperateResult<bool[]> ReadBool( string address, ushort length )
         {
             // 读取数据
-            OperateResult<byte[]> read = Read(address, length);
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(read);
+            OperateResult<byte[]> read = Read( address, length );
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( read );
 
             // 提取bool
-            byte[] buffer = BasicFramework.SoftBasic.BytesReverseByWord(read.Content);
-            return OperateResult.CreateSuccessResult(BasicFramework.SoftBasic.ByteToBoolArray(read.Content, length));
+            byte[] buffer = BasicFramework.SoftBasic.BytesReverseByWord( read.Content );
+            return OperateResult.CreateSuccessResult( BasicFramework.SoftBasic.ByteToBoolArray( read.Content, length ) );
+        }
+
+        /// <summary>
+        /// 读取单个的地址信息的bool值
+        /// </summary>
+        /// <param name="address">起始地址</param>
+        /// <returns>读取结果对象</returns>
+        public override OperateResult<bool> ReadBool( string address )
+        {
+            // 创建指令
+            OperateResult<byte[]> command = PanasonicMewtocolOverTcp.BuildReadOneCoil( Station, address );
+            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool>( command );
+
+            // 数据交互
+            OperateResult<byte[]> read = ReadBase( command.Content );
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool>( read );
+
+            // 提取数据
+            return PanasonicMewtocolOverTcp.ExtraActualBool( read.Content );
         }
 
         /// <summary>
@@ -243,21 +266,41 @@ namespace HslCommunication.Profinet.Panasonic
         /// <param name="address">起始地址</param>
         /// <param name="values">数据值信息</param>
         /// <returns>返回是否成功的结果对象</returns>
-        public override OperateResult Write(string address, bool[] values)
+        public override OperateResult Write( string address, bool[] values )
         {
             // 计算字节数据
-            byte[] buffer = BasicFramework.SoftBasic.BoolArrayToByte(values);
+            byte[] buffer = BasicFramework.SoftBasic.BoolArrayToByte( values );
 
             // 创建指令
-            OperateResult<byte[]> command = PanasonicMewtocolOverTcp.BuildWriteCommand(Station, address, BasicFramework.SoftBasic.BytesReverseByWord(buffer), (short)values.Length);
+            OperateResult<byte[]> command = PanasonicMewtocolOverTcp.BuildWriteCommand( Station, address, BasicFramework.SoftBasic.BytesReverseByWord( buffer ), (short)values.Length );
             if (!command.IsSuccess) return command;
 
             // 数据交互
-            OperateResult<byte[]> read = ReadBase(command.Content);
+            OperateResult<byte[]> read = ReadBase( command.Content );
             if (!read.IsSuccess) return read;
 
             // 提取结果
-            return PanasonicMewtocolOverTcp.ExtraActualData(read.Content);
+            return PanasonicMewtocolOverTcp.ExtraActualData( read.Content );
+        }
+
+        /// <summary>
+        /// 写入bool数据信息
+        /// </summary>
+        /// <param name="address">起始地址</param>
+        /// <param name="value">数据值信息</param>
+        /// <returns>返回是否成功的结果对象</returns>
+        public override OperateResult Write( string address, bool value )
+        {
+            // 创建指令
+            OperateResult<byte[]> command = PanasonicMewtocolOverTcp.BuildWriteOneCoil( Station, address, value );
+            if (!command.IsSuccess) return command;
+
+            // 数据交互
+            OperateResult<byte[]> read = ReadBase( command.Content );
+            if (!read.IsSuccess) return read;
+
+            // 提取结果
+            return PanasonicMewtocolOverTcp.ExtraActualData( read.Content );
         }
 
         #endregion
@@ -268,7 +311,7 @@ namespace HslCommunication.Profinet.Panasonic
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToString()
+        public override string ToString( )
         {
             return $"Panasonic Mewtocol[{PortName}:{BaudRate}]";
         }

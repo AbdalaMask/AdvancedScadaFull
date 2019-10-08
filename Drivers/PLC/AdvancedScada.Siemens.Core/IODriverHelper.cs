@@ -108,8 +108,9 @@ namespace AdvancedScada.Siemens.Core
                     {
                         IDriverAdapter DriverAdapter = null;
                         Channel ch = (Channel)chParam;
-
-                        switch (ch.ConnectionType)
+                        try
+                        {
+                         switch (ch.ConnectionType)
                         {
                             case "SerialPort":
                                 DriverAdapter = _PLCPPI[ch.ChannelName];
@@ -119,6 +120,13 @@ namespace AdvancedScada.Siemens.Core
                                 DriverAdapter = _PLCS7[ch.ChannelName];
                                 break;
                         }
+                        }
+                        catch (Exception ex)
+                        {
+                            Disconnect();
+                            EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                        }
+
 
 
                         //======Connection to PLC==================================
@@ -179,7 +187,7 @@ namespace AdvancedScada.Siemens.Core
             {
                 IsConnected = false;
 
-                TagCollection.Tags.Clear();
+               
                 Channels = null;
                 for (int i = 0; i < threads.Length; i++)
                 {

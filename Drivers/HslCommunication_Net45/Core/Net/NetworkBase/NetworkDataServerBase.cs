@@ -2,9 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using HslCommunication.Core.Types;
+using System.Net;
 
 namespace HslCommunication.Core.Net
 {
@@ -14,23 +15,23 @@ namespace HslCommunication.Core.Net
     public class NetworkDataServerBase : NetworkAuthenticationServerBase, IDisposable
     {
         #region Constructor
-
+        
         /// <summary>
         /// 实例化一个默认的数据服务器的对象
         /// </summary>
-        public NetworkDataServerBase()
+        public NetworkDataServerBase( )
         {
-            lock_trusted_clients = new SimpleHybirdLock();
+            lock_trusted_clients = new SimpleHybirdLock( );
 
 
-            lockOnlineClient = new SimpleHybirdLock();
-            listsOnlineClient = new List<AppSession>();
+            lockOnlineClient = new SimpleHybirdLock( );
+            listsOnlineClient = new List<AppSession>( );
         }
 
         #endregion
-
+        
         #region Virtual Method
-
+        
         /// <summary>
         /// 从设备读取原始数据
         /// </summary>
@@ -38,11 +39,11 @@ namespace HslCommunication.Core.Net
         /// <param name="length">地址长度</param>
         /// <returns>带有成功标识的结果对象</returns>
         /// <remarks>需要在继承类中重写实现，并且实现地址解析操作</remarks>
-        public virtual OperateResult<byte[]> Read(string address, ushort length)
+        public virtual OperateResult<byte[]> Read( string address, ushort length )
         {
-            return new OperateResult<byte[]>();
+            return new OperateResult<byte[]>( );
         }
-
+        
         /// <summary>
         /// 将原始数据写入设备
         /// </summary>
@@ -50,16 +51,16 @@ namespace HslCommunication.Core.Net
         /// <param name="value">原始数据</param>
         /// <returns>带有成功标识的结果对象</returns>
         /// <remarks>需要在继承类中重写实现，并且实现地址解析操作</remarks>
-        public virtual OperateResult Write(string address, byte[] value)
+        public virtual OperateResult Write( string address, byte[] value )
         {
-            return new OperateResult();
+            return new OperateResult( );
         }
 
         /// <summary>
         /// 从字节数据加载数据信息
         /// </summary>
         /// <param name="content">字节数据</param>
-        protected virtual void LoadFromBytes(byte[] content)
+        protected virtual void LoadFromBytes(byte[] content )
         {
 
         }
@@ -68,15 +69,15 @@ namespace HslCommunication.Core.Net
         /// 将数据信息存储到字节数组去
         /// </summary>
         /// <returns>所有的内容</returns>
-        protected virtual byte[] SaveToBytes()
+        protected virtual byte[] SaveToBytes( )
         {
             return new byte[0];
         }
-
+        
         #endregion
 
         #region File Load Save
-
+        
         /// <summary>
         /// 将本系统的数据池数据存储到指定的文件
         /// </summary>
@@ -89,10 +90,10 @@ namespace HslCommunication.Core.Net
         /// <exception cref="UnauthorizedAccessException"></exception>
         /// <exception cref="NotSupportedException"></exception>
         /// <exception cref="System.Security.SecurityException"></exception>
-        public void SaveDataPool(string path)
+        public void SaveDataPool( string path )
         {
-            byte[] content = SaveToBytes();
-            System.IO.File.WriteAllBytes(path, content);
+            byte[] content = SaveToBytes( );
+            System.IO.File.WriteAllBytes( path, content );
         }
 
         /// <summary>
@@ -108,12 +109,12 @@ namespace HslCommunication.Core.Net
         /// <exception cref="NotSupportedException"></exception>
         /// <exception cref="System.Security.SecurityException"></exception>
         /// <exception cref="System.IO.FileNotFoundException"></exception>
-        public void LoadDataPool(string path)
+        public void LoadDataPool( string path )
         {
-            if (System.IO.File.Exists(path))
+            if (System.IO.File.Exists( path ))
             {
-                byte[] buffer = System.IO.File.ReadAllBytes(path);
-                LoadFromBytes(buffer);
+                byte[] buffer = System.IO.File.ReadAllBytes( path );
+                LoadFromBytes( buffer );
             }
         }
 
@@ -131,7 +132,7 @@ namespace HslCommunication.Core.Net
         /// </summary>
         /// <param name="sender">本服务器对象</param>
         /// <param name="data">实际的数据信息</param>
-        public delegate void DataReceivedDelegate(object sender, byte[] data);
+        public delegate void DataReceivedDelegate( object sender, byte[] data );
 
         /// <summary>
         /// 接收到数据的时候就行触发
@@ -142,9 +143,9 @@ namespace HslCommunication.Core.Net
         /// 触发一个数据接收的事件信息
         /// </summary>
         /// <param name="receive">接收数据信息</param>
-        protected void RaiseDataReceived(byte[] receive)
+        protected void RaiseDataReceived( byte[] receive )
         {
-            OnDataReceived?.Invoke(this, receive);
+            OnDataReceived?.Invoke( this, receive );
         }
         /// <summary>
         /// Show DataSend To PLC
@@ -185,7 +186,7 @@ namespace HslCommunication.Core.Net
         /// </summary>
         /// <param name="socket">网络套接字</param>
         /// <param name="endPoint">终端节点</param>
-        protected virtual void ThreadPoolLoginAfterClientCheck(Socket socket, System.Net.IPEndPoint endPoint)
+        protected virtual void ThreadPoolLoginAfterClientCheck( Socket socket, System.Net.IPEndPoint endPoint )
         {
 
         }
@@ -195,25 +196,25 @@ namespace HslCommunication.Core.Net
         /// </summary>
         /// <param name="socket">异步对象</param>
         /// <param name="endPoint">终结点</param>
-        protected override void ThreadPoolLogin(Socket socket, IPEndPoint endPoint)
+        protected override void ThreadPoolLogin( Socket socket, IPEndPoint endPoint )
         {
             // 为了提高系统的响应能力，采用异步来实现，即时有数万台设备接入也能应付
-            string ipAddress = endPoint.Address.ToString();
+            string ipAddress = endPoint.Address.ToString( );
 
             if (IsTrustedClientsOnly)
             {
                 // 检查受信任的情况
-                if (!CheckIpAddressTrusted(ipAddress))
+                if (!CheckIpAddressTrusted( ipAddress ))
                 {
                     // 客户端不被信任，退出
-                    LogNet?.WriteDebug(ToString(), string.Format(StringResources.Language.ClientDisableLogin, endPoint));
-                    socket.Close();
+                    LogNet?.WriteDebug( ToString( ), string.Format( StringResources.Language.ClientDisableLogin, endPoint ) );
+                    socket.Close( );
                     return;
                 }
             }
 
-            if (!IsUseAccountCertificate) LogNet?.WriteDebug(ToString(), string.Format(StringResources.Language.ClientOnlineInfo, endPoint));
-            ThreadPoolLoginAfterClientCheck(socket, endPoint);
+            if(!IsUseAccountCertificate) LogNet?.WriteDebug( ToString( ), string.Format( StringResources.Language.ClientOnlineInfo, endPoint ) );
+            ThreadPoolLoginAfterClientCheck( socket, endPoint );
         }
 
 
@@ -225,24 +226,24 @@ namespace HslCommunication.Core.Net
         /// 设置并启动受信任的客户端登录并读写，如果为null，将关闭对客户端的ip验证
         /// </summary>
         /// <param name="clients">受信任的客户端列表</param>
-        public void SetTrustedIpAddress(List<string> clients)
+        public void SetTrustedIpAddress( List<string> clients )
         {
-            lock_trusted_clients.Enter();
+            lock_trusted_clients.Enter( );
             if (clients != null)
             {
-                TrustedClients = clients.Select(m =>
-               {
-                   System.Net.IPAddress iPAddress = System.Net.IPAddress.Parse(m);
-                   return iPAddress.ToString();
-               }).ToList();
+                TrustedClients = clients.Select( m =>
+                {
+                    System.Net.IPAddress iPAddress = System.Net.IPAddress.Parse( m );
+                    return iPAddress.ToString( );
+                } ).ToList( );
                 IsTrustedClientsOnly = true;
             }
             else
             {
-                TrustedClients = new List<string>();
+                TrustedClients = new List<string>( );
                 IsTrustedClientsOnly = false;
             }
-            lock_trusted_clients.Leave();
+            lock_trusted_clients.Leave( );
         }
 
         /// <summary>
@@ -250,12 +251,12 @@ namespace HslCommunication.Core.Net
         /// </summary>
         /// <param name="ipAddress">Ip地址信息</param>
         /// <returns>是受信任的返回<c>True</c>，否则返回<c>False</c></returns>
-        private bool CheckIpAddressTrusted(string ipAddress)
+        private bool CheckIpAddressTrusted( string ipAddress )
         {
             if (IsTrustedClientsOnly)
             {
                 bool result = false;
-                lock_trusted_clients.Enter();
+                lock_trusted_clients.Enter( );
                 for (int i = 0; i < TrustedClients.Count; i++)
                 {
                     if (TrustedClients[i] == ipAddress)
@@ -264,7 +265,7 @@ namespace HslCommunication.Core.Net
                         break;
                     }
                 }
-                lock_trusted_clients.Leave();
+                lock_trusted_clients.Leave( );
                 return result;
             }
             else
@@ -277,15 +278,15 @@ namespace HslCommunication.Core.Net
         /// 获取受信任的客户端列表
         /// </summary>
         /// <returns>字符串数据信息</returns>
-        public string[] GetTrustedClients()
+        public string[] GetTrustedClients( )
         {
             string[] result = new string[0];
-            lock_trusted_clients.Enter();
+            lock_trusted_clients.Enter( );
             if (TrustedClients != null)
             {
-                result = TrustedClients.ToArray();
+                result = TrustedClients.ToArray( );
             }
-            lock_trusted_clients.Leave();
+            lock_trusted_clients.Leave( );
             return result;
         }
 
@@ -307,42 +308,42 @@ namespace HslCommunication.Core.Net
         /// 新增一个在线的客户端信息
         /// </summary>
         /// <param name="session">会话内容</param>
-        protected void AddClient(AppSession session)
+        protected void AddClient( AppSession session )
         {
-            lockOnlineClient.Enter();
-            listsOnlineClient.Add(session);
+            lockOnlineClient.Enter( );
+            listsOnlineClient.Add( session );
             onlineCount++;
-            lockOnlineClient.Leave();
+            lockOnlineClient.Leave( );
         }
 
         /// <summary>
         /// 移除在线的客户端信息
         /// </summary>
         /// <param name="session">会话内容</param>
-        protected void RemoveClient(AppSession session)
+        protected void RemoveClient( AppSession session )
         {
-            lockOnlineClient.Enter();
-            if (listsOnlineClient.Remove(session))
+            lockOnlineClient.Enter( );
+            if(listsOnlineClient.Remove( session ))
             {
                 onlineCount--;
             }
-            lockOnlineClient.Leave();
+            lockOnlineClient.Leave( );
         }
 
         /// <summary>
         /// 关闭之后进行的操作
         /// </summary>
-        protected override void CloseAction()
+        protected override void CloseAction( )
         {
-            base.CloseAction();
+            base.CloseAction( );
 
-            lockOnlineClient.Enter();
+            lockOnlineClient.Enter( );
             for (int i = 0; i < listsOnlineClient.Count; i++)
             {
-                listsOnlineClient[i]?.WorkSocket?.Close();
+                listsOnlineClient[i]?.WorkSocket?.Close( );
             }
-            listsOnlineClient.Clear();
-            lockOnlineClient.Leave();
+            listsOnlineClient.Clear( );
+            lockOnlineClient.Leave( );
         }
 
         #endregion
@@ -364,14 +365,14 @@ namespace HslCommunication.Core.Net
         /// 接下来就可以实现数据的读取了
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadCustomerExample" title="ReadCustomer示例" />
         /// </example>
-        public OperateResult<T> ReadCustomer<T>(string address) where T : IDataTransfer, new()
+        public OperateResult<T> ReadCustomer<T>( string address ) where T : IDataTransfer, new()
         {
-            OperateResult<T> result = new OperateResult<T>();
-            T Content = new T();
-            OperateResult<byte[]> read = Read(address, Content.ReadCount);
+            OperateResult<T> result = new OperateResult<T>( );
+            T Content = new T( );
+            OperateResult<byte[]> read = Read( address, Content.ReadCount );
             if (read.IsSuccess)
             {
-                Content.ParseSource(read.Content);
+                Content.ParseSource( read.Content );
                 result.Content = Content;
                 result.IsSuccess = true;
             }
@@ -399,9 +400,9 @@ namespace HslCommunication.Core.Net
         /// 接下来就可以实现数据的读取了
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteCustomerExample" title="WriteCustomer示例" />
         /// </example>
-        public OperateResult WriteCustomer<T>(string address, T data) where T : IDataTransfer, new()
+        public OperateResult WriteCustomer<T>( string address, T data ) where T : IDataTransfer, new()
         {
-            return Write(address, data.ToSource());
+            return Write( address, data.ToSource( ) );
         }
 
 
@@ -419,9 +420,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadInt16" title="Int16类型示例" />
         /// </example>
-        public OperateResult<short> ReadInt16(string address)
+        public OperateResult<short> ReadInt16( string address )
         {
-            return ByteTransformHelper.GetResultFromArray(ReadInt16(address, 1));
+            return ByteTransformHelper.GetResultFromArray( ReadInt16( address, 1 ) );
         }
 
 
@@ -435,9 +436,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadInt16Array" title="Int16类型示例" />
         /// </example>
-        public virtual OperateResult<short[]> ReadInt16(string address, ushort length)
+        public virtual OperateResult<short[]> ReadInt16( string address, ushort length )
         {
-            return ByteTransformHelper.GetResultFromBytes(Read(address, (ushort)(length * WordLength)), m => ByteTransform.TransInt16(m, 0, length));
+            return ByteTransformHelper.GetResultFromBytes( Read( address, (ushort)(length * WordLength) ), m => ByteTransform.TransInt16( m, 0, length ) );
         }
 
         /// <summary>
@@ -449,9 +450,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadUInt16" title="UInt16类型示例" />
         /// </example>
-        public OperateResult<ushort> ReadUInt16(string address)
+        public OperateResult<ushort> ReadUInt16( string address )
         {
-            return ByteTransformHelper.GetResultFromArray(ReadUInt16(address, 1));
+            return ByteTransformHelper.GetResultFromArray( ReadUInt16( address, 1 ) );
         }
 
 
@@ -465,9 +466,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadUInt16Array" title="UInt16类型示例" />
         /// </example>
-        public virtual OperateResult<ushort[]> ReadUInt16(string address, ushort length)
+        public virtual OperateResult<ushort[]> ReadUInt16( string address, ushort length )
         {
-            return ByteTransformHelper.GetResultFromBytes(Read(address, (ushort)(length * WordLength)), m => ByteTransform.TransUInt16(m, 0, length));
+            return ByteTransformHelper.GetResultFromBytes( Read( address, (ushort)(length * WordLength) ), m => ByteTransform.TransUInt16( m, 0, length ) );
         }
 
 
@@ -481,9 +482,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadInt32" title="Int32类型示例" />
         /// </example>
-        public OperateResult<int> ReadInt32(string address)
+        public OperateResult<int> ReadInt32( string address )
         {
-            return ByteTransformHelper.GetResultFromArray(ReadInt32(address, 1));
+            return ByteTransformHelper.GetResultFromArray( ReadInt32( address, 1 ) );
         }
 
         /// <summary>
@@ -496,9 +497,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadInt32Array" title="Int32类型示例" />
         /// </example>
-        public virtual OperateResult<int[]> ReadInt32(string address, ushort length)
+        public virtual OperateResult<int[]> ReadInt32( string address, ushort length )
         {
-            return ByteTransformHelper.GetResultFromBytes(Read(address, (ushort)(length * WordLength * 2)), m => ByteTransform.TransInt32(m, 0, length));
+            return ByteTransformHelper.GetResultFromBytes( Read( address, (ushort)(length * WordLength * 2) ), m => ByteTransform.TransInt32( m, 0, length ) );
         }
 
         /// <summary>
@@ -510,9 +511,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadUInt32" title="UInt32类型示例" />
         /// </example>
-        public OperateResult<uint> ReadUInt32(string address)
+        public OperateResult<uint> ReadUInt32( string address )
         {
-            return ByteTransformHelper.GetResultFromArray(ReadUInt32(address, 1));
+            return ByteTransformHelper.GetResultFromArray( ReadUInt32( address, 1 ) );
         }
 
         /// <summary>
@@ -525,9 +526,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadUInt32Array" title="UInt32类型示例" />
         /// </example>
-        public virtual OperateResult<uint[]> ReadUInt32(string address, ushort length)
+        public virtual OperateResult<uint[]> ReadUInt32( string address, ushort length )
         {
-            return ByteTransformHelper.GetResultFromBytes(Read(address, (ushort)(length * WordLength * 2)), m => ByteTransform.TransUInt32(m, 0, length));
+            return ByteTransformHelper.GetResultFromBytes( Read( address, (ushort)(length * WordLength * 2) ), m => ByteTransform.TransUInt32( m, 0, length ) );
         }
 
         /// <summary>
@@ -539,9 +540,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadFloat" title="Float类型示例" />
         /// </example>
-        public OperateResult<float> ReadFloat(string address)
+        public OperateResult<float> ReadFloat( string address )
         {
-            return ByteTransformHelper.GetResultFromArray(ReadFloat(address, 1));
+            return ByteTransformHelper.GetResultFromArray( ReadFloat( address, 1 ) );
         }
 
 
@@ -555,9 +556,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadFloatArray" title="Float类型示例" />
         /// </example>
-        public virtual OperateResult<float[]> ReadFloat(string address, ushort length)
+        public virtual OperateResult<float[]> ReadFloat( string address, ushort length )
         {
-            return ByteTransformHelper.GetResultFromBytes(Read(address, (ushort)(length * WordLength * 2)), m => ByteTransform.TransSingle(m, 0, length));
+            return ByteTransformHelper.GetResultFromBytes( Read( address, (ushort)(length * WordLength * 2) ), m => ByteTransform.TransSingle( m, 0, length ) );
         }
 
         /// <summary>
@@ -569,9 +570,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadInt64" title="Int64类型示例" />
         /// </example>
-        public OperateResult<long> ReadInt64(string address)
+        public OperateResult<long> ReadInt64( string address )
         {
-            return ByteTransformHelper.GetResultFromArray(ReadInt64(address, 1));
+            return ByteTransformHelper.GetResultFromArray( ReadInt64( address, 1 ) );
         }
 
         /// <summary>
@@ -584,9 +585,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadInt64Array" title="Int64类型示例" />
         /// </example>
-        public virtual OperateResult<long[]> ReadInt64(string address, ushort length)
+        public virtual OperateResult<long[]> ReadInt64( string address, ushort length )
         {
-            return ByteTransformHelper.GetResultFromBytes(Read(address, (ushort)(length * WordLength * 4)), m => ByteTransform.TransInt64(m, 0, length));
+            return ByteTransformHelper.GetResultFromBytes( Read( address, (ushort)(length * WordLength * 4) ), m => ByteTransform.TransInt64( m, 0, length ) );
         }
 
         /// <summary>
@@ -598,9 +599,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadUInt64" title="UInt64类型示例" />
         /// </example>
-        public OperateResult<ulong> ReadUInt64(string address)
+        public OperateResult<ulong> ReadUInt64( string address )
         {
-            return ByteTransformHelper.GetResultFromArray(ReadUInt64(address, 1));
+            return ByteTransformHelper.GetResultFromArray( ReadUInt64( address, 1 ) );
         }
 
         /// <summary>
@@ -613,9 +614,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadUInt64Array" title="UInt64类型示例" />
         /// </example>
-        public virtual OperateResult<ulong[]> ReadUInt64(string address, ushort length)
+        public virtual OperateResult<ulong[]> ReadUInt64( string address, ushort length )
         {
-            return ByteTransformHelper.GetResultFromBytes(Read(address, (ushort)(length * WordLength * 4)), m => ByteTransform.TransUInt64(m, 0, length));
+            return ByteTransformHelper.GetResultFromBytes( Read( address, (ushort)(length * WordLength * 4) ), m => ByteTransform.TransUInt64( m, 0, length ) );
         }
 
         /// <summary>
@@ -627,9 +628,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadDouble" title="Double类型示例" />
         /// </example>
-        public OperateResult<double> ReadDouble(string address)
+        public OperateResult<double> ReadDouble( string address )
         {
-            return ByteTransformHelper.GetResultFromArray(ReadDouble(address, 1));
+            return ByteTransformHelper.GetResultFromArray( ReadDouble( address, 1 ) );
         }
 
         /// <summary>
@@ -642,9 +643,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadDoubleArray" title="Double类型示例" />
         /// </example>
-        public virtual OperateResult<double[]> ReadDouble(string address, ushort length)
+        public virtual OperateResult<double[]> ReadDouble( string address, ushort length )
         {
-            return ByteTransformHelper.GetResultFromBytes(Read(address, (ushort)(length * WordLength * 4)), m => ByteTransform.TransDouble(m, 0, length));
+            return ByteTransformHelper.GetResultFromBytes( Read( address, (ushort)(length * WordLength * 4) ), m => ByteTransform.TransDouble( m, 0, length ) );
         }
 
         /// <summary>
@@ -657,9 +658,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="ReadString" title="String类型示例" />
         /// </example>
-        public OperateResult<string> ReadString(string address, ushort length)
+        public OperateResult<string> ReadString( string address, ushort length )
         {
-            return ByteTransformHelper.GetResultFromBytes(Read(address, length), m => ByteTransform.TransString(m, 0, m.Length, Encoding.ASCII));
+            return ByteTransformHelper.GetResultFromBytes( Read( address, length ), m => ByteTransform.TransString( m, 0, m.Length, Encoding.ASCII ) );
         }
 
         #endregion
@@ -676,9 +677,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteInt16Array" title="Int16类型示例" />
         /// </example>
-        public virtual OperateResult Write(string address, short[] values)
+        public virtual OperateResult Write( string address, short[] values )
         {
-            return Write(address, ByteTransform.TransByte(values));
+            return Write( address, ByteTransform.TransByte( values ) );
         }
 
         /// <summary>
@@ -691,9 +692,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteInt16" title="Int16类型示例" />
         /// </example>
-        public OperateResult Write(string address, short value)
+        public OperateResult Write( string address, short value )
         {
-            return Write(address, new short[] { value });
+            return Write( address, new short[] { value } );
         }
 
         #endregion
@@ -711,9 +712,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteUInt16Array" title="UInt16类型示例" />
         /// </example>
-        public virtual OperateResult Write(string address, ushort[] values)
+        public virtual OperateResult Write( string address, ushort[] values )
         {
-            return Write(address, ByteTransform.TransByte(values));
+            return Write( address, ByteTransform.TransByte( values ) );
         }
 
 
@@ -727,9 +728,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteUInt16" title="UInt16类型示例" />
         /// </example>
-        public OperateResult Write(string address, ushort value)
+        public OperateResult Write( string address, ushort value )
         {
-            return Write(address, new ushort[] { value });
+            return Write( address, new ushort[] { value } );
         }
 
 
@@ -747,9 +748,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteInt32Array" title="Int32类型示例" />
         /// </example>
-        public virtual OperateResult Write(string address, int[] values)
+        public virtual OperateResult Write( string address, int[] values )
         {
-            return Write(address, ByteTransform.TransByte(values));
+            return Write( address, ByteTransform.TransByte( values ) );
         }
 
         /// <summary>
@@ -762,9 +763,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteInt32" title="Int32类型示例" />
         /// </example>
-        public OperateResult Write(string address, int value)
+        public OperateResult Write( string address, int value )
         {
-            return Write(address, new int[] { value });
+            return Write( address, new int[] { value } );
         }
 
         #endregion
@@ -781,9 +782,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteUInt32Array" title="UInt32类型示例" />
         /// </example>
-        public virtual OperateResult Write(string address, uint[] values)
+        public virtual OperateResult Write( string address, uint[] values )
         {
-            return Write(address, ByteTransform.TransByte(values));
+            return Write( address, ByteTransform.TransByte( values ) );
         }
 
         /// <summary>
@@ -796,9 +797,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteUInt32" title="UInt32类型示例" />
         /// </example>
-        public OperateResult Write(string address, uint value)
+        public OperateResult Write( string address, uint value )
         {
-            return Write(address, new uint[] { value });
+            return Write( address, new uint[] { value } );
         }
 
         #endregion
@@ -815,9 +816,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteFloatArray" title="Float类型示例" />
         /// </example>
-        public virtual OperateResult Write(string address, float[] values)
+        public virtual OperateResult Write( string address, float[] values )
         {
-            return Write(address, ByteTransform.TransByte(values));
+            return Write( address, ByteTransform.TransByte( values ) );
         }
 
         /// <summary>
@@ -830,9 +831,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteFloat" title="Float类型示例" />
         /// </example>
-        public OperateResult Write(string address, float value)
+        public OperateResult Write( string address, float value )
         {
-            return Write(address, new float[] { value });
+            return Write( address, new float[] { value } );
         }
 
 
@@ -850,9 +851,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteInt64Array" title="Int64类型示例" />
         /// </example>
-        public virtual OperateResult Write(string address, long[] values)
+        public virtual OperateResult Write( string address, long[] values )
         {
-            return Write(address, ByteTransform.TransByte(values));
+            return Write( address, ByteTransform.TransByte( values ) );
         }
 
         /// <summary>
@@ -865,9 +866,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteInt64" title="Int64类型示例" />
         /// </example>
-        public OperateResult Write(string address, long value)
+        public OperateResult Write( string address, long value )
         {
-            return Write(address, new long[] { value });
+            return Write( address, new long[] { value } );
         }
 
         #endregion
@@ -884,9 +885,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteUInt64Array" title="UInt64类型示例" />
         /// </example>
-        public virtual OperateResult Write(string address, ulong[] values)
+        public virtual OperateResult Write( string address, ulong[] values )
         {
-            return Write(address, ByteTransform.TransByte(values));
+            return Write( address, ByteTransform.TransByte( values ) );
         }
 
         /// <summary>
@@ -899,9 +900,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteUInt64" title="UInt64类型示例" />
         /// </example>
-        public OperateResult Write(string address, ulong value)
+        public OperateResult Write( string address, ulong value )
         {
-            return Write(address, new ulong[] { value });
+            return Write( address, new ulong[] { value } );
         }
 
         #endregion
@@ -918,9 +919,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteDoubleArray" title="Double类型示例" />
         /// </example>
-        public virtual OperateResult Write(string address, double[] values)
+        public virtual OperateResult Write( string address, double[] values )
         {
-            return Write(address, ByteTransform.TransByte(values));
+            return Write( address, ByteTransform.TransByte( values ) );
         }
 
         /// <summary>
@@ -933,9 +934,9 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteDouble" title="Double类型示例" />
         /// </example>
-        public OperateResult Write(string address, double value)
+        public OperateResult Write( string address, double value )
         {
-            return Write(address, new double[] { value });
+            return Write( address, new double[] { value } );
         }
 
         #endregion
@@ -952,11 +953,11 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteString" title="String类型示例" />
         /// </example>
-        public virtual OperateResult Write(string address, string value)
+        public virtual OperateResult Write( string address, string value )
         {
-            byte[] temp = ByteTransform.TransByte(value, Encoding.ASCII);
-            if (WordLength == 1) temp = SoftBasic.ArrayExpandToLengthEven(temp);
-            return Write(address, temp);
+            byte[] temp = ByteTransform.TransByte( value, Encoding.ASCII );
+            if (WordLength == 1) temp = SoftBasic.ArrayExpandToLengthEven( temp );
+            return Write( address, temp );
         }
 
         /// <summary>
@@ -970,12 +971,12 @@ namespace HslCommunication.Core.Net
         /// 以下为三菱的连接对象示例，其他的设备读写情况参照下面的代码：
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Core\NetworkDeviceBase.cs" region="WriteString2" title="String类型示例" />
         /// </example>
-        public virtual OperateResult Write(string address, string value, int length)
+        public virtual OperateResult Write( string address, string value, int length )
         {
-            byte[] temp = ByteTransform.TransByte(value, Encoding.ASCII);
-            if (WordLength == 1) temp = SoftBasic.ArrayExpandToLengthEven(temp);
-            temp = SoftBasic.ArrayExpandToLength(temp, length);
-            return Write(address, temp);
+            byte[] temp = ByteTransform.TransByte( value, Encoding.ASCII );
+            if (WordLength == 1) temp = SoftBasic.ArrayExpandToLengthEven( temp );
+            temp = SoftBasic.ArrayExpandToLength( temp, length );
+            return Write( address, temp );
         }
 
         /// <summary>
@@ -984,10 +985,10 @@ namespace HslCommunication.Core.Net
         /// <param name="address">数据地址</param>
         /// <param name="value">字符串数据</param>
         /// <returns>是否写入成功的结果对象</returns>
-        public virtual OperateResult WriteUnicodeString(string address, string value)
+        public virtual OperateResult WriteUnicodeString( string address, string value )
         {
-            byte[] temp = ByteTransform.TransByte(value, Encoding.Unicode);
-            return Write(address, temp);
+            byte[] temp = ByteTransform.TransByte( value, Encoding.Unicode );
+            return Write( address, temp );
         }
 
         /// <summary>
@@ -997,11 +998,11 @@ namespace HslCommunication.Core.Net
         /// <param name="value">字符串数据</param>
         /// <param name="length">指定的字符串长度，必须大于0</param>
         /// <returns>是否写入成功的结果对象 -> Whether to write a successful result object</returns>
-        public virtual OperateResult WriteUnicodeString(string address, string value, int length)
+        public virtual OperateResult WriteUnicodeString( string address, string value, int length )
         {
-            byte[] temp = ByteTransform.TransByte(value, Encoding.Unicode);
-            temp = SoftBasic.ArrayExpandToLength(temp, length * 2);
-            return Write(address, temp);
+            byte[] temp = ByteTransform.TransByte( value, Encoding.Unicode );
+            temp = SoftBasic.ArrayExpandToLength( temp, length * 2 );
+            return Write( address, temp );
         }
 
         #endregion
@@ -1012,13 +1013,13 @@ namespace HslCommunication.Core.Net
         /// 释放当前的对象
         /// </summary>
         /// <param name="disposing">是否托管对象</param>
-        protected override void Dispose(bool disposing)
+        protected override void Dispose( bool disposing )
         {
             if (disposing)
             {
-                lock_trusted_clients?.Dispose();
+                lock_trusted_clients?.Dispose( );
             }
-            base.Dispose(disposing);
+            base.Dispose( disposing );
         }
 
         #endregion
@@ -1029,7 +1030,7 @@ namespace HslCommunication.Core.Net
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串数据</returns>
-        public override string ToString()
+        public override string ToString( )
         {
             return "NetworkDataServerBase";
         }

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
+using System.Text;
 using System.Threading;
 
 namespace HslCommunication.Core
@@ -254,7 +257,7 @@ namespace HslCommunication.Core
         private static int NumWritersWaiting(int ls) { return (ls & c_lsWritersWaitingMask) >> c_lsWritersWaitingStartBit; }
         private static void AddWritersWaiting(ref int ls, int amount) { ls += (c_ls1WriterWaiting * amount); }
 
-        private static bool AnyWaiters(int ls) { return (ls & c_lsAnyWaitingMask) != 0; }
+        private static bool AnyWaiters( int ls ) { return (ls & c_lsAnyWaitingMask) != 0; }
 
         private static string DebugState(int ls)
         {
@@ -544,7 +547,7 @@ namespace HslCommunication.Core
         #region IDisposable Support
         private bool disposedValue = false; // 要检测冗余调用
 
-        void Dispose(bool disposing)
+        void Dispose( bool disposing )
         {
             if (!disposedValue)
             {
@@ -558,7 +561,7 @@ namespace HslCommunication.Core
 #if NET35
                 m_waiterLock.Close();
 #else
-                m_waiterLock.Value.Close();
+                m_waiterLock.Value.Close( );
 #endif
 
                 disposedValue = true;
@@ -575,10 +578,10 @@ namespace HslCommunication.Core
         /// <summary>
         /// 释放资源
         /// </summary>
-        public void Dispose()
+        public void Dispose( )
         {
             // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
-            Dispose(true);
+            Dispose( true );
             // TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
             // GC.SuppressFinalize(this);
         }
@@ -598,34 +601,34 @@ namespace HslCommunication.Core
         /// <summary>
         /// 基元内核模式构造同步锁
         /// </summary>
-        private readonly Lazy<AutoResetEvent> m_waiterLock = new Lazy<AutoResetEvent>(() => new AutoResetEvent(false));
+        private readonly Lazy<AutoResetEvent> m_waiterLock = new Lazy<AutoResetEvent>( ( ) => new AutoResetEvent( false ) );
 #endif
 
 
         /// <summary>
         /// 获取锁
         /// </summary>
-        public void Enter()
+        public void Enter( )
         {
-            if (Interlocked.Increment(ref m_waiters) == 1) return;      // 用户锁可以使用的时候，直接返回，第一次调用时发生
-                                                                        // 当发生锁竞争时，使用内核同步构造锁
+            if (Interlocked.Increment( ref m_waiters ) == 1) return;      // 用户锁可以使用的时候，直接返回，第一次调用时发生
+                                                                          // 当发生锁竞争时，使用内核同步构造锁
 #if NET35
             m_waiterLock.WaitOne();
 #else
-            m_waiterLock.Value.WaitOne();
+            m_waiterLock.Value.WaitOne( );
 #endif
         }
 
         /// <summary>
         /// 离开锁
         /// </summary>
-        public void Leave()
+        public void Leave( )
         {
-            if (Interlocked.Decrement(ref m_waiters) == 0) return;     // 没有可用的锁的时候
+            if (Interlocked.Decrement( ref m_waiters ) == 0) return;     // 没有可用的锁的时候
 #if NET35
             m_waiterLock.Set( );
 #else
-            m_waiterLock.Value.Set();
+            m_waiterLock.Value.Set( );
 #endif
         }
 
@@ -636,10 +639,10 @@ namespace HslCommunication.Core
     }
 
 
-    #endregion
+#endregion
 
-    #region 多线程并发处理数据的类
-
+#region 多线程并发处理数据的类
+    
 
     /*******************************************************************************
      * 
@@ -647,7 +650,7 @@ namespace HslCommunication.Core
      *    
      * 
      *******************************************************************************/
-
+     
 
     /// <summary>
     /// 一个用于多线程并发处理数据的模型类，适用于处理数据量非常庞大的情况
@@ -665,7 +668,7 @@ namespace HslCommunication.Core
         {
             m_dataList = dataList ?? throw new ArgumentNullException("dataList");
             m_operater = operater ?? throw new ArgumentNullException("operater");
-            if (threadCount < 1) throw new ArgumentException("threadCount can not less than 1", "threadCount");
+            if (threadCount < 1) throw new ArgumentException( "threadCount can not less than 1", "threadCount");
             m_threadCount = threadCount;
             //增加任务处理
             Interlocked.Add(ref m_opCount, dataList.Length);
@@ -759,7 +762,7 @@ namespace HslCommunication.Core
         private bool m_isQuitAfterException = false;
 
 
-        #region Start Stop Method
+#region Start Stop Method
         /// <summary>
         /// 启动多线程进行数据处理
         /// </summary>
@@ -821,7 +824,7 @@ namespace HslCommunication.Core
             }
         }
 
-        #endregion
+#endregion
 
 
 
@@ -896,9 +899,9 @@ namespace HslCommunication.Core
     }
 
 
-    #endregion
+#endregion
 
-    #region 双检锁
+#region 双检锁
 
 #if !NET35
 
@@ -957,7 +960,7 @@ namespace HslCommunication.Core
         #region IDisposable Support
         private bool disposedValue = false; // 要检测冗余调用
 
-        void Dispose(bool disposing)
+        void Dispose( bool disposing )
         {
             if (!disposedValue)
             {
@@ -968,7 +971,7 @@ namespace HslCommunication.Core
 
                 // TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
                 // TODO: 将大型字段设置为 null。
-                m_waiterLock.Value.Close();
+                m_waiterLock.Value.Close( );
 
                 disposedValue = true;
             }
@@ -984,17 +987,17 @@ namespace HslCommunication.Core
         /// <summary>
         /// 释放资源
         /// </summary>
-        public void Dispose()
+        public void Dispose( )
         {
             // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
-            Dispose(true);
+            Dispose( true );
             // TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
             // GC.SuppressFinalize(this);
         }
         #endregion
 
         private int m_waiters = 0;                                                                                              // 基元用户模式构造同步锁
-        private readonly Lazy<AutoResetEvent> m_waiterLock = new Lazy<AutoResetEvent>(() => new AutoResetEvent(false));    // 基元内核模式构造同步锁
+        private readonly Lazy<AutoResetEvent> m_waiterLock = new Lazy<AutoResetEvent>( ( ) => new AutoResetEvent( false ) );    // 基元内核模式构造同步锁
         private int m_spincount = 1000;                                                                                         // 控制自旋的一个字段
         private int m_owningThreadId = 0;                                                                                       // 指出哪个线程拥有锁
         private int m_recursion = 0;                                                                                            // 指示锁拥有了多少次
@@ -1011,7 +1014,7 @@ namespace HslCommunication.Core
         /// <summary>
         /// 获取锁
         /// </summary>
-        public void Enter()
+        public void Enter( )
         {
             int threadId = Thread.CurrentThread.ManagedThreadId;
             if (threadId == m_owningThreadId)
@@ -1020,10 +1023,10 @@ namespace HslCommunication.Core
                 return;                 // 如果调用线程已经拥有锁，就返回。这么操作的原理就是支持递归，可以在一个线程里进行反复调用
             }
 
-            SpinWait spinwait = new SpinWait();
+            SpinWait spinwait = new SpinWait( );
             for (int spincount = 0; spincount < m_spincount; spincount++)
             {
-                if (Interlocked.CompareExchange(ref m_waiters, 1, 0) == 0)
+                if (Interlocked.CompareExchange( ref m_waiters, 1, 0 ) == 0)
                 {
                     m_owningThreadId = Thread.CurrentThread.ManagedThreadId;
                     m_recursion = 1;
@@ -1031,12 +1034,12 @@ namespace HslCommunication.Core
                 }
 
                 // 自旋了极短的一段时间
-                spinwait.SpinOnce();
+                spinwait.SpinOnce( );
             }
 
             // 假如在短暂的自旋之后，还没有获得锁，再转为内核构造模式
-            if (Interlocked.Increment(ref m_waiters) > 1)
-                m_waiterLock.Value.WaitOne();
+            if (Interlocked.Increment( ref m_waiters ) > 1)
+                m_waiterLock.Value.WaitOne( );
 
             m_owningThreadId = Thread.CurrentThread.ManagedThreadId;
             m_recursion = 1;
@@ -1045,21 +1048,21 @@ namespace HslCommunication.Core
         /// <summary>
         /// 离开锁
         /// </summary>
-        public void Leave()
+        public void Leave( )
         {
             if (Thread.CurrentThread.ManagedThreadId != m_owningThreadId)
-                throw new SynchronizationLockException("Current Thread have not the owning thread.");
+                throw new SynchronizationLockException( "Current Thread have not the owning thread." );
 
             if (--m_recursion > 0) return;   // 减少递归所的递归次数，如果这个线程多次拥有锁，则返回
 
             m_owningThreadId = 0; // 重置线程锁的id
-            if (Interlocked.Decrement(ref m_waiters) == 0) return;
-            m_waiterLock.Value.Set();
+            if (Interlocked.Decrement( ref m_waiters ) == 0) return;
+            m_waiterLock.Value.Set( );
         }
 
     }
 
 #endif
 
-    #endregion
+#endregion
 }

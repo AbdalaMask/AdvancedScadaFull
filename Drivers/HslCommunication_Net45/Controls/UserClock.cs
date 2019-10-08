@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Drawing2D;
+using System.Data;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 
 /**************************************************************
@@ -32,8 +36,8 @@ namespace HslCommunication.Controls
         public UserClock()
         {
             InitializeComponent();
-            _Time1s.Interval = 50;
-            _Time1s.Tick += _Time1s_Tick;
+            _Time1s.Interval=50;
+            _Time1s.Tick+=_Time1s_Tick;
             DoubleBuffered = true;
         }
 
@@ -44,7 +48,7 @@ namespace HslCommunication.Controls
         }
         //1秒的时钟
         private Timer _Time1s = new Timer();
-        private void _Time1s_Tick(object sender, EventArgs e)
+        private void  _Time1s_Tick(object sender,EventArgs e)
         {
             _NowTime = DateTime.Now;
             this.Invalidate();
@@ -198,7 +202,7 @@ namespace HslCommunication.Controls
         /// <param name="e"></param>
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!Authorization.nzugaydgwadawdibbas()) return;
+            if (!Authorization.nzugaydgwadawdibbas( )) return;
 
             base.OnPaint(e);
 

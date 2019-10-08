@@ -257,7 +257,7 @@ namespace AdvancedScada.Management.BLManager
                     tg.TagId = int.Parse(item.Attributes[TAG_ID].Value);
                     tg.TagName = item.Attributes[TAG_NAME].Value;
                     tg.Address = item.Attributes[ADDRESS].Value;
-                    tg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", dbNote.Attributes[DATA_TYPE].Value));
+                    tg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", item.Attributes[DATA_TYPE].Value));
                     tg.Description = item.Attributes[ChannelService.DESCRIPTION].Value;
                     dbList.Add(tg);
                 }

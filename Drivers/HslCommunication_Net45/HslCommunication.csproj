@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HslCommunication</RootNamespace>
     <AssemblyName>HslCommunication</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -252,6 +252,8 @@
     <Compile Include="Enthernet\FileNet\GroupFileItem.cs" />
     <Compile Include="Enthernet\FileNet\IntegrationFileClient.cs" />
     <Compile Include="Enthernet\FileNet\UltimateFileServer.cs" />
+    <Compile Include="Enthernet\HttpServer\HttpServer.cs" />
+    <Compile Include="Enthernet\Plain\NetPlainSocket.cs" />
     <Compile Include="Enthernet\PushNet\NetPushClient.cs" />
     <Compile Include="Enthernet\PushNet\NetPushServer.cs" />
     <Compile Include="Enthernet\PushNet\PushGroupClient.cs" />
@@ -259,7 +261,7 @@
     <Compile Include="Enthernet\Redis\RedisSubscribe.cs" />
     <Compile Include="Enthernet\SimplifyNet\NetSimplifyClient.cs" />
     <Compile Include="Enthernet\SimplifyNet\NetSimplifyServer.cs" />
-    <Compile Include="Enthernet\SoftUpdateNet\ClassSoftUpdate.cs" />
+    <Compile Include="Enthernet\SoftUpdateNet\NetSoftUpdateServer.cs" />
     <Compile Include="Enthernet\UdpNet\NetUdpClient.cs" />
     <Compile Include="Enthernet\UdpNet\NetUdpServer.cs" />
     <Compile Include="Instrument\Temperature\DAM3601.cs" />
@@ -293,7 +295,19 @@
     <Compile Include="ModBus\ModBusState.cs" />
     <Compile Include="ModBus\ModbusTcpNet.cs" />
     <Compile Include="ModBus\ModbusTcpServer.cs" />
+    <Compile Include="ModBus\ModbusUdpNet.cs" />
     <Compile Include="ModBus\MonitorAddress.cs" />
+    <Compile Include="MQTT\MqttApplicationMessage.cs" />
+    <Compile Include="MQTT\MqttClient.cs" />
+    <Compile Include="MQTT\MqttClientApplicationMessage.cs" />
+    <Compile Include="MQTT\MqttConnectionOptions.cs" />
+    <Compile Include="MQTT\MqttControlMessage.cs" />
+    <Compile Include="MQTT\MqttCredential.cs" />
+    <Compile Include="MQTT\MqttPublishMessage.cs" />
+    <Compile Include="MQTT\MqttQualityOfServiceLevel.cs" />
+    <Compile Include="MQTT\MqttServer.cs" />
+    <Compile Include="MQTT\MqttSession.cs" />
+    <Compile Include="MQTT\MqttSubcribeMessage.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Profinet\AllenBradley\AllenBradleyHelper.cs" />
     <Compile Include="Profinet\AllenBradley\AllenBradleyNet.cs" />
@@ -340,7 +354,9 @@
     <Compile Include="Profinet\Panasonic\PanasonicMewtocol.cs" />
     <Compile Include="Profinet\Panasonic\PanasonicMewtocolOverTcp.cs" />
     <Compile Include="Profinet\Sick\SickIcrTcpServer.cs" />
+    <Compile Include="Profinet\Siemens\SiemensDateTime.cs" />
     <Compile Include="Profinet\Siemens\SiemensFetchWriteNet.cs" />
+    <Compile Include="Profinet\Siemens\SiemensMPI.cs" />
     <Compile Include="Profinet\Siemens\SiemensPLCS.cs" />
     <Compile Include="Profinet\Siemens\SiemensPPI.cs" />
     <Compile Include="Profinet\Siemens\SiemensPPIOverTcp.cs" />

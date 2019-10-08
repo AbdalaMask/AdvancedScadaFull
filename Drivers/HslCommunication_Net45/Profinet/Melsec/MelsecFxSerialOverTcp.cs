@@ -2,6 +2,8 @@
 using HslCommunication.Core;
 using HslCommunication.Core.Net;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace HslCommunication.Profinet.Melsec
@@ -131,9 +133,21 @@ namespace HslCommunication.Profinet.Melsec
         /// <summary>
         /// 实例化网络版的三菱的串口协议的通讯对象
         /// </summary>
-        public MelsecFxSerialOverTcp()
+        public MelsecFxSerialOverTcp( )
         {
-            WordLength = 1;
+            this.WordLength = 1;
+        }
+
+        /// <summary>
+        /// 实例化网络版的三菱的串口协议的通讯对象
+        /// </summary>
+        /// <param name="ipAddress">Ip地址</param>
+        /// <param name="port">端口号</param>
+        public MelsecFxSerialOverTcp( string ipAddress, int port )
+        {
+            this.WordLength = 1;
+            this.IpAddress = ipAddress;
+            this.Port = port;
         }
 
         #endregion
@@ -152,7 +166,7 @@ namespace HslCommunication.Profinet.Melsec
         /// 以下是读取不同类型数据的示例
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\MelsecFxSerial.cs" region="ReadExample1" title="Read示例" />
         /// </example>
-        public override OperateResult<byte[]> Read(string address, ushort length) => ReadHelper(address, length, ReadFromCoreServer);
+        public override OperateResult<byte[]> Read( string address, ushort length ) => ReadHelper( address, length, ReadFromCoreServer );
 
         /// <summary>
         /// 向PLC写入数据，数据格式为原始的字节类型
@@ -166,7 +180,7 @@ namespace HslCommunication.Profinet.Melsec
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\MelsecFxSerial.cs" region="WriteExample1" title="Write示例" />
         /// </example>
         /// <returns>是否写入成功的结果对象</returns>
-        public override OperateResult Write(string address, byte[] value) => WriteHelper(address, value, ReadFromCoreServer);
+        public override OperateResult Write( string address, byte[] value ) => WriteHelper( address, value, ReadFromCoreServer );
 
         #endregion
 
@@ -181,9 +195,9 @@ namespace HslCommunication.Profinet.Melsec
         /// <example>
         ///  <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\MelsecFxSerial.cs" region="ReadBool" title="Bool类型示例" />
         /// </example>
-        public override OperateResult<bool[]> ReadBool(string address, ushort length)
+        public override OperateResult<bool[]> ReadBool( string address, ushort length )
         {
-            return ReadBoolHelper(address, length, ReadFromCoreServer);
+            return ReadBoolHelper( address, length, ReadFromCoreServer );
         }
 
         /// <summary>
@@ -192,9 +206,9 @@ namespace HslCommunication.Profinet.Melsec
         /// <param name="address">地址信息</param>
         /// <param name="value">是否为通</param>
         /// <returns>是否写入成功的结果对象</returns>
-        public override OperateResult Write(string address, bool value)
+        public override OperateResult Write( string address, bool value )
         {
-            return WriteHelper(address, value, ReadFromCoreServer);
+            return WriteHelper( address, value, ReadFromCoreServer );
         }
 
         #endregion
@@ -205,7 +219,7 @@ namespace HslCommunication.Profinet.Melsec
         /// 获取当前对象的字符串标识形式
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToString() => $"MelsecFxSerialOverTcp[{IpAddress}:{Port}]";
+        public override string ToString( ) => $"MelsecFxSerialOverTcp[{IpAddress}:{Port}]";
 
         #endregion
 
@@ -224,22 +238,22 @@ namespace HslCommunication.Profinet.Melsec
         /// 以下是读取不同类型数据的示例
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\MelsecFxSerial.cs" region="ReadExample1" title="Read示例" />
         /// </example>
-        public static OperateResult<byte[]> ReadHelper(string address, ushort length, Func<byte[], OperateResult<byte[]>> readCore)
+        public static OperateResult<byte[]> ReadHelper( string address, ushort length, Func<byte[],OperateResult<byte[]>> readCore)
         {
             // 获取指令
-            OperateResult<byte[]> command = BuildReadWordCommand(address, length);
-            if (!command.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(command);
+            OperateResult<byte[]> command = BuildReadWordCommand( address, length );
+            if (!command.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( command );
 
             // 核心交互
-            OperateResult<byte[]> read = readCore(command.Content);
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(read);
+            OperateResult<byte[]> read = readCore( command.Content );
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( read );
 
             // 反馈检查
-            OperateResult ackResult = CheckPlcReadResponse(read.Content);
-            if (!ackResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(ackResult);
+            OperateResult ackResult = CheckPlcReadResponse( read.Content );
+            if (!ackResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( ackResult );
 
             // 数据提炼
-            return ExtractActualData(read.Content);
+            return ExtractActualData( read.Content );
         }
 
         /// <summary>
@@ -252,22 +266,22 @@ namespace HslCommunication.Profinet.Melsec
         /// <example>
         ///  <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\MelsecFxSerial.cs" region="ReadBool" title="Bool类型示例" />
         /// </example>
-        public static OperateResult<bool[]> ReadBoolHelper(string address, ushort length, Func<byte[], OperateResult<byte[]>> readCore)
+        public static OperateResult<bool[]> ReadBoolHelper( string address, ushort length, Func<byte[], OperateResult<byte[]>> readCore )
         {
             //获取指令
-            OperateResult<byte[], int> command = BuildReadBoolCommand(address, length);
-            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(command);
+            OperateResult<byte[], int> command = BuildReadBoolCommand( address, length );
+            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( command );
 
             // 核心交互
-            OperateResult<byte[]> read = readCore(command.Content1);
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(read);
+            OperateResult<byte[]> read = readCore( command.Content1 );
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( read );
 
             // 反馈检查
-            OperateResult ackResult = CheckPlcReadResponse(read.Content);
-            if (!ackResult.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(ackResult);
+            OperateResult ackResult = CheckPlcReadResponse( read.Content );
+            if (!ackResult.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( ackResult );
 
             // 提取真实的数据
-            return ExtractActualBoolData(read.Content, command.Content2, length);
+            return ExtractActualBoolData( read.Content, command.Content2, length );
         }
 
         /// <summary>
@@ -283,21 +297,21 @@ namespace HslCommunication.Profinet.Melsec
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\MelsecFxSerial.cs" region="WriteExample1" title="Write示例" />
         /// </example>
         /// <returns>是否写入成功的结果对象</returns>
-        public static OperateResult WriteHelper(string address, byte[] value, Func<byte[], OperateResult<byte[]>> readCore)
+        public static OperateResult WriteHelper( string address, byte[] value, Func<byte[], OperateResult<byte[]>> readCore )
         {
             // 获取写入
-            OperateResult<byte[]> command = BuildWriteWordCommand(address, value);
+            OperateResult<byte[]> command = BuildWriteWordCommand( address, value );
             if (!command.IsSuccess) return command;
 
             // 核心交互
-            OperateResult<byte[]> read = readCore(command.Content);
+            OperateResult<byte[]> read = readCore( command.Content );
             if (!read.IsSuccess) return read;
 
             // 结果验证
-            OperateResult checkResult = CheckPlcWriteResponse(read.Content);
+            OperateResult checkResult = CheckPlcWriteResponse( read.Content );
             if (!checkResult.IsSuccess) return checkResult;
 
-            return OperateResult.CreateSuccessResult();
+            return OperateResult.CreateSuccessResult( );
         }
 
         /// <summary>
@@ -307,21 +321,21 @@ namespace HslCommunication.Profinet.Melsec
         /// <param name="value">是否为通</param>
         /// <param name="readCore">指定的通道信息</param>
         /// <returns>是否写入成功的结果对象</returns>
-        public static OperateResult WriteHelper(string address, bool value, Func<byte[], OperateResult<byte[]>> readCore)
+        public static OperateResult WriteHelper( string address, bool value, Func<byte[], OperateResult<byte[]>> readCore )
         {
             // 先获取指令
-            OperateResult<byte[]> command = BuildWriteBoolPacket(address, value);
+            OperateResult<byte[]> command = BuildWriteBoolPacket( address, value );
             if (!command.IsSuccess) return command;
 
             // 和串口进行核心的数据交互
-            OperateResult<byte[]> read = readCore(command.Content);
+            OperateResult<byte[]> read = readCore( command.Content );
             if (!read.IsSuccess) return read;
 
             // 检查结果是否正确
-            OperateResult checkResult = CheckPlcWriteResponse(read.Content);
+            OperateResult checkResult = CheckPlcWriteResponse( read.Content );
             if (!checkResult.IsSuccess) return checkResult;
 
-            return OperateResult.CreateSuccessResult();
+            return OperateResult.CreateSuccessResult( );
         }
 
         /// <summary>
@@ -329,15 +343,15 @@ namespace HslCommunication.Profinet.Melsec
         /// </summary>
         /// <param name="ack">Plc反馈的数据信息</param>
         /// <returns>检查结果</returns>
-        public static OperateResult CheckPlcReadResponse(byte[] ack)
+        public static OperateResult CheckPlcReadResponse( byte[] ack )
         {
-            if (ack.Length == 0) return new OperateResult(StringResources.Language.MelsecFxReceiveZore);
-            if (ack[0] == 0x15) return new OperateResult(StringResources.Language.MelsecFxAckNagative + " Actual: " + SoftBasic.ByteToHexString(ack, ' '));
-            if (ack[0] != 0x02) return new OperateResult(StringResources.Language.MelsecFxAckWrong + ack[0] + " Actual: " + SoftBasic.ByteToHexString(ack, ' '));
+            if (ack.Length == 0) return new OperateResult( StringResources.Language.MelsecFxReceiveZore );
+            if (ack[0] == 0x15) return new OperateResult( StringResources.Language.MelsecFxAckNagative + " Actual: " + SoftBasic.ByteToHexString( ack, ' ' ) );
+            if (ack[0] != 0x02) return new OperateResult( StringResources.Language.MelsecFxAckWrong + ack[0] + " Actual: " + SoftBasic.ByteToHexString( ack, ' ' ) );
 
-            if (!MelsecHelper.CheckCRC(ack)) return new OperateResult(StringResources.Language.MelsecFxCrcCheckFailed);
+            if (!MelsecHelper.CheckCRC( ack )) return new OperateResult( StringResources.Language.MelsecFxCrcCheckFailed );
 
-            return OperateResult.CreateSuccessResult();
+            return OperateResult.CreateSuccessResult( );
         }
 
         /// <summary>
@@ -345,13 +359,13 @@ namespace HslCommunication.Profinet.Melsec
         /// </summary>
         /// <param name="ack">Plc反馈的数据信息</param>
         /// <returns>检查结果</returns>
-        public static OperateResult CheckPlcWriteResponse(byte[] ack)
+        public static OperateResult CheckPlcWriteResponse( byte[] ack )
         {
-            if (ack.Length == 0) return new OperateResult(StringResources.Language.MelsecFxReceiveZore);
-            if (ack[0] == 0x15) return new OperateResult(StringResources.Language.MelsecFxAckNagative + " Actual: " + SoftBasic.ByteToHexString(ack, ' '));
-            if (ack[0] != 0x06) return new OperateResult(StringResources.Language.MelsecFxAckWrong + ack[0] + " Actual: " + SoftBasic.ByteToHexString(ack, ' '));
+            if (ack.Length == 0) return new OperateResult( StringResources.Language.MelsecFxReceiveZore );
+            if (ack[0] == 0x15) return new OperateResult( StringResources.Language.MelsecFxAckNagative + " Actual: " + SoftBasic.ByteToHexString( ack, ' ' ) );
+            if (ack[0] != 0x06) return new OperateResult( StringResources.Language.MelsecFxAckWrong + ack[0] + " Actual: " + SoftBasic.ByteToHexString( ack, ' ' ) );
 
-            return OperateResult.CreateSuccessResult();
+            return OperateResult.CreateSuccessResult( );
         }
 
         /// <summary>
@@ -360,10 +374,10 @@ namespace HslCommunication.Profinet.Melsec
         /// <param name="address">地址信息，每个地址存在一定的范围，需要谨慎传入数据。举例：M10,S10,X5,Y10,C10,T10</param>
         /// <param name="value"><c>True</c>或是<c>False</c></param>
         /// <returns>带报文信息的结果对象</returns>
-        public static OperateResult<byte[]> BuildWriteBoolPacket(string address, bool value)
+        public static OperateResult<byte[]> BuildWriteBoolPacket( string address, bool value )
         {
-            var analysis = FxAnalysisAddress(address);
-            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(analysis);
+            var analysis = FxAnalysisAddress( address );
+            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( analysis );
 
             // 二次运算起始地址偏移量，根据类型的不同，地址的计算方式不同
             ushort startAddress = analysis.Content2;
@@ -416,21 +430,21 @@ namespace HslCommunication.Profinet.Melsec
             }
             else
             {
-                return new OperateResult<byte[]>(StringResources.Language.MelsecCurrentTypeNotSupportedBitOperate);
+                return new OperateResult<byte[]>( StringResources.Language.MelsecCurrentTypeNotSupportedBitOperate );
             }
 
 
             byte[] _PLCCommand = new byte[9];
             _PLCCommand[0] = 0x02;                                                       // STX
             _PLCCommand[1] = value ? (byte)0x37 : (byte)0x38;                            // Read
-            _PLCCommand[2] = SoftBasic.BuildAsciiBytesFrom(startAddress)[2];         // 偏移地址
-            _PLCCommand[3] = SoftBasic.BuildAsciiBytesFrom(startAddress)[3];
-            _PLCCommand[4] = SoftBasic.BuildAsciiBytesFrom(startAddress)[0];
-            _PLCCommand[5] = SoftBasic.BuildAsciiBytesFrom(startAddress)[1];
+            _PLCCommand[2] = SoftBasic.BuildAsciiBytesFrom( startAddress )[2];         // 偏移地址
+            _PLCCommand[3] = SoftBasic.BuildAsciiBytesFrom( startAddress )[3];
+            _PLCCommand[4] = SoftBasic.BuildAsciiBytesFrom( startAddress )[0];
+            _PLCCommand[5] = SoftBasic.BuildAsciiBytesFrom( startAddress )[1];
             _PLCCommand[6] = 0x03;                                                       // ETX
-            MelsecHelper.FxCalculateCRC(_PLCCommand).CopyTo(_PLCCommand, 7);         // CRC
+            MelsecHelper.FxCalculateCRC( _PLCCommand ).CopyTo( _PLCCommand, 7 );         // CRC
 
-            return OperateResult.CreateSuccessResult(_PLCCommand);
+            return OperateResult.CreateSuccessResult( _PLCCommand );
         }
 
         /// <summary>
@@ -439,10 +453,10 @@ namespace HslCommunication.Profinet.Melsec
         /// <param name="address">起始地址</param>
         /// <param name="length">长度</param>
         /// <returns>带有成功标志的指令数据</returns>
-        public static OperateResult<byte[]> BuildReadWordCommand(string address, ushort length)
+        public static OperateResult<byte[]> BuildReadWordCommand( string address, ushort length )
         {
-            var addressResult = FxCalculateWordStartAddress(address);
-            if (!addressResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(addressResult);
+            var addressResult = FxCalculateWordStartAddress( address );
+            if (!addressResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( addressResult );
 
             length = (ushort)(length * 2);
             ushort startAddress = addressResult.Content;
@@ -452,12 +466,12 @@ namespace HslCommunication.Profinet.Melsec
             _PLCCommand[1] = 0x45;  //指令形式
             _PLCCommand[2] = 0x30;  //Read
             _PLCCommand[3] = 0x30;  //Read
-            _PLCCommand[4] = SoftBasic.BuildAsciiBytesFrom(startAddress)[0]; //起始地址
-            _PLCCommand[5] = SoftBasic.BuildAsciiBytesFrom(startAddress)[1]; //起始地址
-            _PLCCommand[6] = SoftBasic.BuildAsciiBytesFrom(startAddress)[2]; //起始地址
-            _PLCCommand[7] = SoftBasic.BuildAsciiBytesFrom(startAddress)[3]; //起始地址
-            _PLCCommand[8] = SoftBasic.BuildAsciiBytesFrom((byte)length)[0];      // 读取长度
-            _PLCCommand[9] = SoftBasic.BuildAsciiBytesFrom((byte)length)[1];
+            _PLCCommand[4] = SoftBasic.BuildAsciiBytesFrom( startAddress )[0]; //起始地址
+            _PLCCommand[5] = SoftBasic.BuildAsciiBytesFrom( startAddress )[1]; //起始地址
+            _PLCCommand[6] = SoftBasic.BuildAsciiBytesFrom( startAddress )[2]; //起始地址
+            _PLCCommand[7] = SoftBasic.BuildAsciiBytesFrom( startAddress )[3]; //起始地址
+            _PLCCommand[8] = SoftBasic.BuildAsciiBytesFrom( (byte)length )[0];      // 读取长度
+            _PLCCommand[9] = SoftBasic.BuildAsciiBytesFrom( (byte)length )[1];
             _PLCCommand[10] = 0x03;
             //_PLCCommand[0] = 0x02;                                                    // STX
             //_PLCCommand[1] = 0x30;                                                    // Read
@@ -468,9 +482,9 @@ namespace HslCommunication.Profinet.Melsec
             //_PLCCommand[6] = MelsecHelper.BuildBytesFromData( (byte)length )[0];      // 读取长度
             //_PLCCommand[7] = MelsecHelper.BuildBytesFromData( (byte)length )[1];
             //_PLCCommand[8] = 0x03;                                                    // ETX
-            MelsecHelper.FxCalculateCRC(_PLCCommand).CopyTo(_PLCCommand, 11);      // CRC
+            MelsecHelper.FxCalculateCRC( _PLCCommand ).CopyTo( _PLCCommand, 11 );      // CRC
 
-            return OperateResult.CreateSuccessResult(_PLCCommand);                  // Return
+            return OperateResult.CreateSuccessResult( _PLCCommand );                  // Return
         }
 
         /// <summary>
@@ -479,10 +493,10 @@ namespace HslCommunication.Profinet.Melsec
         /// <param name="address">起始地址</param>
         /// <param name="length">bool数组长度</param>
         /// <returns>带有成功标志的指令数据</returns>
-        public static OperateResult<byte[], int> BuildReadBoolCommand(string address, ushort length)
+        public static OperateResult<byte[], int> BuildReadBoolCommand( string address, ushort length )
         {
-            var addressResult = FxCalculateBoolStartAddress(address);
-            if (!addressResult.IsSuccess) return OperateResult.CreateFailedResult<byte[], int>(addressResult);
+            var addressResult = FxCalculateBoolStartAddress( address );
+            if (!addressResult.IsSuccess) return OperateResult.CreateFailedResult<byte[], int>( addressResult );
 
             // 计算下实际需要读取的数据长度
             ushort length2 = (ushort)((addressResult.Content2 + length - 1) / 8 - (addressResult.Content2 / 8) + 1);
@@ -491,16 +505,16 @@ namespace HslCommunication.Profinet.Melsec
             byte[] _PLCCommand = new byte[11];
             _PLCCommand[0] = 0x02;                                                    // STX
             _PLCCommand[1] = 0x30;                                                    // Read
-            _PLCCommand[2] = SoftBasic.BuildAsciiBytesFrom(startAddress)[0];      // 偏移地址
-            _PLCCommand[3] = SoftBasic.BuildAsciiBytesFrom(startAddress)[1];
-            _PLCCommand[4] = SoftBasic.BuildAsciiBytesFrom(startAddress)[2];
-            _PLCCommand[5] = SoftBasic.BuildAsciiBytesFrom(startAddress)[3];
-            _PLCCommand[6] = SoftBasic.BuildAsciiBytesFrom((byte)length2)[0];     // 读取长度
-            _PLCCommand[7] = SoftBasic.BuildAsciiBytesFrom((byte)length2)[1];
+            _PLCCommand[2] = SoftBasic.BuildAsciiBytesFrom( startAddress )[0];      // 偏移地址
+            _PLCCommand[3] = SoftBasic.BuildAsciiBytesFrom( startAddress )[1];
+            _PLCCommand[4] = SoftBasic.BuildAsciiBytesFrom( startAddress )[2];
+            _PLCCommand[5] = SoftBasic.BuildAsciiBytesFrom( startAddress )[3];
+            _PLCCommand[6] = SoftBasic.BuildAsciiBytesFrom( (byte)length2 )[0];     // 读取长度
+            _PLCCommand[7] = SoftBasic.BuildAsciiBytesFrom( (byte)length2 )[1];
             _PLCCommand[8] = 0x03;                                                    // ETX
-            MelsecHelper.FxCalculateCRC(_PLCCommand).CopyTo(_PLCCommand, 9);      // CRC
+            MelsecHelper.FxCalculateCRC( _PLCCommand ).CopyTo( _PLCCommand, 9 );      // CRC
 
-            return OperateResult.CreateSuccessResult(_PLCCommand, (int)addressResult.Content3);
+            return OperateResult.CreateSuccessResult( _PLCCommand, (int)addressResult.Content3 );
         }
 
         /// <summary>
@@ -509,13 +523,13 @@ namespace HslCommunication.Profinet.Melsec
         /// <param name="address">起始地址</param>
         /// <param name="value">实际的数据信息</param>
         /// <returns>带有成功标志的指令数据</returns>
-        public static OperateResult<byte[]> BuildWriteWordCommand(string address, byte[] value)
+        public static OperateResult<byte[]> BuildWriteWordCommand( string address, byte[] value )
         {
-            var addressResult = FxCalculateWordStartAddress(address);
-            if (!addressResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(addressResult);
+            var addressResult = FxCalculateWordStartAddress( address );
+            if (!addressResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( addressResult );
 
             // 字节数据转换成ASCII格式
-            if (value != null) value = SoftBasic.BuildAsciiBytesFrom(value);
+            if (value != null) value = SoftBasic.BuildAsciiBytesFrom( value );
 
             ushort startAddress = addressResult.Content;
 
@@ -524,17 +538,17 @@ namespace HslCommunication.Profinet.Melsec
             _PLCCommand[1] = 0x45;  //指令形式
             _PLCCommand[2] = 0x31;  //Read
             _PLCCommand[3] = 0x30;  //Read
-            _PLCCommand[4] = SoftBasic.BuildAsciiBytesFrom(startAddress)[0];                      // Offect Address
-            _PLCCommand[5] = SoftBasic.BuildAsciiBytesFrom(startAddress)[1];
-            _PLCCommand[6] = SoftBasic.BuildAsciiBytesFrom(startAddress)[2];
-            _PLCCommand[7] = SoftBasic.BuildAsciiBytesFrom(startAddress)[3];
-            _PLCCommand[8] = SoftBasic.BuildAsciiBytesFrom((byte)(value.Length / 2))[0];          // Read Length
-            _PLCCommand[9] = SoftBasic.BuildAsciiBytesFrom((byte)(value.Length / 2))[1];
-            Array.Copy(value, 0, _PLCCommand, 10, value.Length);
+            _PLCCommand[4] = SoftBasic.BuildAsciiBytesFrom( startAddress )[0];                      // Offect Address
+            _PLCCommand[5] = SoftBasic.BuildAsciiBytesFrom( startAddress )[1];
+            _PLCCommand[6] = SoftBasic.BuildAsciiBytesFrom( startAddress )[2];
+            _PLCCommand[7] = SoftBasic.BuildAsciiBytesFrom( startAddress )[3];
+            _PLCCommand[8] = SoftBasic.BuildAsciiBytesFrom( (byte)(value.Length / 2) )[0];          // Read Length
+            _PLCCommand[9] = SoftBasic.BuildAsciiBytesFrom( (byte)(value.Length / 2) )[1];
+            Array.Copy( value, 0, _PLCCommand, 10, value.Length );
             _PLCCommand[_PLCCommand.Length - 3] = 0x03;                                               // ETX
-            MelsecHelper.FxCalculateCRC(_PLCCommand).CopyTo(_PLCCommand, _PLCCommand.Length - 2); // CRC
+            MelsecHelper.FxCalculateCRC( _PLCCommand ).CopyTo( _PLCCommand, _PLCCommand.Length - 2 ); // CRC
 
-            return OperateResult.CreateSuccessResult(_PLCCommand);
+            return OperateResult.CreateSuccessResult( _PLCCommand );
         }
 
 
@@ -543,7 +557,7 @@ namespace HslCommunication.Profinet.Melsec
         /// </summary>
         /// <param name="response">PLC反馈的真实数据</param>
         /// <returns>数据提炼后的真实数据</returns>
-        public static OperateResult<byte[]> ExtractActualData(byte[] response)
+        public static OperateResult<byte[]> ExtractActualData( byte[] response )
         {
             try
             {
@@ -554,17 +568,17 @@ namespace HslCommunication.Profinet.Melsec
                     buffer[0] = response[i * 2 + 1];
                     buffer[1] = response[i * 2 + 2];
 
-                    data[i] = Convert.ToByte(Encoding.ASCII.GetString(buffer), 16);
+                    data[i] = Convert.ToByte( Encoding.ASCII.GetString( buffer ), 16 );
                 }
 
-                return OperateResult.CreateSuccessResult(data);
+                return OperateResult.CreateSuccessResult( data );
             }
             catch (Exception ex)
             {
-                return new OperateResult<byte[]>()
+                return new OperateResult<byte[]>( )
                 {
                     Message = "Extract Msg：" + ex.Message + Environment.NewLine +
-                    "Data: " + BasicFramework.SoftBasic.ByteToHexString(response)
+                    "Data: " + BasicFramework.SoftBasic.ByteToHexString( response )
                 };
             }
         }
@@ -577,29 +591,29 @@ namespace HslCommunication.Profinet.Melsec
         /// <param name="start">起始提取的点信息</param>
         /// <param name="length">bool数组的长度</param>
         /// <returns>数据提炼后的真实数据</returns>
-        public static OperateResult<bool[]> ExtractActualBoolData(byte[] response, int start, int length)
+        public static OperateResult<bool[]> ExtractActualBoolData( byte[] response, int start, int length )
         {
-            OperateResult<byte[]> extraResult = ExtractActualData(response);
-            if (!extraResult.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(extraResult);
+            OperateResult<byte[]> extraResult = ExtractActualData( response );
+            if (!extraResult.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( extraResult );
 
             // 转化bool数组
             try
             {
                 bool[] data = new bool[length];
-                bool[] array = BasicFramework.SoftBasic.ByteToBoolArray(extraResult.Content, extraResult.Content.Length * 8);
+                bool[] array = BasicFramework.SoftBasic.ByteToBoolArray( extraResult.Content, extraResult.Content.Length * 8 );
                 for (int i = 0; i < length; i++)
                 {
                     data[i] = array[i + start];
                 }
 
-                return OperateResult.CreateSuccessResult(data);
+                return OperateResult.CreateSuccessResult( data );
             }
             catch (Exception ex)
             {
-                return new OperateResult<bool[]>()
+                return new OperateResult<bool[]>( )
                 {
                     Message = "Extract Msg：" + ex.Message + Environment.NewLine +
-                    "Data: " + BasicFramework.SoftBasic.ByteToHexString(response)
+                    "Data: " + BasicFramework.SoftBasic.ByteToHexString( response )
                 };
             }
         }
@@ -609,9 +623,9 @@ namespace HslCommunication.Profinet.Melsec
         /// </summary>
         /// <param name="address">数据地址</param>
         /// <returns>地址结果对象</returns>
-        private static OperateResult<MelsecMcDataType, ushort> FxAnalysisAddress(string address)
+        private static OperateResult<MelsecMcDataType, ushort> FxAnalysisAddress( string address )
         {
-            var result = new OperateResult<MelsecMcDataType, ushort>();
+            var result = new OperateResult<MelsecMcDataType, ushort>( );
             try
             {
                 switch (address[0])
@@ -620,35 +634,35 @@ namespace HslCommunication.Profinet.Melsec
                     case 'm':
                         {
                             result.Content1 = MelsecMcDataType.M;
-                            result.Content2 = Convert.ToUInt16(address.Substring(1), MelsecMcDataType.M.FromBase);
+                            result.Content2 = Convert.ToUInt16( address.Substring( 1 ), MelsecMcDataType.M.FromBase );
                             break;
                         }
                     case 'X':
                     case 'x':
                         {
                             result.Content1 = MelsecMcDataType.X;
-                            result.Content2 = Convert.ToUInt16(address.Substring(1), 8);
+                            result.Content2 = Convert.ToUInt16( address.Substring( 1 ), 8 );
                             break;
                         }
                     case 'Y':
                     case 'y':
                         {
                             result.Content1 = MelsecMcDataType.Y;
-                            result.Content2 = Convert.ToUInt16(address.Substring(1), 8);
+                            result.Content2 = Convert.ToUInt16( address.Substring( 1 ), 8 );
                             break;
                         }
                     case 'D':
                     case 'd':
                         {
                             result.Content1 = MelsecMcDataType.D;
-                            result.Content2 = Convert.ToUInt16(address.Substring(1), MelsecMcDataType.D.FromBase);
+                            result.Content2 = Convert.ToUInt16( address.Substring( 1 ), MelsecMcDataType.D.FromBase );
                             break;
                         }
                     case 'S':
                     case 's':
                         {
                             result.Content1 = MelsecMcDataType.S;
-                            result.Content2 = Convert.ToUInt16(address.Substring(1), MelsecMcDataType.S.FromBase);
+                            result.Content2 = Convert.ToUInt16( address.Substring( 1 ), MelsecMcDataType.S.FromBase );
                             break;
                         }
                     case 'T':
@@ -657,24 +671,24 @@ namespace HslCommunication.Profinet.Melsec
                             if (address[1] == 'N' || address[1] == 'n')
                             {
                                 result.Content1 = MelsecMcDataType.TN;
-                                result.Content2 = Convert.ToUInt16(address.Substring(2), MelsecMcDataType.TN.FromBase);
+                                result.Content2 = Convert.ToUInt16( address.Substring( 2 ), MelsecMcDataType.TN.FromBase );
                                 break;
                             }
                             else if (address[1] == 'S' || address[1] == 's')
                             {
                                 result.Content1 = MelsecMcDataType.TS;
-                                result.Content2 = Convert.ToUInt16(address.Substring(2), MelsecMcDataType.TS.FromBase);
+                                result.Content2 = Convert.ToUInt16( address.Substring( 2 ), MelsecMcDataType.TS.FromBase );
                                 break;
                             }
                             else if (address[1] == 'C' || address[1] == 'c')
                             {
                                 result.Content1 = MelsecMcDataType.TC;
-                                result.Content2 = Convert.ToUInt16(address.Substring(2), MelsecMcDataType.TC.FromBase);
+                                result.Content2 = Convert.ToUInt16( address.Substring( 2 ), MelsecMcDataType.TC.FromBase );
                                 break;
                             }
                             else
                             {
-                                throw new Exception(StringResources.Language.NotSupportedDataType);
+                                throw new Exception( StringResources.Language.NotSupportedDataType );
                             }
                         }
                     case 'C':
@@ -683,27 +697,27 @@ namespace HslCommunication.Profinet.Melsec
                             if (address[1] == 'N' || address[1] == 'n')
                             {
                                 result.Content1 = MelsecMcDataType.CN;
-                                result.Content2 = Convert.ToUInt16(address.Substring(2), MelsecMcDataType.CN.FromBase);
+                                result.Content2 = Convert.ToUInt16( address.Substring( 2 ), MelsecMcDataType.CN.FromBase );
                                 break;
                             }
                             else if (address[1] == 'S' || address[1] == 's')
                             {
                                 result.Content1 = MelsecMcDataType.CS;
-                                result.Content2 = Convert.ToUInt16(address.Substring(2), MelsecMcDataType.CS.FromBase);
+                                result.Content2 = Convert.ToUInt16( address.Substring( 2 ), MelsecMcDataType.CS.FromBase );
                                 break;
                             }
                             else if (address[1] == 'C' || address[1] == 'c')
                             {
                                 result.Content1 = MelsecMcDataType.CC;
-                                result.Content2 = Convert.ToUInt16(address.Substring(2), MelsecMcDataType.CC.FromBase);
+                                result.Content2 = Convert.ToUInt16( address.Substring( 2 ), MelsecMcDataType.CC.FromBase );
                                 break;
                             }
                             else
                             {
-                                throw new Exception(StringResources.Language.NotSupportedDataType);
+                                throw new Exception( StringResources.Language.NotSupportedDataType );
                             }
                         }
-                    default: throw new Exception(StringResources.Language.NotSupportedDataType);
+                    default: throw new Exception( StringResources.Language.NotSupportedDataType );
                 }
             }
             catch (Exception ex)
@@ -721,11 +735,11 @@ namespace HslCommunication.Profinet.Melsec
         /// </summary>
         /// <param name="address">读取的地址信息</param>
         /// <returns>带起始地址的结果对象</returns>
-        private static OperateResult<ushort> FxCalculateWordStartAddress(string address)
+        private static OperateResult<ushort> FxCalculateWordStartAddress( string address )
         {
             // 初步解析，失败就返回
-            var analysis = FxAnalysisAddress(address);
-            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<ushort>(analysis);
+            var analysis = FxAnalysisAddress( address );
+            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<ushort>( analysis );
 
             // 二次解析
             ushort startAddress = analysis.Content2;
@@ -758,21 +772,21 @@ namespace HslCommunication.Profinet.Melsec
             }
             else
             {
-                return new OperateResult<ushort>(StringResources.Language.MelsecCurrentTypeNotSupportedWordOperate);
+                return new OperateResult<ushort>( StringResources.Language.MelsecCurrentTypeNotSupportedWordOperate );
             }
 
-            return OperateResult.CreateSuccessResult(startAddress);
+            return OperateResult.CreateSuccessResult( startAddress );
         }
 
         /// <summary>
         /// 返回读取的地址及长度信息，以及当前的偏置信息
         /// </summary><param name="address">读取的地址信息</param>
         /// <returns>带起始地址的结果对象</returns>
-        private static OperateResult<ushort, ushort, ushort> FxCalculateBoolStartAddress(string address)
+        private static OperateResult<ushort, ushort, ushort> FxCalculateBoolStartAddress( string address )
         {
             // 初步解析
-            var analysis = FxAnalysisAddress(address);
-            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<ushort, ushort, ushort>(analysis);
+            var analysis = FxAnalysisAddress( address );
+            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<ushort, ushort, ushort>( analysis );
 
             // 二次解析
             ushort startAddress = analysis.Content2;
@@ -817,10 +831,10 @@ namespace HslCommunication.Profinet.Melsec
             }
             else
             {
-                return new OperateResult<ushort, ushort, ushort>(StringResources.Language.MelsecCurrentTypeNotSupportedBitOperate);
+                return new OperateResult<ushort, ushort, ushort>( StringResources.Language.MelsecCurrentTypeNotSupportedBitOperate );
             }
 
-            return OperateResult.CreateSuccessResult(startAddress, analysis.Content2, (ushort)(analysis.Content2 % 8));
+            return OperateResult.CreateSuccessResult( startAddress, analysis.Content2, (ushort)(analysis.Content2 % 8) );
         }
 
         #endregion

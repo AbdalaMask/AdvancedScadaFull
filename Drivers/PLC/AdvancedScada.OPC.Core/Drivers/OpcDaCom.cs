@@ -51,6 +51,15 @@ namespace AdvancedScada.OPC.Core.Drivers
                     DLL = new Server(fact, null);
                     DLL.Url = new URL(m_OPCServerPath + "/" + OPCServer);
                     DLL.Connect();
+                    if (DLL.IsConnected)
+                    {
+                        EventscadaException?.Invoke(this.GetType().Name, "ConnectedSuccess");
+                        IsConnected = true;
+                    }
+                    else
+                    {
+                        EventscadaException?.Invoke(this.GetType().Name, "ConnectedFailed");
+                    }
                     IsConnected = true;
                      
                     stopwatch.Stop();

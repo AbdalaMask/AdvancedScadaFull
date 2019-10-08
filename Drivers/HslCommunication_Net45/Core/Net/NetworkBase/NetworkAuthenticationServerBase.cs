@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
 
 namespace HslCommunication.Core.Net
@@ -17,32 +19,32 @@ namespace HslCommunication.Core.Net
         /// <param name="socket">套接字</param>
         /// <param name="endPoint">终结点</param>
         /// <returns>验证的结果</returns>
-        protected override OperateResult SocketAcceptExtraCheck(Socket socket, IPEndPoint endPoint)
+        protected override OperateResult SocketAcceptExtraCheck( Socket socket, IPEndPoint endPoint )
         {
             if (IsUseAccountCertificate)
             {
-                OperateResult<byte[], byte[]> receive = ReceiveAndCheckBytes(socket, 2000);
-                if (!receive.IsSuccess) return new OperateResult(string.Format("Client login failed[{0}]", endPoint));
+                OperateResult<byte[], byte[]> receive = ReceiveAndCheckBytes( socket, 2000 );
+                if (!receive.IsSuccess) return new OperateResult( string.Format( "Client login failed[{0}]", endPoint ) );
 
-                if (BitConverter.ToInt32(receive.Content1, 0) != HslProtocol.ProtocolAccountLogin)
+                if (BitConverter.ToInt32( receive.Content1, 0 ) != HslProtocol.ProtocolAccountLogin)
                 {
-                    LogNet?.WriteError(ToString(), StringResources.Language.NetClientAccountTimeout);
-                    socket?.Close();
-                    return new OperateResult(string.Format("Client login failed[{0}]", endPoint));
+                    LogNet?.WriteError( ToString( ), StringResources.Language.NetClientAccountTimeout );
+                    socket?.Close( );
+                    return new OperateResult( string.Format( "Client login failed[{0}]", endPoint ) );
                 }
 
-                string[] infos = HslProtocol.UnPackStringArrayFromByte(receive.Content2);
-                string ret = CheckAccountLegal(infos);
-                SendStringAndCheckReceive(socket, ret == "success" ? 1 : 0, new string[] { ret });
+                string[] infos = HslProtocol.UnPackStringArrayFromByte( receive.Content2 );
+                string ret = CheckAccountLegal( infos );
+                SendStringAndCheckReceive( socket, ret == "success" ? 1 : 0, new string[] { ret } );
 
                 if (ret != "success")
                 {
-                    return new OperateResult(string.Format("Client login failed[{0}]:{1}", endPoint, ret));
+                    return new OperateResult( string.Format( "Client login failed[{0}]:{1}", endPoint, ret ) );
                 }
 
-                LogNet?.WriteDebug(ToString(), string.Format("Account Login:{0} Endpoint:[{1}]", infos[0], endPoint));
+                LogNet?.WriteDebug( ToString( ), string.Format( "Account Login:{0} Endpoint:[{1}]", infos[0], endPoint ) );
             }
-            return OperateResult.CreateSuccessResult();
+            return OperateResult.CreateSuccessResult( );
         }
 
         #region Account Certification
@@ -52,28 +54,28 @@ namespace HslCommunication.Core.Net
         /// </summary>
         public bool IsUseAccountCertificate { get; set; }
 
-        private Dictionary<string, string> accounts = new Dictionary<string, string>();
-        private SimpleHybirdLock lockLoginAccount = new SimpleHybirdLock();
+        private Dictionary<string, string> accounts = new Dictionary<string, string>( );
+        private SimpleHybirdLock lockLoginAccount = new SimpleHybirdLock( );
 
         /// <summary>
         /// 新增账户，如果想要启动账户登录，比如将<see cref="IsUseAccountCertificate"/>设置为<c>True</c>。
         /// </summary>
         /// <param name="userName">账户名称</param>
         /// <param name="password">账户名称</param>
-        public void AddAccount(string userName, string password)
+        public void AddAccount( string userName, string password )
         {
-            if (!string.IsNullOrEmpty(userName))
+            if (!string.IsNullOrEmpty( userName ))
             {
-                lockLoginAccount.Enter();
-                if (accounts.ContainsKey(userName))
+                lockLoginAccount.Enter( );
+                if (accounts.ContainsKey( userName ))
                 {
                     accounts[userName] = password;
                 }
                 else
                 {
-                    accounts.Add(userName, password);
+                    accounts.Add( userName, password );
                 }
-                lockLoginAccount.Leave();
+                lockLoginAccount.Leave( );
             }
         }
 
@@ -81,22 +83,22 @@ namespace HslCommunication.Core.Net
         /// 删除一个账户的信息
         /// </summary>
         /// <param name="userName">账户名称</param>
-        public void DeleteAccount(string userName)
+        public void DeleteAccount( string userName )
         {
-            lockLoginAccount.Enter();
-            if (accounts.ContainsKey(userName))
+            lockLoginAccount.Enter( );
+            if (accounts.ContainsKey( userName ))
             {
-                accounts.Remove(userName);
+                accounts.Remove( userName );
             }
-            lockLoginAccount.Leave();
+            lockLoginAccount.Leave( );
         }
 
-        private string CheckAccountLegal(string[] infos)
+        private string CheckAccountLegal( string[] infos )
         {
             if (infos?.Length < 2) return "User Name input wrong";
             string ret = "";
-            lockLoginAccount.Enter();
-            if (!accounts.ContainsKey(infos[0]))
+            lockLoginAccount.Enter( );
+            if (!accounts.ContainsKey( infos[0] ))
             {
                 ret = "User Name input wrong";
             }
@@ -111,7 +113,7 @@ namespace HslCommunication.Core.Net
                     ret = "success";
                 }
             }
-            lockLoginAccount.Leave();
+            lockLoginAccount.Leave( );
             return ret;
         }
 
@@ -125,14 +127,14 @@ namespace HslCommunication.Core.Net
         /// 释放当前的对象
         /// </summary>
         /// <param name="disposing">是否托管对象</param>
-        protected virtual void Dispose(bool disposing)
+        protected virtual void Dispose( bool disposing )
         {
             if (!disposedValue)
             {
                 if (disposing)
                 {
-                    ServerClose();
-                    lockLoginAccount?.Dispose();
+                    ServerClose( );
+                    lockLoginAccount?.Dispose( );
                     // TODO: 释放托管状态(托管对象)。
                 }
 
@@ -155,10 +157,10 @@ namespace HslCommunication.Core.Net
         /// <summary>
         /// 释放当前的对象
         /// </summary>
-        public void Dispose()
+        public void Dispose( )
         {
             // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
-            Dispose(true);
+            Dispose( true );
             // TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
             // GC.SuppressFinalize(this);
         }

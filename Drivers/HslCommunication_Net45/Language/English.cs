@@ -1,4 +1,9 @@
-﻿namespace HslCommunication.Language
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace HslCommunication.Language
 {
     /// <summary>
     /// English Version Text
@@ -144,7 +149,7 @@
         public override string PasswordCheckFailed => "Password validation failed";
         public override string DataTransformError => "Data conversion failed, source data: ";
         public override string RemoteClosedConnection => "Remote shutdown of connection";
-
+        
         /***********************************************************************************
          * 
          *    Log related
@@ -236,7 +241,7 @@
          ************************************************************************************/
 
 
-        public override string AllenBradley04 => "The IOI could not be deciphered. Either it was not formed correctly or the match tag does not exist.";
+        public override string AllenBradley04 => "The IOI could not be deciphered. Either it was not formed correctly or the match tag does not exist."; 
         public override string AllenBradley05 => "The particular item referenced (usually instance) could not be found.";
         public override string AllenBradley06 => "The amount of data requested would not fit into the response buffer. Partial data transfer has occurred.";
         public override string AllenBradley0A => "An error has occurred trying to process one of the attributes.";
@@ -319,6 +324,13 @@
         public override string FujiSpbStatus09 => "Unable to execute due to faulty program (RUN)";
         public override string FujiSpbStatus0C => "Inconsistent password";
 
+
+        /***********************************************************************************
+         * 
+         *   MQTT相关
+         * 
+         ************************************************************************************/
+        public override string MQTTDataTooLong => "The current data length exceeds the limit of the agreement";
 
 #pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
 

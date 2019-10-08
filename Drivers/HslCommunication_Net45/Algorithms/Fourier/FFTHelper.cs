@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-#if !NETSTANDARD2_0
+#if !NETSTANDARD2_0 && !NETSTANDARD2_1
 using System.Drawing.Drawing2D;
 #endif
 using System.Linq;
+using System.Text;
 
 namespace HslCommunication.Algorithms.Fourier
 {
@@ -20,7 +21,7 @@ namespace HslCommunication.Algorithms.Fourier
         /// <param name="xreal"></param>
         /// <param name="ximag"></param>
         /// <param name="n"></param>
-        private static void bitrp(double[] xreal, double[] ximag, int n)
+        private static void bitrp( double[] xreal, double[] ximag, int n )
         {
             // 位反转置换 Bit-reversal Permutation
             int i, j, a, b, p;
@@ -57,13 +58,13 @@ namespace HslCommunication.Algorithms.Fourier
         /// </summary>
         /// <param name="xreal">实数部分</param>
         /// <returns>变换后的数组值</returns>
-        public static double[] FFT(double[] xreal)
+        public static double[] FFT( double[] xreal )
         {
-            return FFTValue(xreal, new double[xreal.Length]);
+            return FFTValue( xreal, new double[xreal.Length] );
         }
 
 
-#if !NETSTANDARD2_0
+#if !NETSTANDARD2_0 && !NETSTANDARD2_1
 
         /// <summary>
         /// 获取FFT变换后的显示图形，需要指定图形的相关参数
@@ -76,30 +77,30 @@ namespace HslCommunication.Algorithms.Fourier
         /// <remarks>
         /// <note type="warning">.net standrard2.0 下不支持。</note>
         /// </remarks>
-        public static Bitmap GetFFTImage(double[] xreal, int width, int heigh, Color lineColor)
+        public static Bitmap GetFFTImage( double[] xreal,int width,int heigh ,Color lineColor)
         {
             double[] ximag = new double[xreal.Length];                // 构造虚对象
-            double[] array = FFTValue(xreal, ximag);                     // 傅立叶变换
+            double[] array = FFTValue( xreal, ximag );                     // 傅立叶变换
 
-            Bitmap bitmap = new Bitmap(width, heigh);               // 构造图形
-            Graphics g = Graphics.FromImage(bitmap);
+            Bitmap bitmap = new Bitmap( width, heigh );               // 构造图形
+            Graphics g = Graphics.FromImage( bitmap );
             g.SmoothingMode = SmoothingMode.HighQuality;
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            g.Clear(Color.White);
+            g.Clear( Color.White );
 
-            Pen pen_Line = new Pen(Color.DimGray, 1);               // 定义画笔资源
-            Pen pen_Dash = new Pen(Color.LightGray, 1);
-            Pen pen_Fourier = new Pen(lineColor, 1);
+            Pen pen_Line = new Pen( Color.DimGray, 1 );               // 定义画笔资源
+            Pen pen_Dash = new Pen( Color.LightGray, 1 );
+            Pen pen_Fourier = new Pen( lineColor, 1 );
             pen_Dash.DashPattern = new float[2] { 5, 5 };
             pen_Dash.DashStyle = DashStyle.Custom;
 
             Font Font_Normal = SystemFonts.DefaultFont;               // 定义字体资源
 
-            StringFormat sf_right = new StringFormat();
+            StringFormat sf_right = new StringFormat( );
             sf_right.Alignment = StringAlignment.Far;
             sf_right.LineAlignment = StringAlignment.Center;
 
-            StringFormat sf_center = new StringFormat();
+            StringFormat sf_center = new StringFormat( );
             sf_center.LineAlignment = StringAlignment.Center;
             sf_center.Alignment = StringAlignment.Center;
 
@@ -110,51 +111,51 @@ namespace HslCommunication.Algorithms.Fourier
             int sections = 9;
 
             // g.DrawLine( pen_Line, new Point( padding_left, padding_top ), new Point( padding_left, heigh - padding_down ) );
-
+            
             float paint_height = heigh - padding_top - padding_down;
             float paint_width = width - padding_left - padding_right;
 
             if (array.Length > 1)
             {
-                double Max = array.Max();
-                double Min = array.Min();
+                double Max = array.Max( );
+                double Min = array.Min( );
 
                 Max = Max - Min > 1 ? Max : Min + 1;
                 double Length = Max - Min;
-
+                
                 //提取峰值
-                List<float> Peaks = new List<float>();
+                List<float> Peaks = new List<float>( );
                 if (array.Length >= 2)
                 {
                     if (array[0] > array[1])
                     {
-                        Peaks.Add(0);
+                        Peaks.Add( 0 );
                     }
 
                     for (int i = 1; i < array.Length - 2; i++)
                     {
                         if (array[i - 1] < array[i] && array[i] > array[i + 1])
                         {
-                            Peaks.Add(i);
+                            Peaks.Add( i );
                         }
                     }
-
+                    
                     if (array[array.Length - 1] > array[array.Length - 2])
                     {
-                        Peaks.Add(array.Length - 1);
+                        Peaks.Add( array.Length - 1 );
                     }
                 }
-
+                
 
                 //高400
                 for (int i = 0; i < sections; i++)
                 {
-                    RectangleF rec = new RectangleF(-10f, (float)i / (sections - 1) * paint_height, padding_left + 8f, 20f);
+                    RectangleF rec = new RectangleF( -10f, (float)i / (sections - 1) * paint_height, padding_left + 8f, 20f );
                     double n = (sections - 1 - i) * Length / (sections - 1) + Min;
-                    g.DrawString(n.ToString("F1"), Font_Normal, Brushes.Black, rec, sf_right);
-                    g.DrawLine(
+                    g.DrawString( n.ToString( "F1" ), Font_Normal, Brushes.Black, rec, sf_right );
+                    g.DrawLine( 
                         pen_Dash, padding_left - 3, paint_height * i / (sections - 1) + padding_top,
-                        width - padding_right, paint_height * i / (sections - 1) + padding_top);
+                        width - padding_right, paint_height * i / (sections - 1) + padding_top );
                 }
 
                 float intervalX = paint_width / array.Length;                        // 横向间隔
@@ -163,25 +164,25 @@ namespace HslCommunication.Algorithms.Fourier
                 {
                     if (array[(int)Peaks[i]] * 200 / Max > 1)
                     {
-                        g.DrawLine(pen_Dash, Peaks[i] * intervalX + padding_left + 1, padding_top, Peaks[i] * intervalX + padding_left + 1, heigh - padding_down);
-                        RectangleF rec = new RectangleF(Peaks[i] * intervalX + padding_left + 1 - 40, heigh - padding_down + 1, 80f, 20f);
+                        g.DrawLine( pen_Dash, Peaks[i] * intervalX + padding_left + 1, padding_top, Peaks[i] * intervalX + padding_left + 1, heigh - padding_down );
+                        RectangleF rec = new RectangleF( Peaks[i] * intervalX + padding_left + 1 - 40, heigh - padding_down + 1, 80f, 20f );
 
-                        g.DrawString(Peaks[i].ToString(), Font_Normal, Brushes.DeepPink, rec, sf_center);
+                        g.DrawString( Peaks[i].ToString( ), Font_Normal, Brushes.DeepPink, rec, sf_center );
                     }
                 }
-
+                
                 for (int i = 0; i < array.Length; i++)
                 {
-                    PointF point = new PointF();
+                    PointF point = new PointF( );
                     point.X = i * intervalX + padding_left + 1;
                     point.Y = (float)(paint_height - (array[i] - Min) * paint_height / Length + padding_top);
 
-                    PointF point2 = new PointF();
+                    PointF point2 = new PointF( );
                     point2.X = i * intervalX + padding_left + 1;
                     point2.Y = (float)(paint_height - (Min - Min) * paint_height / Length + padding_top);
+                    
 
-
-                    g.DrawLine(Pens.Tomato, point, point2);
+                    g.DrawLine( Pens.Tomato, point, point2 );
                 }
             }
             else
@@ -192,23 +193,23 @@ namespace HslCommunication.Algorithms.Fourier
                 //高400
                 for (int i = 0; i < sections; i++)
                 {
-                    RectangleF rec = new RectangleF(-10f, (float)i / (sections - 1) * paint_height, padding_left + 8f, 20f);
+                    RectangleF rec = new RectangleF( -10f, (float)i / (sections - 1) * paint_height, padding_left + 8f, 20f );
                     double n = (sections - 1 - i) * Length / (sections - 1) + Min;
-                    g.DrawString(n.ToString("F1"), Font_Normal, Brushes.Black, rec, sf_right);
+                    g.DrawString( n.ToString( "F1" ), Font_Normal, Brushes.Black, rec, sf_right );
                     g.DrawLine(
                         pen_Dash, padding_left - 3, paint_height * i / (sections - 1) + padding_top,
-                        width - padding_right, paint_height * i / (sections - 1) + padding_top);
+                        width - padding_right, paint_height * i / (sections - 1) + padding_top );
                 }
             }
 
 
-            pen_Dash.Dispose();
-            pen_Line.Dispose();
-            pen_Fourier.Dispose();
-            Font_Normal.Dispose();
-            sf_right.Dispose();
-            sf_center.Dispose();
-            g.Dispose();
+            pen_Dash.Dispose( );
+            pen_Line.Dispose( );
+            pen_Fourier.Dispose( );
+            Font_Normal.Dispose( );
+            sf_right.Dispose( );
+            sf_center.Dispose( );
+            g.Dispose( );
             return bitmap;
         }
 
@@ -221,7 +222,7 @@ namespace HslCommunication.Algorithms.Fourier
         /// <param name="xreal">实数部分，数组长度最好为2的n次方</param>
         /// <param name="ximag">虚数部分，数组长度最好为2的n次方</param>
         /// <returns>变换后的数组值</returns>
-        public static double[] FFTValue(double[] xreal, double[] ximag)
+        public static double[] FFTValue( double[] xreal, double[] ximag )
         {
             //n值为2的N次方
             int n = 2;
@@ -237,12 +238,12 @@ namespace HslCommunication.Algorithms.Fourier
             double treal, timag, ureal, uimag, arg;
             int m, k, j, t, index1, index2;
 
-            bitrp(xreal, ximag, n);
+            bitrp( xreal, ximag, n );
 
             // 计算 1 的前 n / 2 个 n 次方根的共轭复数 W'j = wreal [j] + i * wimag [j] , j = 0, 1, ... , n / 2 - 1
             arg = (-2 * Math.PI / n);
-            treal = Math.Cos(arg);
-            timag = Math.Sin(arg);
+            treal = Math.Cos( arg );
+            timag = Math.Sin( arg );
             wreal[0] = 1.0f;
             wimag[0] = 0.0f;
             for (j = 1; j < n / 2; j++)
@@ -275,7 +276,7 @@ namespace HslCommunication.Algorithms.Fourier
             double[] result = new double[n];
             for (int i = 0; i < result.Length; i++)
             {
-                result[i] = Math.Sqrt(Math.Pow(xreal[i], 2) + Math.Pow(ximag[i], 2));
+                result[i] = Math.Sqrt( Math.Pow( xreal[i], 2 ) + Math.Pow( ximag[i], 2 ) );
             }
 
             return result;
@@ -288,9 +289,9 @@ namespace HslCommunication.Algorithms.Fourier
         /// <param name="xreal">实数部分，数组长度最好为2的n次方</param>
         /// <param name="ximag">虚数部分，数组长度最好为2的n次方</param>
         /// <returns>变换后的数组值</returns>
-        public static int FFT(double[] xreal, double[] ximag)
+        public static int FFT( double[] xreal, double[] ximag )
         {
-            return FFTValue(xreal, ximag).Length;
+            return FFTValue( xreal, ximag ).Length;
         }
 
         /// <summary>
@@ -299,9 +300,9 @@ namespace HslCommunication.Algorithms.Fourier
         /// <param name="xreal">实数部分，数组长度最好为2的n次方</param>
         /// <param name="ximag">虚数部分，数组长度最好为2的n次方</param>
         /// <returns>变换后的数组值</returns>
-        public static int FFT(float[] xreal, float[] ximag)
+        public static int FFT( float[] xreal, float[] ximag )
         {
-            return FFT(xreal.Select(m => (double)m).ToArray(), ximag.Select(m => (double)m).ToArray());
+            return FFT( xreal.Select( m => (double)m ).ToArray( ), ximag.Select( m => (double)m ).ToArray( ) );
         }
 
         /// <summary>
@@ -310,9 +311,9 @@ namespace HslCommunication.Algorithms.Fourier
         /// <param name="xreal">实数部分，数组长度最好为2的n次方</param>
         /// <param name="ximag">虚数部分，数组长度最好为2的n次方</param>
         /// <returns>2的多少次方</returns>
-        public static int IFFT(float[] xreal, float[] ximag)
+        public static int IFFT( float[] xreal, float[] ximag )
         {
-            return IFFT(xreal.Select(m => (double)m).ToArray(), ximag.Select(m => (double)m).ToArray());
+            return IFFT( xreal.Select( m => (double)m ).ToArray( ), ximag.Select( m => (double)m ).ToArray( ) );
         }
 
         /// <summary>
@@ -321,7 +322,7 @@ namespace HslCommunication.Algorithms.Fourier
         /// <param name="xreal">实数部分，数组长度最好为2的n次方</param>
         /// <param name="ximag">虚数部分，数组长度最好为2的n次方</param>
         /// <returns>2的多少次方</returns>
-        public static int IFFT(double[] xreal, double[] ximag)
+        public static int IFFT( double[] xreal, double[] ximag )
         {
             //n值为2的N次方
             int n = 2;
@@ -337,12 +338,12 @@ namespace HslCommunication.Algorithms.Fourier
             double treal, timag, ureal, uimag, arg;
             int m, k, j, t, index1, index2;
 
-            bitrp(xreal, ximag, n);
+            bitrp( xreal, ximag, n );
 
             // 计算 1 的前 n / 2 个 n 次方根 Wj = wreal [j] + i * wimag [j] , j = 0, 1, ... , n / 2 - 1
             arg = (2 * Math.PI / n);
-            treal = (Math.Cos(arg));
-            timag = (Math.Sin(arg));
+            treal = (Math.Cos( arg ));
+            timag = (Math.Sin( arg ));
             wreal[0] = 1.0f;
             wimag[0] = 0.0f;
             for (j = 1; j < n / 2; j++)

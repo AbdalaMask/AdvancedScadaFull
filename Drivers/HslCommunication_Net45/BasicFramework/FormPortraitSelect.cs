@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace HslCommunication.BasicFramework
@@ -98,7 +103,7 @@ namespace HslCommunication.BasicFramework
         {
             if (IsMouseOver && HasPicture)
             {
-                if (RectangleSelected.Contains(e.Location))
+                if(RectangleSelected.Contains(e.Location))
                 {
                     IsMouseDown = true;
                     MouseDownPoint = e.Location;
@@ -128,8 +133,8 @@ namespace HslCommunication.BasicFramework
 
 
             pictureBox2.Image?.Dispose();
-            pictureBox2.Image = GetSpecicalSizeFromImage(100, des);
-
+            pictureBox2.Image = GetSpecicalSizeFromImage(100,des);
+            
             pictureBox3.Image?.Dispose();
             pictureBox3.Image = GetSpecicalSizeFromImage(64, des);
 
@@ -150,7 +155,7 @@ namespace HslCommunication.BasicFramework
                 return new Rectangle(RectangleSelected.X * x / 370, 0, y, y);
             }
         }
-        private Bitmap GetSpecicalSizeFromImage(int size, Rectangle des)
+        private Bitmap GetSpecicalSizeFromImage(int size,Rectangle des)
         {
             Bitmap bitmap = new Bitmap(size, size);
             using (Graphics g2 = Graphics.FromImage(bitmap))
@@ -210,7 +215,7 @@ namespace HslCommunication.BasicFramework
                 HasPicture = true;
                 pictureBox1.Refresh();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 SoftBasic.ShowExceptionMessage(ex);
                 return;
@@ -238,7 +243,7 @@ namespace HslCommunication.BasicFramework
             if (HasPicture)
             {
                 Graphics g = e.Graphics;
-
+                
                 g.FillRectangle(brush, RectangleSelected);
                 g.DrawRectangle(Pens.LightSkyBlue, RectangleSelected);
             }
@@ -295,7 +300,7 @@ namespace HslCommunication.BasicFramework
         /// <returns>缩放后的图形</returns>
         public Bitmap GetSpecifiedSizeImage(int size)
         {
-            if (HasPicture)
+            if(HasPicture)
             {
                 return GetSpecicalSizeFromImage(size, RectangleRestore());
             }

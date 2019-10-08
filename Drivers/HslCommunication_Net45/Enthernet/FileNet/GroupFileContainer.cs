@@ -3,6 +3,7 @@ using HslCommunication.LogNet;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace HslCommunication.Enthernet
@@ -19,10 +20,10 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="logNet">日志记录对象，可以为空</param>
         /// <param name="path">文件的路径</param>
-        public GroupFileContainer(ILogNet logNet, string path)
+        public GroupFileContainer( ILogNet logNet, string path )
         {
             LogNet = logNet;
-            GroupFileContainerLoadByPath(path);
+            GroupFileContainerLoadByPath( path );
         }
 
         #endregion
@@ -50,9 +51,9 @@ namespace HslCommunication.Enthernet
         #region Event Handle
 
 
-        private void OnFileCountChanged()
+        private void OnFileCountChanged( )
         {
-            FileCountChanged?.Invoke(m_filesCount);
+            FileCountChanged?.Invoke( m_filesCount );
         }
 
         /// <summary>
@@ -70,10 +71,10 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="fileName">文件的实际名称</param>
         /// <returns>文件名映射过去的实际的文件名字</returns>
-        public string GetCurrentFileMappingName(string fileName)
+        public string GetCurrentFileMappingName( string fileName )
         {
-            string source = Guid.NewGuid().ToString("N");
-            hybirdLock.Enter();
+            string source = Guid.NewGuid( ).ToString( "N" );
+            hybirdLock.Enter( );
             for (int i = 0; i < m_files.Count; i++)
             {
                 if (m_files[i].FileName == fileName)
@@ -82,10 +83,10 @@ namespace HslCommunication.Enthernet
                     m_files[i].DownloadTimes++;
                 }
             }
-            hybirdLock.Leave();
+            hybirdLock.Leave( );
 
             // 更新缓存
-            coordinatorCacheJsonArray.StartOperaterInfomation();
+            coordinatorCacheJsonArray.StartOperaterInfomation( );
 
             return source;
         }
@@ -99,10 +100,10 @@ namespace HslCommunication.Enthernet
         /// <param name="owner">文件的拥有者</param>
         /// <param name="description">文件的额外描述</param>
         /// <returns>映射的文件名称</returns>
-        public string UpdateFileMappingName(string fileName, long fileSize, string mappingName, string owner, string description)
+        public string UpdateFileMappingName( string fileName, long fileSize, string mappingName, string owner, string description )
         {
             string source = string.Empty;
-            hybirdLock.Enter();
+            hybirdLock.Enter( );
 
             for (int i = 0; i < m_files.Count; i++)
             {
@@ -118,10 +119,10 @@ namespace HslCommunication.Enthernet
                 }
             }
 
-            if (string.IsNullOrEmpty(source))
+            if (string.IsNullOrEmpty( source ))
             {
                 // 文件不存在
-                m_files.Add(new GroupFileItem()
+                m_files.Add( new GroupFileItem( )
                 {
                     FileName = fileName,
                     FileSize = fileSize,
@@ -130,13 +131,13 @@ namespace HslCommunication.Enthernet
                     Owner = owner,
                     MappingName = mappingName,
                     UploadTime = DateTime.Now
-                });
+                } );
             }
 
-            hybirdLock.Leave();
+            hybirdLock.Leave( );
 
             // 更新缓存
-            coordinatorCacheJsonArray.StartOperaterInfomation();
+            coordinatorCacheJsonArray.StartOperaterInfomation( );
 
             return source;
         }
@@ -146,23 +147,23 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="fileName">实际的文件名称</param>
         /// <returns>映射之后的文件名</returns>
-        public string DeleteFile(string fileName)
+        public string DeleteFile( string fileName )
         {
             string source = string.Empty;
-            hybirdLock.Enter();
+            hybirdLock.Enter( );
             for (int i = 0; i < m_files.Count; i++)
             {
                 if (m_files[i].FileName == fileName)
                 {
                     source = m_files[i].MappingName;
-                    m_files.RemoveAt(i);
+                    m_files.RemoveAt( i );
                     break;
                 }
             }
-            hybirdLock.Leave();
+            hybirdLock.Leave( );
 
             // 更新缓存
-            coordinatorCacheJsonArray.StartOperaterInfomation();
+            coordinatorCacheJsonArray.StartOperaterInfomation( );
             return source;
         }
 
@@ -173,59 +174,59 @@ namespace HslCommunication.Enthernet
         /// <summary>
         /// 缓存JSON文本的方法，该机制使用乐观并发模型完成
         /// </summary>
-        private void CacheJsonArrayContent()
+        private void CacheJsonArrayContent( )
         {
-            hybirdLock.Enter();
+            hybirdLock.Enter( );
             m_filesCount = m_files.Count;
-            m_JsonArrayContent = Newtonsoft.Json.Linq.JArray.FromObject(m_files).ToString();
+            m_JsonArrayContent = Newtonsoft.Json.Linq.JArray.FromObject( m_files ).ToString( );
 
             // 保存文件
-            using (StreamWriter sw = new StreamWriter(m_filePath + FileListResources, false, Encoding.UTF8))
+            using (StreamWriter sw = new StreamWriter( m_filePath + FileListResources, false, Encoding.UTF8 ))
             {
-                sw.Write(m_JsonArrayContent);
+                sw.Write( m_JsonArrayContent );
             }
 
-            hybirdLock.Leave();
+            hybirdLock.Leave( );
             // 通知更新
-            OnFileCountChanged();
+            OnFileCountChanged( );
         }
 
         /// <summary>
         /// 从目录进行加载数据，必须实例化的时候加载，加载失败会导致系统异常，旧的文件丢失
         /// </summary>
         /// <param name="path"></param>
-        private void GroupFileContainerLoadByPath(string path)
+        private void GroupFileContainerLoadByPath( string path )
         {
             m_filePath = path;
 
-            if (!Directory.Exists(m_filePath))
+            if (!Directory.Exists( m_filePath ))
             {
-                Directory.CreateDirectory(m_filePath);
+                Directory.CreateDirectory( m_filePath );
             }
 
-            if (File.Exists(m_filePath + FileListResources))
+            if (File.Exists( m_filePath + FileListResources ))
             {
                 try
                 {
-                    using (StreamReader sr = new StreamReader(m_filePath + FileListResources, Encoding.UTF8))
+                    using (StreamReader sr = new StreamReader( m_filePath + FileListResources, Encoding.UTF8 ))
                     {
-                        m_files = Newtonsoft.Json.Linq.JArray.Parse(sr.ReadToEnd()).ToObject<List<GroupFileItem>>();
+                        m_files = Newtonsoft.Json.Linq.JArray.Parse( sr.ReadToEnd( ) ).ToObject<List<GroupFileItem>>( );
                     }
                 }
                 catch (Exception ex)
                 {
-                    LogNet?.WriteException("GroupFileContainer", "Load files txt failed,", ex);
+                    LogNet?.WriteException( "GroupFileContainer", "Load files txt failed,", ex );
                 }
             }
 
             if (m_files == null)
             {
-                m_files = new List<GroupFileItem>();
+                m_files = new List<GroupFileItem>( );
             }
 
-            coordinatorCacheJsonArray = new HslAsyncCoordinator(CacheJsonArrayContent);
+            coordinatorCacheJsonArray = new HslAsyncCoordinator( CacheJsonArrayContent );
 
-            CacheJsonArrayContent();
+            CacheJsonArrayContent( );
         }
 
         #endregion
@@ -236,7 +237,7 @@ namespace HslCommunication.Enthernet
         private ILogNet LogNet;                                           // 日志对象
         private string m_JsonArrayContent = "[]";                         // 缓存数据
         private int m_filesCount = 0;                                     // 文件数量
-        private SimpleHybirdLock hybirdLock = new SimpleHybirdLock();     // 简单混合锁
+        private SimpleHybirdLock hybirdLock = new SimpleHybirdLock( );     // 简单混合锁
         private HslAsyncCoordinator coordinatorCacheJsonArray;            // 乐观并发模型
         private List<GroupFileItem> m_files;                              // 文件队列
         private string m_filePath;                                        // 文件路径

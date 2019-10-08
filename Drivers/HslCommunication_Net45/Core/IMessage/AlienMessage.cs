@@ -1,4 +1,9 @@
-﻿namespace HslCommunication.Core.IMessage
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace HslCommunication.Core.IMessage
 {
 
     /// <summary>
@@ -31,7 +36,7 @@
         /// </summary>
         /// <param name="token">令牌</param>
         /// <returns>是否合法</returns>
-        public bool CheckHeadBytesLegal(byte[] token)
+        public bool CheckHeadBytesLegal( byte[] token )
         {
             if (HeadBytes == null) return false;
 
@@ -51,7 +56,7 @@
         /// 从头子节信息中解析出接下来需要接收的数据长度
         /// </summary>
         /// <returns>接下来的数据长度</returns>
-        public int GetContentLengthByHeadBytes()
+        public int GetContentLengthByHeadBytes( )
         {
             return HeadBytes[4];
         }
@@ -60,9 +65,9 @@
         /// 获取头子节里的特殊标识
         /// </summary>
         /// <returns>标识信息</returns>
-        public int GetHeadBytesIdentity()
+        public int GetHeadBytesIdentity( )
         {
-            return 0;
+             return 0;
         }
 
 

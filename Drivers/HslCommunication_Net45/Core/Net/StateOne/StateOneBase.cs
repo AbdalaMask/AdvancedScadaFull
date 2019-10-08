@@ -1,4 +1,8 @@
-﻿using System.Threading;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
 
 namespace HslCommunication.Core.Net
 {
@@ -28,7 +32,7 @@ namespace HslCommunication.Core.Net
         /// 缓存器
         /// </summary>
         public byte[] Buffer { get; set; }
-
+        
 
         /// <summary>
         /// 是否发生了错误

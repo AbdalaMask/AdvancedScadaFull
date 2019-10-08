@@ -1,4 +1,9 @@
-﻿namespace HslCommunication.Algorithms.PID
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace HslCommunication.Algorithms.PID
 {
     /// <summary>
     /// Pid的模式选择

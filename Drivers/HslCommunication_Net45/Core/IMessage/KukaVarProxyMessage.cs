@@ -1,4 +1,9 @@
-﻿namespace HslCommunication.Core.IMessage
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace HslCommunication.Core.IMessage
 {
     /// <summary>
     /// Kuka机器人的 KRC4 控制器中的服务器KUKAVARPROXY
@@ -22,13 +27,13 @@
         /// 内容字节信息
         /// </summary>
         public byte[] ContentBytes { get; set; }
-
+        
         /// <summary>
         /// 检查接收的数据是否合法
         /// </summary>
         /// <param name="token">令牌</param>
         /// <returns>是否合法</returns>
-        public bool CheckHeadBytesLegal(byte[] token)
+        public bool CheckHeadBytesLegal( byte[] token )
         {
             return true;
         }
@@ -64,7 +69,7 @@
                 return 0;
             }
         }
-
+        
         /// <summary>
         /// 发送的字节信息
         /// </summary>

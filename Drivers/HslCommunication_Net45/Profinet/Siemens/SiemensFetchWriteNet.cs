@@ -1,7 +1,11 @@
-﻿using HslCommunication.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using HslCommunication.Core;
 using HslCommunication.Core.IMessage;
+using System.Net.Sockets;
 using HslCommunication.Core.Net;
-using System;
 
 
 /********************************************************************************
@@ -111,7 +115,7 @@ namespace HslCommunication.Profinet.Siemens
         /// </summary>
         /// <param name="ipAddress">PLC的Ip地址 -> Specify IP Address</param>
         /// <param name="port">PLC的端口 -> Specify IP Port</param>
-        public SiemensFetchWriteNet(string ipAddress, int port)
+        public SiemensFetchWriteNet(string ipAddress,int port)
         {
             WordLength = 2;
             IpAddress = ipAddress;
@@ -121,7 +125,7 @@ namespace HslCommunication.Profinet.Siemens
         #endregion
 
         #region Read Support
-
+        
         /// <summary>
         /// 从PLC读取数据，地址格式为I100，Q100，DB20.100，M100，T100，C100，以字节为单位 ->
         /// Read data from PLC, address format I100,Q100,DB20.100,M100,T100,C100, in bytes
@@ -137,23 +141,23 @@ namespace HslCommunication.Profinet.Siemens
         /// 以下是读取不同类型数据的示例
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\SiemensFetchWriteNet.cs" region="ReadExample1" title="Read示例" />
         /// </example>
-        public override OperateResult<byte[]> Read(string address, ushort length)
+        public override OperateResult<byte[]> Read( string address, ushort length )
         {
             // 指令解析 -> Instruction parsing
-            OperateResult<byte[]> command = BuildReadCommand(address, length);
+            OperateResult<byte[]> command = BuildReadCommand( address, length );
             if (!command.IsSuccess) return command;
 
             // 核心交互 -> Core Interactions
-            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
+            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
             if (!read.IsSuccess) return read;
 
             // 错误码验证 -> Error code Verification
-            if (read.Content[8] != 0x00) return new OperateResult<byte[]>(read.Content[8], StringResources.Language.SiemensFWError);
+            if (read.Content[8] != 0x00) return new OperateResult<byte[]>( read.Content[8], StringResources.Language.SiemensFWError );
 
             // 读取正确 -> Read Right
             byte[] buffer = new byte[read.Content.Length - 16];
-            Array.Copy(read.Content, 16, buffer, 0, buffer.Length);
-            return OperateResult.CreateSuccessResult(buffer);
+            Array.Copy( read.Content, 16, buffer, 0, buffer.Length );
+            return OperateResult.CreateSuccessResult( buffer );
         }
 
         /// <summary>
@@ -168,13 +172,13 @@ namespace HslCommunication.Profinet.Siemens
         /// </remarks>
         public OperateResult<byte> ReadByte(string address)
         {
-            return ByteTransformHelper.GetResultFromArray(Read(address, 1));
+            return ByteTransformHelper.GetResultFromArray( Read( address, 1 ) );
         }
-
+        
         #endregion
 
         #region Write Base
-
+        
         /// <summary>
         /// 将数据写入到PLC数据，地址格式为I100，Q100，DB20.100，M100，以字节为单位 ->
         /// Writes data to the PLC data, in the address format i100,q100,db20.100,m100, in bytes
@@ -188,24 +192,24 @@ namespace HslCommunication.Profinet.Siemens
         /// 以下是写入不同类型数据的示例
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\SiemensFetchWriteNet.cs" region="WriteExample1" title="Write示例" />
         /// </example>
-        public override OperateResult Write(string address, byte[] value)
+        public override OperateResult Write( string address, byte[] value )
         {
             // 指令解析 -> Instruction parsing
-            OperateResult<byte[]> command = BuildWriteCommand(address, value);
+            OperateResult<byte[]> command = BuildWriteCommand( address, value );
             if (!command.IsSuccess) return command;
 
             // 核心交互 -> Core Interactions
-            OperateResult<byte[]> write = ReadFromCoreServer(command.Content);
+            OperateResult<byte[]> write = ReadFromCoreServer( command.Content );
             if (!write.IsSuccess) return write;
 
             // 错误码验证 -> Error code Verification
-            if (write.Content[8] != 0x00) return new OperateResult(write.Content[8], StringResources.Language.SiemensWriteError + write.Content[8]);
+            if (write.Content[8] != 0x00) return new OperateResult( write.Content[8], StringResources.Language.SiemensWriteError + write.Content[8] );
 
             // 写入成功 -> Write Right
-            return OperateResult.CreateSuccessResult();
+            return OperateResult.CreateSuccessResult( );
 
         }
-
+        
         #endregion
 
         #region Write bool[]
@@ -225,9 +229,9 @@ namespace HslCommunication.Profinet.Siemens
         /// </remarks>
         public override OperateResult Write(string address, bool[] values)
         {
-            return Write(address, BasicFramework.SoftBasic.BoolArrayToByte(values));
+            return Write( address, BasicFramework.SoftBasic.BoolArrayToByte( values ) );
         }
-
+        
         #endregion
 
         #region Write Byte
@@ -240,7 +244,7 @@ namespace HslCommunication.Profinet.Siemens
         /// <returns>是否写入成功的结果对象 -> Whether to write a successful result object</returns>
         public OperateResult Write(string address, byte value)
         {
-            return Write(address, new byte[] { value });
+            return Write( address, new byte[] { value } );
         }
 
         #endregion
@@ -259,22 +263,22 @@ namespace HslCommunication.Profinet.Siemens
         #endregion
 
         #region Static Method Helper
-
+        
         /// <summary>
         /// 计算特殊的地址信息
         /// </summary>
         /// <param name="address">字符串信息</param>
         /// <returns>实际值</returns>
-        private static int CalculateAddressStarted(string address)
+        private static int CalculateAddressStarted( string address )
         {
-            if (address.IndexOf('.') < 0)
+            if (address.IndexOf( '.' ) < 0)
             {
-                return Convert.ToInt32(address);
+                return Convert.ToInt32( address );
             }
             else
             {
-                string[] temp = address.Split('.');
-                return Convert.ToInt32(temp[0]);
+                string[] temp = address.Split( '.' );
+                return Convert.ToInt32( temp[0] );
             }
         }
 
@@ -283,38 +287,38 @@ namespace HslCommunication.Profinet.Siemens
         /// </summary>
         /// <param name="address">起始地址，格式为M100,I100,Q100,DB1.100 -> Starting address, formatted as M100,I100,Q100,DB1.100</param>
         /// <returns>解析出地址类型，起始地址，DB块的地址 -> Resolves address type, start address, db block address</returns>
-        private static OperateResult<byte, int, ushort> AnalysisAddress(string address)
+        private static OperateResult<byte, int, ushort> AnalysisAddress( string address )
         {
-            var result = new OperateResult<byte, int, ushort>();
+            var result = new OperateResult<byte, int, ushort>( );
             try
             {
                 result.Content3 = 0;
                 if (address[0] == 'I')
                 {
                     result.Content1 = 0x03;
-                    result.Content2 = CalculateAddressStarted(address.Substring(1));
+                    result.Content2 = CalculateAddressStarted( address.Substring( 1 ) );
                 }
                 else if (address[0] == 'Q')
                 {
                     result.Content1 = 0x04;
-                    result.Content2 = CalculateAddressStarted(address.Substring(1));
+                    result.Content2 = CalculateAddressStarted( address.Substring( 1 ) );
                 }
                 else if (address[0] == 'M')
                 {
                     result.Content1 = 0x02;
-                    result.Content2 = CalculateAddressStarted(address.Substring(1));
+                    result.Content2 = CalculateAddressStarted( address.Substring( 1 ) );
                 }
-                else if (address[0] == 'D' || address.Substring(0, 2) == "DB")
+                else if (address[0] == 'D' || address.Substring( 0, 2 ) == "DB")
                 {
                     result.Content1 = 0x01;
-                    string[] adds = address.Split('.');
+                    string[] adds = address.Split( '.' );
                     if (address[1] == 'B')
                     {
-                        result.Content3 = Convert.ToUInt16(adds[0].Substring(2));
+                        result.Content3 = Convert.ToUInt16( adds[0].Substring( 2 ) );
                     }
                     else
                     {
-                        result.Content3 = Convert.ToUInt16(adds[0].Substring(1));
+                        result.Content3 = Convert.ToUInt16( adds[0].Substring( 1 ) );
                     }
 
                     if (result.Content3 > 255)
@@ -323,17 +327,17 @@ namespace HslCommunication.Profinet.Siemens
                         return result;
                     }
 
-                    result.Content2 = CalculateAddressStarted(address.Substring(address.IndexOf('.') + 1));
+                    result.Content2 = CalculateAddressStarted( address.Substring( address.IndexOf( '.' ) + 1 ) );
                 }
                 else if (address[0] == 'T')
                 {
                     result.Content1 = 0x07;
-                    result.Content2 = CalculateAddressStarted(address.Substring(1));
+                    result.Content2 = CalculateAddressStarted( address.Substring( 1 ) );
                 }
                 else if (address[0] == 'C')
                 {
                     result.Content1 = 0x06;
-                    result.Content2 = CalculateAddressStarted(address.Substring(1));
+                    result.Content2 = CalculateAddressStarted( address.Substring( 1 ) );
                 }
                 else
                 {
@@ -353,7 +357,7 @@ namespace HslCommunication.Profinet.Siemens
             result.IsSuccess = true;
             return result;
         }
-
+        
         #endregion
 
         #region Build Command
@@ -364,10 +368,10 @@ namespace HslCommunication.Profinet.Siemens
         /// <param name="address">起始地址，格式为M100,I100,Q100,DB1.100 -> Starting address, formatted as M100,I100,Q100,DB1.100</param>
         /// <param name="count">读取数据个数 -> Number of Read data</param>
         /// <returns>带结果对象的报文数据 -> Message data with a result object</returns>
-        public static OperateResult<byte[]> BuildReadCommand(string address, ushort count)
+        public static OperateResult<byte[]> BuildReadCommand( string address, ushort count )
         {
-            OperateResult<byte, int, ushort> analysis = AnalysisAddress(address);
-            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(analysis);
+            OperateResult<byte, int, ushort> analysis = AnalysisAddress( address );
+            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( analysis );
 
             byte[] _PLCCommand = new byte[16];
             _PLCCommand[0] = 0x53;
@@ -393,7 +397,7 @@ namespace HslCommunication.Profinet.Siemens
             {
                 if (count % 2 != 0)
                 {
-                    return new OperateResult<byte[]>(StringResources.Language.SiemensReadLengthMustBeEvenNumber);
+                    return new OperateResult<byte[]>( StringResources.Language.SiemensReadLengthMustBeEvenNumber );
                 }
                 else
                 {
@@ -412,22 +416,22 @@ namespace HslCommunication.Profinet.Siemens
             _PLCCommand[14] = 0xff;
             _PLCCommand[15] = 0x02;
 
-            return OperateResult.CreateSuccessResult(_PLCCommand);
+            return OperateResult.CreateSuccessResult( _PLCCommand );
         }
-
+        
         /// <summary>
         /// 生成一个写入字节数据的指令 -> Generate an instruction to write byte data
         /// </summary>
         /// <param name="address">起始地址，格式为M100,I100,Q100,DB1.100 -> Starting address, formatted as M100,I100,Q100,DB1.100</param>
         /// <param name="data">实际的写入的内容 -> The actual content of the write</param>
         /// <returns>带结果对象的报文数据 -> Message data with a result object</returns>
-        public static OperateResult<byte[]> BuildWriteCommand(string address, byte[] data)
+        public static OperateResult<byte[]> BuildWriteCommand( string address, byte[] data )
         {
             if (data == null) data = new byte[0];
 
-            OperateResult<byte, int, ushort> analysis = AnalysisAddress(address);
-            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(analysis);
-
+            OperateResult<byte, int, ushort> analysis = AnalysisAddress( address );
+            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( analysis );
+            
             byte[] _PLCCommand = new byte[16 + data.Length];
             _PLCCommand[0] = 0x53;
             _PLCCommand[1] = 0x35;
@@ -450,7 +454,7 @@ namespace HslCommunication.Profinet.Siemens
             {
                 if (data.Length % 2 != 0)
                 {
-                    return new OperateResult<byte[]>(StringResources.Language.SiemensReadLengthMustBeEvenNumber);
+                    return new OperateResult<byte[]>( StringResources.Language.SiemensReadLengthMustBeEvenNumber );
                 }
                 else
                 {
@@ -469,11 +473,11 @@ namespace HslCommunication.Profinet.Siemens
             _PLCCommand[15] = 0x02;
 
             // 放置数据 -> Placing data
-            Array.Copy(data, 0, _PLCCommand, 16, data.Length);
+            Array.Copy( data, 0, _PLCCommand, 16, data.Length );
 
-            return OperateResult.CreateSuccessResult(_PLCCommand);
+            return OperateResult.CreateSuccessResult( _PLCCommand );
         }
-
+        
         #endregion
 
     }

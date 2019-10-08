@@ -1,9 +1,12 @@
-﻿using HslCommunication.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using HslCommunication.Core.IMessage;
 using HslCommunication.Core.Net;
-using System;
-using System.Linq;
+using HslCommunication.Core;
 using System.Net.Sockets;
+using HslCommunication.BasicFramework;
 
 namespace HslCommunication.Profinet.Omron
 {
@@ -87,17 +90,17 @@ namespace HslCommunication.Profinet.Omron
     /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\OmronFinsNet.cs" region="Usage" title="简单的短连接使用" />
     /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\OmronFinsNet.cs" region="Usage2" title="简单的长连接使用" />
     /// </example>
-    public class OmronFinsNet : NetworkDeviceBase<FinsMessage, ReverseWordTransform>
+    public class OmronFinsNet : NetworkDeviceBase<FinsMessage,ReverseWordTransform>
     {
         #region Constructor
 
         /// <summary>
         /// 实例化一个欧姆龙PLC Fins帧协议的通讯对象
         /// </summary>
-        public OmronFinsNet()
+        public OmronFinsNet( )
         {
-            WordLength = 1;
-            ByteTransform.DataFormat = DataFormat.CDAB;
+            WordLength                  = 1;
+            ByteTransform.DataFormat    = DataFormat.CDAB;
         }
 
         /// <summary>
@@ -105,12 +108,12 @@ namespace HslCommunication.Profinet.Omron
         /// </summary>
         /// <param name="ipAddress">PLCd的Ip地址</param>
         /// <param name="port">PLC的端口</param>
-        public OmronFinsNet(string ipAddress, int port)
+        public OmronFinsNet( string ipAddress, int port )
         {
-            WordLength = 1;
-            IpAddress = ipAddress;
-            Port = port;
-            ByteTransform.DataFormat = DataFormat.CDAB;
+            WordLength                  = 1;
+            IpAddress                   = ipAddress;
+            Port                        = port;
+            ByteTransform.DataFormat    = DataFormat.CDAB;
         }
 
         #endregion
@@ -125,7 +128,7 @@ namespace HslCommunication.Profinet.Omron
             get => base.IpAddress;
             set
             {
-                DA1 = Convert.ToByte(value.Substring(value.LastIndexOf(".") + 1));
+                DA1 = Convert.ToByte( value.Substring( value.LastIndexOf( "." ) + 1 ) );
                 base.IpAddress = value;
             }
         }
@@ -153,7 +156,7 @@ namespace HslCommunication.Profinet.Omron
         /// PLC的网络号地址，默认0x00
         /// </summary>
         public byte DNA { get; set; } = 0x00;
-
+        
         /// <summary>
         /// PLC的节点地址，这个值在配置了ip地址之后是默认赋值的，默认为Ip地址的最后一位
         /// </summary>
@@ -174,7 +177,7 @@ namespace HslCommunication.Profinet.Omron
         /// 上位机的网络号地址
         /// </summary>
         public byte SNA { get; set; } = 0x00;
-
+        
         private byte computerSA1 = 0x0B;
 
         /// <summary>
@@ -207,11 +210,11 @@ namespace HslCommunication.Profinet.Omron
         /// 如果设置为<c>True</c>，当数据读取失败的时候，会自动变更当前的SA1值，会选择自动增加，但不会和DA1一致，本值需要在对象实例化之后立即设置。
         /// </summary>
         public bool IsChangeSA1AfterReadFailed { get; set; }
-
+        
         #endregion
-
+        
         #region Build Command
-
+        
         /// <summary>
         /// 将普通的指令打包成完整的指令
         /// </summary>
@@ -220,10 +223,10 @@ namespace HslCommunication.Profinet.Omron
         private byte[] PackCommand(byte[] cmd)
         {
             byte[] buffer = new byte[26 + cmd.Length];
-            Array.Copy(handSingle, 0, buffer, 0, 4);
-            byte[] tmp = BitConverter.GetBytes(buffer.Length - 8);
-            Array.Reverse(tmp);
-            tmp.CopyTo(buffer, 4);
+            Array.Copy( handSingle, 0, buffer, 0, 4 );
+            byte[] tmp = BitConverter.GetBytes( buffer.Length - 8 );
+            Array.Reverse( tmp );
+            tmp.CopyTo( buffer, 4 );
             buffer[11] = 0x02;
 
             buffer[16] = ICF;
@@ -236,11 +239,11 @@ namespace HslCommunication.Profinet.Omron
             buffer[23] = SA1;
             buffer[24] = SA2;
             buffer[25] = SID;
-            cmd.CopyTo(buffer, 26);
+            cmd.CopyTo( buffer, 26 );
 
             return buffer;
         }
-
+        
         /// <summary>
         /// 根据类型地址长度确认需要读取的指令头
         /// </summary>
@@ -248,14 +251,14 @@ namespace HslCommunication.Profinet.Omron
         /// <param name="length">长度</param>
         /// <param name="isBit">是否是位读取</param>
         /// <returns>带有成功标志的报文数据</returns>
-        public OperateResult<byte[]> BuildReadCommand(string address, ushort length, bool isBit)
+        public OperateResult<byte[]> BuildReadCommand( string address, ushort length ,bool isBit)
         {
-            var command = OmronFinsNetHelper.BuildReadCommand(address, length, isBit);
+            var command = OmronFinsNetHelper.BuildReadCommand( address, length, isBit );
             if (!command.IsSuccess) return command;
 
-            return OperateResult.CreateSuccessResult(PackCommand(command.Content));
+            return OperateResult.CreateSuccessResult( PackCommand( command.Content ) );
         }
-
+        
         /// <summary>
         /// 根据类型地址以及需要写入的数据来生成指令头
         /// </summary>
@@ -263,14 +266,14 @@ namespace HslCommunication.Profinet.Omron
         /// <param name="value">真实的数据值信息</param>
         /// <param name="isBit">是否是位操作</param>
         /// <returns>带有成功标志的报文数据</returns>
-        public OperateResult<byte[]> BuildWriteCommand(string address, byte[] value, bool isBit)
+        public OperateResult<byte[]> BuildWriteCommand( string address, byte[] value, bool isBit )
         {
-            var command = OmronFinsNetHelper.BuildWriteWordCommand(address, value, isBit);
+            var command = OmronFinsNetHelper.BuildWriteWordCommand( address, value, isBit );
             if (!command.IsSuccess) return command;
-
-            return OperateResult.CreateSuccessResult(PackCommand(command.Content));
+            
+            return OperateResult.CreateSuccessResult( PackCommand( command.Content ) );
         }
-
+        
         #endregion
 
         #region Double Mode Override
@@ -280,12 +283,12 @@ namespace HslCommunication.Profinet.Omron
         /// </summary>
         /// <param name="socket">连接的套接字</param>
         /// <returns>初始化成功与否</returns>
-        protected override OperateResult InitializationOnConnect(Socket socket)
+        protected override OperateResult InitializationOnConnect( Socket socket )
         {
             // 握手信号
-            OperateResult<byte[]> read = ReadFromCoreServer(socket, handSingle);
+            OperateResult<byte[]> read = ReadFromCoreServer( socket, handSingle );
             if (!read.IsSuccess) return read;
-
+            
             // 检查返回的状态
             byte[] buffer = new byte[4];
             buffer[0] = read.Content[15];
@@ -293,22 +296,22 @@ namespace HslCommunication.Profinet.Omron
             buffer[2] = read.Content[13];
             buffer[3] = read.Content[12];
 
-            int status = BitConverter.ToInt32(buffer, 0);
-            if (status != 0) return new OperateResult(status, OmronFinsNetHelper.GetStatusDescription(status));
+            int status = BitConverter.ToInt32( buffer, 0 );
+            if(status != 0) return new OperateResult( status, OmronFinsNetHelper.GetStatusDescription( status ) );
 
             // 提取PLC的节点地址
             if (read.Content.Length >= 24) DA1 = read.Content[23];
 
-            return OperateResult.CreateSuccessResult();
+            return OperateResult.CreateSuccessResult( ) ;
         }
 
         /// <summary>
         /// 和服务器交互完成的时候调用的方法，无论是成功或是失败，都将会调用，具体的操作需要重写实现
         /// </summary>
         /// <param name="read">读取结果</param>
-        protected override void ExtraAfterReadFromCoreServer(OperateResult read)
+        protected override void ExtraAfterReadFromCoreServer( OperateResult read )
         {
-            base.ExtraAfterReadFromCoreServer(read);
+            base.ExtraAfterReadFromCoreServer( read );
             if (!read.IsSuccess)
             {
                 if (IsChangeSA1AfterReadFailed)
@@ -338,22 +341,22 @@ namespace HslCommunication.Profinet.Omron
         /// 以下是读取不同类型数据的示例
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\OmronFinsNet.cs" region="ReadExample1" title="Read示例" />
         /// </example>
-        public override OperateResult<byte[]> Read(string address, ushort length)
+        public override OperateResult<byte[]> Read( string address, ushort length )
         {
             // 获取指令
-            var command = BuildReadCommand(address, length, false);
-            if (!command.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(command);
+            var command = BuildReadCommand( address, length, false );
+            if (!command.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( command );
 
             // 核心数据交互
-            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(read);
+            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
+            if(!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( read );
 
             // 数据有效性分析
-            OperateResult<byte[]> valid = OmronFinsNetHelper.ResponseValidAnalysis(read.Content, true);
-            if (!valid.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(valid);
+            OperateResult<byte[]> valid = OmronFinsNetHelper.ResponseValidAnalysis( read.Content, true );
+            if(!valid.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( valid );
 
             // 读取到了正确的数据
-            return OperateResult.CreateSuccessResult(valid.Content);
+            return OperateResult.CreateSuccessResult( valid.Content );
         }
 
         /// <summary>
@@ -368,22 +371,22 @@ namespace HslCommunication.Profinet.Omron
         /// 以下是写入不同类型数据的示例
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\OmronFinsNet.cs" region="WriteExample1" title="Write示例" />
         /// </example>
-        public override OperateResult Write(string address, byte[] value)
+        public override OperateResult Write( string address, byte[] value )
         {
             // 获取指令
-            var command = BuildWriteCommand(address, value, false);
+            var command = BuildWriteCommand( address, value, false );
             if (!command.IsSuccess) return command;
 
             // 核心数据交互
-            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
+            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
             if (!read.IsSuccess) return read;
 
             // 数据有效性分析
-            OperateResult<byte[]> valid = OmronFinsNetHelper.ResponseValidAnalysis(read.Content, false);
+            OperateResult<byte[]> valid = OmronFinsNetHelper.ResponseValidAnalysis( read.Content, false );
             if (!valid.IsSuccess) return valid;
 
             // 成功
-            return OperateResult.CreateSuccessResult();
+            return OperateResult.CreateSuccessResult( ) ;
         }
 
         #endregion
@@ -399,22 +402,22 @@ namespace HslCommunication.Profinet.Omron
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\OmronFinsNet.cs" region="ReadBool" title="ReadBool示例" />
         /// </example>
-        public override OperateResult<bool[]> ReadBool(string address, ushort length)
+        public override OperateResult<bool[]> ReadBool( string address, ushort length )
         {
             // 获取指令
-            var command = BuildReadCommand(address, length, true);
-            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(command);
+            var command = BuildReadCommand( address, length, true );
+            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( command );
 
             // 核心数据交互
-            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(read);
+            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( read );
 
             // 数据有效性分析
-            OperateResult<byte[]> valid = OmronFinsNetHelper.ResponseValidAnalysis(read.Content, true);
-            if (!valid.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(valid);
+            OperateResult<byte[]> valid = OmronFinsNetHelper.ResponseValidAnalysis( read.Content, true );
+            if (!valid.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( valid );
 
             // 返回正确的数据信息
-            return OperateResult.CreateSuccessResult(valid.Content.Select(m => m != 0x00 ? true : false).ToArray());
+            return OperateResult.CreateSuccessResult( valid.Content.Select( m => m != 0x00 ? true : false ).ToArray( ) );
         }
 
         /// <summary>
@@ -426,22 +429,22 @@ namespace HslCommunication.Profinet.Omron
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\OmronFinsNet.cs" region="WriteBool" title="WriteBool示例" />
         /// </example>
-        public override OperateResult Write(string address, bool[] values)
+        public override OperateResult Write( string address, bool[] values )
         {
             // 获取指令
-            var command = BuildWriteCommand(address, values.Select(m => m ? (byte)0x01 : (byte)0x00).ToArray(), true);
+            var command = BuildWriteCommand( address, values.Select( m => m ? (byte)0x01 : (byte)0x00 ).ToArray( ), true );
             if (!command.IsSuccess) return command;
 
             // 核心数据交互
-            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
+            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
             if (!read.IsSuccess) return read;
 
             // 数据有效性分析
-            OperateResult<byte[]> valid = OmronFinsNetHelper.ResponseValidAnalysis(read.Content, false);
+            OperateResult<byte[]> valid = OmronFinsNetHelper.ResponseValidAnalysis( read.Content, false );
             if (!valid.IsSuccess) return valid;
 
             // 写入成功
-            return OperateResult.CreateSuccessResult();
+            return OperateResult.CreateSuccessResult( );
         }
 
         #endregion
@@ -467,7 +470,7 @@ namespace HslCommunication.Profinet.Omron
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串</returns>
-        public override string ToString()
+        public override string ToString( )
         {
             return $"OmronFinsNet[{IpAddress}:{Port}]";
         }

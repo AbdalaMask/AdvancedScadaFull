@@ -1,11 +1,13 @@
 ﻿using HslCommunication.Core;
-using HslCommunication.Core.Net;
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
+using System.Text;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
+using HslCommunication;
+using System.IO;
+using HslCommunication.Core.Net;
 
 namespace HslCommunication.Enthernet
 {
@@ -23,8 +25,8 @@ namespace HslCommunication.Enthernet
         /// </summary>
         public DeviceNet()
         {
-            list = new List<DeviceState>();
-            lock_list = new SimpleHybirdLock();
+            list = new List<DeviceState>( );
+            lock_list = new SimpleHybirdLock( );
         }
 
         #endregion
@@ -37,23 +39,23 @@ namespace HslCommunication.Enthernet
 
         private void AddClient(DeviceState device)
         {
-            lock_list.Enter();
-            list.Add(device);
-            lock_list.Leave();
+            lock_list.Enter( );
+            list.Add( device );
+            lock_list.Leave( );
 
-            ClientOnline?.Invoke(device);
+            ClientOnline?.Invoke( device );
         }
 
         private void RemoveClient(DeviceState device)
         {
-            lock_list.Enter();
-            list.Remove(device);
-            device.WorkSocket?.Close();
-            lock_list.Leave();
+            lock_list.Enter( );
+            list.Remove( device );
+            device.WorkSocket?.Close( );
+            lock_list.Leave( );
 
-            ClientOffline?.Invoke(device);
+            ClientOffline?.Invoke( device );
         }
-
+        
 
         #endregion
 
@@ -95,79 +97,79 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="socket">异步对象</param>
         /// <param name="endPoint">终结点</param>
-        protected override void ThreadPoolLogin(Socket socket, IPEndPoint endPoint)
+        protected override void ThreadPoolLogin( Socket socket, IPEndPoint endPoint )
         {
             // 登录成功
-            DeviceState stateone = new DeviceState()
+            DeviceState stateone = new DeviceState( )
             {
                 WorkSocket = socket,
                 DeviceEndPoint = (IPEndPoint)socket.RemoteEndPoint,
-                IpAddress = ((IPEndPoint)socket.RemoteEndPoint).Address.ToString(),
+                IpAddress = ((IPEndPoint)socket.RemoteEndPoint).Address.ToString( ),
                 ConnectTime = DateTime.Now,
             };
 
-            AddClient(stateone);
+            AddClient( stateone );
 
             try
             {
-                stateone.WorkSocket.BeginReceive(stateone.Buffer, 0, stateone.Buffer.Length, SocketFlags.None,
-                    new AsyncCallback(ContentReceiveCallBack), stateone);
+                stateone.WorkSocket.BeginReceive( stateone.Buffer, 0, stateone.Buffer.Length, SocketFlags.None,
+                    new AsyncCallback( ContentReceiveCallBack ), stateone );
             }
             catch (Exception ex)
             {
                 //登录前已经出错
-                RemoveClient(stateone);
-                LogNet?.WriteException(ToString(), StringResources.Language.NetClientLoginFailed, ex);
+                RemoveClient( stateone );
+                LogNet?.WriteException( ToString( ), StringResources.Language.NetClientLoginFailed, ex );
             }
         }
-
+        
 
         private void ContentReceiveCallBack(IAsyncResult ar)
         {
-            if (ar.AsyncState is DeviceState stateone)
+            if(ar.AsyncState is DeviceState stateone)
             {
                 try
                 {
-                    int count = stateone.WorkSocket.EndReceive(ar);
+                    int count = stateone.WorkSocket.EndReceive( ar );
 
                     if (count > 0)
                     {
-                        MemoryStream ms = new MemoryStream();
+                        MemoryStream ms = new MemoryStream( );
                         byte next = stateone.Buffer[0];
-
-                        while (next != endByte)
+                        
+                        while(next != endByte)
                         {
-                            ms.WriteByte(next);
+                            ms.WriteByte( next );
                             byte[] buffer = new byte[1];
-                            stateone.WorkSocket.Receive(buffer, 0, 1, SocketFlags.None);
+                            stateone.WorkSocket.Receive( buffer, 0, 1, SocketFlags.None );
                             next = buffer[0];
                         }
 
                         // 接收完成
-                        stateone.WorkSocket.BeginReceive(stateone.Buffer, 0, stateone.Buffer.Length, SocketFlags.None,
-                            new AsyncCallback(ContentReceiveCallBack), stateone);
+                        stateone.WorkSocket.BeginReceive( stateone.Buffer, 0, stateone.Buffer.Length, SocketFlags.None,
+                            new AsyncCallback( ContentReceiveCallBack ), stateone );
 
 
-                        byte[] receive = ms.ToArray();
-                        ms.Dispose();
+                        byte[] receive =ms.ToArray( );
+                        ms.Dispose( );
 
-                        lock_list.Enter();
+                        lock_list.Enter( );
                         stateone.ReceiveTime = DateTime.Now;
-                        lock_list.Leave();
-                        AcceptBytes?.Invoke(stateone, receive);
-                        AcceptString?.Invoke(stateone, Encoding.ASCII.GetString(receive));
+                        lock_list.Leave( );
+                        AcceptBytes?.Invoke( stateone, receive );
+                        AcceptString?.Invoke( stateone, Encoding.ASCII.GetString( receive ));
                     }
                     else
                     {
-                        RemoveClient(stateone);
-                        LogNet?.WriteInfo(ToString(), StringResources.Language.NetClientOffline);
+                        RemoveClient( stateone );
+                        LogNet?.WriteInfo( ToString( ), StringResources.Language.NetClientOffline );
                     }
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     //登录前已经出错
-                    RemoveClient(stateone);
-                    LogNet?.WriteException(ToString(), StringResources.Language.NetClientLoginFailed, ex);
+                    RemoveClient( stateone );
+                    LogNet?.WriteException( ToString( ), StringResources.Language.NetClientLoginFailed, ex );
                 }
             }
         }
