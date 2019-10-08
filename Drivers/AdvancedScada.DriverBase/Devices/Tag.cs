@@ -23,14 +23,10 @@ namespace AdvancedScada.DriverBase.Devices
         private string _Description;
 
         public EventValueChanged ValueChanged = null;
-
-
-
+        private string address;
 
         [DataMember]
         public int ChannelId { get; set; }
-
-
 
         [DataMember]
         public int DataBlockId { get; set; }
@@ -44,7 +40,17 @@ namespace AdvancedScada.DriverBase.Devices
         public DataTypes DataType { get; set; }
 
         [DataMember]
-        public string Address { get; set; }
+        public string Address
+        { get
+            {
+                return address;
+            }
+            set
+            {
+                address = value;
+                OnPropertyChanged("Address");
+            }
+        }
         [DataMember]
         public int TagId
         {

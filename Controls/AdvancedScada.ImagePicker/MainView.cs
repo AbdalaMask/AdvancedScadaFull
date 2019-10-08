@@ -200,35 +200,34 @@ namespace AdvancedScada.ImagePicker
             {
 
                 var dirs = DirSearch(SelectedPath).ToArray();
-                Task t = Task.Factory.StartNew(() =>
+
+                foreach (var item in dirs)
                 {
-                    foreach (var item in dirs)
+                    Image bitmap = null;
+                    string newName = Path.GetFileNameWithoutExtension(item);
+                    if (item.EndsWith(".wmf"))
                     {
-                        Image bitmap = null;
-                        string newName = Path.GetFileNameWithoutExtension(item);
-                        if (item.EndsWith(".wmf"))
+                        bitmap = new Metafile(item);
+                        Bitmap pic = new Bitmap(100, 100);
+                        using (Graphics g = Graphics.FromImage(pic))
                         {
-                            bitmap = new Metafile(item);
-                            Bitmap pic = new Bitmap(100, 100);
-                            using (Graphics g = Graphics.FromImage(pic))
-                            {
-                                g.DrawImage(bitmap, new System.Drawing.Rectangle(0, 0, pic.Width, pic.Height)); //redraw smaller image
-                            }
-                            bitmap = pic;
+                            g.DrawImage(bitmap, new System.Drawing.Rectangle(0, 0, pic.Width, pic.Height)); //redraw smaller image
                         }
-                        else
-                        {
-                            bitmap = Image.FromFile(item);
-                        }
-
-                        ImageListCurrentImage.Add(i++, bitmap);
-                        ImageListCurrentTip.Add(i, string.Format("{0}.{1}.{2}", newName, bitmap.Height, bitmap.Width));
-                        il32.Images.Add(newName, bitmap);
-
+                        bitmap = pic;
+                    }
+                    else
+                    {
+                        bitmap = Image.FromFile(item);
                     }
 
-                });
-                t.Wait();
+                    ImageListCurrentImage.Add(i++, bitmap);
+                    ImageListCurrentTip.Add(i, string.Format("{0}.{1}.{2}", newName, bitmap.Height, bitmap.Width));
+                    il32.Images.Add(newName, bitmap);
+                    Application.DoEvents();
+
+                }
+
+
                 gc.ImageList = il32;
 
 
@@ -254,46 +253,46 @@ namespace AdvancedScada.ImagePicker
             var dirs = DirSearch(SelectedPath).ToArray();
             ImageListCurrentSVG.Clear();
             ImageListCurrentTip.Clear();
- 
-                    try
-                    {
 
-                ThreadPool.QueueUserWorkItem((th) =>
+            try
+            {
+
+
+
+                foreach (var item in dirs)
                 {
-
-                    foreach (var item in dirs)
+                    string newName = Path.GetFileNameWithoutExtension(item);
+                    SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
+                    svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(item);
+                    var bitmap = SVGSample.svg.SVGParser.GetBitmapFromSVG(item);
+                    if (bitmap == null)
                     {
-                        string newName = Path.GetFileNameWithoutExtension(item);
-                        SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
-                        svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(item);
-                        var bitmap = SVGSample.svg.SVGParser.GetBitmapFromSVG(item);
-                        if (bitmap == null)
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            ImageListCurrentSVG.Add(i++, item);
-                            ImageListCurrentTip.Add(i, string.Format("{0}.{1}.{2}", newName, bitmap.Height, bitmap.Width));
-                            il32.Images.Add(newName, bitmap);
-                        }
+                        continue;
                     }
-                });
-                //Application.DoEvents();
+                    else
+                    {
+                        ImageListCurrentSVG.Add(i++, item);
+                        ImageListCurrentTip.Add(i, string.Format("{0}.{1}.{2}", newName, bitmap.Height, bitmap.Width));
+                        il32.Images.Add(newName, bitmap);
+                        Application.DoEvents();
+                    }
+                }
 
 
-            
-                
+
+
+
+
             }
             catch (Exception ex)
-                    {
+            {
 
-                        Console.WriteLine(ex.Message);
-                        this.Text = $"{Level++}";
-                        //return;
-                    }
+                Console.WriteLine(ex.Message);
+                this.Text = $"{Level++}";
+                //return;
+            }
 
-           
+
             gcSVG.ImageList = il32;
 
 
