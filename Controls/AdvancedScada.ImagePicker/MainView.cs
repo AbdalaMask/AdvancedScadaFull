@@ -261,10 +261,25 @@ namespace AdvancedScada.ImagePicker
 
                 foreach (var item in dirs)
                 {
+                    Image bitmap = null;
                     string newName = Path.GetFileNameWithoutExtension(item);
-                    SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
-                    svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(item);
-                    var bitmap = SVGSample.svg.SVGParser.GetBitmapFromSVG(item);
+                    if (!item.EndsWith(".svg"))
+                    {
+                        bitmap = Image.FromFile(item);
+                        Bitmap pic = new Bitmap(100, 100);
+                        using (Graphics g = Graphics.FromImage(pic))
+                        {
+                            g.DrawImage(bitmap, new System.Drawing.Rectangle(0, 0, pic.Width, pic.Height)); //redraw smaller image
+                        }
+                        bitmap = pic;
+                    }
+                    else
+                    {
+                        SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
+                        svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(item);
+                        bitmap = SVGSample.svg.SVGParser.GetBitmapFromSVG(item);
+                       
+                    }
                     if (bitmap == null)
                     {
                         continue;
