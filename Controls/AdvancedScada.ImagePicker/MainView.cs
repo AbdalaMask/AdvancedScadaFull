@@ -241,7 +241,41 @@ namespace AdvancedScada.ImagePicker
             }
 
         }
+        #region Xaml
+        private static double IMAGE_DPI;
+        public static System.Drawing.Image SaveImage(System.Windows.Controls.Viewbox control, string path)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                GenerateImage(control, stream);
+                System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
+                return img;
+            }
+        }
 
+        public static void GenerateImage(System.Windows.Controls.Viewbox control, Stream result)
+        {
+            //Set background to white
+            //control.Background = System.Windows.Media.Brushes.White;
+
+            System.Windows.Size controlSize = RetrieveDesiredSize(control);
+            System.Windows.Rect rect = new System.Windows.Rect(0, 0, controlSize.Width, controlSize.Height);
+
+            System.Windows.Media.Imaging.RenderTargetBitmap rtb = new System.Windows.Media.Imaging.RenderTargetBitmap((int)controlSize.Width, (int)controlSize.Height, IMAGE_DPI, IMAGE_DPI, PixelFormats.Pbgra32);
+
+            control.Arrange(rect);
+            rtb.Render(control);
+
+            System.Windows.Media.Imaging.PngBitmapEncoder png = new System.Windows.Media.Imaging.PngBitmapEncoder();
+            png.Frames.Add(System.Windows.Media.Imaging.BitmapFrame.Create(rtb));
+            png.Save(result);
+        }
+        private static System.Windows.Size RetrieveDesiredSize(System.Windows.Controls.Viewbox control)
+        {
+            control.Measure(new System.Windows.Size(double.PositiveInfinity, double.PositiveInfinity));
+            return control.DesiredSize;
+        }
+        #endregion
         private void cboxListForderSVG_SelectedIndexChanged(object sender, EventArgs e)
         {
             il32 = new ImageList();
@@ -263,8 +297,34 @@ namespace AdvancedScada.ImagePicker
                 {
                     Image bitmap = null;
                     string newName = Path.GetFileNameWithoutExtension(item);
-                    if (!item.EndsWith(".svg"))
+                    if (item.EndsWith(".svg"))
                     {
+                        SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
+                        svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(item);
+                        bitmap = SVGSample.svg.SVGParser.GetBitmapFromSVG(item);
+                    }
+                     else if (item.EndsWith(".Xaml"))
+                    {
+                        try
+                        {
+                            IMAGE_DPI = 96;
+                            XmlTextReader xmlReader = new XmlTextReader(new StringReader(item));
+                            Stream s = File.OpenRead(item);
+                            
+                            object control = XamlReader.Load(s);
+                            bitmap = SaveImage((System.Windows.Controls.Viewbox)control, "C://Test.png");
+                        }
+                        catch  
+                        {
+
+                            continue;
+                        }
+                       
+                        
+                    }
+                    else
+                    {
+
                         bitmap = Image.FromFile(item);
                         Bitmap pic = new Bitmap(100, 100);
                         using (Graphics g = Graphics.FromImage(pic))
@@ -272,12 +332,8 @@ namespace AdvancedScada.ImagePicker
                             g.DrawImage(bitmap, new System.Drawing.Rectangle(0, 0, pic.Width, pic.Height)); //redraw smaller image
                         }
                         bitmap = pic;
-                    }
-                    else
-                    {
-                        SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
-                        svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(item);
-                        bitmap = SVGSample.svg.SVGParser.GetBitmapFromSVG(item);
+
+                     
                        
                     }
                     if (bitmap == null)
