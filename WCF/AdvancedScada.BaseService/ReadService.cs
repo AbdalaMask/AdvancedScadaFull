@@ -13,7 +13,7 @@ namespace AdvancedScada.BaseService
     public class ReadService : IReadService
     {
 
-         private bool RUN_APPLICATION;
+        private bool RUN_APPLICATION;
         public IServiceCallback EventDataChanged;
         IODriver driverHelper = null;
         private ChannelService objChannelManager;
@@ -51,27 +51,27 @@ namespace AdvancedScada.BaseService
                                 if (EventDataChanged != null)
                                 {
 
- 
-                                        try
+
+                                    try
+                                    {
+                                        if (((ICommunicationObject)EventDataChanged).State == CommunicationState.Opened)
                                         {
-                                            if (((ICommunicationObject)EventDataChanged).State == CommunicationState.Opened)
-                                            {
-                                           EventDataChanged.UpdateCollection(XCollection.objConnectionState, TagCollection.Tags);
+                                            EventDataChanged.UpdateCollection(XCollection.objConnectionState, TagCollection.Tags);
                                             EventDataChanged.DataTags(TagCollection.Tags);
-                                            }
-
-                                            Thread.Sleep(100);
-
                                         }
-                                        catch (Exception ex)
-                                        {
-                                      
+
+                                        Thread.Sleep(100);
+
+                                    }
+                                    catch (Exception ex)
+                                    {
+
                                         RUN_APPLICATION = false;
                                         eventLoggingMessage?.Invoke(string.Format("Removed Callback Channel: {0}, IP Address: {1}| Message Exception: {2}.", mac.MachineName, mac.IPAddress, ex.Message));
                                         EventscadaException?.Invoke(this.GetType().Name, ex.Message);
                                         EventDataChanged = null;
                                         EventChannelCount?.Invoke(1, false);
-                                        }
+                                    }
                                     Thread.Sleep(100);
 
                                 }
@@ -95,7 +95,7 @@ namespace AdvancedScada.BaseService
                 });
 
 
-                 
+
             }
             catch (Exception ex)
             {
@@ -127,33 +127,33 @@ namespace AdvancedScada.BaseService
             {
                 GC.SuppressFinalize(this);
             }
-          
+
         }
 
         public void WriteTag(string tagName, dynamic value)
         {
-            
+
             try
             {
                 if (objChannelManager == null) return;
-               
-                    var strArrays = tagName.Split('.');
-                    var str = $"{strArrays[0]}.{strArrays[1]}";
-                    foreach (var Channels in objChannelManager.Channels)
+
+                var strArrays = tagName.Split('.');
+                var str = $"{strArrays[0]}.{strArrays[1]}";
+                foreach (var Channels in objChannelManager.Channels)
+                {
+                    foreach (var dv in Channels.Devices)
                     {
-                        foreach (var dv in Channels.Devices)
+                        var bEquals = $"{Channels.ChannelName}.{dv.DeviceName}".Equals(str);
+                        if (bEquals)
                         {
-                            var bEquals = $"{Channels.ChannelName}.{dv.DeviceName}".Equals(str);
-                            if (bEquals)
-                            {
                             driverHelper = GetDriver(Channels.ChannelTypes);
 
                             driverHelper?.WriteTag(tagName, value);
 
-                            }
                         }
                     }
-                
+                }
+
             }
             catch (Exception ex)
             {

@@ -1,7 +1,5 @@
 ﻿using AdvancedScada.BaseService.Client;
-using AdvancedScada.DataAccess;
 using AdvancedScada.DriverBase;
-using AdvancedScada.HMI.Tools;
 using AdvancedScada.IBaseService;
 using AdvancedScada.IBaseService.Common;
 using System;
@@ -58,7 +56,7 @@ namespace AdvancedScada.HMI
             try
             {
                 client?.Disconnect(XCollection.CURRENT_MACHINE);
-                
+
 
             }
             catch (CommunicationException ex)

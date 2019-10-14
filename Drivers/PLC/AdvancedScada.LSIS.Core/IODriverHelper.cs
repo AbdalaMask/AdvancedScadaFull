@@ -11,7 +11,7 @@ using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.LSIS.Core
 {
-    public  class IODriverHelper: AdvancedScada.DriverBase. IODriver
+    public class IODriverHelper : AdvancedScada.DriverBase.IODriver
     {
         public static readonly ManualResetEvent SendDone = new ManualResetEvent(true);
         public static List<Channel> Channels = new List<Channel>();
@@ -22,65 +22,65 @@ namespace AdvancedScada.LSIS.Core
 
         private static bool IsConnected;
         private static int COUNTER;
-     
+
 
         #region IServiceDriver
         public string Name => "LSIS";
         public void InitializeService(Channel ch)
         {
- 
+
             try
             {
 
                 //=================================================================
 
-            if (Channels == null) return;
+                if (Channels == null) return;
                 Channels.Add(ch);
-              
-                
-                    IDriverAdapter DriverAdapter = null;
-                    foreach (var dv in ch.Devices)
+
+
+                IDriverAdapter DriverAdapter = null;
+                foreach (var dv in ch.Devices)
+                {
+                    try
                     {
-                        try
+                        switch (ch.ConnectionType)
                         {
-                            switch (ch.ConnectionType)
-                            {
-                                case "SerialPort":
-                                    var dis = (DISerialPort)ch;
-                                    var sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
-                                    {
-                                        Handshake = dis.Handshake
-                                    };
+                            case "SerialPort":
+                                var dis = (DISerialPort)ch;
+                                var sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
+                                {
+                                    Handshake = dis.Handshake
+                                };
 
-                                    DriverAdapter = new LS_CNET(dv.SlaveId, sp);
-                                    cnet.Add(ch.ChannelName, (LS_CNET)DriverAdapter);
-                                    break;
-                                case "Ethernet":
-                                    var die = (DIEthernet)ch;
+                                DriverAdapter = new LS_CNET(dv.SlaveId, sp);
+                                cnet.Add(ch.ChannelName, (LS_CNET)DriverAdapter);
+                                break;
+                            case "Ethernet":
+                                var die = (DIEthernet)ch;
 
-                                    DriverAdapter = new LS_FENET(die.CPU, die.IPAddress, die.Port, die.Slot);
-                                    FENET.Add(ch.ChannelName, (LS_FENET)DriverAdapter);
+                                DriverAdapter = new LS_FENET(die.CPU, die.IPAddress, die.Port, die.Slot);
+                                FENET.Add(ch.ChannelName, (LS_FENET)DriverAdapter);
 
-                                    break;
-                            }
-
+                                break;
                         }
-                        catch (Exception ex)
-                        {
-                            EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-                        }
-                        foreach (var db in dv.DataBlocks)
-                        {
 
-                            foreach (var tg in db.Tags)
-                            {
-                                TagCollection.Tags.Add(
-                                    $"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
+                    }
+                    catch (Exception ex)
+                    {
+                        EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                    }
+                    foreach (var db in dv.DataBlocks)
+                    {
 
-                            }
+                        foreach (var tg in db.Tags)
+                        {
+                            TagCollection.Tags.Add(
+                                $"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
+
                         }
                     }
-                 
+                }
+
 
             }
             catch (Exception ex)

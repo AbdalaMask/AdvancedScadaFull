@@ -12,7 +12,7 @@ using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.Delta.Core
 {
-    public  class IODriverHelper : AdvancedScada.DriverBase.IODriver
+    public class IODriverHelper : AdvancedScada.DriverBase.IODriver
     {
         public static readonly ManualResetEvent SendDone = new ManualResetEvent(true);
         public static List<Channel> Channels = new List<Channel>();
@@ -24,75 +24,75 @@ namespace AdvancedScada.Delta.Core
 
         private static bool IsConnected;
         private static int COUNTER;
-         #region IServiceDriver
+        #region IServiceDriver
 
         public string Name => "Delta";
         public void InitializeService(Channel chns)
         {
-            
+
             try
             {
 
                 //=================================================================
 
-            if (Channels == null) return;
+                if (Channels == null) return;
                 Channels.Add(chns);
-               
-               
-                    IDriverAdapter DriverAdapter = null;
-                    foreach (var dv in chns.Devices)
+
+
+                IDriverAdapter DriverAdapter = null;
+                foreach (var dv in chns.Devices)
+                {
+                    try
                     {
-                        try
+                        switch (chns.ConnectionType)
                         {
-                            switch (chns.ConnectionType)
-                            {
-                                case "SerialPort":
-                                    var dis = (DISerialPort)chns;
-                                    var sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
-                                    {
-                                        Handshake = dis.Handshake
-                                    };
+                            case "SerialPort":
+                                var dis = (DISerialPort)chns;
+                                var sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
+                                {
+                                    Handshake = dis.Handshake
+                                };
 
-                                    switch (dis.Mode)
-                                    {
-                                        case "RTU":
-                                            DriverAdapter = new DeltaRTUMaster(dv.SlaveId, sp);
-                                            Deltartu.Add(chns.ChannelName, (DeltaRTUMaster)DriverAdapter);
-                                            break;
-                                        case "ASCII":
-                                            DriverAdapter = new DeltaASCIIMaster(dv.SlaveId, sp);
-                                            Deltaascii.Add(chns.ChannelName, (DeltaASCIIMaster)DriverAdapter);
-                                            break;
-                                    }
-                                    break;
-                                case "Ethernet":
-                                    var die = (DIEthernet)chns;
+                                switch (dis.Mode)
+                                {
+                                    case "RTU":
+                                        DriverAdapter = new DeltaRTUMaster(dv.SlaveId, sp);
+                                        Deltartu.Add(chns.ChannelName, (DeltaRTUMaster)DriverAdapter);
+                                        break;
+                                    case "ASCII":
+                                        DriverAdapter = new DeltaASCIIMaster(dv.SlaveId, sp);
+                                        Deltaascii.Add(chns.ChannelName, (DeltaASCIIMaster)DriverAdapter);
+                                        break;
+                                }
+                                break;
+                            case "Ethernet":
+                                var die = (DIEthernet)chns;
 
 
-                                    DriverAdapter = new DeltaTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
-                                    Deltambe.Add(chns.ChannelName, (DeltaTCPMaster)DriverAdapter);
+                                DriverAdapter = new DeltaTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
+                                Deltambe.Add(chns.ChannelName, (DeltaTCPMaster)DriverAdapter);
 
 
-                                    break;
-                            }
-
+                                break;
                         }
-                        catch (Exception ex)
-                        {
-                            EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-                        }
-                        foreach (var db in dv.DataBlocks)
-                        {
 
-                            foreach (var tg in db.Tags)
-                            {
-                                TagCollection.Tags.Add(
-                                    $"{chns.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
+                    }
+                    catch (Exception ex)
+                    {
+                        EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                    }
+                    foreach (var db in dv.DataBlocks)
+                    {
 
-                            }
+                        foreach (var tg in db.Tags)
+                        {
+                            TagCollection.Tags.Add(
+                                $"{chns.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
+
                         }
                     }
-                 
+                }
+
 
             }
             catch (Exception ex)

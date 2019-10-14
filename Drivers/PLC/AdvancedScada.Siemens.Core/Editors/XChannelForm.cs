@@ -10,10 +10,10 @@ namespace AdvancedScada.Siemens.Core.Editors
 {
     public partial class XChannelForm : AdvancedScada.Management.Editors.XChannelForm
     {
-        
+
         private string _DriverTypes;
 
-       
+
         public XChannelForm()
         {
             InitializeComponent();
@@ -46,7 +46,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                 cboxStopBits.Items.AddRange(System.Enum.GetNames(typeof(StopBits)));
                 cboxHandshake.Items.AddRange(System.Enum.GetNames(typeof(Handshake)));
 
-                    cboxModel.DataSource = System.Enum.GetNames(typeof(SiemensPLCS));
+                cboxModel.DataSource = System.Enum.GetNames(typeof(SiemensPLCS));
 
                 if (ch != null)
                 {
@@ -66,7 +66,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                             cboxParity.SelectedItem = $"{dis.Parity}";
                             cboxStopBits.SelectedItem = $"{dis.StopBits}";
                             cboxHandshake.SelectedItem = $"{dis.Handshake}";
-                          
+
 
                             break;
                         case "Ethernet":
@@ -84,8 +84,8 @@ namespace AdvancedScada.Siemens.Core.Editors
                 }
                 else
                 {
-                    
-                         
+
+
                     cboxConnType.Enabled = true;
                     this.Text = "Add Channel    " + _DriverTypes;
                     this.cboxConnType.SelectedIndex = 0;

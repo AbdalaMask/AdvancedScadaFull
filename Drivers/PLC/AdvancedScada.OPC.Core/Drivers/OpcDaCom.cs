@@ -1,12 +1,12 @@
-﻿using System;
-using System.Diagnostics;
-using AdvancedScada.DriverBase.Devices;
+﻿using AdvancedScada.DriverBase.Devices;
 using Opc;
 using Opc.Da;
+using System;
+using System.Diagnostics;
+using static AdvancedScada.IBaseService.Common.XCollection;
 using Convert = System.Convert;
 using Factory = OpcCom.Factory;
 using Server = Opc.Da.Server;
-using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.OPC.Core.Drivers
 {
@@ -61,7 +61,7 @@ namespace AdvancedScada.OPC.Core.Drivers
                         EventscadaException?.Invoke(this.GetType().Name, "ConnectedFailed");
                     }
                     IsConnected = true;
-                     
+
                     stopwatch.Stop();
 
 
@@ -71,7 +71,7 @@ namespace AdvancedScada.OPC.Core.Drivers
             {
                 EventscadaException?.Invoke(this.GetType().Name,
                     $"Could Not Connect to Server : {ex.Message}Time{stopwatch.ElapsedTicks}");
-                
+
                 IsConnected = false;
             }
 
@@ -96,7 +96,7 @@ namespace AdvancedScada.OPC.Core.Drivers
                     fact.Dispose();
                 }
 
-               
+
                 IsConnected = false;
 
 
@@ -104,9 +104,9 @@ namespace AdvancedScada.OPC.Core.Drivers
             catch (TimeoutException ex)
             {
 
-              
+
                 EventscadaException?.Invoke(this.GetType().Name, $"Could Not Connect to Server : {ex.Message}");
-               
+
                 throw ex;
             }
         }
@@ -385,7 +385,7 @@ namespace AdvancedScada.OPC.Core.Drivers
                     fact.Dispose();
                 }
 
-                
+
                 IsConnected = false;
 
 
@@ -395,7 +395,7 @@ namespace AdvancedScada.OPC.Core.Drivers
 
 
                 EventscadaException?.Invoke(this.GetType().Name, $"Could Not Connect to Server : {ex.Message}");
-                
+
             }
         }
         #endregion

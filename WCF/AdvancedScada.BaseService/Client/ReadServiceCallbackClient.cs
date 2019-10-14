@@ -11,11 +11,11 @@ using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.BaseService.Client
 {
 
-   
+
     [CallbackBehavior(UseSynchronizationContext = false)]
     public class ReadServiceCallbackClient : IServiceCallback
     {
-        
+
         public static bool LoadTagCollection()
         {
 

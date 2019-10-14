@@ -534,7 +534,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public string PLCAddressValue { get; set; }
         public string PLCAddressClick { get; set; }
-       
+
         public string PLCAddressEnabled { get; set; }
 
 

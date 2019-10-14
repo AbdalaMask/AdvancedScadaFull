@@ -41,7 +41,8 @@ namespace AdvancedScada.DriverBase.Devices
 
         [DataMember]
         public string Address
-        { get
+        {
+            get
             {
                 return address;
             }

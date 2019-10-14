@@ -3,21 +3,19 @@ using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.OPC.Core.Drivers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.OPC.Core
 {
-    public class IODriverHelper:AdvancedScada.DriverBase.IODriver
+    public class IODriverHelper : AdvancedScada.DriverBase.IODriver
     {
         #region Flad
         private static Dictionary<string, OpcDaCom> _OpcDaCom = new Dictionary<string, OpcDaCom>();
         private static readonly ManualResetEvent SendDone = new ManualResetEvent(true);
         private static readonly object myLockRead = new object();
-         private object LockObject = new object();
+        private object LockObject = new object();
         public OpcDaCom opcDaCom;
         public static List<Channel> Channels = new List<Channel>();
 
@@ -59,7 +57,7 @@ namespace AdvancedScada.OPC.Core
 
         }
         #endregion
-        
+
         #region IServiceDriver
         public void InitializeService(Channel ch)
         {

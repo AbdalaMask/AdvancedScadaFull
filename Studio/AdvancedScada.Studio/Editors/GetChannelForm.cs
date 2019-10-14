@@ -3,27 +3,23 @@ using AdvancedScada.IBaseService;
 using AdvancedScada.Management;
 using AdvancedScada.Management.BLManager;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AdvancedScada.Studio.Editors
 {
-    public  class GetChannelForm
+    public class GetChannelForm
     {
-       
+
 
         public EventChannelChanged eventChannelChanged = null;
-      
+
 
         public Management.Editors.XChannelForm XChannelFormLoad(string SelectedDrivers, ChannelService chm = null, Channel chCurrent = null)
         {
-            
-                return GetForm(SelectedDrivers, chCurrent, chm, "XChannelForm");
+
+            return GetForm(SelectedDrivers, chCurrent, chm, "XChannelForm");
         }
-       
+
         public Management.Editors.XChannelForm GetForm(string Path, Channel ch, ChannelService objChannelManager, string classname)
         {
             var objFunctions = GetIODriver.GetFunctions();
@@ -52,12 +48,12 @@ namespace AdvancedScada.Studio.Editors
             return GetForm(chParam.ChannelTypes, chParam, dvPara, "XDeviceForm");
         }
 
-        public Management.Editors.XDeviceForm GetForm(string Path, Channel chParam, Device dvPara , string classname)
+        public Management.Editors.XDeviceForm GetForm(string Path, Channel chParam, Device dvPara, string classname)
         {
             var objFunctions = GetIODriver.GetFunctions();
             var context = objFunctions.ParseNamespace($@"\AdvancedScada.{Path}.Core.dll", classname);
             var t = (Type)context;
-           
+
             var newObject = (Management.Editors.XDeviceForm)objFunctions.CreateInstance(t, new object[] { chParam, dvPara });
             newObject.eventDeviceChanged += (dv, isNew) =>
             {

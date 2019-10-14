@@ -43,7 +43,7 @@ namespace AdvancedScada.IODriver.Delta.TCP
                 return false;
             }
 
-            
+
             try
             {
 

@@ -8,9 +8,9 @@ namespace AdvancedScada.Siemens.Core.Editors
 {
     public partial class XDataBlockForm : AdvancedScada.Management.Editors.XDataBlockForm
     {
-      
+
         int TagsCount = 1;
-       
+
 
         public XDataBlockForm()
         {
@@ -24,13 +24,13 @@ namespace AdvancedScada.Siemens.Core.Editors
             db = dbParam;
         }
 
-       
-         
 
-     
+
+
+
         private void XDataBlockForm_Load(object sender, EventArgs e)
         {
-           
+
             try
             {
                 txtDeviceName.Text = dv.DeviceName;
@@ -41,14 +41,14 @@ namespace AdvancedScada.Siemens.Core.Editors
                 cboxDataType.DataSource = System.Enum.GetNames(typeof(DataTypes));
                 if (db == null)
                 {
-                  
+
                     Text = "Add DataBlock   " + ch.ChannelTypes;
                     txtDataBlockId.Text = Convert.ToString(dv.DataBlocks.Count + 1);
                     txtDataBlock.Text = "DataBlock" + Convert.ToString(dv.DataBlocks.Count + 1);
                 }
                 else
                 {
-                   
+
                     Text = "Edit DataBlock    " + ch.ChannelTypes;
                     txtChannelId.Text = db.ChannelId.ToString();
                     txtDeviceId.Text = db.DeviceId.ToString();
@@ -57,7 +57,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                     txtDesc.Text = db.Description;
                     txtDataBlockId.Text = $"{db.DataBlockId}";
                     cboxDataType.SelectedItem = string.Format("{0}", db.DataType);
-                    
+
                 }
             }
             catch (Exception ex)
@@ -70,15 +70,15 @@ namespace AdvancedScada.Siemens.Core.Editors
 
         private void cboxDataType_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
+
         }
 
-        
+
 
         private void btnOK_Click(object sender, EventArgs e)
         {
             try
-            { 
+            {
 
 
                 if ((string.IsNullOrEmpty(txtDBNumber.Text)
@@ -113,8 +113,8 @@ namespace AdvancedScada.Siemens.Core.Editors
                             Tags = new List<Tag>()
                         };
 
-                       
-                                
+
+
                         eventDataBlockChanged?.Invoke(dbNew, true);
                         Close();
                     }
@@ -132,8 +132,8 @@ namespace AdvancedScada.Siemens.Core.Editors
                         db.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", cboxDataType.SelectedItem));
                         db.IsArray = false;
 
-                     
- 
+
+
                         eventDataBlockChanged?.Invoke(db, false);
                         Close();
                     }

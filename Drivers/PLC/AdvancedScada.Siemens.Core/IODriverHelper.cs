@@ -110,16 +110,16 @@ namespace AdvancedScada.Siemens.Core
                         Channel ch = (Channel)chParam;
                         try
                         {
-                         switch (ch.ConnectionType)
-                        {
-                            case "SerialPort":
-                                DriverAdapter = _PLCPPI[ch.ChannelName];
-                                break;
+                            switch (ch.ConnectionType)
+                            {
+                                case "SerialPort":
+                                    DriverAdapter = _PLCPPI[ch.ChannelName];
+                                    break;
 
-                            case "Ethernet":
-                                DriverAdapter = _PLCS7[ch.ChannelName];
-                                break;
-                        }
+                                case "Ethernet":
+                                    DriverAdapter = _PLCS7[ch.ChannelName];
+                                    break;
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -187,7 +187,7 @@ namespace AdvancedScada.Siemens.Core
             {
                 IsConnected = false;
 
-               
+
                 Channels = null;
                 for (int i = 0; i < threads.Length; i++)
                 {
@@ -238,8 +238,8 @@ namespace AdvancedScada.Siemens.Core
                             if (IntRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < IntRs.Length; j++)
                             {
-                                
-                                    db.Tags[j].Value = IntRs[j];
+
+                                db.Tags[j].Value = IntRs[j];
                                 db.Tags[j].TimeSpan = DateTime.Now;
                             }
                         }
@@ -266,9 +266,9 @@ namespace AdvancedScada.Siemens.Core
                             if (wdRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < wdRs.Length; j++)
                             {
-                                
-                                    db.Tags[j].Value = wdRs[j];
-                                
+
+                                db.Tags[j].Value = wdRs[j];
+
                                 db.Tags[j].TimeSpan = DateTime.Now;
                             }
                         }
@@ -320,7 +320,7 @@ namespace AdvancedScada.Siemens.Core
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
         }
-       
+
         #endregion
         #region Write All
 

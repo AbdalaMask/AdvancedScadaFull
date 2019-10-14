@@ -1,6 +1,4 @@
 ﻿using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.Management;
-using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
 using static AdvancedScada.IBaseService.Common.XCollection;
@@ -8,7 +6,7 @@ namespace AdvancedScada.LSIS.Core.Editors
 {
     public partial class XDeviceForm : AdvancedScada.Management.Editors.XDeviceForm
     {
-       
+
 
         public XDeviceForm()
         {

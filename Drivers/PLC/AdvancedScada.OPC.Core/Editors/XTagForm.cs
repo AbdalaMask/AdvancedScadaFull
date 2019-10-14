@@ -1,7 +1,6 @@
 ﻿using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.Management;
-using ComponentFactory.Krypton.Toolkit;
 using System;
 using static AdvancedScada.IBaseService.Common.XCollection;
 

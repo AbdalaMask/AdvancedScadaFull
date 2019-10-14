@@ -11,7 +11,7 @@ namespace AdvancedScada.IBaseService
     {
         private static readonly object mutex = new object();
         private static GetIODriver _instance;
-       
+
         public static GetIODriver GetFunctions()
         {
             lock (mutex)
@@ -21,16 +21,16 @@ namespace AdvancedScada.IBaseService
 
             return _instance;
         }
-    
+
         public IODriver GetAssemblyDrivers(string Path, string NameSpaceAndClass)
         {
             IODriver iODriver = null;
             try
             {
- 
+
                 iODriver = GetAssembly($@"\AdvancedScada.{Path}.Core.dll",
                     string.Format("AdvancedScada.{0}.Core.{1}Service", NameSpaceAndClass));
- 
+
             }
             catch (Exception ex)
             {

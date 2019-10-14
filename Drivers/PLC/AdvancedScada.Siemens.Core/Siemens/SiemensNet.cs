@@ -22,7 +22,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
 
         public bool IsConnected { get => _IsConnected; set => _IsConnected = value; }
         public byte Station { get => station; set => station = value; }
- 
+
         public SiemensNet()
         {
         }
@@ -112,9 +112,9 @@ namespace AdvancedScada.Siemens.Core.Siemens
 
         public bool Write(string address, dynamic value)
         {
-           
-                siemensTcpNet.Write(address, value);
-             
+
+            siemensTcpNet.Write(address, value);
+
 
             return true;
         }
@@ -179,7 +179,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
 
-      
+
 
         public bool[] ReadSingle(string address, ushort length)
         {

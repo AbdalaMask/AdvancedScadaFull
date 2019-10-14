@@ -1,7 +1,5 @@
 ﻿using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.Management;
 using AdvancedScada.Management.BLManager;
-using HslCommunication.Profinet.LSIS;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -11,10 +9,10 @@ namespace AdvancedScada.Delta.Core.Editors
 {
     public partial class XChannelForm : AdvancedScada.Management.Editors.XChannelForm
     {
-       
+
         private string _DriverTypes;
 
-      
+
         public XChannelForm()
         {
             InitializeComponent();
@@ -51,12 +49,12 @@ namespace AdvancedScada.Delta.Core.Editors
                 if (ch != null)
                 {
 
-                  
+
                     cboxConnType.Enabled = false;
                     this.Text = "Edit Channel   " + ch.ChannelTypes;
                     this.txtChannelName.Text = ch.ChannelName;
                     this.cboxConnType.SelectedItem = $"{ch.ConnectionType}";
-                  
+
                     txtDesc.Text = ch.ChannelName;
                     switch (ch.ConnectionType)
                     {
@@ -76,7 +74,7 @@ namespace AdvancedScada.Delta.Core.Editors
                             DIEthernet die = (DIEthernet)ch;
                             txtIPAddress.Text = die.IPAddress;
                             txtPort.Value = die.Port;
-                          
+
                             break;
 
 
@@ -85,7 +83,7 @@ namespace AdvancedScada.Delta.Core.Editors
                 }
                 else
                 {
-                    
+
                     cboxConnType.Enabled = true;
                     this.Text = "Add Channel    " + _DriverTypes;
                     this.cboxConnType.SelectedIndex = 0;

@@ -13,7 +13,7 @@ namespace AdvancedScada.IBaseService
         [OperationContract]
         [FaultContract(typeof(IFaultException))]
         [WebInvoke(Method = "GET", UriTemplate = "GetCollection", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        Dictionary<string , Tag> GetCollection();
+        Dictionary<string, Tag> GetCollection();
 
 
     }

@@ -8,9 +8,9 @@ namespace AdvancedScada.Modbus.Core.Editors
 {
     public partial class XDataBlockForm : AdvancedScada.Management.Editors.XDataBlockForm
     {
-      
+
         int TagsCount = 1;
-      
+
 
 
         public XDataBlockForm()
@@ -64,12 +64,12 @@ namespace AdvancedScada.Modbus.Core.Editors
         }
         #endregion
 
-        
 
-        
+
+
         private void XDataBlockForm_Load(object sender, EventArgs e)
         {
-          
+
             try
             {
                 txtDeviceName.Text = dv.DeviceName;
@@ -78,17 +78,17 @@ namespace AdvancedScada.Modbus.Core.Editors
                 txtDeviceId.Text = dv.DeviceId.ToString();
                 CboxTypeOfRead.SelectedIndex = 0;
                 cboxDataType.DataSource = System.Enum.GetNames(typeof(DataTypes));
-               
+
                 if (db == null)
                 {
-                   
+
                     Text = "Add DataBlock   " + ch.ChannelTypes;
                     txtDataBlockId.Text = Convert.ToString(dv.DataBlocks.Count + 1);
                     txtDataBlock.Text = "DataBlock" + Convert.ToString(dv.DataBlocks.Count + 1);
                 }
                 else
                 {
-                  
+
                     Text = "Edit DataBlock    " + ch.ChannelTypes;
                     txtChannelId.Text = db.ChannelId.ToString();
                     txtDeviceId.Text = db.DeviceId.ToString();

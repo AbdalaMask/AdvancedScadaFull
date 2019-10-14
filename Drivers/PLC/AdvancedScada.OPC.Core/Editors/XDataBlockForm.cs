@@ -1,17 +1,17 @@
 ﻿using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.DriverBase.Devices;
-using System;
-using System.Collections.Generic;
 using Opc;
 using Opc.Da;
 using OpcRcw.Da;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
+using static AdvancedScada.IBaseService.Common.XCollection;
 using Convert = System.Convert;
 using Factory = OpcCom.Factory;
 using Server = Opc.Da.Server;
 using Type = System.Type;
-using static AdvancedScada.IBaseService.Common.XCollection;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
 
 namespace AdvancedScada.OPC.Core.Editors
 {
@@ -292,9 +292,9 @@ namespace AdvancedScada.OPC.Core.Editors
 
             Type t;
             //if (localServerButton.Checked)
-                t = Type.GetTypeFromProgID(serverName);
+            t = Type.GetTypeFromProgID(serverName);
             //else
-                //t = Type.GetTypeFromProgID(serverName, serverTextBox.Text);
+            //t = Type.GetTypeFromProgID(serverName, serverTextBox.Text);
 
             object obj = Activator.CreateInstance(t);
             IOPCBrowseServerAddressSpace srv = (IOPCBrowseServerAddressSpace)obj;
@@ -317,7 +317,7 @@ namespace AdvancedScada.OPC.Core.Editors
                 ImportOPCChannels(srv, channelsTree.Nodes);
             }
             channelsTree.AfterCheck += new TreeViewEventHandler(ChannelsTree_AfterCheck);
-            
+
             connectButton.Enabled = false;
 
         }
@@ -329,7 +329,7 @@ namespace AdvancedScada.OPC.Core.Editors
             connectButton.Enabled = txtOPCServer.Text.Length > 0;
         }
 
-        
+
         public struct OPCChannelInfo
         {
             public string progId;

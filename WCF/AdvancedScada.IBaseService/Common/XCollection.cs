@@ -9,10 +9,10 @@ namespace AdvancedScada.IBaseService.Common
         public static ChannelCount EventChannelCount;
         public static EventLoggingMessage eventLoggingMessage;
         public static Machine CURRENT_MACHINE = null;
-       
+
         public static EventListenning eventAddMessage;
         public static EventConnectionState eventConnectionState;
-        public static EventConnectionChanged eventConnectionChanged ;
+        public static EventConnectionChanged eventConnectionChanged;
 
         public static PvGridChannelGet EventPvGridChannelGet;
         public static PvGridDeviceGet EventPvGridDeviceGet;

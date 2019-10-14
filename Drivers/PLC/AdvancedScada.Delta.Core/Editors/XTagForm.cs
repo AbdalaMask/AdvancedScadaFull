@@ -1,7 +1,5 @@
 ﻿using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.Management;
-using ComponentFactory.Krypton.Toolkit;
 using System;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
@@ -9,7 +7,7 @@ namespace AdvancedScada.Delta.Core.Editors
 {
     public partial class XTagForm : AdvancedScada.Management.Editors.XTagForm
     {
-       
+
         public XTagForm()
         {
             InitializeComponent();

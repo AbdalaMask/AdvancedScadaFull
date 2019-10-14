@@ -1,7 +1,5 @@
 ﻿using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.Management;
 using AdvancedScada.Management.BLManager;
-using ComponentFactory.Krypton.Toolkit;
 using HslCommunication.Profinet.LSIS;
 using System;
 using System.Collections.Generic;
@@ -12,10 +10,10 @@ namespace AdvancedScada.LSIS.Core.Editors
 {
     public partial class XChannelForm : AdvancedScada.Management.Editors.XChannelForm
     {
-        
+
         private string _DriverTypes;
 
-       
+
         public XChannelForm()
         {
             InitializeComponent();
@@ -52,9 +50,9 @@ namespace AdvancedScada.LSIS.Core.Editors
                 if (ch != null)
                 {
 
-                 
-                            cboxModel.DataSource = System.Enum.GetNames(typeof(LSCpuInfo));
-                           
+
+                    cboxModel.DataSource = System.Enum.GetNames(typeof(LSCpuInfo));
+
                     cboxConnType.Enabled = false;
                     this.Text = "Edit Channel   " + ch.ChannelTypes;
                     this.txtChannelName.Text = ch.ChannelName;
@@ -71,7 +69,7 @@ namespace AdvancedScada.LSIS.Core.Editors
                             cboxParity.SelectedItem = $"{dis.Parity}";
                             cboxStopBits.SelectedItem = $"{dis.StopBits}";
                             cboxHandshake.SelectedItem = $"{dis.Handshake}";
-                          
+
 
                             break;
                         case "Ethernet":
@@ -80,7 +78,7 @@ namespace AdvancedScada.LSIS.Core.Editors
                             txtIPAddress.Text = die.IPAddress;
                             txtPort.Value = die.Port;
                             txtSlot.Value = die.Slot;
-                           
+
                             break;
 
 
@@ -89,9 +87,9 @@ namespace AdvancedScada.LSIS.Core.Editors
                 }
                 else
                 {
-                    
-                            cboxModel.DataSource = System.Enum.GetNames(typeof(LSCpuInfo));
-                        
+
+                    cboxModel.DataSource = System.Enum.GetNames(typeof(LSCpuInfo));
+
                     cboxConnType.Enabled = true;
                     this.Text = "Add Channel    " + _DriverTypes;
                     this.cboxConnType.SelectedIndex = 0;

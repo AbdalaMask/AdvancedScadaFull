@@ -1,8 +1,6 @@
 ﻿using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.Management;
 using AdvancedScada.Utils.LSIS;
-using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
 using static AdvancedScada.IBaseService.Common.XCollection;
@@ -13,7 +11,7 @@ namespace AdvancedScada.LSIS.Core.Editors
     {
         private int IDX;
         int TagsCount = 1;
-       
+
 
         public XDataBlockForm()
         {
@@ -27,7 +25,7 @@ namespace AdvancedScada.LSIS.Core.Editors
             db = dbParam;
         }
 
-       
+
         #region LSIS
         public void AddressCreateTagWord(DataBlock db, bool IsNew)
         {
@@ -146,33 +144,33 @@ namespace AdvancedScada.LSIS.Core.Editors
         }
         #endregion
 
-     
+
         private void XDataBlockForm_Load(object sender, EventArgs e)
         {
-           
+
             try
             {
                 txtDeviceName.Text = dv.DeviceName;
                 txtChannelName.Text = ch.ChannelName;
                 txtChannelId.Text = ch.ChannelId.ToString();
                 txtDeviceId.Text = dv.DeviceId.ToString();
-                
+
                 cboxDataType.DataSource = System.Enum.GetNames(typeof(DataTypes));
                 if (db == null)
                 {
-                  
+
                     Text = "Add DataBlock   " + ch.ChannelTypes;
                     txtDataBlockId.Text = Convert.ToString(dv.DataBlocks.Count + 1);
                     txtDataBlock.Text = "DataBlock" + Convert.ToString(dv.DataBlocks.Count + 1);
                 }
                 else
                 {
-                   
+
                     Text = "Edit DataBlock    " + ch.ChannelTypes;
                     txtChannelId.Text = db.ChannelId.ToString();
                     txtDeviceId.Text = db.DeviceId.ToString();
                     txtDataBlock.Text = db.DataBlockName;
-                  
+
                     txtStartAddress.Value = db.StartAddress;
                     txtAddressLength.Value = db.Length;
                     txtDomain.Text = db.MemoryType;
@@ -291,19 +289,19 @@ namespace AdvancedScada.LSIS.Core.Editors
             {
                 var Address = 0;
                 var Save_BufAddr = 0;
-               
 
-                        switch (cboxDataType.Text)
-                        {
-                            case "Bit" when chkX16.Checked:
-                                Save_BufAddr = (int)txtAddressLength.Value * 16;
-                                break;
-                            default:
-                                Save_BufAddr = (int)txtAddressLength.Value;
-                                break;
-                        }
-                        Address = chkX10.Checked ? 10 * (int)txtStartAddress.Value : (int)txtStartAddress.Value;
-                    
+
+                switch (cboxDataType.Text)
+                {
+                    case "Bit" when chkX16.Checked:
+                        Save_BufAddr = (int)txtAddressLength.Value * 16;
+                        break;
+                    default:
+                        Save_BufAddr = (int)txtAddressLength.Value;
+                        break;
+                }
+                Address = chkX10.Checked ? 10 * (int)txtStartAddress.Value : (int)txtStartAddress.Value;
+
 
 
 
@@ -339,19 +337,19 @@ namespace AdvancedScada.LSIS.Core.Editors
                             Tags = new List<Tag>()
                         };
 
-                       
-                                switch (cboxDataType.Text)
-                                {
-                                    case "Bit":
-                                    case "Byte":
-                                        if (chkCreateTag.Checked && chkIsHex.Checked) AddressCreateTagBitHex(dbNew, Address, Save_BufAddr, true);
-                                        else AddressCreateTagBit(dbNew, Address, Save_BufAddr, true);
-                                        break;
-                                    default:
-                                        if (chkCreateTag.Checked) AddressCreateTagWord(dbNew, true);
-                                        break;
-                                }
-                          
+
+                        switch (cboxDataType.Text)
+                        {
+                            case "Bit":
+                            case "Byte":
+                                if (chkCreateTag.Checked && chkIsHex.Checked) AddressCreateTagBitHex(dbNew, Address, Save_BufAddr, true);
+                                else AddressCreateTagBit(dbNew, Address, Save_BufAddr, true);
+                                break;
+                            default:
+                                if (chkCreateTag.Checked) AddressCreateTagWord(dbNew, true);
+                                break;
+                        }
+
 
                         eventDataBlockChanged?.Invoke(dbNew, true);
                         Close();
@@ -370,19 +368,19 @@ namespace AdvancedScada.LSIS.Core.Editors
                         db.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", cboxDataType.SelectedItem));
                         db.IsArray = chkIsArray.Checked;
 
-                     
-                                switch (cboxDataType.Text)
-                                {
-                                    case "Bit":
-                                    case "Byte":
-                                        if (chkCreateTag.Checked && chkIsHex.Checked) AddressCreateTagBitHex(db, Address, Save_BufAddr, false);
-                                        else AddressCreateTagBit(db, Address, Save_BufAddr, false);
-                                        break;
-                                    default:
-                                        if (chkCreateTag.Checked) AddressCreateTagWord(db, false);
-                                        break;
-                                }
-                            
+
+                        switch (cboxDataType.Text)
+                        {
+                            case "Bit":
+                            case "Byte":
+                                if (chkCreateTag.Checked && chkIsHex.Checked) AddressCreateTagBitHex(db, Address, Save_BufAddr, false);
+                                else AddressCreateTagBit(db, Address, Save_BufAddr, false);
+                                break;
+                            default:
+                                if (chkCreateTag.Checked) AddressCreateTagWord(db, false);
+                                break;
+                        }
+
                         eventDataBlockChanged?.Invoke(db, false);
                         Close();
                     }

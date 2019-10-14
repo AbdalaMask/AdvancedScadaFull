@@ -29,7 +29,7 @@ namespace AdvancedScada.Studio.Tools
         }
         private void ServiceBase_eventChannelCount(string message)
         {
-            SetLabelText( txtHistory,string.Format("{0}" + Environment.NewLine, message));
+            SetLabelText(txtHistory, string.Format("{0}" + Environment.NewLine, message));
         }
         private void ServiceBase_eventChannelCount(string classname, string erorr)
         {

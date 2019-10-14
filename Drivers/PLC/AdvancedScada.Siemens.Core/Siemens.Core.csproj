@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HslCommunication, Version=8.1.1.0, Culture=neutral, PublicKeyToken=cdb2261fa039ed67, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\HslCommunication.8.1.1\lib\net451\HslCommunication.dll</HintPath>
+    </Reference>
     <Reference Include="Krypton Navigator, Version=5.470.773.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Lib\Krypton\Krypton Navigator.dll</HintPath>
@@ -120,12 +123,9 @@
       <Project>{1d570e9a-e5b4-44dd-946d-9d73cfa4a535}</Project>
       <Name>DriverBase</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\HslCommunication_Net45\HslCommunication.csproj">
-      <Project>{7f8029da-1b94-4b1d-b91f-5b21dbf2f3a2}</Project>
-      <Name>HslCommunication</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\AddChannel.png" />
   </ItemGroup>
   <ItemGroup>

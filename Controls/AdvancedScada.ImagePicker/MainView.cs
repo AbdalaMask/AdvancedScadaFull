@@ -10,8 +10,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Resources;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -303,24 +301,24 @@ namespace AdvancedScada.ImagePicker
                         svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(item);
                         bitmap = SVGSample.svg.SVGParser.GetBitmapFromSVG(item);
                     }
-                     else if (item.EndsWith(".Xaml"))
+                    else if (item.EndsWith(".Xaml"))
                     {
                         try
                         {
                             IMAGE_DPI = 96;
                             XmlTextReader xmlReader = new XmlTextReader(new StringReader(item));
                             Stream s = File.OpenRead(item);
-                            
+
                             object control = XamlReader.Load(s);
                             bitmap = SaveImage((System.Windows.Controls.Viewbox)control, "C://Test.png");
                         }
-                        catch  
+                        catch
                         {
 
                             continue;
                         }
-                       
-                        
+
+
                     }
                     else
                     {
@@ -333,8 +331,8 @@ namespace AdvancedScada.ImagePicker
                         }
                         bitmap = pic;
 
-                     
-                       
+
+
                     }
                     if (bitmap == null)
                     {

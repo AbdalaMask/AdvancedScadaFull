@@ -46,7 +46,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
         public bool IsConnected { get; set; } = false;
 
         public bool Connection()
-        { 
+        {
             if (!System.Net.IPAddress.TryParse(IP, out System.Net.IPAddress address))
             {
                 EventscadaException?.Invoke(this.GetType().Name, DemoUtils.IpAddressInputWrong);
@@ -79,7 +79,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
                     if (connect.IsSuccess)
                     {
                         EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedSuccess);
-                           IsConnected = true;
+                        IsConnected = true;
                     }
                     else
                     {
@@ -148,9 +148,9 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
             }
             if (typeof(TValue) == typeof(ushort))
             {
-               
+
                 var result = fastEnet.ReadUInt16(address, length).Content;
-                
+
                 return (TValue[])(object)result;
             }
             if (typeof(TValue) == typeof(int))

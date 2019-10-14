@@ -3,9 +3,6 @@ using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IBaseService;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdvancedScada.BaseService.Web
 {
@@ -23,6 +20,6 @@ namespace AdvancedScada.BaseService.Web
             }
         }
 
-      
+
     }
 }

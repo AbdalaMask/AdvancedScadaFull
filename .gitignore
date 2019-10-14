@@ -242,3 +242,7 @@ ModelManifest.xml
 .fake/
 /ImagesList
 /Drivers/HslCommunication_Net45/Profinet
+/HMI/Database
+/HMI/PLC
+/HMI/شاشة الوزن
+/HMI/HMI.7z

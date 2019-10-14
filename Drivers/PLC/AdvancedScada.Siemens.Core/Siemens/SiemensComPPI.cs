@@ -1,5 +1,4 @@
 ﻿using AdvancedScada.DriverBase;
-using HslCommunication;
 using HslCommunication.Profinet.Siemens;
 using System;
 using System.Diagnostics;
@@ -75,9 +74,9 @@ namespace AdvancedScada.Siemens.Core.Siemens
 
         public bool Write(string address, dynamic value)
         {
-           
-                siemensPPI.Write(address, value);
-            
+
+            siemensPPI.Write(address, value);
+
 
             return true;
         }

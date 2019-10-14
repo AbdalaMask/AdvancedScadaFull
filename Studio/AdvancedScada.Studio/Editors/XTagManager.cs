@@ -375,7 +375,7 @@ namespace AdvancedScada.Studio.Editors
             try
             {
                 Channel chCurrent = null;
-                
+
                 if (treeViewSI.SelectedNode == null) return;
                 int Level = treeViewSI.SelectedNode.Level;
                 switch (Level)
@@ -387,7 +387,7 @@ namespace AdvancedScada.Studio.Editors
                         chCurrent = objChannelManager.GetByChannelName(treeViewSI.SelectedNode.Parent.Text);
                         break;
                 }
-               var dvFrm = new GetDeviceForm().XDeviceFormLoad(chCurrent);
+                var dvFrm = new GetDeviceForm().XDeviceFormLoad(chCurrent);
                 dvFrm.eventDeviceChanged += new EventDeviceChanged((dv, isNew) =>
                 {
                     try
@@ -429,7 +429,7 @@ namespace AdvancedScada.Studio.Editors
             {
                 Channel chCurrent = null;
                 Device dvCurrent = null;
-               
+
                 if (treeViewSI.SelectedNode == null) return;
                 int Level = treeViewSI.SelectedNode.Level;
                 switch (Level)
@@ -443,7 +443,7 @@ namespace AdvancedScada.Studio.Editors
                         dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
                         break;
                 }
-              var  dbFrm = new GetDataBlockForm().XDataBlockFormLoad(chCurrent, dvCurrent);
+                var dbFrm = new GetDataBlockForm().XDataBlockFormLoad(chCurrent, dvCurrent);
                 dbFrm.eventDataBlockChanged += new EventDataBlockChanged((db, isNew) =>
                 {
                     try

@@ -1,20 +1,19 @@
 ﻿using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.Management;
 using AdvancedScada.Management.BLManager;
-using System;
 using Opc;
 using OpcCom;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using System;
 using System.Collections.Generic;
+using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.OPC.Core.Editors
 {
     public partial class XChannelForm : AdvancedScada.Management.Editors.XChannelForm
     {
-       
-       
 
-     
+
+
+
         public XChannelForm()
         {
             InitializeComponent();
@@ -67,7 +66,7 @@ namespace AdvancedScada.OPC.Core.Editors
             }
 
 
-           
+
 
         }
 
@@ -105,7 +104,7 @@ namespace AdvancedScada.OPC.Core.Editors
 
                 if (ch == null)
                 {
-                    
+
                     die.ChannelId = objChannelManager.Channels.Count + 1;
                     die.Devices = new List<Device>();
                     if (eventChannelChanged != null) eventChannelChanged(die, true);
@@ -115,7 +114,7 @@ namespace AdvancedScada.OPC.Core.Editors
                 }
                 else
                 {
- 
+
                     die.ChannelId = ch.ChannelId;
                     die.Devices = ch.Devices;
                     if (eventChannelChanged != null) eventChannelChanged(die, false);

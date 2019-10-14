@@ -11,7 +11,7 @@ using System.Threading;
 using static AdvancedScada.IBaseService.Common.XCollection;
 namespace AdvancedScada.Modbus.Core
 {
-    public partial class IODriverHelper:AdvancedScada.DriverBase.IODriver
+    public partial class IODriverHelper : AdvancedScada.DriverBase.IODriver
     {
         public static readonly ManualResetEvent SendDone = new ManualResetEvent(true);
         public static List<Channel> Channels = new List<Channel>();
@@ -24,73 +24,73 @@ namespace AdvancedScada.Modbus.Core
 
         private static bool IsConnected;
         private static int COUNTER;
-         #region IServiceDriver
+        #region IServiceDriver
         public string Name => "Modbus";
         public void InitializeService(Channel ch)
         {
 
-            
+
             try
             {
 
                 //=================================================================
 
 
-             
+
                 if (Channels == null) return;
                 Channels.Add(ch);
-                    IDriverAdapter DriverAdapter = null;
-                    foreach (var dv in ch.Devices)
+                IDriverAdapter DriverAdapter = null;
+                foreach (var dv in ch.Devices)
+                {
+                    try
                     {
-                        try
+                        switch (ch.ConnectionType)
                         {
-                            switch (ch.ConnectionType)
-                            {
-                                case "SerialPort":
-                                    var dis = (DISerialPort)ch;
-                                    var sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
-                                    {
-                                        Handshake = dis.Handshake
-                                    };
+                            case "SerialPort":
+                                var dis = (DISerialPort)ch;
+                                var sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
+                                {
+                                    Handshake = dis.Handshake
+                                };
 
 
-                                    switch (dis.Mode)
-                                    {
-                                        case "RTU":
-                                            DriverAdapter = new ModbusRTUMaster(dv.SlaveId, sp);
-                                            rtu.Add(ch.ChannelName, (ModbusRTUMaster)DriverAdapter);
-                                            break;
-                                        case "ASCII":
-                                            DriverAdapter = new ModbusASCIIMaster(dv.SlaveId, sp);
-                                            ascii.Add(ch.ChannelName, (ModbusASCIIMaster)DriverAdapter);
-                                            break;
-                                    }
+                                switch (dis.Mode)
+                                {
+                                    case "RTU":
+                                        DriverAdapter = new ModbusRTUMaster(dv.SlaveId, sp);
+                                        rtu.Add(ch.ChannelName, (ModbusRTUMaster)DriverAdapter);
+                                        break;
+                                    case "ASCII":
+                                        DriverAdapter = new ModbusASCIIMaster(dv.SlaveId, sp);
+                                        ascii.Add(ch.ChannelName, (ModbusASCIIMaster)DriverAdapter);
+                                        break;
+                                }
 
-                                    break;
-                                case "Ethernet":
-                                    var die = (DIEthernet)ch;
-                                    DriverAdapter = new ModbusTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
-                                    mbe.Add(ch.ChannelName, (ModbusTCPMaster)DriverAdapter);
-                                    break;
-                            }
-
+                                break;
+                            case "Ethernet":
+                                var die = (DIEthernet)ch;
+                                DriverAdapter = new ModbusTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
+                                mbe.Add(ch.ChannelName, (ModbusTCPMaster)DriverAdapter);
+                                break;
                         }
-                        catch (Exception ex)
-                        {
-                            EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-                        }
-                        foreach (var db in dv.DataBlocks)
-                        {
 
-                            foreach (var tg in db.Tags)
-                            {
-                                TagCollection.Tags.Add(
-                                    $"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
+                    }
+                    catch (Exception ex)
+                    {
+                        EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                    }
+                    foreach (var db in dv.DataBlocks)
+                    {
 
-                            }
+                        foreach (var tg in db.Tags)
+                        {
+                            TagCollection.Tags.Add(
+                                $"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
+
                         }
                     }
-                
+                }
+
 
             }
             catch (Exception ex)
@@ -192,7 +192,7 @@ namespace AdvancedScada.Modbus.Core
             try
             {
                 IsConnected = false;
-               
+
                 TagCollection.Tags.Clear();
                 Channels = null;
                 for (int i = 0; i < threads.Length; i++)
@@ -213,7 +213,7 @@ namespace AdvancedScada.Modbus.Core
 
         #endregion
         #region SendPackage All
-       
+
         private void SendPackageModbus(IDriverAdapter DriverAdapter, DataBlock db)
         {
             try
@@ -365,7 +365,7 @@ namespace AdvancedScada.Modbus.Core
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
         }
-       
+
 
         #endregion
         #region Write All
@@ -387,20 +387,20 @@ namespace AdvancedScada.Modbus.Core
                         {
                             IDriverAdapter DriverAdapter = null;
 
-                           
-                                    switch (ch.Mode)
-                                    {
-                                        case "RTU":
-                                            DriverAdapter = rtu[ch.ChannelName];
-                                            break;
-                                        case "ASCII":
-                                            DriverAdapter = ascii[ch.ChannelName];
-                                            break;
-                                        case "TCP":
-                                            DriverAdapter = mbe[ch.ChannelName];
-                                            break;
-                                    }
-                                 
+
+                            switch (ch.Mode)
+                            {
+                                case "RTU":
+                                    DriverAdapter = rtu[ch.ChannelName];
+                                    break;
+                                case "ASCII":
+                                    DriverAdapter = ascii[ch.ChannelName];
+                                    break;
+                                case "TCP":
+                                    DriverAdapter = mbe[ch.ChannelName];
+                                    break;
+                            }
+
                             if (DriverAdapter == null) return;
                             lock (DriverAdapter)
                                 switch (TagCollection.Tags[tagName].DataType)

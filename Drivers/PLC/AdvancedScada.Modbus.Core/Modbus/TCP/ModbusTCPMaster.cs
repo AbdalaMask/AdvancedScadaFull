@@ -42,7 +42,7 @@ namespace AdvancedScada.Modbus.Core.Modbus.TCP
                 return false;
             }
 
-            
+
 
             try
             {

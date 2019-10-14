@@ -10,7 +10,6 @@ using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.ServiceModel.Web;
-using System.Threading;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.BaseService
@@ -42,7 +41,7 @@ namespace AdvancedScada.BaseService
                 objWebServiceHost.Open();
                 foreach (ServiceEndpoint item in objWebServiceHost.Description.Endpoints)
                 {
-                   
+
                     //DriverService.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> Service is host with endpoint: '{1}'", DateTime.Now, item.Address));
                 }
 
@@ -105,13 +104,13 @@ namespace AdvancedScada.BaseService
                 });
                 foreach (var item in channels)
                 {
-                   
+
                     driverHelper = GetDriver(item.ChannelTypes);
                     if (driverHelper != null)
                         driverHelper.InitializeService(item);
                 }
                 foreach (var item in channels)
-                {  
+                {
                     _SerialNo = (ushort)(_SerialNo++ % 255 + 1);
                     driverHelper = GetDriver(item.ChannelTypes);
 
@@ -122,8 +121,8 @@ namespace AdvancedScada.BaseService
                     {
                         RequestsDriver.Add(item.ChannelTypes, driverHelper);
                         if (driverHelper != null)
-                                driverHelper?.Connect();
-                          
+                            driverHelper?.Connect();
+
                     }
 
                 }

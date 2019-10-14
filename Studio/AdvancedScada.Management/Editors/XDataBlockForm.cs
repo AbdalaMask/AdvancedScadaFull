@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using AdvancedScada.DriverBase.Devices;
+﻿using AdvancedScada.DriverBase.Devices;
 using ComponentFactory.Krypton.Toolkit;
 
 namespace AdvancedScada.Management.Editors

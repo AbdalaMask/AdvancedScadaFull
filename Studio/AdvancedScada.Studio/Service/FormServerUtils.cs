@@ -30,7 +30,7 @@ namespace AdvancedScada.Studio.Service
                 host.Opened += host_Opened;
                 host.Open();
 
-              
+
 
                 foreach (var se in host.Description.Endpoints)
                 {

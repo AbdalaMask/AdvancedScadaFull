@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using AdvancedScada.DriverBase.Devices;
+﻿using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.Management.BLManager;
 using ComponentFactory.Krypton.Toolkit;
 
