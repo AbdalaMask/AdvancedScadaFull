@@ -689,7 +689,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public void DisplayError(string ErrorMessage)
         {
-            throw new NotImplementedException();
+           
         }
 
         #endregion

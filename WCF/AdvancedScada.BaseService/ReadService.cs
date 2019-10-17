@@ -149,7 +149,7 @@ namespace AdvancedScada.BaseService
                             driverHelper = GetDriver(Channels.ChannelTypes);
 
                             driverHelper?.WriteTag(tagName, value);
-
+                            break;
                         }
                     }
                 }

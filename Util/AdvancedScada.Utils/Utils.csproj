@@ -34,9 +34,6 @@
     <Reference Include="EPPlus, Version=4.5.3.2, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EPPlus.4.5.3.2\lib\net40\EPPlus.dll</HintPath>
     </Reference>
-    <Reference Include="HslCommunication, Version=8.1.1.0, Culture=neutral, PublicKeyToken=cdb2261fa039ed67, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\HslCommunication.8.1.1\lib\net451\HslCommunication.dll</HintPath>
-    </Reference>
     <Reference Include="Krypton Toolkit, Version=5.470.1254.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\Krypton\Krypton Toolkit.dll</HintPath>
@@ -132,6 +129,10 @@
     <None Include="Resources\FolderOpen_32x32_72.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Drivers\HslCommunication_Net45\HslCommunication_Net45.csproj">
+      <Project>{7f8029da-1b94-4b1d-b91f-5b21dbf2f3a2}</Project>
+      <Name>HslCommunication_Net45</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WCF\AdvancedScada.IBaseService\IBaseService.csproj">
       <Project>{f47222c0-6b69-4ff1-aec3-b4c668b0a55a}</Project>
       <Name>IBaseService</Name>

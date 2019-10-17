@@ -32,19 +32,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Krypton Docking">
+    <Reference Include="Krypton Docking, Version=5.470.745.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\Krypton\Krypton Docking.dll</HintPath>
     </Reference>
-    <Reference Include="Krypton Navigator">
+    <Reference Include="Krypton Navigator, Version=5.470.774.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\Krypton\Krypton Navigator.dll</HintPath>
     </Reference>
-    <Reference Include="Krypton Ribbon">
+    <Reference Include="Krypton Ribbon, Version=5.470.828.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\Krypton\Krypton Ribbon.dll</HintPath>
     </Reference>
-    <Reference Include="Krypton Toolkit">
+    <Reference Include="Krypton Toolkit, Version=5.470.1302.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\Krypton\Krypton Toolkit.dll</HintPath>
     </Reference>
-    <Reference Include="Krypton Workspace">
+    <Reference Include="Krypton Workspace, Version=5.470.719.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\Krypton\Krypton Workspace.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Windows.Design.Extensibility, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86">
