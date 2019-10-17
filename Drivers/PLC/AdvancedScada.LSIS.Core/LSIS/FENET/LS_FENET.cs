@@ -13,7 +13,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
         private readonly int Port = 2004;
         private readonly string IP = "127.0.0.1";
 
-        private object slotNo;
+        private byte slotNo;
         private string CpuType = "XGB";
 
         #region construction
@@ -31,7 +31,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
             fastEnet = new XGBFastEnet();
         }
 
-        public LS_FENET(string CpuType, string ip, int port, object slotNo)
+        public LS_FENET(string CpuType, string ip, int port, byte slotNo)
             : this(ip, port)
         {
 
@@ -71,8 +71,8 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
 
                 fastEnet.IpAddress = IP;
                 fastEnet.Port = Port;
-                fastEnet.SlotNo = 3;
-                fastEnet.XCpuType = CpuType;
+                fastEnet.SlotNo = slotNo;
+                fastEnet.SetCpuType = CpuType;
                 try
                 {
                     OperateResult connect = fastEnet.ConnectServer();

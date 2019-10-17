@@ -49,7 +49,7 @@ namespace HslCommunication.Profinet.LSIS
         /// <param name="slotNo"></param>
         public XGBFastEnet(string CpuType, string ipAddress, int port, byte slotNo)
         {
-            this.XCpuType = CpuType;
+            this.SetCpuType = CpuType;
             WordLength = 2;
             IpAddress = ipAddress;
             Port = port;
@@ -61,7 +61,7 @@ namespace HslCommunication.Profinet.LSIS
         /// <summary>
         /// set plc
         /// </summary>
-        public string XCpuType { get; set; }
+        public string SetCpuType { get; set; }
 
         /// <summary>
         /// CPU TYPE
@@ -511,7 +511,7 @@ namespace HslCommunication.Profinet.LSIS
         private OperateResult<byte[]> BuildWriteByteCommand(string address, byte[] data)
         {
 
-            switch (XCpuType)
+            switch (SetCpuType)
             {
                 case "XGK":
                     analysisResult = AnalysisAddress(address);
