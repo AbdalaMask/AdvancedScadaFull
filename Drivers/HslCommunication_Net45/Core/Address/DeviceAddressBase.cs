@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-
-
-
-
-
-
-namespace HslCommunication.Core.Address
+﻿namespace HslCommunication.Core.Address
 {
     /// <summary>
     /// 所有设备通信类的地址基础类
@@ -26,9 +15,9 @@ namespace HslCommunication.Core.Address
         /// 解析字符串的地址
         /// </summary>
         /// <param name="address">地址信息</param>
-        public virtual void Parse( string address )
+        public virtual void Parse(string address)
         {
-            Address = ushort.Parse( address );
+            Address = ushort.Parse(address);
         }
 
 
@@ -36,9 +25,9 @@ namespace HslCommunication.Core.Address
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串数据</returns>
-        public override string ToString( )
+        public override string ToString()
         {
-            return Address.ToString( );
+            return Address.ToString();
         }
 
     }

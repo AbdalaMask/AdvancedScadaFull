@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using System.Text;
 
 namespace HslCommunication.Profinet.AllenBradley
 {
@@ -94,52 +93,52 @@ namespace HslCommunication.Profinet.AllenBradley
 
         #endregion
 
-        private static byte[] BuildRequestPathCommand( string address )
+        private static byte[] BuildRequestPathCommand(string address)
         {
-            using (MemoryStream ms = new MemoryStream( ))
+            using (MemoryStream ms = new MemoryStream())
             {
-                string[] tagNames = address.Split( new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries );
+                string[] tagNames = address.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
 
                 for (int i = 0; i < tagNames.Length; i++)
                 {
                     string strIndex = string.Empty;
-                    int indexFirst = tagNames[i].IndexOf( '[' );
-                    int indexSecond = tagNames[i].IndexOf( ']' );
+                    int indexFirst = tagNames[i].IndexOf('[');
+                    int indexSecond = tagNames[i].IndexOf(']');
                     if (indexFirst > 0 && indexSecond > 0 && indexSecond > indexFirst)
                     {
-                        strIndex = tagNames[i].Substring( indexFirst + 1, indexSecond - indexFirst - 1 );
-                        tagNames[i] = tagNames[i].Substring( 0, indexFirst );
+                        strIndex = tagNames[i].Substring(indexFirst + 1, indexSecond - indexFirst - 1);
+                        tagNames[i] = tagNames[i].Substring(0, indexFirst);
                     }
 
-                    ms.WriteByte( 0x91 );                        // 固定
-                    ms.WriteByte( (byte)tagNames[i].Length );    // 节点的长度值
-                    byte[] nameBytes = Encoding.ASCII.GetBytes( tagNames[i] );
-                    ms.Write( nameBytes, 0, nameBytes.Length );
-                    if (nameBytes.Length % 2 == 1) ms.WriteByte( 0x00 );
+                    ms.WriteByte(0x91);                        // 固定
+                    ms.WriteByte((byte)tagNames[i].Length);    // 节点的长度值
+                    byte[] nameBytes = Encoding.ASCII.GetBytes(tagNames[i]);
+                    ms.Write(nameBytes, 0, nameBytes.Length);
+                    if (nameBytes.Length % 2 == 1) ms.WriteByte(0x00);
 
-                    if (!string.IsNullOrEmpty( strIndex ))
+                    if (!string.IsNullOrEmpty(strIndex))
                     {
-                        string[] indexs = strIndex.Split( new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries );
+                        string[] indexs = strIndex.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                         for (int j = 0; j < indexs.Length; j++)
                         {
-                            int index = Convert.ToInt32( indexs[j] );
+                            int index = Convert.ToInt32(indexs[j]);
                             if (index < 256)
                             {
-                                ms.WriteByte( 0x28 );
-                                ms.WriteByte( (byte)index );
+                                ms.WriteByte(0x28);
+                                ms.WriteByte((byte)index);
                             }
                             else
                             {
-                                ms.WriteByte( 0x29 );
-                                ms.WriteByte( 0x00 );
-                                ms.WriteByte( BitConverter.GetBytes( index )[0] );
-                                ms.WriteByte( BitConverter.GetBytes( index )[1] );
+                                ms.WriteByte(0x29);
+                                ms.WriteByte(0x00);
+                                ms.WriteByte(BitConverter.GetBytes(index)[0]);
+                                ms.WriteByte(BitConverter.GetBytes(index)[1]);
                             }
                         }
                     }
                 }
 
-                return ms.ToArray( );
+                return ms.ToArray();
             }
         }
 
@@ -150,13 +149,13 @@ namespace HslCommunication.Profinet.AllenBradley
         /// <param name="session">当前会话的id</param>
         /// <param name="commandSpecificData">CommandSpecificData命令</param>
         /// <returns>最终可发送的数据命令</returns>
-        public static byte[] PackRequestHeader( ushort command, uint session, byte[] commandSpecificData )
+        public static byte[] PackRequestHeader(ushort command, uint session, byte[] commandSpecificData)
         {
             byte[] buffer = new byte[commandSpecificData.Length + 24];
-            Array.Copy( commandSpecificData, 0, buffer, 24, commandSpecificData.Length );
-            BitConverter.GetBytes( command ).CopyTo( buffer, 0 );
-            BitConverter.GetBytes( session ).CopyTo( buffer, 4 );
-            BitConverter.GetBytes( (ushort)commandSpecificData.Length ).CopyTo( buffer, 2 );
+            Array.Copy(commandSpecificData, 0, buffer, 24, commandSpecificData.Length);
+            BitConverter.GetBytes(command).CopyTo(buffer, 0);
+            BitConverter.GetBytes(session).CopyTo(buffer, 4);
+            BitConverter.GetBytes((ushort)commandSpecificData.Length).CopyTo(buffer, 2);
             return buffer;
         }
 
@@ -166,23 +165,23 @@ namespace HslCommunication.Profinet.AllenBradley
         /// <param name="address">地址</param>
         /// <param name="length">指代数组的长度</param>
         /// <returns>CIP的指令信息</returns>
-        public static byte[] PackRequsetRead( string address, int length )
+        public static byte[] PackRequsetRead(string address, int length)
         {
             byte[] buffer = new byte[1024];
             int offect = 0;
             buffer[offect++] = CIP_READ_DATA;
             offect++;
 
-            byte[] requestPath = BuildRequestPathCommand( address );
-            requestPath.CopyTo( buffer, offect );
+            byte[] requestPath = BuildRequestPathCommand(address);
+            requestPath.CopyTo(buffer, offect);
             offect += requestPath.Length;
 
             buffer[1] = (byte)((offect - 2) / 2);
-            buffer[offect++] = BitConverter.GetBytes( length )[0];
-            buffer[offect++] = BitConverter.GetBytes( length )[1];
-            
+            buffer[offect++] = BitConverter.GetBytes(length)[0];
+            buffer[offect++] = BitConverter.GetBytes(length)[1];
+
             byte[] data = new byte[offect];
-            Array.Copy( buffer, 0, data, 0, offect );
+            Array.Copy(buffer, 0, data, 0, offect);
             return data;
         }
 
@@ -193,7 +192,7 @@ namespace HslCommunication.Profinet.AllenBradley
         /// <param name="startIndex">起始的索引位置</param>
         /// <param name="length">读取的数据长度，对于short来说，最大是489长度</param>
         /// <returns>CIP的指令信息</returns>
-        public static byte[] PackRequestReadSegment(string address, int startIndex, int length )
+        public static byte[] PackRequestReadSegment(string address, int startIndex, int length)
         {
             byte[] buffer = new byte[1024];
             int offect = 0;
@@ -201,20 +200,20 @@ namespace HslCommunication.Profinet.AllenBradley
             offect++;
 
 
-            byte[] requestPath = BuildRequestPathCommand( address + (address.EndsWith( "]" ) ? string.Empty : $"[{startIndex}]") );
-            requestPath.CopyTo( buffer, offect );
+            byte[] requestPath = BuildRequestPathCommand(address + (address.EndsWith("]") ? string.Empty : $"[{startIndex}]"));
+            requestPath.CopyTo(buffer, offect);
             offect += requestPath.Length;
 
             buffer[1] = (byte)((offect - 2) / 2);
-            buffer[offect++] = BitConverter.GetBytes( length )[0];
-            buffer[offect++] = BitConverter.GetBytes( length )[1];
-            buffer[offect++] = BitConverter.GetBytes( 0 )[0];
-            buffer[offect++] = BitConverter.GetBytes( 0 )[1];
-            buffer[offect++] = BitConverter.GetBytes( 0 )[2];
-            buffer[offect++] = BitConverter.GetBytes( 0 )[3];
+            buffer[offect++] = BitConverter.GetBytes(length)[0];
+            buffer[offect++] = BitConverter.GetBytes(length)[1];
+            buffer[offect++] = BitConverter.GetBytes(0)[0];
+            buffer[offect++] = BitConverter.GetBytes(0)[1];
+            buffer[offect++] = BitConverter.GetBytes(0)[2];
+            buffer[offect++] = BitConverter.GetBytes(0)[3];
 
             byte[] data = new byte[offect];
-            Array.Copy( buffer, 0, data, 0, offect );
+            Array.Copy(buffer, 0, data, 0, offect);
             return data;
         }
 
@@ -226,30 +225,30 @@ namespace HslCommunication.Profinet.AllenBradley
         /// <param name="value">字节值</param>
         /// <param name="length">如果节点为数组，就是数组长度</param>
         /// <returns>CIP的指令信息</returns>
-        public static byte[] PackRequestWrite( string address, ushort typeCode, byte[] value, int length = 1 )
+        public static byte[] PackRequestWrite(string address, ushort typeCode, byte[] value, int length = 1)
         {
             byte[] buffer = new byte[1024];
             int offect = 0;
             buffer[offect++] = CIP_WRITE_DATA;
             offect++;
 
-            byte[] requestPath = BuildRequestPathCommand( address );
-            requestPath.CopyTo( buffer, offect );
+            byte[] requestPath = BuildRequestPathCommand(address);
+            requestPath.CopyTo(buffer, offect);
             offect += requestPath.Length;
 
             buffer[1] = (byte)((offect - 2) / 2);
 
-            buffer[offect++] = BitConverter.GetBytes( typeCode )[0];     // 数据类型
-            buffer[offect++] = BitConverter.GetBytes( typeCode )[1];
+            buffer[offect++] = BitConverter.GetBytes(typeCode)[0];     // 数据类型
+            buffer[offect++] = BitConverter.GetBytes(typeCode)[1];
 
-            buffer[offect++] = BitConverter.GetBytes( length )[0];       // 固定
-            buffer[offect++] = BitConverter.GetBytes( length )[1];
+            buffer[offect++] = BitConverter.GetBytes(length)[0];       // 固定
+            buffer[offect++] = BitConverter.GetBytes(length)[1];
 
-            value.CopyTo( buffer, offect );                              // 数值
+            value.CopyTo(buffer, offect);                              // 数值
             offect += value.Length;
 
             byte[] data = new byte[offect];
-            Array.Copy( buffer, 0, data, 0, offect );
+            Array.Copy(buffer, 0, data, 0, offect);
             return data;
         }
 
@@ -260,79 +259,79 @@ namespace HslCommunication.Profinet.AllenBradley
         /// <param name="slot">PLC所在的槽号</param>
         /// <param name="cips">cip指令内容</param>
         /// <returns>最终的指令值</returns>
-        public static byte[] PackCommandSpecificData( byte slot, params byte[][] cips )
+        public static byte[] PackCommandSpecificData(byte slot, params byte[][] cips)
         {
-            System.IO.MemoryStream ms = new System.IO.MemoryStream( );
-            ms.WriteByte( 0x00 );
-            ms.WriteByte( 0x00 );
-            ms.WriteByte( 0x00 );
-            ms.WriteByte( 0x00 );
-            ms.WriteByte( 0x01 );     // 超时
-            ms.WriteByte( 0x00 );
-            ms.WriteByte( 0x02 );     // 项数
-            ms.WriteByte( 0x00 );
-            ms.WriteByte( 0x00 );     // 连接的地址项
-            ms.WriteByte( 0x00 );
-            ms.WriteByte( 0x00 );     // 长度
-            ms.WriteByte( 0x00 );
-            ms.WriteByte( 0xB2 );     // 连接的项数
-            ms.WriteByte( 0x00 );
-            ms.WriteByte( 0x00 );     // 后面数据包的长度，等全部生成后在赋值
-            ms.WriteByte( 0x00 );
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            ms.WriteByte(0x00);
+            ms.WriteByte(0x00);
+            ms.WriteByte(0x00);
+            ms.WriteByte(0x00);
+            ms.WriteByte(0x01);     // 超时
+            ms.WriteByte(0x00);
+            ms.WriteByte(0x02);     // 项数
+            ms.WriteByte(0x00);
+            ms.WriteByte(0x00);     // 连接的地址项
+            ms.WriteByte(0x00);
+            ms.WriteByte(0x00);     // 长度
+            ms.WriteByte(0x00);
+            ms.WriteByte(0xB2);     // 连接的项数
+            ms.WriteByte(0x00);
+            ms.WriteByte(0x00);     // 后面数据包的长度，等全部生成后在赋值
+            ms.WriteByte(0x00);
 
-            ms.WriteByte( 0x52 );     // 服务
-            ms.WriteByte( 0x02 );     // 请求路径大小
-            ms.WriteByte( 0x20 );     // 请求路径
-            ms.WriteByte( 0x06 );
-            ms.WriteByte( 0x24 );
-            ms.WriteByte( 0x01 );
-            ms.WriteByte( 0x0A );     // 超时时间
-            ms.WriteByte( 0xF0 );
-            ms.WriteByte( 0x00 );     // CIP指令长度
-            ms.WriteByte( 0x00 );
+            ms.WriteByte(0x52);     // 服务
+            ms.WriteByte(0x02);     // 请求路径大小
+            ms.WriteByte(0x20);     // 请求路径
+            ms.WriteByte(0x06);
+            ms.WriteByte(0x24);
+            ms.WriteByte(0x01);
+            ms.WriteByte(0x0A);     // 超时时间
+            ms.WriteByte(0xF0);
+            ms.WriteByte(0x00);     // CIP指令长度
+            ms.WriteByte(0x00);
 
             int count = 0;
             if (cips.Length == 1)
             {
-                ms.Write( cips[0], 0, cips[0].Length );
+                ms.Write(cips[0], 0, cips[0].Length);
                 count += cips[0].Length;
             }
             else
             {
-                ms.WriteByte( 0x0A );   // 固定
-                ms.WriteByte( 0x02 );
-                ms.WriteByte( 0x20 );
-                ms.WriteByte( 0x02 );
-                ms.WriteByte( 0x24 );
-                ms.WriteByte( 0x01 );
+                ms.WriteByte(0x0A);   // 固定
+                ms.WriteByte(0x02);
+                ms.WriteByte(0x20);
+                ms.WriteByte(0x02);
+                ms.WriteByte(0x24);
+                ms.WriteByte(0x01);
                 count += 8;
 
-                ms.Write( BitConverter.GetBytes( (ushort)cips.Length ), 0, 2 );  // 写入项数
+                ms.Write(BitConverter.GetBytes((ushort)cips.Length), 0, 2);  // 写入项数
                 ushort offect = (ushort)(0x02 + 2 * cips.Length);
                 count += 2 * cips.Length;
 
                 for (int i = 0; i < cips.Length; i++)
                 {
-                    ms.Write( BitConverter.GetBytes( offect ), 0, 2 );
+                    ms.Write(BitConverter.GetBytes(offect), 0, 2);
                     offect = (ushort)(offect + cips[i].Length);
                 }
 
                 for (int i = 0; i < cips.Length; i++)
                 {
-                    ms.Write( cips[i], 0, cips[i].Length );
+                    ms.Write(cips[i], 0, cips[i].Length);
                     count += cips[i].Length;
                 }
             }
-            ms.WriteByte( 0x01 );     // Path Size
-            ms.WriteByte( 0x00 );
-            ms.WriteByte( 0x01 );     // port
-            ms.WriteByte( slot );
+            ms.WriteByte(0x01);     // Path Size
+            ms.WriteByte(0x00);
+            ms.WriteByte(0x01);     // port
+            ms.WriteByte(slot);
 
-            byte[] data = ms.ToArray( );
-            ms.Dispose( );
-            BitConverter.GetBytes( (short)count ).CopyTo( data, 24 );
-            data[14] = BitConverter.GetBytes( (short)(data.Length - 16) )[0];
-            data[15] = BitConverter.GetBytes( (short)(data.Length - 16) )[1];
+            byte[] data = ms.ToArray();
+            ms.Dispose();
+            BitConverter.GetBytes((short)count).CopyTo(data, 24);
+            data[14] = BitConverter.GetBytes((short)(data.Length - 16))[0];
+            data[15] = BitConverter.GetBytes((short)(data.Length - 16))[1];
             return data;
         }
 
@@ -342,49 +341,49 @@ namespace HslCommunication.Profinet.AllenBradley
         /// <param name="response">PLC的反馈数据</param>
         /// <param name="isRead">是否是返回的操作</param>
         /// <returns>带有结果标识的最终数据</returns>
-        public static OperateResult<byte[]> ExtractActualData( byte[] response, bool isRead )
+        public static OperateResult<byte[]> ExtractActualData(byte[] response, bool isRead)
         {
 
-            List<byte> data = new List<byte>( );
+            List<byte> data = new List<byte>();
 
             int offect = 38;
-            ushort count = BitConverter.ToUInt16( response, 38 );    // 剩余总字节长度，在剩余的字节里，有可能是一项数据，也有可能是多项
-            if (BitConverter.ToInt32( response, 40 ) == 0x8A)
+            ushort count = BitConverter.ToUInt16(response, 38);    // 剩余总字节长度，在剩余的字节里，有可能是一项数据，也有可能是多项
+            if (BitConverter.ToInt32(response, 40) == 0x8A)
             {
                 // 多项数据
                 offect = 44;
-                int dataCount = BitConverter.ToUInt16( response, offect );
+                int dataCount = BitConverter.ToUInt16(response, offect);
                 for (int i = 0; i < dataCount; i++)
                 {
-                    int offectStart = BitConverter.ToUInt16( response, offect + 2 + i * 2 ) + offect;
-                    int offectEnd = (i == dataCount - 1) ? response.Length : (BitConverter.ToUInt16( response, (offect + 4 + i * 2) ) + offect);
-                    ushort err = BitConverter.ToUInt16( response, offectStart + 2 );
+                    int offectStart = BitConverter.ToUInt16(response, offect + 2 + i * 2) + offect;
+                    int offectEnd = (i == dataCount - 1) ? response.Length : (BitConverter.ToUInt16(response, (offect + 4 + i * 2)) + offect);
+                    ushort err = BitConverter.ToUInt16(response, offectStart + 2);
                     switch (err)
                     {
-                        case 0x04: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley04 };
-                        case 0x05: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley05 };
+                        case 0x04: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley04 };
+                        case 0x05: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley05 };
                         case 0x06:
                             {
                                 // 06的错误码通常是数据长度太多了
                                 // CC是符号返回，D2是符号片段返回
                                 if (response[offect + 2] == 0xD2 || response[offect + 2] == 0xCC)
-                                    return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley06 };
+                                    return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley06 };
                                 break;
                             }
-                        case 0x0A: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley0A };
-                        case 0x13: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley13 };
-                        case 0x1C: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley1C };
-                        case 0x1E: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley1E };
-                        case 0x26: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley26 };
+                        case 0x0A: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley0A };
+                        case 0x13: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley13 };
+                        case 0x1C: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley1C };
+                        case 0x1E: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley1E };
+                        case 0x26: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley26 };
                         case 0x00: break;
-                        default: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.UnknownError };
+                        default: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.UnknownError };
                     }
 
                     if (isRead)
                     {
                         for (int j = offectStart + 6; j < offectEnd; j++)
                         {
-                            data.Add( response[j] );
+                            data.Add(response[j]);
                         }
                     }
                 }
@@ -395,33 +394,33 @@ namespace HslCommunication.Profinet.AllenBradley
                 byte err = response[offect + 4];
                 switch (err)
                 {
-                    case 0x04: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley04 };
-                    case 0x05: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley05 };
+                    case 0x04: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley04 };
+                    case 0x05: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley05 };
                     case 0x06:
                         {
                             if (response[offect + 2] == 0xD2 || response[offect + 2] == 0xCC)
-                                return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley06 };
+                                return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley06 };
                             break;
                         }
-                    case 0x0A: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley0A };
-                    case 0x13: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley13 };
-                    case 0x1C: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley1C };
-                    case 0x1E: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley1E };
-                    case 0x26: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.AllenBradley26 };
+                    case 0x0A: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley0A };
+                    case 0x13: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley13 };
+                    case 0x1C: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley1C };
+                    case 0x1E: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley1E };
+                    case 0x26: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.AllenBradley26 };
                     case 0x00: break;
-                    default: return new OperateResult<byte[]>( ) { ErrorCode = err, Message = StringResources.Language.UnknownError };
+                    default: return new OperateResult<byte[]>() { ErrorCode = err, Message = StringResources.Language.UnknownError };
                 }
 
                 if (isRead)
                 {
                     for (int i = offect + 8; i < offect + 2 + count; i++)
                     {
-                        data.Add( response[i] );
+                        data.Add(response[i]);
                     }
                 }
             }
 
-            return OperateResult.CreateSuccessResult( data.ToArray( ) );
+            return OperateResult.CreateSuccessResult(data.ToArray());
         }
 
     }

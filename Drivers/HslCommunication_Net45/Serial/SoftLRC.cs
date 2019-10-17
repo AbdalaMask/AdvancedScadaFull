@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace HslCommunication.Serial
 {
@@ -15,7 +12,7 @@ namespace HslCommunication.Serial
         /// </summary>
         /// <param name="value">需要校验的数据，不包含LRC字节</param>
         /// <returns>返回带LRC校验码的字节数组，可用于串口发送</returns>
-        public static byte[] LRC( byte[] value )
+        public static byte[] LRC(byte[] value)
         {
             if (value == null) return null;
 
@@ -29,7 +26,7 @@ namespace HslCommunication.Serial
             sum = 256 - sum;
 
             byte[] LRC = new byte[] { (byte)sum };
-            return BasicFramework.SoftBasic.SpliceTwoByteArray( value, LRC );
+            return BasicFramework.SoftBasic.SpliceTwoByteArray(value, LRC);
         }
 
 
@@ -38,15 +35,15 @@ namespace HslCommunication.Serial
         /// </summary>
         /// <param name="value">等待校验的数据，是否正确</param>
         /// <returns>是否校验成功</returns>
-        public static bool CheckLRC( byte[] value )
+        public static bool CheckLRC(byte[] value)
         {
             if (value == null) return false;
 
             int length = value.Length;
             byte[] buf = new byte[length - 1];
-            Array.Copy( value, 0, buf, 0, buf.Length );
+            Array.Copy(value, 0, buf, 0, buf.Length);
 
-            byte[] LRCbuf = LRC( buf );
+            byte[] LRCbuf = LRC(buf);
             if (LRCbuf[length - 1] == value[length - 1])
             {
                 return true;

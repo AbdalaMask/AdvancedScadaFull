@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HslCommunication.Core;
+﻿using HslCommunication.Core;
 
 namespace HslCommunication
 {
@@ -903,7 +899,7 @@ namespace HslCommunication
     ///         </list>
     ///     </revision>
     /// </revisionHistory>
-    [System.Runtime.CompilerServices.CompilerGeneratedAttribute( )]
+    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class NamespaceDoc
     {
 

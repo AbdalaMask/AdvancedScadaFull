@@ -282,9 +282,9 @@ namespace HslCommunication.Profinet.LSIS
         /// AnalysisAddress
         /// </summary>
         /// <param name="address"></param>
-
+        /// <param name="IsRead"></param>
         /// <returns></returns>
-        public static OperateResult<string> AnalysisAddress(string address)
+        public static OperateResult<string> AnalysisAddress(string address, bool IsRead)
         {
             // P,M,L,K,F,T
             // P,M,L,K,F,T,C,D,S
@@ -294,7 +294,9 @@ namespace HslCommunication.Profinet.LSIS
                 sb.Append("%");
                 char[] types = new char[] { 'P', 'M', 'L', 'K', 'F', 'T', 'C', 'D', 'S', 'Q', 'I', 'N', 'U', 'Z', 'R' };
                 bool exsist = false;
-                for (int i = 0; i < types.Length; i++)
+                if (IsRead)
+                {
+                    for (int i = 0; i < types.Length; i++)
                 {
                     if (types[i] == address[0])
                     {
@@ -340,65 +342,6 @@ namespace HslCommunication.Profinet.LSIS
                         break;
                     }
                 }
-                if (!exsist) throw new Exception(StringResources.Language.NotSupportedDataType);
-            }
-            catch (Exception ex)
-            {
-                return new OperateResult<string>(ex.Message);
-            }
-
-            return OperateResult.CreateSuccessResult(sb.ToString());
-        }
-        /// <summary>
-        /// AnalysisAddress Write PLC XGB
-        /// </summary>
-        /// <param name="address"></param>
-        /// <param name="IsRead"></param>
-        /// <returns></returns>
-        public static OperateResult<string> AnalysisAddressWrite(string address, bool IsRead)
-        {
-            // P,M,L,K,F,T
-            // P,M,L,K,F,T,C,D,S
-            StringBuilder sb = new StringBuilder();
-            try
-            {
-                sb.Append("%");
-                char[] types = new char[] { 'P', 'M', 'L', 'K', 'F', 'T', 'C', 'D', 'S', 'Q', 'I', 'N', 'U', 'Z', 'R' };
-                bool exsist = false;
-                if (IsRead)
-                {
-                    for (int i = 0; i < types.Length; i++)
-                    {
-                        if (types[i] == address[0])
-                        {
-                            sb.Append(types[i]);
-                            sb.Append("B");
-                            if (address[1] == 'B')
-                            {
-                                sb.Append(int.Parse(address.Substring(2)) * 2);
-                            }
-                            else if (address[1] == 'W')
-                            {
-                                sb.Append(int.Parse(address.Substring(2)) * 2);
-                            }
-                            else if (address[1] == 'D')
-                            {
-                                sb.Append(int.Parse(address.Substring(2)) * 4);
-                            }
-                            else if (address[1] == 'L')
-                            {
-                                sb.Append(int.Parse(address.Substring(2)) * 8);
-                            }
-                            else
-                            {
-                                sb.Append(int.Parse(address.Substring(1)));
-                            }
-
-                            exsist = true;
-                            break;
-                        }
-                    }
-
                 }
                 else
                 {
@@ -415,6 +358,7 @@ namespace HslCommunication.Profinet.LSIS
 
             return OperateResult.CreateSuccessResult(sb.ToString());
         }
+        
         /// <summary>
         /// Get DataType to Address
         /// </summary>
@@ -473,7 +417,7 @@ namespace HslCommunication.Profinet.LSIS
         }
         private static OperateResult<byte[]> BuildReadByteCommand(string address, ushort length)
         {
-            var analysisResult = AnalysisAddress(address);
+            var analysisResult = AnalysisAddress(address,true);
             if (!analysisResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(analysisResult);
             var DataTypeResult = GetDataTypeToAddress(address);
             if (!DataTypeResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(DataTypeResult);
@@ -507,14 +451,14 @@ namespace HslCommunication.Profinet.LSIS
 
             return OperateResult.CreateSuccessResult(command);
         }
-        private static OperateResult<string> analysisResult;
+       
         private OperateResult<byte[]> BuildWriteByteCommand(string address, byte[] data)
         {
-
+            OperateResult<string> analysisResult=null;
             switch (SetCpuType)
             {
                 case "XGK":
-                    analysisResult = AnalysisAddress(address);
+                    analysisResult = AnalysisAddress(address, true);
                     break;
                 case "XGI":
                     break;
@@ -525,9 +469,10 @@ namespace HslCommunication.Profinet.LSIS
                 case "XGB_IEC":
                     break;
                 case "XGB":
-                    analysisResult = AnalysisAddressWrite(address, false);
+                    analysisResult = AnalysisAddress(address, false);
                     break;
                 default:
+                    analysisResult = AnalysisAddress(address, true);
                     break;
             }
             if (!analysisResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(analysisResult);

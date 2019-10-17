@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HslCommunication.MQTT
+﻿namespace HslCommunication.MQTT
 {
     /// <summary>
     /// 来自客户端的一次消息的内容

@@ -1,9 +1,6 @@
-﻿using Microsoft.Win32.SafeHandles;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
@@ -23,7 +20,7 @@ namespace HslCommunication.BasicFramework
         /// 实例化一个软件授权类
         /// </summary>
         /// <param name="UseAdmin">是否使用管理员模式</param>
-        public SoftAuthorize(bool UseAdmin=false)
+        public SoftAuthorize(bool UseAdmin = false)
         {
             machine_code = GetInfo(UseAdmin);
             LogHeaderText = "SoftAuthorize";
@@ -195,7 +192,7 @@ namespace HslCommunication.BasicFramework
             //是否存在scsi 
             if (HWID.IsServer)
             {
-                unique += HWID.SCSI+ "|";
+                unique += HWID.SCSI + "|";
             }
 
             //获取系统盘ID 新增 较为稳定
@@ -241,9 +238,9 @@ namespace HslCommunication.BasicFramework
                     System.Windows.Forms.Application.Exit();
                 }
             }
-          
+
             SHA1CryptoServiceProvider SHA1 = new SHA1CryptoServiceProvider();
-            var md5= SoftBasic.ByteToHexString(SHA1.ComputeHash(Encoding.Unicode.GetBytes(unique)));
+            var md5 = SoftBasic.ByteToHexString(SHA1.ComputeHash(Encoding.Unicode.GetBytes(unique)));
             return md5.Substring(0, 25);
         }
 
@@ -252,7 +249,7 @@ namespace HslCommunication.BasicFramework
         #region HWID
         private class HWID
         {
-            public  static String BIOS { get {return GetWMIIdent("Win32_BIOS", "Manufacturer", "SerialNumber", "SMBIOSBIOSVersion", "IdentificationCode"); }}
+            public static String BIOS { get { return GetWMIIdent("Win32_BIOS", "Manufacturer", "SerialNumber", "SMBIOSBIOSVersion", "IdentificationCode"); } }
             public static String CPU { get { return GetWMIIdent("Win32_Processor", "ProcessorId", "UniqueId", "Name"); } }
             public static String HDD { get { return GetWMIIdent("Win32_DiskDrive", "Model", "TotalHeads"); } }
             public static String GPU { get { return GetWMIIdent("Win32_VideoController", "DriverVersion", "Name"); } }
@@ -295,7 +292,7 @@ namespace HslCommunication.BasicFramework
         /// <example>
         /// AtapiDevice.GetHddInfo()
         /// </example>
-        public static HardDiskInfo GetHddInfo(byte driveIndex=0)
+        public static HardDiskInfo GetHddInfo(byte driveIndex = 0)
         {
             switch (Environment.OSVersion.Platform)
             {

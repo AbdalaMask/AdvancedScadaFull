@@ -1,10 +1,7 @@
 ﻿using HslCommunication.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 
 namespace HslCommunication.ModBus
 {
@@ -19,9 +16,9 @@ namespace HslCommunication.ModBus
         /// <summary>
         /// 实例化一个对象
         /// </summary>
-        public ModBusState( )
+        public ModBusState()
         {
-            hybirdLock = new SimpleHybirdLock( );
+            hybirdLock = new SimpleHybirdLock();
             ConnectTime = DateTime.Now;
             HeadByte = new byte[6];
         }
@@ -83,18 +80,18 @@ namespace HslCommunication.ModBus
         /// 判断当前的客户端是否已经下线，下线成功的话，就返回True
         /// </summary>
         /// <returns></returns>
-        public bool IsModbusOffline( )
+        public bool IsModbusOffline()
         {
-            int tmp = System.Threading.Interlocked.CompareExchange( ref isSocketOffline, 1, 0 );
+            int tmp = System.Threading.Interlocked.CompareExchange(ref isSocketOffline, 1, 0);
             return tmp == 0;
         }
 
         /// <summary>
         /// 清除原先的接收状态
         /// </summary>
-        public void Clear( )
+        public void Clear()
         {
-            Array.Clear( HeadByte, 0, 6 );
+            Array.Clear(HeadByte, 0, 6);
             HeadByteReceivedLength = 0;
             Content = null;
             ContentReceivedLength = 0;

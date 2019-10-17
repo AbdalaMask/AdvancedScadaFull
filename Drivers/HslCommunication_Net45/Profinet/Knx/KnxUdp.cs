@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using HslCommunication.LogNet;
+using System;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using HslCommunication.LogNet;
 
 namespace HslCommunication.Profinet.Knx
 {
@@ -22,9 +19,9 @@ namespace HslCommunication.Profinet.Knx
         /// <summary>
         /// 实例化一个默认的对象
         /// </summary>
-        public KnxUdp( )
+        public KnxUdp()
         {
-            KNX_CODE = new KnxCode( );
+            KNX_CODE = new KnxCode();
         }
 
         #endregion
@@ -72,21 +69,21 @@ namespace HslCommunication.Profinet.Knx
         /// <summary>
         /// 和KNX网络进行握手并开始监听
         /// </summary>
-        public void ConnectKnx( )
+        public void ConnectKnx()
         {
             if (udpClient == null)
             {
-                udpClient = new UdpClient( LocalEndpoint ) { Client = { DontFragment = true, SendBufferSize = 0, ReceiveTimeout = stateRequestTimerInterval * 2 } };
+                udpClient = new UdpClient(LocalEndpoint) { Client = { DontFragment = true, SendBufferSize = 0, ReceiveTimeout = stateRequestTimerInterval * 2 } };
             }
-            var x = udpClient.Send( KNX_CODE.Handshake( LocalEndpoint ), 26, RouEndpoint );//发送握手报文
-            udpClient.BeginReceive( new AsyncCallback( ReceiveCallback ), null );//开启监听
-            Thread.Sleep( 1000 );
+            var x = udpClient.Send(KNX_CODE.Handshake(LocalEndpoint), 26, RouEndpoint);//发送握手报文
+            udpClient.BeginReceive(new AsyncCallback(ReceiveCallback), null);//开启监听
+            Thread.Sleep(1000);
             if (this.KNX_CODE.IsConnect)
             {
                 KNX_CODE.Return_data_msg += KNX_CODE_Return_data_msg;
                 KNX_CODE.GetData_msg += KNX_CODE_GetData_msg;
                 KNX_CODE.Set_knx_data += KNX_CODE_Set_knx_data;
-                KNX_CODE.knx_server_is_real( LocalEndpoint );
+                KNX_CODE.knx_server_is_real(LocalEndpoint);
             }
             //  KNX_CODE.knx_server_is_real(LocalEndpoint);
         }
@@ -94,20 +91,20 @@ namespace HslCommunication.Profinet.Knx
         /// <summary>
         /// 保持KNX连接
         /// </summary>
-        public void KeepConnection( )
+        public void KeepConnection()
         {
-            KNX_CODE.knx_server_is_real( LocalEndpoint );
+            KNX_CODE.knx_server_is_real(LocalEndpoint);
         }
 
         /// <summary>
         /// 关闭连接
         /// </summary>
-        public void DisConnectKnx( )
+        public void DisConnectKnx()
         {
             if (KNX_CODE.Channel != 0)
             {
-                var x = KNX_CODE.Disconnect_knx( KNX_CODE.Channel, LocalEndpoint );
-                udpClient.Send( x, x.Length, RouEndpoint );
+                var x = KNX_CODE.Disconnect_knx(KNX_CODE.Channel, LocalEndpoint);
+                udpClient.Send(x, x.Length, RouEndpoint);
             }
 
         }
@@ -122,18 +119,18 @@ namespace HslCommunication.Profinet.Knx
         /// <param name="addr">地址</param>
         /// <param name="len">长度</param>
         /// <param name="data">数据</param>
-        public void SetKnxData( short addr, byte len, byte[] data )
+        public void SetKnxData(short addr, byte len, byte[] data)
         {
-            KNX_CODE.Knx_Write( addr, len, data );
+            KNX_CODE.Knx_Write(addr, len, data);
         }
         /// <summary>
         /// 读取指定KNX组地址
         /// </summary>
         /// <param name="addr">地址</param>
-        public void ReadKnxData( short addr )
+        public void ReadKnxData(short addr)
         {
-            KNX_CODE.knx_server_is_real( LocalEndpoint );
-            KNX_CODE.Knx_Resd_step1( addr );
+            KNX_CODE.knx_server_is_real(LocalEndpoint);
+            KNX_CODE.Knx_Resd_step1(addr);
         }
 
         #endregion
@@ -141,29 +138,29 @@ namespace HslCommunication.Profinet.Knx
         #region Private Method
 
 
-        private void KNX_CODE_Set_knx_data( byte[] data )
+        private void KNX_CODE_Set_knx_data(byte[] data)
         {
-            udpClient.Send( data, data.Length, RouEndpoint );
+            udpClient.Send(data, data.Length, RouEndpoint);
         }
 
-        private void KNX_CODE_GetData_msg( short addr, byte len, byte[] data )
+        private void KNX_CODE_GetData_msg(short addr, byte len, byte[] data)
         {
-            logNet?.WriteDebug( "收到数据 地址：" + addr + " 长度:" + len + "数据：" + BitConverter.ToString( data ) );
+            logNet?.WriteDebug("收到数据 地址：" + addr + " 长度:" + len + "数据：" + BitConverter.ToString(data));
         }
 
-        private void KNX_CODE_Return_data_msg( byte[] data )
+        private void KNX_CODE_Return_data_msg(byte[] data)
         {
-            udpClient.Send( data, data.Length, RouEndpoint );
+            udpClient.Send(data, data.Length, RouEndpoint);
         }
 
-        private void ReceiveCallback( IAsyncResult iar )
+        private void ReceiveCallback(IAsyncResult iar)
         {
-            byte[] receiveData = udpClient.EndReceive( iar, ref _rouEndpoint );
-            logNet?.WriteDebug( "收到报文 {0}", BitConverter.ToString( receiveData ) );
-            KNX_CODE.KNX_check( receiveData );
+            byte[] receiveData = udpClient.EndReceive(iar, ref _rouEndpoint);
+            logNet?.WriteDebug("收到报文 {0}", BitConverter.ToString(receiveData));
+            KNX_CODE.KNX_check(receiveData);
             if (this.KNX_CODE.IsConnect)
             {
-                udpClient.BeginReceive( new AsyncCallback( ReceiveCallback ), null );
+                udpClient.BeginReceive(new AsyncCallback(ReceiveCallback), null);
             }
 
         }

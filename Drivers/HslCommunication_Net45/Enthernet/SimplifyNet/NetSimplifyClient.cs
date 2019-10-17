@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using HslCommunication.Core.Net;
 using HslCommunication.Core.IMessage;
@@ -31,7 +29,7 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="ipAddress">服务器的ip地址</param>
         /// <param name="port">服务器的端口号</param>
-        public NetSimplifyClient( string ipAddress, int port )
+        public NetSimplifyClient(string ipAddress, int port)
         {
             IpAddress = ipAddress;
             Port = port;
@@ -40,7 +38,7 @@ namespace HslCommunication.Enthernet
         /// <summary>
         /// 实例化一个客户端对象，需要手动指定Ip地址和端口
         /// </summary>
-        public NetSimplifyClient( )
+        public NetSimplifyClient()
         {
 
         }
@@ -54,14 +52,14 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="socket">网络套接字</param>
         /// <returns>是否初始化成功，依据具体的协议进行重写</returns>
-        protected override OperateResult InitializationOnConnect( Socket socket )
+        protected override OperateResult InitializationOnConnect(Socket socket)
         {
             if (isUseAccountCertificate)
             {
-                return AccountCertificate( socket );
+                return AccountCertificate(socket);
             }
 
-            return OperateResult.CreateSuccessResult( );
+            return OperateResult.CreateSuccessResult();
         }
 
         #endregion
@@ -72,12 +70,12 @@ namespace HslCommunication.Enthernet
         /// <param name="customer">用户的指令头</param>
         /// <param name="send">发送数据</param>
         /// <returns>带返回消息的结果对象</returns>
-        public OperateResult<string> ReadFromServer( NetHandle customer, string send )
+        public OperateResult<string> ReadFromServer(NetHandle customer, string send)
         {
-            var read = ReadFromServerBase( HslProtocol.CommandBytes( customer, Token, send ) );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<string>( read );
+            var read = ReadFromServerBase(HslProtocol.CommandBytes(customer, Token, send));
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<string>(read);
 
-            return OperateResult.CreateSuccessResult( Encoding.Unicode.GetString( read.Content ) );
+            return OperateResult.CreateSuccessResult(Encoding.Unicode.GetString(read.Content));
         }
 
         /// <summary>
@@ -86,12 +84,12 @@ namespace HslCommunication.Enthernet
         /// <param name="customer">用户的指令头</param>
         /// <param name="send">发送数据</param>
         /// <returns>带返回消息的结果对象</returns>
-        public OperateResult<string[]> ReadFromServer( NetHandle customer, string[] send )
+        public OperateResult<string[]> ReadFromServer(NetHandle customer, string[] send)
         {
-            var read = ReadFromServerBase( HslProtocol.CommandBytes( customer, Token, send ) );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<string[]>( read );
+            var read = ReadFromServerBase(HslProtocol.CommandBytes(customer, Token, send));
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<string[]>(read);
 
-            return OperateResult.CreateSuccessResult( HslProtocol.UnPackStringArrayFromByte( read.Content ) );
+            return OperateResult.CreateSuccessResult(HslProtocol.UnPackStringArrayFromByte(read.Content));
         }
 
         /// <summary>
@@ -100,9 +98,9 @@ namespace HslCommunication.Enthernet
         /// <param name="customer">用户的指令头</param>
         /// <param name="send">发送的字节内容</param>
         /// <returns>带返回消息的结果对象</returns>
-        public OperateResult<byte[]> ReadFromServer( NetHandle customer, byte[] send )
+        public OperateResult<byte[]> ReadFromServer(NetHandle customer, byte[] send)
         {
-            return ReadFromServerBase( HslProtocol.CommandBytes( customer, Token, send ) );
+            return ReadFromServerBase(HslProtocol.CommandBytes(customer, Token, send));
         }
 
         /// <summary>
@@ -111,12 +109,12 @@ namespace HslCommunication.Enthernet
         /// <param name="customer">用户的指令头</param>
         /// <param name="send">发送数据</param>
         /// <returns>带返回消息的结果对象</returns>
-        public OperateResult<NetHandle, string> ReadCustomerFromServer( NetHandle customer, string send )
+        public OperateResult<NetHandle, string> ReadCustomerFromServer(NetHandle customer, string send)
         {
-            var read = ReadCustomerFromServerBase( HslProtocol.CommandBytes( customer, Token, send ) );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<NetHandle, string>( read );
+            var read = ReadCustomerFromServerBase(HslProtocol.CommandBytes(customer, Token, send));
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<NetHandle, string>(read);
 
-            return OperateResult.CreateSuccessResult( read.Content1, Encoding.Unicode.GetString( read.Content2 ) );
+            return OperateResult.CreateSuccessResult(read.Content1, Encoding.Unicode.GetString(read.Content2));
         }
 
         /// <summary>
@@ -125,12 +123,12 @@ namespace HslCommunication.Enthernet
         /// <param name="customer">用户的指令头</param>
         /// <param name="send">发送数据</param>
         /// <returns>带返回消息的结果对象</returns>
-        public OperateResult<NetHandle, string[]> ReadCustomerFromServer( NetHandle customer, string[] send )
+        public OperateResult<NetHandle, string[]> ReadCustomerFromServer(NetHandle customer, string[] send)
         {
-            var read = ReadCustomerFromServerBase( HslProtocol.CommandBytes( customer, Token, send ) );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<NetHandle, string[]>( read );
+            var read = ReadCustomerFromServerBase(HslProtocol.CommandBytes(customer, Token, send));
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<NetHandle, string[]>(read);
 
-            return OperateResult.CreateSuccessResult( read.Content1, HslProtocol.UnPackStringArrayFromByte( read.Content2 ) );
+            return OperateResult.CreateSuccessResult(read.Content1, HslProtocol.UnPackStringArrayFromByte(read.Content2));
         }
 
         /// <summary>
@@ -139,9 +137,9 @@ namespace HslCommunication.Enthernet
         /// <param name="customer">用户的指令头</param>
         /// <param name="send">发送数据</param>
         /// <returns>带返回消息的结果对象</returns>
-        public OperateResult<NetHandle, byte[]> ReadCustomerFromServer( NetHandle customer, byte[] send )
+        public OperateResult<NetHandle, byte[]> ReadCustomerFromServer(NetHandle customer, byte[] send)
         {
-            return ReadCustomerFromServerBase( HslProtocol.CommandBytes( customer, Token, send ) );
+            return ReadCustomerFromServerBase(HslProtocol.CommandBytes(customer, Token, send));
         }
 
         /// <summary>
@@ -149,12 +147,12 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="send">需要发送的底层数据</param>
         /// <returns>带返回消息的结果对象</returns>
-        private OperateResult<byte[]> ReadFromServerBase( byte[] send )
+        private OperateResult<byte[]> ReadFromServerBase(byte[] send)
         {
-            var read = ReadCustomerFromServerBase( send );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( read );
+            var read = ReadCustomerFromServerBase(send);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(read);
 
-            return OperateResult.CreateSuccessResult( read.Content2 );
+            return OperateResult.CreateSuccessResult(read.Content2);
         }
 
         /// <summary>
@@ -162,16 +160,16 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="send">需要发送的底层数据</param>
         /// <returns>带返回消息的结果对象</returns>
-        private OperateResult<NetHandle, byte[]> ReadCustomerFromServerBase( byte[] send )
+        private OperateResult<NetHandle, byte[]> ReadCustomerFromServerBase(byte[] send)
         {
             // 核心数据交互
-            var read = ReadFromCoreServer( send );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<NetHandle, byte[]>( read );
+            var read = ReadFromCoreServer(send);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<NetHandle, byte[]>(read);
 
             if (read.Content.Length == 0)
             {
                 // 没有数据接收的时候，直接返回成功
-                return OperateResult.CreateSuccessResult( (NetHandle)0, new byte[0] );
+                return OperateResult.CreateSuccessResult((NetHandle)0, new byte[0]);
             }
             else
             {
@@ -179,17 +177,17 @@ namespace HslCommunication.Enthernet
                 byte[] headBytes = new byte[HslProtocol.HeadByteLength];
                 byte[] contentBytes = new byte[read.Content.Length - HslProtocol.HeadByteLength];
 
-                Array.Copy( read.Content, 0, headBytes, 0, HslProtocol.HeadByteLength );
-                if (contentBytes.Length > 0) Array.Copy( read.Content, HslProtocol.HeadByteLength, contentBytes, 0, read.Content.Length - HslProtocol.HeadByteLength );
+                Array.Copy(read.Content, 0, headBytes, 0, HslProtocol.HeadByteLength);
+                if (contentBytes.Length > 0) Array.Copy(read.Content, HslProtocol.HeadByteLength, contentBytes, 0, read.Content.Length - HslProtocol.HeadByteLength);
 
-                if (BitConverter.ToInt32( headBytes, 0 ) == HslProtocol.ProtocolErrorMsg)
+                if (BitConverter.ToInt32(headBytes, 0) == HslProtocol.ProtocolErrorMsg)
                 {
-                    return new OperateResult<NetHandle, byte[]>( Encoding.ASCII.GetString( contentBytes ) );
+                    return new OperateResult<NetHandle, byte[]>(Encoding.ASCII.GetString(contentBytes));
                 }
 
-                int customer = BitConverter.ToInt32( headBytes, 4 );
-                contentBytes = HslProtocol.CommandAnalysis( headBytes, contentBytes );
-                return OperateResult.CreateSuccessResult( (NetHandle)customer, contentBytes );
+                int customer = BitConverter.ToInt32(headBytes, 4);
+                contentBytes = HslProtocol.CommandAnalysis(headBytes, contentBytes);
+                return OperateResult.CreateSuccessResult((NetHandle)customer, contentBytes);
             }
         }
 
@@ -200,9 +198,9 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="customer">用户的指令头</param>
         /// <param name="send">发送数据</param>
-        public Task<OperateResult<string>> ReadFromServerAsync( NetHandle customer, string send )
+        public Task<OperateResult<string>> ReadFromServerAsync(NetHandle customer, string send)
         {
-            return Task.Run( ( ) => ReadFromServer( customer, send ) );
+            return Task.Run(() => ReadFromServer(customer, send));
         }
 
         /// <summary>
@@ -211,9 +209,9 @@ namespace HslCommunication.Enthernet
         /// <param name="customer">用户的指令头</param>
         /// <param name="send">发送的字节内容</param>
         /// <returns>带返回消息的结果对象</returns>
-        public Task<OperateResult<byte[]>> ReadFromServerAsync( NetHandle customer, byte[] send )
+        public Task<OperateResult<byte[]>> ReadFromServerAsync(NetHandle customer, byte[] send)
         {
-            return Task.Run( ( ) => ReadFromServer( customer, send ) );
+            return Task.Run(() => ReadFromServer(customer, send));
         }
 
         /// <summary>
@@ -221,9 +219,9 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="customer">用户的指令头</param>
         /// <param name="sends">发送数据</param>
-        public Task<OperateResult<string[]>> ReadFromServerAsync( NetHandle customer, string[] sends )
+        public Task<OperateResult<string[]>> ReadFromServerAsync(NetHandle customer, string[] sends)
         {
-            return Task.Run( ( ) => ReadFromServer( customer, sends ) );
+            return Task.Run(() => ReadFromServer(customer, sends));
         }
 
         /// <summary>
@@ -232,9 +230,9 @@ namespace HslCommunication.Enthernet
         /// <param name="customer">用户的指令头</param>
         /// <param name="send">发送数据</param>
         /// <returns>带返回消息的结果对象</returns>
-        public Task<OperateResult<NetHandle, string>> ReadCustomerFromServerAsync( NetHandle customer, string send )
+        public Task<OperateResult<NetHandle, string>> ReadCustomerFromServerAsync(NetHandle customer, string send)
         {
-            return Task.Run( ( ) => ReadCustomerFromServer( customer, send ) );
+            return Task.Run(() => ReadCustomerFromServer(customer, send));
         }
 
         /// <summary>
@@ -243,9 +241,9 @@ namespace HslCommunication.Enthernet
         /// <param name="customer">用户的指令头</param>
         /// <param name="send">发送数据</param>
         /// <returns>带返回消息的结果对象</returns>
-        public Task<OperateResult<NetHandle, string[]>> ReadCustomerFromServerAsync( NetHandle customer, string[] send )
+        public Task<OperateResult<NetHandle, string[]>> ReadCustomerFromServerAsync(NetHandle customer, string[] send)
         {
-            return Task.Run( ( ) => ReadCustomerFromServer( customer, send ) );
+            return Task.Run(() => ReadCustomerFromServer(customer, send));
         }
 
         /// <summary>
@@ -254,9 +252,9 @@ namespace HslCommunication.Enthernet
         /// <param name="customer">用户的指令头</param>
         /// <param name="send">发送数据</param>
         /// <returns>带返回消息的结果对象</returns>
-        public Task<OperateResult<NetHandle, byte[]>> ReadCustomerFromServerAsync( NetHandle customer, byte[] send )
+        public Task<OperateResult<NetHandle, byte[]>> ReadCustomerFromServerAsync(NetHandle customer, byte[] send)
         {
-            return Task.Run( ( ) => ReadCustomerFromServer( customer, send ) );
+            return Task.Run(() => ReadCustomerFromServer(customer, send));
         }
 
 #endif
@@ -267,7 +265,7 @@ namespace HslCommunication.Enthernet
         /// 获取本对象的字符串表示形式
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return $"NetSimplifyClient[{IpAddress}:{Port}]";
         }

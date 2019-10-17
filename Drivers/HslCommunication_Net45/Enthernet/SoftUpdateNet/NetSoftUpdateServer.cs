@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using System.Net.Sockets;
-using System.Net;
-using System.IO;
-using System.Threading;
-using HslCommunication.Core;
-using HslCommunication.Core.Net;
+﻿using HslCommunication.Core.Net;
 using HslCommunication.LogNet;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
 
 namespace HslCommunication.Enthernet
 {
@@ -26,7 +23,7 @@ namespace HslCommunication.Enthernet
         /// 实例化一个对象
         /// </summary>
         /// <param name="updateExeFileName">更新程序的名称</param>
-        public NetSoftUpdateServer( string updateExeFileName = "软件自动更新.exe" )
+        public NetSoftUpdateServer(string updateExeFileName = "软件自动更新.exe")
         {
             this.updateExeFileName = updateExeFileName;
         }
@@ -55,14 +52,14 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="socket">异步对象</param>
         /// <param name="endPoint">终结点</param>
-        protected override void ThreadPoolLogin( Socket socket, IPEndPoint endPoint )
+        protected override void ThreadPoolLogin(Socket socket, IPEndPoint endPoint)
         {
             try
             {
-                OperateResult<byte[]> receive = Receive( socket, 4 );
+                OperateResult<byte[]> receive = Receive(socket, 4);
                 if (!receive.IsSuccess)
                 {
-                    LogNet?.WriteError( ToString( ), "Receive Failed: " + receive.Message );
+                    LogNet?.WriteError(ToString(), "Receive Failed: " + receive.Message);
                     return;
                 }
 
@@ -78,12 +75,12 @@ namespace HslCommunication.Enthernet
                     }
                     else
                     {
-                        LogNet?.WriteInfo( ToString( ), StringResources.Language.SystemUpdateOperater + ((IPEndPoint)socket.RemoteEndPoint).Address.ToString());
+                        LogNet?.WriteInfo(ToString(), StringResources.Language.SystemUpdateOperater + ((IPEndPoint)socket.RemoteEndPoint).Address.ToString());
                     }
 
                     if (Directory.Exists(FileUpdatePath))
                     {
-                        List<string> Files = GetAllFiles( FileUpdatePath, LogNet );
+                        List<string> Files = GetAllFiles(FileUpdatePath, LogNet);
 
                         for (int i = Files.Count - 1; i >= 0; i--)
                         {
@@ -109,8 +106,8 @@ namespace HslCommunication.Enthernet
                         {
                             // 传送数据包含了本次数据大小，文件数据大小，文件名（带后缀）
                             FileInfo finfo = new FileInfo(files[i]);
-                            string fileName = finfo.FullName.Replace( m_FilePath, "" );
-                            if (fileName.StartsWith( "\\" )) fileName = fileName.Substring( 1 );
+                            string fileName = finfo.FullName.Replace(m_FilePath, "");
+                            if (fileName.StartsWith("\\")) fileName = fileName.Substring(1);
                             byte[] ByteName = Encoding.Unicode.GetBytes(fileName);
 
                             int First = 4 + 4 + ByteName.Length;
@@ -142,8 +139,8 @@ namespace HslCommunication.Enthernet
                     }
                     else
                     {
-                        socket.Send( BitConverter.GetBytes( 0 ) );
-                        socket?.Close( );
+                        socket.Send(BitConverter.GetBytes(0));
+                        socket?.Close();
                     }
                 }
                 else
@@ -158,7 +155,7 @@ namespace HslCommunication.Enthernet
             {
                 Thread.Sleep(20);
                 socket?.Close();
-                LogNet?.WriteException( ToString( ), StringResources.Language.FileSendClientFailed, ex);
+                LogNet?.WriteException(ToString(), StringResources.Language.FileSendClientFailed, ex);
             }
         }
 
@@ -171,9 +168,9 @@ namespace HslCommunication.Enthernet
                 {
                     socket.EndReceive(ir);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    LogNet?.WriteException( ToString( ), ex);
+                    LogNet?.WriteException(ToString(), ex);
                 }
                 finally
                 {
@@ -183,20 +180,20 @@ namespace HslCommunication.Enthernet
             }
         }
 
-        public static List<string> GetAllFiles( string dircPath, ILogNet logNet )
+        public static List<string> GetAllFiles(string dircPath, ILogNet logNet)
         {
-            List<string> fileList = new List<string>( );
+            List<string> fileList = new List<string>();
 
             try
             {
-                fileList.AddRange( Directory.GetFiles( dircPath ) );
+                fileList.AddRange(Directory.GetFiles(dircPath));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                logNet?.WriteWarn( "GetAllFiles", ex.Message );
+                logNet?.WriteWarn("GetAllFiles", ex.Message);
             }
-            foreach (var item in Directory.GetDirectories( dircPath ))
-                fileList.AddRange( GetAllFiles( item, logNet ) );
+            foreach (var item in Directory.GetDirectories(dircPath))
+                fileList.AddRange(GetAllFiles(item, logNet));
             return fileList;
         }
 
@@ -206,7 +203,7 @@ namespace HslCommunication.Enthernet
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return "NetSoftUpdateServer";
         }

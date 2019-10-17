@@ -58,14 +58,6 @@
     <Compile Include="Models\BatchsDetails.cs" />
     <Compile Include="Models\BatchWeight.cs" />
     <Compile Include="Models\NameTankFinal.cs" />
-    <Compile Include="Models\Repositories\BatchFinalRepository.cs" />
-    <Compile Include="Models\Repositories\DB\BatchsDbRepository.cs" />
-    <Compile Include="Models\Repositories\BatchsDetailsRepository.cs" />
-    <Compile Include="Models\Repositories\BatchsRepository.cs" />
-    <Compile Include="Models\Repositories\BatchWeightRepository.cs" />
-    <Compile Include="Models\Repositories\IBatchRepository.cs" />
-    <Compile Include="Models\Repositories\NameTankFinalRepository.cs" />
-    <Compile Include="Models\Repositories\TanksRepository.cs" />
     <Compile Include="Models\Tanks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

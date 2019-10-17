@@ -58,7 +58,7 @@ namespace AdvancedScada.LSIS.Core
                             case "Ethernet":
                                 var die = (DIEthernet)ch;
 
-                                DriverAdapter = new LS_FENET(die.CPU, die.IPAddress, die.Port,(byte) die.Slot);
+                                DriverAdapter = new LS_FENET(die.CPU, die.IPAddress, die.Port, (byte)die.Slot);
                                 FENET.Add(ch.ChannelName, (LS_FENET)DriverAdapter);
 
                                 break;

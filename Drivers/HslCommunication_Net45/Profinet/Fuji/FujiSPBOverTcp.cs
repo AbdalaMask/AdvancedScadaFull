@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HslCommunication.BasicFramework;
+﻿using HslCommunication.BasicFramework;
 using HslCommunication.Core;
 using HslCommunication.Core.Net;
+using System;
+using System.Text;
 
 namespace HslCommunication.Profinet.Fuji
 {
@@ -18,7 +16,7 @@ namespace HslCommunication.Profinet.Fuji
         /// <summary>
         /// 使用默认的构造方法实例化对象
         /// </summary>
-        public FujiSPBOverTcp( )
+        public FujiSPBOverTcp()
         {
             this.WordLength = 1;
         }
@@ -28,7 +26,7 @@ namespace HslCommunication.Profinet.Fuji
         /// </summary>
         /// <param name="ipAddress">设备的Ip地址</param>
         /// <param name="port">设备的端口号</param>
-        public FujiSPBOverTcp( string ipAddress, int port )
+        public FujiSPBOverTcp(string ipAddress, int port)
         {
             this.WordLength = 1;
             this.IpAddress = ipAddress;
@@ -55,28 +53,28 @@ namespace HslCommunication.Profinet.Fuji
         /// <param name="address">地址信息</param>
         /// <param name="length">数据长度</param>
         /// <returns>读取结果信息</returns>
-        public override OperateResult<byte[]> Read( string address, ushort length )
+        public override OperateResult<byte[]> Read(string address, ushort length)
         {
             // 解析指令
-            OperateResult<byte[]> command = BuildReadCommand( this.station, address, length, false );
-            if (!command.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( command );
+            OperateResult<byte[]> command = BuildReadCommand(this.station, address, length, false);
+            if (!command.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(command);
 
             // 核心交互
-            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( read );
+            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(read);
 
             // 结果验证
-            if (read.Content[0] != ':') return new OperateResult<byte[]>( read.Content[0], "Read Faild:" + BasicFramework.SoftBasic.ByteToHexString( read.Content, ' ' ) );
-            if (Encoding.ASCII.GetString( read.Content, 9, 2 ) != "00") return new OperateResult<byte[]>( read.Content[5], GetErrorDescriptionFromCode( Encoding.ASCII.GetString( read.Content, 9, 2 ) ) );
+            if (read.Content[0] != ':') return new OperateResult<byte[]>(read.Content[0], "Read Faild:" + BasicFramework.SoftBasic.ByteToHexString(read.Content, ' '));
+            if (Encoding.ASCII.GetString(read.Content, 9, 2) != "00") return new OperateResult<byte[]>(read.Content[5], GetErrorDescriptionFromCode(Encoding.ASCII.GetString(read.Content, 9, 2)));
 
             // 提取结果
             byte[] Content = new byte[length * 2];
             for (int i = 0; i < Content.Length / 2; i++)
             {
-                ushort tmp = Convert.ToUInt16( Encoding.ASCII.GetString( read.Content, i * 4 + 6, 4 ), 16 );
-                BitConverter.GetBytes( tmp ).CopyTo( Content, i * 2 );
+                ushort tmp = Convert.ToUInt16(Encoding.ASCII.GetString(read.Content, i * 4 + 6, 4), 16);
+                BitConverter.GetBytes(tmp).CopyTo(Content, i * 2);
             }
-            return OperateResult.CreateSuccessResult( Content );
+            return OperateResult.CreateSuccessResult(Content);
         }
 
         /// <summary>
@@ -85,22 +83,22 @@ namespace HslCommunication.Profinet.Fuji
         /// <param name="address">地址信息，举例，D100，R200，RC100，RT200</param>
         /// <param name="value">数据值</param>
         /// <returns>是否写入成功</returns>
-        public override OperateResult Write( string address, byte[] value )
+        public override OperateResult Write(string address, byte[] value)
         {
             // 解析指令
-            OperateResult<byte[]> command = BuildWriteByteCommand( this.station, address, value );
+            OperateResult<byte[]> command = BuildWriteByteCommand(this.station, address, value);
             if (!command.IsSuccess) return command;
 
             // 核心交互
-            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
+            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
             if (!read.IsSuccess) return read;
 
             // 结果验证
-            if (read.Content[0] != ':') return new OperateResult<byte[]>( read.Content[0], "Read Faild:" + BasicFramework.SoftBasic.ByteToHexString( read.Content, ' ' ) );
-            if (Encoding.ASCII.GetString( read.Content, 9, 2 ) != "00") return new OperateResult<byte[]>( read.Content[5], GetErrorDescriptionFromCode( Encoding.ASCII.GetString( read.Content, 9, 2 ) ) );
+            if (read.Content[0] != ':') return new OperateResult<byte[]>(read.Content[0], "Read Faild:" + BasicFramework.SoftBasic.ByteToHexString(read.Content, ' '));
+            if (Encoding.ASCII.GetString(read.Content, 9, 2) != "00") return new OperateResult<byte[]>(read.Content[5], GetErrorDescriptionFromCode(Encoding.ASCII.GetString(read.Content, 9, 2)));
 
             // 提取结果
-            return OperateResult.CreateSuccessResult( );
+            return OperateResult.CreateSuccessResult();
         }
 
         #endregion
@@ -117,7 +115,7 @@ namespace HslCommunication.Profinet.Fuji
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return $"FujiSPBOverTcp[{IpAddress}:{Port}]";
         }
@@ -126,10 +124,10 @@ namespace HslCommunication.Profinet.Fuji
 
         #region Static Helper
 
-        private static string AnalysisIntegerAddress( int address )
+        private static string AnalysisIntegerAddress(int address)
         {
-            string tmp = address.ToString( "D4" );
-            return tmp.Substring( 2 ) + tmp.Substring( 0, 2 );
+            string tmp = address.ToString("D4");
+            return tmp.Substring(2) + tmp.Substring(0, 2);
         }
 
         /// <summary>
@@ -137,9 +135,9 @@ namespace HslCommunication.Profinet.Fuji
         /// </summary>
         /// <param name="address">数据地址</param>
         /// <returns>地址结果对象</returns>
-        public static OperateResult<string> FujikAnalysisAddress( string address )
+        public static OperateResult<string> FujikAnalysisAddress(string address)
         {
-            var result = new OperateResult<string>( );
+            var result = new OperateResult<string>();
             try
             {
                 switch (address[0])
@@ -147,25 +145,25 @@ namespace HslCommunication.Profinet.Fuji
                     case 'X':
                     case 'x':
                         {
-                            result.Content = "01" + AnalysisIntegerAddress( Convert.ToUInt16( address.Substring( 1 ), 10 ) );
+                            result.Content = "01" + AnalysisIntegerAddress(Convert.ToUInt16(address.Substring(1), 10));
                             break;
                         }
                     case 'Y':
                     case 'y':
                         {
-                            result.Content = "00" + AnalysisIntegerAddress( Convert.ToUInt16( address.Substring( 1 ), 10 ) );
+                            result.Content = "00" + AnalysisIntegerAddress(Convert.ToUInt16(address.Substring(1), 10));
                             break;
                         }
                     case 'M':
                     case 'm':
                         {
-                            result.Content = "02" + AnalysisIntegerAddress( Convert.ToUInt16( address.Substring( 1 ), 10 ) );
+                            result.Content = "02" + AnalysisIntegerAddress(Convert.ToUInt16(address.Substring(1), 10));
                             break;
                         }
                     case 'L':
                     case 'l':
                         {
-                            result.Content = "03" + AnalysisIntegerAddress( Convert.ToUInt16( address.Substring( 1 ), 10 ) );
+                            result.Content = "03" + AnalysisIntegerAddress(Convert.ToUInt16(address.Substring(1), 10));
                             break;
                         }
                     case 'T':
@@ -173,17 +171,17 @@ namespace HslCommunication.Profinet.Fuji
                         {
                             if (address[1] == 'N' || address[1] == 'n')
                             {
-                                result.Content = "0A" + AnalysisIntegerAddress( Convert.ToUInt16( address.Substring( 1 ), 10 ) );
+                                result.Content = "0A" + AnalysisIntegerAddress(Convert.ToUInt16(address.Substring(1), 10));
                                 break;
                             }
                             else if (address[1] == 'C' || address[1] == 'c')
                             {
-                                result.Content = "04" + AnalysisIntegerAddress( Convert.ToUInt16( address.Substring( 1 ), 10 ) );
+                                result.Content = "04" + AnalysisIntegerAddress(Convert.ToUInt16(address.Substring(1), 10));
                                 break;
                             }
                             else
                             {
-                                throw new Exception( StringResources.Language.NotSupportedDataType );
+                                throw new Exception(StringResources.Language.NotSupportedDataType);
                             }
                         }
                     case 'C':
@@ -191,32 +189,32 @@ namespace HslCommunication.Profinet.Fuji
                         {
                             if (address[1] == 'N' || address[1] == 'n')
                             {
-                                result.Content = "0B" + AnalysisIntegerAddress( Convert.ToUInt16( address.Substring( 1 ), 10 ) );
+                                result.Content = "0B" + AnalysisIntegerAddress(Convert.ToUInt16(address.Substring(1), 10));
                                 break;
                             }
                             else if (address[1] == 'C' || address[1] == 'c')
                             {
-                                result.Content = "05" + AnalysisIntegerAddress( Convert.ToUInt16( address.Substring( 1 ), 10 ) );
+                                result.Content = "05" + AnalysisIntegerAddress(Convert.ToUInt16(address.Substring(1), 10));
                                 break;
                             }
                             else
                             {
-                                throw new Exception( StringResources.Language.NotSupportedDataType );
+                                throw new Exception(StringResources.Language.NotSupportedDataType);
                             }
                         }
                     case 'D':
                     case 'd':
                         {
-                            result.Content = "0C" + AnalysisIntegerAddress( Convert.ToUInt16( address.Substring( 1 ), 10 ) );
+                            result.Content = "0C" + AnalysisIntegerAddress(Convert.ToUInt16(address.Substring(1), 10));
                             break;
                         }
                     case 'R':
                     case 'r':
                         {
-                            result.Content = "0D" + AnalysisIntegerAddress( Convert.ToUInt16( address.Substring( 1 ), 10 ) );
+                            result.Content = "0D" + AnalysisIntegerAddress(Convert.ToUInt16(address.Substring(1), 10));
                             break;
                         }
-                    default: throw new Exception( StringResources.Language.NotSupportedDataType );
+                    default: throw new Exception(StringResources.Language.NotSupportedDataType);
                 }
             }
             catch (Exception ex)
@@ -234,9 +232,9 @@ namespace HslCommunication.Profinet.Fuji
         /// </summary>
         /// <param name="data">指令</param>
         /// <returns>校验之后的信息</returns>
-        public static string CalculateAcc( string data )
+        public static string CalculateAcc(string data)
         {
-            byte[] buffer = Encoding.ASCII.GetBytes( data );
+            byte[] buffer = Encoding.ASCII.GetBytes(data);
 
             int count = 0;
             for (int i = 0; i < buffer.Length; i++)
@@ -244,7 +242,7 @@ namespace HslCommunication.Profinet.Fuji
                 count += buffer[i];
             }
 
-            return count.ToString( "X4" ).Substring( 2 );
+            return count.ToString("X4").Substring(2);
         }
 
         /// <summary>
@@ -255,22 +253,22 @@ namespace HslCommunication.Profinet.Fuji
         /// <param name="length">数据长度</param>
         /// <param name="isBool">是否位读取</param>
         /// <returns>是否成功的结果对象</returns>
-        public static OperateResult<byte[]> BuildReadCommand( byte station, string address, ushort length, bool isBool )
+        public static OperateResult<byte[]> BuildReadCommand(byte station, string address, ushort length, bool isBool)
         {
-            OperateResult<string> addressAnalysis = FujikAnalysisAddress( address );
-            if (!addressAnalysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( addressAnalysis );
+            OperateResult<string> addressAnalysis = FujikAnalysisAddress(address);
+            if (!addressAnalysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(addressAnalysis);
 
-            StringBuilder stringBuilder = new StringBuilder( );
-            stringBuilder.Append( ':' );
-            stringBuilder.Append( station.ToString( "X2" ) );
-            stringBuilder.Append( "09" );
-            stringBuilder.Append( "FFFF" );
-            stringBuilder.Append( "00" );
-            stringBuilder.Append( "00" );
-            stringBuilder.Append( addressAnalysis.Content );
-            stringBuilder.Append( length.ToString( "D4" ) );
-            stringBuilder.Append( "\r\n" );
-            return OperateResult.CreateSuccessResult( Encoding.ASCII.GetBytes( stringBuilder.ToString( ) ) );
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(':');
+            stringBuilder.Append(station.ToString("X2"));
+            stringBuilder.Append("09");
+            stringBuilder.Append("FFFF");
+            stringBuilder.Append("00");
+            stringBuilder.Append("00");
+            stringBuilder.Append(addressAnalysis.Content);
+            stringBuilder.Append(length.ToString("D4"));
+            stringBuilder.Append("\r\n");
+            return OperateResult.CreateSuccessResult(Encoding.ASCII.GetBytes(stringBuilder.ToString()));
         }
 
         /// <summary>
@@ -280,29 +278,29 @@ namespace HslCommunication.Profinet.Fuji
         /// <param name="address">地址</param>
         /// <param name="value">数组值</param>
         /// <returns>是否创建成功</returns>
-        public static OperateResult<byte[]> BuildWriteByteCommand( byte station, string address, byte[] value )
+        public static OperateResult<byte[]> BuildWriteByteCommand(byte station, string address, byte[] value)
         {
-            OperateResult<string> addressAnalysis = FujikAnalysisAddress( address );
-            if (!addressAnalysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( addressAnalysis );
+            OperateResult<string> addressAnalysis = FujikAnalysisAddress(address);
+            if (!addressAnalysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(addressAnalysis);
 
-            StringBuilder stringBuilder = new StringBuilder( );
-            stringBuilder.Append( ':' );
-            stringBuilder.Append( station.ToString( "X2" ) );
-            stringBuilder.Append( (9 + value.Length / 2).ToString( "X2" ) );
-            stringBuilder.Append( "FFFF" );
-            stringBuilder.Append( "01" );
-            stringBuilder.Append( "00" );
-            stringBuilder.Append( addressAnalysis.Content );
-            stringBuilder.Append( (value.Length / 2).ToString( "D4" ) );
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(':');
+            stringBuilder.Append(station.ToString("X2"));
+            stringBuilder.Append((9 + value.Length / 2).ToString("X2"));
+            stringBuilder.Append("FFFF");
+            stringBuilder.Append("01");
+            stringBuilder.Append("00");
+            stringBuilder.Append(addressAnalysis.Content);
+            stringBuilder.Append((value.Length / 2).ToString("D4"));
 
             byte[] buffer = new byte[value.Length * 2];
             for (int i = 0; i < value.Length / 2; i++)
             {
-                SoftBasic.BuildAsciiBytesFrom( BitConverter.ToUInt16( value, i * 2 ) ).CopyTo( buffer, 4 * i );
+                SoftBasic.BuildAsciiBytesFrom(BitConverter.ToUInt16(value, i * 2)).CopyTo(buffer, 4 * i);
             }
-            stringBuilder.Append( Encoding.ASCII.GetString( buffer ) );
-            stringBuilder.Append( "\r\n" );
-            return OperateResult.CreateSuccessResult( Encoding.ASCII.GetBytes( stringBuilder.ToString( ) ) );
+            stringBuilder.Append(Encoding.ASCII.GetString(buffer));
+            stringBuilder.Append("\r\n");
+            return OperateResult.CreateSuccessResult(Encoding.ASCII.GetBytes(stringBuilder.ToString()));
         }
 
         /// <summary>
@@ -310,7 +308,7 @@ namespace HslCommunication.Profinet.Fuji
         /// </summary>
         /// <param name="code">错误码</param>
         /// <returns>错误的文本描述</returns>
-        public static string GetErrorDescriptionFromCode( string code )
+        public static string GetErrorDescriptionFromCode(string code)
         {
             switch (code)
             {

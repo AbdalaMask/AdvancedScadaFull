@@ -12,7 +12,7 @@ namespace AdvancedScada.BaseService
     public class ServiceDriverHelper : BaseBinding
     {
         public static ConnectionState objConnectionState = ConnectionState.DISCONNECT;
-      
+
         IODriver driverHelper = null;
         private ushort _SerialNo;
         public Dictionary<string, IODriver> RequestsDriver { get; set; }
@@ -22,7 +22,7 @@ namespace AdvancedScada.BaseService
             RequestsDriver = new Dictionary<string, IODriver>(1024);
         }
 
-      
+
         public ServiceHost InitializeReadService()
         {
             ServiceHost serviceHost = null;
@@ -95,7 +95,7 @@ namespace AdvancedScada.BaseService
                     }
 
                 }
-                
+
                 return true;
 
 
@@ -127,6 +127,6 @@ namespace AdvancedScada.BaseService
             return true;
         }
 
-         
+
     }
 }

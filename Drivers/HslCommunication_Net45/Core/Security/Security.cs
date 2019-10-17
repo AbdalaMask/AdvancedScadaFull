@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HslCommunication
+﻿namespace HslCommunication
 {
     internal class HslSecurity
     {
@@ -17,7 +12,7 @@ namespace HslCommunication
          *    Method for encryption and decryption, for performance reasons, using relatively simple encryption and decryption
          * 
          *******************************************************************************/
-         
+
 
         /// <summary>
         /// 加密方法，只对当前的程序集开放

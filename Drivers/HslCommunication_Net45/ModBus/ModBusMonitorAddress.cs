@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace HslCommunication.ModBus
 {
@@ -29,9 +26,9 @@ namespace HslCommunication.ModBus
         /// 强制设置触发事件
         /// </summary>
         /// <param name="value"></param>
-        public void SetValue( short value )
+        public void SetValue(short value)
         {
-            OnWrite?.Invoke( this, value );
+            OnWrite?.Invoke(this, value);
         }
 
         /// <summary>
@@ -39,11 +36,11 @@ namespace HslCommunication.ModBus
         /// </summary>
         /// <param name="before">变更前的值</param>
         /// <param name="after">变更后的值</param>
-        public void SetChangeValue( short before, short after )
+        public void SetChangeValue(short before, short after)
         {
             if (before != after)
             {
-                OnChange?.Invoke( this, before, after );
+                OnChange?.Invoke(this, before, after);
             }
         }
     }

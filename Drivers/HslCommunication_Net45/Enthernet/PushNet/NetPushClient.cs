@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HslCommunication.Core.Net;
+﻿using HslCommunication.Core.Net;
+using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
 namespace HslCommunication.Enthernet
 {
@@ -29,14 +27,14 @@ namespace HslCommunication.Enthernet
         /// <param name="ipAddress">服务器的IP地址</param>
         /// <param name="port">服务器的端口号</param>
         /// <param name="key">订阅关键字</param>
-        public NetPushClient( string ipAddress, int port, string key )
+        public NetPushClient(string ipAddress, int port, string key)
         {
-            endPoint = new IPEndPoint( IPAddress.Parse( ipAddress ), port );
+            endPoint = new IPEndPoint(IPAddress.Parse(ipAddress), port);
             keyWord = key;
 
-            if (string.IsNullOrEmpty( key ))
+            if (string.IsNullOrEmpty(key))
             {
-                throw new Exception( StringResources.Language.KeyIsNotAllowedNull );
+                throw new Exception(StringResources.Language.KeyIsNotAllowedNull);
             }
         }
 
@@ -44,34 +42,34 @@ namespace HslCommunication.Enthernet
 
         #region NetworkXBase Override
 
-        internal override void DataProcessingCenter( AppSession session, int protocol, int customer, byte[] content )
+        internal override void DataProcessingCenter(AppSession session, int protocol, int customer, byte[] content)
         {
-            if(protocol == HslProtocol.ProtocolUserString)
+            if (protocol == HslProtocol.ProtocolUserString)
             {
-                action?.Invoke( this, Encoding.Unicode.GetString( content ) );
-                OnReceived?.Invoke( this, Encoding.Unicode.GetString( content ) );
+                action?.Invoke(this, Encoding.Unicode.GetString(content));
+                OnReceived?.Invoke(this, Encoding.Unicode.GetString(content));
             }
         }
 
-        internal override void SocketReceiveException( AppSession session, Exception ex )
+        internal override void SocketReceiveException(AppSession session, Exception ex)
         {
             // 发生异常的时候需要进行重新连接
             while (true)
             {
-                Console.WriteLine( ex );
-                Console.WriteLine( StringResources.Language.ReConnectServerAfterTenSeconds );
-                System.Threading.Thread.Sleep( this.reconnectTime );
+                Console.WriteLine(ex);
+                Console.WriteLine(StringResources.Language.ReConnectServerAfterTenSeconds);
+                System.Threading.Thread.Sleep(this.reconnectTime);
 
-                if(CreatePush( ).IsSuccess)
+                if (CreatePush().IsSuccess)
                 {
-                    Console.WriteLine( StringResources.Language.ReConnectServerSuccess );
+                    Console.WriteLine(StringResources.Language.ReConnectServerSuccess);
                     break;
                 }
             }
         }
 
         #endregion
-        
+
         #region Public Method 
 
         /// <summary>
@@ -79,57 +77,57 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="pushCallBack">触发数据推送的委托</param>
         /// <returns>是否创建成功</returns>
-        public OperateResult CreatePush( Action<NetPushClient, string> pushCallBack )
+        public OperateResult CreatePush(Action<NetPushClient, string> pushCallBack)
         {
             action = pushCallBack;
-            return CreatePush( );
+            return CreatePush();
         }
 
         /// <summary>
         /// 创建数据推送服务，使用事件绑定的机制实现
         /// </summary>
         /// <returns>是否创建成功</returns>
-        public OperateResult CreatePush( )
+        public OperateResult CreatePush()
         {
-            CoreSocket?.Close( );
+            CoreSocket?.Close();
 
             // 连接服务器
-            OperateResult<Socket> connect = CreateSocketAndConnect( endPoint, 5000 );
+            OperateResult<Socket> connect = CreateSocketAndConnect(endPoint, 5000);
             if (!connect.IsSuccess) return connect;
 
             // 发送订阅的关键字
-            OperateResult send = SendStringAndCheckReceive( connect.Content, 0, keyWord );
+            OperateResult send = SendStringAndCheckReceive(connect.Content, 0, keyWord);
             if (!send.IsSuccess) return send;
 
             // 确认服务器的反馈
-            OperateResult<int, string> receive = ReceiveStringContentFromSocket( connect.Content );
+            OperateResult<int, string> receive = ReceiveStringContentFromSocket(connect.Content);
             if (!receive.IsSuccess) return receive;
 
             // 订阅不存在
             if (receive.Content1 != 0)
             {
-                connect.Content?.Close( );
-                return new OperateResult( receive.Content2 );
+                connect.Content?.Close();
+                return new OperateResult(receive.Content2);
             }
 
             // 异步接收
-            AppSession appSession = new AppSession( );
+            AppSession appSession = new AppSession();
             CoreSocket = connect.Content;
             appSession.WorkSocket = connect.Content;
-            ReBeginReceiveHead( appSession, false );
+            ReBeginReceiveHead(appSession, false);
 
-            return OperateResult.CreateSuccessResult( );
+            return OperateResult.CreateSuccessResult();
         }
-        
+
         /// <summary>
         /// 关闭消息推送的界面
         /// </summary>
         public void ClosePush()
         {
             action = null;
-            if (CoreSocket != null && CoreSocket.Connected) CoreSocket?.Send( BitConverter.GetBytes( 100 ) );
-            System.Threading.Thread.Sleep( 20 );
-            CoreSocket?.Close( );
+            if (CoreSocket != null && CoreSocket.Connected) CoreSocket?.Send(BitConverter.GetBytes(100));
+            System.Threading.Thread.Sleep(20);
+            CoreSocket?.Close();
         }
 
         #endregion
@@ -172,7 +170,7 @@ namespace HslCommunication.Enthernet
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return $"NetPushClient[{endPoint}]";
         }

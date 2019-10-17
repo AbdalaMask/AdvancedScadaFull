@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace HslCommunication.MQTT
 {
@@ -15,15 +12,15 @@ namespace HslCommunication.MQTT
         /// <summary>
         /// 实例化一个默认的对象
         /// </summary>
-        public MqttConnectionOptions( )
+        public MqttConnectionOptions()
         {
-            ClientId                  = string.Empty;
-            IpAddress                 = "127.0.0.1";
-            Port                      = 1883;
-            KeepAlivePeriod           = TimeSpan.FromSeconds( 100 );
-            KeepAliveSendInterval     = TimeSpan.FromSeconds( 30 );
-            CleanSession              = true;
-            ConnectTimeout            = 5000;
+            ClientId = string.Empty;
+            IpAddress = "127.0.0.1";
+            Port = 1883;
+            KeepAlivePeriod = TimeSpan.FromSeconds(100);
+            KeepAliveSendInterval = TimeSpan.FromSeconds(30);
+            CleanSession = true;
+            ConnectTimeout = 5000;
         }
 
         #endregion

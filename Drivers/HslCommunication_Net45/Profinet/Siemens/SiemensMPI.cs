@@ -1,11 +1,8 @@
-﻿using HslCommunication.Core;
+﻿using HslCommunication.BasicFramework;
+using HslCommunication.Core;
 using HslCommunication.Core.Address;
 using HslCommunication.Serial;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HslCommunication.BasicFramework;
 
 namespace HslCommunication.Profinet.Siemens
 {
@@ -19,7 +16,7 @@ namespace HslCommunication.Profinet.Siemens
         /// <summary>
         /// 实例化一个西门子的MPI协议对象
         /// </summary>
-        public SiemensMPI( )
+        public SiemensMPI()
         {
             WordLength = 2;
         }
@@ -60,25 +57,25 @@ namespace HslCommunication.Profinet.Siemens
         /// 握手信号
         /// </summary>
         /// <returns>是否握手成功</returns>
-        public OperateResult Handle( )
+        public OperateResult Handle()
         {
             while (true)
             {
                 // 令牌帧接收
-                OperateResult<byte[]> receiveResult = SPReceived( sP_ReadData, true );
-                if (!receiveResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( receiveResult );
+                OperateResult<byte[]> receiveResult = SPReceived(sP_ReadData, true);
+                if (!receiveResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(receiveResult);
 
                 if (receiveResult.Content[0] == 0xDC && receiveResult.Content[1] == 0x02 && receiveResult.Content[2] == 0x02)
                 {
-                    OperateResult sendResult = SPSend( sP_ReadData, new byte[] { 0xDC, 0x00, 0x00 } );
-                    if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( sendResult );
+                    OperateResult sendResult = SPSend(sP_ReadData, new byte[] { 0xDC, 0x00, 0x00 });
+                    if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(sendResult);
                 }
                 else if (receiveResult.Content[0] == 0xDC && receiveResult.Content[1] == 0x00 && receiveResult.Content[2] == 0x02)
                 {
-                    OperateResult sendResult = SPSend( sP_ReadData, new byte[] { 0xDC, 0x02, 0x00 } );
-                    if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( sendResult );
+                    OperateResult sendResult = SPSend(sP_ReadData, new byte[] { 0xDC, 0x02, 0x00 });
+                    if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(sendResult);
 
-                    return OperateResult.CreateSuccessResult( );
+                    return OperateResult.CreateSuccessResult();
                 }
             }
         }
@@ -93,39 +90,39 @@ namespace HslCommunication.Profinet.Siemens
         /// <param name="address">西门子的地址数据信息</param>
         /// <param name="length">数据长度</param>
         /// <returns>带返回结果的结果对象</returns>
-        public override OperateResult<byte[]> Read( string address, ushort length )
+        public override OperateResult<byte[]> Read(string address, ushort length)
         {
             // 解析指令
-            OperateResult<byte[]> command = BuildReadCommand( station, address, length, false );
+            OperateResult<byte[]> command = BuildReadCommand(station, address, length, false);
             if (!command.IsSuccess) return command;
 
-            if (IsClearCacheBeforeRead) ClearSerialCache( );
+            if (IsClearCacheBeforeRead) ClearSerialCache();
 
             // 第一次发送
-            OperateResult sendResult = SPSend( sP_ReadData, command.Content );
-            if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( sendResult );
+            OperateResult sendResult = SPSend(sP_ReadData, command.Content);
+            if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(sendResult);
 
             // 第一次接收
-            OperateResult<byte[]> receiveResult = SPReceived( sP_ReadData, true );
-            if (!receiveResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( receiveResult );
-            if (receiveResult.Content[14] != 0xE5) return new OperateResult<byte[]>( "PLC Receive Check Failed:" + SoftBasic.ByteToHexString( receiveResult.Content ) );
+            OperateResult<byte[]> receiveResult = SPReceived(sP_ReadData, true);
+            if (!receiveResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(receiveResult);
+            if (receiveResult.Content[14] != 0xE5) return new OperateResult<byte[]>("PLC Receive Check Failed:" + SoftBasic.ByteToHexString(receiveResult.Content));
 
             // 第二次接收
-            receiveResult = SPReceived( sP_ReadData, true );
-            if (!receiveResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( receiveResult );
-            if (receiveResult.Content[19] != 0x00) return new OperateResult<byte[]>( "PLC Receive Check Failed:" + receiveResult.Content[19] );
+            receiveResult = SPReceived(sP_ReadData, true);
+            if (!receiveResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(receiveResult);
+            if (receiveResult.Content[19] != 0x00) return new OperateResult<byte[]>("PLC Receive Check Failed:" + receiveResult.Content[19]);
 
             // 确认信息
-            sendResult = SPSend( sP_ReadData, readConfirm );
-            if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( sendResult );
+            sendResult = SPSend(sP_ReadData, readConfirm);
+            if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(sendResult);
 
             // 数据提取
             byte[] buffer = new byte[length];
             if (receiveResult.Content[25] == 0xFF && receiveResult.Content[26] == 0x04)
             {
-                Array.Copy( receiveResult.Content, 29, buffer, 0, length );
+                Array.Copy(receiveResult.Content, 29, buffer, 0, length);
             }
-            return OperateResult.CreateSuccessResult( buffer );
+            return OperateResult.CreateSuccessResult(buffer);
         }
 
         /// <summary>
@@ -134,38 +131,38 @@ namespace HslCommunication.Profinet.Siemens
         /// <param name="address">西门子的地址数据信息</param>
         /// <param name="length">数据长度</param>
         /// <returns>带返回结果的结果对象</returns>
-        public override OperateResult<bool[]> ReadBool( string address, ushort length )
+        public override OperateResult<bool[]> ReadBool(string address, ushort length)
         {
             // 解析指令
-            OperateResult<byte[]> command = BuildReadCommand( station, address, length, true );
-            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( command );
+            OperateResult<byte[]> command = BuildReadCommand(station, address, length, true);
+            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(command);
 
             // 第一次发送
-            OperateResult sendResult = SPSend( sP_ReadData, command.Content );
-            if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( sendResult );
+            OperateResult sendResult = SPSend(sP_ReadData, command.Content);
+            if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(sendResult);
 
             // 第一次接收
-            OperateResult<byte[]> receiveResult = SPReceived( sP_ReadData, true );
-            if (!receiveResult.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( receiveResult );
-            if (receiveResult.Content[14] != 0xE5) return new OperateResult<bool[]>( "PLC Receive Check Failed:" + SoftBasic.ByteToHexString( receiveResult.Content ) );
+            OperateResult<byte[]> receiveResult = SPReceived(sP_ReadData, true);
+            if (!receiveResult.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(receiveResult);
+            if (receiveResult.Content[14] != 0xE5) return new OperateResult<bool[]>("PLC Receive Check Failed:" + SoftBasic.ByteToHexString(receiveResult.Content));
 
             // 第二次接收
-            receiveResult = SPReceived( sP_ReadData, true );
-            if (!receiveResult.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( receiveResult );
-            if (receiveResult.Content[19] != 0x00) return new OperateResult<bool[]>( "PLC Receive Check Failed:" + receiveResult.Content[19] );
+            receiveResult = SPReceived(sP_ReadData, true);
+            if (!receiveResult.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(receiveResult);
+            if (receiveResult.Content[19] != 0x00) return new OperateResult<bool[]>("PLC Receive Check Failed:" + receiveResult.Content[19]);
 
             // 确认信息
-            sendResult = SPSend( sP_ReadData, readConfirm );
-            if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( sendResult );
+            sendResult = SPSend(sP_ReadData, readConfirm);
+            if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(sendResult);
 
             // 数据提取
             byte[] buffer = new byte[receiveResult.Content.Length - 31];
             if (receiveResult.Content[21] == 0xFF && receiveResult.Content[22] == 0x03)
             {
-                Array.Copy( receiveResult.Content, 28, buffer, 0, buffer.Length );
+                Array.Copy(receiveResult.Content, 28, buffer, 0, buffer.Length);
             }
 
-            return OperateResult.CreateSuccessResult( SoftBasic.ByteToBoolArray( buffer, length ) );
+            return OperateResult.CreateSuccessResult(SoftBasic.ByteToBoolArray(buffer, length));
         }
 
         /// <summary>
@@ -174,34 +171,34 @@ namespace HslCommunication.Profinet.Siemens
         /// <param name="address">西门子的地址数据信息</param>
         /// <param name="value">数据长度</param>
         /// <returns>带返回结果的结果对象</returns>
-        public override OperateResult Write( string address, byte[] value )
+        public override OperateResult Write(string address, byte[] value)
         {
             // 解析指令
-            OperateResult<byte[]> command = BuildWriteCommand( station, address, value );
+            OperateResult<byte[]> command = BuildWriteCommand(station, address, value);
             if (!command.IsSuccess) return command;
 
-            if (IsClearCacheBeforeRead) ClearSerialCache( );
+            if (IsClearCacheBeforeRead) ClearSerialCache();
 
             // 第一次发送
-            OperateResult sendResult = SPSend( sP_ReadData, command.Content );
-            if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( sendResult );
+            OperateResult sendResult = SPSend(sP_ReadData, command.Content);
+            if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(sendResult);
 
             // 第一次接收
-            OperateResult<byte[]> receiveResult = SPReceived( sP_ReadData, true );
-            if (!receiveResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( receiveResult );
-            if (receiveResult.Content[14] != 0xE5) return new OperateResult<byte[]>( "PLC Receive Check Failed:" + SoftBasic.ByteToHexString( receiveResult.Content ) );
+            OperateResult<byte[]> receiveResult = SPReceived(sP_ReadData, true);
+            if (!receiveResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(receiveResult);
+            if (receiveResult.Content[14] != 0xE5) return new OperateResult<byte[]>("PLC Receive Check Failed:" + SoftBasic.ByteToHexString(receiveResult.Content));
 
             // 第二次接收
-            receiveResult = SPReceived( sP_ReadData, true );
-            if (!receiveResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( receiveResult );
-            if (receiveResult.Content[25] != 0xFF) return new OperateResult<byte[]>( "PLC Receive Check Failed:" + receiveResult.Content[25] );
+            receiveResult = SPReceived(sP_ReadData, true);
+            if (!receiveResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(receiveResult);
+            if (receiveResult.Content[25] != 0xFF) return new OperateResult<byte[]>("PLC Receive Check Failed:" + receiveResult.Content[25]);
 
             // 确认信息
-            sendResult = SPSend( sP_ReadData, writeConfirm );
-            if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( sendResult );
+            sendResult = SPSend(sP_ReadData, writeConfirm);
+            if (!sendResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(sendResult);
 
             // 数据提取
-            return OperateResult.CreateSuccessResult( );
+            return OperateResult.CreateSuccessResult();
         }
 
         #endregion
@@ -213,12 +210,12 @@ namespace HslCommunication.Profinet.Siemens
         /// </summary>
         /// <param name="address">西门子的地址数据信息</param>
         /// <returns>带返回结果的结果对象</returns>
-        public OperateResult<byte> ReadByte( string address )
+        public OperateResult<byte> ReadByte(string address)
         {
-            OperateResult<byte[]> read = Read( address, 1 );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte>( read );
+            OperateResult<byte[]> read = Read(address, 1);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte>(read);
 
-            return OperateResult.CreateSuccessResult( read.Content[0] );
+            return OperateResult.CreateSuccessResult(read.Content[0]);
         }
 
         /// <summary>
@@ -227,9 +224,9 @@ namespace HslCommunication.Profinet.Siemens
         /// <param name="address">西门子的地址数据信息</param>
         /// <param name="value">数据长度</param>
         /// <returns>带返回结果的结果对象</returns>
-        public OperateResult WriteByte( string address, byte value )
+        public OperateResult WriteByte(string address, byte value)
         {
-            return Write( address, new byte[] { value } );
+            return Write(address, new byte[] { value });
         }
 
         #endregion
@@ -248,7 +245,7 @@ namespace HslCommunication.Profinet.Siemens
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return $"SiemensMPI[{PortName}:{BaudRate}]";
         }
@@ -267,15 +264,15 @@ namespace HslCommunication.Profinet.Siemens
         /// <param name="length">读取数据长度 -> Read Data length</param>
         /// <param name="isBit">是否为位读取</param>
         /// <returns>包含结果对象的报文 -> Message containing the result object</returns>
-        public static OperateResult<byte[]> BuildReadCommand( byte station, string address, ushort length, bool isBit )
+        public static OperateResult<byte[]> BuildReadCommand(byte station, string address, ushort length, bool isBit)
         {
-            OperateResult<S7AddressData> analysis = S7AddressData.ParseFrom( address, length );
-            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( analysis );
+            OperateResult<S7AddressData> analysis = S7AddressData.ParseFrom(address, length);
+            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(analysis);
 
             byte[] _PLCCommand = new byte[38];
             _PLCCommand[0] = 0x68;
-            _PLCCommand[1] = BitConverter.GetBytes( _PLCCommand.Length - 6 )[0];
-            _PLCCommand[2] = BitConverter.GetBytes( _PLCCommand.Length - 6 )[0];
+            _PLCCommand[1] = BitConverter.GetBytes(_PLCCommand.Length - 6)[0];
+            _PLCCommand[2] = BitConverter.GetBytes(_PLCCommand.Length - 6)[0];
             _PLCCommand[3] = 0x68;
             _PLCCommand[4] = (byte)(station + 0x80);
             _PLCCommand[5] = (byte)(0x00 + 0x80);
@@ -301,25 +298,25 @@ namespace HslCommunication.Profinet.Siemens
             _PLCCommand[25] = 0x10;
 
             _PLCCommand[26] = isBit ? (byte)0x01 : (byte)0x02;
-            _PLCCommand[27] = BitConverter.GetBytes( length )[1];
-            _PLCCommand[28] = BitConverter.GetBytes( length )[0];
-            _PLCCommand[29] = BitConverter.GetBytes( analysis.Content.DbBlock )[1];
-            _PLCCommand[30] = BitConverter.GetBytes( analysis.Content.DbBlock )[0];
+            _PLCCommand[27] = BitConverter.GetBytes(length)[1];
+            _PLCCommand[28] = BitConverter.GetBytes(length)[0];
+            _PLCCommand[29] = BitConverter.GetBytes(analysis.Content.DbBlock)[1];
+            _PLCCommand[30] = BitConverter.GetBytes(analysis.Content.DbBlock)[0];
             _PLCCommand[31] = analysis.Content.DataCode;
-            _PLCCommand[32] = BitConverter.GetBytes( analysis.Content.AddressStart )[2];
-            _PLCCommand[33] = BitConverter.GetBytes( analysis.Content.AddressStart )[1];
-            _PLCCommand[34] = BitConverter.GetBytes( analysis.Content.AddressStart )[0];
+            _PLCCommand[32] = BitConverter.GetBytes(analysis.Content.AddressStart)[2];
+            _PLCCommand[33] = BitConverter.GetBytes(analysis.Content.AddressStart)[1];
+            _PLCCommand[34] = BitConverter.GetBytes(analysis.Content.AddressStart)[0];
 
             int count = 0;
             for (int i = 4; i < 35; i++)
             {
                 count += _PLCCommand[i];
             }
-            _PLCCommand[35] = BitConverter.GetBytes( count )[0];
+            _PLCCommand[35] = BitConverter.GetBytes(count)[0];
             _PLCCommand[36] = 0x16;
             _PLCCommand[37] = 0xE5;
 
-            return OperateResult.CreateSuccessResult( _PLCCommand );
+            return OperateResult.CreateSuccessResult(_PLCCommand);
         }
 
 
@@ -331,17 +328,17 @@ namespace HslCommunication.Profinet.Siemens
         /// <param name="address">地址</param>
         /// <param name="values">数据值</param>
         /// <returns>是否写入成功</returns>
-        public static OperateResult<byte[]> BuildWriteCommand( byte station, string address, byte[] values )
+        public static OperateResult<byte[]> BuildWriteCommand(byte station, string address, byte[] values)
         {
-            OperateResult<S7AddressData> analysis = S7AddressData.ParseFrom( address );
-            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( analysis );
+            OperateResult<S7AddressData> analysis = S7AddressData.ParseFrom(address);
+            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(analysis);
 
             int length = values.Length;
             // 68 21 21 68 02 00 6C 32 01 00 00 00 00 00 0E 00 00 04 01 12 0A 10
             byte[] _PLCCommand = new byte[42 + values.Length];
             _PLCCommand[0] = 0x68;
-            _PLCCommand[1] = BitConverter.GetBytes( _PLCCommand.Length - 6 )[0];
-            _PLCCommand[2] = BitConverter.GetBytes( _PLCCommand.Length - 6 )[0];
+            _PLCCommand[1] = BitConverter.GetBytes(_PLCCommand.Length - 6)[0];
+            _PLCCommand[2] = BitConverter.GetBytes(_PLCCommand.Length - 6)[0];
             _PLCCommand[3] = 0x68;
             _PLCCommand[4] = (byte)(station + 0x80);
             _PLCCommand[5] = (byte)(0x00 + 0x80);
@@ -367,34 +364,34 @@ namespace HslCommunication.Profinet.Siemens
             _PLCCommand[25] = 0x10;
 
             _PLCCommand[26] = 0x02;
-            _PLCCommand[27] = BitConverter.GetBytes( length )[0];
-            _PLCCommand[28] = BitConverter.GetBytes( length )[1];
-            _PLCCommand[29] = BitConverter.GetBytes( analysis.Content.DbBlock )[0];
-            _PLCCommand[30] = BitConverter.GetBytes( analysis.Content.DbBlock )[1];
+            _PLCCommand[27] = BitConverter.GetBytes(length)[0];
+            _PLCCommand[28] = BitConverter.GetBytes(length)[1];
+            _PLCCommand[29] = BitConverter.GetBytes(analysis.Content.DbBlock)[0];
+            _PLCCommand[30] = BitConverter.GetBytes(analysis.Content.DbBlock)[1];
             _PLCCommand[31] = analysis.Content.DataCode;
-            _PLCCommand[32] = BitConverter.GetBytes( analysis.Content.AddressStart )[2];
-            _PLCCommand[33] = BitConverter.GetBytes( analysis.Content.AddressStart )[1];
-            _PLCCommand[34] = BitConverter.GetBytes( analysis.Content.AddressStart )[0];
+            _PLCCommand[32] = BitConverter.GetBytes(analysis.Content.AddressStart)[2];
+            _PLCCommand[33] = BitConverter.GetBytes(analysis.Content.AddressStart)[1];
+            _PLCCommand[34] = BitConverter.GetBytes(analysis.Content.AddressStart)[0];
 
             _PLCCommand[35] = 0x00;
             _PLCCommand[36] = 0x04;
-            _PLCCommand[37] = BitConverter.GetBytes( length * 8 )[1];
-            _PLCCommand[38] = BitConverter.GetBytes( length * 8 )[0];
+            _PLCCommand[37] = BitConverter.GetBytes(length * 8)[1];
+            _PLCCommand[38] = BitConverter.GetBytes(length * 8)[0];
 
 
-            values.CopyTo( _PLCCommand, 39 );
+            values.CopyTo(_PLCCommand, 39);
 
             int count = 0;
             for (int i = 4; i < _PLCCommand.Length - 3; i++)
             {
                 count += _PLCCommand[i];
             }
-            _PLCCommand[_PLCCommand.Length - 3] = BitConverter.GetBytes( count )[0];
+            _PLCCommand[_PLCCommand.Length - 3] = BitConverter.GetBytes(count)[0];
             _PLCCommand[_PLCCommand.Length - 2] = 0x16;
             _PLCCommand[_PLCCommand.Length - 1] = 0xE5;
 
 
-            return OperateResult.CreateSuccessResult( _PLCCommand );
+            return OperateResult.CreateSuccessResult(_PLCCommand);
         }
 
         /// <summary>
@@ -402,7 +399,7 @@ namespace HslCommunication.Profinet.Siemens
         /// </summary>
         /// <param name="code">状态</param>
         /// <returns>消息文本</returns>
-        public static string GetMsgFromStatus( byte code )
+        public static string GetMsgFromStatus(byte code)
         {
             switch (code)
             {
@@ -422,7 +419,7 @@ namespace HslCommunication.Profinet.Siemens
         /// <param name="errorClass">错误类型</param>
         /// <param name="errorCode">错误代码</param>
         /// <returns>错误信息</returns>
-        public static string GetMsgFromStatus( byte errorClass, byte errorCode )
+        public static string GetMsgFromStatus(byte errorClass, byte errorCode)
         {
             if (errorClass == 0x80 && errorCode == 0x01)
             {

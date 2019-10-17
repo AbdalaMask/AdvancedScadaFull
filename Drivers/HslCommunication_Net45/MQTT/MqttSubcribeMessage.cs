@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace HslCommunication.MQTT
@@ -14,10 +11,10 @@ namespace HslCommunication.MQTT
         /// <summary>
         /// 实例化一个默认的对象
         /// </summary>
-        public MqttSubcribeMessage( )
+        public MqttSubcribeMessage()
         {
             QualityOfServiceLevel = MqttQualityOfServiceLevel.AtMostOnce;
-            ResetEvent = new AutoResetEvent( false );
+            ResetEvent = new AutoResetEvent(false);
         }
 
         /// <summary>
@@ -50,7 +47,7 @@ namespace HslCommunication.MQTT
         /// 释放对象
         /// </summary>
         /// <param name="disposing"></param>
-        protected virtual void Dispose( bool disposing )
+        protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {
@@ -63,7 +60,7 @@ namespace HslCommunication.MQTT
                 // TODO: 将大型字段设置为 null。
 
                 disposedValue = true;
-                ResetEvent.Close( );
+                ResetEvent.Close();
             }
         }
 
@@ -75,10 +72,10 @@ namespace HslCommunication.MQTT
         // }
 
         // 添加此代码以正确实现可处置模式。
-        public void Dispose( )
+        public void Dispose()
         {
             // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
-            Dispose( true );
+            Dispose(true);
             // TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
             // GC.SuppressFinalize(this);
         }

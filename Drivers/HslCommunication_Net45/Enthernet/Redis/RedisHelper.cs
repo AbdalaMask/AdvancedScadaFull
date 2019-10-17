@@ -1,7 +1,6 @@
 ﻿using HslCommunication.Core;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 
@@ -13,15 +12,15 @@ namespace HslCommunication.Enthernet.Redis
     public class RedisHelper
     {
         #region Socket Helper
-        
+
         /// <summary>
         /// 接收一行命令数据
         /// </summary>
         /// <param name="socket">网络套接字</param>
         /// <returns>带有结果对象的数据信息</returns>
-        public static OperateResult<byte[]> ReceiveCommandLine( Socket socket )
+        public static OperateResult<byte[]> ReceiveCommandLine(Socket socket)
         {
-            return NetSupport.ReceiveCommandLineFromSocket( socket, (byte)'\n' );
+            return NetSupport.ReceiveCommandLineFromSocket(socket, (byte)'\n');
         }
 
         /// <summary>
@@ -30,22 +29,22 @@ namespace HslCommunication.Enthernet.Redis
         /// <param name="socket">网络套接字</param>
         /// <param name="length">字符串的长度</param>
         /// <returns>带有结果对象的数据信息</returns>
-        public static OperateResult<byte[]> ReceiveCommandString( Socket socket, int length )
+        public static OperateResult<byte[]> ReceiveCommandString(Socket socket, int length)
         {
             try
             {
-                List<byte> bufferArray = new List<byte>( );
-                bufferArray.AddRange( NetSupport.ReadBytesFromSocket( socket, length ) );
+                List<byte> bufferArray = new List<byte>();
+                bufferArray.AddRange(NetSupport.ReadBytesFromSocket(socket, length));
 
-                OperateResult<byte[]> commandTail = ReceiveCommandLine( socket );
+                OperateResult<byte[]> commandTail = ReceiveCommandLine(socket);
                 if (!commandTail.IsSuccess) return commandTail;
 
-                bufferArray.AddRange( commandTail.Content );
-                return OperateResult.CreateSuccessResult( bufferArray.ToArray( ) );
+                bufferArray.AddRange(commandTail.Content);
+                return OperateResult.CreateSuccessResult(bufferArray.ToArray());
             }
             catch (Exception ex)
             {
-                return new OperateResult<byte[]>( ex.Message );
+                return new OperateResult<byte[]>(ex.Message);
             }
         }
 
@@ -55,53 +54,53 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="socket">网络套接字</param>
         /// <returns>接收的结果对象</returns>
-        public static OperateResult<byte[]> ReceiveCommand( Socket socket )
+        public static OperateResult<byte[]> ReceiveCommand(Socket socket)
         {
-            List<byte> bufferArray = new List<byte>( );
+            List<byte> bufferArray = new List<byte>();
 
-            OperateResult<byte[]> readCommandLine = ReceiveCommandLine( socket );
+            OperateResult<byte[]> readCommandLine = ReceiveCommandLine(socket);
             if (!readCommandLine.IsSuccess) return readCommandLine;
 
-            bufferArray.AddRange( readCommandLine.Content );
+            bufferArray.AddRange(readCommandLine.Content);
             if (readCommandLine.Content[0] == '+' || readCommandLine.Content[0] == '-' || readCommandLine.Content[0] == ':')
             {
                 // 状态回复，错误回复，整数回复
-                return OperateResult.CreateSuccessResult( bufferArray.ToArray( ) );
+                return OperateResult.CreateSuccessResult(bufferArray.ToArray());
             }
             else if (readCommandLine.Content[0] == '$')
             {
                 // 批量回复，允许最大512M字节
-                OperateResult<int> lengthResult = GetNumberFromCommandLine( readCommandLine.Content );
-                if (!lengthResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( lengthResult );
+                OperateResult<int> lengthResult = GetNumberFromCommandLine(readCommandLine.Content);
+                if (!lengthResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(lengthResult);
 
-                if (lengthResult.Content < 0) return OperateResult.CreateSuccessResult( bufferArray.ToArray( ) );
+                if (lengthResult.Content < 0) return OperateResult.CreateSuccessResult(bufferArray.ToArray());
 
                 // 接收字符串信息
-                OperateResult<byte[]> receiveContent = ReceiveCommandString( socket, lengthResult.Content );
+                OperateResult<byte[]> receiveContent = ReceiveCommandString(socket, lengthResult.Content);
                 if (!receiveContent.IsSuccess) return receiveContent;
 
-                bufferArray.AddRange( receiveContent.Content );
-                return OperateResult.CreateSuccessResult( bufferArray.ToArray( ) );
+                bufferArray.AddRange(receiveContent.Content);
+                return OperateResult.CreateSuccessResult(bufferArray.ToArray());
             }
             else if (readCommandLine.Content[0] == '*')
             {
                 // 多参数的回复
-                OperateResult<int> lengthResult = GetNumberFromCommandLine( readCommandLine.Content );
-                if (!lengthResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( lengthResult );
+                OperateResult<int> lengthResult = GetNumberFromCommandLine(readCommandLine.Content);
+                if (!lengthResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(lengthResult);
 
                 for (int i = 0; i < lengthResult.Content; i++)
                 {
-                    OperateResult<byte[]> receiveCommand = ReceiveCommand( socket );
+                    OperateResult<byte[]> receiveCommand = ReceiveCommand(socket);
                     if (!receiveCommand.IsSuccess) return receiveCommand;
 
-                    bufferArray.AddRange( receiveCommand.Content );
+                    bufferArray.AddRange(receiveCommand.Content);
                 }
 
-                return OperateResult.CreateSuccessResult( bufferArray.ToArray( ) );
+                return OperateResult.CreateSuccessResult(bufferArray.ToArray());
             }
             else
             {
-                return new OperateResult<byte[]>( "Not Supported HeadCode: " + readCommandLine.Content[0] );
+                return new OperateResult<byte[]>("Not Supported HeadCode: " + readCommandLine.Content[0]);
             }
         }
 
@@ -114,21 +113,21 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="commands">字节数据信息</param>
         /// <returns>结果报文信息</returns>
-        public static byte[] PackStringCommand( string[] commands )
+        public static byte[] PackStringCommand(string[] commands)
         {
-            StringBuilder sb = new StringBuilder( );
-            sb.Append( '*' );
-            sb.Append( commands.Length.ToString( ) );
-            sb.Append( "\r\n" );
+            StringBuilder sb = new StringBuilder();
+            sb.Append('*');
+            sb.Append(commands.Length.ToString());
+            sb.Append("\r\n");
             for (int i = 0; i < commands.Length; i++)
             {
-                sb.Append( '$' );
-                sb.Append( Encoding.UTF8.GetBytes( commands[i] ).Length.ToString( ) );
-                sb.Append( "\r\n" );
-                sb.Append( commands[i] );
-                sb.Append( "\r\n" );
+                sb.Append('$');
+                sb.Append(Encoding.UTF8.GetBytes(commands[i]).Length.ToString());
+                sb.Append("\r\n");
+                sb.Append(commands[i]);
+                sb.Append("\r\n");
             }
-            return Encoding.UTF8.GetBytes( sb.ToString( ) );
+            return Encoding.UTF8.GetBytes(sb.ToString());
         }
 
         /// <summary>
@@ -136,34 +135,34 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="commandLine">原始的字节数据</param>
         /// <returns>带有结果对象的数据信息</returns>
-        public static OperateResult<int> GetNumberFromCommandLine( byte[] commandLine )
+        public static OperateResult<int> GetNumberFromCommandLine(byte[] commandLine)
         {
             try
             {
-                string command = Encoding.UTF8.GetString( commandLine ).TrimEnd( '\r', '\n' );
-                return OperateResult.CreateSuccessResult( Convert.ToInt32( command.Substring( 1 ) ) );
+                string command = Encoding.UTF8.GetString(commandLine).TrimEnd('\r', '\n');
+                return OperateResult.CreateSuccessResult(Convert.ToInt32(command.Substring(1)));
             }
             catch (Exception ex)
             {
-                return new OperateResult<int>( ex.Message );
+                return new OperateResult<int>(ex.Message);
             }
         }
-        
+
         /// <summary>
         /// 从原始的结果数据对象中提取出数字数据
         /// </summary>
         /// <param name="commandLine">原始的字节数据</param>
         /// <returns>带有结果对象的数据信息</returns>
-        public static OperateResult<long> GetLongNumberFromCommandLine( byte[] commandLine )
+        public static OperateResult<long> GetLongNumberFromCommandLine(byte[] commandLine)
         {
             try
             {
-                string command = Encoding.UTF8.GetString( commandLine ).TrimEnd( '\r', '\n' );
-                return OperateResult.CreateSuccessResult( Convert.ToInt64( command.Substring( 1 ) ) );
+                string command = Encoding.UTF8.GetString(commandLine).TrimEnd('\r', '\n');
+                return OperateResult.CreateSuccessResult(Convert.ToInt64(command.Substring(1)));
             }
             catch (Exception ex)
             {
-                return new OperateResult<long>( ex.Message );
+                return new OperateResult<long>(ex.Message);
             }
         }
 
@@ -172,11 +171,11 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="commandLine">原始的字节数据</param>
         /// <returns>带有结果对象的数据信息</returns>
-        public static OperateResult<string> GetStringFromCommandLine( byte[] commandLine )
+        public static OperateResult<string> GetStringFromCommandLine(byte[] commandLine)
         {
             try
             {
-                if (commandLine[0] != '$') return new OperateResult<string>( Encoding.UTF8.GetString( commandLine ) );
+                if (commandLine[0] != '$') return new OperateResult<string>(Encoding.UTF8.GetString(commandLine));
 
                 // 先找到换行符
                 int index_start = -1;
@@ -196,14 +195,14 @@ namespace HslCommunication.Enthernet.Redis
                     }
                 }
 
-                int length = Convert.ToInt32( Encoding.UTF8.GetString( commandLine, 1, index_start - 1 ) );
-                if (length < 0) return new OperateResult<string>( "(nil) None Value" );
+                int length = Convert.ToInt32(Encoding.UTF8.GetString(commandLine, 1, index_start - 1));
+                if (length < 0) return new OperateResult<string>("(nil) None Value");
 
-                return OperateResult.CreateSuccessResult( Encoding.UTF8.GetString( commandLine, index_end + 1, length ) );
+                return OperateResult.CreateSuccessResult(Encoding.UTF8.GetString(commandLine, index_end + 1, length));
             }
             catch (Exception ex)
             {
-                return new OperateResult<string>( ex.Message );
+                return new OperateResult<string>(ex.Message);
             }
         }
 
@@ -212,12 +211,12 @@ namespace HslCommunication.Enthernet.Redis
         /// </summary>
         /// <param name="commandLine">结果数据</param>
         /// <returns>带有结果对象的数据信息</returns>
-        public static OperateResult<string[]> GetStringsFromCommandLine( byte[] commandLine )
+        public static OperateResult<string[]> GetStringsFromCommandLine(byte[] commandLine)
         {
             try
             {
-                List<string> lists = new List<string>( );
-                if (commandLine[0] != '*') return new OperateResult<string[]>( Encoding.UTF8.GetString( commandLine ) );
+                List<string> lists = new List<string>();
+                if (commandLine[0] != '*') return new OperateResult<string[]>(Encoding.UTF8.GetString(commandLine));
 
                 int index = 0;
                 for (int i = 0; i < commandLine.Length; i++)
@@ -229,7 +228,7 @@ namespace HslCommunication.Enthernet.Redis
                     }
                 }
 
-                int length = Convert.ToInt32( Encoding.UTF8.GetString( commandLine, 1, index - 1 ) );
+                int length = Convert.ToInt32(Encoding.UTF8.GetString(commandLine, 1, index - 1));
                 for (int i = 0; i < length; i++)
                 {
                     // 提取所有的字符串内容
@@ -255,7 +254,7 @@ namespace HslCommunication.Enthernet.Redis
                                 break;
                             }
                         }
-                        int stringLength = Convert.ToInt32( Encoding.UTF8.GetString( commandLine, index + 1, index_start - index - 1 ) );
+                        int stringLength = Convert.ToInt32(Encoding.UTF8.GetString(commandLine, index + 1, index_start - index - 1));
                         if (stringLength >= 0)
                         {
                             for (int j = index; j < commandLine.Length; j++)
@@ -268,12 +267,12 @@ namespace HslCommunication.Enthernet.Redis
                             }
                             index = index_end + 1;
 
-                            lists.Add( Encoding.UTF8.GetString( commandLine, index, stringLength ) );
+                            lists.Add(Encoding.UTF8.GetString(commandLine, index, stringLength));
                             index = index + stringLength;
                         }
                         else
                         {
-                            lists.Add( null );
+                            lists.Add(null);
                         }
                     }
                     else
@@ -287,15 +286,15 @@ namespace HslCommunication.Enthernet.Redis
                                 break;
                             }
                         }
-                        lists.Add( Encoding.UTF8.GetString( commandLine, index, index_start - index - 1 ) );
+                        lists.Add(Encoding.UTF8.GetString(commandLine, index, index_start - index - 1));
                     }
                 }
-                
-                return OperateResult.CreateSuccessResult( lists.ToArray( ) );
+
+                return OperateResult.CreateSuccessResult(lists.ToArray());
             }
             catch (Exception ex)
             {
-                return new OperateResult<string[]>( ex.Message );
+                return new OperateResult<string[]>(ex.Message);
             }
         }
 

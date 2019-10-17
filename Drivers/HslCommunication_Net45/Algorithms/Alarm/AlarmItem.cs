@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace HslCommunication.Algorithms.Alarm
@@ -16,9 +13,9 @@ namespace HslCommunication.Algorithms.Alarm
         /// <summary>
         /// 实例化一个默认的对象
         /// </summary>
-        public AlarmItem( )
+        public AlarmItem()
         {
-            this.uniqueId = Interlocked.Increment( ref AlarmIdCurrent );
+            this.uniqueId = Interlocked.Increment(ref AlarmIdCurrent);
         }
 
         /// <summary>
@@ -26,9 +23,9 @@ namespace HslCommunication.Algorithms.Alarm
         /// </summary>
         /// <param name="userId">用户的自身的id标识信息</param>
         /// <param name="alarmDescription">报警的描述信息</param>
-        public AlarmItem( int userId, string alarmDescription )
+        public AlarmItem(int userId, string alarmDescription)
         {
-            this.uniqueId = Interlocked.Increment( ref AlarmIdCurrent );
+            this.uniqueId = Interlocked.Increment(ref AlarmIdCurrent);
             this.userId = userId;
             this.alarmDescription = alarmDescription;
         }
@@ -39,9 +36,9 @@ namespace HslCommunication.Algorithms.Alarm
         /// <param name="alarmCode">报警的代号</param>
         /// <param name="userId">用户的自身的id标识信息</param>
         /// <param name="alarmDescription">报警的描述信息</param>
-        public AlarmItem( int alarmCode, int userId, string alarmDescription )
+        public AlarmItem(int alarmCode, int userId, string alarmDescription)
         {
-            this.uniqueId = Interlocked.Increment( ref AlarmIdCurrent );
+            this.uniqueId = Interlocked.Increment(ref AlarmIdCurrent);
             this.alarmCode = alarmCode;
             this.userId = userId;
             this.alarmDescription = alarmDescription;

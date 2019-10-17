@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 
@@ -34,13 +31,13 @@ namespace HslCommunication.Controls
         /// <summary>
         /// 实例化一个曲线显示的控件
         /// </summary>
-        public UserCurve( )
+        public UserCurve()
         {
-            InitializeComponent( );
+            InitializeComponent();
             DoubleBuffered = true;
-            random = new Random( );
-            data_list = new Dictionary<string, HslCurveItem>( );
-            auxiliary_lines = new List<AuxiliaryLine>( );
+            random = new Random();
+            data_list = new Dictionary<string, HslCurveItem>();
+            auxiliary_lines = new List<AuxiliaryLine>();
 
             format_left = new StringFormat
             {
@@ -62,10 +59,10 @@ namespace HslCommunication.Controls
 
 
 
-            font_size9 = new Font( "宋体", 9 );
-            font_size12 = new Font( "宋体", 12 );
-            InitializationColor( );
-            pen_dash = new Pen( color_deep );
+            font_size9 = new Font("宋体", 9);
+            font_size12 = new Font("宋体", 12);
+            InitializationColor();
+            pen_dash = new Pen(color_deep);
             pen_dash.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
             pen_dash.DashPattern = new float[] { 5, 5 };
         }
@@ -114,10 +111,10 @@ namespace HslCommunication.Controls
         /// <summary>
         /// 获取或设置图形的纵坐标的最大值，该值必须大于最小值
         /// </summary>
-        [Category( "外观" )]
-        [Description( "获取或设置图形的左纵坐标的最大值，该值必须大于最小值" )]
-        [Browsable( true )]
-        [DefaultValue( 100f )]
+        [Category("外观")]
+        [Description("获取或设置图形的左纵坐标的最大值，该值必须大于最小值")]
+        [Browsable(true)]
+        [DefaultValue(100f)]
         public float ValueMaxLeft
         {
             get { return value_max_left; }
@@ -126,7 +123,7 @@ namespace HslCommunication.Controls
                 if (value > value_min_left)
                 {
                     value_max_left = value;
-                    Invalidate( );
+                    Invalidate();
                 }
             }
         }
@@ -134,10 +131,10 @@ namespace HslCommunication.Controls
         /// <summary>
         /// 获取或设置图形的纵坐标的最小值，该值必须小于最大值
         /// </summary>
-        [Category( "外观" )]
-        [Description( "获取或设置图形的左纵坐标的最小值，该值必须小于最大值" )]
-        [Browsable( true )]
-        [DefaultValue( 0f )]
+        [Category("外观")]
+        [Description("获取或设置图形的左纵坐标的最小值，该值必须小于最大值")]
+        [Browsable(true)]
+        [DefaultValue(0f)]
         public float ValueMinLeft
         {
             get { return value_min_left; }
@@ -146,7 +143,7 @@ namespace HslCommunication.Controls
                 if (value < value_max_left)
                 {
                     value_min_left = value;
-                    Invalidate( );
+                    Invalidate();
                 }
             }
         }
@@ -154,10 +151,10 @@ namespace HslCommunication.Controls
         /// <summary>
         /// 获取或设置图形的纵坐标的最大值，该值必须大于最小值
         /// </summary>
-        [Category( "外观" )]
-        [Description( "获取或设置图形的右纵坐标的最大值，该值必须大于最小值" )]
-        [Browsable( true )]
-        [DefaultValue( 100f )]
+        [Category("外观")]
+        [Description("获取或设置图形的右纵坐标的最大值，该值必须大于最小值")]
+        [Browsable(true)]
+        [DefaultValue(100f)]
         public float ValueMaxRight
         {
             get { return value_max_right; }
@@ -166,7 +163,7 @@ namespace HslCommunication.Controls
                 if (value > value_min_right)
                 {
                     value_max_right = value;
-                    Invalidate( );
+                    Invalidate();
                 }
             }
         }
@@ -174,10 +171,10 @@ namespace HslCommunication.Controls
         /// <summary>
         /// 获取或设置图形的纵坐标的最小值，该值必须小于最大值
         /// </summary>
-        [Category( "外观" )]
-        [Description( "获取或设置图形的右纵坐标的最小值，该值必须小于最大值" )]
-        [Browsable( true )]
-        [DefaultValue( 0f )]
+        [Category("外观")]
+        [Description("获取或设置图形的右纵坐标的最小值，该值必须小于最大值")]
+        [Browsable(true)]
+        [DefaultValue(0f)]
         public float ValueMinRight
         {
             get { return value_min_right; }
@@ -186,7 +183,7 @@ namespace HslCommunication.Controls
                 if (value < value_max_right)
                 {
                     value_min_right = value;
-                    Invalidate( );
+                    Invalidate();
                 }
             }
         }
@@ -194,34 +191,34 @@ namespace HslCommunication.Controls
         /// <summary>
         /// 获取或设置图形的纵轴分段数
         /// </summary>
-        [Category( "外观" )]
-        [Description( "获取或设置图形的纵轴分段数" )]
-        [Browsable( true )]
-        [DefaultValue( 5 )]
+        [Category("外观")]
+        [Description("获取或设置图形的纵轴分段数")]
+        [Browsable(true)]
+        [DefaultValue(5)]
         public int ValueSegment
         {
             get { return value_Segment; }
             set
             {
                 value_Segment = value;
-                Invalidate( );
+                Invalidate();
             }
         }
 
         /// <summary>
         /// 获取或设置所有的数据是否强制在一个界面里显示
         /// </summary>
-        [Category( "外观" )]
-        [Description( "获取或设置所有的数据是否强制在一个界面里显示" )]
-        [Browsable( true )]
-        [DefaultValue( false )]
+        [Category("外观")]
+        [Description("获取或设置所有的数据是否强制在一个界面里显示")]
+        [Browsable(true)]
+        [DefaultValue(false)]
         public bool IsAbscissaStrech
         {
             get { return value_IsAbscissaStrech; }
             set
             {
                 value_IsAbscissaStrech = value;
-                Invalidate( );
+                Invalidate();
             }
         }
 
@@ -229,17 +226,17 @@ namespace HslCommunication.Controls
         /// <summary>
         /// 获取或设置拉伸模式下的最大数据量
         /// </summary>
-        [Category( "外观" )]
-        [Description( "获取或设置拉伸模式下的最大数据量" )]
-        [Browsable( true )]
-        [DefaultValue( 300 )]
+        [Category("外观")]
+        [Description("获取或设置拉伸模式下的最大数据量")]
+        [Browsable(true)]
+        [DefaultValue(300)]
         public int StrechDataCountMax
         {
             get { return value_StrechDataCountMax; }
             set
             {
                 value_StrechDataCountMax = value;
-                Invalidate( );
+                Invalidate();
             }
         }
 
@@ -247,17 +244,17 @@ namespace HslCommunication.Controls
         /// <summary>
         /// 获取或设置虚线是否进行显示
         /// </summary>
-        [Category( "外观" )]
-        [Description( "获取或设置虚线是否进行显示" )]
-        [Browsable( true )]
-        [DefaultValue( true )]
+        [Category("外观")]
+        [Description("获取或设置虚线是否进行显示")]
+        [Browsable(true)]
+        [DefaultValue(true)]
         public bool IsRenderDashLine
         {
             get { return value_IsRenderDashLine; }
             set
             {
                 value_IsRenderDashLine = value;
-                Invalidate( );
+                Invalidate();
             }
         }
 
@@ -265,18 +262,18 @@ namespace HslCommunication.Controls
         /// <summary>
         /// 获取或设置坐标轴及相关信息文本的颜色
         /// </summary>
-        [Category( "外观" )]
-        [Description( "获取或设置坐标轴及相关信息文本的颜色" )]
-        [Browsable( true )]
-        [DefaultValue( typeof( Color ), "DimGray" )]
+        [Category("外观")]
+        [Description("获取或设置坐标轴及相关信息文本的颜色")]
+        [Browsable(true)]
+        [DefaultValue(typeof(Color), "DimGray")]
         public Color ColorLinesAndText
         {
             get { return color_deep; }
             set
             {
                 color_deep = value;
-                InitializationColor( );
-                Invalidate( );
+                InitializationColor();
+                Invalidate();
             }
         }
 
@@ -284,21 +281,21 @@ namespace HslCommunication.Controls
         /// <summary>
         /// 获取或设置虚线的颜色
         /// </summary>
-        [Category( "外观" )]
-        [Description( "获取或设置虚线的颜色" )]
-        [Browsable( true )]
-        [DefaultValue( typeof( Color ), "Gray" )]
+        [Category("外观")]
+        [Description("获取或设置虚线的颜色")]
+        [Browsable(true)]
+        [DefaultValue(typeof(Color), "Gray")]
         public Color ColorDashLines
         {
             get { return color_dash; }
             set
             {
                 color_dash = value;
-                pen_dash?.Dispose( );
-                pen_dash = new Pen( color_dash );
+                pen_dash?.Dispose();
+                pen_dash = new Pen(color_dash);
                 pen_dash.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
                 pen_dash.DashPattern = new float[] { 5, 5 };
-                Invalidate( );
+                Invalidate();
             }
         }
 
@@ -306,27 +303,27 @@ namespace HslCommunication.Controls
         /// <summary>
         /// 获取或设置纵向虚线的分隔情况，单位为多少个数据
         /// </summary>
-        [Category( "外观" )]
-        [Description( "获取或设置纵向虚线的分隔情况，单位为多少个数据" )]
-        [Browsable( true )]
-        [DefaultValue( 100 )]
+        [Category("外观")]
+        [Description("获取或设置纵向虚线的分隔情况，单位为多少个数据")]
+        [Browsable(true)]
+        [DefaultValue(100)]
         public int IntervalAbscissaText
         {
             get { return value_IntervalAbscissaText; }
             set
             {
                 value_IntervalAbscissaText = value;
-                Invalidate( );
+                Invalidate();
             }
         }
 
         /// <summary>
         /// 获取或设置实时数据新增时文本相对应于时间的格式化字符串，默认HH:mm
         /// </summary>
-        [Category( "外观" )]
-        [Description( "获取或设置实时数据新增时文本相对应于时间的格式化字符串，默认HH:mm" )]
-        [Browsable( true )]
-        [DefaultValue( "HH:mm" )]
+        [Category("外观")]
+        [Description("获取或设置实时数据新增时文本相对应于时间的格式化字符串，默认HH:mm")]
+        [Browsable(true)]
+        [DefaultValue("HH:mm")]
         public string TextAddFormat
         {
             get { return textFormat; }
@@ -348,12 +345,12 @@ namespace HslCommunication.Controls
         }
 
 
-        private void InitializationColor( )
+        private void InitializationColor()
         {
-            pen_normal?.Dispose( );
-            brush_deep?.Dispose( );
-            pen_normal = new Pen( color_deep );
-            brush_deep = new SolidBrush( color_deep );
+            pen_normal?.Dispose();
+            brush_deep?.Dispose();
+            pen_normal = new Pen(color_deep);
+            brush_deep = new SolidBrush(color_deep);
         }
 
         #endregion
@@ -369,7 +366,7 @@ namespace HslCommunication.Controls
             data_text = descriptions;
 
             // 重绘图形
-            Invalidate( );
+            Invalidate();
         }
 
 
@@ -378,11 +375,11 @@ namespace HslCommunication.Controls
         /// </summary>
         /// <param name="key">曲线关键字</param>
         /// <param name="data">曲线的具体数据</param>
-        public void SetLeftCurve( string key, float[] data )
+        public void SetLeftCurve(string key, float[] data)
         {
-            SetLeftCurve( key, data, Color.FromArgb( random.Next( 256 ), random.Next( 256 ), random.Next( 256 ) ) );
+            SetLeftCurve(key, data, Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)));
         }
-        
+
 
         /// <summary>
         /// 新增或修改一条指定关键字的左参考系曲线数据，需要指定数据，颜色，没有数据上限，线条宽度为1
@@ -390,9 +387,9 @@ namespace HslCommunication.Controls
         /// <param name="key">曲线关键字</param>
         /// <param name="data"></param>
         /// <param name="lineColor"></param>
-        public void SetLeftCurve( string key, float[] data, Color lineColor )
+        public void SetLeftCurve(string key, float[] data, Color lineColor)
         {
-            SetCurve( key, true, data, lineColor, 1f );
+            SetCurve(key, true, data, lineColor, 1f);
         }
 
         /// <summary>
@@ -400,9 +397,9 @@ namespace HslCommunication.Controls
         /// </summary>
         /// <param name="key">曲线关键字</param>
         /// <param name="data"></param>
-        public void SetRightCurve( string key, float[] data )
+        public void SetRightCurve(string key, float[] data)
         {
-            SetRightCurve( key, data, Color.FromArgb( random.Next( 256 ), random.Next( 256 ), random.Next( 256 ) ) );
+            SetRightCurve(key, data, Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)));
         }
 
         /// <summary>
@@ -411,9 +408,9 @@ namespace HslCommunication.Controls
         /// <param name="key">曲线关键字</param>
         /// <param name="data"></param>
         /// <param name="lineColor"></param>
-        public void SetRightCurve( string key, float[] data, Color lineColor )
+        public void SetRightCurve(string key, float[] data, Color lineColor)
         {
-            SetCurve( key, false, data, lineColor, 1f );
+            SetCurve(key, false, data, lineColor, 1f);
         }
 
 
@@ -425,9 +422,9 @@ namespace HslCommunication.Controls
         /// <param name="data">数据</param>
         /// <param name="lineColor">线条颜色</param>
         /// <param name="thickness">线条宽度</param>
-        public void SetCurve( string key, bool isLeft, float[] data, Color lineColor, float thickness )
+        public void SetCurve(string key, bool isLeft, float[] data, Color lineColor, float thickness)
         {
-            if (data_list.ContainsKey( key ))
+            if (data_list.ContainsKey(key))
             {
                 if (data == null) data = new float[] { };
                 data_list[key].Data = data;
@@ -435,19 +432,19 @@ namespace HslCommunication.Controls
             else
             {
                 if (data == null) data = new float[] { };
-                data_list.Add( key, new HslCurveItem( )
+                data_list.Add(key, new HslCurveItem()
                 {
                     Data = data,
                     LineThickness = thickness,
                     LineColor = lineColor,
                     IsLeftFrame = isLeft,
-                } );
+                });
 
                 if (data_text == null) data_text = new string[data.Length];
             }
 
             // 重绘图形
-            Invalidate( );
+            Invalidate();
         }
 
 
@@ -455,28 +452,28 @@ namespace HslCommunication.Controls
         /// 移除指定关键字的曲线
         /// </summary>
         /// <param name="key">曲线关键字</param>
-        public void RemoveCurve( string key )
+        public void RemoveCurve(string key)
         {
-            if (data_list.ContainsKey( key ))
+            if (data_list.ContainsKey(key))
             {
-                data_list.Remove( key );
+                data_list.Remove(key);
             }
             if (data_list.Count == 0) data_text = new string[0];
             // 重绘图形
-            Invalidate( );
+            Invalidate();
         }
 
 
         /// <summary>
         /// 移除指定关键字的曲线
         /// </summary>
-        public void RemoveAllCurve( )
+        public void RemoveAllCurve()
         {
             int count = data_list.Count;
-            data_list.Clear( );
+            data_list.Clear();
             if (data_list.Count == 0) data_text = new string[0];
             // 重绘图形
-            if (count > 0) Invalidate( );
+            if (count > 0) Invalidate();
         }
 
 
@@ -490,11 +487,11 @@ namespace HslCommunication.Controls
         /// <param name="key">新增曲线的关键字</param>
         /// <param name="values"></param>
         /// <param name="isUpdateUI">是否刷新界面</param>
-        private void AddCurveData( string key, float[] values, bool isUpdateUI )
+        private void AddCurveData(string key, float[] values, bool isUpdateUI)
         {
             if (values?.Length < 1) return;                              // 没有传入数据
 
-            if (data_list.ContainsKey( key ))
+            if (data_list.ContainsKey(key))
             {
                 HslCurveItem curve = data_list[key];
                 if (curve.Data != null)
@@ -502,37 +499,37 @@ namespace HslCommunication.Controls
                     if (value_IsAbscissaStrech)
                     {
                         // 填充玩整个图形的情况
-                        BasicFramework.SoftBasic.AddArrayData( ref curve.Data, values, value_StrechDataCountMax );
+                        BasicFramework.SoftBasic.AddArrayData(ref curve.Data, values, value_StrechDataCountMax);
                     }
                     else
                     {
                         // 指定点的情况，必然存在最大值情况
-                        BasicFramework.SoftBasic.AddArrayData( ref curve.Data, values, value_count_max );
+                        BasicFramework.SoftBasic.AddArrayData(ref curve.Data, values, value_count_max);
                     }
 
-                    if (isUpdateUI) Invalidate( );
+                    if (isUpdateUI) Invalidate();
                 }
             }
         }
 
         // 新增曲线的时间节点
-        private void AddCurveTime( int count )
+        private void AddCurveTime(int count)
         {
             if (data_text == null) return;
             string[] values = new string[count];
             for (int i = 0; i < values.Length; i++)
             {
-                values[i] = DateTime.Now.ToString( textFormat );
+                values[i] = DateTime.Now.ToString(textFormat);
             }
 
 
-            if(value_IsAbscissaStrech)
+            if (value_IsAbscissaStrech)
             {
-                BasicFramework.SoftBasic.AddArrayData( ref data_text, values, value_StrechDataCountMax );
+                BasicFramework.SoftBasic.AddArrayData(ref data_text, values, value_StrechDataCountMax);
             }
             else
             {
-                BasicFramework.SoftBasic.AddArrayData( ref data_text, values, value_count_max );
+                BasicFramework.SoftBasic.AddArrayData(ref data_text, values, value_count_max);
             }
         }
 
@@ -541,9 +538,9 @@ namespace HslCommunication.Controls
         /// </summary>
         /// <param name="key">曲线的关键字</param>
         /// <param name="value">数据值</param>
-        public void AddCurveData( string key, float value )
+        public void AddCurveData(string key, float value)
         {
-            AddCurveData( key, new float[] { value } );
+            AddCurveData(key, new float[] { value });
         }
 
         /// <summary>
@@ -551,14 +548,14 @@ namespace HslCommunication.Controls
         /// </summary>
         /// <param name="key">曲线的关键字</param>
         /// <param name="values">数组值</param>
-        public void AddCurveData( string key, float[] values )
+        public void AddCurveData(string key, float[] values)
         {
-            AddCurveData( key, values, false );
+            AddCurveData(key, values, false);
             if (values?.Length > 0)
             {
-                AddCurveTime( values.Length );
+                AddCurveTime(values.Length);
             }
-            Invalidate( );
+            Invalidate();
         }
 
         /// <summary>
@@ -566,36 +563,36 @@ namespace HslCommunication.Controls
         /// </summary>
         /// <param name="keys">曲线的关键字数组</param>
         /// <param name="values">数组值</param>
-        public void AddCurveData( string[] keys, float[] values )
+        public void AddCurveData(string[] keys, float[] values)
         {
-            if (keys == null) throw new ArgumentNullException( "keys" );
-            if (values == null) throw new ArgumentNullException( "values" );
-            if (keys.Length != values.Length) throw new Exception( "两个参数的数组长度不一致。" );
+            if (keys == null) throw new ArgumentNullException("keys");
+            if (values == null) throw new ArgumentNullException("values");
+            if (keys.Length != values.Length) throw new Exception("两个参数的数组长度不一致。");
 
-            
+
             for (int i = 0; i < keys.Length; i++)
             {
-                AddCurveData( keys[i], new float[] { values[i] }, false );
+                AddCurveData(keys[i], new float[] { values[i] }, false);
             }
 
-            AddCurveTime( 1 );
+            AddCurveTime(1);
             // 统一的更新显示
-            Invalidate( );
+            Invalidate();
         }
-        
+
 
         /// <summary>
         /// 设置一条曲线是否是可见的，如果该曲线不存在，则无效。
         /// </summary>
         /// <param name="key">关键字</param>
         /// <param name="visible">是否可见</param>
-        public void SetCurveVisible( string key, bool visible )
+        public void SetCurveVisible(string key, bool visible)
         {
-            if (data_list.ContainsKey( key ))
+            if (data_list.ContainsKey(key))
             {
                 HslCurveItem curve = data_list[key];
                 curve.Visible = visible;
-                Invalidate( );
+                Invalidate();
             }
         }
 
@@ -604,17 +601,17 @@ namespace HslCommunication.Controls
         /// </summary>
         /// <param name="keys">关键字</param>
         /// <param name="visible">是否可见</param>
-        public void SetCurveVisible( string[] keys, bool visible )
+        public void SetCurveVisible(string[] keys, bool visible)
         {
             foreach (var key in keys)
             {
-                if (data_list.ContainsKey( key ))
+                if (data_list.ContainsKey(key))
                 {
                     HslCurveItem curve = data_list[key];
                     curve.Visible = visible;
                 }
             }
-            Invalidate( );
+            Invalidate();
         }
 
 
@@ -630,9 +627,9 @@ namespace HslCommunication.Controls
         /// 新增一条左侧的辅助线，使用默认的文本颜色
         /// </summary>
         /// <param name="value">数据值</param>
-        public void AddLeftAuxiliary( float value )
+        public void AddLeftAuxiliary(float value)
         {
-            AddLeftAuxiliary( value, ColorLinesAndText );
+            AddLeftAuxiliary(value, ColorLinesAndText);
         }
 
         /// <summary>
@@ -640,9 +637,9 @@ namespace HslCommunication.Controls
         /// </summary>
         /// <param name="value">数据值</param>
         /// <param name="lineColor">线条颜色</param>
-        public void AddLeftAuxiliary( float value, Color lineColor )
+        public void AddLeftAuxiliary(float value, Color lineColor)
         {
-            AddLeftAuxiliary( value, lineColor, 1f );
+            AddLeftAuxiliary(value, lineColor, 1f);
         }
 
         /// <summary>
@@ -651,9 +648,9 @@ namespace HslCommunication.Controls
         /// <param name="value">数据值</param>
         /// <param name="lineColor">线条颜色</param>
         /// <param name="lineThickness">线条宽度</param>
-        public void AddLeftAuxiliary( float value, Color lineColor, float lineThickness )
+        public void AddLeftAuxiliary(float value, Color lineColor, float lineThickness)
         {
-            AddAuxiliary( value, lineColor, lineThickness, true );
+            AddAuxiliary(value, lineColor, lineThickness, true);
         }
 
 
@@ -661,9 +658,9 @@ namespace HslCommunication.Controls
         /// 新增一条右侧的辅助线，使用默认的文本颜色
         /// </summary>
         /// <param name="value">数据值</param>
-        public void AddRightAuxiliary( float value )
+        public void AddRightAuxiliary(float value)
         {
-            AddRightAuxiliary( value, ColorLinesAndText );
+            AddRightAuxiliary(value, ColorLinesAndText);
         }
 
         /// <summary>
@@ -671,9 +668,9 @@ namespace HslCommunication.Controls
         /// </summary>
         /// <param name="value">数据值</param>
         /// <param name="lineColor">线条颜色</param>
-        public void AddRightAuxiliary( float value, Color lineColor )
+        public void AddRightAuxiliary(float value, Color lineColor)
         {
-            AddRightAuxiliary( value, lineColor, 1f );
+            AddRightAuxiliary(value, lineColor, 1f);
         }
 
 
@@ -683,59 +680,59 @@ namespace HslCommunication.Controls
         /// <param name="value">数据值</param>
         /// <param name="lineColor">线条颜色</param>
         /// <param name="lineThickness">线条宽度</param>
-        public void AddRightAuxiliary( float value, Color lineColor, float lineThickness )
+        public void AddRightAuxiliary(float value, Color lineColor, float lineThickness)
         {
-            AddAuxiliary( value, lineColor, lineThickness, false );
+            AddAuxiliary(value, lineColor, lineThickness, false);
         }
 
 
-        private void AddAuxiliary( float value, Color lineColor, float lineThickness, bool isLeft )
+        private void AddAuxiliary(float value, Color lineColor, float lineThickness, bool isLeft)
         {
-            auxiliary_lines.Add( new AuxiliaryLine( )
+            auxiliary_lines.Add(new AuxiliaryLine()
             {
                 Value = value,
                 LineColor = lineColor,
-                PenDash = new Pen( lineColor )
+                PenDash = new Pen(lineColor)
                 {
                     DashStyle = System.Drawing.Drawing2D.DashStyle.Custom,
                     DashPattern = new float[] { 5, 5 }
                 },
                 IsLeftFrame = isLeft,
                 LineThickness = lineThickness,
-                LineTextBrush = new SolidBrush( lineColor ),
-            } );
-            Invalidate( );
+                LineTextBrush = new SolidBrush(lineColor),
+            });
+            Invalidate();
         }
 
         /// <summary>
         /// 移除所有的指定值的辅助曲线，包括左边的和右边的
         /// </summary>
         /// <param name="value"></param>
-        public void RemoveAuxiliary( float value )
+        public void RemoveAuxiliary(float value)
         {
             int removeCount = 0;
             for (int i = auxiliary_lines.Count - 1; i >= 0; i--)
             {
                 if (auxiliary_lines[i].Value == value)
                 {
-                    auxiliary_lines[i].Dispose( );
-                    auxiliary_lines.RemoveAt( i );
+                    auxiliary_lines[i].Dispose();
+                    auxiliary_lines.RemoveAt(i);
                     removeCount++;
                 }
             }
-            if (removeCount > 0) Invalidate( );
+            if (removeCount > 0) Invalidate();
         }
 
 
         /// <summary>
         /// 移除所有的辅助线
         /// </summary>
-        public void RemoveAllAuxiliary( )
+        public void RemoveAllAuxiliary()
         {
             int removeCount = auxiliary_lines.Count;
-            auxiliary_lines.Clear( );
+            auxiliary_lines.Clear();
 
-            if (removeCount > 0) Invalidate( );
+            if (removeCount > 0) Invalidate();
         }
 
 
@@ -768,16 +765,16 @@ namespace HslCommunication.Controls
         private StringFormat format_center = null;        // 中间对齐的文本
 
 
-        private void UserCurve_Paint( object sender, PaintEventArgs e )
+        private void UserCurve_Paint(object sender, PaintEventArgs e)
         {
-            if (!Authorization.nzugaydgwadawdibbas( )) return;
+            if (!Authorization.nzugaydgwadawdibbas()) return;
 
             Graphics g = e.Graphics;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             if (BackColor != Color.Transparent)
             {
-                g.Clear( BackColor );
+                g.Clear(BackColor);
             }
 
 
@@ -788,33 +785,33 @@ namespace HslCommunication.Controls
 
 
             // 绘制极轴
-            g.DrawLines( pen_normal, new Point[] {
+            g.DrawLines(pen_normal, new Point[] {
                 new Point(leftRight-1, upDowm - 8),
                 new Point(leftRight-1, heigh_totle - upDowm),
                 new Point(width_totle - leftRight, heigh_totle - upDowm),
                 new Point(width_totle - leftRight, upDowm - 8)
-            } );
+            });
 
             // 绘制图表的标题
-            if(!string.IsNullOrEmpty(value_title))
+            if (!string.IsNullOrEmpty(value_title))
             {
                 g.DrawString(value_title, font_size9, brush_deep, new Rectangle(0, 0, width_totle - 1, 20), format_center);
             }
 
             // 绘制倒三角
-            BasicFramework.SoftPainting.PaintTriangle( g, brush_deep, new Point( leftRight - 1, upDowm - 8 ), 4, BasicFramework.GraphDirection.Upward );
-            BasicFramework.SoftPainting.PaintTriangle( g, brush_deep, new Point( width_totle - leftRight, upDowm - 8 ), 4, BasicFramework.GraphDirection.Upward );
+            BasicFramework.SoftPainting.PaintTriangle(g, brush_deep, new Point(leftRight - 1, upDowm - 8), 4, BasicFramework.GraphDirection.Upward);
+            BasicFramework.SoftPainting.PaintTriangle(g, brush_deep, new Point(width_totle - leftRight, upDowm - 8), 4, BasicFramework.GraphDirection.Upward);
 
             // 计算所有辅助线的实际值
             for (int i = 0; i < auxiliary_lines.Count; i++)
             {
                 if (auxiliary_lines[i].IsLeftFrame)
                 {
-                    auxiliary_lines[i].PaintValue = BasicFramework.SoftPainting.ComputePaintLocationY( value_max_left, value_min_left, (heigh_totle - upDowm - upDowm), auxiliary_lines[i].Value ) + upDowm;
+                    auxiliary_lines[i].PaintValue = BasicFramework.SoftPainting.ComputePaintLocationY(value_max_left, value_min_left, (heigh_totle - upDowm - upDowm), auxiliary_lines[i].Value) + upDowm;
                 }
                 else
                 {
-                    auxiliary_lines[i].PaintValue = BasicFramework.SoftPainting.ComputePaintLocationY( value_max_right, value_min_right, (heigh_totle - upDowm - upDowm), auxiliary_lines[i].Value ) + upDowm;
+                    auxiliary_lines[i].PaintValue = BasicFramework.SoftPainting.ComputePaintLocationY(value_max_right, value_min_right, (heigh_totle - upDowm - upDowm), auxiliary_lines[i].Value) + upDowm;
                 }
             }
 
@@ -822,21 +819,21 @@ namespace HslCommunication.Controls
             for (int i = 0; i <= value_Segment; i++)
             {
                 float valueTmpLeft = i * (value_max_left - value_min_left) / value_Segment + value_min_left;
-                float paintTmp = BasicFramework.SoftPainting.ComputePaintLocationY( value_max_left, value_min_left, (heigh_totle - upDowm - upDowm), valueTmpLeft ) + upDowm;
-                if (IsNeedPaintDash( paintTmp ))
+                float paintTmp = BasicFramework.SoftPainting.ComputePaintLocationY(value_max_left, value_min_left, (heigh_totle - upDowm - upDowm), valueTmpLeft) + upDowm;
+                if (IsNeedPaintDash(paintTmp))
                 {
                     // 左坐标轴
-                    g.DrawLine( pen_normal, leftRight - 4, paintTmp, leftRight - 1, paintTmp );
-                    RectangleF rectTmp = new RectangleF( 0, paintTmp - 9, leftRight - 4, 20 );
-                    g.DrawString( valueTmpLeft.ToString( ), font_size9, brush_deep, rectTmp, format_right );
+                    g.DrawLine(pen_normal, leftRight - 4, paintTmp, leftRight - 1, paintTmp);
+                    RectangleF rectTmp = new RectangleF(0, paintTmp - 9, leftRight - 4, 20);
+                    g.DrawString(valueTmpLeft.ToString(), font_size9, brush_deep, rectTmp, format_right);
 
                     // 右坐标轴
                     float valueTmpRight = i * (value_max_right - value_min_right) / value_Segment + value_min_right;
-                    g.DrawLine( pen_normal, width_totle - leftRight + 1, paintTmp, width_totle - leftRight + 4, paintTmp );
-                    rectTmp.Location = new PointF( width_totle - leftRight + 4, paintTmp - 9 );
-                    g.DrawString( valueTmpRight.ToString( ), font_size9, brush_deep, rectTmp, format_left );
+                    g.DrawLine(pen_normal, width_totle - leftRight + 1, paintTmp, width_totle - leftRight + 4, paintTmp);
+                    rectTmp.Location = new PointF(width_totle - leftRight + 4, paintTmp - 9);
+                    g.DrawString(valueTmpRight.ToString(), font_size9, brush_deep, rectTmp, format_left);
 
-                    if (i > 0 && value_IsRenderDashLine) g.DrawLine( pen_dash, leftRight, paintTmp, width_totle - leftRight, paintTmp );
+                    if (i > 0 && value_IsRenderDashLine) g.DrawLine(pen_dash, leftRight, paintTmp, width_totle - leftRight, paintTmp);
                 }
             }
 
@@ -847,20 +844,20 @@ namespace HslCommunication.Controls
                 {
                     // 拉伸模式下，因为错位是均匀的，所以根据数据来显示
                     float offect = (width_totle - leftRight * 2) * 1.0f / (value_StrechDataCountMax - 1);
-                    int dataCount = CalculateDataCountByOffect( offect );
+                    int dataCount = CalculateDataCountByOffect(offect);
                     for (int i = 0; i < value_StrechDataCountMax; i += dataCount)
                     {
                         if (i > 0 && i < value_StrechDataCountMax - 1)
                         {
-                            g.DrawLine( pen_dash, i * offect + leftRight, upDowm, i * offect + leftRight, heigh_totle - upDowm - 1 );
+                            g.DrawLine(pen_dash, i * offect + leftRight, upDowm, i * offect + leftRight, heigh_totle - upDowm - 1);
                         }
 
                         if (data_text != null)
                         {
-                            if (i < data_text.Length && ((i * offect + leftRight) < (data_text.Length - 1) * offect + leftRight -40 ))
+                            if (i < data_text.Length && ((i * offect + leftRight) < (data_text.Length - 1) * offect + leftRight - 40))
                             {
-                                Rectangle rec = new Rectangle( (int)(i * offect), heigh_totle - upDowm + 1, 100, upDowm );
-                                g.DrawString( data_text[i], font_size9, brush_deep, rec, format_center );
+                                Rectangle rec = new Rectangle((int)(i * offect), heigh_totle - upDowm + 1, 100, upDowm);
+                                g.DrawString(data_text[i], font_size9, brush_deep, rec, format_center);
                             }
                         }
                     }
@@ -870,11 +867,11 @@ namespace HslCommunication.Controls
                         if (data_text.Length < value_StrechDataCountMax)
                         {
                             // 绘制最前端的虚线
-                            g.DrawLine( pen_dash, (data_text.Length - 1) * offect + leftRight, upDowm, (data_text.Length - 1) * offect + leftRight, heigh_totle - upDowm - 1 );
+                            g.DrawLine(pen_dash, (data_text.Length - 1) * offect + leftRight, upDowm, (data_text.Length - 1) * offect + leftRight, heigh_totle - upDowm - 1);
                         }
 
-                        Rectangle rec = new Rectangle( (int)((data_text.Length - 1) * offect + leftRight) - leftRight, heigh_totle - upDowm + 1, 100, upDowm );
-                        g.DrawString( data_text[data_text.Length - 1], font_size9, brush_deep, rec, format_center );
+                        Rectangle rec = new Rectangle((int)((data_text.Length - 1) * offect + leftRight) - leftRight, heigh_totle - upDowm + 1, 100, upDowm);
+                        g.DrawString(data_text[data_text.Length - 1], font_size9, brush_deep, rec, format_center);
                     }
                 }
                 else
@@ -885,7 +882,7 @@ namespace HslCommunication.Controls
                     {
                         if (i != leftRight)
                         {
-                            g.DrawLine( pen_dash, i, upDowm, i, heigh_totle - upDowm - 1 );
+                            g.DrawLine(pen_dash, i, upDowm, i, heigh_totle - upDowm - 1);
                         }
 
                         if (data_text != null)
@@ -899,13 +896,13 @@ namespace HslCommunication.Controls
                                     // 点数大于1的时候才绘制
                                     if (data_text.Length <= countTmp)
                                     {
-                                        Rectangle rec = new Rectangle( i - leftRight, heigh_totle - upDowm + 1, 100, upDowm );
-                                        g.DrawString( data_text[i - leftRight], font_size9, brush_deep, rec, format_center );
+                                        Rectangle rec = new Rectangle(i - leftRight, heigh_totle - upDowm + 1, 100, upDowm);
+                                        g.DrawString(data_text[i - leftRight], font_size9, brush_deep, rec, format_center);
                                     }
                                     else
                                     {
-                                        Rectangle rec = new Rectangle( i - leftRight, heigh_totle - upDowm + 1, 100, upDowm );
-                                        g.DrawString( data_text[i - leftRight + data_text.Length - countTmp], font_size9, brush_deep, rec, format_center );
+                                        Rectangle rec = new Rectangle(i - leftRight, heigh_totle - upDowm + 1, 100, upDowm);
+                                        g.DrawString(data_text[i - leftRight + data_text.Length - countTmp], font_size9, brush_deep, rec, format_center);
                                     }
                                 }
                             }
@@ -917,14 +914,14 @@ namespace HslCommunication.Controls
                         if (data_text.Length < countTmp)
                         {
                             // 绘制最前端的虚线
-                            g.DrawLine( pen_dash, (data_text.Length + leftRight - 1), upDowm, (data_text.Length + leftRight - 1), heigh_totle - upDowm - 1 );
-                            Rectangle rec = new Rectangle( (data_text.Length + leftRight - 1) - leftRight, heigh_totle - upDowm + 1, 100, upDowm );
-                            g.DrawString( data_text[data_text.Length - 1], font_size9, brush_deep, rec, format_center );
+                            g.DrawLine(pen_dash, (data_text.Length + leftRight - 1), upDowm, (data_text.Length + leftRight - 1), heigh_totle - upDowm - 1);
+                            Rectangle rec = new Rectangle((data_text.Length + leftRight - 1) - leftRight, heigh_totle - upDowm + 1, 100, upDowm);
+                            g.DrawString(data_text[data_text.Length - 1], font_size9, brush_deep, rec, format_center);
                         }
                         else
                         {
-                            Rectangle rec = new Rectangle( width_totle - leftRight - leftRight, heigh_totle - upDowm + 1, 100, upDowm );
-                            g.DrawString( data_text[data_text.Length - 1], font_size9, brush_deep, rec, format_center );
+                            Rectangle rec = new Rectangle(width_totle - leftRight - leftRight, heigh_totle - upDowm + 1, 100, upDowm);
+                            g.DrawString(data_text[data_text.Length - 1], font_size9, brush_deep, rec, format_center);
                         }
                     }
                 }
@@ -936,17 +933,17 @@ namespace HslCommunication.Controls
                 if (auxiliary_lines[i].IsLeftFrame)
                 {
                     // 左坐标轴
-                    g.DrawLine( auxiliary_lines[i].PenDash, leftRight - 4, auxiliary_lines[i].PaintValue, leftRight - 1, auxiliary_lines[i].PaintValue );
-                    RectangleF rectTmp = new RectangleF( 0, auxiliary_lines[i].PaintValue - 9, leftRight - 4, 20 );
-                    g.DrawString( auxiliary_lines[i].Value.ToString( ), font_size9, auxiliary_lines[i].LineTextBrush, rectTmp, format_right );
+                    g.DrawLine(auxiliary_lines[i].PenDash, leftRight - 4, auxiliary_lines[i].PaintValue, leftRight - 1, auxiliary_lines[i].PaintValue);
+                    RectangleF rectTmp = new RectangleF(0, auxiliary_lines[i].PaintValue - 9, leftRight - 4, 20);
+                    g.DrawString(auxiliary_lines[i].Value.ToString(), font_size9, auxiliary_lines[i].LineTextBrush, rectTmp, format_right);
                 }
                 else
                 {
-                    g.DrawLine( auxiliary_lines[i].PenDash, width_totle - leftRight + 1, auxiliary_lines[i].PaintValue, width_totle - leftRight + 4, auxiliary_lines[i].PaintValue );
-                    RectangleF rectTmp = new RectangleF( width_totle - leftRight + 4, auxiliary_lines[i].PaintValue - 9, leftRight - 4, 20 );
-                    g.DrawString( auxiliary_lines[i].Value.ToString( ), font_size9, auxiliary_lines[i].LineTextBrush, rectTmp, format_left );
+                    g.DrawLine(auxiliary_lines[i].PenDash, width_totle - leftRight + 1, auxiliary_lines[i].PaintValue, width_totle - leftRight + 4, auxiliary_lines[i].PaintValue);
+                    RectangleF rectTmp = new RectangleF(width_totle - leftRight + 4, auxiliary_lines[i].PaintValue - 9, leftRight - 4, 20);
+                    g.DrawString(auxiliary_lines[i].Value.ToString(), font_size9, auxiliary_lines[i].LineTextBrush, rectTmp, format_left);
                 }
-                g.DrawLine( auxiliary_lines[i].PenDash, leftRight, auxiliary_lines[i].PaintValue, width_totle - leftRight, auxiliary_lines[i].PaintValue );
+                g.DrawLine(auxiliary_lines[i].PenDash, leftRight, auxiliary_lines[i].PaintValue, width_totle - leftRight, auxiliary_lines[i].PaintValue);
             }
 
             // 绘制线条
@@ -956,7 +953,7 @@ namespace HslCommunication.Controls
                 foreach (var line in data_list.Values)
                 {
                     if (!line.Visible) continue;
-                    
+
                     if (line.Data?.Length > 1)
                     {
                         float offect = (width_totle - leftRight * 2) * 1.0f / (value_StrechDataCountMax - 1);
@@ -969,12 +966,12 @@ namespace HslCommunication.Controls
                             points[i].Y = BasicFramework.SoftPainting.ComputePaintLocationY(
                                 line.IsLeftFrame ? value_max_left : value_max_right,
                                 line.IsLeftFrame ? value_min_left : value_min_right,
-                                (heigh_totle - upDowm - upDowm), line.Data[i] ) + upDowm;
+                                (heigh_totle - upDowm - upDowm), line.Data[i]) + upDowm;
                         }
 
-                        using (Pen penTmp = new Pen( line.LineColor, line.LineThickness ))
+                        using (Pen penTmp = new Pen(line.LineColor, line.LineThickness))
                         {
-                            g.DrawLines( penTmp, points );
+                            g.DrawLines(penTmp, points);
                         }
                     }
                 }
@@ -1000,7 +997,7 @@ namespace HslCommunication.Controls
                                 points[i].Y = BasicFramework.SoftPainting.ComputePaintLocationY(
                                     line.IsLeftFrame ? value_max_left : value_max_right,
                                     line.IsLeftFrame ? value_min_left : value_min_right,
-                                    (heigh_totle - upDowm - upDowm), line.Data[i] ) + upDowm;
+                                    (heigh_totle - upDowm - upDowm), line.Data[i]) + upDowm;
                             }
                         }
                         else
@@ -1012,13 +1009,13 @@ namespace HslCommunication.Controls
                                 points[i].Y = BasicFramework.SoftPainting.ComputePaintLocationY(
                                     line.IsLeftFrame ? value_max_left : value_max_right,
                                     line.IsLeftFrame ? value_min_left : value_min_right,
-                                    (heigh_totle - upDowm - upDowm), line.Data[i + line.Data.Length - countTmp] ) + upDowm;
+                                    (heigh_totle - upDowm - upDowm), line.Data[i + line.Data.Length - countTmp]) + upDowm;
                             }
                         }
 
-                        using (Pen penTmp = new Pen( line.LineColor, line.LineThickness ))
+                        using (Pen penTmp = new Pen(line.LineColor, line.LineThickness))
                         {
-                            g.DrawLines( penTmp, points );
+                            g.DrawLines(penTmp, points);
                         }
                     }
                 }
@@ -1028,12 +1025,12 @@ namespace HslCommunication.Controls
         }
 
 
-        private bool IsNeedPaintDash( float paintValue )
+        private bool IsNeedPaintDash(float paintValue)
         {
             // 遍历所有的数据组
             for (int i = 0; i < auxiliary_lines.Count; i++)
             {
-                if (Math.Abs( auxiliary_lines[i].PaintValue - paintValue ) < font_size9.Height)
+                if (Math.Abs(auxiliary_lines[i].PaintValue - paintValue) < font_size9.Height)
                 {
                     // 与辅助线冲突，不需要绘制
                     return false;
@@ -1048,16 +1045,16 @@ namespace HslCommunication.Controls
         {
             if (offect > 40) return 1;
             offect = 40f / offect;
-            return (int)Math.Ceiling( offect );
+            return (int)Math.Ceiling(offect);
         }
 
         #endregion
 
         #region Size Changed
 
-        private void UserCurve_SizeChanged( object sender, EventArgs e )
+        private void UserCurve_SizeChanged(object sender, EventArgs e)
         {
-            Invalidate( );
+            Invalidate();
         }
 
         #endregion
@@ -1072,7 +1069,7 @@ namespace HslCommunication.Controls
         /// <summary>
         /// 实例化一个对象
         /// </summary>
-        public HslCurveItem( )
+        public HslCurveItem()
         {
             LineThickness = 1.0f;
             IsLeftFrame = true;
@@ -1150,15 +1147,15 @@ namespace HslCommunication.Controls
 
         private bool disposedValue = false; // 要检测冗余调用
 
-        protected virtual void Dispose( bool disposing )
+        protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {
                 if (disposing)
                 {
                     // TODO: 释放托管状态(托管对象)。
-                    PenDash?.Dispose( );
-                    LineTextBrush.Dispose( );
+                    PenDash?.Dispose();
+                    LineTextBrush.Dispose();
                 }
 
                 // TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
@@ -1179,10 +1176,10 @@ namespace HslCommunication.Controls
         /// <summary>
         /// 释放内存信息
         /// </summary>
-        public void Dispose( )
+        public void Dispose()
         {
             // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
-            Dispose( true );
+            Dispose(true);
             // TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
             // GC.SuppressFinalize(this);
         }

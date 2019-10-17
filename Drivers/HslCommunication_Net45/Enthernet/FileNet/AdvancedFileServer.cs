@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net.Sockets;
-using System.Net;
-using System.Threading;
 using System.IO;
-using System.Security.Cryptography;
-using System.Drawing;
-using HslCommunication.BasicFramework;
-using HslCommunication.LogNet;
-using HslCommunication.Core;
-using System.Runtime.InteropServices;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
 
 namespace HslCommunication.Enthernet
 {
@@ -32,9 +24,9 @@ namespace HslCommunication.Enthernet
         /// <summary>
         /// 实例化一个对象
         /// </summary>
-        public AdvancedFileServer( )
+        public AdvancedFileServer()
         {
-            
+
         }
 
         #endregion
@@ -46,11 +38,11 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="socket">异步对象</param>
         /// <param name="endPoint">终结点</param>
-        protected override void ThreadPoolLogin( Socket socket, IPEndPoint endPoint )
+        protected override void ThreadPoolLogin(Socket socket, IPEndPoint endPoint)
         {
-            OperateResult result = new OperateResult( );
+            OperateResult result = new OperateResult();
             // 获取ip地址
-            string IpAddress = ((IPEndPoint)(socket.RemoteEndPoint)).Address.ToString( );
+            string IpAddress = ((IPEndPoint)(socket.RemoteEndPoint)).Address.ToString();
 
             // 接收操作信息
             OperateResult infoResult = ReceiveInformationHead(
@@ -59,56 +51,56 @@ namespace HslCommunication.Enthernet
                 out string fileName,
                 out string Factory,
                 out string Group,
-                out string Identify );
+                out string Identify);
 
             if (!infoResult.IsSuccess)
             {
-                Console.WriteLine( infoResult.ToMessageShowString( ) );
+                Console.WriteLine(infoResult.ToMessageShowString());
                 return;
             }
 
-            string relativeName = ReturnRelativeFileName( Factory, Group, Identify, fileName );
+            string relativeName = ReturnRelativeFileName(Factory, Group, Identify, fileName);
 
             // 操作分流
 
             if (customer == HslProtocol.ProtocolFileDownload)
             {
-                string fullFileName = ReturnAbsoluteFileName( Factory, Group, Identify, fileName );
+                string fullFileName = ReturnAbsoluteFileName(Factory, Group, Identify, fileName);
 
                 // 发送文件数据
-                OperateResult sendFile = SendFileAndCheckReceive( socket, fullFileName, fileName, "", "" );
+                OperateResult sendFile = SendFileAndCheckReceive(socket, fullFileName, fileName, "", "");
                 if (!sendFile.IsSuccess)
                 {
-                    LogNet?.WriteError( ToString( ), $"{StringResources.Language.FileDownloadFailed}:{relativeName} ip:{IpAddress} reason：{sendFile.Message}" );
+                    LogNet?.WriteError(ToString(), $"{StringResources.Language.FileDownloadFailed}:{relativeName} ip:{IpAddress} reason：{sendFile.Message}");
                     return;
                 }
                 else
                 {
-                    socket?.Close( );
-                    LogNet?.WriteInfo( ToString( ), StringResources.Language.FileDownloadSuccess + ":" + relativeName );
+                    socket?.Close();
+                    LogNet?.WriteInfo(ToString(), StringResources.Language.FileDownloadSuccess + ":" + relativeName);
                 }
             }
             else if (customer == HslProtocol.ProtocolFileUpload)
             {
-                string tempFileName = Path.Combine( FilesDirectoryPathTemp, CreateRandomFileName( ) );
-                string fullFileName = ReturnAbsoluteFileName( Factory, Group, Identify, fileName );
+                string tempFileName = Path.Combine(FilesDirectoryPathTemp, CreateRandomFileName());
+                string fullFileName = ReturnAbsoluteFileName(Factory, Group, Identify, fileName);
 
                 // 上传文件
-                CheckFolderAndCreate( );
+                CheckFolderAndCreate();
 
                 // 创建新的文件夹
                 try
                 {
-                    FileInfo info = new FileInfo( fullFileName );
-                    if (!Directory.Exists( info.DirectoryName ))
+                    FileInfo info = new FileInfo(fullFileName);
+                    if (!Directory.Exists(info.DirectoryName))
                     {
-                        Directory.CreateDirectory( info.DirectoryName );
+                        Directory.CreateDirectory(info.DirectoryName);
                     }
                 }
                 catch (Exception ex)
                 {
-                    LogNet?.WriteException( ToString( ), StringResources.Language.FilePathCreateFailed + fullFileName, ex );
-                    socket?.Close( );
+                    LogNet?.WriteException(ToString(), StringResources.Language.FilePathCreateFailed + fullFileName, ex);
+                    socket?.Close();
                     return;
                 }
 
@@ -124,27 +116,27 @@ namespace HslCommunication.Enthernet
 
                 if (receiveFile.IsSuccess)
                 {
-                    socket?.Close( );
-                    OnFileUpload( new FileServerInfo( )
+                    socket?.Close();
+                    OnFileUpload(new FileServerInfo()
                     {
                         ActualFileFullName = fullFileName,
                         Name = FileName,
                         Size = FileSize,
                         Tag = FileTag,
                         Upload = FileUpload
-                    } );
-                    LogNet?.WriteInfo( ToString( ), StringResources.Language.FileUploadSuccess + ":" + relativeName );
+                    });
+                    LogNet?.WriteInfo(ToString(), StringResources.Language.FileUploadSuccess + ":" + relativeName);
                 }
                 else
                 {
-                    LogNet?.WriteInfo( ToString( ), StringResources.Language.FileUploadFailed + ":" + relativeName + " " + StringResources.Language.TextDescription + receiveFile.Message );
+                    LogNet?.WriteInfo(ToString(), StringResources.Language.FileUploadFailed + ":" + relativeName + " " + StringResources.Language.TextDescription + receiveFile.Message);
                 }
             }
             else if (customer == HslProtocol.ProtocolFileDelete)
             {
-                string fullFileName = ReturnAbsoluteFileName( Factory, Group, Identify, fileName );
+                string fullFileName = ReturnAbsoluteFileName(Factory, Group, Identify, fileName);
 
-                bool deleteResult = DeleteFileByName( fullFileName );
+                bool deleteResult = DeleteFileByName(fullFileName);
 
                 // 回发消息
                 if (SendStringAndCheckReceive(
@@ -153,81 +145,81 @@ namespace HslCommunication.Enthernet
                     deleteResult ? StringResources.Language.FileDeleteSuccess : StringResources.Language.FileDeleteFailed
                     ).IsSuccess)
                 {
-                    socket?.Close( );
+                    socket?.Close();
                 }
 
-                if (deleteResult) LogNet?.WriteInfo( ToString( ), StringResources.Language.FileDeleteSuccess + ":" + relativeName );
+                if (deleteResult) LogNet?.WriteInfo(ToString(), StringResources.Language.FileDeleteSuccess + ":" + relativeName);
             }
             else if (customer == HslProtocol.ProtocolFileDirectoryFiles)
             {
-                List<GroupFileItem> fileNames = new List<GroupFileItem>( );
-                foreach (var m in GetDirectoryFiles( Factory, Group, Identify ))
+                List<GroupFileItem> fileNames = new List<GroupFileItem>();
+                foreach (var m in GetDirectoryFiles(Factory, Group, Identify))
                 {
-                    FileInfo fileInfo = new FileInfo( m );
-                    fileNames.Add( new GroupFileItem( )
+                    FileInfo fileInfo = new FileInfo(m);
+                    fileNames.Add(new GroupFileItem()
                     {
                         FileName = fileInfo.Name,
                         FileSize = fileInfo.Length,
-                    } );
+                    });
                 }
 
-                Newtonsoft.Json.Linq.JArray jArray = Newtonsoft.Json.Linq.JArray.FromObject( fileNames.ToArray( ) );
+                Newtonsoft.Json.Linq.JArray jArray = Newtonsoft.Json.Linq.JArray.FromObject(fileNames.ToArray());
                 if (SendStringAndCheckReceive(
                     socket,
                     HslProtocol.ProtocolFileDirectoryFiles,
-                    jArray.ToString( ) ).IsSuccess)
+                    jArray.ToString()).IsSuccess)
                 {
-                    socket?.Close( );
+                    socket?.Close();
                 }
             }
             else if (customer == HslProtocol.ProtocolFileDirectories)
             {
-                List<string> folders = new List<string>( );
-                foreach (var m in GetDirectories( Factory, Group, Identify ))
+                List<string> folders = new List<string>();
+                foreach (var m in GetDirectories(Factory, Group, Identify))
                 {
-                    DirectoryInfo directory = new DirectoryInfo( m );
-                    folders.Add( directory.Name );
+                    DirectoryInfo directory = new DirectoryInfo(m);
+                    folders.Add(directory.Name);
                 }
 
-                Newtonsoft.Json.Linq.JArray jArray = Newtonsoft.Json.Linq.JArray.FromObject( folders.ToArray( ) );
+                Newtonsoft.Json.Linq.JArray jArray = Newtonsoft.Json.Linq.JArray.FromObject(folders.ToArray());
                 if (SendStringAndCheckReceive(
                     socket,
                     HslProtocol.ProtocolFileDirectoryFiles,
-                    jArray.ToString( ) ).IsSuccess)
+                    jArray.ToString()).IsSuccess)
                 {
-                    socket?.Close( );
+                    socket?.Close();
                 }
             }
             else
             {
-                socket?.Close( );
+                socket?.Close();
             }
         }
 
         /// <summary>
         /// 初始化数据
         /// </summary>
-        protected override void StartInitialization( )
+        protected override void StartInitialization()
         {
-            if (string.IsNullOrEmpty( FilesDirectoryPathTemp ))
+            if (string.IsNullOrEmpty(FilesDirectoryPathTemp))
             {
-                throw new ArgumentNullException( "FilesDirectoryPathTemp", "No saved path is specified" );
+                throw new ArgumentNullException("FilesDirectoryPathTemp", "No saved path is specified");
             }
 
-            base.StartInitialization( );
+            base.StartInitialization();
         }
 
         /// <summary>
         /// 检查文件夹
         /// </summary>
-        protected override void CheckFolderAndCreate( )
+        protected override void CheckFolderAndCreate()
         {
-            if (!Directory.Exists( FilesDirectoryPathTemp ))
+            if (!Directory.Exists(FilesDirectoryPathTemp))
             {
-                Directory.CreateDirectory( FilesDirectoryPathTemp );
+                Directory.CreateDirectory(FilesDirectoryPathTemp);
             }
 
-            base.CheckFolderAndCreate( );
+            base.CheckFolderAndCreate();
         }
 
         /// <summary>
@@ -252,10 +244,10 @@ namespace HslCommunication.Enthernet
             )
         {
             // 先接收文件
-            OperateResult<FileBaseInfo> fileInfo = ReceiveFileFromSocket( socket, savename, null );
+            OperateResult<FileBaseInfo> fileInfo = ReceiveFileFromSocket(socket, savename, null);
             if (!fileInfo.IsSuccess)
             {
-                DeleteFileByName( savename );
+                DeleteFileByName(savename);
                 filename = null;
                 size = 0;
                 filetag = null;
@@ -267,7 +259,7 @@ namespace HslCommunication.Enthernet
             size = fileInfo.Content.Size;
             filetag = fileInfo.Content.Tag;
             fileupload = fileInfo.Content.Upload;
-            
+
 
             // 标记移动文件，失败尝试三次
             int customer = 0;
@@ -275,24 +267,24 @@ namespace HslCommunication.Enthernet
             while (times < 3)
             {
                 times++;
-                if (MoveFileToNewFile( savename, fileNameNew ))
+                if (MoveFileToNewFile(savename, fileNameNew))
                 {
                     customer = 1;
                     break;
                 }
                 else
                 {
-                    Thread.Sleep( 500 );
+                    Thread.Sleep(500);
                 }
             }
 
             if (customer == 0)
             {
-                DeleteFileByName( savename );
+                DeleteFileByName(savename);
             }
 
             // 回发消息
-            OperateResult sendString = SendStringAndCheckReceive( socket, customer, "success" );
+            OperateResult sendString = SendStringAndCheckReceive(socket, customer, "success");
             return sendString;
         }
 
@@ -306,7 +298,7 @@ namespace HslCommunication.Enthernet
         public string FilesDirectoryPathTemp
         {
             get { return m_FilesDirectoryPathTemp; }
-            set { m_FilesDirectoryPathTemp = PreprocessFolderName( value ); }
+            set { m_FilesDirectoryPathTemp = PreprocessFolderName(value); }
         }
 
         #endregion

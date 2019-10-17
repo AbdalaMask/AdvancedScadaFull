@@ -346,6 +346,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CPU.ico" />
+    <Content Include="script.sql" />
     <None Include="Resources\DigitalPanelMeterR1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

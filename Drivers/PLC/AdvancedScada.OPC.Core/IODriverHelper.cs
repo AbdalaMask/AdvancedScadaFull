@@ -116,7 +116,7 @@ namespace AdvancedScada.OPC.Core
                             opcDaCom = _OpcDaCom[ch.ChannelName];
                             if (opcDaCom != null)
                             {
-                                opcDaCom.CreateDLLInstance();
+                                opcDaCom.Connection();
                                 IsConnected = opcDaCom.IsConnected;
                                 while (IsConnected)
                                     foreach (var dv in ch.Devices)

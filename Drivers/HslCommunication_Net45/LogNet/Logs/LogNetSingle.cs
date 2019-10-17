@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
-using System.IO;
 
 namespace HslCommunication.LogNet
 {
@@ -21,17 +18,17 @@ namespace HslCommunication.LogNet
         /// </summary>
         /// <param name="filePath">文件的路径</param>
         /// <exception cref="FileNotFoundException"></exception>
-        public LogNetSingle( string filePath )
+        public LogNetSingle(string filePath)
         {
             LogSaveMode = LogNetManagment.LogSaveModeBySingleFile;
 
             fileName = filePath;
-            if (!string.IsNullOrEmpty( fileName ))
+            if (!string.IsNullOrEmpty(fileName))
             {
-                FileInfo fileInfo = new FileInfo( filePath );
-                if (!Directory.Exists( fileInfo.DirectoryName ))
+                FileInfo fileInfo = new FileInfo(filePath);
+                if (!Directory.Exists(fileInfo.DirectoryName))
                 {
-                    Directory.CreateDirectory( fileInfo.DirectoryName );
+                    Directory.CreateDirectory(fileInfo.DirectoryName);
                 }
             }
         }
@@ -43,34 +40,34 @@ namespace HslCommunication.LogNet
         /// <summary>
         /// 单日志文件允许清空日志内容
         /// </summary>
-        public void ClearLog( )
+        public void ClearLog()
         {
-            m_fileSaveLock.Enter( );
-            if (!string.IsNullOrEmpty( fileName ))
+            m_fileSaveLock.Enter();
+            if (!string.IsNullOrEmpty(fileName))
             {
-                File.Create( fileName ).Dispose( );
+                File.Create(fileName).Dispose();
             }
-            m_fileSaveLock.Leave( );
+            m_fileSaveLock.Leave();
         }
 
         /// <summary>
         /// 获取单日志文件的所有保存记录
         /// </summary>
         /// <returns>字符串信息</returns>
-        public string GetAllSavedLog( )
+        public string GetAllSavedLog()
         {
             string result = string.Empty;
-            m_fileSaveLock.Enter( );
-            if (!string.IsNullOrEmpty( fileName ))
+            m_fileSaveLock.Enter();
+            if (!string.IsNullOrEmpty(fileName))
             {
-                if (File.Exists( fileName ))
+                if (File.Exists(fileName))
                 {
-                    StreamReader stream = new StreamReader( fileName, Encoding.UTF8 );
-                    result = stream.ReadToEnd( );
-                    stream.Dispose( );
+                    StreamReader stream = new StreamReader(fileName, Encoding.UTF8);
+                    result = stream.ReadToEnd();
+                    stream.Dispose();
                 }
             }
-            m_fileSaveLock.Leave( );
+            m_fileSaveLock.Leave();
             return result;
         }
 
@@ -78,7 +75,7 @@ namespace HslCommunication.LogNet
         /// 获取所有的日志文件数组，对于单日志文件来说就只有一个
         /// </summary>
         /// <returns>字符串数组，包含了所有的存在的日志数据</returns>
-        public string[] GetExistLogFileNames( )
+        public string[] GetExistLogFileNames()
         {
             return new string[]
             {
@@ -94,7 +91,7 @@ namespace HslCommunication.LogNet
         /// 获取存储的文件的名称
         /// </summary>
         /// <returns>字符串数据</returns>
-        protected override string GetFileSaveName( )
+        protected override string GetFileSaveName()
         {
             return fileName;
         }
@@ -113,7 +110,7 @@ namespace HslCommunication.LogNet
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return $"LogNetSingle";
         }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HslCommunication.BasicFramework;
+﻿using HslCommunication.BasicFramework;
+using System;
 
 namespace HslCommunication.Profinet.Omron
 {
@@ -12,16 +9,16 @@ namespace HslCommunication.Profinet.Omron
     public class OmronFinsNetHelper
     {
         #region Static Method Helper
-        
+
         /// <summary>
         /// 解析数据地址，Omron手册第188页
         /// </summary>
         /// <param name="address">数据地址</param>
         /// <param name="isBit">是否是位地址</param>
         /// <returns>解析后的结果地址对象</returns>
-        public static OperateResult<OmronFinsDataType, byte[]> AnalysisAddress( string address, bool isBit )
+        public static OperateResult<OmronFinsDataType, byte[]> AnalysisAddress(string address, bool isBit)
         {
-            var result = new OperateResult<OmronFinsDataType, byte[]>( );
+            var result = new OperateResult<OmronFinsDataType, byte[]>();
             try
             {
                 switch (address[0])
@@ -65,48 +62,48 @@ namespace HslCommunication.Profinet.Omron
                     case 'e':
                         {
                             // E区，比较复杂，需要专门的计算
-                            string[] splits = address.Split( new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries );
-                            int block = Convert.ToInt32( splits[0].Substring( 1 ), 16 );
+                            string[] splits = address.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+                            int block = Convert.ToInt32(splits[0].Substring(1), 16);
                             if (block < 16)
                             {
-                                result.Content1 = new OmronFinsDataType( (byte)(0x20 + block), (byte)(0xA0 + block) );
+                                result.Content1 = new OmronFinsDataType((byte)(0x20 + block), (byte)(0xA0 + block));
                             }
                             else
                             {
-                                result.Content1 = new OmronFinsDataType( (byte)(0xE0 + block - 16), (byte)(0x60 + block - 16) );
+                                result.Content1 = new OmronFinsDataType((byte)(0xE0 + block - 16), (byte)(0x60 + block - 16));
                             }
                             break;
                         }
-                    default: throw new Exception( StringResources.Language.NotSupportedDataType );
+                    default: throw new Exception(StringResources.Language.NotSupportedDataType);
                 }
 
                 if (address[0] == 'E' || address[0] == 'e')
                 {
-                    string[] splits = address.Split( new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries );
+                    string[] splits = address.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
                     if (isBit)
                     {
                         // 位操作
-                        ushort addr = ushort.Parse( splits[1] );
+                        ushort addr = ushort.Parse(splits[1]);
                         result.Content2 = new byte[3];
-                        result.Content2[0] = BitConverter.GetBytes( addr )[1];
-                        result.Content2[1] = BitConverter.GetBytes( addr )[0];
+                        result.Content2[0] = BitConverter.GetBytes(addr)[1];
+                        result.Content2[1] = BitConverter.GetBytes(addr)[0];
 
                         if (splits.Length > 2)
                         {
-                            result.Content2[2] = byte.Parse( splits[2] );
+                            result.Content2[2] = byte.Parse(splits[2]);
                             if (result.Content2[2] > 15)
                             {
-                                throw new Exception( StringResources.Language.OmronAddressMustBeZeroToFiveteen );
+                                throw new Exception(StringResources.Language.OmronAddressMustBeZeroToFiveteen);
                             }
                         }
                     }
                     else
                     {
                         // 字操作
-                        ushort addr = ushort.Parse( splits[1] );
+                        ushort addr = ushort.Parse(splits[1]);
                         result.Content2 = new byte[3];
-                        result.Content2[0] = BitConverter.GetBytes( addr )[1];
-                        result.Content2[1] = BitConverter.GetBytes( addr )[0];
+                        result.Content2[0] = BitConverter.GetBytes(addr)[1];
+                        result.Content2[1] = BitConverter.GetBytes(addr)[0];
                     }
                 }
                 else
@@ -114,28 +111,28 @@ namespace HslCommunication.Profinet.Omron
                     if (isBit)
                     {
                         // 位操作
-                        string[] splits = address.Substring( 1 ).Split( new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries );
-                        ushort addr = ushort.Parse( splits[0] );
+                        string[] splits = address.Substring(1).Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+                        ushort addr = ushort.Parse(splits[0]);
                         result.Content2 = new byte[3];
-                        result.Content2[0] = BitConverter.GetBytes( addr )[1];
-                        result.Content2[1] = BitConverter.GetBytes( addr )[0];
+                        result.Content2[0] = BitConverter.GetBytes(addr)[1];
+                        result.Content2[1] = BitConverter.GetBytes(addr)[0];
 
                         if (splits.Length > 1)
                         {
-                            result.Content2[2] = byte.Parse( splits[1] );
+                            result.Content2[2] = byte.Parse(splits[1]);
                             if (result.Content2[2] > 15)
                             {
-                                throw new Exception( StringResources.Language.OmronAddressMustBeZeroToFiveteen );
+                                throw new Exception(StringResources.Language.OmronAddressMustBeZeroToFiveteen);
                             }
                         }
                     }
                     else
                     {
                         // 字操作
-                        ushort addr = ushort.Parse( address.Substring( 1 ) );
+                        ushort addr = ushort.Parse(address.Substring(1));
                         result.Content2 = new byte[3];
-                        result.Content2[0] = BitConverter.GetBytes( addr )[1];
-                        result.Content2[1] = BitConverter.GetBytes( addr )[0];
+                        result.Content2[0] = BitConverter.GetBytes(addr)[1];
+                        result.Content2[1] = BitConverter.GetBytes(addr)[0];
                     }
                 }
             }
@@ -156,10 +153,10 @@ namespace HslCommunication.Profinet.Omron
         /// <param name="length">读取的数据长度</param>
         /// <param name="isBit">是否使用位读取</param>
         /// <returns>带有成功标识的Fins核心报文</returns>
-        public static OperateResult<byte[]> BuildReadCommand( string address, ushort length, bool isBit )
+        public static OperateResult<byte[]> BuildReadCommand(string address, ushort length, bool isBit)
         {
-            var analysis = OmronFinsNetHelper.AnalysisAddress( address, isBit );
-            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( analysis );
+            var analysis = OmronFinsNetHelper.AnalysisAddress(address, isBit);
+            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(analysis);
 
             byte[] _PLCCommand = new byte[8];
             _PLCCommand[0] = 0x01;    // 读取存储区数据
@@ -172,11 +169,11 @@ namespace HslCommunication.Profinet.Omron
             {
                 _PLCCommand[2] = analysis.Content1.WordCode;
             }
-            analysis.Content2.CopyTo( _PLCCommand, 3 );
+            analysis.Content2.CopyTo(_PLCCommand, 3);
             _PLCCommand[6] = (byte)(length / 256);                       // 长度
             _PLCCommand[7] = (byte)(length % 256);
 
-            return OperateResult.CreateSuccessResult( _PLCCommand );
+            return OperateResult.CreateSuccessResult(_PLCCommand);
         }
 
         /// <summary>
@@ -186,10 +183,10 @@ namespace HslCommunication.Profinet.Omron
         /// <param name="value">实际的数据</param>
         /// <param name="isBit">是否位数据</param>
         /// <returns>带有成功标识的Fins核心报文</returns>
-        public static OperateResult<byte[]> BuildWriteWordCommand( string address, byte[] value, bool isBit )
+        public static OperateResult<byte[]> BuildWriteWordCommand(string address, byte[] value, bool isBit)
         {
-            var analysis = OmronFinsNetHelper.AnalysisAddress( address, isBit );
-            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( analysis );
+            var analysis = OmronFinsNetHelper.AnalysisAddress(address, isBit);
+            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(analysis);
 
             byte[] _PLCCommand = new byte[8 + value.Length];
             _PLCCommand[0] = 0x01;
@@ -204,7 +201,7 @@ namespace HslCommunication.Profinet.Omron
                 _PLCCommand[2] = analysis.Content1.WordCode;
             }
 
-            analysis.Content2.CopyTo( _PLCCommand, 3 );
+            analysis.Content2.CopyTo(_PLCCommand, 3);
             if (isBit)
             {
                 _PLCCommand[6] = (byte)(value.Length / 256);
@@ -216,9 +213,9 @@ namespace HslCommunication.Profinet.Omron
                 _PLCCommand[7] = (byte)(value.Length / 2 % 256);
             }
 
-            value.CopyTo( _PLCCommand, 8 );
-            
-            return OperateResult.CreateSuccessResult( _PLCCommand );
+            value.CopyTo(_PLCCommand, 8);
+
+            return OperateResult.CreateSuccessResult(_PLCCommand);
         }
 
         /// <summary>
@@ -227,7 +224,7 @@ namespace HslCommunication.Profinet.Omron
         /// <param name="response">来自欧姆龙返回的数据内容</param>
         /// <param name="isRead">是否读取</param>
         /// <returns>带有是否成功的结果对象</returns>
-        public static OperateResult<byte[]> ResponseValidAnalysis( byte[] response, bool isRead )
+        public static OperateResult<byte[]> ResponseValidAnalysis(byte[] response, bool isRead)
         {
             if (response.Length >= 16)
             {
@@ -238,12 +235,12 @@ namespace HslCommunication.Profinet.Omron
                 buffer[2] = response[13];
                 buffer[3] = response[12];
 
-                int err = BitConverter.ToInt32( buffer, 0 );
-                if (err > 0) return new OperateResult<byte[]>( err, GetStatusDescription( err ) );
+                int err = BitConverter.ToInt32(buffer, 0);
+                if (err > 0) return new OperateResult<byte[]>(err, GetStatusDescription(err));
 
                 byte[] result = new byte[response.Length - 16];
-                Array.Copy( response, 16, result, 0, result.Length );
-                return UdpResponseValidAnalysis( result, isRead );
+                Array.Copy(response, 16, result, 0, result.Length);
+                return UdpResponseValidAnalysis(result, isRead);
                 //if (response.Length >= 30)
                 //{
                 //    err = response[28] * 256 + response[29];
@@ -271,7 +268,7 @@ namespace HslCommunication.Profinet.Omron
                 //}
             }
 
-            return new OperateResult<byte[]>( StringResources.Language.OmronReceiveDataError );
+            return new OperateResult<byte[]>(StringResources.Language.OmronReceiveDataError);
         }
 
 
@@ -281,7 +278,7 @@ namespace HslCommunication.Profinet.Omron
         /// <param name="response">来自欧姆龙返回的数据内容</param>
         /// <param name="isRead">是否读取</param>
         /// <returns>带有是否成功的结果对象</returns>
-        public static OperateResult<byte[]> UdpResponseValidAnalysis( byte[] response, bool isRead )
+        public static OperateResult<byte[]> UdpResponseValidAnalysis(byte[] response, bool isRead)
         {
             if (response.Length >= 14)
             {
@@ -290,26 +287,26 @@ namespace HslCommunication.Profinet.Omron
 
                 if (!isRead)
                 {
-                    OperateResult<byte[]> success = OperateResult.CreateSuccessResult( new byte[0] );
+                    OperateResult<byte[]> success = OperateResult.CreateSuccessResult(new byte[0]);
                     success.ErrorCode = err;
-                    success.Message = GetStatusDescription( err ) + " Received:" + SoftBasic.ByteToHexString( response, ' ' );
+                    success.Message = GetStatusDescription(err) + " Received:" + SoftBasic.ByteToHexString(response, ' ');
                     return success;
                 }
                 else
                 {
                     // 读取操作 -> read operate
                     byte[] content = new byte[response.Length - 14];
-                    if (content.Length > 0) Array.Copy( response, 14, content, 0, content.Length );
+                    if (content.Length > 0) Array.Copy(response, 14, content, 0, content.Length);
 
-                    OperateResult<byte[]> success = OperateResult.CreateSuccessResult( content );
+                    OperateResult<byte[]> success = OperateResult.CreateSuccessResult(content);
                     if (content.Length == 0) success.IsSuccess = false;
                     success.ErrorCode = err;
-                    success.Message = GetStatusDescription( err ) + " Received:" + SoftBasic.ByteToHexString( response, ' ' );
+                    success.Message = GetStatusDescription(err) + " Received:" + SoftBasic.ByteToHexString(response, ' ');
                     return success;
                 }
             }
 
-            return new OperateResult<byte[]>( StringResources.Language.OmronReceiveDataError );
+            return new OperateResult<byte[]>(StringResources.Language.OmronReceiveDataError);
         }
 
         /// <summary>
@@ -317,7 +314,7 @@ namespace HslCommunication.Profinet.Omron
         /// </summary>
         /// <param name="err">错误码</param>
         /// <returns>文本描述</returns>
-        public static string GetStatusDescription( int err )
+        public static string GetStatusDescription(int err)
         {
             switch (err)
             {

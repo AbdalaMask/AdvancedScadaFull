@@ -1,7 +1,5 @@
 ﻿using HslCommunication.BasicFramework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace HslCommunication.Core
@@ -16,7 +14,7 @@ namespace HslCommunication.Core
         /// <summary>
         /// 实例化一个默认的对象
         /// </summary>
-        public ByteTransformBase( )
+        public ByteTransformBase()
         {
             DataFormat = DataFormat.DCBA;
         }
@@ -25,7 +23,7 @@ namespace HslCommunication.Core
         /// 使用指定的数据解析来实例化对象
         /// </summary>
         /// <param name="dataFormat">数据规则</param>
-        public ByteTransformBase( DataFormat dataFormat )
+        public ByteTransformBase(DataFormat dataFormat)
         {
             this.DataFormat = dataFormat;
         }
@@ -40,7 +38,7 @@ namespace HslCommunication.Core
         /// <param name="buffer">缓存数据</param>
         /// <param name="index">位的索引</param>
         /// <returns>bool对象</returns>
-        public virtual bool TransBool( byte[] buffer, int index )
+        public virtual bool TransBool(byte[] buffer, int index)
         {
             return ((buffer[index] & 0x01) == 0x01);
         }
@@ -53,11 +51,11 @@ namespace HslCommunication.Core
         /// <param name="index">位的索引</param>
         /// <param name="length">bool长度</param>
         /// <returns>bool数组</returns>
-        public bool[] TransBool( byte[] buffer, int index, int length )
+        public bool[] TransBool(byte[] buffer, int index, int length)
         {
             byte[] tmp = new byte[length];
-            Array.Copy( buffer, index, tmp, 0, length );
-            return SoftBasic.ByteToBoolArray( tmp, length * 8 );
+            Array.Copy(buffer, index, tmp, 0, length);
+            return SoftBasic.ByteToBoolArray(tmp, length * 8);
         }
 
         /// <summary>
@@ -66,7 +64,7 @@ namespace HslCommunication.Core
         /// <param name="buffer">缓存数据</param>
         /// <param name="index">索引位置</param>
         /// <returns>byte对象</returns>
-        public virtual byte TransByte( byte[] buffer, int index )
+        public virtual byte TransByte(byte[] buffer, int index)
         {
             return buffer[index];
         }
@@ -78,10 +76,10 @@ namespace HslCommunication.Core
         /// <param name="index">索引位置</param>
         /// <param name="length">读取的数组长度</param>
         /// <returns>byte数组对象</returns>
-        public virtual byte[] TransByte( byte[] buffer, int index, int length )
+        public virtual byte[] TransByte(byte[] buffer, int index, int length)
         {
             byte[] tmp = new byte[length];
-            Array.Copy( buffer, index, tmp, 0, length );
+            Array.Copy(buffer, index, tmp, 0, length);
             return tmp;
         }
 
@@ -92,9 +90,9 @@ namespace HslCommunication.Core
         /// <param name="buffer">缓存数据</param>
         /// <param name="index">索引位置</param>
         /// <returns>short对象</returns>
-        public virtual short TransInt16( byte[] buffer, int index )
+        public virtual short TransInt16(byte[] buffer, int index)
         {
-            return BitConverter.ToInt16( buffer, index );
+            return BitConverter.ToInt16(buffer, index);
         }
 
         /// <summary>
@@ -104,12 +102,12 @@ namespace HslCommunication.Core
         /// <param name="index">索引位置</param>
         /// <param name="length">读取的数组长度</param>
         /// <returns>short数组对象</returns>
-        public virtual short[] TransInt16( byte[] buffer, int index, int length )
+        public virtual short[] TransInt16(byte[] buffer, int index, int length)
         {
             short[] tmp = new short[length];
             for (int i = 0; i < length; i++)
             {
-                tmp[i] = TransInt16( buffer, index + 2 * i );
+                tmp[i] = TransInt16(buffer, index + 2 * i);
             }
             return tmp;
         }
@@ -121,9 +119,9 @@ namespace HslCommunication.Core
         /// <param name="buffer">缓存数据</param>
         /// <param name="index">索引位置</param>
         /// <returns>ushort对象</returns>
-        public virtual ushort TransUInt16( byte[] buffer, int index )
+        public virtual ushort TransUInt16(byte[] buffer, int index)
         {
-            return BitConverter.ToUInt16( buffer, index );
+            return BitConverter.ToUInt16(buffer, index);
         }
 
         /// <summary>
@@ -133,12 +131,12 @@ namespace HslCommunication.Core
         /// <param name="index">索引位置</param>
         /// <param name="length">读取的数组长度</param>
         /// <returns>ushort数组对象</returns>
-        public virtual ushort[] TransUInt16( byte[] buffer, int index, int length )
+        public virtual ushort[] TransUInt16(byte[] buffer, int index, int length)
         {
             ushort[] tmp = new ushort[length];
             for (int i = 0; i < length; i++)
             {
-                tmp[i] = TransUInt16( buffer, index + 2 * i );
+                tmp[i] = TransUInt16(buffer, index + 2 * i);
             }
             return tmp;
         }
@@ -151,9 +149,9 @@ namespace HslCommunication.Core
         /// <param name="buffer">缓存数据</param>
         /// <param name="index">索引位置</param>
         /// <returns>int对象</returns>
-        public virtual int TransInt32( byte[] buffer, int index )
+        public virtual int TransInt32(byte[] buffer, int index)
         {
-            return BitConverter.ToInt32( ByteTransDataFormat4( buffer, index ), 0 );
+            return BitConverter.ToInt32(ByteTransDataFormat4(buffer, index), 0);
         }
 
         /// <summary>
@@ -163,12 +161,12 @@ namespace HslCommunication.Core
         /// <param name="index">索引位置</param>
         /// <param name="length">读取的数组长度</param>
         /// <returns>int数组对象</returns>
-        public virtual int[] TransInt32( byte[] buffer, int index, int length )
+        public virtual int[] TransInt32(byte[] buffer, int index, int length)
         {
             int[] tmp = new int[length];
             for (int i = 0; i < length; i++)
             {
-                tmp[i] = TransInt32( buffer, index + 4 * i );
+                tmp[i] = TransInt32(buffer, index + 4 * i);
             }
             return tmp;
         }
@@ -181,9 +179,9 @@ namespace HslCommunication.Core
         /// <param name="buffer">缓存数据</param>
         /// <param name="index">索引位置</param>
         /// <returns>uint对象</returns>
-        public virtual uint TransUInt32( byte[] buffer, int index )
+        public virtual uint TransUInt32(byte[] buffer, int index)
         {
-            return BitConverter.ToUInt32( ByteTransDataFormat4( buffer, index ), 0 );
+            return BitConverter.ToUInt32(ByteTransDataFormat4(buffer, index), 0);
         }
 
         /// <summary>
@@ -193,12 +191,12 @@ namespace HslCommunication.Core
         /// <param name="index">索引位置</param>
         /// <param name="length">读取的数组长度</param>
         /// <returns>uint数组对象</returns>
-        public virtual uint[] TransUInt32( byte[] buffer, int index, int length )
+        public virtual uint[] TransUInt32(byte[] buffer, int index, int length)
         {
             uint[] tmp = new uint[length];
             for (int i = 0; i < length; i++)
             {
-                tmp[i] = TransUInt32( buffer, index + 4 * i );
+                tmp[i] = TransUInt32(buffer, index + 4 * i);
             }
             return tmp;
         }
@@ -209,9 +207,9 @@ namespace HslCommunication.Core
         /// <param name="buffer">缓存数据</param>
         /// <param name="index">索引位置</param>
         /// <returns>long对象</returns>
-        public virtual long TransInt64( byte[] buffer, int index )
+        public virtual long TransInt64(byte[] buffer, int index)
         {
-            return BitConverter.ToInt64( ByteTransDataFormat8( buffer, index ), 0 );
+            return BitConverter.ToInt64(ByteTransDataFormat8(buffer, index), 0);
         }
 
         /// <summary>
@@ -221,12 +219,12 @@ namespace HslCommunication.Core
         /// <param name="index">索引位置</param>
         /// <param name="length">读取的数组长度</param>
         /// <returns>long数组对象</returns>
-        public virtual long[] TransInt64( byte[] buffer, int index, int length )
+        public virtual long[] TransInt64(byte[] buffer, int index, int length)
         {
             long[] tmp = new long[length];
             for (int i = 0; i < length; i++)
             {
-                tmp[i] = TransInt64( buffer, index + 8 * i );
+                tmp[i] = TransInt64(buffer, index + 8 * i);
             }
             return tmp;
         }
@@ -238,9 +236,9 @@ namespace HslCommunication.Core
         /// <param name="buffer">缓存数据</param>
         /// <param name="index">索引位置</param>
         /// <returns>ulong对象</returns>
-        public virtual ulong TransUInt64( byte[] buffer, int index )
+        public virtual ulong TransUInt64(byte[] buffer, int index)
         {
-            return BitConverter.ToUInt64( ByteTransDataFormat8( buffer, index ), 0 );
+            return BitConverter.ToUInt64(ByteTransDataFormat8(buffer, index), 0);
         }
 
         /// <summary>
@@ -250,12 +248,12 @@ namespace HslCommunication.Core
         /// <param name="index">索引位置</param>
         /// <param name="length">读取的数组长度</param>
         /// <returns>ulong数组对象</returns>
-        public virtual ulong[] TransUInt64( byte[] buffer, int index, int length )
+        public virtual ulong[] TransUInt64(byte[] buffer, int index, int length)
         {
             ulong[] tmp = new ulong[length];
             for (int i = 0; i < length; i++)
             {
-                tmp[i] = TransUInt64( buffer, index + 8 * i );
+                tmp[i] = TransUInt64(buffer, index + 8 * i);
             }
             return tmp;
         }
@@ -266,9 +264,9 @@ namespace HslCommunication.Core
         /// <param name="buffer">缓存对象</param>
         /// <param name="index">索引位置</param>
         /// <returns>float对象</returns>
-        public virtual float TransSingle( byte[] buffer, int index )
+        public virtual float TransSingle(byte[] buffer, int index)
         {
-            return BitConverter.ToSingle( ByteTransDataFormat4( buffer, index ), 0 );
+            return BitConverter.ToSingle(ByteTransDataFormat4(buffer, index), 0);
         }
 
         /// <summary>
@@ -278,12 +276,12 @@ namespace HslCommunication.Core
         /// <param name="index">索引位置</param>
         /// <param name="length">读取的数组长度</param>
         /// <returns>float数组对象</returns>
-        public virtual float[] TransSingle( byte[] buffer, int index, int length )
+        public virtual float[] TransSingle(byte[] buffer, int index, int length)
         {
             float[] tmp = new float[length];
             for (int i = 0; i < length; i++)
             {
-                tmp[i] = TransSingle( buffer, index + 4 * i );
+                tmp[i] = TransSingle(buffer, index + 4 * i);
             }
             return tmp;
         }
@@ -295,9 +293,9 @@ namespace HslCommunication.Core
         /// <param name="buffer">缓存对象</param>
         /// <param name="index">索引位置</param>
         /// <returns>double对象</returns>
-        public virtual double TransDouble( byte[] buffer, int index )
+        public virtual double TransDouble(byte[] buffer, int index)
         {
-            return BitConverter.ToDouble( ByteTransDataFormat8( buffer, index ), 0 );
+            return BitConverter.ToDouble(ByteTransDataFormat8(buffer, index), 0);
         }
 
         /// <summary>
@@ -307,12 +305,12 @@ namespace HslCommunication.Core
         /// <param name="index">索引位置</param>
         /// <param name="length">读取的数组长度</param>
         /// <returns>double数组对象</returns>
-        public virtual double[] TransDouble( byte[] buffer, int index, int length )
+        public virtual double[] TransDouble(byte[] buffer, int index, int length)
         {
             double[] tmp = new double[length];
             for (int i = 0; i < length; i++)
             {
-                tmp[i] = TransDouble( buffer, index + 8 * i );
+                tmp[i] = TransDouble(buffer, index + 8 * i);
             }
             return tmp;
         }
@@ -326,10 +324,10 @@ namespace HslCommunication.Core
         /// <param name="length">byte数组长度</param>
         /// <param name="encoding">字符串的编码</param>
         /// <returns>string对象</returns>
-        public virtual string TransString( byte[] buffer, int index, int length, Encoding encoding )
+        public virtual string TransString(byte[] buffer, int index, int length, Encoding encoding)
         {
-            byte[] tmp = TransByte( buffer, index, length );
-            return encoding.GetString( tmp );
+            byte[] tmp = TransByte(buffer, index, length);
+            return encoding.GetString(tmp);
         }
 
 
@@ -343,9 +341,9 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="value">等待转化的数据</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( bool value )
+        public virtual byte[] TransByte(bool value)
         {
-            return TransByte( new bool[] { value } );
+            return TransByte(new bool[] { value });
         }
 
         /// <summary>
@@ -353,11 +351,11 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="values">等待转化的数组</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( bool[] values )
+        public virtual byte[] TransByte(bool[] values)
         {
             if (values == null) return null;
 
-            return SoftBasic.BoolArrayToByte( values );
+            return SoftBasic.BoolArrayToByte(values);
         }
 
 
@@ -366,7 +364,7 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="value">等待转化的数据</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( byte value )
+        public virtual byte[] TransByte(byte value)
         {
             return new byte[] { value };
         }
@@ -377,9 +375,9 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="value">等待转化的数据</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( short value )
+        public virtual byte[] TransByte(short value)
         {
-            return TransByte( new short[] { value } );
+            return TransByte(new short[] { value });
         }
 
 
@@ -388,13 +386,13 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="values">等待转化的数组</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( short[] values )
+        public virtual byte[] TransByte(short[] values)
         {
             if (values == null) return null;
             byte[] buffer = new byte[values.Length * 2];
             for (int i = 0; i < values.Length; i++)
             {
-                BitConverter.GetBytes( values[i] ).CopyTo( buffer, 2 * i );
+                BitConverter.GetBytes(values[i]).CopyTo(buffer, 2 * i);
             }
             return buffer;
         }
@@ -405,9 +403,9 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="value">等待转化的数据</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( ushort value )
+        public virtual byte[] TransByte(ushort value)
         {
-            return TransByte( new ushort[] { value } );
+            return TransByte(new ushort[] { value });
         }
 
 
@@ -416,14 +414,14 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="values">等待转化的数组</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( ushort[] values )
+        public virtual byte[] TransByte(ushort[] values)
         {
             if (values == null) return null;
 
             byte[] buffer = new byte[values.Length * 2];
             for (int i = 0; i < values.Length; i++)
             {
-                BitConverter.GetBytes( values[i] ).CopyTo( buffer, 2 * i );
+                BitConverter.GetBytes(values[i]).CopyTo(buffer, 2 * i);
             }
 
             return buffer;
@@ -435,9 +433,9 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="value">等待转化的数据</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( int value )
+        public virtual byte[] TransByte(int value)
         {
-            return TransByte( new int[] { value } );
+            return TransByte(new int[] { value });
         }
 
 
@@ -446,14 +444,14 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="values">等待转化的数组</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( int[] values )
+        public virtual byte[] TransByte(int[] values)
         {
             if (values == null) return null;
 
             byte[] buffer = new byte[values.Length * 4];
             for (int i = 0; i < values.Length; i++)
             {
-                ByteTransDataFormat4( BitConverter.GetBytes( values[i] ) ).CopyTo( buffer, 4 * i );
+                ByteTransDataFormat4(BitConverter.GetBytes(values[i])).CopyTo(buffer, 4 * i);
             }
 
             return buffer;
@@ -464,9 +462,9 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="value">等待转化的数据</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( uint value )
+        public virtual byte[] TransByte(uint value)
         {
-            return TransByte( new uint[] { value } );
+            return TransByte(new uint[] { value });
         }
 
 
@@ -475,14 +473,14 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="values">等待转化的数组</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( uint[] values )
+        public virtual byte[] TransByte(uint[] values)
         {
             if (values == null) return null;
 
             byte[] buffer = new byte[values.Length * 4];
             for (int i = 0; i < values.Length; i++)
             {
-                ByteTransDataFormat4( BitConverter.GetBytes( values[i] ) ).CopyTo( buffer, 4 * i );
+                ByteTransDataFormat4(BitConverter.GetBytes(values[i])).CopyTo(buffer, 4 * i);
             }
 
             return buffer;
@@ -494,9 +492,9 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="value">等待转化的数据</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( long value )
+        public virtual byte[] TransByte(long value)
         {
-            return TransByte( new long[] { value } );
+            return TransByte(new long[] { value });
         }
 
         /// <summary>
@@ -504,14 +502,14 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="values">等待转化的数组</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( long[] values )
+        public virtual byte[] TransByte(long[] values)
         {
             if (values == null) return null;
 
             byte[] buffer = new byte[values.Length * 8];
             for (int i = 0; i < values.Length; i++)
             {
-                ByteTransDataFormat8( BitConverter.GetBytes( values[i] ) ).CopyTo( buffer, 8 * i );
+                ByteTransDataFormat8(BitConverter.GetBytes(values[i])).CopyTo(buffer, 8 * i);
             }
 
             return buffer;
@@ -522,9 +520,9 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="value">等待转化的数据</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( ulong value )
+        public virtual byte[] TransByte(ulong value)
         {
-            return TransByte( new ulong[] { value } );
+            return TransByte(new ulong[] { value });
         }
 
         /// <summary>
@@ -532,14 +530,14 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="values">等待转化的数组</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( ulong[] values )
+        public virtual byte[] TransByte(ulong[] values)
         {
             if (values == null) return null;
 
             byte[] buffer = new byte[values.Length * 8];
             for (int i = 0; i < values.Length; i++)
             {
-                ByteTransDataFormat8( BitConverter.GetBytes( values[i] ) ).CopyTo( buffer, 8 * i );
+                ByteTransDataFormat8(BitConverter.GetBytes(values[i])).CopyTo(buffer, 8 * i);
             }
 
             return buffer;
@@ -550,9 +548,9 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="value">等待转化的数据</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( float value )
+        public virtual byte[] TransByte(float value)
         {
-            return TransByte( new float[] { value } );
+            return TransByte(new float[] { value });
         }
 
         /// <summary>
@@ -560,14 +558,14 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="values">等待转化的数组</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( float[] values )
+        public virtual byte[] TransByte(float[] values)
         {
             if (values == null) return null;
 
             byte[] buffer = new byte[values.Length * 4];
             for (int i = 0; i < values.Length; i++)
             {
-                ByteTransDataFormat4( BitConverter.GetBytes( values[i] ) ).CopyTo( buffer, 4 * i );
+                ByteTransDataFormat4(BitConverter.GetBytes(values[i])).CopyTo(buffer, 4 * i);
             }
 
             return buffer;
@@ -578,9 +576,9 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="value">等待转化的数据</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( double value )
+        public virtual byte[] TransByte(double value)
         {
-            return TransByte( new double[] { value } );
+            return TransByte(new double[] { value });
         }
 
         /// <summary>
@@ -588,14 +586,14 @@ namespace HslCommunication.Core
         /// </summary>
         /// <param name="values">等待转化的数组</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( double[] values )
+        public virtual byte[] TransByte(double[] values)
         {
             if (values == null) return null;
 
             byte[] buffer = new byte[values.Length * 8];
             for (int i = 0; i < values.Length; i++)
             {
-                ByteTransDataFormat8( BitConverter.GetBytes( values[i] ) ).CopyTo( buffer, 8 * i );
+                ByteTransDataFormat8(BitConverter.GetBytes(values[i])).CopyTo(buffer, 8 * i);
             }
 
             return buffer;
@@ -607,11 +605,11 @@ namespace HslCommunication.Core
         /// <param name="value">等待转化的数据</param>
         /// <param name="encoding">字符串的编码方式</param>
         /// <returns>buffer数据</returns>
-        public virtual byte[] TransByte( string value, Encoding encoding )
+        public virtual byte[] TransByte(string value, Encoding encoding)
         {
             if (value == null) return null;
 
-            return encoding.GetBytes( value );
+            return encoding.GetBytes(value);
         }
 
 
@@ -625,7 +623,7 @@ namespace HslCommunication.Core
         /// <param name="value">数据字节</param>
         /// <param name="index">起始索引，默认值为0</param>
         /// <returns>实际字节信息</returns>
-        protected byte[] ByteTransDataFormat4( byte[] value, int index = 0 )
+        protected byte[] ByteTransDataFormat4(byte[] value, int index = 0)
         {
             byte[] buffer = new byte[4];
             switch (DataFormat)
@@ -674,7 +672,7 @@ namespace HslCommunication.Core
         /// <param name="value">数据字节</param>
         /// <param name="index">起始索引，默认值为0</param>
         /// <returns>实际字节信息</returns>
-        protected byte[] ByteTransDataFormat8( byte[] value, int index = 0 )
+        protected byte[] ByteTransDataFormat8(byte[] value, int index = 0)
         {
             byte[] buffer = new byte[8];
             switch (DataFormat)

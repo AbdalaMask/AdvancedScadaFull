@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HslCommunication.MQTT
+﻿namespace HslCommunication.MQTT
 {
     /// <summary>
     /// Mqtt协议的验证对象，包含用户名和密码
@@ -15,7 +10,7 @@ namespace HslCommunication.MQTT
         /// <summary>
         /// 实例化一个默认的对象
         /// </summary>
-        public MqttCredential( )
+        public MqttCredential()
         {
 
         }
@@ -25,7 +20,7 @@ namespace HslCommunication.MQTT
         /// </summary>
         /// <param name="name">用户名</param>
         /// <param name="pwd">密码</param>
-        public MqttCredential(string name, string pwd )
+        public MqttCredential(string name, string pwd)
         {
             UserName = name;
             Password = pwd;
@@ -47,7 +42,7 @@ namespace HslCommunication.MQTT
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串数据</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return UserName;
         }

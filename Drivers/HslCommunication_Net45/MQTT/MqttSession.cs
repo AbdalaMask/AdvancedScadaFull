@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net;
 using System.Net.Sockets;
 
 namespace HslCommunication.MQTT
@@ -15,12 +12,12 @@ namespace HslCommunication.MQTT
         /// <summary>
         /// 实例化一个默认的对象
         /// </summary>
-        public MqttSession( )
+        public MqttSession()
         {
             ByteHead = new byte[1];
-            Topics = new List<string>( );
+            Topics = new List<string>();
             ActiveTime = DateTime.Now;
-            ActiveTimeSpan = TimeSpan.FromSeconds( 1000000 );
+            ActiveTimeSpan = TimeSpan.FromSeconds(1000000);
         }
 
         /// <summary>
@@ -63,12 +60,12 @@ namespace HslCommunication.MQTT
         /// </summary>
         /// <param name="topic">主题信息</param>
         /// <returns>是否包含的结果信息</returns>
-        public bool IsClientSubscribe( string topic )
+        public bool IsClientSubscribe(string topic)
         {
             bool ret = false;
             lock (objLock)
             {
-                ret = Topics.Contains( topic );
+                ret = Topics.Contains(topic);
             }
             return ret;
         }
@@ -77,13 +74,13 @@ namespace HslCommunication.MQTT
         /// 当前的会话信息新增一个订阅的信息
         /// </summary>
         /// <param name="topic">主题的信息</param>
-        public void AddSubscribe( string topic )
+        public void AddSubscribe(string topic)
         {
             lock (objLock)
             {
-                if(!Topics.Contains( topic ))
+                if (!Topics.Contains(topic))
                 {
-                    Topics.Add( topic );
+                    Topics.Add(topic);
                 }
             }
         }
@@ -93,16 +90,16 @@ namespace HslCommunication.MQTT
         /// 当前的会话信息新增一个订阅的信息
         /// </summary>
         /// <param name="topics">主题的信息</param>
-        public void AddSubscribe( string[] topics )
+        public void AddSubscribe(string[] topics)
         {
             if (topics == null) return;
             lock (objLock)
             {
                 for (int i = 0; i < topics.Length; i++)
                 {
-                    if (!Topics.Contains( topics[i] ))
+                    if (!Topics.Contains(topics[i]))
                     {
-                        Topics.Add( topics[i] );
+                        Topics.Add(topics[i]);
                     }
                 }
             }
@@ -112,13 +109,13 @@ namespace HslCommunication.MQTT
         /// 移除会话信息的一个订阅的主题
         /// </summary>
         /// <param name="topic">主题</param>
-        public void RemoveSubscribe( string topic )
+        public void RemoveSubscribe(string topic)
         {
             lock (objLock)
             {
-                if (Topics.Contains( topic ))
+                if (Topics.Contains(topic))
                 {
-                    Topics.Remove( topic );
+                    Topics.Remove(topic);
                 }
             }
         }
@@ -127,21 +124,21 @@ namespace HslCommunication.MQTT
         /// 移除会话信息的一个订阅的主题
         /// </summary>
         /// <param name="topics">主题</param>
-        public void RemoveSubscribe( string[] topics )
+        public void RemoveSubscribe(string[] topics)
         {
             if (topics == null) return;
             lock (objLock)
             {
                 for (int i = 0; i < topics.Length; i++)
                 {
-                    if (Topics.Contains( topics[i] ))
+                    if (Topics.Contains(topics[i]))
                     {
-                        Topics.Remove( topics[i] );
+                        Topics.Remove(topics[i]);
                     }
                 }
             }
         }
 
-        private object objLock = new object( );
+        private object objLock = new object();
     }
 }

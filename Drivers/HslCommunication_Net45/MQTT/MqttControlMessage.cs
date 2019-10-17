@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HslCommunication.MQTT
+﻿namespace HslCommunication.MQTT
 {
     /// <summary>
     /// 定义了Mqtt的相关的控制报文的信息

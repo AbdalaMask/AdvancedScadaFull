@@ -1,8 +1,5 @@
 ﻿using HslCommunication.BasicFramework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace HslCommunication.Enthernet
 {
@@ -52,9 +49,9 @@ namespace HslCommunication.Enthernet
         /// 获取大小
         /// </summary>
         /// <returns>文件大小的字符串描述形式</returns>
-        public string GetTextFromFileSize( )
+        public string GetTextFromFileSize()
         {
-            return SoftBasic.GetSizeDescription( FileSize );
+            return SoftBasic.GetSizeDescription(FileSize);
         }
 
         #endregion

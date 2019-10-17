@@ -1,10 +1,5 @@
 ﻿using HslCommunication.Core;
 using HslCommunication.Serial;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HslCommunication.BasicFramework;
 
 namespace HslCommunication.Profinet.Melsec
 {
@@ -133,7 +128,7 @@ namespace HslCommunication.Profinet.Melsec
         /// <summary>
         /// 实例化三菱的串口协议的通讯对象
         /// </summary>
-        public MelsecFxSerial( )
+        public MelsecFxSerial()
         {
             WordLength = 1;
         }
@@ -154,7 +149,7 @@ namespace HslCommunication.Profinet.Melsec
         /// 以下是读取不同类型数据的示例
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\MelsecFxSerial.cs" region="ReadExample1" title="Read示例" />
         /// </example>
-        public override OperateResult<byte[]> Read( string address, ushort length ) => MelsecFxSerialOverTcp.ReadHelper( address, length, ReadBase );
+        public override OperateResult<byte[]> Read(string address, ushort length) => MelsecFxSerialOverTcp.ReadHelper(address, length, ReadBase);
 
         /// <summary>
         /// 向PLC写入数据，数据格式为原始的字节类型
@@ -168,7 +163,7 @@ namespace HslCommunication.Profinet.Melsec
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\MelsecFxSerial.cs" region="WriteExample1" title="Write示例" />
         /// </example>
         /// <returns>是否写入成功的结果对象</returns>
-        public override OperateResult Write( string address, byte[] value ) => MelsecFxSerialOverTcp.WriteHelper( address, value, ReadBase );
+        public override OperateResult Write(string address, byte[] value) => MelsecFxSerialOverTcp.WriteHelper(address, value, ReadBase);
 
         #endregion
 
@@ -183,7 +178,7 @@ namespace HslCommunication.Profinet.Melsec
         /// <example>
         ///  <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\Profinet\MelsecFxSerial.cs" region="ReadBool" title="Bool类型示例" />
         /// </example>
-        public override OperateResult<bool[]> ReadBool( string address, ushort length ) => MelsecFxSerialOverTcp.ReadBoolHelper( address, length, ReadBase );
+        public override OperateResult<bool[]> ReadBool(string address, ushort length) => MelsecFxSerialOverTcp.ReadBoolHelper(address, length, ReadBase);
 
         /// <summary>
         /// 强制写入位数据的通断，支持的类型参考文档说明
@@ -191,7 +186,7 @@ namespace HslCommunication.Profinet.Melsec
         /// <param name="address">地址信息</param>
         /// <param name="value">是否为通</param>
         /// <returns>是否写入成功的结果对象</returns>
-        public override OperateResult Write( string address, bool value ) => MelsecFxSerialOverTcp.WriteHelper( address, value, ReadBase );
+        public override OperateResult Write(string address, bool value) => MelsecFxSerialOverTcp.WriteHelper(address, value, ReadBase);
 
         #endregion
 
@@ -201,7 +196,7 @@ namespace HslCommunication.Profinet.Melsec
         /// 获取当前对象的字符串标识形式
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToString( ) => $"MelsecFxSerial";
+        public override string ToString() => $"MelsecFxSerial";
 
         #endregion
 

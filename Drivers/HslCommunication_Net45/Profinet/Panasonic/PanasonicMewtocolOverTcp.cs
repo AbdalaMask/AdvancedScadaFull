@@ -1,8 +1,6 @@
 ﻿using HslCommunication.Core;
 using HslCommunication.Core.Net;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace HslCommunication.Profinet.Panasonic
@@ -161,7 +159,7 @@ namespace HslCommunication.Profinet.Panasonic
         /// 实例化一个默认的松下PLC通信对象，默认站号为1
         /// </summary>
         /// <param name="station">站号信息，默认为0xEE</param>
-        public PanasonicMewtocolOverTcp( byte station = 238 )
+        public PanasonicMewtocolOverTcp(byte station = 238)
         {
             this.Station = station;
             this.ByteTransform.DataFormat = DataFormat.DCBA;
@@ -173,7 +171,7 @@ namespace HslCommunication.Profinet.Panasonic
         /// <param name="ipAddress">Ip地址数据</param>
         /// <param name="port">端口号</param>
         /// <param name="station">站号信息，默认为0xEE</param>
-        public PanasonicMewtocolOverTcp( string ipAddress, int port, byte station = 238 )
+        public PanasonicMewtocolOverTcp(string ipAddress, int port, byte station = 238)
         {
             this.Station = station;
             this.ByteTransform.DataFormat = DataFormat.DCBA;
@@ -200,18 +198,18 @@ namespace HslCommunication.Profinet.Panasonic
         /// <param name="address">起始地址</param>
         /// <param name="length">长度</param>
         /// <returns>返回数据信息</returns>
-        public override OperateResult<byte[]> Read( string address, ushort length )
+        public override OperateResult<byte[]> Read(string address, ushort length)
         {
             // 创建指令
-            OperateResult<byte[]> command = BuildReadCommand( Station, address, length );
+            OperateResult<byte[]> command = BuildReadCommand(Station, address, length);
             if (!command.IsSuccess) return command;
 
             // 数据交互
-            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
+            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
             if (!read.IsSuccess) return read;
 
             // 提取数据
-            return ExtraActualData( read.Content );
+            return ExtraActualData(read.Content);
         }
 
         /// <summary>
@@ -220,18 +218,18 @@ namespace HslCommunication.Profinet.Panasonic
         /// <param name="address">起始地址</param>
         /// <param name="value">真实数据</param>
         /// <returns>是否写入成功</returns>
-        public override OperateResult Write( string address, byte[] value )
+        public override OperateResult Write(string address, byte[] value)
         {
             // 创建指令
-            OperateResult<byte[]> command = BuildWriteCommand( Station, address, value );
+            OperateResult<byte[]> command = BuildWriteCommand(Station, address, value);
             if (!command.IsSuccess) return command;
 
             // 数据交互
-            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
+            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
             if (!read.IsSuccess) return read;
 
             // 提取结果
-            return ExtraActualData( read.Content );
+            return ExtraActualData(read.Content);
         }
 
         #endregion
@@ -244,15 +242,15 @@ namespace HslCommunication.Profinet.Panasonic
         /// <param name="address">起始地址</param>
         /// <param name="length">数据长度</param>
         /// <returns>读取结果对象</returns>
-        public override OperateResult<bool[]> ReadBool( string address, ushort length )
+        public override OperateResult<bool[]> ReadBool(string address, ushort length)
         {
             // 读取数据
-            OperateResult<byte[]> read = Read( address, length );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>( read );
+            OperateResult<byte[]> read = Read(address, length);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool[]>(read);
 
             // 提取bool
-            byte[] buffer = BasicFramework.SoftBasic.BytesReverseByWord( read.Content );
-            return OperateResult.CreateSuccessResult( BasicFramework.SoftBasic.ByteToBoolArray( read.Content, length ) );
+            byte[] buffer = BasicFramework.SoftBasic.BytesReverseByWord(read.Content);
+            return OperateResult.CreateSuccessResult(BasicFramework.SoftBasic.ByteToBoolArray(read.Content, length));
         }
 
         /// <summary>
@@ -260,18 +258,18 @@ namespace HslCommunication.Profinet.Panasonic
         /// </summary>
         /// <param name="address">起始地址</param>
         /// <returns>读取结果对象</returns>
-        public override OperateResult<bool> ReadBool( string address )
+        public override OperateResult<bool> ReadBool(string address)
         {
             // 创建指令
-            OperateResult<byte[]> command = BuildReadOneCoil( Station, address );
-            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool>( command );
+            OperateResult<byte[]> command = BuildReadOneCoil(Station, address);
+            if (!command.IsSuccess) return OperateResult.CreateFailedResult<bool>(command);
 
             // 数据交互
-            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
-            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool>( read );
+            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<bool>(read);
 
             // 提取数据
-            return ExtraActualBool( read.Content );
+            return ExtraActualBool(read.Content);
         }
 
         /// <summary>
@@ -280,21 +278,21 @@ namespace HslCommunication.Profinet.Panasonic
         /// <param name="address">起始地址</param>
         /// <param name="values">数据值信息</param>
         /// <returns>返回是否成功的结果对象</returns>
-        public override OperateResult Write( string address, bool[] values )
+        public override OperateResult Write(string address, bool[] values)
         {
             // 计算字节数据
-            byte[] buffer = BasicFramework.SoftBasic.BoolArrayToByte( values );
+            byte[] buffer = BasicFramework.SoftBasic.BoolArrayToByte(values);
 
             // 创建指令
-            OperateResult<byte[]> command = BuildWriteCommand( Station, address, BasicFramework.SoftBasic.BytesReverseByWord( buffer ), (short)values.Length );
+            OperateResult<byte[]> command = BuildWriteCommand(Station, address, BasicFramework.SoftBasic.BytesReverseByWord(buffer), (short)values.Length);
             if (!command.IsSuccess) return command;
 
             // 数据交互
-            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
+            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
             if (!read.IsSuccess) return read;
 
             // 提取结果
-            return ExtraActualData( read.Content );
+            return ExtraActualData(read.Content);
         }
 
         /// <summary>
@@ -303,18 +301,18 @@ namespace HslCommunication.Profinet.Panasonic
         /// <param name="address">起始地址</param>
         /// <param name="value">数据值信息</param>
         /// <returns>返回是否成功的结果对象</returns>
-        public override OperateResult Write( string address, bool value )
+        public override OperateResult Write(string address, bool value)
         {
             // 创建指令
-            OperateResult<byte[]> command = BuildWriteOneCoil( Station, address, value );
+            OperateResult<byte[]> command = BuildWriteOneCoil(Station, address, value);
             if (!command.IsSuccess) return command;
 
             // 数据交互
-            OperateResult<byte[]> read = ReadFromCoreServer( command.Content );
+            OperateResult<byte[]> read = ReadFromCoreServer(command.Content);
             if (!read.IsSuccess) return read;
 
             // 提取结果
-            return ExtraActualData( read.Content );
+            return ExtraActualData(read.Content);
         }
 
         #endregion
@@ -325,7 +323,7 @@ namespace HslCommunication.Profinet.Panasonic
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串信息</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return $"PanasonicMewtocolOverTcp[{IpAddress}:{Port}]";
         }
@@ -334,7 +332,7 @@ namespace HslCommunication.Profinet.Panasonic
 
         #region Bulid Read Command
 
-        private static string CalculateCrc( StringBuilder sb )
+        private static string CalculateCrc(StringBuilder sb)
         {
             byte tmp = 0;
             tmp = (byte)sb[0];
@@ -342,27 +340,27 @@ namespace HslCommunication.Profinet.Panasonic
             {
                 tmp ^= (byte)sb[i];
             }
-            return BasicFramework.SoftBasic.ByteToHexString( new byte[] { tmp } );
+            return BasicFramework.SoftBasic.ByteToHexString(new byte[] { tmp });
         }
 
-        private static int CalculateComplexAddress(string address )
+        private static int CalculateComplexAddress(string address)
         {
             int add = 0;
-            if (address.IndexOf( "." ) < 0)
+            if (address.IndexOf(".") < 0)
             {
-                add = Convert.ToInt32( address );
+                add = Convert.ToInt32(address);
             }
             else
             {
-                add = Convert.ToInt32( address.Substring( 0, address.IndexOf( "." ) ) ) * 16;
-                string bit = address.Substring( address.IndexOf( "." ) + 1 );
-                if(bit.Contains("A") || bit.Contains( "B" ) || bit.Contains( "C" ) || bit.Contains( "D" ) || bit.Contains( "E" ) || bit.Contains( "F" ))
+                add = Convert.ToInt32(address.Substring(0, address.IndexOf("."))) * 16;
+                string bit = address.Substring(address.IndexOf(".") + 1);
+                if (bit.Contains("A") || bit.Contains("B") || bit.Contains("C") || bit.Contains("D") || bit.Contains("E") || bit.Contains("F"))
                 {
-                    add += Convert.ToInt32( bit, 16 );
+                    add += Convert.ToInt32(bit, 16);
                 }
                 else
                 {
-                    add += Convert.ToInt32( bit );
+                    add += Convert.ToInt32(bit);
                 }
             }
             return add;
@@ -373,80 +371,80 @@ namespace HslCommunication.Profinet.Panasonic
         /// </summary>
         /// <param name="address">数据地址</param>
         /// <returns>解析出地址类型，起始地址，是否位读取</returns>
-        private static OperateResult<string, int> AnalysisAddress( string address )
+        private static OperateResult<string, int> AnalysisAddress(string address)
         {
-            var result = new OperateResult<string, int>( );
+            var result = new OperateResult<string, int>();
             try
             {
                 result.Content2 = 0;
-                if (address.StartsWith( "IX" ) || address.StartsWith( "ix" ))
+                if (address.StartsWith("IX") || address.StartsWith("ix"))
                 {
                     result.Content1 = "IX";
-                    result.Content2 = int.Parse( address.Substring( 2 ) );
+                    result.Content2 = int.Parse(address.Substring(2));
                 }
-                else if (address.StartsWith( "IY" ) || address.StartsWith( "iy" ))
+                else if (address.StartsWith("IY") || address.StartsWith("iy"))
                 {
                     result.Content1 = "IY";
-                    result.Content2 = int.Parse( address.Substring( 2 ) );
+                    result.Content2 = int.Parse(address.Substring(2));
                 }
-                else if (address.StartsWith( "ID" ) || address.StartsWith( "id" ))
+                else if (address.StartsWith("ID") || address.StartsWith("id"))
                 {
                     result.Content1 = "ID";
-                    result.Content2 = int.Parse( address.Substring( 2 ) );
+                    result.Content2 = int.Parse(address.Substring(2));
                 }
                 else if (address[0] == 'X' || address[0] == 'x')
                 {
                     result.Content1 = "X";
-                    result.Content2 = CalculateComplexAddress( address.Substring( 1 ) );
+                    result.Content2 = CalculateComplexAddress(address.Substring(1));
                 }
                 else if (address[0] == 'Y' || address[0] == 'y')
                 {
                     result.Content1 = "Y";
-                    result.Content2 = CalculateComplexAddress( address.Substring( 1 ) );
+                    result.Content2 = CalculateComplexAddress(address.Substring(1));
                 }
                 else if (address[0] == 'R' || address[0] == 'r')
                 {
                     result.Content1 = "R";
-                    result.Content2 = CalculateComplexAddress( address.Substring( 1 ) );
+                    result.Content2 = CalculateComplexAddress(address.Substring(1));
                 }
                 else if (address[0] == 'T' || address[0] == 't')
                 {
                     result.Content1 = "T";
-                    result.Content2 = ushort.Parse( address.Substring( 1 ) );
+                    result.Content2 = ushort.Parse(address.Substring(1));
                 }
                 else if (address[0] == 'C' || address[0] == 'c')
                 {
                     result.Content1 = "C";
-                    result.Content2 = ushort.Parse( address.Substring( 1 ) );
+                    result.Content2 = ushort.Parse(address.Substring(1));
                 }
                 else if (address[0] == 'L' || address[0] == 'l')
                 {
                     result.Content1 = "L";
-                    result.Content2 = CalculateComplexAddress( address.Substring( 1 ) );
+                    result.Content2 = CalculateComplexAddress(address.Substring(1));
                 }
                 else if (address[0] == 'D' || address[0] == 'd')
                 {
                     result.Content1 = "D";
-                    result.Content2 = ushort.Parse( address.Substring( 1 ) );
+                    result.Content2 = ushort.Parse(address.Substring(1));
                 }
                 else if (address[0] == 'F' || address[0] == 'f')
                 {
                     result.Content1 = "F";
-                    result.Content2 = ushort.Parse( address.Substring( 1 ) );
+                    result.Content2 = ushort.Parse(address.Substring(1));
                 }
                 else if (address[0] == 'S' || address[0] == 's')
                 {
                     result.Content1 = "S";
-                    result.Content2 = ushort.Parse( address.Substring( 1 ) );
+                    result.Content2 = ushort.Parse(address.Substring(1));
                 }
                 else if (address[0] == 'K' || address[0] == 'k')
                 {
                     result.Content1 = "K";
-                    result.Content2 = ushort.Parse( address.Substring( 1 ) );
+                    result.Content2 = ushort.Parse(address.Substring(1));
                 }
                 else
                 {
-                    throw new Exception( StringResources.Language.NotSupportedDataType );
+                    throw new Exception(StringResources.Language.NotSupportedDataType);
                 }
             }
             catch (Exception ex)
@@ -465,40 +463,40 @@ namespace HslCommunication.Profinet.Panasonic
         /// <param name="station">站号信息</param>
         /// <param name="address">地址信息</param>
         /// <returns>包含是否成功的结果对象</returns>
-        public static OperateResult<byte[]> BuildReadOneCoil( byte station, string address )
+        public static OperateResult<byte[]> BuildReadOneCoil(byte station, string address)
         {
             // 参数检查
-            if (address == null) return new OperateResult<byte[]>( "address is not allowed null" );
-            if (address.Length < 1 || address.Length > 8) return new OperateResult<byte[]>( "length must be 1-8" );
+            if (address == null) return new OperateResult<byte[]>("address is not allowed null");
+            if (address.Length < 1 || address.Length > 8) return new OperateResult<byte[]>("length must be 1-8");
 
-            StringBuilder sb = new StringBuilder( "%" );
-            sb.Append( station.ToString( "X2" ) );
-            sb.Append( "#RCS" );
+            StringBuilder sb = new StringBuilder("%");
+            sb.Append(station.ToString("X2"));
+            sb.Append("#RCS");
 
             // 解析地址
-            OperateResult<string, int> analysis = AnalysisAddress( address );
-            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( analysis );
+            OperateResult<string, int> analysis = AnalysisAddress(address);
+            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(analysis);
 
-            sb.Append( analysis.Content1 );
-            if(analysis.Content1 == "X" || analysis.Content1 == "Y" || analysis.Content1 == "R" || analysis.Content1 == "L")
+            sb.Append(analysis.Content1);
+            if (analysis.Content1 == "X" || analysis.Content1 == "Y" || analysis.Content1 == "R" || analysis.Content1 == "L")
             {
-                sb.Append( (analysis.Content2 / 16).ToString( "D3" ) );
-                sb.Append( (analysis.Content2 % 16).ToString( "X1" ) );
+                sb.Append((analysis.Content2 / 16).ToString("D3"));
+                sb.Append((analysis.Content2 % 16).ToString("X1"));
             }
-            else if(analysis.Content1 == "T" || analysis.Content1 == "C")
+            else if (analysis.Content1 == "T" || analysis.Content1 == "C")
             {
-                sb.Append( "0" );
-                sb.Append( analysis.Content2.ToString( "D3" ) );
+                sb.Append("0");
+                sb.Append(analysis.Content2.ToString("D3"));
             }
             else
             {
-                return new OperateResult<byte[]>( StringResources.Language.NotSupportedDataType );
+                return new OperateResult<byte[]>(StringResources.Language.NotSupportedDataType);
             }
 
-            sb.Append( CalculateCrc( sb ) );
-            sb.Append( '\u000D' );
+            sb.Append(CalculateCrc(sb));
+            sb.Append('\u000D');
 
-            return OperateResult.CreateSuccessResult( Encoding.ASCII.GetBytes( sb.ToString( ) ) );
+            return OperateResult.CreateSuccessResult(Encoding.ASCII.GetBytes(sb.ToString()));
         }
 
         /// <summary>
@@ -508,39 +506,39 @@ namespace HslCommunication.Profinet.Panasonic
         /// <param name="address">地址信息</param>
         /// <param name="value">bool值数组</param>
         /// <returns>包含是否成功的结果对象</returns>
-        public static OperateResult<byte[]> BuildWriteOneCoil( byte station, string address, bool value )
+        public static OperateResult<byte[]> BuildWriteOneCoil(byte station, string address, bool value)
         {
             // 参数检查
-            StringBuilder sb = new StringBuilder( "%" );
-            sb.Append( station.ToString( "X2" ) );
-            sb.Append( "#WCS" );
+            StringBuilder sb = new StringBuilder("%");
+            sb.Append(station.ToString("X2"));
+            sb.Append("#WCS");
 
             // 解析地址
-            OperateResult<string, int> analysis = AnalysisAddress( address );
-            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( analysis );
+            OperateResult<string, int> analysis = AnalysisAddress(address);
+            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(analysis);
 
-            sb.Append( analysis.Content1 );
+            sb.Append(analysis.Content1);
             if (analysis.Content1 == "X" || analysis.Content1 == "Y" || analysis.Content1 == "R" || analysis.Content1 == "L")
             {
-                sb.Append( (analysis.Content2 / 16).ToString( "D3" ) );
-                sb.Append( (analysis.Content2 % 16).ToString( "X1" ) );
+                sb.Append((analysis.Content2 / 16).ToString("D3"));
+                sb.Append((analysis.Content2 % 16).ToString("X1"));
             }
             else if (analysis.Content1 == "T" || analysis.Content1 == "C")
             {
-                sb.Append( "0" );
-                sb.Append( analysis.Content2.ToString( "D3" ) );
+                sb.Append("0");
+                sb.Append(analysis.Content2.ToString("D3"));
             }
             else
             {
-                return new OperateResult<byte[]>( StringResources.Language.NotSupportedDataType );
+                return new OperateResult<byte[]>(StringResources.Language.NotSupportedDataType);
             }
 
-            sb.Append( value ? '1' : '0' );
+            sb.Append(value ? '1' : '0');
 
-            sb.Append( CalculateCrc( sb ) );
-            sb.Append( '\u000D' );
+            sb.Append(CalculateCrc(sb));
+            sb.Append('\u000D');
 
-            return OperateResult.CreateSuccessResult( Encoding.ASCII.GetBytes( sb.ToString( ) ) );
+            return OperateResult.CreateSuccessResult(Encoding.ASCII.GetBytes(sb.ToString()));
         }
 
 
@@ -551,54 +549,54 @@ namespace HslCommunication.Profinet.Panasonic
         /// <param name="address">地址信息</param>
         /// <param name="length">数据长度</param>
         /// <returns>包含是否成功的结果对象</returns>
-        public static OperateResult<byte[]> BuildReadCommand( byte station, string address, ushort length )
+        public static OperateResult<byte[]> BuildReadCommand(byte station, string address, ushort length)
         {
             // 参数检查
-            if (address == null) return new OperateResult<byte[]>( StringResources.Language.PanasonicAddressParameterCannotBeNull );
+            if (address == null) return new OperateResult<byte[]>(StringResources.Language.PanasonicAddressParameterCannotBeNull);
 
             // 解析地址
-            OperateResult<string, int> analysis = AnalysisAddress( address );
-            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( analysis );
+            OperateResult<string, int> analysis = AnalysisAddress(address);
+            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(analysis);
 
-            StringBuilder sb = new StringBuilder( "%" );
-            sb.Append( station.ToString( "X2" ) );
-            sb.Append( "#" );
+            StringBuilder sb = new StringBuilder("%");
+            sb.Append(station.ToString("X2"));
+            sb.Append("#");
 
             if (analysis.Content1 == "X" || analysis.Content1 == "Y" || analysis.Content1 == "R" || analysis.Content1 == "L")
             {
-                sb.Append( "RCC" );
-                sb.Append( analysis.Content1 );
-                sb.Append( analysis.Content2.ToString( "D4" ) );
-                sb.Append( (analysis.Content2 + length - 1).ToString( "D4" ) );
+                sb.Append("RCC");
+                sb.Append(analysis.Content1);
+                sb.Append(analysis.Content2.ToString("D4"));
+                sb.Append((analysis.Content2 + length - 1).ToString("D4"));
             }
             else if (analysis.Content1 == "D" || analysis.Content1 == "L" || analysis.Content1 == "F")
             {
-                sb.Append( "RD" );
-                sb.Append( analysis.Content1 );
-                sb.Append( analysis.Content2.ToString( "D5" ) );
-                sb.Append( (analysis.Content2 + length - 1).ToString( "D5" ) );
+                sb.Append("RD");
+                sb.Append(analysis.Content1);
+                sb.Append(analysis.Content2.ToString("D5"));
+                sb.Append((analysis.Content2 + length - 1).ToString("D5"));
             }
             else if (analysis.Content1 == "IX" || analysis.Content1 == "IY" || analysis.Content1 == "ID")
             {
-                sb.Append( "RD" );
-                sb.Append( analysis.Content1 );
-                sb.Append( "000000000" );
+                sb.Append("RD");
+                sb.Append(analysis.Content1);
+                sb.Append("000000000");
             }
             else if (analysis.Content1 == "C" || analysis.Content1 == "T")
             {
-                sb.Append( "RS" );
-                sb.Append( analysis.Content2.ToString( "D4" ) );
-                sb.Append( (analysis.Content2 + length - 1).ToString( "D4" ) );
+                sb.Append("RS");
+                sb.Append(analysis.Content2.ToString("D4"));
+                sb.Append((analysis.Content2 + length - 1).ToString("D4"));
             }
             else
             {
-                return new OperateResult<byte[]>( StringResources.Language.NotSupportedDataType );
+                return new OperateResult<byte[]>(StringResources.Language.NotSupportedDataType);
             }
 
-            sb.Append( CalculateCrc( sb ) );
-            sb.Append( '\u000D' );
+            sb.Append(CalculateCrc(sb));
+            sb.Append('\u000D');
 
-            return OperateResult.CreateSuccessResult( Encoding.ASCII.GetBytes( sb.ToString( ) ) );
+            return OperateResult.CreateSuccessResult(Encoding.ASCII.GetBytes(sb.ToString()));
         }
 
         /// <summary>
@@ -609,57 +607,57 @@ namespace HslCommunication.Profinet.Panasonic
         /// <param name="values">数据值</param>
         /// <param name="length">数据长度</param>
         /// <returns>包含是否成功的结果对象</returns>
-        public static OperateResult<byte[]> BuildWriteCommand( byte station, string address, byte[] values, short length = -1 )
+        public static OperateResult<byte[]> BuildWriteCommand(byte station, string address, byte[] values, short length = -1)
         {
             // 参数检查
-            if (address == null) return new OperateResult<byte[]>( StringResources.Language.PanasonicAddressParameterCannotBeNull );
+            if (address == null) return new OperateResult<byte[]>(StringResources.Language.PanasonicAddressParameterCannotBeNull);
 
             // 解析地址
-            OperateResult<string, int> analysis = AnalysisAddress( address );
-            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( analysis );
+            OperateResult<string, int> analysis = AnalysisAddress(address);
+            if (!analysis.IsSuccess) return OperateResult.CreateFailedResult<byte[]>(analysis);
 
             // 确保偶数长度
-            values = BasicFramework.SoftBasic.ArrayExpandToLengthEven( values );
+            values = BasicFramework.SoftBasic.ArrayExpandToLengthEven(values);
             if (length == -1) length = (short)(values.Length / 2);
 
-            StringBuilder sb = new StringBuilder( "%" );
-            sb.Append( station.ToString( "X2" ) );
-            sb.Append( "#" );
+            StringBuilder sb = new StringBuilder("%");
+            sb.Append(station.ToString("X2"));
+            sb.Append("#");
 
             if (analysis.Content1 == "X" || analysis.Content1 == "Y" || analysis.Content1 == "R" || analysis.Content1 == "L")
             {
-                sb.Append( "WCC" );
-                sb.Append( analysis.Content1 );
-                sb.Append( analysis.Content2.ToString( "D4" ) );
-                sb.Append( (analysis.Content2 + length - 1).ToString( "D4" ) );
+                sb.Append("WCC");
+                sb.Append(analysis.Content1);
+                sb.Append(analysis.Content2.ToString("D4"));
+                sb.Append((analysis.Content2 + length - 1).ToString("D4"));
             }
             else if (analysis.Content1 == "D" || analysis.Content1 == "L" || analysis.Content1 == "F")
             {
-                sb.Append( "WD" );
-                sb.Append( analysis.Content1 );
-                sb.Append( analysis.Content2.ToString( "D5" ) );
-                sb.Append( (analysis.Content2 + length - 1).ToString( "D5" ) );
+                sb.Append("WD");
+                sb.Append(analysis.Content1);
+                sb.Append(analysis.Content2.ToString("D5"));
+                sb.Append((analysis.Content2 + length - 1).ToString("D5"));
             }
             else if (analysis.Content1 == "IX" || analysis.Content1 == "IY" || analysis.Content1 == "ID")
             {
-                sb.Append( "WD" );
-                sb.Append( analysis.Content1 );
-                sb.Append( analysis.Content2.ToString( "D9" ) );
-                sb.Append( (analysis.Content2 + length - 1).ToString( "D9" ) );
+                sb.Append("WD");
+                sb.Append(analysis.Content1);
+                sb.Append(analysis.Content2.ToString("D9"));
+                sb.Append((analysis.Content2 + length - 1).ToString("D9"));
             }
             else if (analysis.Content1 == "C" || analysis.Content1 == "T")
             {
-                sb.Append( "WS" );
-                sb.Append( analysis.Content2.ToString( "D4" ) );
-                sb.Append( (analysis.Content2 + length - 1).ToString( "D4" ) );
+                sb.Append("WS");
+                sb.Append(analysis.Content2.ToString("D4"));
+                sb.Append((analysis.Content2 + length - 1).ToString("D4"));
             }
 
-            sb.Append( BasicFramework.SoftBasic.ByteToHexString( values ) );
+            sb.Append(BasicFramework.SoftBasic.ByteToHexString(values));
 
-            sb.Append( CalculateCrc( sb ) );
-            sb.Append( '\u000D' );
+            sb.Append(CalculateCrc(sb));
+            sb.Append('\u000D');
 
-            return OperateResult.CreateSuccessResult( Encoding.ASCII.GetBytes( sb.ToString( ) ) );
+            return OperateResult.CreateSuccessResult(Encoding.ASCII.GetBytes(sb.ToString()));
         }
 
         /// <summary>
@@ -667,28 +665,28 @@ namespace HslCommunication.Profinet.Panasonic
         /// </summary>
         /// <param name="response">反馈信号</param>
         /// <returns>是否成功的结果信息</returns>
-        public static OperateResult<byte[]> ExtraActualData( byte[] response )
+        public static OperateResult<byte[]> ExtraActualData(byte[] response)
         {
-            if (response.Length < 9) return new OperateResult<byte[]>( StringResources.Language.PanasonicReceiveLengthMustLargerThan9 );
+            if (response.Length < 9) return new OperateResult<byte[]>(StringResources.Language.PanasonicReceiveLengthMustLargerThan9);
 
             if (response[3] == '$')
             {
                 byte[] data = new byte[response.Length - 9];
                 if (data.Length > 0)
                 {
-                    Array.Copy( response, 6, data, 0, data.Length );
-                    data = BasicFramework.SoftBasic.HexStringToBytes( Encoding.ASCII.GetString( data ) );
+                    Array.Copy(response, 6, data, 0, data.Length);
+                    data = BasicFramework.SoftBasic.HexStringToBytes(Encoding.ASCII.GetString(data));
                 }
-                return OperateResult.CreateSuccessResult( data );
+                return OperateResult.CreateSuccessResult(data);
             }
             else if (response[3] == '!')
             {
-                int err = int.Parse( Encoding.ASCII.GetString( response, 4, 2 ) );
-                return new OperateResult<byte[]>( err, GetErrorDescription( err ) );
+                int err = int.Parse(Encoding.ASCII.GetString(response, 4, 2));
+                return new OperateResult<byte[]>(err, GetErrorDescription(err));
             }
             else
             {
-                return new OperateResult<byte[]>( StringResources.Language.UnknownError );
+                return new OperateResult<byte[]>(StringResources.Language.UnknownError);
             }
         }
 
@@ -697,22 +695,22 @@ namespace HslCommunication.Profinet.Panasonic
         /// </summary>
         /// <param name="response">反馈信号</param>
         /// <returns>是否成功的结果信息</returns>
-        public static OperateResult<bool> ExtraActualBool( byte[] response )
+        public static OperateResult<bool> ExtraActualBool(byte[] response)
         {
-            if (response.Length < 9) return new OperateResult<bool>( StringResources.Language.PanasonicReceiveLengthMustLargerThan9 );
+            if (response.Length < 9) return new OperateResult<bool>(StringResources.Language.PanasonicReceiveLengthMustLargerThan9);
 
             if (response[3] == '$')
             {
-                return OperateResult.CreateSuccessResult( response[6] == 0x31 );
+                return OperateResult.CreateSuccessResult(response[6] == 0x31);
             }
             else if (response[3] == '!')
             {
-                int err = int.Parse( Encoding.ASCII.GetString( response, 4, 2 ) );
-                return new OperateResult<bool>( err, GetErrorDescription( err ) );
+                int err = int.Parse(Encoding.ASCII.GetString(response, 4, 2));
+                return new OperateResult<bool>(err, GetErrorDescription(err));
             }
             else
             {
-                return new OperateResult<bool>( StringResources.Language.UnknownError );
+                return new OperateResult<bool>(StringResources.Language.UnknownError);
             }
         }
 
@@ -721,7 +719,7 @@ namespace HslCommunication.Profinet.Panasonic
         /// </summary>
         /// <param name="err">错误代码</param>
         /// <returns>字符信息</returns>
-        public static string GetErrorDescription( int err )
+        public static string GetErrorDescription(int err)
         {
             switch (err)
             {

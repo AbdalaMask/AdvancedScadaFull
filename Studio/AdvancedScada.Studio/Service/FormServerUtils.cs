@@ -1,7 +1,6 @@
 ﻿using AdvancedScada.BaseService;
 using AdvancedScada.DriverBase;
 using AdvancedScada.IBaseService;
-using AdvancedScada.IBaseService.Common;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.ServiceModel;
@@ -24,7 +23,7 @@ namespace AdvancedScada.Studio.Service
 
             try
             {
-               
+
                 eventConnectionState += new EventConnectionState(SetConnectionState);
                 new ServiceDriverHelper().InitializePLC();
                 host = new ServiceDriverHelper().InitializeReadService();
@@ -82,7 +81,7 @@ namespace AdvancedScada.Studio.Service
                                     lblConnectState.Text = "Disonnect";
                                     break;
                             }
-                          
+
                             _ConnState = connState;
                         }
                     });
@@ -95,8 +94,8 @@ namespace AdvancedScada.Studio.Service
             }
 
         }
-       
-       
+
+
         private void FormServerUtils_Load(object sender, EventArgs e)
         {
             try

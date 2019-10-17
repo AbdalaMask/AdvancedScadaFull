@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HslCommunication.Core.IMessage
+﻿namespace HslCommunication.Core.IMessage
 {
-    
+
     /// <summary>
     /// 三菱的A兼容1E帧协议解析规则
     /// </summary>
@@ -67,7 +62,7 @@ namespace HslCommunication.Core.IMessage
         /// </summary>
         /// <param name="token">特殊的令牌，有些特殊消息的验证</param>
         /// <returns></returns>
-        public bool CheckHeadBytesLegal( byte[] token )
+        public bool CheckHeadBytesLegal(byte[] token)
         {
             if (HeadBytes != null)
             {

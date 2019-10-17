@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace HslCommunication.Core
 {
@@ -19,22 +16,22 @@ namespace HslCommunication.Core
         /// <param name="result">源</param>
         /// <param name="translator">实际转换的委托</param>
         /// <returns>转换结果</returns>
-        public static OperateResult<TResult> GetResultFromBytes<TResult>( OperateResult<byte[]> result, Func<byte[], TResult> translator )
+        public static OperateResult<TResult> GetResultFromBytes<TResult>(OperateResult<byte[]> result, Func<byte[], TResult> translator)
         {
             try
             {
                 if (result.IsSuccess)
                 {
-                    return OperateResult.CreateSuccessResult(translator( result.Content ));
+                    return OperateResult.CreateSuccessResult(translator(result.Content));
                 }
                 else
                 {
-                    return OperateResult.CreateFailedResult<TResult>( result );
+                    return OperateResult.CreateFailedResult<TResult>(result);
                 }
             }
             catch (Exception ex)
             {
-                return new OperateResult<TResult>( ) { Message = StringResources.Language.DataTransformError + BasicFramework.SoftBasic.ByteToHexString( result.Content ) + $" : Length({result.Content.Length}) " + ex.Message };
+                return new OperateResult<TResult>() { Message = StringResources.Language.DataTransformError + BasicFramework.SoftBasic.ByteToHexString(result.Content) + $" : Length({result.Content.Length}) " + ex.Message };
             }
         }
 
@@ -44,12 +41,12 @@ namespace HslCommunication.Core
         /// <typeparam name="TResult">结果类型</typeparam>
         /// <param name="result">源结果</param>
         /// <returns>转换结果</returns>
-        public static OperateResult<TResult> GetResultFromArray<TResult>( OperateResult<TResult[]> result )
+        public static OperateResult<TResult> GetResultFromArray<TResult>(OperateResult<TResult[]> result)
         {
-            if (!result.IsSuccess) return OperateResult.CreateFailedResult<TResult>( result );
+            if (!result.IsSuccess) return OperateResult.CreateFailedResult<TResult>(result);
 
-            return OperateResult.CreateSuccessResult( result.Content[0] );
+            return OperateResult.CreateSuccessResult(result.Content[0]);
         }
-        
+
     }
 }

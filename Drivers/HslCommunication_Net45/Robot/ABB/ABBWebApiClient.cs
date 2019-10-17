@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Collections.Generic;
 #if !NET35
-using System.Net.Http;
 #endif
-using System.Text;
 using HslCommunication.Core.Net;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
@@ -29,7 +24,7 @@ namespace HslCommunication.Robot.ABB
         /// 使用指定的ip地址来初始化对象
         /// </summary>
         /// <param name="ipAddress">Ip地址信息</param>
-        public ABBWebApiClient( string ipAddress ) : base( ipAddress )
+        public ABBWebApiClient(string ipAddress) : base(ipAddress)
         {
         }
 
@@ -38,7 +33,7 @@ namespace HslCommunication.Robot.ABB
         /// </summary>
         /// <param name="ipAddress">Ip地址信息</param>
         /// <param name="port">端口号信息</param>
-        public ABBWebApiClient( string ipAddress, int port ) : base( ipAddress, port )
+        public ABBWebApiClient(string ipAddress, int port) : base(ipAddress, port)
         {
         }
 
@@ -49,7 +44,7 @@ namespace HslCommunication.Robot.ABB
         /// <param name="port">端口号信息</param>
         /// <param name="name">用户名</param>
         /// <param name="password">密码</param>
-        public ABBWebApiClient( string ipAddress, int port, string name, string password ) : base( ipAddress, port, name, password )
+        public ABBWebApiClient(string ipAddress, int port, string name, string password) : base(ipAddress, port, name, password)
         {
         }
 
@@ -62,59 +57,59 @@ namespace HslCommunication.Robot.ABB
         /// </summary>
         /// <param name="address">地址信息</param>
         /// <returns>带有额外信息的结果类对象</returns>
-        protected override OperateResult<string> ReadByAddress( string address )
+        protected override OperateResult<string> ReadByAddress(string address)
         {
-            if (address.ToUpper( ) == "ErrorState".ToUpper( ))
+            if (address.ToUpper() == "ErrorState".ToUpper())
             {
-                return GetErrorState( );
+                return GetErrorState();
             }
-            else if (address.ToUpper( ) == "jointtarget".ToUpper( ))
+            else if (address.ToUpper() == "jointtarget".ToUpper())
             {
-                return GetJointTarget( );
+                return GetJointTarget();
             }
-            else if (address.ToUpper( ) == "PhysicalJoints".ToUpper( ))
+            else if (address.ToUpper() == "PhysicalJoints".ToUpper())
             {
-                return GetJointTarget( );
+                return GetJointTarget();
             }
-            else if (address.ToUpper( ) == "SpeedRatio".ToUpper( ))
+            else if (address.ToUpper() == "SpeedRatio".ToUpper())
             {
-                return GetSpeedRatio( );
+                return GetSpeedRatio();
             }
-            else if (address.ToUpper( ) == "OperationMode".ToUpper( ))
+            else if (address.ToUpper() == "OperationMode".ToUpper())
             {
-                return GetOperationMode( );
+                return GetOperationMode();
             }
-            else if (address.ToUpper( ) == "CtrlState".ToUpper( ))
+            else if (address.ToUpper() == "CtrlState".ToUpper())
             {
-                return GetCtrlState( );
+                return GetCtrlState();
             }
-            else if (address.ToUpper( ) == "ioin".ToUpper( ))
+            else if (address.ToUpper() == "ioin".ToUpper())
             {
-                return GetIOIn( );
+                return GetIOIn();
             }
-            else if (address.ToUpper( ) == "ioout".ToUpper( ))
+            else if (address.ToUpper() == "ioout".ToUpper())
             {
-                return GetIOOut( );
+                return GetIOOut();
             }
-            else if (address.ToUpper( ) == "io2in".ToUpper( ))
+            else if (address.ToUpper() == "io2in".ToUpper())
             {
-                return GetIO2In( );
+                return GetIO2In();
             }
-            else if (address.ToUpper( ) == "io2out".ToUpper( ))
+            else if (address.ToUpper() == "io2out".ToUpper())
             {
-                return GetIO2Out( );
+                return GetIO2Out();
             }
-            else if (address.ToUpper( ).StartsWith( "log".ToUpper( ) ))
+            else if (address.ToUpper().StartsWith("log".ToUpper()))
             {
                 if (address.Length > 3)
                 {
-                    if(int.TryParse( address.Substring( 3 ) , out int length )) return GetLog( length );
+                    if (int.TryParse(address.Substring(3), out int length)) return GetLog(length);
                 }
-                return GetLog( );
+                return GetLog();
             }
             else
             {
-                return base.ReadByAddress( address );
+                return base.ReadByAddress(address);
             }
         }
 
@@ -122,9 +117,9 @@ namespace HslCommunication.Robot.ABB
         /// 获取当前支持的读取的地址列表
         /// </summary>
         /// <returns>数组信息</returns>
-        public static List<string> GetSelectStrings( )
+        public static List<string> GetSelectStrings()
         {
-            return new List<string>( )
+            return new List<string>()
             {
                 "ErrorState",
                 "jointtarget",
@@ -148,113 +143,113 @@ namespace HslCommunication.Robot.ABB
         /// 获取当前的控制状态，Content属性就是机器人的控制信息
         /// </summary>
         /// <returns>带有状态信息的结果类对象</returns>
-        public OperateResult<string> GetCtrlState( )
+        public OperateResult<string> GetCtrlState()
         {
-            OperateResult<string> read = ReadString( "url=/rw/panel/ctrlstate" );
+            OperateResult<string> read = ReadString("url=/rw/panel/ctrlstate");
             if (!read.IsSuccess) return read;
 
-            Match match = Regex.Match( read.Content, "<span class=\"ctrlstate\">[^<]+" );
-            if (!match.Success) return new OperateResult<string>( read.Content );
+            Match match = Regex.Match(read.Content, "<span class=\"ctrlstate\">[^<]+");
+            if (!match.Success) return new OperateResult<string>(read.Content);
 
-            return OperateResult.CreateSuccessResult( match.Value.Substring( 24 ) );
+            return OperateResult.CreateSuccessResult(match.Value.Substring(24));
         }
 
         /// <summary>
         /// 获取当前的错误状态，Content属性就是机器人的状态信息
         /// </summary>
         /// <returns>带有状态信息的结果类对象</returns>
-        public OperateResult<string> GetErrorState( )
+        public OperateResult<string> GetErrorState()
         {
-            OperateResult<string> read = ReadString( "url=/rw/motionsystem/errorstate" );
+            OperateResult<string> read = ReadString("url=/rw/motionsystem/errorstate");
             if (!read.IsSuccess) return read;
 
-            Match match = Regex.Match( read.Content, "<span class=\"err-state\">[^<]+" );
-            if (!match.Success) return new OperateResult<string>( read.Content );
+            Match match = Regex.Match(read.Content, "<span class=\"err-state\">[^<]+");
+            if (!match.Success) return new OperateResult<string>(read.Content);
 
-            return OperateResult.CreateSuccessResult( match.Value.Substring( 24 ) );
+            return OperateResult.CreateSuccessResult(match.Value.Substring(24));
         }
 
         /// <summary>
         /// 获取当前机器人的物理关节点信息，返回json格式的关节信息
         /// </summary>
         /// <returns>带有关节信息的结果类对象</returns>
-        public OperateResult<string> GetJointTarget( )
+        public OperateResult<string> GetJointTarget()
         {
-            OperateResult<string> read = ReadString( "url=/rw/motionsystem/mechunits/ROB_1/jointtarget" );
+            OperateResult<string> read = ReadString("url=/rw/motionsystem/mechunits/ROB_1/jointtarget");
             if (!read.IsSuccess) return read;
 
-            MatchCollection mc = Regex.Matches( read.Content, "<span class=\"rax[^<]*" );
-            if (mc.Count != 6) return new OperateResult<string>( read.Content );
+            MatchCollection mc = Regex.Matches(read.Content, "<span class=\"rax[^<]*");
+            if (mc.Count != 6) return new OperateResult<string>(read.Content);
 
             double[] joints = new double[6];
             for (int i = 0; i < mc.Count; i++)
             {
-                if(mc[i].Length > 17)
+                if (mc[i].Length > 17)
                 {
-                    joints[i] = double.Parse( mc[i].Value.Substring( 20 ) );
+                    joints[i] = double.Parse(mc[i].Value.Substring(20));
                 }
             }
-            return OperateResult.CreateSuccessResult( JArray.FromObject( joints ).ToString( Newtonsoft.Json.Formatting.None ) );
+            return OperateResult.CreateSuccessResult(JArray.FromObject(joints).ToString(Newtonsoft.Json.Formatting.None));
         }
 
         /// <summary>
         /// 获取当前机器人的速度配比信息
         /// </summary>
         /// <returns>带有速度信息的结果类对象</returns>
-        public OperateResult<string> GetSpeedRatio( )
+        public OperateResult<string> GetSpeedRatio()
         {
-            OperateResult<string> read = ReadString( "url=/rw/panel/speedratio" );
+            OperateResult<string> read = ReadString("url=/rw/panel/speedratio");
             if (!read.IsSuccess) return read;
 
-            Match match = Regex.Match( read.Content, "<span class=\"speedratio\">[^<]*" );
-            if (!match.Success) return new OperateResult<string>( read.Content );
+            Match match = Regex.Match(read.Content, "<span class=\"speedratio\">[^<]*");
+            if (!match.Success) return new OperateResult<string>(read.Content);
 
-            return OperateResult.CreateSuccessResult( match.Value.Substring( 25 ) );
+            return OperateResult.CreateSuccessResult(match.Value.Substring(25));
         }
 
         /// <summary>
         /// 获取当前机器人的工作模式
         /// </summary>
         /// <returns>带有工作模式信息的结果类对象</returns>
-        public OperateResult<string> GetOperationMode( )
+        public OperateResult<string> GetOperationMode()
         {
-            OperateResult<string> read = ReadString( "url=/rw/panel/opmode" );
+            OperateResult<string> read = ReadString("url=/rw/panel/opmode");
             if (!read.IsSuccess) return read;
 
-            Match match = Regex.Match( read.Content, "<span class=\"opmode\">[^<]*" );
-            if (!match.Success) return new OperateResult<string>( read.Content );
+            Match match = Regex.Match(read.Content, "<span class=\"opmode\">[^<]*");
+            if (!match.Success) return new OperateResult<string>(read.Content);
 
-            return OperateResult.CreateSuccessResult( match.Value.Substring( 21 ) );
+            return OperateResult.CreateSuccessResult(match.Value.Substring(21));
         }
 
         /// <summary>
         /// 获取当前机器人的本机的输入IO
         /// </summary>
         /// <returns>带有IO信息的结果类对象</returns>
-        public OperateResult<string> GetIOIn( )
+        public OperateResult<string> GetIOIn()
         {
-            OperateResult<string> read = ReadString( "url=/rw/iosystem/devices/D652_10" );
+            OperateResult<string> read = ReadString("url=/rw/iosystem/devices/D652_10");
             if (!read.IsSuccess) return read;
 
-            Match match = Regex.Match( read.Content, "<span class=\"indata\">[^<]*" );
-            if (!match.Success) return new OperateResult<string>( read.Content );
+            Match match = Regex.Match(read.Content, "<span class=\"indata\">[^<]*");
+            if (!match.Success) return new OperateResult<string>(read.Content);
 
-            return OperateResult.CreateSuccessResult( match.Value.Substring( 21 ) );
+            return OperateResult.CreateSuccessResult(match.Value.Substring(21));
         }
 
         /// <summary>
         /// 获取当前机器人的本机的输出IO
         /// </summary>
         /// <returns>带有IO信息的结果类对象</returns>
-        public OperateResult<string> GetIOOut( )
+        public OperateResult<string> GetIOOut()
         {
-            OperateResult<string> read = ReadString( "url=/rw/iosystem/devices/D652_10" );
+            OperateResult<string> read = ReadString("url=/rw/iosystem/devices/D652_10");
             if (!read.IsSuccess) return read;
 
-            Match match = Regex.Match( read.Content, "<span class=\"outdata\">[^<]*" );
-            if (!match.Success) return new OperateResult<string>( read.Content );
+            Match match = Regex.Match(read.Content, "<span class=\"outdata\">[^<]*");
+            if (!match.Success) return new OperateResult<string>(read.Content);
 
-            return OperateResult.CreateSuccessResult( match.Value.Substring( 22 ) );
+            return OperateResult.CreateSuccessResult(match.Value.Substring(22));
         }
 
 
@@ -262,30 +257,30 @@ namespace HslCommunication.Robot.ABB
         /// 获取当前机器人的本机的输入IO
         /// </summary>
         /// <returns>带有IO信息的结果类对象</returns>
-        public OperateResult<string> GetIO2In( )
+        public OperateResult<string> GetIO2In()
         {
-            OperateResult<string> read = ReadString( "url=/rw/iosystem/devices/BK5250" );
+            OperateResult<string> read = ReadString("url=/rw/iosystem/devices/BK5250");
             if (!read.IsSuccess) return read;
 
-            Match match = Regex.Match( read.Content, "<span class=\"indata\">[^<]*" );
-            if (!match.Success) return new OperateResult<string>( read.Content );
+            Match match = Regex.Match(read.Content, "<span class=\"indata\">[^<]*");
+            if (!match.Success) return new OperateResult<string>(read.Content);
 
-            return OperateResult.CreateSuccessResult( match.Value.Substring( 21 ) );
+            return OperateResult.CreateSuccessResult(match.Value.Substring(21));
         }
 
         /// <summary>
         /// 获取当前机器人的本机的输出IO
         /// </summary>
         /// <returns>带有IO信息的结果类对象</returns>
-        public OperateResult<string> GetIO2Out( )
+        public OperateResult<string> GetIO2Out()
         {
-            OperateResult<string> read = ReadString( "url=/rw/iosystem/devices/BK5250" );
+            OperateResult<string> read = ReadString("url=/rw/iosystem/devices/BK5250");
             if (!read.IsSuccess) return read;
 
-            Match match = Regex.Match( read.Content, "<span class=\"outdata\">[^<]*" );
-            if (!match.Success) return new OperateResult<string>( read.Content );
+            Match match = Regex.Match(read.Content, "<span class=\"outdata\">[^<]*");
+            if (!match.Success) return new OperateResult<string>(read.Content);
 
-            return OperateResult.CreateSuccessResult( match.Value.Substring( 22 ) );
+            return OperateResult.CreateSuccessResult(match.Value.Substring(22));
         }
 
         /// <summary>
@@ -293,30 +288,30 @@ namespace HslCommunication.Robot.ABB
         /// </summary>
         /// <param name="logCount">读取的最大的日志总数</param>
         /// <returns>带有IO信息的结果类对象</returns>
-        public OperateResult<string> GetLog( int logCount = 10 )
+        public OperateResult<string> GetLog(int logCount = 10)
         {
-            OperateResult<string> read = ReadString( "url=/rw/elog/0?lang=zh&amp;resource=title" );
+            OperateResult<string> read = ReadString("url=/rw/elog/0?lang=zh&amp;resource=title");
             if (!read.IsSuccess) return read;
 
-            MatchCollection matchs = Regex.Matches( read.Content, "<li class=\"elog-message-li\" title=\"/rw/elog/0/[0-9]+\">[\\S\\s]+?</li>" );
-            JArray jArray = new JArray( );
+            MatchCollection matchs = Regex.Matches(read.Content, "<li class=\"elog-message-li\" title=\"/rw/elog/0/[0-9]+\">[\\S\\s]+?</li>");
+            JArray jArray = new JArray();
 
             for (int i = 0; i < matchs.Count; i++)
             {
                 if (i >= logCount) break;
 
-                Match id = Regex.Match( matchs[i].Value, "[0-9]+\"" );
-                JObject json = new JObject( );
-                json["id"] = id.Value.TrimEnd( '"' );
+                Match id = Regex.Match(matchs[i].Value, "[0-9]+\"");
+                JObject json = new JObject();
+                json["id"] = id.Value.TrimEnd('"');
 
-                foreach (var item in XElement.Parse( matchs[i].Value ).Elements( "span" ))
+                foreach (var item in XElement.Parse(matchs[i].Value).Elements("span"))
                 {
-                    json[item.Attribute( "class" ).Value] = item.Value;
+                    json[item.Attribute("class").Value] = item.Value;
                 }
-                jArray.Add( json );
+                jArray.Add(json);
             }
 
-            return OperateResult.CreateSuccessResult( jArray.ToString( ) );
+            return OperateResult.CreateSuccessResult(jArray.ToString());
         }
 
         #endregion
@@ -327,7 +322,7 @@ namespace HslCommunication.Robot.ABB
         /// 返回表示当前对象的字符串
         /// </summary>
         /// <returns>字符串</returns>
-        public override string ToString( )
+        public override string ToString()
         {
             return $"ABBWebApiClient[{IpAddress}:{Port}]";
         }

@@ -1,4 +1,5 @@
-﻿using AdvancedScada.DriverBase.Devices;
+﻿using AdvancedScada.DriverBase;
+using AdvancedScada.DriverBase.Devices;
 using Opc;
 using Opc.Da;
 using System;
@@ -10,7 +11,7 @@ using Server = Opc.Da.Server;
 
 namespace AdvancedScada.OPC.Core.Drivers
 {
-    public class OpcDaCom : IDisposable
+    public class OpcDaCom : IDriverAdapter, IDisposable
     {
         private static readonly object mutex = new object();
         private static OpcDaCom _instance;
@@ -38,10 +39,9 @@ namespace AdvancedScada.OPC.Core.Drivers
         //* Create the Data Link Layer Instances
         //* if the IP Address is the same, then resuse a common instance
         //***************************************************************
-        public void CreateDLLInstance()
+        public bool Connection()
         {
-            var stopwatch = Stopwatch.StartNew();
-
+          
             try
             {
                 if (DLL == null)
@@ -62,22 +62,20 @@ namespace AdvancedScada.OPC.Core.Drivers
                     }
                     IsConnected = true;
 
-                    stopwatch.Stop();
+                    
 
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                EventscadaException?.Invoke(this.GetType().Name,
-                    $"Could Not Connect to Server : {ex.Message}Time{stopwatch.ElapsedTicks}");
-
+                EventscadaException?.Invoke(this.GetType().Name, "ConnectedFailed");
                 IsConnected = false;
             }
-
+            return IsConnected;
         }
 
-        public void Disconnection()
+        public bool Disconnection()
         {
 
             try
@@ -101,14 +99,15 @@ namespace AdvancedScada.OPC.Core.Drivers
 
 
             }
-            catch (TimeoutException ex)
+            catch (Exception ex)
             {
 
 
-                EventscadaException?.Invoke(this.GetType().Name, $"Could Not Connect to Server : {ex.Message}");
+                EventscadaException?.Invoke(this.GetType().Name, "ConnectedFailed");
 
                 throw ex;
             }
+            return IsConnected;
         }
 
 
@@ -126,12 +125,7 @@ namespace AdvancedScada.OPC.Core.Drivers
         #endregion
 
         #region Properties
-        public bool IsConnected
-        {
-            get => _IsConnected;
-
-            set => _IsConnected = value;
-        }
+        public bool IsConnected { get; set; } = false;
         private string m_OPCServerPath = "opcda://localhost";
         public string OPCServerPath
         {
@@ -195,7 +189,7 @@ namespace AdvancedScada.OPC.Core.Drivers
         #region Read/Write Interface to Driver
         public int BeginRead(string startAddress, int numberOfElements)
         {
-            if (DLL == null) CreateDLLInstance();
+            if (DLL == null) Connection();
 
             //*********************************************************************
             //* If Async Mode, then return immediately and return value on event
@@ -249,7 +243,7 @@ namespace AdvancedScada.OPC.Core.Drivers
 
 
 
-                if (DLL == null) CreateDLLInstance();
+                if (DLL == null) Connection();
 
 
                 SubscribedItems = new Item[db.Tags.Count];
@@ -329,7 +323,7 @@ namespace AdvancedScada.OPC.Core.Drivers
 
         public int Write(string startAddress, int numberOfElements, string[] dataToWrite)
         {
-            if (DLL == null) CreateDLLInstance();
+            if (DLL == null) Connection();
 
             var items = new Item[1];
             items[0] = new Item();
@@ -390,13 +384,28 @@ namespace AdvancedScada.OPC.Core.Drivers
 
 
             }
-            catch (TimeoutException ex)
+            catch (Exception)
             {
 
 
-                EventscadaException?.Invoke(this.GetType().Name, $"Could Not Connect to Server : {ex.Message}");
+                EventscadaException?.Invoke(this.GetType().Name, "ConnectedFailed");
 
             }
+        }
+
+        public TValue[] Read<TValue>(string address, ushort length)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool[] ReadSingle(string address, ushort length)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Write(string address, dynamic value)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

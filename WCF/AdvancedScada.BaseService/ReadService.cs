@@ -84,8 +84,8 @@ namespace AdvancedScada.BaseService
                         catch (Exception ex)
                         {
                             if (ex.InnerException == null)
-                              
-                            EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+
+                                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
                         }
                         finally
                         {
