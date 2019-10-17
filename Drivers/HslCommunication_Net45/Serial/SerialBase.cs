@@ -21,7 +21,7 @@ namespace HslCommunication.Serial
         /// </summary>
         public SerialBase( )
         {
-            SP_ReadData = new SerialPort( );
+            sP_ReadData = new SerialPort( );
             hybirdLock = new SimpleHybirdLock( );
         }
 
@@ -58,17 +58,17 @@ namespace HslCommunication.Serial
         /// <param name="parity">奇偶校验</param>
         public void SerialPortInni( string portName, int baudRate, int dataBits, StopBits stopBits, Parity parity )
         {
-            if (SP_ReadData.IsOpen)
+            if (sP_ReadData.IsOpen)
             {
                 return;
             }
-            SP_ReadData.PortName     = portName;    // 串口
-            SP_ReadData.BaudRate     = baudRate;    // 波特率
-            SP_ReadData.DataBits     = dataBits;    // 数据位
-            SP_ReadData.StopBits     = stopBits;    // 停止位
-            SP_ReadData.Parity       = parity;      // 奇偶校验
-            PortName                 = SP_ReadData.PortName;
-            BaudRate                 = SP_ReadData.BaudRate;
+            sP_ReadData.PortName     = portName;    // 串口
+            sP_ReadData.BaudRate     = baudRate;    // 波特率
+            sP_ReadData.DataBits     = dataBits;    // 数据位
+            sP_ReadData.StopBits     = stopBits;    // 停止位
+            sP_ReadData.Parity       = parity;      // 奇偶校验
+            PortName                 = sP_ReadData.PortName;
+            BaudRate                 = sP_ReadData.BaudRate;
         }
 
         /// <summary>
@@ -77,20 +77,20 @@ namespace HslCommunication.Serial
         /// <param name="initi">初始化的委托方法</param>
         public void SerialPortInni( Action<SerialPort> initi )
         {
-            if (SP_ReadData.IsOpen)
+            if (sP_ReadData.IsOpen)
             {
                 return;
             }
-            SP_ReadData.PortName      = "COM5";
-            SP_ReadData.BaudRate      = 9600;
-            SP_ReadData.DataBits      = 8;
-            SP_ReadData.StopBits      = StopBits.One;
-            SP_ReadData.Parity        = Parity.None;
+            sP_ReadData.PortName      = "COM5";
+            sP_ReadData.BaudRate      = 9600;
+            sP_ReadData.DataBits      = 8;
+            sP_ReadData.StopBits      = StopBits.One;
+            sP_ReadData.Parity        = Parity.None;
 
-            initi.Invoke( SP_ReadData );
+            initi.Invoke( sP_ReadData );
 
-            PortName                  = SP_ReadData.PortName;
-            BaudRate                  = SP_ReadData.BaudRate;
+            PortName                  = sP_ReadData.PortName;
+            BaudRate                  = sP_ReadData.BaudRate;
         }
 
         /// <summary>
@@ -98,9 +98,9 @@ namespace HslCommunication.Serial
         /// </summary>
         public void Open( )
         {
-            if (!SP_ReadData.IsOpen)
+            if (!sP_ReadData.IsOpen)
             {
-                SP_ReadData.Open( );
+                sP_ReadData.Open( );
                 InitializationOnOpen( );
             }
         }
@@ -111,7 +111,7 @@ namespace HslCommunication.Serial
         /// <returns>是或否</returns>
         public bool IsOpen( )
         {
-            return SP_ReadData.IsOpen;
+            return sP_ReadData.IsOpen;
         }
 
         /// <summary>
@@ -119,10 +119,10 @@ namespace HslCommunication.Serial
         /// </summary>
         public void Close( )
         {
-            if(SP_ReadData.IsOpen)
+            if(sP_ReadData.IsOpen)
             {
                 ExtraOnClose( );
-                SP_ReadData.Close( );
+                sP_ReadData.Close( );
             }
         }
 
@@ -137,14 +137,14 @@ namespace HslCommunication.Serial
 
             if (IsClearCacheBeforeRead) ClearSerialCache( );
 
-            OperateResult sendResult = SPSend( SP_ReadData, send );
+            OperateResult sendResult = SPSend( sP_ReadData, send );
             if (!sendResult.IsSuccess)
             {
                 hybirdLock.Leave( );
                 return OperateResult.CreateFailedResult<byte[]>( sendResult );
             }
 
-            OperateResult<byte[]> receiveResult = SPReceived( SP_ReadData, true );
+            OperateResult<byte[]> receiveResult = SPReceived( sP_ReadData, true );
             hybirdLock.Leave( );
 
             return receiveResult;
@@ -156,7 +156,7 @@ namespace HslCommunication.Serial
         /// <returns>是否操作成功的方法</returns>
         public OperateResult<byte[]> ClearSerialCache( )
         {
-            return SPReceived( SP_ReadData, false );
+            return SPReceived( sP_ReadData, false );
         }
 
         #endregion
@@ -350,7 +350,7 @@ namespace HslCommunication.Serial
                 {
                     // TODO: 释放托管状态(托管对象)。
                     hybirdLock?.Dispose( );
-                    SP_ReadData?.Dispose( );
+                    sP_ReadData?.Dispose( );
                 }
 
                 // TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
@@ -382,7 +382,10 @@ namespace HslCommunication.Serial
 
         #region Private Member
 
-        private SerialPort SP_ReadData = null;                    // 串口交互的核心
+        /// <summary>
+        /// 串口交互的核心
+        /// </summary>
+        protected SerialPort sP_ReadData = null;                  // 串口交互的核心
         private SimpleHybirdLock hybirdLock;                      // 数据交互的锁
         private ILogNet logNet;                                   // 日志存储
         private int receiveTimeout = 5000;                        // 接收数据的超时时间

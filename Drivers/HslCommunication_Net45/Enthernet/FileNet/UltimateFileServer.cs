@@ -11,6 +11,7 @@ using System.Drawing;
 using HslCommunication.BasicFramework;
 using HslCommunication.LogNet;
 using HslCommunication.Core;
+using System.Runtime.InteropServices;
 
 namespace HslCommunication.Enthernet
 {
@@ -87,23 +88,28 @@ namespace HslCommunication.Enthernet
         /// </summary>
         /// <param name="socket">套接字</param>
         /// <param name="savename">保存的文件名</param>
+        /// <param name="fileInfo">文件的基本信息</param>
         /// <returns>是否成功的结果对象</returns>
         private OperateResult ReceiveFileFromSocketAndUpdateGroup(
             Socket socket,
-            string savename
+            string savename,
+            out FileBaseInfo fileInfo
             )
         {
             FileInfo info = new FileInfo( savename );
             string guidName = CreateRandomFileName( );
-            string fileName = info.DirectoryName + "\\" + guidName;
+
+            string fileName = Path.Combine( info.DirectoryName, guidName );
 
             OperateResult<FileBaseInfo> receive = ReceiveFileFromSocket( socket, fileName, null );
             if(!receive.IsSuccess)
             {
                 DeleteFileByName( fileName );
+                fileInfo = null;
                 return receive;
             }
 
+            fileInfo = receive.Content;
             // 更新操作
             GroupFileContainer fileManagment = GetGroupFromFilePath( info.DirectoryName );
             string oldName = fileManagment.UpdateFileMappingName(
@@ -122,9 +128,9 @@ namespace HslCommunication.Enthernet
             return SendStringAndCheckReceive( socket, 1, StringResources.Language.SuccessText );
         }
 
-        #endregion
+#endregion
 
-        #region Private Method
+#region Private Method
 
         /// <summary>
         /// 根据文件的显示名称转化为真实存储的名称
@@ -150,7 +156,7 @@ namespace HslCommunication.Enthernet
         {
             if (!string.IsNullOrEmpty( fileName ))
             {
-                string fileUltimatePath = path + "\\" + fileName;
+                string fileUltimatePath = Path.Combine( path, fileName );
                 FileMarkId fileMarkId = GetFileMarksFromDictionaryWithFileName( fileName );
 
                 fileMarkId.AddOperation( ( ) =>
@@ -163,9 +169,9 @@ namespace HslCommunication.Enthernet
             }
         }
 
-        #endregion
+#endregion
 
-        #region Protect Override
+#region Protect Override
 
         /// <summary>
         /// 当接收到了新的请求的时候执行的操作
@@ -241,9 +247,18 @@ namespace HslCommunication.Enthernet
                 // 接收文件并回发消息
                 if (ReceiveFileFromSocketAndUpdateGroup(
                     socket,                    // 网络套接字
-                    fullFileName ).IsSuccess)
+                    fullFileName,
+                    out FileBaseInfo fileBaseInfo).IsSuccess)
                 {
                     socket?.Close( );
+                    OnFileUpload( new FileServerInfo( )
+                    {
+                        ActualFileFullName = fullFileName,
+                        Name = fileBaseInfo.Name,
+                        Size = fileBaseInfo.Size,
+                        Tag = fileBaseInfo.Tag,
+                        Upload = fileBaseInfo.Upload
+                    } );
                     LogNet?.WriteInfo( ToString( ), StringResources.Language.FileUploadSuccess + ":" + relativeName );
                 }
                 else
@@ -310,9 +325,9 @@ namespace HslCommunication.Enthernet
             }
         }
 
-        #endregion
+#endregion
 
-        #region Object Override
+#region Object Override
 
         /// <summary>
         /// 获取本对象的字符串表示形式
@@ -320,9 +335,9 @@ namespace HslCommunication.Enthernet
         /// <returns>字符串对象</returns>
         public override string ToString( )
         {
-            return "UltimateFileServer";
+            return $"UltimateFileServer[{Port}]";
         }
 
-        #endregion
+#endregion
     }
 }

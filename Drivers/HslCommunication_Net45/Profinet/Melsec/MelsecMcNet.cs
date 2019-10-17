@@ -353,7 +353,7 @@ namespace HslCommunication.Profinet.Melsec
 
             // 错误代码验证
             ushort errorCode = BitConverter.ToUInt16( read.Content, 9 );
-            if (errorCode != 0) return new OperateResult<byte[]>( errorCode, StringResources.Language.MelsecPleaseReferToManulDocument );
+            if (errorCode != 0) return new OperateResult<byte[]>( errorCode, MelsecHelper.GetErrorDescription( errorCode ) );
 
             // 数据解析，需要传入是否使用位的参数
             return ExtractActualData( SoftBasic.BytesArrayRemoveBegin( read.Content, 11 ), false );
@@ -390,11 +390,112 @@ namespace HslCommunication.Profinet.Melsec
             if (!read.IsSuccess) return read;
 
             // 错误码校验
-            ushort ErrorCode = BitConverter.ToUInt16( read.Content, 9 );
-            if (ErrorCode != 0) return new OperateResult<byte[]>( ErrorCode, StringResources.Language.MelsecPleaseReferToManulDocument );
+            ushort errorCode = BitConverter.ToUInt16( read.Content, 9 );
+            if (errorCode != 0) return new OperateResult<byte[]>( errorCode, MelsecHelper.GetErrorDescription( errorCode ) );
 
             // 成功
             return OperateResult.CreateSuccessResult( );
+        }
+
+        #endregion
+
+        #region Read Random
+
+        /// <summary>
+        /// 随机读取PLC的数据信息，可以跨地址，跨类型组合，但是每个地址只能读取一个word，也就是2个字节的内容。收到结果后，需要自行解析数据
+        /// </summary>
+        /// <param name="address">所有的地址的集合</param>
+        /// <remarks>
+        /// 访问安装有 Q 系列 C24/E71 的站 QCPU 上位站 经由 Q 系列兼容网络系统 MELSECNET/H MELSECNET/10 Ethernet 的 QCPU 其他站 时
+        /// 访问点数········1≦ 字访问点数 双字访问点数 ≦192
+        /// 
+        /// 访问 QnACPU 其他站 经由 QnA 系列兼容网络系统 MELSECNET/10 Ethernet 的 Q/QnACPU 其他站 时访问点数········1≦ 字访问点数 双字访问点数 ≦96
+        /// 
+        /// 访问上述以外的 PLC CPU 其他站 时访问点数········1≦字访问点数≦10
+        /// </remarks>
+        /// <returns>结果</returns>
+        public OperateResult<byte[]> ReadRandom( string[] address )
+        {
+            McAddressData[] mcAddressDatas = new McAddressData[address.Length];
+            for (int i = 0; i < address.Length; i++)
+            {
+                OperateResult<McAddressData> addressResult = McAddressData.ParseMelsecFrom( address[i], 1 );
+                if (!addressResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( addressResult );
+
+                mcAddressDatas[i] = addressResult.Content;
+            }
+
+            byte[] coreResult = MelsecHelper.BuildReadRandomWordCommand( mcAddressDatas );
+
+            // 核心交互
+            var read = ReadFromCoreServer( PackMcCommand( coreResult, this.NetworkNumber, this.NetworkStationNumber ) );
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( read );
+
+            // 错误代码验证
+            ushort errorCode = BitConverter.ToUInt16( read.Content, 9 );
+            if (errorCode != 0) return new OperateResult<byte[]>( errorCode, MelsecHelper.GetErrorDescription( errorCode ) );
+
+            // 数据解析，需要传入是否使用位的参数
+            return ExtractActualData( SoftBasic.BytesArrayRemoveBegin( read.Content, 11 ), false );
+        }
+
+
+        /// <summary>
+        /// 随机读取PLC的数据信息，可以跨地址，跨类型组合，每个地址是任意的长度。收到结果后，需要自行解析数据
+        /// </summary>
+        /// <param name="address">所有的地址的集合</param>
+        /// <param name="length">每个地址的长度信息</param>
+        /// <remarks>
+        /// 1 块数按照下列要求指定 120 ≧ 字软元件块数 + 位软元件块数
+        /// 2 各软元件点数按照下列要求指定 960 ≧ 字软元件各块的合计点数 + 位软元件各块的合计点数
+        /// </remarks>
+        /// <returns>结果</returns>
+        public OperateResult<byte[]> ReadRandom( string[] address, ushort[] length )
+        {
+            if (length.Length != address.Length) return new OperateResult<byte[]>( StringResources.Language.TwoParametersLengthIsNotSame );
+
+            McAddressData[] mcAddressDatas = new McAddressData[address.Length];
+            for (int i = 0; i < address.Length; i++)
+            {
+                OperateResult<McAddressData> addressResult = McAddressData.ParseMelsecFrom( address[i], length[i] );
+                if (!addressResult.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( addressResult );
+
+                mcAddressDatas[i] = addressResult.Content;
+            }
+
+            byte[] coreResult = MelsecHelper.BuildReadRandomCommand( mcAddressDatas );
+
+            // 核心交互
+            var read = ReadFromCoreServer( PackMcCommand( coreResult, this.NetworkNumber, this.NetworkStationNumber ) );
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<byte[]>( read );
+
+            // 错误代码验证
+            ushort errorCode = BitConverter.ToUInt16( read.Content, 9 );
+            if (errorCode != 0) return new OperateResult<byte[]>( errorCode, MelsecHelper.GetErrorDescription( errorCode ) );
+
+            // 数据解析，需要传入是否使用位的参数
+            return ExtractActualData( SoftBasic.BytesArrayRemoveBegin( read.Content, 11 ), false );
+        }
+
+        /// <summary>
+        /// 随机读取PLC的数据信息，可以跨地址，跨类型组合，但是每个地址只能读取一个word，也就是2个字节的内容。收到结果后，自动转换为了short类型的数组
+        /// </summary>
+        /// <param name="address">所有的地址的集合</param>
+        /// <remarks>
+        /// 访问安装有 Q 系列 C24/E71 的站 QCPU 上位站 经由 Q 系列兼容网络系统 MELSECNET/H MELSECNET/10 Ethernet 的 QCPU 其他站 时
+        /// 访问点数········1≦ 字访问点数 双字访问点数 ≦192
+        /// 
+        /// 访问 QnACPU 其他站 经由 QnA 系列兼容网络系统 MELSECNET/10 Ethernet 的 Q/QnACPU 其他站 时访问点数········1≦ 字访问点数 双字访问点数 ≦96
+        /// 
+        /// 访问上述以外的 PLC CPU 其他站 时访问点数········1≦字访问点数≦10
+        /// </remarks>
+        /// <returns>结果</returns>
+        public OperateResult<short[]> ReadRandomInt16( string[] address )
+        {
+            OperateResult<byte[]> read = ReadRandom( address );
+            if (!read.IsSuccess) return OperateResult.CreateFailedResult<short[]>( read );
+
+            return OperateResult.CreateSuccessResult( ByteTransform.TransInt16( read.Content, 0, address.Length ) );
         }
 
         #endregion
@@ -428,7 +529,7 @@ namespace HslCommunication.Profinet.Melsec
 
             // 错误代码验证
             ushort errorCode = BitConverter.ToUInt16( read.Content, 9 );
-            if (errorCode != 0) return new OperateResult<bool[]>( errorCode, StringResources.Language.MelsecPleaseReferToManulDocument );
+            if (errorCode != 0) return new OperateResult<bool[]>( errorCode, MelsecHelper.GetErrorDescription( errorCode ) );
 
             // 数据解析，需要传入是否使用位的参数
             var extract = ExtractActualData( SoftBasic.BytesArrayRemoveBegin( read.Content, 11 ), true );
@@ -460,8 +561,8 @@ namespace HslCommunication.Profinet.Melsec
             if (!read.IsSuccess) return read;
 
             // 错误码校验
-            ushort ErrorCode = BitConverter.ToUInt16( read.Content, 9 );
-            if (ErrorCode != 0) return new OperateResult<byte[]>( ErrorCode, StringResources.Language.MelsecPleaseReferToManulDocument );
+            ushort errorCode = BitConverter.ToUInt16( read.Content, 9 );
+            if (errorCode != 0) return new OperateResult<byte[]>( errorCode, MelsecHelper.GetErrorDescription( errorCode ) );
 
             // 成功
             return OperateResult.CreateSuccessResult( );
@@ -482,8 +583,8 @@ namespace HslCommunication.Profinet.Melsec
             if (!read.IsSuccess) return read;
 
             // 错误码校验
-            ushort ErrorCode = BitConverter.ToUInt16( read.Content, 9 );
-            if (ErrorCode != 0) return new OperateResult( ErrorCode, StringResources.Language.MelsecPleaseReferToManulDocument );
+            ushort errorCode = BitConverter.ToUInt16( read.Content, 9 );
+            if (errorCode != 0) return new OperateResult( errorCode, MelsecHelper.GetErrorDescription( errorCode ) );
 
             // 成功
             return OperateResult.CreateSuccessResult( );
@@ -500,8 +601,8 @@ namespace HslCommunication.Profinet.Melsec
             if (!read.IsSuccess) return read;
 
             // 错误码校验
-            ushort ErrorCode = BitConverter.ToUInt16( read.Content, 9 );
-            if (ErrorCode != 0) return new OperateResult( ErrorCode, StringResources.Language.MelsecPleaseReferToManulDocument );
+            ushort errorCode = BitConverter.ToUInt16( read.Content, 9 );
+            if (errorCode != 0) return new OperateResult( errorCode, MelsecHelper.GetErrorDescription( errorCode ) );
 
             // 成功
             return OperateResult.CreateSuccessResult( );
@@ -518,8 +619,8 @@ namespace HslCommunication.Profinet.Melsec
             if (!read.IsSuccess) return read;
 
             // 错误码校验
-            ushort ErrorCode = BitConverter.ToUInt16( read.Content, 9 );
-            if (ErrorCode != 0) return new OperateResult( ErrorCode, StringResources.Language.MelsecPleaseReferToManulDocument );
+            ushort errorCode = BitConverter.ToUInt16( read.Content, 9 );
+            if (errorCode != 0) return new OperateResult( errorCode, MelsecHelper.GetErrorDescription( errorCode ) );
 
             // 成功
             return OperateResult.CreateSuccessResult( );
@@ -536,11 +637,29 @@ namespace HslCommunication.Profinet.Melsec
             if (!read.IsSuccess) return OperateResult.CreateFailedResult<string>( read );
 
             // 错误码校验
-            ushort ErrorCode = BitConverter.ToUInt16( read.Content, 9 );
-            if (ErrorCode != 0) return new OperateResult<string>( ErrorCode, StringResources.Language.MelsecPleaseReferToManulDocument );
+            ushort errorCode = BitConverter.ToUInt16( read.Content, 9 );
+            if (errorCode != 0) return new OperateResult<string>( errorCode, MelsecHelper.GetErrorDescription( errorCode ) );
 
             // 成功
             return OperateResult.CreateSuccessResult( Encoding.ASCII.GetString( read.Content, 11, 16 ).TrimEnd( ) );
+        }
+
+        /// <summary>
+        /// LED 熄灭 出错代码初始化
+        /// </summary>
+        /// <returns>是否成功</returns>
+        public OperateResult ErrorStateReset( )
+        {
+            // 核心交互
+            OperateResult<byte[]> read = ReadFromCoreServer( PackMcCommand( new byte[] { 0x17, 0x16, 0x00, 0x00 }, NetworkNumber, NetworkStationNumber ) );
+            if (!read.IsSuccess) return read;
+
+            // 错误码校验
+            ushort errorCode = BitConverter.ToUInt16( read.Content, 9 );
+            if (errorCode != 0) return new OperateResult( errorCode, MelsecHelper.GetErrorDescription( errorCode ) );
+
+            // 成功
+            return OperateResult.CreateSuccessResult( );
         }
 
         #endregion

@@ -69,7 +69,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPC.Core", "Drivers\PLC\Adv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Siemens.Core", "Drivers\PLC\AdvancedScada.Siemens.Core\Siemens.Core.csproj", "{87B7AF78-072C-4F18-9265-876A7466FA54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HslCommunication", "Drivers\HslCommunication_Net45\HslCommunication.csproj", "{7F8029DA-1B94-4B1D-B91F-5B21DBF2F3A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HslCommunication_Net45", "Drivers\HslCommunication_Net45\HslCommunication_Net45.csproj", "{7F8029DA-1B94-4B1D-B91F-5B21DBF2F3A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

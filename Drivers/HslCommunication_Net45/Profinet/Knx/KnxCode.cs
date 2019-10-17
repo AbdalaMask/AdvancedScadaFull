@@ -8,29 +8,58 @@ namespace HslCommunication.Profinet.Knx
 {
     public class KnxCode
     {
-        public delegate void Return_data( byte[] data );
+        /// <summary>
+        /// 返回数据的委托
+        /// </summary>
+        /// <param name="data"></param>
+        public delegate void ReturnData( byte[] data );
+
         /// <summary>
         /// 返回需要写入KNX总线的应答报文（应答数据）
         /// </summary>
-        public event Return_data Return_data_msg;
+        public event ReturnData Return_data_msg;
+
         /// <summary>
         /// 返回需要写入的KNX系统的报文（写入数据）
         /// </summary>
-        public event Return_data Set_knx_data;
+        public event ReturnData Set_knx_data;
+
+        /// <summary>
+        /// 获取数据的委托
+        /// </summary>
+        /// <param name="addr"></param>
+        /// <param name="len"></param>
+        /// <param name="data"></param>
         public delegate void GetData( short addr, byte len, byte[] data );
+
         /// <summary>
         /// 返回从knx系统得到的数据
         /// </summary>
         public event GetData GetData_msg;
-        public byte Sequence_Counter { get; set; }
+
+        /// <summary>
+        /// 序号计数
+        /// </summary>
+        public byte SequenceCounter { get; set; }
+
+        /// <summary>
+        /// 通道
+        /// </summary>
         public byte Channel { get; set; }
+
+        /// <summary>
+        /// 连接状态
+        /// </summary>
+        public bool IsConnect { get; private set; }
+
+        private bool is_fresh = false;
+
         /// <summary>
         /// 关闭KNX连接
         /// </summary>
         /// <param name="channel">通道号</param>
         /// <param name="IP_PROT">本机IP</param>
         /// <returns></returns>
-        private bool is_fresh = false;
         public byte[] Disconnect_knx( byte channel, IPEndPoint IP_PROT )
         {
             var IP = IP_PROT.Address.GetAddressBytes( );
@@ -119,17 +148,17 @@ namespace HslCommunication.Profinet.Knx
             Byte[] addr_base = BitConverter.GetBytes( addr );
             byte[] out_buff = new byte[(20 + len)];
             byte[] out_buff_len = BitConverter.GetBytes( out_buff.Length );
-            if (this.Sequence_Counter + 1 <= 255)
+            if (this.SequenceCounter + 1 <= 255)
             {
                 if (this.is_fresh != false)
-                    ++this.Sequence_Counter;
+                    ++this.SequenceCounter;
                 else
                     this.is_fresh = true;
 
             }
             else
             {
-                this.Sequence_Counter = 0;
+                this.SequenceCounter = 0;
             }
             out_buff[0] = 0x06;
             out_buff[1] = 0x10;
@@ -139,7 +168,7 @@ namespace HslCommunication.Profinet.Knx
             out_buff[5] = out_buff_len[0];
             out_buff[6] = 0x04;
             out_buff[7] = this.Channel;
-            out_buff[8] = this.Sequence_Counter;
+            out_buff[8] = this.SequenceCounter;
             out_buff[9] = 0x00;
             out_buff[10] = 0x11;
             out_buff[11] = 0x00;
@@ -179,16 +208,16 @@ namespace HslCommunication.Profinet.Knx
             Byte[] addr_base = BitConverter.GetBytes( addr );
             byte[] out_buff = new byte[21];
             byte[] out_buff_len = BitConverter.GetBytes( out_buff.Length );
-            if (this.Sequence_Counter + 1 <= 255)
+            if (this.SequenceCounter + 1 <= 255)
             {
                 if (this.is_fresh != false)
-                    ++this.Sequence_Counter;
+                    ++this.SequenceCounter;
                 else
                     this.is_fresh = true;
             }
             else
             {
-                this.Sequence_Counter = 0;
+                this.SequenceCounter = 0;
             }
             out_buff[0] = 0x06;
             out_buff[1] = 0x10;
@@ -198,7 +227,7 @@ namespace HslCommunication.Profinet.Knx
             out_buff[5] = out_buff_len[0];
             out_buff[6] = 0x04;
             out_buff[7] = this.Channel;
-            out_buff[8] = this.Sequence_Counter;
+            out_buff[8] = this.SequenceCounter;
             out_buff[9] = 0x00;
             out_buff[10] = 0x11;
             out_buff[11] = 0x00;
@@ -253,7 +282,7 @@ namespace HslCommunication.Profinet.Knx
         public short Get_knx_addr( string addr, out bool is_ok )
         {
             short out_addr = 0;
-            var x = addr.Split( '/' );
+            var x = addr.Split( '\\' );
             if (x.Length == 3)
             {
                 int H = int.Parse( x[0] );
@@ -284,9 +313,7 @@ namespace HslCommunication.Profinet.Knx
                 return out_addr;
             }
         }
-
-        #region Private
-
+        #region 私有方法
         private void KNX_serverOF_2( byte[] in_data )
         {
             switch (in_data[3])
@@ -329,6 +356,15 @@ namespace HslCommunication.Profinet.Knx
         private void Extraction_of_Channel( byte[] in_data )
         {
             this.Channel = in_data[6];
+            if (in_data[5] == 0x08 & in_data[7] == 0x25)
+            {
+                // MessageBox.Show( "连接已被占用" );
+                this.IsConnect = false;
+            }
+            if (this.Channel > 0)
+            {
+                this.IsConnect = true;
+            }
         }
 
         private void KNX_serverOF_4( byte[] in_data )
@@ -339,7 +375,6 @@ namespace HslCommunication.Profinet.Knx
                 case 0x21: break;//数据返回确认
             }
         }
-
         /// <summary>
         /// 解析控制包头和CEMI
         /// </summary>
@@ -348,17 +383,20 @@ namespace HslCommunication.Profinet.Knx
             //   this.Sequence_Counter = in_data[8];
             Read_CEMI( in_data );
         }
-
         /// <summary>
         ///具体解析CEMI 
         /// </summary>
         private void Read_CEMI( byte[] in_data )
         {
-            switch (in_data[10])
+            if (in_data.Length > 11)
             {
-                case 0x11: break;
-                case 0x29: Read_CEMI_29( in_data ); break;
-                case 0x2e: Read_CEMI_2e( in_data ); break;
+                switch (in_data[10])
+                {
+                    case 0x11: break;
+                    case 0x29: Read_CEMI_29( in_data ); break;
+                    case 0x2e: Read_CEMI_2e( in_data ); break;
+
+                }
             }
         }
 
@@ -385,11 +423,15 @@ namespace HslCommunication.Profinet.Knx
         private void Read_CEMI_29( byte[] in_data )
         {
             byte[] out_data;
-            var addr = BitConverter.ToInt16( in_data, 16 );
+            byte[] swap = new byte[2];
+            swap[0] = in_data[17];
+            swap[1] = in_data[16];
+            // var addr = BitConverter.ToInt16(in_data, 16);
+            var addr = BitConverter.ToInt16( swap, 0 );
             if (in_data[18] > 1)
             {
                 out_data = new byte[(in_data[18 - 1])];
-                for (int i = 0; i < in_data[18] - 1; i++)
+                for (int i = 0; i < (in_data[18] - 1); i++)
                 {
                     out_data[i] = in_data[21 + i];
                 }
@@ -404,7 +446,6 @@ namespace HslCommunication.Profinet.Knx
             }
             Read_setp6( in_data );
         }
-
         private void Read_setp6( byte[] in_data )
         {
             byte[] out_buff = new byte[10];
@@ -424,7 +465,6 @@ namespace HslCommunication.Profinet.Knx
             }
 
         }
-
         #endregion
     }
 }

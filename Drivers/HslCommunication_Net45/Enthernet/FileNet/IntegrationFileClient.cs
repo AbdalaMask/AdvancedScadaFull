@@ -22,12 +22,23 @@ namespace HslCommunication.Enthernet
     public class IntegrationFileClient : FileClientBase
     {
         #region Constructor
+
         /// <summary>
-        /// 实例化一个对象
+        /// 实例化一个默认的对象，需要额外指定服务器的远程地址
         /// </summary>
         public IntegrationFileClient( )
         {
 
+        }
+
+        /// <summary>
+        /// 通过指定的Ip地址及端口号实例化一个对象
+        /// </summary>
+        /// <param name="ipAddress">服务器的ip地址</param>
+        /// <param name="port">端口号信息</param>
+        public IntegrationFileClient( string ipAddress, int port )
+        {
+            ServerIpEndPoint = new System.Net.IPEndPoint( System.Net.IPAddress.Parse( ipAddress ), port );
         }
 
         #endregion
@@ -51,6 +62,15 @@ namespace HslCommunication.Enthernet
             return DeleteFileBase( fileName, factory, group, id );
         }
 
+        /// <summary>
+        /// 删除服务器的文件操作，此处的分类为空
+        /// </summary>
+        /// <param name="fileName">文件名称，带后缀</param>
+        /// <returns>是否成功的结果对象</returns>
+        public OperateResult DeleteFile( string fileName )
+        {
+            return DeleteFileBase( fileName, "", "", "" );
+        }
 
         #endregion
 
@@ -205,7 +225,71 @@ namespace HslCommunication.Enthernet
             string fileUpload,
             Action<long, long> processReport )
         {
+            if (!File.Exists( fileName )) return new OperateResult( StringResources.Language.FileNotExist );
+
             return UploadFileBase( fileName, serverName, factory, group, id, fileTag, fileUpload, processReport );
+        }
+
+        /// <summary>
+        /// 上传本地的文件到服务器操作，服务器存储的文件名就是当前文件默认的名称
+        /// </summary>
+        /// <param name="fileName">本地的完整路径的文件名称</param>
+        /// <param name="factory">第一大类</param>
+        /// <param name="group">第二大类</param>
+        /// <param name="id">第三大类</param>
+        /// <param name="fileTag">文件的额外描述</param>
+        /// <param name="fileUpload">文件的上传人</param>
+        /// <param name="processReport">上传的进度报告</param>
+        /// <returns>是否成功的结果对象</returns>
+        public OperateResult UploadFile(
+            string fileName,
+            string factory,
+            string group,
+            string id,
+            string fileTag,
+            string fileUpload,
+            Action<long, long> processReport )
+        {
+            if (!File.Exists( fileName )) return new OperateResult( StringResources.Language.FileNotExist );
+
+            FileInfo fileInfo = new FileInfo( fileName );
+            return UploadFileBase( fileName, fileInfo.Name, factory, group, id, fileTag, fileUpload, processReport );
+        }
+
+        /// <summary>
+        /// 上传本地的文件到服务器操作，服务器存储的文件名就是当前文件默认的名称
+        /// </summary>
+        /// <param name="fileName">本地的完整路径的文件名称</param>
+        /// <param name="factory">第一大类</param>
+        /// <param name="group">第二大类</param>
+        /// <param name="id">第三大类</param>
+        /// <param name="processReport">上传的进度报告</param>
+        /// <returns>是否成功的结果对象</returns>
+        public OperateResult UploadFile(
+            string fileName,
+            string factory,
+            string group,
+            string id,
+            Action<long, long> processReport )
+        {
+            if (!File.Exists( fileName )) return new OperateResult( StringResources.Language.FileNotExist );
+
+            FileInfo fileInfo = new FileInfo( fileName );
+            return UploadFileBase( fileName, fileInfo.Name, factory, group, id, "", "", processReport );
+        }
+
+        /// <summary>
+        /// 上传本地的文件到服务器操作，服务器存储的文件名就是当前文件默认的名称，其余参数默认为空
+        /// </summary>
+        /// <param name="fileName">本地的完整路径的文件名称</param>
+        /// <param name="processReport">上传的进度报告</param>
+        /// <returns>是否成功的结果对象</returns>
+        public OperateResult UploadFile( string fileName, Action<long, long> processReport )
+        {
+            if (!File.Exists( fileName )) return new OperateResult( StringResources.Language.FileNotExist );
+
+            FileInfo fileInfo = new FileInfo( fileName );
+            return UploadFileBase( fileName, fileInfo.Name, "", "", "", "", "", processReport );
         }
 
         /// <summary>
@@ -244,6 +328,7 @@ namespace HslCommunication.Enthernet
         }
 
 #if !NETSTANDARD2_0 && !NETSTANDARD2_1
+
         /// <summary>
         /// 上传内存图片到服务器操作
         /// </summary>
@@ -284,62 +369,8 @@ namespace HslCommunication.Enthernet
             stream.Dispose( );
             return result;
         }
+
 #endif
-
-        #endregion
-
-        #region Private Method
-
-        /// <summary>
-        /// 根据三种分类信息，还原成在服务器的相对路径，包含文件
-        /// </summary>
-        /// <param name="fileName">文件名称，包含后缀名</param>
-        /// <param name="factory">第一类</param>
-        /// <param name="group">第二类</param>
-        /// <param name="id">第三类</param>
-        /// <returns>是否成功的结果对象</returns>
-        private string TranslateFileName( string fileName, string factory, string group, string id )
-        {
-            string file_save_server_name = fileName;
-
-            if (id.IndexOf( '\\' ) >= 0) id = id.Replace( '\\', '_' );
-            if (group.IndexOf( '\\' ) >= 0) group = id.Replace( '\\', '_' );
-            if (factory.IndexOf( '\\' ) >= 0) id = factory.Replace( '\\', '_' );
-
-
-            if (id?.Length > 0) file_save_server_name = id + @"\" + file_save_server_name;
-
-            if (group?.Length > 0) file_save_server_name = group + @"\" + file_save_server_name;
-
-            if (factory?.Length > 0) file_save_server_name = factory + @"\" + file_save_server_name;
-
-            return file_save_server_name;
-        }
-
-        /// <summary>
-        /// 根据三种分类信息，还原成在服务器的相对路径，仅仅路径
-        /// </summary>
-        /// <param name="factory">第一类</param>
-        /// <param name="group">第二类</param>
-        /// <param name="id">第三类</param>
-        /// <returns>是否成功的结果对象</returns>
-        private string TranslatePathName( string factory, string group, string id )
-        {
-            string file_save_server_name = "";
-
-            if (id.IndexOf( '\\' ) >= 0) id = id.Replace( '\\', '_' );
-            if (group.IndexOf( '\\' ) >= 0) group = id.Replace( '\\', '_' );
-            if (factory.IndexOf( '\\' ) >= 0) id = factory.Replace( '\\', '_' );
-
-            if (id?.Length > 0) file_save_server_name = @"\" + id;
-
-            if (group?.Length > 0) file_save_server_name = @"\" + group + file_save_server_name;
-
-            if (factory?.Length > 0) file_save_server_name = @"\" + factory + file_save_server_name;
-
-            return file_save_server_name;
-        }
-
 
         #endregion
 

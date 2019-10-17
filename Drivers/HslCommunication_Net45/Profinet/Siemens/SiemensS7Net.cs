@@ -1113,8 +1113,16 @@ namespace HslCommunication.Profinet.Siemens
             _PLCCommand[29] = (byte)(analysis.Content.AddressStart / 256);
             _PLCCommand[30] = (byte)(analysis.Content.AddressStart % 256);
             // 按位写入 -> Bitwise Write
-            _PLCCommand[31] = 0x00;
-            _PLCCommand[32] = 0x03;
+            if (analysis.Content.DataCode == 0x1C)
+            {
+                _PLCCommand[31] = 0x00;
+                _PLCCommand[32] = 0x09;
+            }
+            else
+            {
+                _PLCCommand[31] = 0x00;
+                _PLCCommand[32] = 0x03;
+            }
             // 按位计算的长度 -> The length of the bitwise calculation
             _PLCCommand[33] = (byte)(buffer.Length / 256);
             _PLCCommand[34] = (byte)(buffer.Length % 256);

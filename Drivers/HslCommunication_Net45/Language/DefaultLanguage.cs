@@ -198,6 +198,29 @@ namespace HslCommunication.Language
         public virtual string MelsecFxAckWrong => "PLC反馈信号错误：";
         public virtual string MelsecFxCrcCheckFailed => "PLC反馈报文的和校验失败！";
 
+        public virtual string MelsecErrorC04D => "在以太网模块通过自动开放 UDP端口通讯或无序固定缓冲存储器通讯接收的信息中，应用领域中指定的数据长度不正确。";
+        public virtual string MelsecErrorC050 => "当在以太网模块中进行 ASCII 代码通讯的操作设置时，接收不能转化为二进制代码的 ASCII 代码数据。";
+        public virtual string MelsecErrorC051_54 => "读/写点的数目在允许范围之外。";
+        public virtual string MelsecErrorC055 => "文件数据读/写点的数目在允许范围之外。";
+        public virtual string MelsecErrorC056 => "读/写请求超过了最大地址。";
+        public virtual string MelsecErrorC057 => "请求数据的长度与字符区域(部分文本)的数据计数不匹配。";
+        public virtual string MelsecErrorC058 => "在经过 ASCII 二进制转换后，请求数据的长度与字符区域( 部分文本)的数据计数不相符。";
+        public virtual string MelsecErrorC059 => "命令和子命令的指定不正确。";
+        public virtual string MelsecErrorC05A_B => "以太网模块不能对指定软元件进行读出和写入";
+        public virtual string MelsecErrorC05C => "请求内容不正确。 ( 以位为单元请求读 / 写至字软元件。)";
+        public virtual string MelsecErrorC05D => "不执行监视注册。";
+        public virtual string MelsecErrorC05E => "以太网模块和 PLC CPU 之间的通讯时问超过了 CPU 监视定时器的时间。";
+        public virtual string MelsecErrorC05F => "目标 PLC 上不能执行请求。";
+        public virtual string MelsecErrorC060 => "请求内容不正确。 ( 对位软元件等指定了不正确的数据。) ";
+        public virtual string MelsecErrorC061 => "请求数据的长度与字符区域(部分文本)中的数据数目不相符。 ";
+        public virtual string MelsecErrorC062 => "禁止在线更正时，通过 MC 协议远程 I/O 站执行( QnA兼容 3E 帧或4E 帧)写入操作。";
+        public virtual string MelsecErrorC070 => "不能为目标站指定软元件存储器的范围";
+        public virtual string MelsecErrorC072 => "请求内容不正确。 ( 以位为单元请求调写至字软元件。) ";
+        public virtual string MelsecErrorC074 => "目标 PLC 不执行请求。需要纠正网络号和 PC 号。";
+
+
+
+
         /***********************************************************************************
          * 
          *    Siemens PLC 相关

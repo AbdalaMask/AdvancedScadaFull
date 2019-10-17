@@ -8,6 +8,7 @@ using HslCommunication.BasicFramework;
 using HslCommunication.Enthernet;
 using HslCommunication.LogNet;
 using System.Threading;
+using System.Runtime.InteropServices;
 
 namespace HslCommunication.Core.Net
 {
@@ -130,7 +131,7 @@ namespace HslCommunication.Core.Net
         /// <returns>文件名</returns>
         protected string CreateRandomFileName( )
         {
-            return BasicFramework.SoftBasic.GetUniqueStringByGuidAndRandom( );
+            return SoftBasic.GetUniqueStringByGuidAndRandom( );
         }
 
         /// <summary>
@@ -143,9 +144,24 @@ namespace HslCommunication.Core.Net
         protected string ReturnAbsoluteFilePath( string factory, string group, string id )
         {
             string result = m_FilesDirectoryPath;
-            if (!string.IsNullOrEmpty( factory )) result += "\\" + factory;
-            if (!string.IsNullOrEmpty( group )) result += "\\" + group;
-            if (!string.IsNullOrEmpty( id )) result += "\\" + id;
+#if NET35 || NET451
+                if (!string.IsNullOrEmpty( factory )) result += "\\" + factory;
+                if (!string.IsNullOrEmpty( group )) result += "\\" + group;
+                if (!string.IsNullOrEmpty( id )) result += "\\" + id;
+#else
+            if (RuntimeInformation.IsOSPlatform( OSPlatform.Linux ))
+            {
+                if (!string.IsNullOrEmpty( factory )) result += "/" + factory;
+                if (!string.IsNullOrEmpty( group )) result += "/" + group;
+                if (!string.IsNullOrEmpty( id )) result += "/" + id;
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty( factory )) result += "\\" + factory;
+                if (!string.IsNullOrEmpty( group )) result += "\\" + group;
+                if (!string.IsNullOrEmpty( id )) result += "\\" + id;
+            }
+#endif
             return result;
         }
 
@@ -160,7 +176,18 @@ namespace HslCommunication.Core.Net
         /// <returns>是否成功的结果对象</returns>
         protected string ReturnAbsoluteFileName( string factory, string group, string id, string fileName )
         {
+#if NET35 || NET451
             return ReturnAbsoluteFilePath( factory, group, id ) + "\\" + fileName;
+#else
+            if (RuntimeInformation.IsOSPlatform( OSPlatform.Linux ))
+            {
+                return ReturnAbsoluteFilePath( factory, group, id ) + "/" + fileName;
+            }
+            else
+            {
+                return ReturnAbsoluteFilePath( factory, group, id ) + "\\" + fileName;
+            }
+#endif
         }
 
 
@@ -175,16 +202,31 @@ namespace HslCommunication.Core.Net
         protected string ReturnRelativeFileName( string factory, string group, string id, string fileName )
         {
             string result = "";
+#if NET35 || NET451
             if (!string.IsNullOrEmpty( factory )) result += factory + "\\";
-            if (!string.IsNullOrEmpty( group )) result += group + "\\";
-            if (!string.IsNullOrEmpty( id )) result += id + "\\";
+                if (!string.IsNullOrEmpty( group )) result += group + "\\";
+                if (!string.IsNullOrEmpty( id )) result += id + "\\";
+#else
+            if (RuntimeInformation.IsOSPlatform( OSPlatform.Linux ))
+            {
+                if (!string.IsNullOrEmpty( factory )) result += factory + "/";
+                if (!string.IsNullOrEmpty( group )) result += group + "/";
+                if (!string.IsNullOrEmpty( id )) result += id + "/";
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty( factory )) result += factory + "\\";
+                if (!string.IsNullOrEmpty( group )) result += group + "\\";
+                if (!string.IsNullOrEmpty( id )) result += id + "\\";
+            }
+#endif
             return result + fileName;
         }
 
 
-        #endregion
+#endregion
 
-        #region Clear File Mark
+#region Clear File Mark
 
         //private Timer timer;
 
@@ -211,9 +253,9 @@ namespace HslCommunication.Core.Net
 
         //    hybirdLock.Leave();
         //}
-        #endregion
+#endregion
 
-        #region 临时文件复制块
+#region 临时文件复制块
 
         /// <summary>
         /// 移动一个文件到新的文件去
@@ -287,9 +329,27 @@ namespace HslCommunication.Core.Net
         #region File Upload Event
 
         // 文件的上传事件
+        /// <summary>
+        /// 文件上传的委托
+        /// </summary>
+        /// <param name="fileInfo">文件的基本信息</param>
+        public delegate void FileUploadDelegate( FileServerInfo fileInfo );
 
+        /// <summary>
+        /// 文件上传的事件，当文件上传的时候触发。
+        /// </summary>
+        public event FileUploadDelegate OnFileUploadEvent;
 
-        #endregion
+        /// <summary>
+        /// 触发一个文件上传的事件。
+        /// </summary>
+        /// <param name="fileInfo">文件的基本信息</param>
+        protected void OnFileUpload( FileServerInfo fileInfo )
+        {
+            this.OnFileUploadEvent?.Invoke( fileInfo );
+        }
+
+#endregion
 
         #region Override Method
 
@@ -309,9 +369,9 @@ namespace HslCommunication.Core.Net
             base.StartInitialization( );
         }
 
-        #endregion
+#endregion
 
-        #region Protect Method
+#region Protect Method
 
 
 
@@ -326,9 +386,9 @@ namespace HslCommunication.Core.Net
             }
         }
 
-        #endregion
+#endregion
 
-        #region Public Members
+#region Public Members
 
         /// <summary>
         /// 文件所存储的路径
@@ -378,16 +438,16 @@ namespace HslCommunication.Core.Net
             return Directory.GetDirectories( absolutePath );
         }
 
-        #endregion
+#endregion
 
-        #region Private Members
+#region Private Members
 
         private string m_FilesDirectoryPath = null;      // 文件的存储路径
         private Random m_random = new Random( );          // 随机生成的文件名
 
-        #endregion
+#endregion
 
-        #region Object Override
+#region Object Override
 
         /// <summary>
         /// 获取本对象的字符串标识形式
@@ -398,6 +458,6 @@ namespace HslCommunication.Core.Net
             return "NetworkFileServerBase";
         }
 
-        #endregion
+#endregion
     }
 }

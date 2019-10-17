@@ -18,7 +18,7 @@ namespace HslCommunication.Profinet.Melsec
         /// 解析A1E协议数据地址
         /// </summary>
         /// <param name="address">数据地址</param>
-        /// <returns></returns>
+        /// <returns>结果对象</returns>
         public static OperateResult<MelsecA1EDataType, ushort> McA1EAnalysisAddress(string address)
         {
             var result = new OperateResult<MelsecA1EDataType, ushort>();
@@ -105,6 +105,56 @@ namespace HslCommunication.Profinet.Melsec
         }
 
         /// <summary>
+        /// 按字为单位随机读取的指令创建
+        /// </summary>
+        /// <param name="address">地址数组</param>
+        /// <returns>指令</returns>
+        public static byte[] BuildReadRandomWordCommand( McAddressData[] address )
+        {
+            byte[] command = new byte[6 + address.Length * 4];
+            command[0] = 0x03;                                                      // 批量读取数据命令
+            command[1] = 0x04;
+            command[2] = 0x00;                                                      // 以字为单位随机读取
+            command[3] = 0x00;
+            command[4] = (byte)address.Length;
+            command[5] = 0x00;
+            for (int i = 0; i < address.Length; i++)
+            {
+                command[i * 4 + 6] = BitConverter.GetBytes( address[i].AddressStart )[0];
+                command[i * 4 + 7] = BitConverter.GetBytes( address[i].AddressStart )[1];
+                command[i * 4 + 8] = BitConverter.GetBytes( address[i].AddressStart )[2];
+                command[i * 4 + 9] = address[i].McDataType.DataCode;
+            }
+            return command;
+        }
+
+        /// <summary>
+        /// 按字为单位随机读取的指令创建
+        /// </summary>
+        /// <param name="address">地址数组</param>
+        /// <returns>指令</returns>
+        public static byte[] BuildReadRandomCommand( McAddressData[] address )
+        {
+            byte[] command = new byte[6 + address.Length * 6];
+            command[0] = 0x06;                                                      // 批量读取数据命令
+            command[1] = 0x04;
+            command[2] = 0x00;                                                      // 以字为单位随机读取
+            command[3] = 0x00;
+            command[4] = (byte)address.Length;
+            command[5] = 0x00;
+            for (int i = 0; i < address.Length; i++)
+            {
+                command[i * 6 +  6] = BitConverter.GetBytes( address[i].AddressStart )[0];
+                command[i * 6 +  7] = BitConverter.GetBytes( address[i].AddressStart )[1];
+                command[i * 6 +  8] = BitConverter.GetBytes( address[i].AddressStart )[2];
+                command[i * 6 +  9] = address[i].McDataType.DataCode;
+                command[i * 6 + 10] = (byte)(address[i].Length % 256);                          // 软元件的长度
+                command[i * 6 + 11] = (byte)(address[i].Length / 256);
+            }
+            return command;
+        }
+
+        /// <summary>
         /// 从三菱地址，是否位读取进行创建读取Ascii格式的MC的核心报文
         /// </summary>
         /// <param name="addressData">三菱Mc协议的数据地址</param>
@@ -134,6 +184,78 @@ namespace HslCommunication.Profinet.Melsec
             command[18] = SoftBasic.BuildAsciiBytesFrom( addressData.Length )[2];
             command[19] = SoftBasic.BuildAsciiBytesFrom( addressData.Length )[3];
 
+            return command;
+        }
+
+        /// <summary>
+        /// 按字为单位随机读取的指令创建
+        /// </summary>
+        /// <param name="address">地址数组</param>
+        /// <returns>指令</returns>
+        public static byte[] BuildAsciiReadRandomWordCommand( McAddressData[] address )
+        {
+            byte[] command = new byte[12 + address.Length * 8];
+            command[ 0] = 0x30;                                                               // 批量读取数据命令
+            command[ 1] = 0x34;
+            command[ 2] = 0x30;
+            command[ 3] = 0x33;
+            command[ 4] = 0x30;                                                               // 以点为单位还是字为单位成批读取
+            command[ 5] = 0x30;
+            command[ 6] = 0x30;
+            command[ 7] = 0x30;
+            command[ 8] = SoftBasic.BuildAsciiBytesFrom( (byte)address.Length )[0];
+            command[ 9] = SoftBasic.BuildAsciiBytesFrom( (byte)address.Length )[1];
+            command[10] = 0x30;
+            command[11] = 0x30;
+            for (int i = 0; i < address.Length; i++)
+            {
+                command[i * 8 + 12] = Encoding.ASCII.GetBytes( address[i].McDataType.AsciiCode )[0];          // 软元件类型
+                command[i * 8 + 13] = Encoding.ASCII.GetBytes( address[i].McDataType.AsciiCode )[1];
+                command[i * 8 + 14] = MelsecHelper.BuildBytesFromAddress( address[i].AddressStart, address[i].McDataType )[0];            // 起始地址的地位
+                command[i * 8 + 15] = MelsecHelper.BuildBytesFromAddress( address[i].AddressStart, address[i].McDataType )[1];
+                command[i * 8 + 16] = MelsecHelper.BuildBytesFromAddress( address[i].AddressStart, address[i].McDataType )[2];
+                command[i * 8 + 17] = MelsecHelper.BuildBytesFromAddress( address[i].AddressStart, address[i].McDataType )[3];
+                command[i * 8 + 18] = MelsecHelper.BuildBytesFromAddress( address[i].AddressStart, address[i].McDataType )[4];
+                command[i * 8 + 19] = MelsecHelper.BuildBytesFromAddress( address[i].AddressStart, address[i].McDataType )[5];
+            }
+            return command;
+        }
+
+        /// <summary>
+        /// 随机读取的指令创建
+        /// </summary>
+        /// <param name="address">地址数组</param>
+        /// <returns>指令</returns>
+        public static byte[] BuildAsciiReadRandomCommand( McAddressData[] address )
+        {
+            byte[] command = new byte[12 + address.Length * 12];
+            command[0] = 0x30;                                                               // 批量读取数据命令
+            command[1] = 0x34;
+            command[2] = 0x30;
+            command[3] = 0x36;
+            command[4] = 0x30;                                                               // 以点为单位还是字为单位成批读取
+            command[5] = 0x30;
+            command[6] = 0x30;
+            command[7] = 0x30;
+            command[8] = SoftBasic.BuildAsciiBytesFrom( (byte)address.Length )[0];
+            command[9] = SoftBasic.BuildAsciiBytesFrom( (byte)address.Length )[1];
+            command[10] = 0x30;
+            command[11] = 0x30;
+            for (int i = 0; i < address.Length; i++)
+            {
+                command[i * 12 + 12] = Encoding.ASCII.GetBytes( address[i].McDataType.AsciiCode )[0];          // 软元件类型
+                command[i * 12 + 13] = Encoding.ASCII.GetBytes( address[i].McDataType.AsciiCode )[1];
+                command[i * 12 + 14] = MelsecHelper.BuildBytesFromAddress( address[i].AddressStart, address[i].McDataType )[0];            // 起始地址的地位
+                command[i * 12 + 15] = MelsecHelper.BuildBytesFromAddress( address[i].AddressStart, address[i].McDataType )[1];
+                command[i * 12 + 16] = MelsecHelper.BuildBytesFromAddress( address[i].AddressStart, address[i].McDataType )[2];
+                command[i * 12 + 17] = MelsecHelper.BuildBytesFromAddress( address[i].AddressStart, address[i].McDataType )[3];
+                command[i * 12 + 18] = MelsecHelper.BuildBytesFromAddress( address[i].AddressStart, address[i].McDataType )[4];
+                command[i * 12 + 19] = MelsecHelper.BuildBytesFromAddress( address[i].AddressStart, address[i].McDataType )[5];
+                command[i * 12 + 20] = SoftBasic.BuildAsciiBytesFrom( address[i].Length )[0]; 
+                command[i * 12 + 21] = SoftBasic.BuildAsciiBytesFrom( address[i].Length )[1];
+                command[i * 12 + 22] = SoftBasic.BuildAsciiBytesFrom( address[i].Length )[2];
+                command[i * 12 + 23] = SoftBasic.BuildAsciiBytesFrom( address[i].Length )[3];
+            }
             return command;
         }
 
@@ -265,6 +387,42 @@ namespace HslCommunication.Profinet.Melsec
             buffer.CopyTo( command, 20 );
 
             return command;
+        }
+
+        /// <summary>
+        /// 根据三菱的错误码去查找对象描述信息
+        /// </summary>
+        /// <param name="code">错误码</param>
+        /// <returns>描述信息</returns>
+        public static string GetErrorDescription( int code )
+        {
+            switch (code)
+            {
+                case 0xC04D: return StringResources.Language.MelsecErrorC04D;
+                case 0xC050: return StringResources.Language.MelsecErrorC050;
+                case 0xC051:
+                case 0xC052:
+                case 0xC053:
+                case 0xC054: return StringResources.Language.MelsecErrorC051_54;
+                case 0xC055: return StringResources.Language.MelsecErrorC055;
+                case 0xC056: return StringResources.Language.MelsecErrorC056;
+                case 0xC057: return StringResources.Language.MelsecErrorC057;
+                case 0xC058: return StringResources.Language.MelsecErrorC058;
+                case 0xC059: return StringResources.Language.MelsecErrorC059;
+                case 0xC05A:
+                case 0xC05B: return StringResources.Language.MelsecErrorC05A_B;
+                case 0xC05C: return StringResources.Language.MelsecErrorC05C;
+                case 0xC05D: return StringResources.Language.MelsecErrorC05D;
+                case 0xC05E: return StringResources.Language.MelsecErrorC05E;
+                case 0xC05F: return StringResources.Language.MelsecErrorC05F;
+                case 0xC060: return StringResources.Language.MelsecErrorC060;
+                case 0xC061: return StringResources.Language.MelsecErrorC061;
+                case 0xC062: return StringResources.Language.MelsecErrorC062;
+                case 0xC070: return StringResources.Language.MelsecErrorC070;
+                case 0xC072: return StringResources.Language.MelsecErrorC072;
+                case 0xC074: return StringResources.Language.MelsecErrorC074;
+                default: return StringResources.Language.MelsecPleaseReferToManulDocument;
+            }
         }
 
         #endregion

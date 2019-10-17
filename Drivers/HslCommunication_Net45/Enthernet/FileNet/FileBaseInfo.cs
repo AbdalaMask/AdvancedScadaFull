@@ -30,4 +30,15 @@ namespace HslCommunication.Enthernet
         /// </summary>
         public string Upload { get; set; }
     }
+
+    /// <summary>
+    /// 文件在服务器上的信息
+    /// </summary>
+    public class FileServerInfo : FileBaseInfo
+    {
+        /// <summary>
+        /// 文件的真是路径
+        /// </summary>
+        public string ActualFileFullName { get; set; }
+    }
 }

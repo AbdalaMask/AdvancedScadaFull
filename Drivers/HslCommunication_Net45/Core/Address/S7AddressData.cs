@@ -44,12 +44,16 @@ namespace HslCommunication.Core.Address
         /// 计算特殊的地址信息 -> Calculate Special Address information
         /// </summary>
         /// <param name="address">字符串地址 -> String address</param>
+        /// <param name="isCT">是否是定时器和计数器的地址</param>
         /// <returns>实际值 -> Actual value</returns>
-        public static int CalculateAddressStarted( string address )
+        public static int CalculateAddressStarted( string address, bool isCT = false )
         {
             if (address.IndexOf( '.' ) < 0)
             {
-                return Convert.ToInt32( address ) * 8;
+                if (isCT)
+                    return Convert.ToInt32( address );
+                else
+                    return Convert.ToInt32( address ) * 8;
             }
             else
             {
@@ -62,7 +66,6 @@ namespace HslCommunication.Core.Address
         /// 从实际的西门子的地址里面
         /// </summary>
         /// <param name="address">西门子的地址数据信息</param>
-        /// <param name="length">读取的数据长度</param>
         /// <returns>是否成功的结果对象</returns>
         public static OperateResult<S7AddressData> ParseFrom( string address )
         {
@@ -115,12 +118,12 @@ namespace HslCommunication.Core.Address
                 else if (address[0] == 'T')
                 {
                     addressData.DataCode = 0x1D;
-                    addressData.AddressStart = CalculateAddressStarted( address.Substring( 1 ) );
+                    addressData.AddressStart = CalculateAddressStarted( address.Substring( 1 ), true );
                 }
                 else if (address[0] == 'C')
                 {
                     addressData.DataCode = 0x1C;
-                    addressData.AddressStart = CalculateAddressStarted( address.Substring( 1 ) );
+                    addressData.AddressStart = CalculateAddressStarted( address.Substring( 1 ), true );
                 }
                 else if (address[0] == 'V')
                 {

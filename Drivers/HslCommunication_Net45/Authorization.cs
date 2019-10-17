@@ -105,8 +105,8 @@ namespace HslCommunication
         /// <param name="code">授权码</param>
         public static bool SetAuthorizationCode( string code )
         {
-            if (nasduabwduadawdb( code ) == "B8CBAFF399B97DD8817529FFF031F4C1" ||
-                nasduabwduadawdb( code ) == "2765FFFDDE2A8465A9522442F5A15593")
+            if (nasduabwduadawdb( code ) == "64B2810F33C7DFCD04AF600DBD8185F3" ||
+                nasduabwduadawdb( code ) == "2765FFFDDE2A8465A9522442F5A15593")    // 超级vip群的固定的激活码
             {
                 nuasgdawydbishcgas = nuasgdawydbishdgas;
                 naihsdadaasdasdiwid = niasdhasdguawdwdad;
@@ -136,5 +136,6 @@ namespace HslCommunication
         // V8.0.3 激活码：e8347b41-0473-45cf-9ede-df129d88d191
         // V8.1.0 激活码：5984db31-7461-4239-8226-529ba96e27aa
         // V8.1.1 激活码：5984db31-7461-4239-8226-529ba96e27aa
+        // V8.1.2 激活码：7a6b1f26-ae6e-4399-b2d4-e09246644028
     }
 }

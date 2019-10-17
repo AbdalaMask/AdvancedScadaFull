@@ -11,6 +11,7 @@ using System.Drawing;
 using HslCommunication.BasicFramework;
 using HslCommunication.LogNet;
 using HslCommunication.Core;
+using System.Runtime.InteropServices;
 
 namespace HslCommunication.Enthernet
 {
@@ -26,7 +27,6 @@ namespace HslCommunication.Enthernet
     /// </example>
     public class AdvancedFileServer : HslCommunication.Core.Net.NetworkFileServerBase
     {
-
         #region Constructor
 
         /// <summary>
@@ -90,8 +90,7 @@ namespace HslCommunication.Enthernet
             }
             else if (customer == HslProtocol.ProtocolFileUpload)
             {
-                string tempFileName = FilesDirectoryPathTemp + "\\" + CreateRandomFileName( );
-
+                string tempFileName = Path.Combine( FilesDirectoryPathTemp, CreateRandomFileName( ) );
                 string fullFileName = ReturnAbsoluteFileName( Factory, Group, Identify, fileName );
 
                 // 上传文件
@@ -114,10 +113,10 @@ namespace HslCommunication.Enthernet
                 }
 
                 OperateResult receiveFile = ReceiveFileFromSocketAndMoveFile(
-                    socket,                                 // 网络套接字
-                    tempFileName,                           // 临时保存文件路径
-                    fullFileName,                           // 最终保存文件路径
-                    out string FileName,                    // 文件名称，从客户端上传到服务器时，为上传人
+                    socket,                                              // 网络套接字
+                    tempFileName,                                        // 临时保存文件路径
+                    fullFileName,                                        // 最终保存文件路径
+                    out string FileName,                                 // 文件名称，从客户端上传到服务器时，为上传人
                     out long FileSize,
                     out string FileTag,
                     out string FileUpload
@@ -126,6 +125,14 @@ namespace HslCommunication.Enthernet
                 if (receiveFile.IsSuccess)
                 {
                     socket?.Close( );
+                    OnFileUpload( new FileServerInfo( )
+                    {
+                        ActualFileFullName = fullFileName,
+                        Name = FileName,
+                        Size = FileSize,
+                        Tag = FileTag,
+                        Upload = FileUpload
+                    } );
                     LogNet?.WriteInfo( ToString( ), StringResources.Language.FileUploadSuccess + ":" + relativeName );
                 }
                 else
@@ -318,7 +325,7 @@ namespace HslCommunication.Enthernet
         /// <returns>字符串对象</returns>
         public override string ToString()
         {
-            return "AdvancedFileServer";
+            return $"AdvancedFileServer[{Port}]";
         }
 
         #endregion

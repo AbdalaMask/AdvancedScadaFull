@@ -199,6 +199,26 @@ namespace HslCommunication.Language
         public override string MelsecFxAckWrong => "PLC Feedback Signal Error: ";
         public override string MelsecFxCrcCheckFailed => "PLC Feedback message and check failed!";
 
+        public override string MelsecErrorC04D => "In the information received by the Ethernet module through automatic open UDP port communication or out-of-order fixed buffer communication, the data length specified in the application domain is incorrect.";
+        public override string MelsecErrorC050 => "When the operation setting of ASCII code communication is performed in the Ethernet module, ASCII code data that cannot be converted into binary code is received.";
+        public override string MelsecErrorC051_54 => "The number of read/write points is outside the allowable range.";
+        public override string MelsecErrorC055 => "The number of file data read/write points is outside the allowable range.";
+        public override string MelsecErrorC056 => "The read/write request exceeded the maximum address.";
+        public override string MelsecErrorC057 => "The length of the requested data does not match the data count of the character area (partial text).";
+        public override string MelsecErrorC058 => "After the ASCII binary conversion, the length of the requested data does not match the data count of the character area (partial text).";
+        public override string MelsecErrorC059 => "The designation of commands and subcommands is incorrect.";
+        public override string MelsecErrorC05A_B => "The Ethernet module cannot read and write to the specified device.";
+        public override string MelsecErrorC05C => "The requested content is incorrect. (Request to read/write to word device in bits.)";
+        public override string MelsecErrorC05D => "Monitoring registration is not performed.";
+        public override string MelsecErrorC05E => "The communication time between the Ethernet module and the PLC CPU exceeds the time of the CPU watchdog timer.";
+        public override string MelsecErrorC05F => "The request cannot be executed on the target PLC.";
+        public override string MelsecErrorC060 => "The requested content is incorrect. (Incorrect data is specified for the bit device, etc.)";
+        public override string MelsecErrorC061 => "The length of the requested data does not match the number of data in the character area (partial text).";
+        public override string MelsecErrorC062 => "When the online correction is prohibited, the remote protocol I/O station (QnA compatible 3E frame or 4E frame) write operation is performed by the MC protocol.";
+        public override string MelsecErrorC070 => "Cannot specify the range of device memory for the target station";
+        public override string MelsecErrorC072 => "The requested content is incorrect. (Request to write to word device in bit units.) ";
+        public override string MelsecErrorC074 => "The target PLC does not execute the request. The network number and PC number need to be corrected.";
+
         /***********************************************************************************
          * 
          *    Siemens PLC related
