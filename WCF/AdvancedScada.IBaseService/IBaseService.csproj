@@ -39,12 +39,11 @@
   <ItemGroup>
     <Compile Include="BaseBinding.cs" />
     <Compile Include="Common\Extension.cs" />
-    <Compile Include="Common\MyEvents.cs" />
     <Compile Include="Common\XCollection.cs" />
     <Compile Include="GetIODriver.cs" />
-    <Compile Include="IReadService.cs" />
-    <Compile Include="IReadServiceWeb.cs" />
-    <Compile Include="IServiceCallback.cs" />
+    <Compile Include="Interface\IReadService.cs" />
+    <Compile Include="Interface\IReadServiceWeb.cs" />
+    <Compile Include="Interface\IServiceCallback.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

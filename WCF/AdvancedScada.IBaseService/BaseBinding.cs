@@ -10,7 +10,8 @@ namespace AdvancedScada.IBaseService
     public delegate void PvGridChannelGet(object Value, bool Visible);
     public delegate void PvGridDeviceGet(object Value, bool Visible);
     public delegate void PvGridDataBlockGet(object Value, bool Visible);
-
+    public delegate void EventListenning(string msg);
+    public delegate void EventConnectionState(ConnectionState connState, string msg);
     public class BaseBinding
     {
         protected ushort PORT = 8086;

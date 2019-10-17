@@ -1,5 +1,6 @@
 ﻿using AdvancedScada.BaseService;
 using AdvancedScada.DriverBase;
+using AdvancedScada.IBaseService;
 using AdvancedScada.IBaseService.Common;
 using ComponentFactory.Krypton.Toolkit;
 using System;
@@ -23,7 +24,7 @@ namespace AdvancedScada.Studio.Service
 
             try
             {
-                eventAddMessage += new EventListenning(AddMessage);
+               
                 eventConnectionState += new EventConnectionState(SetConnectionState);
                 new ServiceDriverHelper().InitializePLC();
                 host = new ServiceDriverHelper().InitializeReadService();
@@ -81,7 +82,7 @@ namespace AdvancedScada.Studio.Service
                                     lblConnectState.Text = "Disonnect";
                                     break;
                             }
-                            this.AddLog(msg);
+                          
                             _ConnState = connState;
                         }
                     });
@@ -94,37 +95,8 @@ namespace AdvancedScada.Studio.Service
             }
 
         }
-        private static void AddMessage(string msg)
-        {
-            try
-            {
-                ServiceDriverHelper.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> BusinessHelper(AddMessage): '{1}'", DateTime.Now, msg));
-            }
-            catch (Exception ex)
-            {
-                ServiceDriverHelper.AddLog(string.Format("At {0:dd/MM/yyyy hh:mm:ss tt} --> ERROR(OpenPumpServiceHost): '{1}'", DateTime.Now, ex.Message));
-            }
-        }
-
-        private void AddLog(string msg)
-        {
-            try
-            {
-                if (!this.IsDisposed)
-                {
-                    this.Invoke((MethodInvoker)delegate ()
-                    {
-                        ///*txtLog.Text +=*/ string.Format("At {0: dd/MM/yyyy HH:mm:ss}--> {1}" + Environment.NewLine, DateTime.Now, msg);
-                    });
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-            }
-        }
+       
+       
         private void FormServerUtils_Load(object sender, EventArgs e)
         {
             try

@@ -84,7 +84,7 @@ namespace AdvancedScada.BaseService
                         catch (Exception ex)
                         {
                             if (ex.InnerException == null)
-                                ServiceDriverHelper.AddLog("+ Event S7ConnectorServiceCallback: " + ex.Message);
+                              
                             EventscadaException?.Invoke(this.GetType().Name, ex.Message);
                         }
                         finally
