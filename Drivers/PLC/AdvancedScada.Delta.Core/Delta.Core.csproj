@@ -140,9 +140,9 @@
       <Project>{1D570E9A-E5B4-44DD-946D-9D73CFA4A535}</Project>
       <Name>DriverBase</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\HslCommunication_Net45\HslCommunication_Net45.csproj">
+    <ProjectReference Include="..\..\HslCommunication_Net45\HslCommunication.csproj">
       <Project>{7f8029da-1b94-4b1d-b91f-5b21dbf2f3a2}</Project>
-      <Name>HslCommunication_Net45</Name>
+      <Name>HslCommunication</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

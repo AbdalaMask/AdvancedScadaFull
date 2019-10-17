@@ -129,9 +129,9 @@
     <None Include="Resources\FolderOpen_32x32_72.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Drivers\HslCommunication_Net45\HslCommunication_Net45.csproj">
+    <ProjectReference Include="..\..\Drivers\HslCommunication_Net45\HslCommunication.csproj">
       <Project>{7f8029da-1b94-4b1d-b91f-5b21dbf2f3a2}</Project>
-      <Name>HslCommunication_Net45</Name>
+      <Name>HslCommunication</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WCF\AdvancedScada.IBaseService\IBaseService.csproj">
       <Project>{f47222c0-6b69-4ff1-aec3-b4c668b0a55a}</Project>

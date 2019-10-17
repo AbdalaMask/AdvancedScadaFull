@@ -8,11 +8,7 @@ namespace AdvancedScada.OPC.Core.Editors
 {
     public partial class XTagForm : AdvancedScada.Management.Editors.XTagForm
     {
-        public Channel ch;
-        public DataBlock db;
-        public Device dv;
-        public EventTagChanged eventTagChanged = null;
-        public Tag tg;
+        
         public XTagForm()
         {
             InitializeComponent();

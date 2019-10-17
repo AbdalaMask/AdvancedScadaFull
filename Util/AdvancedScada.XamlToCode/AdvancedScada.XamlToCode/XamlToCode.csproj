@@ -38,6 +38,21 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Krypton Docking">
+      <HintPath>..\..\..\Lib\Krypton\Krypton Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="Krypton Navigator">
+      <HintPath>..\..\..\Lib\Krypton\Krypton Navigator.dll</HintPath>
+    </Reference>
+    <Reference Include="Krypton Ribbon">
+      <HintPath>..\..\..\Lib\Krypton\Krypton Ribbon.dll</HintPath>
+    </Reference>
+    <Reference Include="Krypton Toolkit">
+      <HintPath>..\..\..\Lib\Krypton\Krypton Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Krypton Workspace">
+      <HintPath>..\..\..\Lib\Krypton\Krypton Workspace.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
