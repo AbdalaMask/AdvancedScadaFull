@@ -282,9 +282,9 @@ namespace HslCommunication.Profinet.LSIS
         /// AnalysisAddress
         /// </summary>
         /// <param name="address"></param>
-        /// <param name="IsRead"></param>
+        /// <param name="IsReadWrite"></param>
         /// <returns></returns>
-        public static OperateResult<string> AnalysisAddress(string address, bool IsRead)
+        public static OperateResult<string> AnalysisAddress(string address, bool IsReadWrite)
         {
             // P,M,L,K,F,T
             // P,M,L,K,F,T,C,D,S
@@ -294,7 +294,7 @@ namespace HslCommunication.Profinet.LSIS
                 sb.Append("%");
                 char[] types = new char[] { 'P', 'M', 'L', 'K', 'F', 'T', 'C', 'D', 'S', 'Q', 'I', 'N', 'U', 'Z', 'R' };
                 bool exsist = false;
-                if (IsRead)
+                if (IsReadWrite)
                 {
                     for (int i = 0; i < types.Length; i++)
                 {
@@ -432,12 +432,11 @@ namespace HslCommunication.Profinet.LSIS
                 case "DWord":
                 case "LWord":
                 case "Continuous":
-                    command[2] = 0x14; break;
+                    command[2] = 0x14; break; // continuous reading
                 default: break;
             }
             command[0] = 0x54;    // read
             command[1] = 0x00;
-            // command[2] = 0x14;    // continuous reading
             command[3] = 0x00;
             command[4] = 0x00;    // Reserved
             command[5] = 0x00;
@@ -454,19 +453,11 @@ namespace HslCommunication.Profinet.LSIS
        
         private OperateResult<byte[]> BuildWriteByteCommand(string address, byte[] data)
         {
-            OperateResult<string> analysisResult=null;
+            OperateResult<string> analysisResult;
             switch (SetCpuType)
             {
                 case "XGK":
                     analysisResult = AnalysisAddress(address, true);
-                    break;
-                case "XGI":
-                    break;
-                case "XGR":
-                    break;
-                case "XGB_MK":
-                    break;
-                case "XGB_IEC":
                     break;
                 case "XGB":
                     analysisResult = AnalysisAddress(address, false);
