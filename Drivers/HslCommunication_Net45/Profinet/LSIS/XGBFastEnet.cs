@@ -457,12 +457,15 @@ namespace HslCommunication.Profinet.LSIS
             switch (SetCpuType)
             {
                 case "XGK":
+                    // PLC XGK WriteByte And ReadByte
                     analysisResult = AnalysisAddress(address, true);
                     break;
                 case "XGB":
+                    //PLC XGB WriteWord And ReadByte
                     analysisResult = AnalysisAddress(address, false);
                     break;
                 default:
+                    // PLC XGK WriteByte And ReadByte
                     analysisResult = AnalysisAddress(address, true);
                     break;
             }
