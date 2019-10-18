@@ -26,7 +26,7 @@ namespace AdvancedScada.Studio.Service
 
                 eventConnectionState += new EventConnectionState(SetConnectionState);
                 new ServiceDriverHelper().InitializePLC();
-                host = new ServiceDriverHelper().InitializeReadService();
+                host = new ServiceDriverHelper().InitializeReadServiceHttp();
                 host.Opened += host_Opened;
                 host.Open();
 

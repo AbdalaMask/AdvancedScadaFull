@@ -5,6 +5,7 @@ using AdvancedScada.Management.BLManager;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.BaseService
@@ -22,20 +23,65 @@ namespace AdvancedScada.BaseService
             RequestsDriver = new Dictionary<string, IODriver>(1024);
         }
 
+        public ServiceHost InitializeReadServiceHttp()
 
+        {
+            ServiceHost serviceHost = null;
+             Type serviceType = null;
+            try
+            {
+                serviceType = typeof(ReadService);
+
+                var baseAddresses = new Uri[2]
+                {
+                    new Uri(string.Format(URI_DRIVER, Environment.MachineName, PORT, "Driver")),
+                    new Uri(string.Format(URI_DRIVERWeb,Environment.MachineName, "Driver"))
+                };
+
+
+                serviceHost = new ServiceHost(serviceType, baseAddresses);
+                var throttle = serviceHost.Description.Behaviors.Find<ServiceThrottlingBehavior>();
+                if (throttle == null)
+                {
+                    throttle = new ServiceThrottlingBehavior();
+                    throttle.MaxConcurrentCalls = int.MaxValue;
+                    throttle.MaxConcurrentSessions = int.MaxValue;
+                    throttle.MaxConcurrentInstances = int.MaxValue;
+                    serviceHost.Description.Behaviors.Add(throttle);
+                }
+
+                var binding = GetNetTcpBinding();
+                serviceHost.AddServiceEndpoint(typeof(IReadService), binding, "");
+                
+
+                ////Enable metadata exchange
+                var smb = new ServiceMetadataBehavior();
+                smb.HttpGetUrl = new Uri(string.Format(URI_DRIVERWeb, Environment.MachineName, "Driver"));
+                smb.HttpGetEnabled = true;
+                serviceHost.Description.Behaviors.Add(smb);
+            }
+            catch (CommunicationException ex)
+            {
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            }
+
+            return serviceHost;
+        }
         public ServiceHost InitializeReadService()
         {
             ServiceHost serviceHost = null;
 
             try
             {
-
+                
 
                 string address = string.Format(URI_DRIVER, Environment.MachineName, PORT, "Driver");
+               
                 NetTcpBinding netTcpBinding = GetNetTcpBinding();
                 serviceHost = new ServiceHost(typeof(ReadService));
+             
                 serviceHost.AddServiceEndpoint(typeof(IReadService), netTcpBinding, address);
-
+              
                 return serviceHost;
             }
             catch (Exception ex)

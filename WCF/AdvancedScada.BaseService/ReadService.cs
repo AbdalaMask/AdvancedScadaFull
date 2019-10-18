@@ -10,7 +10,7 @@ using static AdvancedScada.IBaseService.Common.XCollection;
 
 namespace AdvancedScada.BaseService
 {
-    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.PerSession)]
+    [ServiceBehavior( ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.PerSession)]
     public class ReadService : IReadService
     {
         private List<IServiceCallback> listCallbackChannels = new List<IServiceCallback>();

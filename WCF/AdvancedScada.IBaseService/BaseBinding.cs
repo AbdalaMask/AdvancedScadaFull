@@ -17,6 +17,7 @@ namespace AdvancedScada.IBaseService
         protected ushort PORT = 8086;
 
         protected string URI_DRIVER = "net.tcp://{0}:{1}/DriverService/{2}";
+        protected string URI_DRIVERWeb = "http://{0}/DriverService/{1}";
         protected const string DRIVER = "Driver";
 
 
@@ -87,7 +88,16 @@ namespace AdvancedScada.IBaseService
                 serviceThrottlingBehavior.MaxConcurrentCalls = int.MaxValue;
                 serviceThrottlingBehavior.MaxConcurrentSessions = int.MaxValue;
                 serviceThrottlingBehavior.MaxConcurrentInstances = int.MaxValue;
+               
                 host.Description.Behaviors.Add(serviceThrottlingBehavior);
+
+                //ServiceMetadataBehavior metad = host.Description.Behaviors.Find<ServiceMetadataBehavior>();
+        
+                //if (metad == null)
+                //    metad = new ServiceMetadataBehavior();
+                //metad.HttpGetEnabled = true;
+                //host.Description.Behaviors.Add(metad);
+               
             }
             return serviceThrottlingBehavior;
         }
