@@ -57,7 +57,7 @@
             this.graphicIndicatorBaseSVG2.PLCAddressClick = null;
             this.graphicIndicatorBaseSVG2.PLCAddressEnabled = null;
             this.graphicIndicatorBaseSVG2.PLCAddressValue = null;
-            this.graphicIndicatorBaseSVG2.PLCAddressValueSelect1 = "Ch1.PLC1.DataBlock2.TAG00027";
+            this.graphicIndicatorBaseSVG2.PLCAddressValueSelect1 = "CH3.PLC1.DataBlock1.TAG00011";
             this.graphicIndicatorBaseSVG2.PLCAddressVisible = null;
             this.graphicIndicatorBaseSVG2.RotationAngle = AdvancedScada.Controls_Binding.ImageAll.GraphicIndicatorBaseSVG.RotationAngleEnum.NoRotation;
             this.graphicIndicatorBaseSVG2.Size = new System.Drawing.Size(158, 121);
@@ -86,7 +86,7 @@
             this.hmiBottle1.PLCAddressClick = null;
             this.hmiBottle1.PLCAddressEnabled = null;
             this.hmiBottle1.PLCAddressText = "";
-            this.hmiBottle1.PLCAddressValue = "Ch1.PLC1.DataBlock1.TAG00005";
+            this.hmiBottle1.PLCAddressValue = "CH3.PLC1.DataBlock2.TAG00018";
             this.hmiBottle1.PLCAddressVisible = "";
             this.hmiBottle1.Size = new System.Drawing.Size(98, 240);
             this.hmiBottle1.TabIndex = 8;
@@ -111,9 +111,9 @@
             this.hmiLedDisplay1.Name = "hmiLedDisplay1";
             this.hmiLedDisplay1.PLCAddressClick = null;
             this.hmiLedDisplay1.PLCAddressEnabled = null;
-            this.hmiLedDisplay1.PLCAddressKeypad = "Ch1.PLC1.DataBlock1.TAG00005";
+            this.hmiLedDisplay1.PLCAddressKeypad = "CH3.PLC1.DataBlock2.TAG00019";
             this.hmiLedDisplay1.PLCAddressText = "";
-            this.hmiLedDisplay1.PLCAddressValue = "Ch1.PLC1.DataBlock1.TAG00005";
+            this.hmiLedDisplay1.PLCAddressValue = "CH3.PLC1.DataBlock2.TAG00019";
             this.hmiLedDisplay1.PLCAddressVisible = "";
             this.hmiLedDisplay1.Size = new System.Drawing.Size(286, 71);
             this.hmiLedDisplay1.TabIndex = 6;
@@ -130,10 +130,10 @@
             this.hmiVacuumPump1.MinimumHoldTime = 500;
             this.hmiVacuumPump1.Name = "hmiVacuumPump1";
             this.hmiVacuumPump1.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
-            this.hmiVacuumPump1.PLCAddressClick = "Ch1.PLC1.DataBlock2.TAG00027";
+            this.hmiVacuumPump1.PLCAddressClick = "CH3.PLC1.DataBlock1.TAG00011";
             this.hmiVacuumPump1.PLCAddressEnabled = null;
             this.hmiVacuumPump1.PLCAddressText = "";
-            this.hmiVacuumPump1.PLCAddressValue = "Ch1.PLC1.DataBlock2.TAG00027";
+            this.hmiVacuumPump1.PLCAddressValue = "CH3.PLC1.DataBlock1.TAG00011";
             this.hmiVacuumPump1.PLCAddressVisible = "";
             this.hmiVacuumPump1.Size = new System.Drawing.Size(120, 147);
             this.hmiVacuumPump1.TabIndex = 5;
@@ -150,10 +150,10 @@
             this.hmiPipeLine1.Name = "hmiPipeLine1";
             this.hmiPipeLine1.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
             this.hmiPipeLine1.PipeLineActive = true;
-            this.hmiPipeLine1.PLCAddressClick = "Ch1.PLC1.DataBlock2.TAG00025";
+            this.hmiPipeLine1.PLCAddressClick = "CH3.PLC1.DataBlock1.TAG00002";
             this.hmiPipeLine1.PLCAddressEnabled = null;
             this.hmiPipeLine1.PLCAddressText = "";
-            this.hmiPipeLine1.PLCAddressValue = "Ch1.PLC1.DataBlock2.TAG00025";
+            this.hmiPipeLine1.PLCAddressValue = "CH3.PLC1.DataBlock1.TAG00002";
             this.hmiPipeLine1.PLCAddressVisible = "";
             this.hmiPipeLine1.Size = new System.Drawing.Size(297, 36);
             this.hmiPipeLine1.TabIndex = 4;
@@ -169,10 +169,10 @@
             this.hmiMotor1.MinimumHoldTime = 500;
             this.hmiMotor1.Name = "hmiMotor1";
             this.hmiMotor1.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
-            this.hmiMotor1.PLCAddressClick = "Ch1.PLC1.DataBlock2.TAG00024";
+            this.hmiMotor1.PLCAddressClick = "CH3.PLC1.DataBlock1.TAG00002";
             this.hmiMotor1.PLCAddressEnabled = null;
             this.hmiMotor1.PLCAddressText = "";
-            this.hmiMotor1.PLCAddressValue = "Ch1.PLC1.DataBlock2.TAG00024";
+            this.hmiMotor1.PLCAddressValue = "CH3.PLC1.DataBlock1.TAG00002";
             this.hmiMotor1.PLCAddressVisible = "";
             this.hmiMotor1.SelactadMotorColor = AdvancedScada.Controls_Binding.MotorColor.Green;
             this.hmiMotor1.Size = new System.Drawing.Size(123, 86);
@@ -274,10 +274,10 @@
             this.hmiSegment7LED1.OuterBorderDarkColor = System.Drawing.Color.DarkGray;
             this.hmiSegment7LED1.OuterBorderLength = 5;
             this.hmiSegment7LED1.OuterBorderLightColor = System.Drawing.Color.Lavender;
-            this.hmiSegment7LED1.PLCAddressKeypad = "Ch1.PLC1.DataBlock1.TAG00002";
+            this.hmiSegment7LED1.PLCAddressKeypad = "CH3.PLC1.DataBlock2.TAG00018";
             this.hmiSegment7LED1.PLCAddressText = "";
-            this.hmiSegment7LED1.PLCAddressValue = "Ch1.PLC1.DataBlock1.TAG00002";
-            this.hmiSegment7LED1.PLCAddressVisible = "Ch1.PLC1.DataBlock2.TAG00021";
+            this.hmiSegment7LED1.PLCAddressValue = "CH3.PLC1.DataBlock2.TAG00018";
+            this.hmiSegment7LED1.PLCAddressVisible = "CH3.PLC1.DataBlock1.TAG00001";
             this.hmiSegment7LED1.Precision = 0;
             this.hmiSegment7LED1.RoundRadius = 10;
             this.hmiSegment7LED1.SegmentBorderColor = System.Drawing.Color.Black;
@@ -310,10 +310,10 @@
             this.hmiDigitalPanelMeter1.NumberOfDigits = 5;
             this.hmiDigitalPanelMeter1.PLCAddressClick = null;
             this.hmiDigitalPanelMeter1.PLCAddressEnabled = null;
-            this.hmiDigitalPanelMeter1.PLCAddressKeypad = "Ch1.PLC1.DataBlock1.TAG00001";
+            this.hmiDigitalPanelMeter1.PLCAddressKeypad = "CH3.PLC1.DataBlock2.TAG00017";
             this.hmiDigitalPanelMeter1.PLCAddressText = "";
-            this.hmiDigitalPanelMeter1.PLCAddressValue = "Ch1.PLC1.DataBlock1.TAG00001";
-            this.hmiDigitalPanelMeter1.PLCAddressVisible = "Ch1.PLC1.DataBlock2.TAG00022";
+            this.hmiDigitalPanelMeter1.PLCAddressValue = "CH3.PLC1.DataBlock2.TAG00017";
+            this.hmiDigitalPanelMeter1.PLCAddressVisible = "CH3.PLC1.DataBlock1.TAG00001";
             this.hmiDigitalPanelMeter1.Resolution = new decimal(new int[] {
             1,
             0,
@@ -345,7 +345,7 @@
             this.graphicIndicatorBaseSVG3.PLCAddressClick = null;
             this.graphicIndicatorBaseSVG3.PLCAddressEnabled = null;
             this.graphicIndicatorBaseSVG3.PLCAddressValue = null;
-            this.graphicIndicatorBaseSVG3.PLCAddressValueSelect1 = "Ch1.PLC1.DataBlock2.TAG00028";
+            this.graphicIndicatorBaseSVG3.PLCAddressValueSelect1 = "CH3.PLC1.DataBlock1.TAG00011";
             this.graphicIndicatorBaseSVG3.PLCAddressVisible = null;
             this.graphicIndicatorBaseSVG3.RotationAngle = AdvancedScada.Controls_Binding.ImageAll.GraphicIndicatorBaseSVG.RotationAngleEnum.NoRotation;
             this.graphicIndicatorBaseSVG3.Size = new System.Drawing.Size(158, 121);

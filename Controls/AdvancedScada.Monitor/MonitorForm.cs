@@ -260,75 +260,7 @@ namespace AdvancedScada.Monitor
         }
 
 
-        public void DataTags(Dictionary<string, Tag> Tags)
-        {
-            try
-            {
-                int Level = treeViewSI.SelectedNode.Level;
-                string selectedNode = treeViewSI.SelectedNode.Text;
-                if (IsConnected)
-                {
-
-                    switch (Level)
-                    {
-                        case 0:
-                            DGMonitorForm.Rows.Clear();
-                            break;
-                        case 1:
-                            DGMonitorForm.Rows.Clear();
-                            break;
-                        case 2:
-                            Channel chCurrent = objChannelManager.GetByChannelName(treeViewSI.SelectedNode.Parent.Parent.Text);
-                            Device dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
-                            DataBlock dbCurrent = objDataBlockManager.GetByDataBlockName(dvCurrent, treeViewSI.SelectedNode.Text);
-
-
-
-                            if (Tags != null)
-                            {
-                                var List2 = Tags.Where(item => dbCurrent.Tags.Any(p => p.ChannelId == item.Value.ChannelId
-                                                                                      && p.DeviceId == item.Value.DeviceId && p.DataBlockId == item.Value.DataBlockId)).ToList();
-
-                                for (int i = 0; i < DGMonitorForm.RowCount; i++)
-                                {
-
-                                    for (var y = 0; y < List2.Count; y++)
-                                    {
-                                        if (DGMonitorForm[0, i].Value != null)
-                                            if (List2[y].Value.TagId.Equals(int.Parse(DGMonitorForm[0, i].Value.ToString())))
-                                            {
-
-                                                if (DGMonitorForm[1, i].Value != null)
-                                                    for (int j = 0; j < List2.Count; j++)
-                                                        if (List2[j].Value.TagName.Equals(DGMonitorForm[1, i].Value.ToString()))
-                                                        {
-
-                                                            DGMonitorForm[4, i].Value = List2[j].Value.Value;
-                                                            DGMonitorForm[5, i].Value = $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}";
-                                                        }
-
-
-                                            }
-
-                                    }
-
-                                }
-
-
-                            }
-
-                            break;
-                        default:
-                            DGMonitorForm.Rows.Clear();
-                            break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-            }
-        }
+       
         #endregion
         private void PLC_MonitorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -525,9 +457,75 @@ namespace AdvancedScada.Monitor
             }
         }
 
-        public void UpdateCollection(ConnectionState status, Dictionary<string, Tag> collection)
+        public void UpdateCollection(ConnectionState status, Dictionary<string, Tag> Tags)
         {
+            try
+            {
+                eventConnectionChanged?.Invoke(status);
+                int Level = treeViewSI.SelectedNode.Level;
+                string selectedNode = treeViewSI.SelectedNode.Text;
+                if (IsConnected)
+                {
 
+                    switch (Level)
+                    {
+                        case 0:
+                            DGMonitorForm.Rows.Clear();
+                            break;
+                        case 1:
+                            DGMonitorForm.Rows.Clear();
+                            break;
+                        case 2:
+                            Channel chCurrent = objChannelManager.GetByChannelName(treeViewSI.SelectedNode.Parent.Parent.Text);
+                            Device dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
+                            DataBlock dbCurrent = objDataBlockManager.GetByDataBlockName(dvCurrent, treeViewSI.SelectedNode.Text);
+
+
+
+                            if (Tags != null)
+                            {
+                                var List2 = Tags.Where(item => dbCurrent.Tags.Any(p => p.ChannelId == item.Value.ChannelId
+                                                                                      && p.DeviceId == item.Value.DeviceId && p.DataBlockId == item.Value.DataBlockId)).ToList();
+
+                                for (int i = 0; i < DGMonitorForm.RowCount; i++)
+                                {
+
+                                    for (var y = 0; y < List2.Count; y++)
+                                    {
+                                        if (DGMonitorForm[0, i].Value != null)
+                                            if (List2[y].Value.TagId.Equals(int.Parse(DGMonitorForm[0, i].Value.ToString())))
+                                            {
+
+                                                if (DGMonitorForm[1, i].Value != null)
+                                                    for (int j = 0; j < List2.Count; j++)
+                                                        if (List2[j].Value.TagName.Equals(DGMonitorForm[1, i].Value.ToString()))
+                                                        {
+
+                                                            DGMonitorForm[4, i].Value = List2[j].Value.Value;
+                                                            DGMonitorForm[5, i].Value = $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}";
+                                                        }
+
+
+                                            }
+
+                                    }
+
+                                }
+
+
+                            }
+
+                            break;
+                        default:
+                            DGMonitorForm.Rows.Clear();
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            }
         }
     }
 

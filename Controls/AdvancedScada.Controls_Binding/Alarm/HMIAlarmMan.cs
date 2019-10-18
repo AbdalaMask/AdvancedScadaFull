@@ -107,9 +107,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
         }
 
         public static string path = string.Empty;
-        public const string Driver = "Driver";
-        public static ushort PORT = 8090;
-        public static string HOST = "localhost";
+       
 
         public void DataChanged(List<Tag> registers)
         {
@@ -355,20 +353,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
         }
 
 
-        public void DataChangedDataBlock(List<DataBlock> db)
-        {
-
-        }
-
-        public void DataTags(Dictionary<string, Tag> Tags)
-        {
-
-        }
-
-        public void DataDevices(Dictionary<string, Device> Devices)
-        {
-
-        }
+       
 
         public void UpdateCollection(ConnectionState status, Dictionary<string, Tag> collection)
         {
