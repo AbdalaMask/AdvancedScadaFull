@@ -30,9 +30,13 @@ namespace AdvancedScada.BaseService.Client
                     return false;
                 }
 
+             
+                if (TagCollectionClient.Tags.Count > 1 && objChannelManager.Channels.Count>1)
+                {
+                    return true;
+                }
                 objChannelManager.Channels.Clear();
                 TagCollectionClient.Tags.Clear();
-
                 var channels = objChannelManager.GetChannels(xmlFile);
 
                 foreach (var ch in channels)
