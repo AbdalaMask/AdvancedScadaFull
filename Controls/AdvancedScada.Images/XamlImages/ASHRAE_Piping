@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ASHRAE_Piping_0" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="90" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="451"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="150,37 0,37" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="892,345 999,451" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="150,75 563,75 863,375 920,318 600,0 150,0 150,75" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_1" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="133" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="666" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="666,874 665,880 664,886 662,893 659,899 655,905 651,911 645,917 639,922 633,928 625,933 617,938 609,944 599,948 589,953 579,958 568,962 556,966 544,970 532,974 519,977 505,981 491,984 477,986 462,989 447,991 431,993 415,995 399,996 383,997 366,998 349,999 333,999 316,999 299,998 282,997 266,996 250,995 234,993 218,991 203,989 188,986 174,984 160,981 146,977 133,974 121,970 109,966 97,962 86,958 76,953 66,948 56,944 48,938 40,933 32,928 26,922 20,917 14,911 10,905 6,899 3,893 1,886 0,880 0,874 0,0 666,0 666,874" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="166,657 166,724 499,724 499,457 166,457 166,191 499,191 499,258" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_2" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="151" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="758"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="172,758 723,758" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="447,758 447,137" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="240,620 654,620 654,482" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="516,309 999,309" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="447,137 309,0 172,137 103,516 0,482" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="309,413 447,206 585,413 309,413" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_3" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="499,999 499,374" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,999 999,999" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="249,374 499,0 749,374 249,374" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_4" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="151" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="756" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="188,756 188,661 213,661 236,658 260,655 283,652 306,646 329,640 350,632 372,624 393,614 413,604 433,592 452,580 471,567 489,553 506,538 522,522 538,506 553,489 567,471 580,452 592,433 604,413 614,393 624,372 632,350 640,329 646,306 652,283 655,260 658,236 661,213 661,188 756,188 756,203 755,217 754,231 753,245 751,259 750,273 747,286 745,300 742,313 739,327 735,340 731,353 728,366 723,379 719,392 714,404 708,417 703,429 697,442 691,453 684,465 678,477 671,488 664,499 656,510 649,521 640,532 632,542 623,553 615,563 606,572 597,582 594,585 594,972 648,972 648,999 432,999 432,972 486,972 486,671 486,671 484,672 483,673 482,673 474,678 466,683 458,687 450,691 441,696 433,699 424,704 416,708 407,711 398,715 389,719 380,722 371,725 362,728 353,731 344,734 334,736 325,738 315,741 306,743 296,745 287,747 277,748 267,750 258,751 248,752 238,754 228,754 218,755 208,755 198,756 188,756" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="709,188 709,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="188,709 0,709" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_5" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="199" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="997" Height="999"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,496 498,496" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="749,496 997,496" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="498,0 524,2 548,9 573,22 596,39 618,60 638,85 658,114 675,147 691,182 706,221 718,262 729,305 738,350 744,397 748,446 749,496 748,547 744,597 738,645 729,690 718,734 706,776 691,815 675,850 658,883 638,912 618,938 596,959 573,976 548,989 524,996 498,999" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_6" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="199" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="997" Height="999"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,498 997,498" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="498,0 498,999" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="372,125 372,873" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="624,125 624,873" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="498,0 997,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_7" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,499 374,499" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="374,124 374,874" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="624,874 624,124" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="624,499 999,499" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="499,749 499,999" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="499,249 499,0 999,0" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="374,249 624,249 624,749 374,749 374,249" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_8" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="99" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="499"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="166,166 168,149 173,133 181,117 192,101 207,87 223,73 243,60 264,48 287,37 313,28 340,19 370,13 400,7 432,3 465,0 499,0 533,0 566,3 598,7 628,13 658,19 685,28 711,37 734,48 755,60 775,73 791,87 806,101 817,117 825,133 830,149 832,166" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="832,333 999,333" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="166,333 0,333" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="166,499 166,166 832,499 832,166 166,499" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_9" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="133" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="666"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="832,333 999,333" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="166,333 0,333" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="832,0 832,666" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="166,0 166,666" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="249,0 333,666 666,666 749,0 249,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_10" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="87" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="437"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="811,312 187,437 187,0 811,124 811,312" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,218 187,218" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="811,218 999,218" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_11" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="449,199 549,199 549,449 799,449 799,549 549,549 549,799 449,799 449,549 199,549 199,449 449,449 449,199" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="199,499 0,499" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="499,199 499,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="799,499 999,499" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="499,799 499,999" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_12" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="99" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="499"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="166,499 166,166 832,499 832,166 166,499" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="166,333 0,333" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="832,333 999,333" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="166,166 168,149 173,133 181,117 192,101 207,87 223,73 243,60 264,48 287,37 313,28 340,19 370,13 400,7 432,3 465,0 499,0 533,0 566,3 598,7 628,13 658,19 685,28 711,37 734,48 755,60 775,73 791,87 806,101 817,117 825,133 830,149 832,166" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_13" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Ellipse Stroke="#000000" StrokeThickness="3" Canvas.Left="299" Canvas.Top="0" Width="400" Height="399" /&gt;&lt;Ellipse Stroke="#000000" StrokeThickness="3" Canvas.Left="299" Canvas.Top="599" Width="400" Height="400" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="200,799 200,199" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="798,199 798,799" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,499 199,499" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="799,499 999,499" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="199,399 799,399 799,599 199,599 199,399" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_14" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="62" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="312"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="811,312 187,312 187,0 811,124 811,312" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,218 187,218" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="811,218 999,218" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_15" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="66" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="333"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="333,166 0,166" /&gt;&lt;Ellipse Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Canvas.Left="666" Canvas.Top="0" Width="333" Height="333" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="832,249 333,249 333,83 832,83 832,249" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_16" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="66" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="333"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="832,249 333,249 333,83 832,83 832,249" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="333,166 0,166" /&gt;&lt;Ellipse Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Canvas.Left="666" Canvas.Top="0" Width="333" Height="333" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_17" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="199" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="997" Height="999"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,498 372,496" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="624,496 997,498" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="372,0 372,999" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="624,999 624,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_18" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,0 999,0 999,999 0,999 0,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="124,499 151,358 231,231 358,151 499,124 640,151 767,231 847,358 874,499 847,640 767,767 640,847 499,874 358,847 231,767 151,640 124,499" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_19" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="74" Stretch="Fill"&gt;&lt;Canvas Width="998" Height="374"&gt;&lt;Polygon Fill="#f2f2f2" Points="227,261 272,238 726,238 771,261 227,261" /&gt;&lt;Polygon Fill="#009900" Points="181,283 227,260 771,261 817,284 181,283" /&gt;&lt;Polygon Fill="#00a800" Points="136,306 181,283 817,283 862,306 136,306" /&gt;&lt;Polygon Fill="#00b800" Points="90,329 136,306 862,306 908,329 90,329" /&gt;&lt;Polygon Fill="#00c700" Points="0,374 90,329 908,329 998,374 0,374" /&gt;&lt;Polyline Stroke="#7f7f7f" StrokeThickness="3" Points="272,238 726,238" /&gt;&lt;Polyline Stroke="#7f7f7f" StrokeThickness="3" Points="227,261 771,261" /&gt;&lt;Polygon Fill="#e5b200" Stroke="#000000" StrokeThickness="3" Points="495,146 506,146 506,166 495,166 495,146" /&gt;&lt;Polygon Fill="#e5e500" Points="496,146 503,146 503,166 496,166 496,146" /&gt;&lt;Polygon Fill="#e5e5a5" Points="498,146 500,146 500,166 498,166 498,146" /&gt;&lt;Polygon Fill="#ffcc00" Stroke="#000000" StrokeThickness="3" Points="448,0 448,146 552,146 552,0 542,0 542,135 459,135 459,0 448,0" /&gt;&lt;Polygon Fill="#ffff00" Points="450,1 450,143 549,143 549,1 543,1 543,136 456,136 456,1 450,1" /&gt;&lt;Polygon Fill="#ffffbf" Points="451,2 451,140 547,140 547,1 544,1 544,138 454,138 454,2 451,2" /&gt;&lt;Polygon Fill="#000000" Points="492,166 508,166 508,249 492,249 492,166" /&gt;&lt;Polygon Fill="#4c4c4c" Points="494,166 506,166 506,249 494,249 494,166" /&gt;&lt;Polygon Fill="#999999" Points="495,166 503,166 503,249 495,249 495,166" /&gt;&lt;Polygon Fill="#e5e5e5" Points="496,166 500,166 500,249 496,249 496,166" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_20" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="165" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="826" Height="999"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="409,999 409,414" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="826,3 412,417" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,0 414,414" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_21" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="199" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="997" Height="999"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,500 997,500" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="372,0 624,0 372,999 624,999" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_22" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="90" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="450"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="149,37 0,37" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="892,345 999,450" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="150,75 563,75 863,375 919,319 678,75 923,75 923,0 150,0 150,75" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_23" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="100" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="500"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,249 999,249" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="250,500 748,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="250,0 748,500" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_24" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="499,999 999,999 999,0 499,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="999,499 0,499" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_25" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="199" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="997" Height="999"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,498 997,498" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="498,0 498,999" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="372,125 372,873" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="624,125 624,873" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_26" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="99" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="499"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="249,249 267,155 320,70 405,17 499,0 593,17 678,70 731,155 749,249 731,343 678,428 593,481 499,499 405,481 320,428 267,343 249,249" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="249,249 0,249" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="249,499 749,499 749,0 249,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="749,249 999,249" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_27" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="59" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="299"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="199,0 799,0 799,299 199,299 199,0" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="699,99 699,199 899,199 899,99 699,99" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="99,199 299,199 299,99 99,99 99,199" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="99,149 0,149" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="899,149 999,149" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_28" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="57" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="286"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="142,0 856,0 856,286 142,286 142,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="142,143 0,143" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="856,143 999,143" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="856,286 784,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="784,286 713,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="713,286 642,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="642,286 570,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="570,286 499,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="499,286 428,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="428,286 356,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="356,286 285,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="285,286 214,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="214,286 142,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="142,143 178,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="250,286 178,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="250,0 321,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="392,286 321,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="392,0 464,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="535,286 464,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="535,0 606,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="678,286 606,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="678,0 749,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="820,286 749,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="820,0 856,143" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="820,286 856,143" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="820,0 749,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="678,286 749,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="678,0 606,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="535,286 606,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="535,0 464,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="392,286 464,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="392,0 321,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="250,286 321,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="250,0 178,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="142,143 178,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="214,0 142,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="285,0 214,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="356,0 285,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="428,0 356,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="499,0 428,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="570,0 499,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="642,0 570,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="713,0 642,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="784,0 713,286" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="856,0 784,286" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_29" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,999 999,999" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="374,999 374,249" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="624,999 624,249" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="124,0 218,17 303,70 356,155 374,249" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="624,249 642,155 695,70 780,17 874,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="374,374 624,374" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_30" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="133" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="666"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="249,0 333,666 666,666 749,0 249,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="166,0 166,666" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="832,0 832,666" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="166,333 0,333" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="832,333 999,333" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_31" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="114" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="570" Height="999"&gt;&lt;Ellipse Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Canvas.Left="142" Canvas.Top="0" Width="286" Height="285" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="285,392 285,285" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="285,999 285,463" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="71,784 499,784 499,642" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,999 570,999" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="182,245 387,40" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="285,463 295,409 325,361 374,331 428,320 481,331 530,361 560,409 570,463 560,517 530,565 481,595 428,606 285,606" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_32" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="133" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="666" Height="999"&gt;&lt;Ellipse Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Canvas.Left="166" Canvas.Top="0" Width="333" Height="333" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="333,999 333,333" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="83,666 582,666 582,499" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,999 666,999" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="213,286 452,47" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_33" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="125" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="626" Height="999"&gt;&lt;Ellipse Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Canvas.Left="156" Canvas.Top="0" Width="314" Height="313" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="200,269 425,44" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,999 626,999" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="78,685 548,685 548,528" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="313,999 313,509" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="313,391 313,313" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="255,392 371,392 371,509 255,509 255,392" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_34" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="114" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="570"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="143,0 855,0 855,570 143,570 143,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="143,287 0,287" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="855,287 999,287" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="855,570 783,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="783,570 715,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="715,570 643,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="643,570 571,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="571,570 499,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="499,570 427,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="427,570 355,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="355,570 287,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="287,570 215,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="215,570 143,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="143,287 177,570" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="249,570 177,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="249,0 321,570" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="393,570 321,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="393,0 465,570" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="537,570 465,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="537,0 605,570" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="677,570 605,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="677,0 749,570" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="821,570 749,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="821,0 855,287" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_35" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="999,749 874,749 873,717 871,685 867,654 861,623 854,593 846,563 836,534 824,506 812,479 798,452 783,426 767,400 749,376 731,352 711,329 690,308 669,287 646,267 622,249 598,231 572,215 546,200 519,186 492,174 464,162 435,152 405,144 375,137 344,131 313,127 281,125 249,124 249,0 288,0 326,3 363,8 400,15 436,23 472,33 506,45 540,58 573,73 606,90 637,108 668,128 697,149 725,171 753,195 779,219 803,245 827,273 849,301 870,330 890,361 908,392 925,425 940,458 953,492 965,526 975,562 983,598 990,635 995,672 998,710 999,749" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="249,62 0,62" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="936,749 936,999" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_36" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="133" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="667"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,331 999,331" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="499,0 499,667" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_37" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="499,999 499,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="124,499 874,499 874,249" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,999 999,999" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_38" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="99" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="497"&gt;&lt;Ellipse Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Canvas.Left="247" Canvas.Top="0" Width="504" Height="497" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,251 999,251" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_39" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="127" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="639" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="119,159 519,159 519,839 119,839 119,159" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,999 639,999" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="319,999 319,839" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="319,159 319,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="519,839 120,759 519,679 120,599 519,519 120,439 519,359 120,279 519,159" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_40" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="874,749 874,124 249,124 249,0 999,0 999,749 874,749" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="249,62 0,62" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="936,749 936,999" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_41" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="39" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="199"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="799,99 999,99" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="199,99 0,99" /&gt;&lt;Ellipse Stroke="#000000" StrokeThickness="3" Canvas.Left="399" Canvas.Top="0" Width="200" Height="199" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="199,49 799,49 799,149 199,149 199,49" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_42" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="39" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="199"&gt;&lt;Ellipse Stroke="#000000" StrokeThickness="3" Canvas.Left="399" Canvas.Top="0" Width="200" Height="199" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="199,99 0,99" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="799,99 999,99" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="799,49 587,49 593,62 599,99 593,137 587,149 799,149 799,49" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="199,149 411,149 405,137 399,99 405,62 411,49 199,49 199,149" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_43" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="108" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="541"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="166,0 166,83 457,83 457,374 541,374 541,83 832,83 832,0 166,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="166,41 0,41" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="832,41 999,41" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="499,374 499,541" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_44" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,999 999,999" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="499,999 499,499" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="249,0 249,499 749,499 749,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_45" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="122" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="614" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="153,0 461,0 461,768 153,768 153,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,999 614,999" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="307,999 307,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_46" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="99" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="499"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="187,0 312,0 312,499 686,499 686,0 811,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,186 312,186" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="686,186 999,186" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_47" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="99" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="499"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,252 247,252" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="751,252 999,252" /&gt;&lt;Ellipse Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Canvas.Left="247" Canvas.Top="0" Width="504" Height="499" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="ASHRAE_Piping_48" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="152" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="761"&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="610,761 787,584" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="874,249 874,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="124,249 124,0" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="124,124 0,124" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="874,124 999,124" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="655,717 124,187 124,62 874,62 874,187 312,187 741,632 655,717" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+</root>

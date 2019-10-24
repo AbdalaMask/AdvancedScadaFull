@@ -31,14 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.xtbImageGallery = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
-            this.tbImageGallerySVG = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
-            this.cboxListForderSVG = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
-            this.gcSVG = new ComponentFactory.Krypton.Ribbon.KryptonGallery();
-            this.ImageGallery = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
-            this.cboxListForder = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
-            this.gc = new ComponentFactory.Krypton.Ribbon.KryptonGallery();
             this.tbLibraryImages = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonSplitContainer3 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.ListBoxCategoryName = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
@@ -59,29 +51,17 @@
             this.btnOK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnCancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.KR_WMF = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
+            this.KR_Xaml = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
+            this.KR_SVG = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonContextMenuItem7 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem8 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.KR_PNG = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.xtbImageGallery)).BeginInit();
             this.xtbImageGallery.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbImageGallerySVG)).BeginInit();
-            this.tbImageGallerySVG.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
-            this.kryptonSplitContainer1.Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).BeginInit();
-            this.kryptonSplitContainer1.Panel2.SuspendLayout();
-            this.kryptonSplitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ImageGallery)).BeginInit();
-            this.ImageGallery.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel1)).BeginInit();
-            this.kryptonSplitContainer2.Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel2)).BeginInit();
-            this.kryptonSplitContainer2.Panel2.SuspendLayout();
-            this.kryptonSplitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbLibraryImages)).BeginInit();
             this.tbLibraryImages.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer3)).BeginInit();
@@ -91,6 +71,7 @@
             this.kryptonSplitContainer3.Panel2.SuspendLayout();
             this.kryptonSplitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
+            this.kryptonPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -104,115 +85,11 @@
             this.xtbImageGallery.Name = "xtbImageGallery";
             this.xtbImageGallery.NavigatorMode = ComponentFactory.Krypton.Navigator.NavigatorMode.BarCheckButtonGroupInside;
             this.xtbImageGallery.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
-            this.tbImageGallerySVG,
-            this.ImageGallery,
             this.tbLibraryImages});
             this.xtbImageGallery.SelectedIndex = 0;
             this.xtbImageGallery.Size = new System.Drawing.Size(625, 404);
             this.xtbImageGallery.TabIndex = 0;
             this.xtbImageGallery.Text = "kryptonNavigator1";
-            // 
-            // tbImageGallerySVG
-            // 
-            this.tbImageGallerySVG.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.tbImageGallerySVG.Controls.Add(this.kryptonSplitContainer1);
-            this.tbImageGallerySVG.Flags = 65534;
-            this.tbImageGallerySVG.LastVisibleSet = true;
-            this.tbImageGallerySVG.MinimumSize = new System.Drawing.Size(50, 50);
-            this.tbImageGallerySVG.Name = "tbImageGallerySVG";
-            this.tbImageGallerySVG.Size = new System.Drawing.Size(623, 372);
-            this.tbImageGallerySVG.Text = "ImageGallerySVG";
-            this.tbImageGallerySVG.ToolTipTitle = "Page ToolTip";
-            this.tbImageGallerySVG.UniqueName = "6DCCC9F7D5C34697A9AD81F2B17E0A49";
-            // 
-            // kryptonSplitContainer1
-            // 
-            this.kryptonSplitContainer1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.kryptonSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonSplitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonSplitContainer1.Name = "kryptonSplitContainer1";
-            // 
-            // kryptonSplitContainer1.Panel1
-            // 
-            this.kryptonSplitContainer1.Panel1.Controls.Add(this.cboxListForderSVG);
-            // 
-            // kryptonSplitContainer1.Panel2
-            // 
-            this.kryptonSplitContainer1.Panel2.Controls.Add(this.gcSVG);
-            this.kryptonSplitContainer1.Size = new System.Drawing.Size(623, 372);
-            this.kryptonSplitContainer1.SplitterDistance = 205;
-            this.kryptonSplitContainer1.TabIndex = 0;
-            // 
-            // cboxListForderSVG
-            // 
-            this.cboxListForderSVG.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cboxListForderSVG.Location = new System.Drawing.Point(0, 0);
-            this.cboxListForderSVG.Name = "cboxListForderSVG";
-            this.cboxListForderSVG.Size = new System.Drawing.Size(205, 372);
-            this.cboxListForderSVG.TabIndex = 0;
-            this.cboxListForderSVG.SelectedIndexChanged += new System.EventHandler(this.cboxListForderSVG_SelectedIndexChanged);
-            // 
-            // gcSVG
-            // 
-            this.gcSVG.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcSVG.ImageList = null;
-            this.gcSVG.Location = new System.Drawing.Point(0, 0);
-            this.gcSVG.Name = "gcSVG";
-            this.gcSVG.Size = new System.Drawing.Size(413, 372);
-            this.gcSVG.TabIndex = 0;
-            this.gcSVG.SelectedIndexChanged += new System.EventHandler(this.gcSVG_SelectedIndexChanged);
-            this.gcSVG.MouseLeave += new System.EventHandler(this.gcSVG_MouseLeave);
-            // 
-            // ImageGallery
-            // 
-            this.ImageGallery.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.ImageGallery.Controls.Add(this.kryptonSplitContainer2);
-            this.ImageGallery.Flags = 65534;
-            this.ImageGallery.LastVisibleSet = true;
-            this.ImageGallery.MinimumSize = new System.Drawing.Size(50, 50);
-            this.ImageGallery.Name = "ImageGallery";
-            this.ImageGallery.Size = new System.Drawing.Size(623, 372);
-            this.ImageGallery.Text = "ImageGallery";
-            this.ImageGallery.ToolTipTitle = "Page ToolTip";
-            this.ImageGallery.UniqueName = "31450386A7AE41E7C68E45CB6DDCCC1B";
-            // 
-            // kryptonSplitContainer2
-            // 
-            this.kryptonSplitContainer2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.kryptonSplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonSplitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.kryptonSplitContainer2.Name = "kryptonSplitContainer2";
-            // 
-            // kryptonSplitContainer2.Panel1
-            // 
-            this.kryptonSplitContainer2.Panel1.Controls.Add(this.cboxListForder);
-            // 
-            // kryptonSplitContainer2.Panel2
-            // 
-            this.kryptonSplitContainer2.Panel2.Controls.Add(this.gc);
-            this.kryptonSplitContainer2.Size = new System.Drawing.Size(623, 372);
-            this.kryptonSplitContainer2.SplitterDistance = 205;
-            this.kryptonSplitContainer2.TabIndex = 0;
-            // 
-            // cboxListForder
-            // 
-            this.cboxListForder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cboxListForder.Location = new System.Drawing.Point(0, 0);
-            this.cboxListForder.Name = "cboxListForder";
-            this.cboxListForder.Size = new System.Drawing.Size(205, 372);
-            this.cboxListForder.TabIndex = 0;
-            this.cboxListForder.SelectedIndexChanged += new System.EventHandler(this.cboxListForder_SelectedIndexChanged);
-            // 
-            // gc
-            // 
-            this.gc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gc.ImageList = null;
-            this.gc.Location = new System.Drawing.Point(0, 0);
-            this.gc.Name = "gc";
-            this.gc.Size = new System.Drawing.Size(413, 372);
-            this.gc.TabIndex = 0;
-            this.gc.SelectedIndexChanged += new System.EventHandler(this.gc_SelectedIndexChanged);
-            this.gc.MouseLeave += new System.EventHandler(this.gc_MouseLeave);
             // 
             // tbLibraryImages
             // 
@@ -379,12 +256,44 @@
             // 
             // kryptonPanel2
             // 
+            this.kryptonPanel2.Controls.Add(this.KR_PNG);
+            this.kryptonPanel2.Controls.Add(this.KR_WMF);
+            this.kryptonPanel2.Controls.Add(this.KR_Xaml);
+            this.kryptonPanel2.Controls.Add(this.KR_SVG);
             this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonPanel2.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.kryptonPanel2.Name = "kryptonPanel2";
             this.kryptonPanel2.Size = new System.Drawing.Size(625, 28);
             this.kryptonPanel2.TabIndex = 2;
+            // 
+            // KR_WMF
+            // 
+            this.KR_WMF.Location = new System.Drawing.Point(489, 5);
+            this.KR_WMF.Name = "KR_WMF";
+            this.KR_WMF.Size = new System.Drawing.Size(51, 20);
+            this.KR_WMF.TabIndex = 2;
+            this.KR_WMF.Values.Text = "WMF";
+            this.KR_WMF.Click += new System.EventHandler(this.KR_WMF_Click);
+            // 
+            // KR_Xaml
+            // 
+            this.KR_Xaml.Location = new System.Drawing.Point(421, 5);
+            this.KR_Xaml.Name = "KR_Xaml";
+            this.KR_Xaml.Size = new System.Drawing.Size(50, 20);
+            this.KR_Xaml.TabIndex = 1;
+            this.KR_Xaml.Values.Text = "Xaml";
+            this.KR_Xaml.Click += new System.EventHandler(this.KR_Xaml_Click);
+            // 
+            // KR_SVG
+            // 
+            this.KR_SVG.Checked = true;
+            this.KR_SVG.Location = new System.Drawing.Point(353, 3);
+            this.KR_SVG.Name = "KR_SVG";
+            this.KR_SVG.Size = new System.Drawing.Size(45, 20);
+            this.KR_SVG.TabIndex = 0;
+            this.KR_SVG.Values.Text = "SVG";
+            this.KR_SVG.Click += new System.EventHandler(this.KR_SVG_Click);
             // 
             // kryptonPanel1
             // 
@@ -408,6 +317,15 @@
             // 
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             // 
+            // KR_PNG
+            // 
+            this.KR_PNG.Location = new System.Drawing.Point(553, 5);
+            this.KR_PNG.Name = "KR_PNG";
+            this.KR_PNG.Size = new System.Drawing.Size(47, 20);
+            this.KR_PNG.TabIndex = 3;
+            this.KR_PNG.Values.Text = "PNG";
+            this.KR_PNG.Click += new System.EventHandler(this.KR_PNG_Click);
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -423,22 +341,6 @@
             this.Load += new System.EventHandler(this.MainView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.xtbImageGallery)).EndInit();
             this.xtbImageGallery.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tbImageGallerySVG)).EndInit();
-            this.tbImageGallerySVG.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).EndInit();
-            this.kryptonSplitContainer1.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).EndInit();
-            this.kryptonSplitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
-            this.kryptonSplitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ImageGallery)).EndInit();
-            this.ImageGallery.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel1)).EndInit();
-            this.kryptonSplitContainer2.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel2)).EndInit();
-            this.kryptonSplitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2)).EndInit();
-            this.kryptonSplitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tbLibraryImages)).EndInit();
             this.tbLibraryImages.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer3.Panel1)).EndInit();
@@ -448,6 +350,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer3)).EndInit();
             this.kryptonSplitContainer3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
+            this.kryptonPanel2.ResumeLayout(false);
+            this.kryptonPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -457,17 +361,9 @@
         #endregion
 
         private ComponentFactory.Krypton.Navigator.KryptonNavigator xtbImageGallery;
-        private ComponentFactory.Krypton.Navigator.KryptonPage tbImageGallerySVG;
-        private ComponentFactory.Krypton.Navigator.KryptonPage ImageGallery;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnOK;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnCancel;
-        private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
-        private ComponentFactory.Krypton.Ribbon.KryptonGallery gcSVG;
-        private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer2;
-        private ComponentFactory.Krypton.Ribbon.KryptonGallery gc;
         private System.Windows.Forms.ImageList imageListLarge;
-        private ComponentFactory.Krypton.Toolkit.KryptonListBox cboxListForder;
-        private ComponentFactory.Krypton.Toolkit.KryptonListBox cboxListForderSVG;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Navigator.KryptonPage tbLibraryImages;
@@ -490,6 +386,10 @@
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem btnExportXaml;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolTip toolTip1;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton KR_WMF;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton KR_Xaml;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton KR_SVG;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton KR_PNG;
     }
 }
 

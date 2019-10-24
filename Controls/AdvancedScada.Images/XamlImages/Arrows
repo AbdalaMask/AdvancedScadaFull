@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Arrows_0" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="110" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="554"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="109,109 222,109 109,0 109,109" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="109,332 109,444 222,554 222,444 889,444 776,332 109,332" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="109,332 222,444" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="776,444 889,554 999,332 889,109 776,0 889,222 776,444" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="889,222 999,332" /&gt;&lt;Polygon Fill="#ffffff" Stroke="#000000" StrokeThickness="3" Points="0,222 109,0 109,109 776,109 776,0 889,222 776,444 776,332 109,332 109,444 0,222" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_1" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="124" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="623"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="463,120 674,131 652,0 662,0 669,14 676,28 683,41 690,54 699,67 707,80 715,92 723,104 732,116 742,128 752,139 761,150 772,161 781,171 792,181 803,191 815,200 826,210 838,219 849,228 861,236 873,245 885,253 897,260 909,268 922,275 934,281 947,288 960,294 972,300 985,306 999,311 985,317 973,323 960,328 947,335 935,341 922,348 910,356 897,363 886,371 874,379 862,387 850,395 838,404 826,413 815,422 804,432 793,442 782,452 772,462 762,473 752,484 742,495 733,506 724,518 715,531 707,543 699,556 690,569 683,582 676,595 669,609 662,623 652,623 674,492 463,503 501,311 463,120" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,97 29,99 68,311 29,525 0,526 39,311 0,97" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="117,104 155,105 195,311 155,519 117,520 155,311 117,104" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="229,109 292,112 331,311 292,511 229,515 268,311 229,109" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="341,114 434,119 472,311 434,504 341,509 380,311 341,114" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_2" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="55" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="276"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="860,276 860,206 659,206 659,69 860,69 860,0 999,140 860,276" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="392,206 392,69 599,69 599,206 392,206" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="190,206 190,69 331,69 331,206 190,206" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="58,206 58,69 130,69 130,206 58,206" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,206 0,69 8,69 8,206 0,206" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_3" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Ellipse Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Canvas.Left="0" Canvas.Top="0" Width="999" Height="999" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="112,374 112,624 598,624 598,790 908,500 598,208 598,374 112,374" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_4" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="122" Stretch="Fill"&gt;&lt;Canvas Width="998" Height="612"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,0 998,307 0,612 342,307 0,0" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="154,85 555,307 155,526 875,307 154,85" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_5" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="185" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="927" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="927,67 708,569 595,372 196,587 196,999 0,999 0,483 501,206 382,0 927,67" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_6" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="79" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="397" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="146,0 146,275 397,275 397,554 146,554 146,795 270,680 137,999 0,680 127,795 127,532 380,532 380,293 127,293 127,0 128,0 130,0 133,0 136,0 140,0 143,0 145,0 146,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_7" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="106" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="531" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="531,457 364,360 340,395 317,429 296,464 276,498 258,531 241,566 226,601 211,637 199,675 188,714 179,754 172,798 166,843 163,892 161,943 161,999 2,999 1,970 0,942 1,915 2,888 3,861 5,835 8,809 12,784 16,758 20,734 25,709 31,685 37,661 43,638 50,615 58,592 66,570 74,547 82,526 91,504 101,483 111,462 121,441 131,421 141,401 152,381 163,362 174,343 185,323 196,304 208,285 219,267 64,178 480,0 531,457" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_8" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="94" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="471"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="999,235 706,0 763,116 0,0 56,235 0,471 763,351 706,471 999,235" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_9" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="199" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="998" Height="999"&gt;&lt;Ellipse Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Canvas.Left="0" Canvas.Top="0" Width="752" Height="753" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="643,643 998,999" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_10" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="155" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="777"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="999,777 665,369 666,0 0,0 0,444 629,444 999,777" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_11" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="142" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="713"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="999,713 808,570 0,571 0,0 856,0 856,475 999,713" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_12" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="85" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="428"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="885,285 713,114 999,0 885,285" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="799,199 571,428 0,428" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_13" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="77" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="386"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="961,94 999,0 904,37 961,94" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="932,66 613,386 0,386" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_14" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="448,550 216,550 216,698 0,499 216,300 216,448 448,448 448,216 300,216 499,0 698,216 550,216 550,448 782,448 782,300 999,499 782,698 782,550 550,550 550,782 698,782 499,999 300,782 448,782 448,550" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_15" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="133" Stretch="Fill"&gt;&lt;Canvas Width="998" Height="665"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,0 374,208 374,0 998,332 374,665 374,499 0,665 0,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_16" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="94" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="474"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="219,213 284,215 168,0 193,0 309,216 374,219 254,0 280,0 396,219 822,233 819,230 822,231 822,231 818,229 814,228 809,226 804,224 799,222 794,219 788,217 782,214 776,211 770,207 763,203 756,199 748,194 741,188 733,183 725,176 717,170 710,164 704,158 697,153 692,147 687,142 683,137 679,132 675,128 672,123 669,119 666,114 663,109 661,104 659,100 657,95 654,90 652,84 650,77 647,70 645,61 642,51 639,41 636,30 635,27 634,24 634,21 634,17 633,13 632,9 632,4 632,0 999,233 999,239 632,469 632,462 633,455 634,448 635,441 637,433 638,426 641,419 643,412 646,405 649,398 653,390 658,382 663,374 669,366 675,357 683,347 690,338 698,330 706,321 713,313 721,306 729,299 737,292 745,286 754,281 763,275 771,270 781,265 791,260 801,255 810,250 821,245 396,258 280,474 254,474 370,258 309,259 193,474 168,474 284,260 228,261 111,474 86,474 202,261 142,264 25,474 0,474 116,264 25,267 22,267 18,266 15,266 13,266 11,265 8,264 7,263 5,262 4,260 3,259 2,256 1,254 1,251 0,248 0,245 0,241 0,235 0,231 0,227 1,223 1,219 2,217 3,215 4,213 5,211 7,210 9,209 11,208 14,207 17,207 20,207 24,207 116,210 0,0 25,0 142,210 202,214 86,0 111,0 219,213" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_17" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="123" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="618"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,309 222,0 999,0 832,309 999,618 222,618 0,309" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_18" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="77" Stretch="Fill"&gt;&lt;Canvas Width="998" Height="386"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="565,0 544,0 523,1 504,2 485,4 468,7 451,10 435,14 420,18 405,22 391,27 379,31 366,36 355,42 344,47 334,52 324,58 316,63 307,69 300,74 293,79 287,84 282,89 276,94 272,98 268,102 265,105 262,109 260,111 258,113 257,115 256,116 256,116 0,116 0,116 1,115 2,114 4,111 7,109 10,106 14,102 18,98 23,94 28,89 35,85 42,80 49,75 57,69 66,64 76,59 86,53 97,48 109,42 121,37 134,32 148,27 162,23 178,18 194,14 211,11 228,8 246,5 266,3 285,1 306,0 328,0 565,0" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="328,0 349,0 369,0 388,1 407,2 425,4 442,6 459,8 475,11 490,13 505,16 519,19 533,23 546,26 558,30 570,34 581,38 591,43 601,47 611,51 619,56 628,61 636,65 643,70 650,75 656,80 662,85 668,89 673,94 677,99 682,104 685,108 688,113 691,118 694,122 696,127 699,133 700,138 702,144 704,149 705,155 706,161 707,167 708,172 708,178 709,184 709,190 710,195 710,201 710,206 710,211 709,217 709,221 709,226 709,230 708,234 708,238 708,241 707,244 707,247 707,249 707,251 706,252 706,253 706,253 596,253 793,386 998,253 898,253 898,252 898,251 897,250 897,248 897,245 897,242 897,238 896,234 896,229 896,224 895,219 895,214 894,208 893,202 893,196 892,190 891,184 890,178 889,172 888,166 887,160 886,154 885,148 883,143 882,138 880,132 879,128 877,124 876,120 874,116 872,114 870,111 868,109 866,106 863,103 861,100 857,96 854,93 850,89 846,84 841,80 836,75 831,71 825,66 819,61 811,56 804,52 796,47 787,42 778,38 768,33 757,29 745,25 733,21 720,17 706,14 692,11 676,8 660,5 643,3 625,2 606,0 586,0 565,0 328,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_19" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="199" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="997" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="997,499 0,999 559,499 0,0 997,499" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_20" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="199" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="995"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,836 625,195 146,195 354,0 999,0 999,638 778,847 778,365 155,995 0,836" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_21" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="198" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="993"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="292,102 999,0 893,706 784,598 835,253 97,993 0,895 739,157 394,208 292,102" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_22" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="138" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="692"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="430,5 919,261 934,269 948,277 963,285 974,295 984,306 992,318 996,333 999,349 996,365 990,380 982,392 971,404 958,414 943,424 929,433 914,441 452,683 429,692 407,692 391,687 380,676 375,661 378,644 390,628 412,611 799,402 72,402 40,398 18,387 4,371 0,353 4,336 17,320 40,309 72,305 799,305 402,85 382,69 370,53 368,36 371,21 382,9 395,2 411,0 430,5" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_23" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="119" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="596"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="999,299 584,596 584,470 741,358 0,358 0,299 0,238 741,238 584,125 584,0 999,299" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_24" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="199" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="995" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="995,499 0,999 329,499 0,0 995,499" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_25" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="133" Stretch="Fill"&gt;&lt;Canvas Width="998" Height="665"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,665 2,664 4,661 7,658 11,654 15,649 20,643 26,637 32,630 38,622 45,613 52,604 60,594 67,584 75,573 83,561 91,549 98,537 106,524 113,511 121,497 127,483 134,469 140,455 145,440 151,425 155,410 159,395 162,379 164,364 166,348 166,332 166,317 164,301 162,286 159,270 155,255 151,240 145,225 140,210 134,196 127,182 121,168 113,154 106,141 98,128 91,116 83,104 75,92 67,81 60,71 52,61 45,52 38,43 32,35 26,28 20,22 15,16 11,11 7,7 4,4 2,1 0,0 0,0 998,332 0,665 0,665" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_26" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="119" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="599"&gt;&lt;Ellipse Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Canvas.Left="0" Canvas.Top="0" Width="598" Height="599" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="599,299 999,299" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_27" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="79" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="399"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="999,199 599,166 599,0 0,0 0,399 599,399 599,232 999,199" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_28" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="108" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="544"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="999,272 817,317 817,544 0,544 0,0 817,0 817,227 999,272" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_29" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="103" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="519"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="719,519 719,279 999,399 719,519" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="720,399 399,399 0,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_30" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="96" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="483"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="904,483 999,441 903,401 904,483" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="903,441 442,442 0,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_31" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="107" Stretch="Fill"&gt;&lt;Canvas Width="998" Height="537"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="207,524 203,520 201,516 199,511 197,506 197,501 196,495 197,489 197,483 198,476 199,470 201,463 202,456 204,448 206,441 208,434 210,427 212,420 214,413 216,406 218,399 219,392 220,385 221,379 222,373 222,367 221,361 221,356 219,351 217,346 214,342 211,338 206,336 201,336 196,336 192,336 188,337 184,339 179,341 176,343 172,346 168,349 164,352 160,356 157,360 153,363 149,367 145,371 141,375 137,379 133,383 129,387 125,390 120,393 116,396 111,399 106,401 101,403 96,404 90,405 85,405 78,404 72,403 66,401 58,400 50,397 43,394 37,389 31,383 26,375 21,368 16,359 13,349 9,339 6,329 4,317 2,306 1,294 0,282 0,270 0,258 0,246 1,234 3,222 5,211 7,200 11,190 14,179 18,171 23,162 27,155 33,148 39,143 45,138 52,135 60,133 65,133 70,134 76,135 81,136 87,138 92,140 97,142 103,144 108,146 113,149 118,151 123,154 128,156 133,159 138,161 143,164 148,166 153,168 157,170 162,172 166,174 171,175 175,177 180,177 184,178 188,178 192,178 196,178 200,177 204,175 207,173 211,171 214,166 216,161 217,156 219,151 219,145 219,139 219,134 219,128 217,122 216,116 215,110 213,104 212,98 210,91 208,85 206,79 204,73 203,67 201,62 199,56 198,50 197,45 196,40 196,34 196,30 196,25 197,20 199,16 201,12 204,8 207,5 211,2 214,1 218,0 222,0 227,0 232,0 237,1 243,2 250,3 256,4 263,6 271,8 278,10 285,12 293,14 301,16 309,19 317,21 326,23 334,25 342,28 350,30 358,32 366,34 374,35 382,37 389,38 397,39 404,40 410,40 417,40 423,40 429,39 432,42 436,44 441,47 446,50 451,53 457,56 463,58 469,61 476,64 483,66 491,69 498,71 506,74 513,76 521,78 529,81 537,83 545,85 553,87 561,88 568,89 576,91 583,92 590,93 597,94 604,94 610,95 616,95 621,95 626,94 631,94 635,93 639,98 644,102 649,106 654,111 660,115 666,119 672,123 679,127 685,131 692,135 699,139 707,143 714,146 721,150 729,153 736,156 744,159 751,162 759,164 766,167 774,169 781,171 788,173 795,175 802,176 809,177 816,178 822,179 828,179 834,179 839,179 844,179 849,184 854,189 859,194 864,198 869,202 874,205 880,208 885,211 890,214 895,216 900,219 906,221 911,223 916,224 921,226 927,228 932,230 937,231 942,233 947,234 952,236 957,238 961,240 966,241 971,244 975,246 979,248 983,251 987,254 991,257 995,261 998,265 996,268 993,271 990,274 986,276 983,279 979,281 975,284 971,286 967,288 963,290 958,292 954,294 949,297 944,299 939,301 934,303 929,306 924,308 918,311 913,314 907,317 902,320 896,323 890,327 884,331 878,335 872,339 866,343 860,349 854,354 847,359 841,365 837,365 833,364 829,364 824,364 818,365 812,365 806,366 799,368 793,369 785,370 778,372 771,374 763,376 755,378 747,380 738,383 730,385 722,388 714,391 706,394 698,397 690,400 682,403 674,407 667,410 660,414 653,417 646,421 640,425 634,429 629,433 624,436 618,435 612,434 605,434 599,433 593,433 587,434 580,434 574,434 567,435 561,436 554,437 548,439 542,440 535,442 529,444 523,446 516,448 510,450 504,453 498,455 492,458 487,461 481,463 476,466 471,469 466,472 461,475 456,478 452,481 448,484 444,487 441,490 433,489 424,488 416,488 408,489 400,489 392,491 384,493 376,495 368,497 361,500 353,502 345,505 337,508 329,511 322,514 314,518 307,520 299,523 292,526 285,529 278,531 271,533 264,534 258,536 251,536 245,537 239,537 233,536 227,535 222,533 216,531 211,527 207,524" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_32" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="112" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="563"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="999,282 573,563 573,371 0,371 0,192 573,192 573,0 999,282" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="623,242 50,242 50,320 623,320 623,470 909,282 623,93 623,242" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_33" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="137" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="687"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="498,0 974,584 979,590 984,598 988,605 992,610 995,616 997,622 999,627 999,632 999,637 997,644 996,649 995,653 992,658 988,663 985,667 982,671 978,675 972,678 969,680 963,683 958,684 953,685 948,687 942,687 936,687 928,684 922,682 915,678 907,674 901,669 894,662 888,654 498,174 108,654 101,662 95,669 87,674 80,678 74,682 67,684 61,687 54,687 43,685 33,683 24,679 16,672 13,669 10,663 6,659 5,653 2,648 1,642 0,636 0,631 0,626 1,622 3,616 6,610 9,605 13,598 18,590 23,584 498,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_34" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="160" Stretch="Fill"&gt;&lt;Canvas Width="998" Height="799"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,0 199,0 699,399 199,799 0,799 499,399 0,0" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="299,0 499,0 998,399 499,799 299,799 799,399 299,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_35" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="151" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="759" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="759,516 1,999 1,3 0,0 759,516" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_36" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="193" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="967" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="967,0 937,349 845,255 233,855 339,953 0,999 34,673 130,759 739,158 630,58 967,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_37" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="79" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="399"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="216,149 782,149 782,0 999,200 782,399 782,249 216,249 216,399 0,200 216,0 216,149" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_38" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="174" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="874"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="999,177 700,370 700,257 255,257 255,571 364,571 183,874 0,575 124,575 124,126 690,126 690,0 999,177" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_39" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="162" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="814"&gt;&lt;Polygon Fill="#00ffff" Points="905,301 676,301 678,315 690,322 707,328 730,347 738,372 744,393 744,415 740,439 732,459 713,483 686,502 670,505 690,510 705,529 717,556 724,586 720,614 711,632 680,660 657,671 638,676 659,684 678,695 690,717 692,744 690,771 678,795 659,809 638,814 93,814 0,744 0,157 168,0 582,0 586,26 586,51 563,95 526,122 484,133 314,133 285,157 905,157 959,157 972,165 982,179 999,225 988,255 973,276 953,295 928,301 905,301" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_40" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="87" Stretch="Fill"&gt;&lt;Canvas Width="998" Height="436"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,68 160,68 137,91 252,91 261,87 269,83 277,78 285,74 293,70 300,66 307,62 315,58 322,54 329,50 335,46 342,42 348,39 355,35 361,31 367,28 373,25 379,22 385,19 391,16 397,14 402,12 408,10 414,7 419,6 425,4 431,3 436,2 442,1 447,0 453,0 459,0 463,0 468,0 472,1 477,2 482,2 486,4 491,5 496,7 501,8 506,10 510,12 516,14 520,16 525,18 529,20 533,22 538,25 542,27 546,29 550,31 553,33 556,35 559,36 562,38 565,40 567,41 569,42 571,44 572,44 573,45 573,45 574,45 574,45 576,45 580,45 585,45 591,45 598,45 607,45 616,45 626,45 637,45 648,45 660,45 673,45 686,45 699,45 713,45 727,45 740,45 754,45 768,45 782,45 795,45 808,45 821,45 833,45 844,45 855,45 865,45 874,45 882,45 889,45 895,45 908,46 920,47 930,48 940,49 950,51 958,54 966,56 973,60 979,63 984,67 988,71 992,74 995,78 997,83 998,87 998,91 998,96 997,100 995,104 992,108 988,112 984,116 979,120 973,123 966,126 958,129 950,131 940,133 930,135 920,136 908,137 895,137 891,137 885,137 879,137 873,137 866,137 859,137 851,137 844,137 835,137 827,137 818,137 810,137 801,137 792,137 783,137 775,137 766,137 758,137 749,137 742,137 734,137 727,137 720,137 714,137 709,137 704,137 699,137 696,137 692,137 690,137 689,137 689,137 697,142 704,146 711,150 717,154 722,159 726,163 730,167 733,171 736,175 737,179 738,183 739,186 738,190 738,194 736,197 734,200 732,204 729,206 725,209 722,212 717,215 713,217 707,219 701,221 695,223 689,224 682,226 675,227 667,228 659,229 651,229 643,229 653,236 661,242 668,247 673,253 678,258 681,263 683,268 684,273 684,277 683,281 681,285 678,288 675,292 672,295 667,298 663,301 658,303 652,306 647,308 642,310 636,312 630,313 625,315 620,316 615,317 611,318 607,319 603,320 601,320 598,321 597,321 597,321 608,330 617,337 624,346 629,353 631,360 632,368 630,374 627,381 622,387 615,392 606,397 597,402 585,407 573,411 560,415 545,419 529,421 513,424 496,426 478,428 460,429 441,430 422,431 403,431 383,430 364,429 345,428 325,426 306,423 288,420 270,417 252,413 137,413 160,436 0,436 0,68" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_41" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="133" Stretch="Fill"&gt;&lt;Canvas Width="998" Height="665"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,332 267,0 449,0 174,332 449,665 267,665 0,332" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="274,332 541,0 724,0 449,332 724,665 541,665 274,332" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="549,332 816,0 998,0 724,332 998,665 816,665 549,332" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_42" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="116" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="583" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="374,262 374,261 374,261 374,260 374,258 374,257 374,255 374,252 374,250 373,247 373,244 373,240 372,237 371,233 370,229 369,225 368,221 364,213 359,206 354,200 349,195 343,191 337,188 330,186 323,184 316,184 309,184 301,185 293,186 285,188 277,190 269,193 260,195 251,198 243,201 234,205 225,208 216,211 207,214 198,216 189,219 180,221 172,223 163,224 155,225 146,225 138,225 130,223 122,221 122,0 0,443 122,886 122,665 127,667 132,669 138,670 144,672 151,672 158,672 165,672 173,672 181,671 189,670 197,669 206,667 214,666 222,664 231,662 239,660 247,658 255,655 263,653 270,651 277,649 284,647 291,645 296,643 302,641 307,639 311,638 314,636 317,635 319,635 321,634 321,634 374,262" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="317,628 319,628 321,628 323,628 324,628 326,627 328,627 330,627 332,627 334,628 336,628 338,628 340,629 341,629 343,630 345,630 347,631 349,632 350,633 352,633 354,635 356,636 357,637 359,639 361,641 363,643 364,645 366,647 368,649 369,652 371,654 372,657 374,660 374,650 374,639 374,627 374,614 374,600 374,585 374,570 374,555 374,539 374,522 374,506 374,489 374,472 374,455 374,439 374,423 374,406 374,390 374,375 374,361 374,347 374,333 374,321 374,310 374,299 374,290 374,282 374,275 374,269 374,265 374,263 374,262 373,267 372,272 371,277 370,283 368,288 367,293 365,299 363,304 361,309 358,315 356,320 354,326 351,331 349,336 346,342 344,348 341,353 339,359 336,365 334,370 331,375 329,381 327,387 325,392 324,398 322,403 320,409 319,415 318,420 318,426 317,432 317,437 317,628" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="317,448 317,461 317,474 317,488 317,503 317,519 317,535 317,553 317,570 317,587 317,606 317,624 317,643 317,661 317,679 317,698 317,715 317,732 317,749 317,765 317,781 317,795 317,809 317,821 317,833 317,843 317,853 317,860 317,866 317,870 317,873 317,874 317,882 317,890 317,896 317,901 318,906 318,910 319,914 319,917 320,920 321,923 321,925 322,928 323,931 324,934 326,938 327,942 332,955 338,966 344,976 351,983 358,989 366,993 374,996 382,998 391,999 400,998 410,996 419,994 429,991 439,987 449,983 458,978 468,973 478,968 488,962 497,957 507,953 516,948 524,943 533,940 541,937 549,934 556,933 562,932 568,933 574,934 579,937 583,942 582,926 581,911 580,895 580,879 579,864 578,848 578,833 577,817 577,802 576,786 576,770 576,755 576,739 575,724 575,708 575,692 575,677 575,661 576,646 576,630 576,614 576,599 577,583 577,568 578,552 578,536 579,521 580,505 580,490 581,474 582,458 583,443 578,443 572,445 566,447 559,450 551,453 543,457 535,462 526,467 517,472 507,478 497,483 488,489 478,495 467,501 457,506 447,511 437,516 427,521 417,525 408,529 398,532 389,534 381,536 372,537 364,536 357,536 350,533 344,530 338,525 333,519 329,512 326,503 325,501 325,499 324,496 323,493 323,490 322,486 321,482 320,478 320,474 319,469 319,464 318,459 318,454 317,449 317,443 317,437 317,448" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_43" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="83" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="416" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,999 139,501 0,0 276,0 416,497 276,999 0,999" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_44" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="106" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="530"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,0 999,265 0,530 223,265 0,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_45" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="102" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="510"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="999,256 744,510 744,375 370,375 308,313 370,256 308,193 370,128 744,128 744,0 999,256" /&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="321,128 0,128 0,375 321,375 258,313 321,256 258,193 321,128" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_46" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="130" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="650"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="240,363 0,0 436,25 367,142 384,153 402,164 420,175 438,185 456,196 473,206 491,217 510,227 528,237 546,247 565,256 583,266 602,275 621,284 640,293 659,302 679,311 698,319 718,328 738,336 758,344 779,351 800,359 821,366 842,373 863,380 885,386 907,393 930,399 952,405 975,411 999,416 988,416 978,416 969,416 959,416 950,416 940,416 931,416 922,417 913,417 905,417 896,417 887,418 878,418 869,418 860,418 852,418 843,418 834,417 825,417 815,416 806,416 797,415 787,414 777,413 768,412 757,410 747,408 736,406 725,404 714,402 703,399 691,396 699,404 707,412 714,420 721,428 728,436 735,444 741,452 747,460 753,468 758,476 764,484 769,492 774,500 779,508 784,516 788,524 792,532 797,540 801,548 806,555 810,563 814,571 818,579 823,587 827,595 831,603 836,611 840,619 845,627 849,634 854,642 859,650 843,633 826,616 809,600 792,584 776,568 759,552 742,537 725,522 708,508 691,494 674,480 657,466 639,453 622,439 605,427 588,414 570,401 553,390 536,378 518,366 501,355 484,344 466,333 449,322 431,312 414,302 396,292 379,282 361,273 344,264 326,255 309,246 240,363" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_47" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="80" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="402" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="202,0 402,388 269,388 269,999 133,999 133,388 0,388 202,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_48" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="80" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="401" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="201,0 401,388 266,333 266,999 133,999 133,333 0,388 201,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_49" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="89" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="445" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="223,0 445,387 295,223 295,999 148,999 148,223 0,387 223,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_50" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="87" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="437" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="218,0 437,380 290,380 380,999 218,890 52,999 144,380 0,380 218,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_51" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="110" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="554"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,332 109,444 889,444 776,332 0,332" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="0,332" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="776,444 889,554 999,332 889,109 776,0 889,222 776,444" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="889,222 999,332" /&gt;&lt;Polygon Fill="#ffffff" Stroke="#000000" StrokeThickness="3" Points="0,109 0,332 776,332 776,444 889,222 776,0 776,109 0,109" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_52" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="53" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="267" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,0 267,388 132,276 132,999 0,999 0,1 0,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_53" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="72" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="360"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="759,0 999,180 759,360 759,247 351,247 292,360 222,360 280,247 239,247 181,360 114,360 173,247 120,247 63,360 0,360 56,247 56,114 0,0 63,0 120,114 173,114 114,0 181,0 239,114 280,114 222,0 292,0 351,114 759,114 759,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_54" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="75" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="378"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="999,189 810,378 810,198 376,198 259,315 251,306 358,198 257,198 138,317 128,310 237,198 128,198 11,314 1,304 116,192 0,73 7,64 128,185 237,185 128,73 138,64 257,185 358,185 247,73 257,64 376,185 810,185 810,0 999,189" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_55" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="158" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="794" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="249,476 254,484 260,492 265,500 271,507 277,514 283,520 290,526 297,531 304,537 311,542 319,546 326,550 334,554 343,557 351,560 359,563 368,566 377,568 386,570 396,572 405,573 414,574 424,575 434,575 444,575 454,575 464,575 474,575 484,574 495,573 505,572 505,430 794,714 505,999 505,856 494,856 482,856 470,856 457,855 443,854 430,853 415,852 401,851 387,849 372,847 357,845 342,842 326,839 311,835 296,830 280,826 265,821 250,815 235,808 220,801 206,793 192,785 178,775 164,765 151,754 139,743 126,730 114,716 103,702 93,686 83,669 74,652 65,634 58,616 50,598 44,580 38,563 32,545 28,527 23,509 19,492 16,474 13,455 10,437 8,419 6,400 4,381 3,362 2,343 1,323 1,303 0,283 0,262 0,241 0,219 0,197 0,174 0,151 0,127 0,103 0,78 0,53 0,26 0,0 6,5 12,11 18,15 25,20 31,24 38,28 45,32 51,35 58,37 65,39 72,41 79,43 86,44 93,45 100,45 107,45 114,45 121,44 128,43 135,42 142,40 148,39 155,36 161,33 168,30 174,27 180,23 186,19 192,15 197,10 203,5 208,0 208,17 208,34 208,51 207,69 207,86 207,103 207,120 207,137 207,154 207,171 207,187 207,203 207,219 207,235 208,251 208,266 209,281 210,296 211,311 212,325 213,339 215,353 217,366 218,379 221,392 223,404 226,415 229,427 233,438 236,448 240,457 245,467 249,476" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_56" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="119" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="598" Height="998"&gt;&lt;Ellipse Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Canvas.Left="0" Canvas.Top="0" Width="598" Height="598" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="299,599 299,998" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_57" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="149" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="749" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="374,999 416,499 749,499 749,0 0,0 0,499 333,499 374,999" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_58" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="177" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="887"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="499,887 443,665 0,666 0,0 999,0 999,666 555,666 499,887" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_59" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="103" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="519" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,719 240,719 120,999 0,719" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="119,719 119,399 519,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_60" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="96" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="483" Height="999"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="0,904 41,999 81,903 0,904" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="41,903 40,442 483,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_61" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="72" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="360"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="362,0 362,124 819,124 819,0 999,178 819,360 819,239 362,239 362,360 0,360 181,178 0,0 362,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Arrows_62" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="88" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="442"&gt;&lt;Polygon Fill="#00ffff" Stroke="#000000" StrokeThickness="3" Points="384,187 748,187 744,178 740,169 737,160 734,151 730,142 728,132 726,123 723,114 721,105 720,95 718,86 717,77 716,68 716,59 715,49 715,40 715,33 716,27 716,22 716,16 717,11 718,7 719,3 719,0 729,0 735,9 742,19 751,30 762,41 773,53 786,66 801,79 817,92 825,99 834,106 843,113 853,120 863,127 873,134 884,141 895,148 907,155 919,162 931,170 944,177 957,184 970,191 984,198 999,205 999,236 984,244 971,250 958,257 945,264 933,271 920,278 909,285 898,292 887,298 877,305 867,312 858,318 848,325 840,331 832,338 824,344 809,357 794,369 781,381 769,394 757,406 746,418 735,430 726,442 719,442 719,438 718,434 717,430 716,425 716,420 716,414 715,408 715,402 715,392 716,383 716,374 717,365 718,355 720,346 721,336 723,327 726,318 728,309 730,300 734,290 737,281 740,272 744,263 748,254 384,254 384,187" /&gt;&lt;Polygon Fill="#00ffff" Points="75,187 68,178 61,169 55,161 49,152 43,143 38,135 33,127 29,119 25,110 21,102 17,92 14,82 10,72 7,61 4,50 1,38 258,38 265,50 272,62 280,73 287,84 295,95 302,105 310,114 318,124 325,134 334,142 342,151 350,159 359,166 367,173 375,180 384,187 75,187" /&gt;&lt;Polygon Fill="#00ffff" Points="384,254 375,260 367,266 358,272 349,279 341,287 333,294 325,302 316,311 308,320 301,329 293,339 285,349 277,359 270,370 263,382 256,394 0,394 3,383 6,373 9,363 12,354 15,346 19,337 23,329 27,322 30,314 35,306 39,298 44,290 50,281 56,272 62,263 69,254 384,254" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="384,187 75,187 68,178 61,169 55,161 49,152 43,143 38,135 33,127 29,119 25,110 21,102 17,92 14,82 10,72 7,61 4,50 1,38 258,38 265,50 272,62 280,73 287,84 295,95 302,105 310,114 318,124 325,134 334,142 342,151 350,159 359,166 367,173 375,180 384,187" /&gt;&lt;Polyline Stroke="#000000" StrokeThickness="3" Points="384,254 375,260 367,266 358,272 349,279 341,287 333,294 325,302 316,311 308,320 301,329 293,339 285,349 277,359 270,370 263,382 256,394 0,394 3,383 6,373 9,363 12,354 15,346 19,337 23,329 27,322 30,314 35,306 39,298 44,290 50,281 56,272 62,263 69,254 384,254" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+</root>

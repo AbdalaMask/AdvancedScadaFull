@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Conveyors_belt_0" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="182" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="910"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="999,0 999,703 861,716 728,758 607,822 498,910 0,412 218,237 459,109 724,26 999,0" /&gt;&lt;Polygon Fill="#000000" Points="459,871 575,775 707,705 850,660 999,647 999,58 737,80 481,159 248,284 41,453 459,871" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_1" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="182" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="910"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,0 0,703 137,716 270,758 391,822 500,910 999,412 780,237 539,109 274,26 0,0" /&gt;&lt;Polygon Fill="#000000" Points="539,871 423,775 291,705 148,660 0,647 0,58 261,80 517,159 750,284 957,453 539,871" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_2" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="182" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="910"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="999,910 999,206 861,193 728,152 607,88 498,0 0,498 218,673 459,801 724,884 999,910" /&gt;&lt;Polygon Fill="#000000" Points="459,39 575,135 707,205 850,250 999,263 999,852 737,829 481,750 248,626 41,457 459,39" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_3" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="182" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="910"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,910 0,206 137,193 270,152 391,88 500,0 999,498 780,673 539,801 274,884 0,910" /&gt;&lt;Polygon Fill="#000000" Points="539,39 423,135 291,205 148,250 0,263 0,852 261,829 517,750 750,626 957,457 539,39" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_4" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="182" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="910" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,999 703,999 716,861 758,728 822,607 910,498 412,0 237,218 109,459 26,724 0,999" /&gt;&lt;Polygon Fill="#000000" Points="871,459 775,575 705,707 660,850 647,999 58,999 80,737 159,481 284,248 453,41 871,459" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_5" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="182" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="910" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="910,999 206,999 193,861 152,728 88,607 0,498 498,0 673,218 801,459 884,724 910,999" /&gt;&lt;Polygon Fill="#000000" Points="39,459 135,575 205,707 250,850 263,999 852,999 829,737 750,481 626,248 457,41 39,459" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_6" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="182" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="910" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,0 703,0 716,137 758,270 822,391 910,500 412,999 237,780 109,539 26,274 0,0" /&gt;&lt;Polygon Fill="#000000" Points="871,539 775,423 705,291 660,148 647,0 58,0 80,261 159,517 284,750 453,957 871,539" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_7" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="182" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="910" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="910,0 206,0 193,137 152,270 88,391 0,500 498,999 673,780 801,539 884,274 910,0" /&gt;&lt;Polygon Fill="#000000" Points="39,539 135,423 205,291 250,148 263,0 852,0 829,261 750,517 626,750 457,957 39,539" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_8" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,999 498,999 507,901 536,807 582,721 644,644 720,582 807,536 900,508 999,498 999,0 801,21 616,77 443,167 291,291 167,446 77,616 18,804 0,999" /&gt;&lt;Polygon Fill="#000000" Points="999,459 893,468 792,499 697,550 616,616 548,699 499,792 467,893 458,999 41,999 57,813 113,632 201,467 321,321 464,202 632,114 811,59 999,41 999,459" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_9" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,0 0,498 97,507 191,536 277,582 354,644 416,720 462,807 490,900 500,999 999,999 977,801 921,616 831,443 707,291 552,167 382,77 194,18 0,0" /&gt;&lt;Polygon Fill="#000000" Points="539,999 530,893 499,792 448,697 382,616 299,548 206,499 105,467 0,458 0,41 185,57 366,113 531,201 677,321 796,464 884,632 939,811 957,999 539,999" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_10" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="999,999 999,500 901,491 807,462 721,416 644,354 582,278 536,191 508,98 498,0 0,0 21,197 77,382 167,555 291,707 446,831 616,921 804,980 999,999" /&gt;&lt;Polygon Fill="#000000" Points="459,0 468,105 499,206 550,301 616,382 699,450 792,499 893,531 999,540 999,957 813,941 632,885 467,797 321,677 202,534 114,366 59,187 41,0 459,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_11" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="999,0 500,0 491,97 462,191 416,277 354,354 278,416 191,462 98,490 0,500 0,999 197,977 382,921 555,831 707,707 831,552 921,382 980,194 999,0" /&gt;&lt;Polygon Fill="#000000" Points="0,539 105,530 206,499 301,448 382,382 450,299 499,206 531,105 540,0 957,0 941,185 885,366 797,531 677,677 534,796 366,884 187,939 0,957 0,539" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_12" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="888,999 0,110 111,0 999,887 888,999" /&gt;&lt;Polygon Fill="#000000" Points="897,989 9,101 101,9 989,897 897,989" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_13" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,888 888,0 999,111 111,999 0,888" /&gt;&lt;Polygon Fill="#000000" Points="9,897 897,9 989,101 101,989 9,897" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_14" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="24" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="124"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="999,124 0,124 0,0 999,0 999,124" /&gt;&lt;Polygon Fill="#000000" Points="999,114 0,114 0,10 999,10 999,114" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_15" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="24" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="124" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,999 0,0 124,0 124,999 0,999" /&gt;&lt;Polygon Fill="#000000" Points="10,999 10,0 113,0 113,999 10,999" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_16" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="799,999 0,199 200,0 999,798 799,999" /&gt;&lt;Polygon Fill="#000000" Points="816,980 18,182 183,16 982,815 816,980" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_17" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,799 799,0 999,200 200,999 0,799" /&gt;&lt;Polygon Fill="#000000" Points="18,816 816,18 982,183 183,982 18,816" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_18" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="49" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="249"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,0 999,0 999,249 0,249 0,0" /&gt;&lt;Polygon Fill="#000000" Points="0,21 999,21 999,229 0,229 0,21" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_19" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="49" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="249" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,999 0,0 249,0 249,999 0,999" /&gt;&lt;Polygon Fill="#000000" Points="21,999 21,0 229,0 229,999 21,999" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_20" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="116" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="583" Height="999"&gt;&lt;Polygon Fill="#000000" Stroke="#000000" StrokeThickness="3" Points="561,998 561,0 20,0 20,998 561,998" /&gt;&lt;Polygon Fill="#7f7f7f" Stroke="#000000" StrokeThickness="3" Points="332,998 332,748 20,270 20,998 332,998" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="20,242 20,0 0,0 0,998 20,998 20,280 332,749 332,999 353,998 353,744 20,242" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="583,998 583,0 561,0 561,998 583,998" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_21" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="116" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="583" Height="999"&gt;&lt;Polygon Fill="#000000" Stroke="#000000" StrokeThickness="3" Points="21,998 21,0 562,0 562,998 21,998" /&gt;&lt;Polygon Fill="#7f7f7f" Stroke="#000000" StrokeThickness="3" Points="250,998 250,748 562,270 562,998 250,998" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="562,242 562,0 583,0 583,998 562,998 562,280 250,749 250,999 229,998 229,744 562,242" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,998 0,0 21,0 21,998 0,998" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_22" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="116" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="583" Height="999"&gt;&lt;Polygon Fill="#000000" Stroke="#000000" StrokeThickness="3" Points="561,0 561,999 20,999 20,0 561,0" /&gt;&lt;Polygon Fill="#7f7f7f" Stroke="#000000" StrokeThickness="3" Points="332,0 332,250 20,728 20,0 332,0" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="20,756 20,999 0,999 0,0 20,0 20,718 332,249 332,0 353,0 353,254 20,756" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="583,0 583,999 561,999 561,0 583,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_23" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="116" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="583" Height="999"&gt;&lt;Polygon Fill="#000000" Stroke="#000000" StrokeThickness="3" Points="21,0 21,999 562,999 562,0 21,0" /&gt;&lt;Polygon Fill="#7f7f7f" Stroke="#000000" StrokeThickness="3" Points="250,0 250,250 562,728 562,0 250,0" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="562,756 562,999 583,999 583,0 562,0 562,718 250,249 250,0 229,0 229,254 562,756" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,0 0,999 21,999 21,0 0,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_24" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="116" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="583"&gt;&lt;Polygon Fill="#000000" Stroke="#000000" StrokeThickness="3" Points="998,561 0,561 0,20 998,20 998,561" /&gt;&lt;Polygon Fill="#7f7f7f" Stroke="#000000" StrokeThickness="3" Points="998,332 748,332 270,20 998,20 998,332" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="242,20 0,20 0,0 998,0 998,20 280,20 749,332 999,332 998,353 744,353 242,20" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="998,583 0,583 0,561 998,561 998,583" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_25" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="116" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="583"&gt;&lt;Polygon Fill="#000000" Stroke="#000000" StrokeThickness="3" Points="0,561 999,561 999,20 0,20 0,561" /&gt;&lt;Polygon Fill="#7f7f7f" Stroke="#000000" StrokeThickness="3" Points="0,332 250,332 728,20 0,20 0,332" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="756,20 999,20 999,0 0,0 0,20 718,20 249,332 0,332 0,353 254,353 756,20" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,583 999,583 999,561 0,561 0,583" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_26" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="116" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="583"&gt;&lt;Polygon Fill="#000000" Stroke="#000000" StrokeThickness="3" Points="998,21 0,21 0,562 998,562 998,21" /&gt;&lt;Polygon Fill="#7f7f7f" Stroke="#000000" StrokeThickness="3" Points="998,250 748,250 270,562 998,562 998,250" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="242,562 0,562 0,583 998,583 998,562 280,562 749,250 999,250 998,229 744,229 242,562" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="998,0 0,0 0,21 998,21 998,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_27" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="116" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="583"&gt;&lt;Polygon Fill="#000000" Stroke="#000000" StrokeThickness="3" Points="0,21 999,21 999,562 0,562 0,21" /&gt;&lt;Polygon Fill="#7f7f7f" Stroke="#000000" StrokeThickness="3" Points="0,250 250,250 728,562 0,562 0,250" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="756,562 999,562 999,583 0,583 0,562 718,562 249,250 0,250 0,229 254,229 756,562" /&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,0 999,0 999,21 0,21 0,0" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_28" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="666,999 0,333 333,0 999,666 666,999" /&gt;&lt;Polygon Fill="#000000" Points="694,970 28,304 304,27 971,694 694,970" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_29" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,666 666,0 999,333 333,999 0,666" /&gt;&lt;Polygon Fill="#000000" Points="28,694 694,28 971,304 304,971 28,694" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_30" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="99" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="499"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="999,499 0,499 0,0 999,0 999,499" /&gt;&lt;Polygon Fill="#000000" Points="999,456 0,456 0,42 999,42 999,456" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_31" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="99" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="499" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,999 0,0 499,0 499,999 0,999" /&gt;&lt;Polygon Fill="#000000" Points="42,999 42,0 456,0 456,999 42,999" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_32" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="133" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="666"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="333,0 0,333 333,666 999,0 333,0" /&gt;&lt;Polygon Fill="#000000" Points="388,1 27,361 304,638 943,0 388,1" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_33" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="133" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="666"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="666,0 999,333 666,666 0,0 666,0" /&gt;&lt;Polygon Fill="#000000" Points="610,1 971,361 694,638 55,0 610,1" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_34" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="133" Stretch="Fill"&gt;&lt;Canvas Width="999" Height="666"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="333,666 0,333 333,0 999,666 333,666" /&gt;&lt;Polygon Fill="#000000" Points="388,664 27,304 304,27 943,666 388,664" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_35" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="200" Height="133" Stretch="Fill"&gt;&lt;Canvas Width="998" Height="665"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="666,665 998,332 666,0 0,665 666,665" /&gt;&lt;Polygon Fill="#000000" Points="609,665 970,304 694,28 55,665 609,665" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_36" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="133" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="666" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="666,666 333,999 0,666 666,0 666,666" /&gt;&lt;Polygon Fill="#000000" Points="664,610 304,971 27,694 666,55 664,610" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_37" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="133" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="666" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,666 333,999 666,666 0,0 0,666" /&gt;&lt;Polygon Fill="#000000" Points="1,610 361,971 638,694 0,55 1,610" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_38" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="133" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="666" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="666,333 333,0 0,333 666,999 666,333" /&gt;&lt;Polygon Fill="#000000" Points="664,388 304,27 27,304 666,943 664,388" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+  <data name="Conveyors_belt_39" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Viewbox xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="133" Height="200" Stretch="Fill"&gt;&lt;Canvas Width="666" Height="999"&gt;&lt;Polygon Fill="#c0c0c0" Stroke="#000000" StrokeThickness="3" Points="0,333 333,0 666,333 0,999 0,333" /&gt;&lt;Polygon Fill="#000000" Points="1,388 361,27 638,304 0,943 1,388" /&gt;&lt;/Canvas&gt;&lt;/Viewbox&gt;</value>
+  </data>
+</root>

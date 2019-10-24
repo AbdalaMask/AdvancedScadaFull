@@ -14,7 +14,7 @@ namespace ImagePicker
 {
     public partial class FormAddImage : KryptonForm
     {
-        public string CategoryName = "Category_Files\\{0}.resx";
+        public string CategoryName = "Category_Files\\{0}";
         private string[] dirs;
         private ResXResourceWriter rsxw;
         public FormAddImage()
@@ -136,13 +136,13 @@ namespace ImagePicker
             foreach (var file in dirs)
             {
                 if (file.EndsWith(".jpg") || file.EndsWith(".png") || file.EndsWith(".bmp") || file.EndsWith(".BMP") ||
-                    file.EndsWith(".JPG") || file.EndsWith(".gif") || file.EndsWith(".wmf") || file.EndsWith(".svg"))
+                    file.EndsWith(".JPG") || file.EndsWith(".gif") || file.EndsWith(".wmf") || file.EndsWith(".svg")|| file.EndsWith(".Xaml"))
                 {
                     //var newName = Path.GetFileNameWithoutExtension(file);
                     //newName= Regex.Replace(newName, "[ ]","_");
 
                     var newName =$"{ txtCategoryName.Text}_"+ i++;
-                    if (file.EndsWith(".svg"))
+                    if (file.EndsWith(".svg")||file.EndsWith(".Xaml"))
                     {
                         try
                         {
@@ -172,11 +172,14 @@ namespace ImagePicker
                         }
                    
                     }
+                    else if (file.EndsWith(".wmf"))
+                    {
+
+                        rsxw.AddResource(newName, Convert.ToBase64String(System.IO.File.ReadAllBytes(file)));
+                    }
                     else
                     {
-                        var bitmap = Image.FromFile(file);
-                        Pic.Image = bitmap;
-                        rsxw.AddResource(file, bitmap);
+                        rsxw.AddResource(newName, Convert.ToBase64String(System.IO.File.ReadAllBytes(file)));
                     }
                 }
 

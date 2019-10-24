@@ -36,6 +36,10 @@
     <ApplicationIcon>Untitled - 3.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdvancedScada.Images, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\AdvancedScada_2020\AdvancedScada.Images.dll</HintPath>
+    </Reference>
     <Reference Include="Krypton Docking, Version=5.470.742.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\Krypton\Krypton Docking.dll</HintPath>
@@ -122,10 +126,6 @@
     <ProjectReference Include="..\..\WCF\AdvancedScada.IBaseService\IBaseService.csproj">
       <Project>{f47222c0-6b69-4ff1-aec3-b4c668b0a55a}</Project>
       <Name>IBaseService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AdvancedScada.Images\Images.csproj">
-      <Project>{f1e3254b-4f1a-4946-b5d9-8c474f0015e7}</Project>
-      <Name>Images</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

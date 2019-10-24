@@ -26,12 +26,32 @@ namespace AdvancedScada.Images
     }
     public class ImageResourceCache
     {
+        private static readonly object mutex = new object();
         readonly Dictionary<string, Stream> resources;
         readonly IDictionary<string, Stream> resourcesByFileName;
+        private static ImageResourceCache _instance;
         public ImageResourceCache()
         {
             resourcesByFileName = new Dictionary<string, Stream>(64, StringComparer.OrdinalIgnoreCase);
             resources = new Dictionary<string, Stream>(64, StringComparer.OrdinalIgnoreCase);
+        }
+        public static ImageResourceCache GetChannelManager()
+        {
+            lock (mutex)
+            {
+                if (_instance == null) _instance = new ImageResourceCache();
+            }
+
+            return _instance;
+        }
+        public ResXResourceReader GetImages(string resourceName)
+        {
+            if (!this.resources.ContainsKey(resourceName))
+            {
+                return null;
+            }
+            ResXResourceReader rsxr = new ResXResourceReader(this.resources[resourceName]);
+            return rsxr;
         }
         public Stream GetResource(string resourceName)
         {
@@ -45,13 +65,14 @@ namespace AdvancedScada.Images
         }
 
         static ImageResourceCache defaultCore = null;
-        public  ImageResourceCache Default(string ImageType)
+        public static ImageResourceCache Default(string ImageType)
         {
             
                 if (defaultCore == null) defaultCore = DoLoad(ImageType);
                 return defaultCore;
             
         }
+
         readonly static char[] splitCharacters = new char[] { '\\', '/' };
         [System.Runtime.CompilerServices.MethodImpl(256)]
         public static string[] Split(string key)
@@ -61,7 +82,8 @@ namespace AdvancedScada.Images
         [SecuritySafeCritical]
         public static ImageResourceCache DoLoad( string ImageType)
         {
-            ImageResourceCache cache = new ImageResourceCache();
+            ImageResourceCache cache = GetChannelManager();
+            cache.resources.Clear(); cache.resourcesByFileName.Clear();
             using (ResourceReader reader = DoLoadResourceReader())
             {
                 IDictionaryEnumerator e = reader.GetEnumerator();
@@ -70,7 +92,7 @@ namespace AdvancedScada.Images
                 {
                       key = e.Key as string;
                         parts = Split(key);
-                    if(parts[0]== ImageType)
+                    if(parts[0]== ImageType.ToLower())
                     {
                         cache.resources.Add(key, (Stream)e.Value);
                         category = parts[1];

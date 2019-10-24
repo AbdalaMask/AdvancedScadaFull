@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -100,6 +101,127 @@
     <Resource Include="SvgImages\Warning_light_1" />
     <Resource Include="SvgImages\Warning_light_2" />
     <Resource Include="SvgImages\Weather" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="XamlImages\Architectural" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="XamlImages\Air_Conditioning" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="XamlImages\Arrows" />
+    <Resource Include="XamlImages\ASHRAE_Controls_equipment" />
+    <Resource Include="XamlImages\ASHRAE_Ducts" />
+    <Resource Include="XamlImages\ASHRAE_Piping" />
+    <Resource Include="XamlImages\Blowers" />
+    <Resource Include="XamlImages\Boilers" />
+    <Resource Include="XamlImages\Buildings" />
+    <Resource Include="XamlImages\buttons" />
+    <Resource Include="XamlImages\Chemical" />
+    <Resource Include="XamlImages\Containers" />
+    <Resource Include="XamlImages\Conveyors_belt" />
+    <Resource Include="XamlImages\Conveyors_miscellaneous" />
+    <Resource Include="XamlImages\Conveyors_Simple" />
+    <Resource Include="XamlImages\Ducts" />
+    <Resource Include="XamlImages\Electrical" />
+    <Resource Include="XamlImages\Finishing" />
+    <Resource Include="XamlImages\Flow_Meters" />
+    <Resource Include="XamlImages\Food" />
+    <Resource Include="XamlImages\Heating" />
+    <Resource Include="XamlImages\HVAC" />
+    <Resource Include="XamlImages\ISA_Symbols" />
+    <Resource Include="XamlImages\ISA_Symbols_3D" />
+    <Resource Include="XamlImages\Keys" />
+    <Resource Include="XamlImages\Laboratory" />
+    <Resource Include="XamlImages\Machining" />
+    <Resource Include="XamlImages\Material_Handling" />
+    <Resource Include="XamlImages\Mining" />
+    <Resource Include="XamlImages\Mixers" />
+    <Resource Include="XamlImages\Motor" />
+    <Resource Include="XamlImages\Nature" />
+    <Resource Include="XamlImages\PC" />
+    <Resource Include="XamlImages\Pipes" />
+    <Resource Include="XamlImages\Pipes_Miscellaneous" />
+    <Resource Include="XamlImages\Pipes_Segmented" />
+    <Resource Include="XamlImages\Plant_facilities" />
+    <Resource Include="XamlImages\PLC" />
+    <Resource Include="XamlImages\Power" />
+    <Resource Include="XamlImages\Process_Cooling" />
+    <Resource Include="XamlImages\Process_Heating" />
+    <Resource Include="XamlImages\Pulp_Paper" />
+    <Resource Include="XamlImages\Pumps" />
+    <Resource Include="XamlImages\Safety" />
+    <Resource Include="XamlImages\Scales" />
+    <Resource Include="XamlImages\Sensors" />
+    <Resource Include="XamlImages\Tanks" />
+    <Resource Include="XamlImages\Tank_Cutaways" />
+    <Resource Include="XamlImages\Valves" />
+    <Resource Include="XamlImages\Vehicles" />
+    <Resource Include="XamlImages\Water_Wastewater" />
+    <Resource Include="XamlImages\Wire_cable" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="WmfImages\Air_conditioning" />
+    <Resource Include="WmfImages\Architectural" />
+    <Resource Include="WmfImages\ASHRAE_Controls" />
+    <Resource Include="WmfImages\ASHRAE_Ducts" />
+    <Resource Include="WmfImages\ASHRAE_Piping" />
+    <Resource Include="WmfImages\Blowers" />
+    <Resource Include="WmfImages\Boilers" />
+    <Resource Include="WmfImages\Buildings" />
+    <Resource Include="WmfImages\Chemical" />
+    <Resource Include="WmfImages\Containers" />
+    <Resource Include="WmfImages\Conveyors_belt" />
+    <Resource Include="WmfImages\Conveyors_miscellaneous" />
+    <Resource Include="WmfImages\Conveyors_simple" />
+    <Resource Include="WmfImages\Ducts" />
+    <Resource Include="WmfImages\Electrical" />
+    <Resource Include="WmfImages\Finishing" />
+    <Resource Include="WmfImages\Flow_meters" />
+    <Resource Include="WmfImages\Food" />
+    <Resource Include="WmfImages\Heating" />
+    <Resource Include="WmfImages\HVAC" />
+    <Resource Include="WmfImages\ISA_symbols" />
+    <Resource Include="WmfImages\ISA_symbols_3D" />
+    <Resource Include="WmfImages\Laboratory" />
+    <Resource Include="WmfImages\Machining" />
+    <Resource Include="WmfImages\Material_handling" />
+    <Resource Include="WmfImages\Mining" />
+    <Resource Include="WmfImages\Mixers" />
+    <Resource Include="WmfImages\Motors" />
+    <Resource Include="WmfImages\Nature" />
+    <Resource Include="WmfImages\Pipes" />
+    <Resource Include="WmfImages\Pipes_miscellaneous" />
+    <Resource Include="WmfImages\Pipes_segmented" />
+    <Resource Include="WmfImages\Plant_facilities" />
+    <Resource Include="WmfImages\Power" />
+    <Resource Include="WmfImages\Process_cooling" />
+    <Resource Include="WmfImages\Process_heating" />
+    <Resource Include="WmfImages\Pulp_Paper" />
+    <Resource Include="WmfImages\Pumps" />
+    <Resource Include="WmfImages\Safety" />
+    <Resource Include="WmfImages\Scales" />
+    <Resource Include="WmfImages\Sensors" />
+    <Resource Include="WmfImages\Tanks" />
+    <Resource Include="WmfImages\Tank_cutaways" />
+    <Resource Include="WmfImages\Valves" />
+    <Resource Include="WmfImages\Vehicles" />
+    <Resource Include="WmfImages\Water_wastewater" />
+    <Resource Include="WmfImages\Wire_cable" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="PngImages\Button1" />
+    <Resource Include="PngImages\Button2" />
+    <Resource Include="PngImages\Fan" />
+    <Resource Include="PngImages\Gif_Animation" />
+    <Resource Include="PngImages\Lamp1" />
+    <Resource Include="PngImages\Lamp2" />
+    <Resource Include="PngImages\Lamp3" />
+    <Resource Include="PngImages\Pipe" />
+    <Resource Include="PngImages\Pump" />
+    <Resource Include="PngImages\Tank" />
+    <Resource Include="PngImages\TankLibrary" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
