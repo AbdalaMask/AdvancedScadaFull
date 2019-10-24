@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F1E3254B-4F1A-4946-B5D9-8C474F0015E7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AdvancedScada.Images</RootNamespace>
+    <AssemblyName>AdvancedScada.Images</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>C:\AdvancedScada_2020\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ImageCollectionHelper.cs" />
+    <Compile Include="ImageResourceCache.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SvgImages\Buttons" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SvgImages\Alarm" />
+    <Resource Include="SvgImages\Aluminum_Duct" />
+    <Resource Include="SvgImages\Ball_Lamp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SvgImages\Bars" />
+    <Resource Include="SvgImages\Bearing" />
+    <Resource Include="SvgImages\BEMS_Airconditioner" />
+    <Resource Include="SvgImages\Button_in_circle" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SvgImages\CCTV_Box_Type" />
+    <Resource Include="SvgImages\CCTV_Dome_Type" />
+    <Resource Include="SvgImages\Charging" />
+    <Resource Include="SvgImages\Current_Meter" />
+    <Resource Include="SvgImages\Direction" />
+    <Resource Include="SvgImages\Extension" />
+    <Resource Include="SvgImages\Facility" />
+    <Resource Include="SvgImages\Fan" />
+    <Resource Include="SvgImages\Gauge" />
+    <Resource Include="SvgImages\Grid_Electric" />
+    <Resource Include="SvgImages\Icons" />
+    <Resource Include="SvgImages\Inverter" />
+    <Resource Include="SvgImages\Joint_component" />
+    <Resource Include="SvgImages\Memory_card" />
+    <Resource Include="SvgImages\Menu_Box" />
+    <Resource Include="SvgImages\Mixer_Facility_hopper" />
+    <Resource Include="SvgImages\Motor_1" />
+    <Resource Include="SvgImages\Motor_2" />
+    <Resource Include="SvgImages\PC" />
+    <Resource Include="SvgImages\Pipe" />
+    <Resource Include="SvgImages\PLC" />
+    <Resource Include="SvgImages\Port" />
+    <Resource Include="SvgImages\Power_Supply_Unit" />
+    <Resource Include="SvgImages\Pump_1" />
+    <Resource Include="SvgImages\Pump_2" />
+    <Resource Include="SvgImages\PVC_Duct" />
+    <Resource Include="SvgImages\Sample_Project" />
+    <Resource Include="SvgImages\Screw" />
+    <Resource Include="SvgImages\Smarthome_Interphone" />
+    <Resource Include="SvgImages\Smart_home" />
+    <Resource Include="SvgImages\Sound" />
+    <Resource Include="SvgImages\speaker" />
+    <Resource Include="SvgImages\Switch" />
+    <Resource Include="SvgImages\Tank_1" />
+    <Resource Include="SvgImages\Tank_2" />
+    <Resource Include="SvgImages\Timer" />
+    <Resource Include="SvgImages\Valve" />
+    <Resource Include="SvgImages\Warning_light_1" />
+    <Resource Include="SvgImages\Warning_light_2" />
+    <Resource Include="SvgImages\Weather" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

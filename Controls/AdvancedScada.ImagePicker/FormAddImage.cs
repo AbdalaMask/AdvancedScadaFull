@@ -1,11 +1,14 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
 using Svg;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Resources;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace ImagePicker
 {
@@ -67,9 +70,10 @@ namespace ImagePicker
                 var newName = Path.GetExtension(imageListBoxControl.SelectedItem.ToString());
                 if (newName.EndsWith(".svg"))
                 {
-                    var svgDocument = SvgDocument.Open(imageListBoxControl.SelectedItem.ToString());
-                    var bitmap = svgDocument.Draw();
-
+                    
+                    SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
+                  var  svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(imageListBoxControl.SelectedItem.ToString());
+                   var bitmap = SVGSample.svg.SVGParser.GetBitmapFromSVG(imageListBoxControl.SelectedItem.ToString());
                     Pic.Image = bitmap;
                 }
                 else
@@ -81,33 +85,92 @@ namespace ImagePicker
             {
             }
         }
+        public static void UpdateResourceFile(Hashtable data, String path)
+        {
+            Hashtable resourceEntries = new Hashtable();
 
+            ////Get existing resources
+            //ResXResourceReader reader = new ResXResourceReader(path);
+            //if (reader != null)
+            //{
+            //    IDictionaryEnumerator id = reader.GetEnumerator();
+            //    foreach (DictionaryEntry d in reader)
+            //    {
+            //        if (d.Value == null)
+            //            resourceEntries.Add(d.Key.ToString(), "");
+            //        else
+            //            resourceEntries.Add(d.Key.ToString(), d.Value.ToString());
+            //    }
+            //    reader.Close();
+            //}
+
+            //Modify resources here...
+            foreach (String key in data.Keys)
+            {
+                if (!resourceEntries.ContainsKey(key))
+                {
+
+                    String value = data[key].ToString();
+                    if (value == null) value = "";
+
+                    resourceEntries.Add(key, value);
+                }
+            }
+
+            //Write the combined resource file
+            ResXResourceWriter resourceWriter = new ResXResourceWriter(path);
+
+            foreach (String key in resourceEntries.Keys)
+            {
+                resourceWriter.AddResource(key, resourceEntries[key]);
+            }
+            resourceWriter.Generate();
+            resourceWriter.Close();
+
+        }
         private void BtnOK_Click(object sender, EventArgs e)
         {
+            int i = 0;
             rsxw = new ResXResourceWriter(string.Format(CategoryName, txtCategoryName.Text));
-
+           
             foreach (var file in dirs)
             {
                 if (file.EndsWith(".jpg") || file.EndsWith(".png") || file.EndsWith(".bmp") || file.EndsWith(".BMP") ||
                     file.EndsWith(".JPG") || file.EndsWith(".gif") || file.EndsWith(".wmf") || file.EndsWith(".svg"))
                 {
-                    var newName = Path.GetFileNameWithoutExtension(file);
+                    //var newName = Path.GetFileNameWithoutExtension(file);
+                    //newName= Regex.Replace(newName, "[ ]","_");
 
-
+                    var newName =$"{ txtCategoryName.Text}_"+ i++;
                     if (file.EndsWith(".svg"))
                     {
                         try
                         {
-                            var svgDocument = SvgDocument.Open(file);
-                            var bitmap = svgDocument.Draw();
+                           
+                            //SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
+                            //var svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(file);
+                            //var bitmap = SVGSample.svg.SVGParser.GetBitmapFromSVG(file);
 
-                            Pic.Image = bitmap;
-                            rsxw.AddResource(file, bitmap);
+
+                            var xmlDoc = new XmlDocument
+                            {
+                                XmlResolver = null
+                            };
+                            xmlDoc.Load(file);
+                            var GETXML = xmlDoc.InnerXml;
+
+                           
+                          //  openWith.Add(newName, GETXML);
+
+
+                          //  Pic.Image = bitmap;
+                            rsxw.AddResource(newName, GETXML);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
                             continue;
                         }
+                   
                     }
                     else
                     {
@@ -119,8 +182,8 @@ namespace ImagePicker
 
                 Application.DoEvents();
             }
-
-            rsxw.Close();
+          //  UpdateResourceFile(openWith, string.Format(CategoryName, txtCategoryName.Text));
+           rsxw.Close();
             MessageBox.Show("تم");
         }
 

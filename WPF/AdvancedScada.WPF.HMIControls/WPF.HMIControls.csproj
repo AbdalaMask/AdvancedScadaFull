@@ -46,6 +46,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -236,6 +237,10 @@
     <Resource Include="Images\SquareButtonRedOn.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Controls\AdvancedScada.Images\Images.csproj">
+      <Project>{f1e3254b-4f1a-4946-b5d9-8c474f0015e7}</Project>
+      <Name>Images</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Drivers\AdvancedScada.DriverBase\DriverBase.csproj">
       <Project>{1D570E9A-E5B4-44DD-946D-9D73CFA4A535}</Project>
       <Name>DriverBase</Name>
@@ -252,6 +257,9 @@
       <Project>{F47222C0-6B69-4FF1-AEC3-B4C668B0A55A}</Project>
       <Name>IBaseService</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\34-4.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

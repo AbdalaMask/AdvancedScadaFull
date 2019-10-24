@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>C:\AdvancedScada_2020\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -122,6 +122,10 @@
     <ProjectReference Include="..\..\WCF\AdvancedScada.IBaseService\IBaseService.csproj">
       <Project>{f47222c0-6b69-4ff1-aec3-b4c668b0a55a}</Project>
       <Name>IBaseService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AdvancedScada.Images\Images.csproj">
+      <Project>{f1e3254b-4f1a-4946-b5d9-8c474f0015e7}</Project>
+      <Name>Images</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

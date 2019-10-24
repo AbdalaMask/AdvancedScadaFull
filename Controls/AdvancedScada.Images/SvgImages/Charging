@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Charging_0" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.52"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#262626;stroke-miterlimit:10;stroke-width:6px;}.cls-2,.cls-3{fill:#262626;}.cls-3{isolation:isolate;font-size:31.63px;font-family:AdobeMyungjoStd-Medium-KSCpc-EUC-H, Adobe Myungjo Std;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;20&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.78,8.78,0,0,1,8.49-9h99.24a8.77,8.77,0,0,1,8.5,9V33.54a8.79,8.79,0,0,1-8.5,9H11.53a8.77,8.77,0,0,1-8.5-9Z" /&gt;&lt;path class="cls-2" d="M119,16.65h10.31A1.74,1.74,0,0,1,131,18.4h0v8.72a1.74,1.74,0,0,1-1.74,1.74H119Z" /&gt;&lt;polygon class="cls-2" points="30.01 22.9 23.19 20.55 27.55 12.1 17.73 22.61 24.38 24.9 20.21 33.41 30.01 22.9" /&gt;&lt;text class="cls-3" transform="translate(6.09 34.11)"&gt;!&lt;/text&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_1" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#00db37;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#00db37;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;09&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;path class="cls-2" d="M13.39,11.73V33.87H110V11.73ZM58,33.48,62.19,25,55.53,22.7l9.83-10.59L61,20.58l6.81,2.35Z" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_2" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.52"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#0096db;stroke-miterlimit:10;stroke-width:6px;}.cls-2,.cls-3{fill:#0096db;}.cls-3{isolation:isolate;font-size:31.63px;font-family:AdobeMyungjoStd-Medium-KSCpc-EUC-H, Adobe Myungjo Std;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;10&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.78,8.78,0,0,1,8.49-9h99.24a8.77,8.77,0,0,1,8.5,9V33.54a8.79,8.79,0,0,1-8.5,9H11.53a8.77,8.77,0,0,1-8.5-9Z" /&gt;&lt;path class="cls-2" d="M119,16.65h10.31A1.74,1.74,0,0,1,131,18.4h0v8.72a1.74,1.74,0,0,1-1.74,1.74H119Z" /&gt;&lt;polygon class="cls-2" points="30.01 22.9 23.19 20.55 27.55 12.1 17.73 22.61 24.38 24.9 20.21 33.41 30.01 22.9" /&gt;&lt;text class="cls-3" transform="translate(6.09 34.11)"&gt;!&lt;/text&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_3" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#0096db;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#0096db;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;11&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;rect class="cls-2" x="12.42" y="11.73" width="18.43" height="22.13" /&gt;&lt;polygon class="cls-2" points="49.6 22.94 42.77 20.59 47.13 12.12 37.3 22.66 43.96 24.95 39.78 33.48 49.6 22.94" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_4" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#0096db;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#0096db;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;12&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;rect class="cls-2" x="11.88" y="11.73" width="45.4" height="22.13" /&gt;&lt;polygon class="cls-2" points="74.74 22.94 67.9 20.59 72.27 12.12 62.43 22.66 69.09 24.95 64.91 33.48 74.74 22.94" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_5" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#0096db;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#0096db;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;13&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;rect class="cls-2" x="12.97" y="11.73" width="76.53" height="22.13" /&gt;&lt;polygon class="cls-2" points="109.16 22.94 102.32 20.59 106.68 12.12 96.85 22.66 103.52 24.95 99.33 33.48 109.16 22.94" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_6" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#0096db;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#0096db;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;14&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;path class="cls-2" d="M13.39,11.73V33.87H110V11.73ZM58,33.48,62.19,25,55.53,22.7l9.83-10.59L61,20.58l6.81,2.35Z" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_7" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.52"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#ed9a00;stroke-miterlimit:10;stroke-width:6px;}.cls-2,.cls-3{fill:#ed9a00;}.cls-3{isolation:isolate;font-size:31.63px;font-family:AdobeMyungjoStd-Medium-KSCpc-EUC-H, Adobe Myungjo Std;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;15&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.78,8.78,0,0,1,8.49-9h99.24a8.77,8.77,0,0,1,8.5,9V33.54a8.79,8.79,0,0,1-8.5,9H11.53a8.77,8.77,0,0,1-8.5-9Z" /&gt;&lt;path class="cls-2" d="M119,16.65h10.31A1.74,1.74,0,0,1,131,18.4h0v8.72a1.74,1.74,0,0,1-1.74,1.74H119Z" /&gt;&lt;polygon class="cls-2" points="30.01 22.9 23.19 20.55 27.55 12.1 17.73 22.61 24.38 24.9 20.21 33.41 30.01 22.9" /&gt;&lt;text class="cls-3" transform="translate(6.09 34.11)"&gt;!&lt;/text&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_8" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#ed9a00;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#ed9a00;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;16&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;rect class="cls-2" x="12.42" y="11.73" width="18.43" height="22.13" /&gt;&lt;polygon class="cls-2" points="49.6 22.94 42.77 20.59 47.13 12.12 37.3 22.66 43.96 24.95 39.78 33.48 49.6 22.94" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_9" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#ed9a00;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#ed9a00;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;17&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;rect class="cls-2" x="11.88" y="11.73" width="45.4" height="22.13" /&gt;&lt;polygon class="cls-2" points="74.74 22.94 67.9 20.59 72.27 12.12 62.43 22.66 69.09 24.95 64.91 33.48 74.74 22.94" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_10" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#ed9a00;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#ed9a00;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;18&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;rect class="cls-2" x="12.97" y="11.73" width="76.53" height="22.13" /&gt;&lt;polygon class="cls-2" points="109.16 22.94 102.32 20.59 106.68 12.12 96.85 22.66 103.52 24.95 99.33 33.48 109.16 22.94" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_11" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#262626;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#262626;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;01&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;rect class="cls-2" x="12.42" y="11.73" width="18.43" height="22.13" /&gt;&lt;polygon class="cls-2" points="49.6 22.94 42.77 20.59 47.13 12.12 37.3 22.66 43.96 24.95 39.78 33.48 49.6 22.94" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_12" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#ed9a00;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#ed9a00;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;19&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;path class="cls-2" d="M13.39,11.73V33.87H110V11.73ZM58,33.48,62.19,25,55.53,22.7l9.83-10.59L61,20.58l6.81,2.35Z" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_13" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#262626;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#262626;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;02&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;rect class="cls-2" x="11.88" y="11.73" width="45.4" height="22.13" /&gt;&lt;polygon class="cls-2" points="74.74 22.94 67.9 20.59 72.27 12.12 62.43 22.66 69.09 24.95 64.91 33.48 74.74 22.94" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_14" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#262626;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#262626;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;03&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;rect class="cls-2" x="12.97" y="11.73" width="76.53" height="22.13" /&gt;&lt;polygon class="cls-2" points="109.16 22.94 102.32 20.59 106.68 12.12 96.85 22.66 103.52 24.95 99.33 33.48 109.16 22.94" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_15" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#262626;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#262626;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;04&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;path class="cls-2" d="M13.39,11.73V33.87H110V11.73ZM58,33.48,62.19,25,55.53,22.7l9.83-10.59L61,20.58l6.81,2.35Z" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_16" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.52"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#00db37;stroke-miterlimit:10;stroke-width:6px;}.cls-2,.cls-3{fill:#00db37;}.cls-3{isolation:isolate;font-size:31.63px;font-family:AdobeMyungjoStd-Medium-KSCpc-EUC-H, Adobe Myungjo Std;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;05&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.78,8.78,0,0,1,8.49-9h99.24a8.77,8.77,0,0,1,8.5,9V33.54a8.79,8.79,0,0,1-8.5,9H11.53a8.77,8.77,0,0,1-8.5-9Z" /&gt;&lt;path class="cls-2" d="M119,16.65h10.31A1.74,1.74,0,0,1,131,18.4h0v8.72a1.74,1.74,0,0,1-1.74,1.74H119Z" /&gt;&lt;polygon class="cls-2" points="30.01 22.9 23.19 20.55 27.55 12.1 17.73 22.61 24.38 24.9 20.21 33.41 30.01 22.9" /&gt;&lt;text class="cls-3" transform="translate(6.09 34.11)"&gt;!&lt;/text&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_17" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#00db37;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#00db37;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;06&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;rect class="cls-2" x="12.42" y="11.73" width="18.43" height="22.13" /&gt;&lt;polygon class="cls-2" points="49.6 22.94 42.77 20.59 47.13 12.12 37.3 22.66 43.96 24.95 39.78 33.48 49.6 22.94" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_18" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#00db37;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#00db37;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;07&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;rect class="cls-2" x="11.88" y="11.73" width="45.4" height="22.13" /&gt;&lt;polygon class="cls-2" points="74.74 22.94 67.9 20.59 72.27 12.12 62.43 22.66 69.09 24.95 64.91 33.48 74.74 22.94" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+  <data name="Charging_19" xml:space="preserve">
+    <value>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 45.61"&gt;&lt;defs&gt;&lt;style&gt;.cls-1{fill:none;stroke:#00db37;stroke-miterlimit:10;stroke-width:6px;}.cls-2{fill:#00db37;}&lt;/style&gt;&lt;/defs&gt;&lt;title&gt;08&lt;/title&gt;&lt;g id="Layer_2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2" data-name="Layer 1"&gt;&lt;g id="Layer_2-2" data-name="Layer 2"&gt;&lt;g id="Layer_1-2-2" data-name="Layer 1-2"&gt;&lt;path class="cls-1" d="M3,12a8.8,8.8,0,0,1,8.51-9H111a8.79,8.79,0,0,1,8.52,9V33.61a8.81,8.81,0,0,1-8.52,9H11.55a8.79,8.79,0,0,1-8.52-9Z" /&gt;&lt;path class="cls-2" d="M118.92,16.68h10.33A1.75,1.75,0,0,1,131,18.43h0v8.75a1.74,1.74,0,0,1-1.75,1.74H118.92Z" /&gt;&lt;rect class="cls-2" x="12.97" y="11.73" width="76.53" height="22.13" /&gt;&lt;polygon class="cls-2" points="109.16 22.94 102.32 20.59 106.68 12.12 96.85 22.66 103.52 24.95 99.33 33.48 109.16 22.94" /&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;</value>
+  </data>
+</root>

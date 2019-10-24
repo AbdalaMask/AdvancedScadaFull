@@ -50,7 +50,7 @@
             this.graphicIndicatorBaseSVG2.GraphicAllOff = resources.GetString("graphicIndicatorBaseSVG2.GraphicAllOff");
             this.graphicIndicatorBaseSVG2.GraphicSelect1 = resources.GetString("graphicIndicatorBaseSVG2.GraphicSelect1");
             this.graphicIndicatorBaseSVG2.GraphicSelect2 = null;
-            this.graphicIndicatorBaseSVG2.Location = new System.Drawing.Point(490, 251);
+            this.graphicIndicatorBaseSVG2.Location = new System.Drawing.Point(490, 290);
             this.graphicIndicatorBaseSVG2.Name = "graphicIndicatorBaseSVG2";
             this.graphicIndicatorBaseSVG2.NumericFormat = null;
             this.graphicIndicatorBaseSVG2.OutputType = AdvancedScada.Controls_Binding.ImageAll.GraphicIndicatorBaseSVG.OutputTypes.MomentarySet;
@@ -60,7 +60,7 @@
             this.graphicIndicatorBaseSVG2.PLCAddressValueSelect1 = "CH3.PLC1.DataBlock1.TAG00011";
             this.graphicIndicatorBaseSVG2.PLCAddressVisible = null;
             this.graphicIndicatorBaseSVG2.RotationAngle = AdvancedScada.Controls_Binding.ImageAll.GraphicIndicatorBaseSVG.RotationAngleEnum.NoRotation;
-            this.graphicIndicatorBaseSVG2.Size = new System.Drawing.Size(158, 121);
+            this.graphicIndicatorBaseSVG2.Size = new System.Drawing.Size(134, 133);
             this.graphicIndicatorBaseSVG2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.graphicIndicatorBaseSVG2.TabIndex = 9;
             this.graphicIndicatorBaseSVG2.Text2 = "";
@@ -69,7 +69,7 @@
             0,
             0,
             0});
-            this.graphicIndicatorBaseSVG2.ValueSelect1 = false;
+            this.graphicIndicatorBaseSVG2.ValueSelect1 = true;
             this.graphicIndicatorBaseSVG2.ValueSelect2 = false;
             // 
             // hmiBottle1

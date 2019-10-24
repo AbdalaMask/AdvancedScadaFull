@@ -1,7 +1,9 @@
-﻿using AdvancedScada.Utils.Compression;
+﻿using AdvancedScada.Images;
+using AdvancedScada.Utils.Compression;
 using ComponentFactory.Krypton.Toolkit;
 using ImagePicker;
 using Microsoft.Win32;
+using Svg;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,8 +35,8 @@ namespace AdvancedScada.ImagePicker
         #region Fild
 
         public static System.Windows.Controls.Canvas previewTarget;
-        // Create a ResXResourceReader for the file items.resx.
-        private ResXResourceReader rsxr;
+        //// Create a ResXResourceReader for the file items.resx.
+        //private ResXResourceReader rsxr;
         Dictionary<int, string> ImageListCurrentSVG = new Dictionary<int, string>();
         Dictionary<int, string> ImageListCurrentTip = new Dictionary<int, string>();
         // local variable declarations
@@ -74,7 +76,12 @@ namespace AdvancedScada.ImagePicker
         {
             Close();
         }
-
+        readonly static char[] splitCharacters = new char[] { '\\', '/' };
+        [System.Runtime.CompilerServices.MethodImpl(256)]
+        public static string[] Split(string key)
+        {
+            return key.Split(splitCharacters);
+        }
         private void MainView_Load(object sender, EventArgs e)
         {
             try
@@ -82,6 +89,8 @@ namespace AdvancedScada.ImagePicker
                 var SelectedPath = ReadKey("Symbols");
                 var SelectedPath2 = ReadKey("LibraryImage");
                 var SelectedPath3 = ReadKey("LibraryImages");
+                var tmg = ImageResourceCache.DoLoad("svgimages").GetAllResourceKeys();
+
                 if (SelectedPath != string.Empty && SelectedPath != null)
                 {
                     var dirs = Directory.GetDirectories(SelectedPath);
@@ -107,13 +116,12 @@ namespace AdvancedScada.ImagePicker
                 if (SelectedPath3 != string.Empty && SelectedPath3 != null)
                 {
 
-                    dirs3 = Directory.GetFiles(SelectedPath3);
-
-                    foreach (var item2 in dirs3)
+                    //dirs3 = Directory.GetFiles(SelectedPath3);
+                    string[] parts;
+                    foreach (var item2 in tmg)
                     {
-                        var f = new FileInfo(item2);
-                        var v = f.Name.Split('.');
-                        ListBoxCategoryName.Items.Add(v[0]);
+                        parts = Split(item2);
+                        ListBoxCategoryName.Items.Add(parts[1]);
                     }
                 }
             }
@@ -154,25 +162,51 @@ namespace AdvancedScada.ImagePicker
             il32.ImageSize = new Size(50, 50);
             ImageListCurrentImage.Clear();
             ImageListCurrentTip.Clear();
-            var CategoryName = string.Format(ReadKey("LibraryImages") + "\\{0}.resx", ListBoxCategoryName.SelectedItem);
-            rsxr = new ResXResourceReader(CategoryName);
-
-            var i = 0;
-            foreach (DictionaryEntry file in rsxr)
+            var tmg =  ImageResourceCache.DoLoad("svgimages").GetResource($"svgimages/{ListBoxCategoryName.SelectedItem}");
+          //  var CategoryName = string.Format(ReadKey("LibraryImages") + "\\{0}.resx", ListBoxCategoryName.SelectedItem);
+            using (ResXResourceReader rsxr = new ResXResourceReader(tmg))
             {
-                string newName = Path.GetFileNameWithoutExtension($"{file.Key}");
-                var bitmap = (Image)file.Value;
-                ImageListCurrentImage.Add(i++, bitmap);
-                ImageListCurrentTip.Add(i, string.Format("{0}.{1}.{2}", newName, bitmap.Height, bitmap.Width));
+                Image bitmap = null;
+                var i = 0;
+                foreach (DictionaryEntry file in rsxr)
+                {
 
-                il32.Images.Add($"{file.Key}", bitmap);
-                Application.DoEvents();
+                    string newName = Path.GetFileNameWithoutExtension($"{file.Key}");
+                    svgDocument = SvgDocument.FromSvg<SvgDocument>($"{file.Value}");
+                    SVGSample.svg.SVGParser.MaximumSize = new Size(Width, Height);
+                    try
+                    {
+                        bitmap = svgDocument.Draw();
+
+                    }
+                    catch
+                    {
+
+                        continue;
+                    }
+
+                    //var bitmap = (Image)file.Value;
+                    if (bitmap != null)
+                    {
+                        ImageListCurrentTip.Add(i, string.Format("{0}.{1}.{2}", newName, bitmap.Height, bitmap.Width));
+
+                        ImageListCurrentImage.Add(i++, bitmap);
+
+                        il32.Images.Add($"{file.Key}", bitmap);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                    Application.DoEvents();
 
 
+                }
+
+                //Close the reader.
+                rsxr.Close();
+               
             }
-
-            //Close the reader.
-            rsxr.Close();
             pnlPictures.ImageList = il32;
 
         }
@@ -413,6 +447,41 @@ namespace AdvancedScada.ImagePicker
 
         }
 
+        #region WPFUri
+       public string Group { get; private set; }
+        public string NameUri { get; private set; }
+        internal const string PackPrefix = "pack://application:,,,";
+        public string MakeUri(string ImageType)
+        {
+            return string.Format(PackPrefix + "/{0};component/{1}", "AdvancedScada.Images", MakeUriShort(ImageType));
+        }
+        public string MakeUriShort(string ImageType)
+        {
+            return string.Format("{1}/{2}/{3}", "AdvancedScada.Images", ImageType, Group.ToLower(), NameUri);
+        }
+        public string FromSvgRes(string ImageType,string Group, string NameUri)
+        {
+            
+            string SvgNew2 = null;
+            var tmg = ImageResourceCache.DoLoad(ImageType).GetResource($"{ImageType}/{Group}");
+            using (ResXResourceReader rsxr = new ResXResourceReader(tmg))
+            {
+                
+                foreach (DictionaryEntry file in rsxr)
+                {
+
+                    if (NameUri == $"{file.Key}")
+                    {
+                        SvgNew2 = $"{file.Value}";
+                        break;
+                    }
+                      
+                }
+            }
+            return SvgNew2;
+        }
+        #endregion
+      
         private void gcSVG_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -428,22 +497,26 @@ namespace AdvancedScada.ImagePicker
                 toolTip1.Show(bitmapMessage, this);
                 toolTip1.SetToolTip(gcSVG, bitmapMessage);
                 //==================================================================
-                if (OnImagSVGSelected_Clicked != null)
+                if (OnImagSVGSelected_Clicked == null)
                 {
 
-                    SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
-                    svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(bitmap);
+                    //SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
+                    //svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(bitmap);
 
-                    var xmlDoc = new XmlDocument
-                    {
-                        XmlResolver = null
-                    };
-                    xmlDoc.Load(bitmap);
-                    var GETXML = xmlDoc.InnerXml;
+                    //var xmlDoc = new XmlDocument
+                    //{
+                    //    XmlResolver = null
+                    //};
+                    //xmlDoc.Load(bitmap);
+                    //var GETXML = xmlDoc.InnerXml;
 
-
-
-                    OnImagSVGSelected_Clicked?.Invoke(GETXML);
+                    //byte[] bytes = Encoding.ASCII.GetBytes(GETXML);
+                    //string someString = Encoding.ASCII.GetString(bytes);
+                    Group =$"{ ListBoxCategoryName.SelectedItem}";
+                        Name = stringBitmap[0];
+                    var setImge = MakeUri("svgimages");
+                   
+                    OnImagSVGSelected_Clicked?.Invoke(setImge);
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
                     this.Close();
                 }
@@ -478,23 +551,29 @@ namespace AdvancedScada.ImagePicker
                 var bitmap = ImageListCurrentImage[pnlPictures.SelectedIndex];
                 var stringBitmap = ImageListCurrentTip[pnlPictures.SelectedIndex].Split('.');
                 var bitmapMessage = string.Format("Name:{0} Height:{1} Width:{2} ", stringBitmap[0] + Environment.NewLine, stringBitmap[1] + Environment.NewLine, stringBitmap[2]);
-                byte[] data = ImageCompression.ImageToByte(bitmap);
-                byte[] dataCompress = ImageCompression.Compress(data);
-                string FullNameBase = Convert.ToBase64String(dataCompress);
+
                 toolTip1.Active = true;
                 toolTip1.Show(bitmapMessage, this);
                 toolTip1.SetToolTip(pnlPictures, bitmapMessage);
                 //==================================================================
-                if (OnStringImageSelected_Clicked != null)
+                if (OnImagSVGSelected_Clicked != null)
                 {
-                    OnStringImageSelected_Clicked(FullNameBase);
+                    Group = $"{ListBoxCategoryName.SelectedItem}";
+                    NameUri = stringBitmap[0];
+                   
+                    var Setimages = FromSvgRes("svgimages", Group, NameUri);
+                    OnImagSVGSelected_Clicked?.Invoke(Setimages);
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
                     this.Close();
                 }
                 //====================================================================================
-                if (OnImagSelected_Clicked != null)
+                if (OnStringImageSelected_Clicked != null)
                 {
-                    OnImagSelected_Clicked(bitmap);
+                    Group = $"{ListBoxCategoryName.SelectedItem}";
+                    NameUri = stringBitmap[0];
+                    var Setimages = MakeUri("svgimages");
+                   
+                    OnStringImageSelected_Clicked?.Invoke(Setimages);
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
                     this.Close();
                 }
@@ -503,6 +582,37 @@ namespace AdvancedScada.ImagePicker
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
+            //try
+            //{
+            //    var bitmap = ImageListCurrentImage[pnlPictures.SelectedIndex];
+            //    var stringBitmap = ImageListCurrentTip[pnlPictures.SelectedIndex].Split('.');
+            //    var bitmapMessage = string.Format("Name:{0} Height:{1} Width:{2} ", stringBitmap[0] + Environment.NewLine, stringBitmap[1] + Environment.NewLine, stringBitmap[2]);
+            //    byte[] data = ImageCompression.ImageToByte(bitmap);
+            //    byte[] dataCompress = ImageCompression.Compress(data);
+            //    string FullNameBase = Convert.ToBase64String(dataCompress);
+            //    toolTip1.Active = true;
+            //    toolTip1.Show(bitmapMessage, this);
+            //    toolTip1.SetToolTip(pnlPictures, bitmapMessage);
+            //    //==================================================================
+            //    if (OnStringImageSelected_Clicked != null)
+            //    {
+            //        OnStringImageSelected_Clicked(FullNameBase);
+            //        this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            //        this.Close();
+            //    }
+            //    //====================================================================================
+            //    if (OnImagSelected_Clicked != null)
+            //    {
+            //        OnImagSelected_Clicked(bitmap);
+            //        this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            //        this.Close();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            //}
+
         }
 
         private void pnlPictures_MouseLeave(object sender, EventArgs e)
