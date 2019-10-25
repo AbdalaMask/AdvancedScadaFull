@@ -1,5 +1,5 @@
-﻿using AdvancedScada.Images;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
+using AdvancedScada.Images;
 using ImagePicker;
 using Microsoft.Win32;
 using Svg;
@@ -168,7 +168,7 @@ namespace AdvancedScada.ImagePicker
             {
                 imageType = "svgimages";
             }
-            var rsxr = ImageResourceCache.DoLoad(imageType).GetImages($"{imageType}/{ListBoxCategoryName.SelectedItem}");
+            var rsxr = ImageResourceCache.Default(imageType).GetImages($"{imageType}/{ListBoxCategoryName.SelectedItem}");
             if (rsxr == null) return;
 
             string newName = string.Empty;

@@ -77,8 +77,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEB.Scada", "Web\AdvancedSc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Images", "Controls\AdvancedScada.Images\Images.csproj", "{F1E3254B-4F1A-4946-B5D9-8C474F0015E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp2", "C:\Users\User\source\repos\WindowsFormsApp2\WindowsFormsApp2.csproj", "{B87BB7B1-A1A1-4A29-92D3-77DE1FCD80E9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -311,14 +309,6 @@ Global
 		{F1E3254B-4F1A-4946-B5D9-8C474F0015E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F1E3254B-4F1A-4946-B5D9-8C474F0015E7}.Release|x86.ActiveCfg = Release|Any CPU
 		{F1E3254B-4F1A-4946-B5D9-8C474F0015E7}.Release|x86.Build.0 = Release|Any CPU
-		{B87BB7B1-A1A1-4A29-92D3-77DE1FCD80E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B87BB7B1-A1A1-4A29-92D3-77DE1FCD80E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B87BB7B1-A1A1-4A29-92D3-77DE1FCD80E9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B87BB7B1-A1A1-4A29-92D3-77DE1FCD80E9}.Debug|x86.Build.0 = Debug|Any CPU
-		{B87BB7B1-A1A1-4A29-92D3-77DE1FCD80E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B87BB7B1-A1A1-4A29-92D3-77DE1FCD80E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B87BB7B1-A1A1-4A29-92D3-77DE1FCD80E9}.Release|x86.ActiveCfg = Release|Any CPU
-		{B87BB7B1-A1A1-4A29-92D3-77DE1FCD80E9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

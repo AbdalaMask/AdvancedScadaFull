@@ -87,7 +87,7 @@ namespace AdvancedScada.Images
             using (ResourceReader reader = DoLoadResourceReader())
             {
                 IDictionaryEnumerator e = reader.GetEnumerator();
-                string[] parts; string key, fileName, category;
+                string[] parts; string key, category;
                 while (e.MoveNext())
                 {
                       key = e.Key as string;
@@ -108,12 +108,14 @@ namespace AdvancedScada.Images
             }
             return cache;
         }
+        public static readonly string ResourceName = "AdvancedScada.Images.g.resources";
+
         public static readonly Assembly ImagesAssembly = Assembly.GetExecutingAssembly();
         [SecuritySafeCritical]
         static ResourceReader DoLoadResourceReader()
         {
             List<string> resources = new List<string>(AssemblyBuilder.GetExecutingAssembly().GetManifestResourceNames());
-            return new ResourceReader(ImagesAssembly.GetManifestResourceStream(ImageCollectionHelper.ResourceName));
+            return new ResourceReader(ImagesAssembly.GetManifestResourceStream(ResourceName));
         }
     }
 }
