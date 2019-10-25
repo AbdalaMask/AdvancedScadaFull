@@ -1,4 +1,5 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase;
 using AdvancedScada.IBaseService;
 using ComponentFactory.Krypton.Toolkit;
 using System;
@@ -52,23 +53,23 @@ namespace AdvancedScada.Studio.Monitor
         {
             switch (TagCollection.Tags[txtAddress.Text].DataType)
             {
-                case DriverBase.Comm.DataTypes.Bit:
+                case DriverBase.DataTypes.Bit:
                     break;
-                case DriverBase.Comm.DataTypes.Byte:
+                case DriverBase.DataTypes.Byte:
                     break;
-                case DriverBase.Comm.DataTypes.Short:
-                case DriverBase.Comm.DataTypes.UShort:
-                case DriverBase.Comm.DataTypes.Int:
-                case DriverBase.Comm.DataTypes.UInt:
-                case DriverBase.Comm.DataTypes.Long:
-                case DriverBase.Comm.DataTypes.ULong:
+                case DriverBase.DataTypes.Short:
+                case DriverBase.DataTypes.UShort:
+                case DriverBase.DataTypes.Int:
+                case DriverBase.DataTypes.UInt:
+                case DriverBase.DataTypes.Long:
+                case DriverBase.DataTypes.ULong:
                     txtValue.Text = "0";
                     break;
-                case DriverBase.Comm.DataTypes.Float:
-                case DriverBase.Comm.DataTypes.Double:
+                case DriverBase.DataTypes.Float:
+                case DriverBase.DataTypes.Double:
                     txtValue.Text = "0.0";
                     break;
-                case DriverBase.Comm.DataTypes.String:
+                case DriverBase.DataTypes.String:
                     txtValue.Text = "Test";
                     break;
                 default:

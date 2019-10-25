@@ -1,7 +1,7 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Client;
+using AdvancedScada.Common;
+using AdvancedScada.Common.Client;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;

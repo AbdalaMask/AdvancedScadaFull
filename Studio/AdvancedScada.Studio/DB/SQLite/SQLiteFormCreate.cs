@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Windows.Forms;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Studio.DB.SQLite
 {
     public partial class SQLiteFormCreate : KryptonForm

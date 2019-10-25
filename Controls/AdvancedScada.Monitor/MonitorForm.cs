@@ -2,7 +2,7 @@
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IBaseService;
-using AdvancedScada.IBaseService.Common;
+using AdvancedScada.Common;
 using AdvancedScada.Management.BLManager;
 using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Navigator;
@@ -17,7 +17,7 @@ using System.Net.Sockets;
 using System.ServiceModel;
 using System.Threading;
 using System.Windows.Forms;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Monitor
 {

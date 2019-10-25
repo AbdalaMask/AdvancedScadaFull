@@ -15,7 +15,7 @@ using System.Windows.Forms;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Xml;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 using Brushes = System.Windows.Media.Brushes;
 using Color = System.Windows.Media.Color;
 using Image = System.Drawing.Image;

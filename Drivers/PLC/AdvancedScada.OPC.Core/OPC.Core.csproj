@@ -146,6 +146,10 @@
       <Project>{8feab090-6b9a-4c8d-ad4a-b5c9062152a0}</Project>
       <Name>Management</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Util\AdvancedScada.Common\Common.csproj">
+      <Project>{ef8e1580-bdc2-4426-8d2d-bb866fc66305}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Util\AdvancedScada.Utils\Utils.csproj">
       <Project>{5c361f75-32c8-487b-9eb8-0b4d627b89b4}</Project>
       <Name>Utils</Name>

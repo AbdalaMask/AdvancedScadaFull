@@ -5,7 +5,7 @@ using System;
 using System.Data;
 using System.Data.Sql;
 using System.Windows.Forms;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Studio.Config
 {
     public partial class FormConfiguration : KryptonForm

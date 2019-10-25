@@ -13,7 +13,7 @@ using System.CodeDom.Compiler;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Markup;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.XamlToCode
 {

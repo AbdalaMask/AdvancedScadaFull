@@ -77,6 +77,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEB.Scada", "Web\AdvancedSc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Images", "Controls\AdvancedScada.Images\Images.csproj", "{F1E3254B-4F1A-4946-B5D9-8C474F0015E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Util\AdvancedScada.Common\Common.csproj", "{EF8E1580-BDC2-4426-8D2D-BB866FC66305}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -309,6 +311,14 @@ Global
 		{F1E3254B-4F1A-4946-B5D9-8C474F0015E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F1E3254B-4F1A-4946-B5D9-8C474F0015E7}.Release|x86.ActiveCfg = Release|Any CPU
 		{F1E3254B-4F1A-4946-B5D9-8C474F0015E7}.Release|x86.Build.0 = Release|Any CPU
+		{EF8E1580-BDC2-4426-8D2D-BB866FC66305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF8E1580-BDC2-4426-8D2D-BB866FC66305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF8E1580-BDC2-4426-8D2D-BB866FC66305}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EF8E1580-BDC2-4426-8D2D-BB866FC66305}.Debug|x86.Build.0 = Debug|Any CPU
+		{EF8E1580-BDC2-4426-8D2D-BB866FC66305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF8E1580-BDC2-4426-8D2D-BB866FC66305}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF8E1580-BDC2-4426-8D2D-BB866FC66305}.Release|x86.ActiveCfg = Release|Any CPU
+		{EF8E1580-BDC2-4426-8D2D-BB866FC66305}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -343,6 +353,7 @@ Global
 		{7F8029DA-1B94-4B1D-B91F-5B21DBF2F3A2} = {D0B07350-1C4B-4484-836A-B450309F94AD}
 		{A945127A-E286-41D6-A764-80535C23D097} = {8EA7B1E9-71A7-41F0-BF87-AB8C5A3F0DD8}
 		{F1E3254B-4F1A-4946-B5D9-8C474F0015E7} = {3F39B096-049E-452F-AC7F-AA6F167C5886}
+		{EF8E1580-BDC2-4426-8D2D-BB866FC66305} = {BE6E8E66-E008-4C37-99DD-CE60BDEB7349}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {204AF3B5-65D3-431D-B11A-887625B7EECD}

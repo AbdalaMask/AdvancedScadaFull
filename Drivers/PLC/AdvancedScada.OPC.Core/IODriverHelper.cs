@@ -1,15 +1,15 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.Common;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.OPC.Core.Drivers;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.OPC.Core
 {
-    public class IODriverHelper : AdvancedScada.DriverBase.IODriver
+    public class IODriverHelper : AdvancedScada.Common.IODriver
     {
         #region Flad
         private static Dictionary<string, OpcDaCom> _OpcDaCom = new Dictionary<string, OpcDaCom>();

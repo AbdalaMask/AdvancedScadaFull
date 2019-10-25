@@ -2,7 +2,7 @@
 using System;
 
 
-namespace AdvancedScada.DriverBase.Comm
+namespace AdvancedScada.Common
 {
     public class PlcComEventArgs : EventArgs, ICloneable
     {

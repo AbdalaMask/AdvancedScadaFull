@@ -114,9 +114,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ServiceProviders.cs" />
-    <Compile Include="UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="XamlToCodeConverter.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -125,12 +122,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="UserControl1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
@@ -145,16 +136,16 @@
     <None Include="Resources\this.Ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\WCF\AdvancedScada.IBaseService\IBaseService.csproj">
-      <Project>{f47222c0-6b69-4ff1-aec3-b4c668b0a55a}</Project>
-      <Name>IBaseService</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\New.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AdvancedScada.Common\Common.csproj">
+      <Project>{ef8e1580-bdc2-4426-8d2d-bb866fc66305}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

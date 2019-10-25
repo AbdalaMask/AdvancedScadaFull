@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace AdvancedScada.DriverBase
+namespace AdvancedScada.Common
 {
 
 

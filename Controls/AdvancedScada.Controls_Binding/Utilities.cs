@@ -2,7 +2,7 @@
 using AdvancedScada.IBaseService;
 using System;
 using System.Threading;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Controls_Binding
 {

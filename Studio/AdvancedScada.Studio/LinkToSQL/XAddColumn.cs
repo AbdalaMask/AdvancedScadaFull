@@ -5,7 +5,7 @@ using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.ComponentModel;
 using System.Linq;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Studio.LinkToSQL
 {

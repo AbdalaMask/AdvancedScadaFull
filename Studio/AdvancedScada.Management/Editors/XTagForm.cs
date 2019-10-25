@@ -1,4 +1,5 @@
-﻿using AdvancedScada.DriverBase.Devices;
+﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase.Devices;
 using ComponentFactory.Krypton.Toolkit;
 
 namespace AdvancedScada.Management.Editors

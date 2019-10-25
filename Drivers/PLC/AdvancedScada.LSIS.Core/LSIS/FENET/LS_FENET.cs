@@ -1,10 +1,11 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase;
 using AdvancedScada.Utils;
 using HslCommunication;
 using HslCommunication.Profinet.LSIS;
 using System;
 using System.Net.Sockets;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.LSIS.Core.LSIS.FENET
 {
     public class LS_FENET : IDriverAdapter

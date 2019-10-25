@@ -1,11 +1,10 @@
 ﻿using AdvancedScada.BaseService;
-using AdvancedScada.DriverBase;
-using AdvancedScada.IBaseService;
+using AdvancedScada.Common;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.ServiceModel;
 using System.Windows.Forms;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Studio.Service
 {
     public partial class FormServerUtils : KryptonForm

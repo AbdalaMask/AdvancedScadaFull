@@ -2,7 +2,7 @@
 using ComponentFactory.Krypton.Toolkit;
 using Microsoft.Win32;
 using System;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Studio.LinkToSQL
 {

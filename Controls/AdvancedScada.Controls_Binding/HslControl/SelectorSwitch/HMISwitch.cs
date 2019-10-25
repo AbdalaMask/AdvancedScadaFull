@@ -1,4 +1,4 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.Common;
 using HslControls;
 
 namespace AdvancedScada.Controls_Binding.HslControl.SelectorSwitch

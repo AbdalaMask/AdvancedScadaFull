@@ -1,10 +1,10 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.Common;
 using AdvancedScada.DriverBase.Devices;
 using Opc;
 using Opc.Da;
 using System;
 using System.Diagnostics;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 using Convert = System.Convert;
 using Factory = OpcCom.Factory;
 using Server = Opc.Da.Server;

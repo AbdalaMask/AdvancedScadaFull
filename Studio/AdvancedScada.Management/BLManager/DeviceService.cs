@@ -1,11 +1,12 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
 using System.Xml;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Management.BLManager
 

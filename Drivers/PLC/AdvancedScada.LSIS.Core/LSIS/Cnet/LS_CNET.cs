@@ -1,8 +1,9 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase;
 using HslCommunication.Profinet.LSIS;
 using System;
 using System.IO.Ports;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.LSIS.Core.LSIS.Cnet
 {
     public class LS_CNET : IDriverAdapter

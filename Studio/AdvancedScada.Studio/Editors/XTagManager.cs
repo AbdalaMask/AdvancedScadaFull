@@ -1,4 +1,5 @@
-﻿using AdvancedScada.DriverBase.Devices;
+﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.Management;
 using AdvancedScada.Management.BLManager;
 using AdvancedScada.Studio.IE;
@@ -11,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Studio.Editors
 {

@@ -1,6 +1,6 @@
-﻿using AdvancedScada.DriverBase.Devices;
+﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IBaseService;
-using AdvancedScada.Management;
 using AdvancedScada.Management.BLManager;
 using System;
 using System.Windows.Forms;

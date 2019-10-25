@@ -1,4 +1,5 @@
-﻿using AdvancedScada.Management;
+﻿using AdvancedScada.Common;
+using AdvancedScada.Management;
 using ComponentFactory.Krypton.Toolkit;
 using Microsoft.Win32;
 using System;
@@ -24,9 +25,9 @@ namespace AdvancedScada.Studio.Editors
                 Assembly lib = Assembly.LoadFrom(fi.FullName);
                 foreach (Type t in lib.GetExportedTypes())
                 {
-                    if (t.GetInterface(typeof(AdvancedScada.DriverBase.IODriver).FullName) != null)
+                    if (t.GetInterface(typeof(IODriver).FullName) != null)
                     {
-                        AdvancedScada.DriverBase.IODriver plug = (AdvancedScada.DriverBase.IODriver)Activator.CreateInstance(t);
+                        IODriver plug = (IODriver)Activator.CreateInstance(t);
                         cboxSelectedDrivers.Items.Add(plug.Name);
                     }
                 }

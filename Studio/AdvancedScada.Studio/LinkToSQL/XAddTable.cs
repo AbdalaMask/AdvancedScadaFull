@@ -1,7 +1,7 @@
 ﻿using AdvancedScada.Management.SQLManager;
 using ComponentFactory.Krypton.Toolkit;
 using System;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Studio.LinkToSQL
 {

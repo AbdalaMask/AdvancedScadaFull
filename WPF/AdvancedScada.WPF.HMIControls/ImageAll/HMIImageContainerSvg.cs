@@ -1,4 +1,4 @@
-﻿using AdvancedScada.DriverBase.Client;
+﻿using AdvancedScada.Common.Client;
 using AdvancedScada.Images;
 using AdvancedScada.Utils.Compression;
 using AdvancedScada.WPF.HMIControls.Comm;

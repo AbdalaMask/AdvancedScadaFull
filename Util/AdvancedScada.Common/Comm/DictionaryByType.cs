@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace AdvancedScada.DriverBase
+namespace AdvancedScada.Common
 {
     /// <summary>
     /// Map from types to instances of those types, e.g. int to 10 and

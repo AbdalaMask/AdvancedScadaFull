@@ -1,7 +1,7 @@
 ﻿using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Binding.Display;
-using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Client;
+using AdvancedScada.Common;
+using AdvancedScada.Common.Client;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
@@ -318,8 +318,9 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                             Utilities.Write(PLCAddressClick, "1");
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    DisplayError(ex.Message);
                 }
 
             //this.Invalidate();
@@ -327,7 +328,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
 
         public void DisplayError(string ErrorMessage)
         {
-            throw new NotImplementedException();
+             XCollection.EventscadaException?.Invoke(this.GetType().Name, ErrorMessage);
         }
 
         #endregion

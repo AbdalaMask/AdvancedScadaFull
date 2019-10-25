@@ -1,4 +1,4 @@
-﻿namespace AdvancedScada.DriverBase.Comm
+﻿namespace AdvancedScada.DriverBase
 {
     public enum DataTypes
     {

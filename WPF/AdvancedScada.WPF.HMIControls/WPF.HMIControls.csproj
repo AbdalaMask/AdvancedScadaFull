@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="HslControls, Version=2.2.3.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\HslControls.2.2.3\lib\net45\HslControls.dll</HintPath>
@@ -244,6 +247,10 @@
     <ProjectReference Include="..\..\Drivers\AdvancedScada.DriverBase\DriverBase.csproj">
       <Project>{1D570E9A-E5B4-44DD-946D-9D73CFA4A535}</Project>
       <Name>DriverBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Util\AdvancedScada.Common\Common.csproj">
+      <Project>{ef8e1580-bdc2-4426-8d2d-bb866fc66305}</Project>
+      <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Util\AdvancedScada.Utils\Utils.csproj">
       <Project>{5C361F75-32C8-487B-9EB8-0B4D627B89B4}</Project>

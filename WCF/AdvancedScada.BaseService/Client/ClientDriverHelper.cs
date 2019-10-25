@@ -1,7 +1,7 @@
 ﻿using AdvancedScada.IBaseService;
 using System;
 using System.ServiceModel;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.BaseService.Client
 {

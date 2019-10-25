@@ -7,7 +7,7 @@ using System.IO;
 using System.Resources;
 using System.Windows.Forms;
 using System.Xml;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 namespace ImagePicker
 {
     public partial class FormAddImage : KryptonForm

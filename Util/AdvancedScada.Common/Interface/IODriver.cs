@@ -1,6 +1,6 @@
 ﻿using AdvancedScada.DriverBase.Devices;
 
-namespace AdvancedScada.DriverBase
+namespace AdvancedScada.Common
 {
     public interface IODriver
     {

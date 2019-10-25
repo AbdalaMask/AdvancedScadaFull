@@ -1,9 +1,9 @@
-﻿using AdvancedScada.DriverBase.Comm;
+﻿using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.Utils.LSIS;
 using System;
 using System.Collections.Generic;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.LSIS.Core.Editors
 {

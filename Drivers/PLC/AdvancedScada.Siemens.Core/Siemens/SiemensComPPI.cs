@@ -1,9 +1,9 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.Common;
 using HslCommunication.Profinet.Siemens;
 using System;
 using System.Diagnostics;
 using System.IO.Ports;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Siemens.Core.Siemens
 {
     public class SiemensComPPI : IDriverAdapter

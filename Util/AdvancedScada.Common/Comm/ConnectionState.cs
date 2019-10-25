@@ -1,4 +1,4 @@
-﻿namespace AdvancedScada.DriverBase
+﻿namespace AdvancedScada.Common
 {
     public enum ConnectionState
     {

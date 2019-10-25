@@ -1,6 +1,6 @@
 ﻿using AdvancedScada.DriverBase;
 
-namespace AdvancedScada.IBaseService.Common
+namespace AdvancedScada.Common
 {
     public class XCollection
     {

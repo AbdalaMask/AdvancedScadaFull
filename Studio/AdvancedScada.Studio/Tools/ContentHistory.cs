@@ -1,4 +1,4 @@
-﻿using AdvancedScada.IBaseService.Common;
+﻿using AdvancedScada.Common;
 using System;
 using System.Windows.Forms;
 

@@ -1,4 +1,4 @@
-﻿using AdvancedScada.DriverBase.Comm;
+﻿using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.Utils.Excel;
 using ComponentFactory.Krypton.Toolkit;
@@ -8,7 +8,7 @@ using System.Data;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Studio.IE
 {

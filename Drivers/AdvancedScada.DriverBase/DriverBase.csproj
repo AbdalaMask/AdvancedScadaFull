@@ -31,7 +31,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
@@ -39,27 +38,14 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\TagCollectionClient.cs" />
-    <Compile Include="Comm\DataType.cs" />
-    <Compile Include="Comm\PLCComEventArgs.cs" />
-    <Compile Include="Comm\PLCDriverException.cs" />
-    <Compile Include="Comm\Util.cs" />
-    <Compile Include="Comm\ConnectionState.cs" />
+    <Compile Include="DataType.cs" />
     <Compile Include="Devices\Channel.cs" />
     <Compile Include="Devices\DataBlock.cs" />
     <Compile Include="Devices\Device.cs" />
     <Compile Include="Devices\DIEthernet.cs" />
     <Compile Include="Devices\DISerialPort.cs" />
     <Compile Include="Devices\Tag.cs" />
-    <Compile Include="Comm\DictionaryByType.cs" />
-    <Compile Include="Interface\IControls.cs" />
-    <Compile Include="Interface\IDriverAdapter.cs" />
-    <Compile Include="Interface\IFaultException.cs" />
-    <Compile Include="Interface\IODriver.cs" />
-    <Compile Include="Comm\Machine.cs" />
-    <Compile Include="Comm\ObjectExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Comm\TagCollection.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

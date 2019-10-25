@@ -1,4 +1,4 @@
-﻿using AdvancedScada.DriverBase.Client;
+﻿using AdvancedScada.Common.Client;
 using AdvancedScada.WPF.HMIControls.KeyPad.Converter;
 using System;
 using System.ComponentModel;

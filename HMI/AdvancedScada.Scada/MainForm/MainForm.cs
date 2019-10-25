@@ -1,9 +1,7 @@
 ﻿using AdvancedScada.BaseService.Client;
 using AdvancedScada.DataAccess;
-using AdvancedScada.DriverBase;
 using AdvancedScada.HMI.Tools;
 using AdvancedScada.IBaseService;
-using AdvancedScada.IBaseService.Common;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
@@ -14,7 +12,8 @@ using System.Net.Sockets;
 using System.ServiceModel;
 using System.Windows.Forms;
 using static AdvancedScada.HMI.Tools.Tools;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
+using AdvancedScada.Common;
 
 namespace AdvancedScada.HMI.MainForm
 {

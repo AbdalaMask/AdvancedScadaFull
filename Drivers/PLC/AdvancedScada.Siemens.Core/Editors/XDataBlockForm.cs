@@ -1,15 +1,15 @@
-﻿using AdvancedScada.DriverBase.Comm;
+﻿using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
 using System;
 using System.Collections.Generic;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Siemens.Core.Editors
 {
     public partial class XDataBlockForm : AdvancedScada.Management.Editors.XDataBlockForm
     {
 
-        int TagsCount = 1;
+       
 
 
         public XDataBlockForm()

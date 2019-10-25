@@ -4,7 +4,7 @@ using Opc;
 using OpcCom;
 using System;
 using System.Collections.Generic;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.OPC.Core.Editors
 {

@@ -1,4 +1,5 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
 using System.Collections.Generic;
 using System.ServiceModel;

@@ -5,7 +5,7 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using System.IO;
 using System.Windows.Forms;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Utils.Databases
 {
     public class ClassSQL

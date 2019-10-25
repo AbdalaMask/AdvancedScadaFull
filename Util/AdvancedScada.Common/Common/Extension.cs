@@ -1,4 +1,4 @@
-﻿namespace AdvancedScada.IBaseService.Common
+﻿namespace AdvancedScada.Common
 {
     public static class Extension
     {

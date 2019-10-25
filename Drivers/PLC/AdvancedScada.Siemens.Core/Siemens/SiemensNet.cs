@@ -1,10 +1,10 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.Common;
 using HslCommunication;
 using HslCommunication.Profinet.Siemens;
 using System;
 using System.Diagnostics;
 using System.Net.Sockets;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Siemens.Core.Siemens
 {
     public class SiemensNet : IDriverAdapter

@@ -1,11 +1,10 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase;
 using System.ServiceModel;
 
 namespace AdvancedScada.IBaseService
 {
-    public delegate void ChannelCount(int channelCount, bool isNew);
-    public delegate void EventLoggingMessage(string message);
-
+  
     [ServiceContract(SessionMode = SessionMode.Required, CallbackContract = typeof(IServiceCallback))]
     public interface IReadService
     {

@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
 
-namespace AdvancedScada.DriverBase.Comm
+namespace AdvancedScada.Common
 {
     public enum ConnectionType
     {

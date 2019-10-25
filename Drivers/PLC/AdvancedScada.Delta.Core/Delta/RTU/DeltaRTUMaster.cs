@@ -1,9 +1,9 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.Common;
 using AdvancedScada.DriverBase.Devices;
 using HslCommunication.ModBus;
 using System;
 using System.IO.Ports;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.IODriver.Delta.RTU
 {
     public class DeltaRTUMaster : IDriverAdapter

@@ -1,12 +1,11 @@
 ﻿using AdvancedScada.BaseService.Client;
-using AdvancedScada.DriverBase;
+using AdvancedScada.Common;
 using AdvancedScada.IBaseService;
-using AdvancedScada.IBaseService.Common;
 using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Windows;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.WPF.Scada
 {

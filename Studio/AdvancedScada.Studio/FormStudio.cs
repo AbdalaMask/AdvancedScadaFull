@@ -1,4 +1,4 @@
-﻿using AdvancedScada.IBaseService.Common;
+﻿using AdvancedScada.Common;
 using AdvancedScada.ImagePicker;
 using AdvancedScada.Management.BLManager;
 using AdvancedScada.Studio.Config;

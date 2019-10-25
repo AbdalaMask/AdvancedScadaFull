@@ -4,7 +4,7 @@ using HslCommunication.Profinet.Siemens;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Siemens.Core.Editors
 {

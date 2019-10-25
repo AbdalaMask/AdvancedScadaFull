@@ -85,60 +85,60 @@ Public Class AlarmMan
         Next
 
     End Sub
-    Public Sub AlarmMan_DataChanged(senderPlcAddress As String, e As DriverBase.Comm.PlcComEventArgs)
-        Dim LastValue As String = String.Empty
-        If e.PlcAddress = senderPlcAddress Then
-            Dim row0 As String() = {e.PlcAddress, e.Values(0), Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}
+    'Public Sub AlarmMan_DataChanged(senderPlcAddress As String, e As PlcComEventArgs)
+    '    Dim LastValue As String = String.Empty
+    '    If e.PlcAddress = senderPlcAddress Then
+    '        Dim row0 As String() = {e.PlcAddress, e.Values(0), Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}
 
-            If e.Values(0) <> LastValue Then
-                LastValue = e.Values(0)
-                '* Do something here for the value changed
-                If LastValue = "True" Then
-                    Dim flag As Boolean = False
-                    For Each listViewItem As ListViewItem In Me.Items
-                        If listViewItem.Text = row0(0) And listViewItem.SubItems(2).Text.Substring(14, 2) = row0(2).Substring(14, 2) Then
-                            listViewItem.ForeColor = Color.Red
-                            If listViewItem.SubItems(1).Text <> row0(1) Then
-                                listViewItem.SubItems(1).Text = row0(1)
-                            End If
-                            If listViewItem.SubItems(2).Text <> row0(2) Then
-                                listViewItem.SubItems(2).Text = row0(2)
-                            End If
+    '        If e.Values(0) <> LastValue Then
+    '            LastValue = e.Values(0)
+    '            '* Do something here for the value changed
+    '            If LastValue = "True" Then
+    '                Dim flag As Boolean = False
+    '                For Each listViewItem As ListViewItem In Me.Items
+    '                    If listViewItem.Text = row0(0) And listViewItem.SubItems(2).Text.Substring(14, 2) = row0(2).Substring(14, 2) Then
+    '                        listViewItem.ForeColor = Color.Red
+    '                        If listViewItem.SubItems(1).Text <> row0(1) Then
+    '                            listViewItem.SubItems(1).Text = row0(1)
+    '                        End If
+    '                        If listViewItem.SubItems(2).Text <> row0(2) Then
+    '                            listViewItem.SubItems(2).Text = row0(2)
+    '                        End If
 
-                            flag = True
-                            Exit For
-                        End If
-                    Next listViewItem
-                    If Not flag Then
-                        Dim item As New ListViewItem(row0)
-                        item.ForeColor = Color.Red
-                        Me.Items.Insert(0, item)
-                    End If
-                ElseIf LastValue = "False" Then
-                    Dim row1 As String() = {e.PlcAddress, e.Values(0), Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}
+    '                        flag = True
+    '                        Exit For
+    '                    End If
+    '                Next listViewItem
+    '                If Not flag Then
+    '                    Dim item As New ListViewItem(row0)
+    '                    item.ForeColor = Color.Red
+    '                    Me.Items.Insert(0, item)
+    '                End If
+    '            ElseIf LastValue = "False" Then
+    '                Dim row1 As String() = {e.PlcAddress, e.Values(0), Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}
 
-                    Dim flag As Boolean = False
-                    For Each listViewItem As ListViewItem In Me.Items
-                        If listViewItem.Text = row0(0) And listViewItem.SubItems(2).Text.Substring(14, 2) = row0(2).Substring(14, 2) Then
-                            listViewItem.ForeColor = Color.Green
-                            If listViewItem.SubItems(1).Text <> row1(1) Then
-                                listViewItem.SubItems(1).Text = row1(1)
-                            End If
-                            If listViewItem.SubItems(2).Text <> row1(2) Then
-                                listViewItem.SubItems(2).Text = row1(2)
-                            End If
-                            flag = True
-                            Exit For
-                        End If
-                    Next listViewItem
-                    If Not flag Then
-                        Dim item As New ListViewItem(row1)
-                        item.ForeColor = Color.Green
-                        Me.Items.Insert(0, item)
-                    End If
-                End If
-            End If
-        End If
-    End Sub
+    '                Dim flag As Boolean = False
+    '                For Each listViewItem As ListViewItem In Me.Items
+    '                    If listViewItem.Text = row0(0) And listViewItem.SubItems(2).Text.Substring(14, 2) = row0(2).Substring(14, 2) Then
+    '                        listViewItem.ForeColor = Color.Green
+    '                        If listViewItem.SubItems(1).Text <> row1(1) Then
+    '                            listViewItem.SubItems(1).Text = row1(1)
+    '                        End If
+    '                        If listViewItem.SubItems(2).Text <> row1(2) Then
+    '                            listViewItem.SubItems(2).Text = row1(2)
+    '                        End If
+    '                        flag = True
+    '                        Exit For
+    '                    End If
+    '                Next listViewItem
+    '                If Not flag Then
+    '                    Dim item As New ListViewItem(row1)
+    '                    item.ForeColor = Color.Green
+    '                    Me.Items.Insert(0, item)
+    '                End If
+    '            End If
+    '        End If
+    '    End If
+    'End Sub
 
 End Class

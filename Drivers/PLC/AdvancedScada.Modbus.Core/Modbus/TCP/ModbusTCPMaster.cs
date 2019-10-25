@@ -1,10 +1,10 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.Common;
 using AdvancedScada.Utils;
 using HslCommunication;
 using HslCommunication.ModBus;
 using System;
 using System.Net.Sockets;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Modbus.Core.Modbus.TCP
 {
     public class ModbusTCPMaster : IDriverAdapter

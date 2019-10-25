@@ -1,4 +1,4 @@
-﻿using AdvancedScada.DriverBase.Client;
+﻿using AdvancedScada.Common.Client;
 using System;
 using System.ComponentModel;
 using System.Windows;

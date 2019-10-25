@@ -1,12 +1,12 @@
-﻿using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Client;
+﻿using AdvancedScada.Common;
+using AdvancedScada.Common.Client;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IBaseService;
 using AdvancedScada.Management.BLManager;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.BaseService.Client
 {

@@ -1,5 +1,5 @@
-﻿using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Comm;
+﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IODriver.Delta.ASCII;
 using AdvancedScada.IODriver.Delta.RTU;
@@ -8,11 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Threading;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Delta.Core
 {
-    public class IODriverHelper : AdvancedScada.DriverBase.IODriver
+    public class IODriverHelper : AdvancedScada.Common. IODriver
     {
         public static readonly ManualResetEvent SendDone = new ManualResetEvent(true);
         public static List<Channel> Channels = new List<Channel>();

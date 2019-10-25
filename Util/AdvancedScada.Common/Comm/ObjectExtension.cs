@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-namespace AdvancedScada.DriverBase
+namespace AdvancedScada.Common
 {
     public static class ObjectExtension
     {

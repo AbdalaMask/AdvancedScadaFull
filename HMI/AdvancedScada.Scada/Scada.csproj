@@ -145,10 +145,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Controls\AdvancedScada.Controls_Net45\Controls_Net45.vbproj">
-      <Project>{6a4ea5f0-f6a7-4d58-8542-e39444a0a7c3}</Project>
-      <Name>Controls_Net45</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Controls\AdvancedScada.ImagePicker\ImagePicker.csproj">
       <Project>{06c4d61d-cbb1-4f3d-8599-f18099548a25}</Project>
       <Name>ImagePicker</Name>
@@ -164,6 +160,10 @@
     <ProjectReference Include="..\..\Studio\AdvancedScada.Management\Management.csproj">
       <Project>{8feab090-6b9a-4c8d-ad4a-b5c9062152a0}</Project>
       <Name>Management</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Util\AdvancedScada.Common\Common.csproj">
+      <Project>{EF8E1580-BDC2-4426-8D2D-BB866FC66305}</Project>
+      <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Util\AdvancedScada.Utils\Utils.csproj">
       <Project>{5c361f75-32c8-487b-9eb8-0b4d627b89b4}</Project>
