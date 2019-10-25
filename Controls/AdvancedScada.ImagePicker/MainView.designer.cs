@@ -51,6 +51,7 @@
             this.btnOK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnCancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.KR_PNG = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.KR_WMF = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.KR_Xaml = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.KR_SVG = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
@@ -59,7 +60,6 @@
             this.kryptonContextMenuItem8 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.KR_PNG = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.xtbImageGallery)).BeginInit();
             this.xtbImageGallery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbLibraryImages)).BeginInit();
@@ -253,6 +253,7 @@
             this.btnCancel.Size = new System.Drawing.Size(136, 27);
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Values.Text = "Cancel";
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // kryptonPanel2
             // 
@@ -266,6 +267,15 @@
             this.kryptonPanel2.Name = "kryptonPanel2";
             this.kryptonPanel2.Size = new System.Drawing.Size(625, 28);
             this.kryptonPanel2.TabIndex = 2;
+            // 
+            // KR_PNG
+            // 
+            this.KR_PNG.Location = new System.Drawing.Point(553, 5);
+            this.KR_PNG.Name = "KR_PNG";
+            this.KR_PNG.Size = new System.Drawing.Size(47, 20);
+            this.KR_PNG.TabIndex = 3;
+            this.KR_PNG.Values.Text = "PNG";
+            this.KR_PNG.Click += new System.EventHandler(this.KR_PNG_Click);
             // 
             // KR_WMF
             // 
@@ -316,15 +326,6 @@
             // toolTip1
             // 
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            // 
-            // KR_PNG
-            // 
-            this.KR_PNG.Location = new System.Drawing.Point(553, 5);
-            this.KR_PNG.Name = "KR_PNG";
-            this.KR_PNG.Size = new System.Drawing.Size(47, 20);
-            this.KR_PNG.TabIndex = 3;
-            this.KR_PNG.Values.Text = "PNG";
-            this.KR_PNG.Click += new System.EventHandler(this.KR_PNG_Click);
             // 
             // MainView
             // 

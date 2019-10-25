@@ -96,7 +96,7 @@ namespace AdvancedScada.ImagePicker
         }
         private void MainView_Load(object sender, EventArgs e)
         {
-            string[] category;
+           
             string imageType = "";
             try
             {
@@ -355,7 +355,9 @@ namespace AdvancedScada.ImagePicker
             return SvgNew2;
         }
         #endregion
+        #region pnlPictures
 
+      
 
         private void pnlPictures_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -432,7 +434,7 @@ namespace AdvancedScada.ImagePicker
         {
             toolTip1.Hide(this);
         }
-
+       #endregion
         #region Export
 
 
@@ -591,6 +593,9 @@ namespace AdvancedScada.ImagePicker
                 MessageBoxIcon.Information);
         }
         #endregion
+        #region Event
+
+       
         private void BtnAddImageFiles_Click(object sender, EventArgs e)
         {
             var frm = new FormAddImage();
@@ -616,5 +621,11 @@ namespace AdvancedScada.ImagePicker
         {
             GetImageFolderName("PngImages");
         }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+        #endregion
     }
 }
