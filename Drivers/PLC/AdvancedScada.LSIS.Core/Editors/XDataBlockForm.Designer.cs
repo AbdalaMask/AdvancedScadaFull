@@ -192,6 +192,9 @@
             this.chkX10.Name = "chkX10";
             this.chkX10.Size = new System.Drawing.Size(44, 20);
             this.chkX10.TabIndex = 19;
+            this.chkX10.ToolTipValues.Description = "Not D \r\nM20=2X10\r\nP40=4X10\r\n";
+            this.chkX10.ToolTipValues.EnableToolTips = true;
+            this.chkX10.ToolTipValues.Image = global::AdvancedScada.LSIS.Core.Properties.Resources.AddTag;
             this.chkX10.Values.Text = "X10";
             // 
             // txtStartAddress
@@ -425,6 +428,10 @@
             this.chkIsHex.Name = "chkIsHex";
             this.chkIsHex.Size = new System.Drawing.Size(53, 20);
             this.chkIsHex.TabIndex = 28;
+            this.chkIsHex.ToolTipValues.Description = "DataBlock From 1---F\r\nLength=1\r\nX16=true\r\nNot using D";
+            this.chkIsHex.ToolTipValues.EnableToolTips = true;
+            this.chkIsHex.ToolTipValues.Heading = "";
+            this.chkIsHex.ToolTipValues.Image = global::AdvancedScada.LSIS.Core.Properties.Resources.AddGoup;
             this.chkIsHex.Values.Text = "IsHex";
             // 
             // chkX16
@@ -457,6 +464,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "XDataBlockForm";
+            this.Text = "XDataBlockForm - (Administrator)";
             this.Load += new System.EventHandler(this.XDataBlockForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DxErrorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).EndInit();

@@ -297,7 +297,12 @@ namespace AdvancedScada.LSIS.Core
                             }
                             else
                             {
-                                bitArys = DriverAdapter.ReadSingle($"{db.MemoryType}{db.StartAddress}", (ushort)(db.Length));
+                                bitArys = new bool[db.Tags.Count];
+                                for (int i = 0; i < db.Tags.Count; i++)
+                                {
+                                    bitArys[i] = DriverAdapter.ReadSingle(db.Tags[i].Address, 1);
+
+                                }
                             }
                             if (bitArys == null || bitArys.Length == 0) return;
                             if (bitArys.Length > db.Tags.Count) return;

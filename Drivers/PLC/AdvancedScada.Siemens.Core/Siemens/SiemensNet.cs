@@ -181,7 +181,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
 
 
 
-        public bool[] ReadSingle(string address, ushort length)
+        public bool ReadSingle(string address, ushort length)
         {
             throw new NotImplementedException();
         }

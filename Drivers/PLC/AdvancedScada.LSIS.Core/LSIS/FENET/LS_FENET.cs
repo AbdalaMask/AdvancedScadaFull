@@ -206,9 +206,9 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
             return HslCommunication.BasicFramework.SoftBasic.ByteToBoolArray(bitArys.Content);
         }
 
-        public bool[] ReadSingle(string address, ushort length)
+        public bool ReadSingle(string address, ushort length)
         {
-            return fastEnet.ReadBool(address, length).Content;
+            return fastEnet.ReadBool(address, length).Content[0];
         }
 
 

@@ -185,7 +185,7 @@ namespace AdvancedScada.IODriver.Delta.TCP
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
 
-        public bool[] ReadSingle(string address, ushort length)
+        public bool ReadSingle(string address, ushort length)
         {
             throw new NotImplementedException();
         }

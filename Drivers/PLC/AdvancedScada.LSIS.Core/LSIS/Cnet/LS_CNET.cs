@@ -167,9 +167,9 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
             return xGBCnet.ReadBool(address, length).Content;
         }
 
-        public bool[] ReadSingle(string address, ushort length)
+        public bool ReadSingle(string address, ushort length)
         {
-            return xGBCnet.ReadBool(address, length).Content;
+            return xGBCnet.ReadBool(address, length).Content[0];
         }
     }
 }

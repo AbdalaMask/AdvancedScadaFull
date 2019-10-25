@@ -159,7 +159,7 @@ namespace AdvancedScada.IODriver.Delta.RTU
             throw new NotImplementedException();
         }
 
-        public bool[] ReadSingle(string address, ushort length)
+        public bool ReadSingle(string address, ushort length)
         {
             throw new NotImplementedException();
         }
