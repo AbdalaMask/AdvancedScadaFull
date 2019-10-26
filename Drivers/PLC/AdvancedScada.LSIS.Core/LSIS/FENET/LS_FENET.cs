@@ -220,7 +220,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
                 var read = fastEnet.ReadBool(address, 1);
                 if (!read.IsSuccess)
                 {
-                    throw new NotImplementedException();
+                    throw new NullReferenceException();
                 }
                 else
                 {

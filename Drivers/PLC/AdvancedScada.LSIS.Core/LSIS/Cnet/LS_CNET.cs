@@ -179,7 +179,21 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
         }
         public TValue Read<TValue>(string address)
         {
-            throw new NotImplementedException();
+            if (typeof(TValue) == typeof(bool))
+            {
+                var read = xGBCnet.ReadBool(address, 1);
+                if (!read.IsSuccess)
+                {
+                    throw new NullReferenceException();
+                }
+                else
+                {
+                    return (TValue)(object)read.Content[0];
+                }
+
+            }
+            throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
+
         }
-        }
+    }
 }
