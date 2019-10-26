@@ -150,7 +150,10 @@ namespace AdvancedScada.Modbus.Core.Modbus.RTU
 
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
-
+        public TValue Read<TValue>(string address)
+        {
+            throw new NotImplementedException();
+        }
         public bool ReadSingle(string address, ushort length)
         {
             throw new NotImplementedException();

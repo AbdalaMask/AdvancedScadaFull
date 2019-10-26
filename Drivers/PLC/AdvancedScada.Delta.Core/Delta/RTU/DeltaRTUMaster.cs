@@ -154,7 +154,7 @@ namespace AdvancedScada.IODriver.Delta.RTU
 
 
 
-        public TValue[] Read<TValue>(DataBlock db)
+        public TValue Read<TValue>(string address)
         {
             throw new NotImplementedException();
         }

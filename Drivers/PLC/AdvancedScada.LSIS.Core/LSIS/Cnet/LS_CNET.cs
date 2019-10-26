@@ -172,5 +172,14 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
         {
             return xGBCnet.ReadBool(address, length).Content[0];
         }
-    }
+
+        public TValue[] ReadSingle<TValue>(string address, ushort length)
+        {
+            throw new NotImplementedException();
+        }
+        public TValue Read<TValue>(string address)
+        {
+            throw new NotImplementedException();
+        }
+        }
 }

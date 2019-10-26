@@ -158,5 +158,10 @@ namespace AdvancedScada.IODriver.Delta.ASCII
         {
             throw new NotImplementedException();
         }
+
+        public TValue Read<TValue>(string address)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

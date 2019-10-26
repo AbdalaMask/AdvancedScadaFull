@@ -209,9 +209,27 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
 
         public bool ReadSingle(string address, ushort length)
         {
-            return fastEnet.ReadBool(address, length).Content[0];
+            throw new NotImplementedException();
         }
 
+       
+        public TValue Read<TValue>(string address)
+        {
+            if (typeof(TValue) == typeof(bool))
+            {
+                var read = fastEnet.ReadBool(address, 1);
+                if (!read.IsSuccess)
+                {
+                    throw new NotImplementedException();
+                }
+                else
+                {
+                    return (TValue)(object)read.Content[0];
+                }
 
+            }
+            throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
+          
+        }
     }
-}
+    }

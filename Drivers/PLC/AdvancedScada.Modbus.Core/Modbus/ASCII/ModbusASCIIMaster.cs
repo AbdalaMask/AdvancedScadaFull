@@ -147,7 +147,10 @@ namespace AdvancedScada.Modbus.Core.Modbus.ASCII
         {
             return busAsciiClient.ReadDiscrete(address, length).Content;
         }
-
+        public TValue Read<TValue>(string address)
+        {
+            throw new NotImplementedException();
+        }
         public bool ReadSingle(string address, ushort length)
         {
             throw new NotImplementedException();

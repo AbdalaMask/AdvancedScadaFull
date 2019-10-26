@@ -402,7 +402,10 @@ namespace AdvancedScada.OPC.Core.Drivers
         {
             throw new NotImplementedException();
         }
-
+        public TValue Read<TValue>(string address)
+        {
+            throw new NotImplementedException();
+        }
         public bool Write(string address, dynamic value)
         {
             throw new NotImplementedException();
