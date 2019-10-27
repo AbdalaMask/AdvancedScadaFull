@@ -139,7 +139,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         public string PLCAddressValue { get; set; }
         public string PLCAddressClick { get; set; }
         public string PLCAddressEnabled { get; set; }
-
+        #endregion
         //***************************************
         //* Call backs for returned data
         //***************************************
@@ -167,7 +167,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                 if (!ErrorDisplayTime.Enabled) OriginalText = Text;
 
                 ErrorDisplayTime.Enabled = true;
-
+                Utilities.DisplayError(this, ErrorMessage);
                 Text = ErrorMessage;
             }
         }
@@ -205,6 +205,6 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                 }
         }
 
-        #endregion
+        
     }
 }

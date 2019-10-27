@@ -1,11 +1,14 @@
 ﻿using AdvancedScada;
 using AdvancedScada;
+using AdvancedScada;
 using AdvancedScada.Controls;
+using AdvancedScada.Controls;
+using AdvancedScada.Controls.AHMI;
 using AdvancedScada.Controls.AHMI;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AdvancedScada.Controls.AHMI
+namespace AdvancedScada.Controls.AHMI.TankAll
 {
     public class HMIStackLight : StackLight5Lights_V4
     {

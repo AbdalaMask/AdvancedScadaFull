@@ -217,7 +217,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         #endregion
 
-        #region Properties
+        #region PLC Properties
         private string m_PLCAddressSelect1 = string.Empty;
         public string PLCAddressValueSelect1
         {
@@ -689,7 +689,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public void DisplayError(string ErrorMessage)
         {
-
+            Utilities.DisplayError(this, ErrorMessage);
         }
 
         #endregion

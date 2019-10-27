@@ -5,7 +5,7 @@ using AdvancedScada.Controls.AHMI;
 using AdvancedScada.Controls.AHMI.TankAll;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.Common;
 using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Collections;

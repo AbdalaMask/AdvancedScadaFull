@@ -159,7 +159,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.TankAll
                 }
 
                 ErrorDisplayTime.Enabled = true;
-
+                Utilities.DisplayError(this, ErrorMessage);
                 this.Text = ErrorMessage;
             }
         }

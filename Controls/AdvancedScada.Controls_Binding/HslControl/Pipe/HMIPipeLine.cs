@@ -13,7 +13,11 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
 
     public class HMIPipeLine : HslPipeLine, IPropertiesControls
     {
-
+        public HMIPipeLine()
+        {
+            MaxHoldTimer.Tick += MaxHoldTimer_Tick;
+            MinHoldTimer.Tick += HoldTimer_Tick;
+        }
         #region PLC Related Properties
         private bool m_Value;
         public bool HoldTimeMet;
@@ -191,10 +195,10 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
                 switch (OutputType)
                 {
                     case OutputType.MomentarySet:
-                        Utilities.Write(PLCAddressClick, Convert.ToString(false));
+                        Utilities.Write(PLCAddressClick, false);
                         break;
                     case OutputType.MomentaryReset:
-                        Utilities.Write(PLCAddressClick, Convert.ToString(true));
+                        Utilities.Write(PLCAddressClick, true);
                         break;
                 }
             }
@@ -230,24 +234,24 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
                     switch (OutputType)
                     {
                         case OutputType.MomentarySet:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                         case OutputType.MomentaryReset:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.SetTrue:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                         case OutputType.SetFalse:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.Toggle:
 
                             var CurrentValue = Value;
                             if (CurrentValue)
-                                Utilities.Write(m_PLCAddressClick, "0");
+                                Utilities.Write(m_PLCAddressClick, false);
                             else
-                                Utilities.Write(m_PLCAddressClick, "1");
+                                Utilities.Write(m_PLCAddressClick, true);
                             break;
                         default:
 
@@ -273,10 +277,10 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
                     switch (OutputType)
                     {
                         case OutputType.MomentarySet:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.MomentaryReset:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                     }
                 }
@@ -342,7 +346,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
                 }
 
                 ErrorDisplayTime.Enabled = true;
-
+                Utilities.DisplayError(this, ErrorMessage);
                 this.Text = ErrorMessage;
             }
         }

@@ -45,8 +45,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HslControls, Version=2.2.2.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\HslControls.2.2.2\lib\net45\HslControls.dll</HintPath>
+    <Reference Include="HslControls, Version=2.2.3.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\HslControls.2.2.3\lib\net45\HslControls.dll</HintPath>
     </Reference>
     <Reference Include="Krypton Docking, Version=5.470.742.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -353,7 +353,6 @@
     <EmbeddedResource Include="HslControl\Pipe\HMIPipeLine.resx">
       <DependentUpon>HMIPipeLine.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -383,6 +382,10 @@
     <ProjectReference Include="..\..\Drivers\AdvancedScada.DriverBase\DriverBase.csproj">
       <Project>{1d570e9a-e5b4-44dd-946d-9d73cfa4a535}</Project>
       <Name>DriverBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Util\AdvancedScada.Common\Common.csproj">
+      <Project>{ef8e1580-bdc2-4426-8d2d-bb866fc66305}</Project>
+      <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Util\AdvancedScada.Utils\Utils.csproj">
       <Project>{5c361f75-32c8-487b-9eb8-0b4d627b89b4}</Project>

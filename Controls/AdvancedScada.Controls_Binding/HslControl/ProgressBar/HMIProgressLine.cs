@@ -165,7 +165,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.ProgressBar
                 }
 
                 ErrorDisplayTime.Enabled = true;
-
+                Utilities.DisplayError(this, ErrorMessage);
                 this.Text = ErrorMessage;
             }
         }

@@ -309,13 +309,7 @@ namespace AdvancedScada.LSIS.Core
                                         EventscadaException?.Invoke(this.GetType().Name, ex.Message);
 
                                     }
-                                    //catch
-                                    //{
-                                    //    bitArys = null;
-                                    //    break;
-                                    //}
-
-
+                                  
                                 }
                             }
                             if (bitArys == null || bitArys.Length == 0) return;

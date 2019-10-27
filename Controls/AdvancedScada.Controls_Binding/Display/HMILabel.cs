@@ -888,6 +888,7 @@ namespace AdvancedScada.Controls_Binding.Display
                         ErrorDisplayTime.Enabled = true;
                         OriginalText = base.Text;
                         base.Text = ErrorMessage;
+                        Utilities.DisplayError(this, ErrorMessage);
                     }
                 }
             }

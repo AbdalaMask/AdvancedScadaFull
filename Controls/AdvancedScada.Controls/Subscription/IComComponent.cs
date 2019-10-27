@@ -6,10 +6,9 @@ using AdvancedScada.BaseService.Client;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Comm;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IBaseService;
-using AdvancedScada.IBaseService.Common;
+using AdvancedScada.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,7 +23,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Controls.Subscription
 {
@@ -77,7 +76,7 @@ namespace AdvancedScada.Controls.Subscription
                             break;
                         }
                     }
-                    AdvancedScada.Controls.Utilities.client = DriverHelper.GetInstance().GetReadService(ic);
+                    AdvancedScada.Controls.Utilities.client = ClientDriverHelper.GetInstance().GetReadService(ic);
                     AdvancedScada.Controls.Utilities.client.Connect(XCollection.CURRENT_MACHINE);
 
 
@@ -315,6 +314,10 @@ namespace AdvancedScada.Controls.Subscription
             }
         }
 
+        public void UpdateCollection(Common.ConnectionState status, Dictionary<string, Tag> collection)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

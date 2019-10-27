@@ -13,7 +13,11 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
     public class HMIPilotLight : MfgControl.AdvancedHMI.Controls.PilotLight, IPropertiesControls
     {
 
-
+        public HMIPilotLight()
+        {
+            MaxHoldTimer.Tick += MaxHoldTimer_Tick;
+            MinHoldTimer.Tick += HoldTimer_Tick;
+        }
 
 
         public bool HoldTimeMet;
@@ -192,16 +196,16 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                 switch (OutputType)
                 {
                     case OutputType.MomentarySet:
-                        Utilities.Write(PLCAddressClick, "0");
+                        Utilities.Write(PLCAddressClick, false);
                         break;
                     case OutputType.MomentaryReset:
-                        Utilities.Write(PLCAddressClick, "1");
+                        Utilities.Write(PLCAddressClick, true);
                         break;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DisplayError(ex.Message);
             }
         }
 
@@ -231,24 +235,24 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                     switch (OutputType)
                     {
                         case OutputType.MomentarySet:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                         case OutputType.MomentaryReset:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.SetTrue:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                         case OutputType.SetFalse:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.Toggle:
 
                             var CurrentValue = Value;
                             if (CurrentValue)
-                                Utilities.Write(m_PLCAddressClick, "0");
+                                Utilities.Write(m_PLCAddressClick, false);
                             else
-                                Utilities.Write(m_PLCAddressClick, "1");
+                                Utilities.Write(m_PLCAddressClick, true);
                             break;
                         default:
 
@@ -275,10 +279,10 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                     switch (OutputType)
                     {
                         case OutputType.MomentarySet:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.MomentaryReset:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                     }
                 }

@@ -299,34 +299,34 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                 {
                     if (OutputType == OutputType.MomentarySet)
                     {
-                        Utilities.Write(PLCAddressClick, "1");
+                        Utilities.Write(PLCAddressClick, true);
                         if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
                         if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
                     }
                     else if (OutputType == OutputType.MomentaryReset)
                     {
-                        Utilities.Write(PLCAddressClick, "0");
+                        Utilities.Write(PLCAddressClick, false);
                         if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
                         if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
                     }
 
                     else if (OutputType == OutputType.SetTrue)
                     {
-                        Utilities.Write(PLCAddressClick, "1");
+                        Utilities.Write(PLCAddressClick, true);
                     }
 
                     else if (OutputType == OutputType.SetFalse)
                     {
-                        Utilities.Write(PLCAddressClick, "0");
+                        Utilities.Write(PLCAddressClick, false);
                     }
 
                     else if (OutputType == OutputType.Toggle)
                     {
                         bool CurrentValue = Convert.ToBoolean(Value);
                         if (CurrentValue)
-                            Utilities.Write(PLCAddressClick, "0");
+                            Utilities.Write(PLCAddressClick, false);
                         else
-                            Utilities.Write(PLCAddressClick, "1");
+                            Utilities.Write(PLCAddressClick, true);
                     }
                 }
                 catch (Exception ex)

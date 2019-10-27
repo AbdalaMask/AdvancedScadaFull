@@ -11,7 +11,11 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
     [DefaultEvent("Click")]
     public class HMIPushButton : MfgControl.AdvancedHMI.Controls.PushButton, IPropertiesControls
     {
-
+        public HMIPushButton()
+        {
+            MaxHoldTimer.Tick += MaxHoldTimer_Tick;
+            MinHoldTimer.Tick += HoldTimer_Tick;
+        }
         #region PLC Properties
 
 
@@ -193,10 +197,10 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                 switch (OutputType)
                 {
                     case OutputTypes.MomentarySet:
-                        Utilities.Write(PLCAddressClick, Convert.ToString(false));
+                        Utilities.Write(PLCAddressClick, false);
                         break;
                     case OutputTypes.MomentaryReset:
-                        Utilities.Write(PLCAddressClick, Convert.ToString(true));
+                        Utilities.Write(PLCAddressClick, true);
                         break;
                 }
             }
@@ -231,24 +235,24 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                     switch (OutputType)
                     {
                         case OutputTypes.MomentarySet:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                         case OutputTypes.MomentaryReset:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputTypes.SetTrue:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                         case OutputTypes.SetFalse:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputTypes.Toggle:
 
                             var CurrentValue = Value;
                             if (CurrentValue)
-                                Utilities.Write(m_PLCAddressClick, "0");
+                                Utilities.Write(m_PLCAddressClick, false);
                             else
-                                Utilities.Write(m_PLCAddressClick, "1");
+                                Utilities.Write(m_PLCAddressClick, true);
                             break;
                         default:
 
@@ -274,10 +278,10 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                     switch (OutputType)
                     {
                         case OutputTypes.MomentarySet:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputTypes.MomentaryReset:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                     }
                 }
@@ -342,6 +346,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                 ErrorDisplayTime.Enabled = true;
 
                 Text = ErrorMessage;
+                Utilities.DisplayError(this, ErrorMessage);
             }
         }
 

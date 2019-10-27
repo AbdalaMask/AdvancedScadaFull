@@ -7,7 +7,7 @@ using AdvancedScada.Controls.Drivers;
 using AdvancedScada.Controls.Drivers;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -430,7 +430,7 @@ namespace AdvancedScada.Controls.Alarm
                             m_PLCAddressValueItems[index].LastValue = e.Values[0];
                             if (!DesignMode)
                             {
-                                AlarmMan_DataChanged(m_PLCAddressValueItems[index].PLCAddress, e);
+                                //AlarmMan_DataChanged(m_PLCAddressValueItems[index].PLCAddress, e);
 
                             }
 

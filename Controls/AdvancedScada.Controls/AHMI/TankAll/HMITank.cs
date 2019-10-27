@@ -7,7 +7,7 @@ using AdvancedScada.Controls.AHMI.TankAll;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.Common;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.Collections;

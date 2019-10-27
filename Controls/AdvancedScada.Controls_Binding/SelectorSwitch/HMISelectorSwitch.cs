@@ -11,7 +11,11 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
 {
     public class HMISelectorSwitch : MfgControl.AdvancedHMI.Controls.SelectorSwitch, IPropertiesControls
     {
-
+        public HMISelectorSwitch()
+        {
+            MaxHoldTimer.Tick += MaxHoldTimer_Tick;
+            MinHoldTimer.Tick += HoldTimer_Tick;
+        }
         #region PLC Properties
 
 
@@ -58,13 +62,6 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
         //* Call backs for returned data
         //***************************************
         private string OriginalText;
-
-
-        #region "Basic Properties"
-
-
-        #endregion
-
         [Category("PLC Properties")]
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressText
@@ -198,16 +195,16 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                 switch (OutputType)
                 {
                     case OutputType.MomentarySet:
-                        Utilities.Write(PLCAddressClick, Convert.ToString(false));
+                        Utilities.Write(PLCAddressClick, false);
                         break;
                     case OutputType.MomentaryReset:
-                        Utilities.Write(PLCAddressClick, Convert.ToString(true));
+                        Utilities.Write(PLCAddressClick, true);
                         break;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DisplayError(ex.Message);
             }
         }
 
@@ -236,24 +233,24 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                     switch (OutputType)
                     {
                         case OutputType.MomentarySet:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                         case OutputType.MomentaryReset:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.SetTrue:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                         case OutputType.SetFalse:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.Toggle:
 
                             var CurrentValue = true;
                             if (CurrentValue)
-                                Utilities.Write(m_PLCAddressClick, "0");
+                                Utilities.Write(m_PLCAddressClick, false);
                             else
-                                Utilities.Write(m_PLCAddressClick, "1");
+                                Utilities.Write(m_PLCAddressClick, true);
                             break;
                         default:
 
@@ -280,10 +277,10 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                     switch (OutputType)
                     {
                         case OutputType.MomentarySet:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.MomentaryReset:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                     }
                 }
@@ -325,6 +322,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                 ErrorDisplayTime.Enabled = true;
 
                 Text = ErrorMessage;
+                Utilities.DisplayError(this, ErrorMessage);
             }
         }
 

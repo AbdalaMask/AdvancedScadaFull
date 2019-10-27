@@ -12,7 +12,9 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
     public class HMITempController : MfgControl.AdvancedHMI.Controls.TempController, IPropertiesControls
     {
 
+        #region PLC Properties
 
+        
         //*****************************************
         //* Property - What to do to bit in PLC
         //*****************************************
@@ -118,7 +120,7 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
         public string PLCAddressClick { get; set; }
         public string PLCAddressVisible { get; set; }
         public string PLCAddressEnabled { get; set; }
-
+        #endregion
         private void _Click1(object sender, EventArgs e)
         {
             MouseDownAction(m_PLCAddressClick1);
@@ -168,24 +170,24 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
                     switch (m_OutputType)
                     {
                         case OutputType.MomentarySet:
-                            Utilities.Write(PLCAddress, "1");
+                            Utilities.Write(PLCAddress, true);
                             break;
                         case OutputType.MomentaryReset:
-                            Utilities.Write(PLCAddress, "0");
+                            Utilities.Write(PLCAddress, false);
                             break;
                         case OutputType.SetTrue:
-                            Utilities.Write(PLCAddress, "1");
+                            Utilities.Write(PLCAddress, true);
                             break;
                         case OutputType.SetFalse:
-                            Utilities.Write(PLCAddress, "0");
+                            Utilities.Write(PLCAddress, false);
                             break;
                         case OutputType.Toggle:
                             var CurrentValue = false;
                             CurrentValue = Convert.ToBoolean(PLCAddress);
                             if (CurrentValue)
-                                Utilities.Write(PLCAddress, "0");
+                                Utilities.Write(PLCAddress, false);
                             else
-                                Utilities.Write(PLCAddress, "1");
+                                Utilities.Write(PLCAddress, true);
                             break;
                     }
                 }
@@ -203,10 +205,10 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
                     switch (OutputType)
                     {
                         case OutputType.MomentarySet:
-                            Utilities.Write(PLCAddress, "0");
+                            Utilities.Write(PLCAddress, false);
                             break;
                         case OutputType.MomentaryReset:
-                            Utilities.Write(PLCAddress, "1");
+                            Utilities.Write(PLCAddress, true);
                             break;
                     }
                 }
@@ -237,7 +239,7 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
 
                 //* Save the text to return to
                 if (!ErrorDisplayTime.Enabled) OriginalText = Text;
-
+                Utilities.DisplayError(this, ErrorMessage);
                 ErrorDisplayTime.Enabled = true;
 
                 Text = ErrorMessage;

@@ -8,7 +8,7 @@ using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.Common;
 using AdvancedScada.Monitor;
 using MfgControl.AdvancedHMI.Controls;
 using System;

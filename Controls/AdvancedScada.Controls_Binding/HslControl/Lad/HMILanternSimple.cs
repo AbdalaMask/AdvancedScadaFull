@@ -180,7 +180,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Lad
                 }
 
                 ErrorDisplayTime.Enabled = true;
-
+                Utilities.DisplayError(this, ErrorMessage);
                 this.Text = ErrorMessage;
             }
         }

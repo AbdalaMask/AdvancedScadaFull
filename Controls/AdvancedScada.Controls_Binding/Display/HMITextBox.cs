@@ -14,7 +14,7 @@ using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.Display
 {
-    [Designer(typeof(HMITextBoxDesigner))]
+     
     public class HMITextBox : System.Windows.Forms.TextBox, IPropertiesControls
     {
         //*****************************************
@@ -92,7 +92,8 @@ namespace AdvancedScada.Controls_Binding.Display
 
         public int PollRate { get; set; }
 
-        [DefaultValue(false)] public bool SuppressErrorDisplay { get; set; }
+        [DefaultValue(false)]
+        public bool SuppressErrorDisplay { get; set; }
 
         [DefaultValue("")]
         [Category("PLC Properties")]
@@ -571,6 +572,7 @@ namespace AdvancedScada.Controls_Binding.Display
                         ErrorDisplayTime.Enabled = true;
                         OriginalText = base.Text;
                         base.Text = ErrorMessage;
+                        Utilities.DisplayError(this, ErrorMessage);
                     }
                 }
             }
@@ -780,105 +782,5 @@ namespace AdvancedScada.Controls_Binding.Display
 
         #endregion
     }
-
-    [PermissionSet
-        (SecurityAction.Demand, Name = "FullTrust")]
-    internal class HMITextBoxDesigner : ControlDesigner
-    {
-        private DesignerActionListCollection actionLists;
-
-        // Use pull model to populate smart tag menu.
-        public override DesignerActionListCollection ActionLists
-        {
-            get
-            {
-                if (null == actionLists)
-                {
-                    actionLists = new DesignerActionListCollection();
-                    actionLists.Add(new INetTextBoxActionList(Component));
-                }
-
-                return actionLists;
-            }
-        }
-    }
-
-    internal class INetTextBoxActionList : DesignerActionList
-    {
-        private readonly HMITextBox _INetTextBox;
-
-        private DesignerActionUIService designerActionUISvc;
-
-        //The constructor associates the control with the smart tag list.
-        public INetTextBoxActionList(IComponent component)
-            : base(component)
-        {
-            _INetTextBox = component as HMITextBox;
-
-            // Cache a reference to DesignerActionUIService, 
-            // so the DesigneractionList can be refreshed.
-            designerActionUISvc = GetService(typeof(DesignerActionUIService))
-                as DesignerActionUIService;
-        }
-
-
-        public string PLCAddressValue
-        {
-            get { return _INetTextBox.PLCAddressValue; }
-            set { _INetTextBox.PLCAddressValue = value; }
-        }
-
-        public Color BackColor
-        {
-            get { return _INetTextBox.BackColor; }
-            set { _INetTextBox.BackColor = value; }
-        }
-
-        public Color ForeColor
-        {
-            get { return _INetTextBox.ForeColor; }
-            set { _INetTextBox.ForeColor = value; }
-        }
-
-        public Font Font
-        {
-            get { return _INetTextBox.Font; }
-            set { _INetTextBox.Font = value; }
-        }
-
-        public string Text
-        {
-            get { return _INetTextBox.Text; }
-            set { _INetTextBox.Text = value; }
-        }
-
-        // Implementation of this abstract method creates smart tag  items, 
-        // associates their targets, and collects into list.
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            var items = new DesignerActionItemCollection();
-
-            //Define static section header entries.
-            items.Add(new DesignerActionHeaderItem("HMI Professional"));
-            items.Add(new DesignerActionMethodItem(this, "ShowTagList", "Choose Tag"));
-            items.Add(new DesignerActionPropertyItem("BackColor", "BackColor"));
-            items.Add(new DesignerActionPropertyItem("ForeColor", "ForeColor"));
-            items.Add(new DesignerActionPropertyItem("Font", "Font"));
-            items.Add(new DesignerActionPropertyItem("TagName", "TagName"));
-            items.Add(new DesignerActionPropertyItem("Text", "Text"));
-            return items;
-        }
-
-        private void ShowTagList()
-        {
-            var frm = new MonitorForm(PLCAddressValue);
-            frm.OnTagSelected_Clicked += tagName =>
-            {
-                var pd = TypeDescriptor.GetProperties(_INetTextBox)["PLCAddressValue"];
-                pd.SetValue(_INetTextBox, tagName);
-            };
-            frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.ShowDialog();
-        }
-    }
+ 
 }

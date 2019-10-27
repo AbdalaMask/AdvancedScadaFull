@@ -1,9 +1,8 @@
 ﻿using AdvancedScada.BaseService.Client;
+using AdvancedScada.Common;
 using AdvancedScada.Controls.Drivers;
-using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IBaseService;
-using AdvancedScada.IBaseService.Common;
 using AdvancedScada.Utils;
 using System;
 using System.Collections.Generic;
@@ -23,7 +22,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
 
     public class HMIAlarmMan : AdvancedScada.Controls_Net45.AlarmMan, IServiceCallback
     {
-        private string ChannelTypes;
+        
 
         #region Public Methods
 
@@ -42,21 +41,9 @@ namespace AdvancedScada.Controls_Binding.Alarm
 
         #endregion
 
-        #region Fild 
+       
 
-        private int intCount;
-        private readonly string nTime = "2017/12/18 16:44:02";
-        private readonly string nTagName = "TagName";
-        private readonly string nTagValue = "15135";
-        private readonly string[] nTagStatus = new string[4] { "Alarm On", "Alarm oFF", "Alarm Ack", "Alarm Variation" };
-        private readonly Color[] nColor = new Color[4] { Color.Red, Color.Green, Color.Blue, Color.Yellow };
-        public List<string> _nListViewColumns = new List<string>();
-        public List<Color> _nListViewColumnsColor = new List<Color>();
-        private readonly IniClass inicls = new IniClass();
-
-        #endregion
-
-        #region Property
+        #region PLC Properties
 
         //*****************************************
         //* Property - Address in PLC to Link to
@@ -73,15 +60,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
 
         #endregion
 
-        #region Constructor/Destructor
-
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-        }
-
-        #endregion
+       
 
         #region Public Methods WCF
 
@@ -254,32 +233,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
 
         #region Private Methods     
 
-        public void RListViewColumns()
-        {
-            View = View.Details;
-            FullRowSelect = true;
-            GridLines = true;
-            Columns.Clear();
-            Items.Clear();
-            HeaderStyle = ColumnHeaderStyle.Nonclickable;
-            BackColor = Color.FromArgb(Convert.ToInt32(inicls.GetIniValue("Alarm Type", "BackGround.BackColor", path)));
-            Sorting = SortOrder.Ascending;
-
-            Sort();
-
-            for (var i = 0; i < _nListViewColumns.Count; i++)
-                Columns.Add(_nListViewColumns[i], 130, HorizontalAlignment.Left);
-
-            for (var index = 0; index <= 19; index++)
-            {
-                string[] row0 = { nTime, nTagName, nTagValue, nTagStatus[intCount] };
-                var item = new ListViewItem(row0) { ForeColor = _nListViewColumnsColor[intCount] };
-                Items.Insert(0, item);
-                intCount = intCount + 1;
-                if (intCount == 3)
-                    intCount = 0;
-            }
-        }
+        
 
         protected override void OnCreateControl()
         {
@@ -289,41 +243,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
                 if (!DesignMode)
                 {
                     GetWCF();
-                    Items.Clear();
-                    _nListViewColumnsColor.Clear();
-                    // Open the file to read from.
-                    // string path = "c:\\AlarmMan.txt";
-                    //Using sr As StreamReader = File.OpenText(Path)
-                    //    Do While sr.Peek() >= 0
-                    //        _nListViewColumns.Add(sr.ReadLine())
-                    //    Loop
-                    //End Using
-                    _nListViewColumnsColor.Add(
-                        Color.FromArgb(Convert.ToInt32(inicls.GetIniValue("Alarm Type", "Button6.BackColor", path))));
-                    _nListViewColumnsColor.Add(
-                        Color.FromArgb(Convert.ToInt32(inicls.GetIniValue("Alarm Type", "Button7.BackColor", path))));
-                    _nListViewColumnsColor.Add(
-                        Color.FromArgb(Convert.ToInt32(inicls.GetIniValue("Alarm Type", "Button8.BackColor", path))));
-                    _nListViewColumnsColor.Add(
-                        Color.FromArgb(Convert.ToInt32(inicls.GetIniValue("Alarm Type", "Button9.BackColor", path))));
-                    _nListViewColumnsColor.Add(
-                        Color.FromArgb(
-                            Convert.ToInt32(inicls.GetIniValue("Alarm Type", "BackGround.BackColor", path))));
-                    var ItemsCount = int.Parse(inicls.GetIniValue("Display Format", "ListBoxSelectedItemsCount", path));
-                    for (var i = 0; i < ItemsCount; i++)
-                        _nListViewColumns.Add(inicls.GetIniValue("Display Format",
-                            "ListBoxSelected.Items" + Convert.ToString(i), path));
-                    //   _nListViewColumns.Add(inicls.GetIniValue("Display Format", "ListBoxSelected.Items" + Convert.ToString(i), "C:\Settings.ini"))
-                    View = View.Details;
-                    FullRowSelect = true;
-                    GridLines = true;
-                    Columns.Clear();
-                    Items.Clear();
-                    HeaderStyle = ColumnHeaderStyle.Nonclickable;
-                    BackColor = Color.FromArgb(
-                        Convert.ToInt32(inicls.GetIniValue("Alarm Type", "BackGround.BackColor", path)));
-                    for (var i = 0; i < _nListViewColumns.Count; i++)
-                        Columns.Add(_nListViewColumns[i], 130, HorizontalAlignment.Left);
+                    
                 }
             }
             catch (Exception ex)

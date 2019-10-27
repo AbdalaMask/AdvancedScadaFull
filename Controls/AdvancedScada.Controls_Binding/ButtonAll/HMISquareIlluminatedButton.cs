@@ -12,8 +12,14 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
     public class HMISquareIlluminatedButton : SquareIlluminatedButton, IPropertiesControls
     {
 
+        public HMISquareIlluminatedButton()
+        {
+            MaxHoldTimer.Tick += MaxHoldTimer_Tick;
+            MinHoldTimer.Tick += HoldTimer_Tick;
+        }
+        #region PLC Properties
 
-
+       
         public bool HoldTimeMet;
         private int m_MaximumHoldTime = 3000;
         private int m_MinimumHoldTime = 500;
@@ -181,7 +187,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
 
         [Category("PLC Properties")]
         public int ValueToWrite { get; set; }
-
+        #endregion
         public event EventHandler ValueChanged;
 
 
@@ -192,10 +198,10 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                 switch (OutputType)
                 {
                     case OutputType.MomentarySet:
-                        Utilities.Write(PLCAddressClick, Convert.ToString(false));
+                        Utilities.Write(PLCAddressClick, false);
                         break;
                     case OutputType.MomentaryReset:
-                        Utilities.Write(PLCAddressClick, Convert.ToString(true));
+                        Utilities.Write(PLCAddressClick, true);
                         break;
                 }
             }
@@ -231,24 +237,24 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                     switch (OutputType)
                     {
                         case OutputType.MomentarySet:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                         case OutputType.MomentaryReset:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.SetTrue:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                         case OutputType.SetFalse:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.Toggle:
 
                             var CurrentValue = Value;
                             if (CurrentValue)
-                                Utilities.Write(m_PLCAddressClick, "0");
+                                Utilities.Write(m_PLCAddressClick, false);
                             else
-                                Utilities.Write(m_PLCAddressClick, "1");
+                                Utilities.Write(m_PLCAddressClick, true);
                             break;
                         default:
 
@@ -276,10 +282,10 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                     switch (OutputType)
                     {
                         case OutputType.MomentarySet:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.MomentaryReset:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                     }
                 }
@@ -344,7 +350,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                 if (!ErrorDisplayTime.Enabled) OriginalText = Text;
 
                 ErrorDisplayTime.Enabled = true;
-
+                Utilities.DisplayError(this, ErrorMessage);
                 Text = ErrorMessage;
             }
         }

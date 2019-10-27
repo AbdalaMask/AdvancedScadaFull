@@ -14,7 +14,12 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 {
     public class HMIGraphicIndicator : MfgControl.AdvancedHMI.Controls.GraphicIndicator, IPropertiesControls
     {
-
+        public HMIGraphicIndicator()
+        {
+            MaxHoldTimer.Tick += MaxHoldTimer_Tick;
+            MinHoldTimer.Tick += HoldTimer_Tick;
+        }
+        #region PLC Properties
         public bool HoldTimeMet;
         private int m_MaximumHoldTime = 3000;
         private int m_MinimumHoldTime = 500;
@@ -173,7 +178,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         public int ValueToWrite { get; set; }
         public string PLCAddressValue { get; set; }
         public string PLCAddressEnabled { get; set; }
-
+        #endregion
         private void ReleaseValue()
         {
             try
@@ -181,16 +186,16 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                 switch (OutputType)
                 {
                     case OutputTypes.MomentarySet:
-                        Utilities.Write(m_PLCAddressClick, Convert.ToString(false));
+                        Utilities.Write(m_PLCAddressClick, false);
                         break;
                     case OutputTypes.MomentaryReset:
-                        Utilities.Write(m_PLCAddressClick, Convert.ToString(true));
+                        Utilities.Write(m_PLCAddressClick, true);
                         break;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DisplayError(ex.Message);
             }
         }
 
@@ -220,24 +225,24 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     switch (OutputType)
                     {
                         case OutputTypes.MomentarySet:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                         case OutputTypes.MomentaryReset:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputTypes.SetTrue:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                         case OutputTypes.SetFalse:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputTypes.Toggle:
 
                             var CurrentValue = false;
                             if (CurrentValue)
-                                Utilities.Write(m_PLCAddressClick, "0");
+                                Utilities.Write(m_PLCAddressClick, false);
                             else
-                                Utilities.Write(m_PLCAddressClick, "1");
+                                Utilities.Write(m_PLCAddressClick, true);
                             break;
                         default:
 
@@ -263,10 +268,10 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     switch (OutputType)
                     {
                         case OutputTypes.MomentarySet:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputTypes.MomentaryReset:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                     }
                 }
@@ -301,7 +306,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                 if (!ErrorDisplayTime.Enabled) OriginalText = Text;
 
                 ErrorDisplayTime.Enabled = true;
-
+                Utilities.DisplayError(this, ErrorMessage);
                 Text = ErrorMessage;
             }
         }

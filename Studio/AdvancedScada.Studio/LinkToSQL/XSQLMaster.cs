@@ -13,7 +13,7 @@ namespace AdvancedScada.Studio.LinkToSQL
 {
     public partial class XSQLMaster : KryptonForm
     {
-        private BindingList<Column> bColumns;
+        
         public bool IsDataChanged;
 
         private string _lblValueInfo = string.Empty;

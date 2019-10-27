@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.Leds
 {
-    [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(HMILedSingle), "HMI7Segment.ico")]
+   
     public partial class HMILedSingle : DasNetIndicator.DAS_Net_Indicator, IPropertiesControls
     {
+        public HMILedSingle()
+        {
+            MaxHoldTimer.Tick += MaxHoldTimer_Tick;
+            MinHoldTimer.Tick += HoldTimer_Tick;
+        }
+        #region PLC Properties
 
+       
         public bool HoldTimeMet;
         private int m_MaximumHoldTime = 3000;
         private int m_MinimumHoldTime = 500;
@@ -191,7 +197,7 @@ namespace AdvancedScada.Controls_Binding.Leds
         [Category("PLC Properties")]
         public int ValueToWrite { get; set; }
         public string PLCAddressEnabled { get; set; }
-
+        #endregion
         private void ReleaseValue()
         {
             try
@@ -199,16 +205,16 @@ namespace AdvancedScada.Controls_Binding.Leds
                 switch (OutputType)
                 {
                     case OutputType.MomentarySet:
-                        Utilities.Write(PLCAddressClick, Convert.ToString(false));
+                        Utilities.Write(PLCAddressClick, false);
                         break;
                     case OutputType.MomentaryReset:
-                        Utilities.Write(PLCAddressClick, Convert.ToString(true));
+                        Utilities.Write(PLCAddressClick, true);
                         break;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DisplayError("WRITE FAILED!" + ex.Message);
             }
         }
 
@@ -238,24 +244,24 @@ namespace AdvancedScada.Controls_Binding.Leds
                     switch (OutputType)
                     {
                         case OutputType.MomentarySet:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                         case OutputType.MomentaryReset:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.SetTrue:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                         case OutputType.SetFalse:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.Toggle:
 
                             var CurrentValue = Value;
                             if (CurrentValue)
-                                Utilities.Write(m_PLCAddressClick, "0");
+                                Utilities.Write(m_PLCAddressClick, false);
                             else
-                                Utilities.Write(m_PLCAddressClick, "1");
+                                Utilities.Write(m_PLCAddressClick, true);
                             break;
                         default:
 
@@ -281,10 +287,10 @@ namespace AdvancedScada.Controls_Binding.Leds
                     switch (OutputType)
                     {
                         case OutputType.MomentarySet:
-                            Utilities.Write(m_PLCAddressClick, "0");
+                            Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.MomentaryReset:
-                            Utilities.Write(m_PLCAddressClick, "1");
+                            Utilities.Write(m_PLCAddressClick, true);
                             break;
                     }
                 }
@@ -321,6 +327,7 @@ namespace AdvancedScada.Controls_Binding.Leds
                 ErrorDisplayTime.Enabled = true;
 
                 Text = ErrorMessage;
+                Utilities.DisplayError(this, ErrorMessage);
             }
         }
 

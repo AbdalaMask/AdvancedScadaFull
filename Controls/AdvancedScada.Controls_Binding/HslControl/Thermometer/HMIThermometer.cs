@@ -165,7 +165,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Thermometer
                 }
 
                 ErrorDisplayTime.Enabled = true;
-
+                Utilities.DisplayError(this, ErrorMessage);
                 this.Text = ErrorMessage;
             }
         }

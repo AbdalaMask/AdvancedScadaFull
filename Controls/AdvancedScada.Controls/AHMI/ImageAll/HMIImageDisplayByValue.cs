@@ -6,7 +6,7 @@ using AdvancedScada.Controls.AHMI.ImageAll;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.Common;
 using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.ComponentModel;

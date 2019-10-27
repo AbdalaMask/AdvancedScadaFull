@@ -7,7 +7,7 @@ using AdvancedScada.Controls.Drivers;
 using AdvancedScada.Controls.Drivers;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;

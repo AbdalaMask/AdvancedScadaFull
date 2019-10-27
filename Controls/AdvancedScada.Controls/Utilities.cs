@@ -4,7 +4,7 @@ using AdvancedScada.BaseService;
 using AdvancedScada.BaseService.Client;
 using AdvancedScada.Controls;
 using AdvancedScada.IBaseService;
-using AdvancedScada.IBaseService.Common;
+using AdvancedScada.Common;
 using AdvancedScada.Utils;
 using Microsoft.Win32;
 using System;
@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading;
 using System.Windows.Forms;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Controls
 {
@@ -33,7 +33,7 @@ namespace AdvancedScada.Controls
             {
                 lock (myLockRead)
                 {
-                    client = DriverHelper.GetInstance().GetReadService();
+                    client = ClientDriverHelper.GetInstance().GetReadService();
                     if (client != null)
                         client.WriteTag(PLCAddressClick, Value);
                 }

@@ -1,5 +1,6 @@
 ﻿using AdvancedScada;
 using AdvancedScada;
+using AdvancedScada.Common.Client;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
 using AdvancedScada.Controls.AHMI.Controls;
@@ -7,7 +8,6 @@ using AdvancedScada.Controls.AHMI.Licenses;
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.DriverBase.Client;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.Collections.Generic;

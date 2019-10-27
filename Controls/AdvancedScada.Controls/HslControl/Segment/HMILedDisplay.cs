@@ -8,7 +8,7 @@ using AdvancedScada.Controls.HslControl.Segment;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.Common;
 using HslControls;
 using System;
 using System.ComponentModel;

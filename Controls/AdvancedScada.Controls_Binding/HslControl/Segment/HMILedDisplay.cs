@@ -185,7 +185,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
                 }
 
                 ErrorDisplayTime.Enabled = true;
-
+                Utilities.DisplayError(this, ErrorMessage);
                 this.Text = ErrorMessage;
             }
         }
@@ -273,13 +273,13 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
                             if ((Convert.ToDouble(KeypadPopUp.Value) < KeypadMinValue) |
                                 (Convert.ToDouble(KeypadPopUp.Value) > KeypadMaxValue))
                             {
-                                MessageBox.Show("Value must be >" + KeypadMinValue + " and <" + KeypadMaxValue);
+                                DisplayError("Value must be >" + KeypadMinValue + " and <" + KeypadMaxValue);
                                 return;
                             }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Failed to validate value. " + ex.Message);
+                        DisplayError("Failed to validate value. " + ex.Message);
                         return;
                     }
 
@@ -299,7 +299,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Failed to write value. " + ex.Message);
+                        DisplayError("Failed to write value. " + ex.Message);
                     }
                 }
 

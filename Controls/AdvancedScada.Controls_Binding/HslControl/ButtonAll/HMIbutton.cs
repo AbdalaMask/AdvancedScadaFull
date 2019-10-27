@@ -606,7 +606,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.ButtonAll
                 }
 
                 ErrorDisplayTime.Enabled = true;
-
+                Utilities.DisplayError(this, ErrorMessage);
                 this.Text = ErrorMessage;
             }
         }

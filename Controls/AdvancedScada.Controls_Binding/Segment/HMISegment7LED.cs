@@ -15,7 +15,7 @@ namespace AdvancedScada.Controls_Binding.Segment
 
         private string OriginalText;
 
-        #region propartas
+        #region PLC Properties
 
         //*****************************************
         //* Property - Address in PLC to Link to
@@ -112,6 +112,20 @@ namespace AdvancedScada.Controls_Binding.Segment
             }
         }
 
+        //*****************************************
+        //* Property - Address in PLC to Write Data To
+        //*****************************************
+        private string m_PLCAddressKeypad = string.Empty;
+
+        [Category("PLC Properties")]
+        public string PLCAddressKeypad
+        {
+            get { return m_PLCAddressKeypad; }
+            set
+            {
+                if (m_PLCAddressKeypad != value) m_PLCAddressKeypad = value;
+            }
+        }
 
 
         #endregion
@@ -148,6 +162,7 @@ namespace AdvancedScada.Controls_Binding.Segment
                         ErrorDisplayTime.Enabled = true;
                         OriginalText = Text;
                         Text = ErrorMessage;
+                        Utilities.DisplayError(this, ErrorMessage);
                     }
                 }
             }
@@ -223,21 +238,7 @@ namespace AdvancedScada.Controls_Binding.Segment
 
         public bool KeypadShowCurrentValue { get; set; }
 
-        //*****************************************
-        //* Property - Address in PLC to Write Data To
-        //*****************************************
-        private string m_PLCAddressKeypad = string.Empty;
-
-        [Category("PLC Properties")]
-        public string PLCAddressKeypad
-        {
-            get { return m_PLCAddressKeypad; }
-            set
-            {
-                if (m_PLCAddressKeypad != value) m_PLCAddressKeypad = value;
-            }
-        }
-
+      
 
         private IKeyboard KeypadPopUp;
 

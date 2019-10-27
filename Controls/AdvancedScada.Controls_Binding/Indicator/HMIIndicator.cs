@@ -171,8 +171,9 @@ namespace AdvancedScada.Controls_Binding.Indicator
                 if (!ErrorDisplayTime.Enabled) OriginalText = Text;
 
                 ErrorDisplayTime.Enabled = true;
-
+                Utilities.DisplayError(this, ErrorMessage);
                 Text = ErrorMessage;
+                
             }
         }
 

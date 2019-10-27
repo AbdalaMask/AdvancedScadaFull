@@ -1,5 +1,6 @@
 ﻿using AdvancedScada;
 using AdvancedScada;
+using AdvancedScada.Common;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
 using AdvancedScada.Controls.AHMI.ButtonAll;
@@ -7,7 +8,7 @@ using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.DriverBase;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.Collections;

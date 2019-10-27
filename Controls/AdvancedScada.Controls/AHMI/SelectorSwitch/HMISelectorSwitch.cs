@@ -5,7 +5,7 @@ using AdvancedScada.Controls.AHMI;
 using AdvancedScada.Controls.AHMI.SelectorSwitch;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.Common;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.Collections;

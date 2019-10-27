@@ -16,7 +16,7 @@ namespace AdvancedScada.Controls_Binding.Linear
 
         private string OriginalText;
 
-        #region propartas
+        #region PLC Properties
 
         //*****************************************
         //* Property - Address in PLC to Link to
@@ -143,7 +143,7 @@ namespace AdvancedScada.Controls_Binding.Linear
                 if (!ErrorDisplayTime.Enabled) OriginalText = Text;
 
                 ErrorDisplayTime.Enabled = true;
-
+                Utilities.DisplayError(this, ErrorMessage);
                 Text = ErrorMessage;
             }
         }

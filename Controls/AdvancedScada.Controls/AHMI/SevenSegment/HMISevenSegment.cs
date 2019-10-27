@@ -10,7 +10,7 @@
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.DriverBase.Comm;
+using AdvancedScada.Common;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -958,7 +958,7 @@ namespace AdvancedScada.Controls.AHMI.SevenSegment
                 // draw faded led(s)
                 subRect.Width = subRectWidth;
                 subRect.Height = subRectHeight;
-                subRect.X = (int)(i * subRect.Width + 5);
+                subRect.X = (i * subRect.Width + 5);
                 subRect.Y = 0;
                 subRect.Inflate(-charIntervals, -charIntervals);
                 // draw foreground led(s)

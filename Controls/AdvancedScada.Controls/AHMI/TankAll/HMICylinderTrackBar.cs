@@ -4,7 +4,7 @@ using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
 using AdvancedScada.Controls.AHMI.TankAll;
 using AdvancedScada.DriverBase;
-using AdvancedScada.DriverBase.Client;
+using AdvancedScada.Common.Client;
 using AdvancedScada.Monitor;
 using System;
 using System.ComponentModel;

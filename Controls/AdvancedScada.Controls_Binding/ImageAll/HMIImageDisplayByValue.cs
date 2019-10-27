@@ -326,7 +326,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                 if (!ErrorDisplayTime.Enabled) OriginalText = Text;
 
                 ErrorDisplayTime.Enabled = true;
-
+                Utilities.DisplayError(this, ErrorMessage);
                 Text = ErrorMessage;
             }
         }
@@ -352,23 +352,9 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         #region Keypad popup for data entry
 
-        private Keypad_v3 _KeypadPopUp;
+        private Keypad_v3 KeypadPopUp;
 
-        private Keypad_v3 KeypadPopUp
-        {
-            [DebuggerNonUserCode]
-            get { return _KeypadPopUp; }
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            [DebuggerNonUserCode]
-            set
-            {
-                if (_KeypadPopUp != null) _KeypadPopUp.ButtonClick -= KeypadPopUp_ButtonClick;
-
-                _KeypadPopUp = value;
-
-                if (value != null) _KeypadPopUp.ButtonClick += KeypadPopUp_ButtonClick;
-            }
-        }
+      
 
         public string PLCAddressClick { get; set; }
         public string PLCAddressEnabled { get; set; }

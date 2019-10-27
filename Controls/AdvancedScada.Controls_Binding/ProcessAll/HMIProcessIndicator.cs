@@ -14,7 +14,7 @@ namespace AdvancedScada.Controls_Binding.ProcessAll
     {
 
 
-        #region propartas
+        #region PLC Properties
 
         //*****************************************
         //* Property - Address in PLC to Link to
@@ -113,8 +113,24 @@ namespace AdvancedScada.Controls_Binding.ProcessAll
                 }
             }
         }
+        //*****************************************
+        //* Property - Address in PLC to Write Data To
+        //*****************************************
+        private string m_PLCAddressKeypad = string.Empty;
 
-        [DefaultValue(false)]
+        [Category("PLC Properties")]
+        [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
+        public string PLCAddressKeypad
+        {
+            get { return m_PLCAddressKeypad; }
+            set
+            {
+                if (m_PLCAddressKeypad != value) m_PLCAddressKeypad = value;
+            }
+        }
+        public string PLCAddressClick { get; set; }
+        public string PLCAddressEnabled { get; set; }
+        [DefaultValue(true)]
         public bool SuppressErrorDisplay { get; set; }
 
         #endregion
@@ -143,6 +159,7 @@ namespace AdvancedScada.Controls_Binding.ProcessAll
                 ErrorDisplayTime.Enabled = true;
 
                 Text = ErrorMessage;
+                Utilities.DisplayError(this, ErrorMessage);
             }
         }
 
@@ -167,22 +184,7 @@ namespace AdvancedScada.Controls_Binding.ProcessAll
 
         private Keypad_v3 KeypadPopUp;
 
-        //*****************************************
-        //* Property - Address in PLC to Write Data To
-        //*****************************************
-        private string m_PLCAddressKeypad = string.Empty;
-
-        [Category("PLC Properties")]
-        [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
-        public string PLCAddressKeypad
-        {
-            get { return m_PLCAddressKeypad; }
-            set
-            {
-                if (m_PLCAddressKeypad != value) m_PLCAddressKeypad = value;
-            }
-        }
-
+       
         public string KeypadText { get; set; }
 
         private Color m_KeypadFontColor = Color.WhiteSmoke;
@@ -213,8 +215,7 @@ namespace AdvancedScada.Controls_Binding.ProcessAll
         public double KeypadMinValue { get; set; }
 
         public double KeypadMaxValue { get; set; }
-        public string PLCAddressClick { get; set; }
-        public string PLCAddressEnabled { get; set; }
+    
 
         private void KeypadPopUp_ButtonClick(object sender, KeypadEventArgs e)
         {
