@@ -1,5 +1,5 @@
-﻿using AdvancedScada.DriverBase;
-using AdvancedScada.Common;
+﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.Modbus.Core.Modbus.ASCII;
 using AdvancedScada.Modbus.Core.Modbus.RTU;

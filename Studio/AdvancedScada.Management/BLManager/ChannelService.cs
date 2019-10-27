@@ -1,5 +1,4 @@
 ﻿using AdvancedScada.Common;
-using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
 using Microsoft.Win32;
 using System;

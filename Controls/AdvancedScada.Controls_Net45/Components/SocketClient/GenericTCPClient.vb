@@ -198,13 +198,13 @@ Public Class GenericTcpClient
             For Each d In GTCDLL
                 If d.Value IsNot Nothing Then
                     ' rep = DirectCast(d.Value.RemoteEndPoint, System.Net.IPEndPoint)
-                    Dim IP1 As String = ""
+                    Dim IP1 As String = String.Empty
                     Try
                         IP1 = Net.IPAddress.Parse(d.Value.IPAddress).ToString()
                     Catch ex As Exception
                     End Try
 
-                    Dim IP2 As String = ""
+                    Dim IP2 As String = String.Empty
                     Try
                         IP2 = Net.IPAddress.Parse(m_IPAddress).ToString()
                     Catch ex As Exception
@@ -404,7 +404,7 @@ Public Class GenericTcpClient
     '* This is the procedure pointed to by the BeginWrite method
     '************************************************************
     Private ReceivedDataPacketBuilder As New List(Of Byte)
-    Private ReceivedPacketString As String = ""
+    Private ReceivedPacketString As String = String.Empty
     Private DataReceivedLock As New Object
     Private Sub DataLinkLayerDataReceived(ByVal ar As System.IAsyncResult)
         ' Retrieve the state object and the client socket 
@@ -437,7 +437,7 @@ Public Class GenericTcpClient
             '* No terminating characters specified so send on completed packet
             If String.IsNullOrEmpty(m_ParsedTerminators) Then
                 Dim dataArray(StateObject.CurrentIndex - 2) As Byte
-                Dim dataString As String = ""
+                Dim dataString As String = String.Empty
                 Array.Copy(StateObject.data, dataArray, StateObject.CurrentIndex - 1)
                 For index2 = 0 To dataArray.Length - 1
                     If dataArray(index2) >= 32 And dataArray(index2) < 128 Then
@@ -456,7 +456,7 @@ Public Class GenericTcpClient
 
                         CurrentByte = 0 'make sure last byte isn't falsely 16
                         ReceivedDataPacketBuilder.Clear()
-                        ReceivedPacketString = ""
+                        ReceivedPacketString = String.Empty
                     Else
                         ReceivedDataPacketBuilder.Add(CurrentByte)
                         '* Only add printable characters

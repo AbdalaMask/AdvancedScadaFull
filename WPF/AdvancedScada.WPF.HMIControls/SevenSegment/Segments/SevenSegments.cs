@@ -166,7 +166,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
 
                 if (SegmentsBrush.Any())
                 {
-                    var brush = SegmentsBrush.SingleOrDefault(s => s.Item1 == (int)entry.SegmentNumber);
+                    var brush = SegmentsBrush.SingleOrDefault(s => s.Item1 == entry.SegmentNumber);
                     Pen figurePen = new Pen(new SolidColorBrush(brush != null ? brush.Item3 : PenColor),
                         PenThickness);
 
@@ -226,7 +226,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
             {
                 for (int i = 0; i < SelectedSegments.Count; i++)
                 {
-                    GeometryFigures.Single(t => (int)t.SegmentNumber == SelectedSegments[i]).IsSelected = true;
+                    GeometryFigures.Single(t => t.SegmentNumber == SelectedSegments[i]).IsSelected = true;
                 }
             }
             else
@@ -442,7 +442,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
         {
             for (int i = 0; i < segmNumbers.Length; i++)
             {
-                GeometryFigures.Single(t => (int)t.SegmentNumber == segmNumbers[i]).IsSelected = true;
+                GeometryFigures.Single(t => t.SegmentNumber == segmNumbers[i]).IsSelected = true;
             }
 
         }

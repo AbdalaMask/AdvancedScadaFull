@@ -1,5 +1,5 @@
-﻿using AdvancedScada.DriverBase;
-using AdvancedScada.Common;
+﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.LSIS.Core.LSIS.Cnet;
 using AdvancedScada.LSIS.Core.LSIS.FENET;
@@ -19,7 +19,7 @@ namespace AdvancedScada.LSIS.Core
     }
     public class IODriverHelper : AdvancedScada.Common.IODriver
     {
-       
+
         public static List<Channel> Channels = new List<Channel>();
 
         //==================================LS===================================================
@@ -153,16 +153,16 @@ namespace AdvancedScada.LSIS.Core
                                     try
                                     {
                                         foreach (Device dv in ch.Devices)
-                                    {
-
-                                        foreach (DataBlock db in dv.DataBlocks)
                                         {
-                                            if (!IsConnected) break;
 
-                                            SendPackageLSIS(DriverAdapter, db);
+                                            foreach (DataBlock db in dv.DataBlocks)
+                                            {
+                                                if (!IsConnected) break;
+
+                                                SendPackageLSIS(DriverAdapter, db);
+                                            }
+
                                         }
-
-                                    }
                                     }
                                     catch (Exception ex)
                                     {
@@ -269,7 +269,7 @@ namespace AdvancedScada.LSIS.Core
                         baseAddress = db.StartAddress * 8;
                         break;
                 }
-                
+
                 switch (db.DataType)
                 {
                     case DataTypes.BitOnByte:
@@ -304,13 +304,18 @@ namespace AdvancedScada.LSIS.Core
                                     {
                                         bitArys[i] = DriverAdapter.Read<bool>(db.Tags[i].Address);
                                     }
-                                    catch  
+                                    catch (Exception ex)
                                     {
-                                        bitArys = null;
-                                        break  ;
+                                        EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+
                                     }
-                                  
-                                    
+                                    //catch
+                                    //{
+                                    //    bitArys = null;
+                                    //    break;
+                                    //}
+
+
                                 }
                             }
                             if (bitArys == null || bitArys.Length == 0) return;
@@ -475,7 +480,7 @@ namespace AdvancedScada.LSIS.Core
             var value = data.value;
             try
             {
-                
+
                 string[] ary = tagName.Split('.');
                 string tagDevice = string.Format("{0}.{1}", ary[0], ary[1]);
                 foreach (Channel ch in Channels)

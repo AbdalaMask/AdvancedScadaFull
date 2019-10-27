@@ -200,34 +200,34 @@ namespace AdvancedScada.LSIS.Core.Editors
                         chkX16.Enabled = true;
                         chkIsHex.Enabled = true;
                         txtAddressLength.Maximum = 1;
-                                chkX10.Enabled = true;
-                                txtAddressLength.Minimum = 1;
-                           
+                        chkX10.Enabled = true;
+                        txtAddressLength.Minimum = 1;
+
 
                         break;
                     case DataTypes.Byte:
                         break;
                     case DataTypes.Short:
-                        
-                                if (ch.ConnectionType == "SerialPort")
-                                {
-                                    txtAddressLength.Maximum = 60;
-                                    txtAddressLength.Minimum = 1;
-                                   
-                                }
 
-                                else
-                                {
-                                    txtAddressLength.Maximum = 120;
-                                    txtAddressLength.Minimum = 1;
-                                    
-                                }
+                        if (ch.ConnectionType == "SerialPort")
+                        {
+                            txtAddressLength.Maximum = 60;
+                            txtAddressLength.Minimum = 1;
+
+                        }
+
+                        else
+                        {
+                            txtAddressLength.Maximum = 120;
+                            txtAddressLength.Minimum = 1;
+
+                        }
                         chkX10.Enabled = false;
                         chkX16.Enabled = false;
                         chkIsHex.Enabled = false;
                         break;
-                          
-                         
+
+
                     case DataTypes.UShort:
                         break;
                     case DataTypes.Int:
@@ -310,7 +310,7 @@ namespace AdvancedScada.LSIS.Core.Editors
                             DeviceId = dv.DeviceId,
                             DataBlockId = dv.DataBlocks.Count + 1,
                             DataBlockName = txtDataBlock.Text,
-                            TypeOfRead = "",
+                            TypeOfRead = string.Empty,
                             StartAddress = (ushort)txtStartAddress.Value,
                             MemoryType = txtDomain.Text,
                             Description = txtDesc.Text,
@@ -343,7 +343,7 @@ namespace AdvancedScada.LSIS.Core.Editors
                         db.DeviceId = db.DeviceId;
                         db.DataBlockId = int.Parse(txtDataBlockId.Text);
                         db.DataBlockName = txtDataBlock.Text;
-                        db.TypeOfRead = "";
+                        db.TypeOfRead = string.Empty;
                         db.StartAddress = (ushort)txtStartAddress.Value;
                         db.MemoryType = txtDomain.Text;
                         db.Length = (ushort)txtAddressLength.Value;

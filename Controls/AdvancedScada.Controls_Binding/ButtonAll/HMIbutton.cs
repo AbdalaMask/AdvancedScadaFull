@@ -1,7 +1,7 @@
-﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.Controls_Binding.Display;
-using AdvancedScada.Common;
+﻿using AdvancedScada.Common;
 using AdvancedScada.Common.Client;
+using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.Controls_Binding.Display;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
@@ -19,20 +19,15 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
             MinHoldTimer.Tick += HoldTimer_Tick;
         }
 
-        #region Property
+        #region PLC Properties
 
         //********************************************
         //* Property - Address in PLC for click event
         //********************************************
-        private string m_PLCAddressClick = string.Empty;
 
         [Category("PLC Properties")]
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
-        public string PLCAddressClick
-        {
-            get { return m_PLCAddressClick; }
-            set { m_PLCAddressClick = value; }
-        }
+        public string PLCAddressClick { get; set; } = string.Empty;
 
         //*****************************************
         //* Property - Address in PLC to Link to
@@ -75,9 +70,9 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                         var bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressText], "Value", true);
                         DataBindings.Add(bd);
                     }
-                    catch (Exception e1)
+                    catch (Exception ex)
                     {
-                        Console.WriteLine(e1.Message);
+                        Utilities.DisplayError(this, ex.Message);
                     }
                 }
             }
@@ -98,13 +93,21 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                 if (m_PLCAddressVisible != value)
                 {
                     m_PLCAddressVisible = value;
+                    try
+                    {
+                        //* When address is changed, re-subscribe to new address
 
-                    //* When address is changed, re-subscribe to new address
+                        if (string.IsNullOrEmpty(m_PLCAddressVisible) || string.IsNullOrWhiteSpace(m_PLCAddressVisible) ||
+                            Licenses.LicenseManager.IsInDesignMode) return;
+                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                        DataBindings.Add(bd);
+                    }
+                    catch (Exception ex)
+                    {
 
-                    if (string.IsNullOrEmpty(m_PLCAddressVisible) || string.IsNullOrWhiteSpace(m_PLCAddressVisible) ||
-                        Licenses.LicenseManager.IsInDesignMode) return;
-                    var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
-                    DataBindings.Add(bd);
+                        Utilities.DisplayError(this, ex.Message);
+                    }
+
                 }
             }
         }
@@ -122,12 +125,20 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                 if (m_PLCAddressEnabled != value)
                 {
                     m_PLCAddressEnabled = value;
+                    try
+                    {
+                        //* When address is changed, re-subscribe to new address
+                        if (string.IsNullOrEmpty(m_PLCAddressEnabled) || string.IsNullOrWhiteSpace(m_PLCAddressEnabled) ||
+                            Licenses.LicenseManager.IsInDesignMode) return;
+                        var bd = new Binding("Enabled", TagCollectionClient.Tags[m_PLCAddressEnabled], "Value", true);
+                        DataBindings.Add(bd);
+                    }
+                    catch (Exception ex)
+                    {
 
-                    //* When address is changed, re-subscribe to new address
-                    if (string.IsNullOrEmpty(m_PLCAddressEnabled) || string.IsNullOrWhiteSpace(m_PLCAddressEnabled) ||
-                        Licenses.LicenseManager.IsInDesignMode) return;
-                    var bd = new Binding("Enabled", TagCollectionClient.Tags[m_PLCAddressEnabled], "Value", true);
-                    DataBindings.Add(bd);
+                        Utilities.DisplayError(this, ex.Message);
+                    }
+
                 }
             }
         }
@@ -199,7 +210,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Utilities.DisplayError(this, ex.Message);
             }
         }
 
@@ -246,7 +257,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         //**********************************************************************
 
         [Category("PLC Properties")] public int ValueToWrite { get; set; }
-        public string PLCAddressValue { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string PLCAddressValue { get; set; }
 
         #endregion
 
@@ -323,12 +334,12 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                     DisplayError(ex.Message);
                 }
 
-            //this.Invalidate();
+
         }
 
         public void DisplayError(string ErrorMessage)
         {
-             XCollection.EventscadaException?.Invoke(this.GetType().Name, ErrorMessage);
+            Utilities.DisplayError(this, ErrorMessage);
         }
 
         #endregion

@@ -1,10 +1,9 @@
-﻿using AdvancedScada.DriverBase;
-using System;
+﻿using System;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 namespace AdvancedScada.IBaseService
 {
-   
+
     public class BaseBinding
     {
         protected ushort PORT = 8086;
@@ -81,16 +80,16 @@ namespace AdvancedScada.IBaseService
                 serviceThrottlingBehavior.MaxConcurrentCalls = int.MaxValue;
                 serviceThrottlingBehavior.MaxConcurrentSessions = int.MaxValue;
                 serviceThrottlingBehavior.MaxConcurrentInstances = int.MaxValue;
-               
+
                 host.Description.Behaviors.Add(serviceThrottlingBehavior);
 
                 //ServiceMetadataBehavior metad = host.Description.Behaviors.Find<ServiceMetadataBehavior>();
-        
+
                 //if (metad == null)
                 //    metad = new ServiceMetadataBehavior();
                 //metad.HttpGetEnabled = true;
                 //host.Description.Behaviors.Add(metad);
-               
+
             }
             return serviceThrottlingBehavior;
         }

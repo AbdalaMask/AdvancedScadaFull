@@ -1,8 +1,7 @@
 ﻿using AdvancedScada.BaseService.Client;
-using AdvancedScada.DriverBase;
+using AdvancedScada.Common;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IBaseService;
-using AdvancedScada.Common;
 using AdvancedScada.Management.BLManager;
 using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Navigator;
@@ -260,7 +259,7 @@ namespace AdvancedScada.Monitor
         }
 
 
-       
+
         #endregion
         private void PLC_MonitorForm_FormClosing(object sender, FormClosingEventArgs e)
         {

@@ -67,7 +67,7 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
                 typeof(SegmentBase), new PropertyMetadata(false, VisualChanged));
 
             ValueProperty = DependencyProperty.Register("Value", typeof(string),
-                typeof(SegmentBase), new PropertyMetadata("", VisualChanged));
+                typeof(SegmentBase), new PropertyMetadata(string.Empty, VisualChanged));
 
             ShowDotProperty = DependencyProperty.Register("ShowDot", typeof(bool),
                 typeof(SegmentBase), new PropertyMetadata(false, VisualChanged));

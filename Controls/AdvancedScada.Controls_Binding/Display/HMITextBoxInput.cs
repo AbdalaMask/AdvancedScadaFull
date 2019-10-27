@@ -1,5 +1,5 @@
-﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.Common;
+﻿using AdvancedScada.Common;
+using AdvancedScada.Controls_Binding.DialogEditor;
 using System.ComponentModel;
 using System.Drawing.Design;
 

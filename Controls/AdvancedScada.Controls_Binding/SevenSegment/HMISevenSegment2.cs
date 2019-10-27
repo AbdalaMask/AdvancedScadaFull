@@ -1,7 +1,7 @@
-﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.Controls_Net45;
-using AdvancedScada.Common;
+﻿using AdvancedScada.Common;
 using AdvancedScada.Common.Client;
+using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.Controls_Net45;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -17,7 +17,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         private string OriginalText;
 
 
-        #region PLC to Link
+        #region PLC Properties
 
         //*****************************************
         //* Property - Address in PLC to Link to
@@ -37,7 +37,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
 
                     try
                     {
-                        // If Not String.IsNullOrEmpty(m_PLCAddressVisible) Then
+
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
                             string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
@@ -84,7 +84,22 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
                 }
             }
         }
-
+        [Category("PLC Properties")]
+        [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
+        public string PLCAddressKeypad
+        {
+            get { return m_PLCAddressKeypad; }
+            set
+            {
+                if (m_PLCAddressKeypad != value) m_PLCAddressKeypad = value;
+            }
+        }
+        [Category("PLC Properties")]
+        [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
+        public string PLCAddressClick { get; set; }
+        [Category("PLC Properties")]
+        [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
+        public string PLCAddressEnabled { get; set; }
         [DefaultValue(false)]
         public bool SuppressErrorDisplay { get; set; }
 
@@ -114,6 +129,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
                 ErrorDisplayTime.Enabled = true;
 
                 Text = ErrorMessage;
+                Utilities.DisplayError(this, ErrorMessage);
             }
         }
 
@@ -143,16 +159,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         //*****************************************
         private string m_PLCAddressKeypad = string.Empty;
 
-        [Category("PLC Properties")]
-        [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
-        public string PLCAddressKeypad
-        {
-            get { return m_PLCAddressKeypad; }
-            set
-            {
-                if (m_PLCAddressKeypad != value) m_PLCAddressKeypad = value;
-            }
-        }
+
 
         public string KeypadText { get; set; }
 
@@ -183,8 +190,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         public double KeypadMinValue { get; set; }
 
         public double KeypadMaxValue { get; set; }
-        public string PLCAddressClick { get; set; }
-        public string PLCAddressEnabled { get; set; }
+
 
         private void KeypadPopUp_ButtonClick(object sender, KeypadEventArgs e)
         {
@@ -201,7 +207,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Failed to write value. " + ex.Message);
+                        Utilities.DisplayError(this, "Failed to write value. " + ex.Message);
                     }
 
                 KeypadPopUp.Visible = false;

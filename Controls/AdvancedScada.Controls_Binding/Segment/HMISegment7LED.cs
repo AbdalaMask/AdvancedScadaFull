@@ -1,6 +1,6 @@
-﻿using AdvancedScada.Controls_Binding.DialogEditor;
+﻿using AdvancedScada.Common.Client;
+using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.Common.Client;
 using System;
 using System.ComponentModel;
 using System.Drawing;

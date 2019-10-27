@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.BaseService.Client;
+using AdvancedScada.Common;
 using AdvancedScada.DataAccess;
 using AdvancedScada.HMI.Tools;
 using AdvancedScada.IBaseService;
@@ -11,9 +12,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.ServiceModel;
 using System.Windows.Forms;
-using static AdvancedScada.HMI.Tools.Tools;
 using static AdvancedScada.Common.XCollection;
-using AdvancedScada.Common;
+using static AdvancedScada.HMI.Tools.Tools;
 
 namespace AdvancedScada.HMI.MainForm
 {
@@ -319,10 +319,9 @@ namespace AdvancedScada.HMI.MainForm
             {
                 Process.Start("ReportViewer.exe");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
 
         }

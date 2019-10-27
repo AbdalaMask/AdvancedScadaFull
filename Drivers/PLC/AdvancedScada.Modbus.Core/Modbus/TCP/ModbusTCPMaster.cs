@@ -28,7 +28,7 @@ namespace AdvancedScada.Modbus.Core.Modbus.TCP
         }
 
 
-        public  bool Connection()
+        public bool Connection()
         {
             if (!System.Net.IPAddress.TryParse(IP, out System.Net.IPAddress address))
             {

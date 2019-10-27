@@ -12,7 +12,7 @@ using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Delta.Core
 {
-    public class IODriverHelper : AdvancedScada.Common. IODriver
+    public class IODriverHelper : AdvancedScada.Common.IODriver
     {
         public static readonly ManualResetEvent SendDone = new ManualResetEvent(true);
         public static List<Channel> Channels = new List<Channel>();

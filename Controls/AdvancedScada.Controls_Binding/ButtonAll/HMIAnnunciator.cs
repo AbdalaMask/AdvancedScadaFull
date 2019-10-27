@@ -1,6 +1,6 @@
-﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.Common;
+﻿using AdvancedScada.Common;
 using AdvancedScada.Common.Client;
+using AdvancedScada.Controls_Binding.DialogEditor;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
@@ -11,12 +11,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
 {
     public class HMIAnnunciator : Annunciator, IPropertiesControls
     {
-
-
-
         private string OriginalText;
-
-
         #region PLC Related Properties
 
         //*****************************************
@@ -51,18 +46,9 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
             }
         }
 
-        //********************************************
-        //* Property - Address in PLC for click event
-        //********************************************
-        private string m_PLCAddressClick = string.Empty;
-
         [Category("PLC Properties")]
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
-        public string PLCAddressClick
-        {
-            get { return m_PLCAddressClick; }
-            set { m_PLCAddressClick = value; }
-        }
+        public string PLCAddressClick { get; set; } = string.Empty;
 
         //*****************************************
         //* Property - Address in PLC to Link to
@@ -107,7 +93,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                     }
                     catch (Exception e1)
                     {
-                        Console.WriteLine(e1.Message);
+                        Utilities.DisplayError(this, e1.Message);
                     }
                 }
             }
@@ -128,13 +114,19 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                 if (m_PLCAddressVisible != value)
                 {
                     m_PLCAddressVisible = value;
+                    try
+                    {
+                        if (string.IsNullOrEmpty(m_PLCAddressVisible) || string.IsNullOrWhiteSpace(m_PLCAddressVisible) ||
+                            Licenses.LicenseManager.IsInDesignMode) return;
+                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                        DataBindings.Add(bd);
+                    }
+                    catch (Exception ex)
+                    {
 
-                    //* When address is changed, re-subscribe to new address
+                        Utilities.DisplayError(this, ex.Message);
+                    }
 
-                    if (string.IsNullOrEmpty(m_PLCAddressVisible) || string.IsNullOrWhiteSpace(m_PLCAddressVisible) ||
-                        Licenses.LicenseManager.IsInDesignMode) return;
-                    var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
-                    DataBindings.Add(bd);
                 }
             }
         }
@@ -152,12 +144,20 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                 if (m_PLCAddressEnabled != value)
                 {
                     m_PLCAddressEnabled = value;
+                    try
+                    {
+                        //* When address is changed, re-subscribe to new address
+                        if (string.IsNullOrEmpty(m_PLCAddressEnabled) || string.IsNullOrWhiteSpace(m_PLCAddressEnabled) ||
+                            Licenses.LicenseManager.IsInDesignMode) return;
+                        var bd = new Binding("Enabled", TagCollectionClient.Tags[m_PLCAddressEnabled], "Value", true);
+                        DataBindings.Add(bd);
+                    }
+                    catch (Exception ex)
+                    {
 
-                    //* When address is changed, re-subscribe to new address
-                    if (string.IsNullOrEmpty(m_PLCAddressEnabled) || string.IsNullOrWhiteSpace(m_PLCAddressEnabled) ||
-                        Licenses.LicenseManager.IsInDesignMode) return;
-                    var bd = new Binding("Enabled", TagCollectionClient.Tags[m_PLCAddressEnabled], "Value", true);
-                    DataBindings.Add(bd);
+                        Utilities.DisplayError(this, ex.Message);
+                    }
+
                 }
             }
         }
@@ -184,13 +184,9 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
             get { return base.Text; }
             set { base.Text = value; }
         }
-
-
         //******************************************************************************************
         //* Use the base control's text property and make it visible as a property on the designer
         //******************************************************************************************
-
-
         private void ReleaseValue()
         {
             try
@@ -201,7 +197,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Utilities.DisplayError(this, ex.Message);
             }
         }
 
@@ -270,17 +266,26 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         protected override void OnMouseUp(MouseEventArgs mevent)
         {
             base.OnMouseUp(mevent);
-            MouseIsDown = false;
-            if (this.Enabled)
+            try
             {
-                this.Invalidate();
-            }
-            if (PLCAddressClick != null && string.Compare(PLCAddressClick, string.Empty) != 0)
-                if (HoldTimeMet || m_MinimumHoldTime <= 0)
+                MouseIsDown = false;
+                if (this.Enabled)
                 {
-                    MaxHoldTimer.Enabled = false;
-                    ReleaseValue();
+                    this.Invalidate();
                 }
+                if (PLCAddressClick != null && string.Compare(PLCAddressClick, string.Empty) != 0)
+                    if (HoldTimeMet || m_MinimumHoldTime <= 0)
+                    {
+                        MaxHoldTimer.Enabled = false;
+                        ReleaseValue();
+                    }
+            }
+            catch (Exception ex)
+            {
+
+                Utilities.DisplayError(this, ex.Message);
+            }
+
         }
 
 
@@ -324,11 +329,12 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                             Utilities.Write(PLCAddressClick, "1");
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Utilities.DisplayError(this, ex.Message);
                 }
 
-            //this.Invalidate();
+
         }
 
         #endregion
@@ -362,6 +368,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                 ErrorDisplayTime.Enabled = true;
 
                 Text = ErrorMessage;
+                Utilities.DisplayError(this, ErrorMessage);
             }
         }
 

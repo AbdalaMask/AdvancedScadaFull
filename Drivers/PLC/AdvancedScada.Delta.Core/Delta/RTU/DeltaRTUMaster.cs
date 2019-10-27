@@ -1,5 +1,4 @@
 ﻿using AdvancedScada.Common;
-using AdvancedScada.DriverBase.Devices;
 using HslCommunication.ModBus;
 using System;
 using System.IO.Ports;

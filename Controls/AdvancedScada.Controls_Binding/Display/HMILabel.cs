@@ -1,12 +1,12 @@
-﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.Common;
+﻿using AdvancedScada.Common;
 using AdvancedScada.Common.Client;
+using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.Controls_Net45;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
-using AdvancedScada.Controls_Net45;
 
 namespace AdvancedScada.Controls_Binding.Display
 {
@@ -704,6 +704,7 @@ namespace AdvancedScada.Controls_Binding.Display
                         }
                         catch (Exception ex)
                         {
+                            DisplayError(ex.Message);
                             ResultText = "BCD Error";
                         }
                     }
@@ -739,8 +740,9 @@ namespace AdvancedScada.Controls_Binding.Display
                                 ResultText = v.ToString(m_NumericFormat);
                             }
                         }
-                        catch (InvalidCastException exC)
+                        catch (InvalidCastException ex)
                         {
+                            DisplayError(ex.Message);
                             if (!DesignMode)
                             {
                                 ResultText = "----";
@@ -752,6 +754,7 @@ namespace AdvancedScada.Controls_Binding.Display
                         }
                         catch (Exception ex)
                         {
+                            DisplayError(ex.Message);
                             if (!DesignMode)
                             {
                                 ResultText = "Check NumericFormat and variable type";
@@ -791,7 +794,7 @@ namespace AdvancedScada.Controls_Binding.Display
                     }
                     catch (Exception ex)
                     {
-
+                        DisplayError(ex.Message);
                     }
                 }
 

@@ -1,7 +1,7 @@
-﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.Controls_Net45;
-using AdvancedScada.Common;
+﻿using AdvancedScada.Common;
 using AdvancedScada.Common.Client;
+using AdvancedScada.Controls_Binding.DialogEditor;
+using AdvancedScada.Controls_Net45;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -15,11 +15,7 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
     public class HMIDigitalPanelMeter : MfgControl.AdvancedHMI.Controls.DigitalPanelMeter, IPropertiesControls
     {
 
-
-
-
-
-        #region propartas
+        #region PLC Properties
 
         //*****************************************
         //* Property - Address in PLC to Link to
@@ -115,8 +111,24 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
                 }
             }
         }
+        //*****************************************
+        //* Property - Address in PLC to Write Data To
+        //*****************************************
+        private string m_PLCAddressKeypad = string.Empty;
 
-        [DefaultValue(false)]
+        [Category("PLC Properties")]
+        public string PLCAddressKeypad
+        {
+            get { return m_PLCAddressKeypad; }
+            set
+            {
+                if (m_PLCAddressKeypad != value) m_PLCAddressKeypad = value;
+            }
+        }
+        public string PLCAddressClick { get; set; }
+        public string PLCAddressEnabled { get; set; }
+        public string PLCAddressHighlightX { get; set; }
+        [DefaultValue(true)]
         public bool SuppressErrorDisplay { get; set; }
 
         #endregion
@@ -147,6 +159,7 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
                 ErrorDisplayTime.Enabled = true;
 
                 Text = ErrorMessage;
+                Utilities.DisplayError(this, ErrorMessage);
             }
         }
 
@@ -172,20 +185,6 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
 
         private Keypad_v3 KeypadPopUp;
 
-        //*****************************************
-        //* Property - Address in PLC to Write Data To
-        //*****************************************
-        private string m_PLCAddressKeypad = string.Empty;
-
-        [Category("PLC Properties")]
-        public string PLCAddressKeypad
-        {
-            get { return m_PLCAddressKeypad; }
-            set
-            {
-                if (m_PLCAddressKeypad != value) m_PLCAddressKeypad = value;
-            }
-        }
 
         public string KeypadText { get; set; }
 
@@ -216,8 +215,7 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
         public double KeypadMinValue { get; set; }
 
         public double KeypadMaxValue { get; set; }
-        public string PLCAddressClick { get; set; }
-        public string PLCAddressEnabled { get; set; }
+
 
         private void KeypadPopUp_ButtonClick(object sender, KeypadEventArgs e)
         {
@@ -235,13 +233,13 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
                             if ((Convert.ToDouble(KeypadPopUp.Value) < KeypadMinValue) |
                                 (Convert.ToDouble(KeypadPopUp.Value) > KeypadMaxValue))
                             {
-                                MessageBox.Show("Value must be >" + KeypadMinValue + " and <" + KeypadMaxValue);
+                                DisplayError("Value must be >" + KeypadMinValue + " and <" + KeypadMaxValue);
                                 return;
                             }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Failed to validate value. " + ex.Message);
+                        DisplayError("Failed to validate value. " + ex.Message);
                         return;
                     }
 
@@ -261,7 +259,7 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Failed to write value. " + ex.Message);
+                        DisplayError("Failed to write value. " + ex.Message);
                     }
                 }
 

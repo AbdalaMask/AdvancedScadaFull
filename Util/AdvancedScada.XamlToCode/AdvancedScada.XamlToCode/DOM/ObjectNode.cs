@@ -57,7 +57,7 @@ namespace AdvancedScada.XamlToCode.DOM
         public Type Resolve(string qualifiedTypeName)
         {
             var colon = qualifiedTypeName.IndexOf(':');
-            var prefix = "";
+            var prefix = string.Empty;
             if (colon > -1) prefix = qualifiedTypeName.Substring(0, colon);
             var xmlNs = LookupNamespaceByPrefix(prefix);
             if (xmlNs == null)

@@ -3490,6 +3490,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiDigitalPanelMeter1.NumberOfDigits = 5;
             this.hmiDigitalPanelMeter1.PLCAddressClick = null;
             this.hmiDigitalPanelMeter1.PLCAddressEnabled = null;
+            this.hmiDigitalPanelMeter1.PLCAddressHighlightX = null;
             this.hmiDigitalPanelMeter1.PLCAddressKeypad = "CH2.PLC1.DataBlock2.TAG00023";
             this.hmiDigitalPanelMeter1.PLCAddressText = "CH1.PLC1.DataBlock1.TAG00022";
             this.hmiDigitalPanelMeter1.PLCAddressValue = "CH2.PLC1.DataBlock2.TAG00023";
@@ -3500,6 +3501,7 @@ namespace AdvancedScada.HMI.MainForm
             0,
             0});
             this.hmiDigitalPanelMeter1.Size = new System.Drawing.Size(150, 65);
+            this.hmiDigitalPanelMeter1.SuppressErrorDisplay = false;
             this.hmiDigitalPanelMeter1.TabIndex = 521;
             this.hmiDigitalPanelMeter1.Text = "شاشة الانفارتار";
             this.hmiDigitalPanelMeter1.Value = 0F;
@@ -4436,6 +4438,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiDigitalPanelMeter2.NumberOfDigits = 5;
             this.hmiDigitalPanelMeter2.PLCAddressClick = null;
             this.hmiDigitalPanelMeter2.PLCAddressEnabled = null;
+            this.hmiDigitalPanelMeter2.PLCAddressHighlightX = null;
             this.hmiDigitalPanelMeter2.PLCAddressKeypad = "CH3.PLC1.DataBlock2.TAG00019";
             this.hmiDigitalPanelMeter2.PLCAddressText = "";
             this.hmiDigitalPanelMeter2.PLCAddressValue = "CH3.PLC1.DataBlock2.TAG00019";
@@ -4446,6 +4449,7 @@ namespace AdvancedScada.HMI.MainForm
             0,
             0});
             this.hmiDigitalPanelMeter2.Size = new System.Drawing.Size(150, 65);
+            this.hmiDigitalPanelMeter2.SuppressErrorDisplay = false;
             this.hmiDigitalPanelMeter2.TabIndex = 551;
             this.hmiDigitalPanelMeter2.Value = 0F;
             this.hmiDigitalPanelMeter2.ValueScaleFactor = new decimal(new int[] {

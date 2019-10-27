@@ -3,11 +3,10 @@ using AdvancedScada.DriverBase.Devices;
 using Opc;
 using Opc.Da;
 using System;
-using System.Diagnostics;
 using static AdvancedScada.Common.XCollection;
-using Convert = System.Convert;
-using Factory = OpcCom.Factory;
 using Server = Opc.Da.Server;
+using Factory = OpcCom.Factory;
+using Convert = System.Convert;
 
 namespace AdvancedScada.OPC.Core.Drivers
 {
@@ -41,7 +40,7 @@ namespace AdvancedScada.OPC.Core.Drivers
         //***************************************************************
         public bool Connection()
         {
-          
+
             try
             {
                 if (DLL == null)
@@ -62,7 +61,7 @@ namespace AdvancedScada.OPC.Core.Drivers
                     }
                     IsConnected = true;
 
-                    
+
 
 
                 }

@@ -15,7 +15,7 @@
         End Set
     End Property
 
-    Private m_IPAddress As String = ""
+    Private m_IPAddress As String = String.Empty
     Public Property IPAddress As String
         Get
             Return m_IPAddress

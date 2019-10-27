@@ -2,6 +2,7 @@
 using AdvancedScada.IBaseService;
 using System;
 using System.Threading;
+using System.Windows.Forms;
 using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Controls_Binding
@@ -36,6 +37,11 @@ namespace AdvancedScada.Controls_Binding
                 EventscadaException?.Invoke("WCFChannelFactory", ex.Message);
             }
 
+        }
+        public static void DisplayError(Control control, string ErrorMessage)
+        {
+
+            EventscadaException?.Invoke(control.Name, ErrorMessage);
         }
 
         private delegate void SetLabelTextInvoker(System.Windows.Forms.Control label, string Text);

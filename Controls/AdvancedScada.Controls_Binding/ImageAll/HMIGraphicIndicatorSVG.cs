@@ -1,6 +1,6 @@
-﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.Common;
+﻿using AdvancedScada.Common;
 using AdvancedScada.Common.Client;
+using AdvancedScada.Controls_Binding.DialogEditor;
 using Svg;
 using System;
 using System.ComponentModel;

@@ -95,7 +95,7 @@ namespace ImagePicker
                 foreach (DictionaryEntry d in reader)
                 {
                     if (d.Value == null)
-                        resourceEntries.Add(d.Key.ToString(), "");
+                        resourceEntries.Add(d.Key.ToString(), string.Empty);
                     else
                         resourceEntries.Add(d.Key.ToString(), d.Value.ToString());
                 }
@@ -109,7 +109,7 @@ namespace ImagePicker
                 {
 
                     String value = data[key].ToString();
-                    if (value == null) value = "";
+                    if (value == null) value = string.Empty;
 
                     resourceEntries.Add(key, value);
                 }
@@ -136,21 +136,21 @@ namespace ImagePicker
                 if (file.EndsWith(".jpg") || file.EndsWith(".png") || file.EndsWith(".bmp") || file.EndsWith(".BMP") ||
                     file.EndsWith(".JPG") || file.EndsWith(".gif") || file.EndsWith(".wmf") || file.EndsWith(".svg") || file.EndsWith(".Xaml"))
                 {
-                     
+
                     var newName = $"{ txtCategoryName.Text}_" + i++;
                     if (file.EndsWith(".svg") || file.EndsWith(".Xaml"))
                     {
                         try
                         {
 
-                           
+
                             var xmlDoc = new XmlDocument
                             {
                                 XmlResolver = null
                             };
                             xmlDoc.Load(file);
                             var GETXML = xmlDoc.InnerXml;
- 
+
 
                             //  Pic.Image = bitmap;
                             rsxw.AddResource(newName, GETXML);

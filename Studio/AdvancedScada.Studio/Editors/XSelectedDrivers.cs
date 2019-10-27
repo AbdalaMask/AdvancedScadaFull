@@ -1,5 +1,4 @@
 ﻿using AdvancedScada.Common;
-using AdvancedScada.Management;
 using ComponentFactory.Krypton.Toolkit;
 using Microsoft.Win32;
 using System;

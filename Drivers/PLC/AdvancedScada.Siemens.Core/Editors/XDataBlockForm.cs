@@ -9,7 +9,7 @@ namespace AdvancedScada.Siemens.Core.Editors
     public partial class XDataBlockForm : AdvancedScada.Management.Editors.XDataBlockForm
     {
 
-       
+
 
 
         public XDataBlockForm()
@@ -103,7 +103,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                             DeviceId = dv.DeviceId,
                             DataBlockId = dv.DataBlocks.Count + 1,
                             DataBlockName = txtDataBlock.Text,
-                            TypeOfRead = "",
+                            TypeOfRead = string.Empty,
                             StartAddress = ushort.Parse(txtDBNumber.Text),
                             MemoryType = txtDBNumber.Text,
                             Description = txtDesc.Text,
@@ -124,7 +124,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                         db.DeviceId = db.DeviceId;
                         db.DataBlockId = int.Parse(txtDataBlockId.Text);
                         db.DataBlockName = txtDataBlock.Text;
-                        db.TypeOfRead = "";
+                        db.TypeOfRead = string.Empty;
                         db.StartAddress = ushort.Parse(txtDBNumber.Text);
                         db.MemoryType = txtDBNumber.Text;
                         db.Length = (ushort)txtAddressLength.Value;

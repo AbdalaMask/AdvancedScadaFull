@@ -1,10 +1,9 @@
 ﻿using AdvancedScada.Common;
-using AdvancedScada.DriverBase;
 using System.ServiceModel;
 
 namespace AdvancedScada.IBaseService
 {
-  
+
     [ServiceContract(SessionMode = SessionMode.Required, CallbackContract = typeof(IServiceCallback))]
     public interface IReadService
     {

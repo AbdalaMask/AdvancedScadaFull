@@ -1,4 +1,5 @@
 ﻿using Svg;
+using System;
 using System.Drawing;
 /*
  * @author  : Lasitha Ishan Petthawadu
@@ -31,12 +32,17 @@ namespace SVGSample.svg
             }
             catch (System.Exception ex)
             {
-
+                DisplayError(ex.Message);
 
             }
             return null;
 
 
+
+        }
+
+        private static void DisplayError(string message)
+        {
 
         }
 

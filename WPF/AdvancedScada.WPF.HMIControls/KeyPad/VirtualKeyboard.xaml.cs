@@ -35,7 +35,7 @@ namespace AdvancedScada.WPF.HMIControls.KeyPad
             InitializeComponent();
             this.Owner = wndOwner;
             this.DataContext = this;
-            Result = "";
+            Result = string.Empty;
         }
 
         #endregion

@@ -1,6 +1,6 @@
 ﻿using AdvancedScada.BaseService.Client;
-using AdvancedScada.IBaseService;
 using AdvancedScada.Common;
+using AdvancedScada.IBaseService;
 using System;
 using System.Net;
 using System.Net.Sockets;

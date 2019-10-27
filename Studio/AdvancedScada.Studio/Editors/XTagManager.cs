@@ -1,6 +1,5 @@
 ﻿using AdvancedScada.Common;
 using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.Management;
 using AdvancedScada.Management.BLManager;
 using AdvancedScada.Studio.IE;
 using ComponentFactory.Krypton.Docking;

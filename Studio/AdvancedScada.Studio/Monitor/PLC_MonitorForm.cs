@@ -241,7 +241,7 @@ namespace AdvancedScada.Studio.Monitor
         }
 
 
-       
+
         #endregion
         private void PLC_MonitorForm_FormClosing(object sender, FormClosingEventArgs e)
         {

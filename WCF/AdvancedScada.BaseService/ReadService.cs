@@ -1,6 +1,6 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase;
 using AdvancedScada.IBaseService;
-using AdvancedScada.Common;
 using AdvancedScada.Management.BLManager;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.BaseService
 {
-    [ServiceBehavior( ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.PerSession)]
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.PerSession)]
     public class ReadService : IReadService
     {
         private List<IServiceCallback> listCallbackChannels = new List<IServiceCallback>();

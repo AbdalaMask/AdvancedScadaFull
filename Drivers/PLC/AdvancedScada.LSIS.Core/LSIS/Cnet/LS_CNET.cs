@@ -1,5 +1,4 @@
 ﻿using AdvancedScada.Common;
-using AdvancedScada.DriverBase;
 using HslCommunication.Profinet.LSIS;
 using System;
 using System.IO.Ports;

@@ -1,6 +1,4 @@
-﻿using AdvancedScada.DriverBase;
-
-namespace AdvancedScada.Common
+﻿namespace AdvancedScada.Common
 {
     public class XCollection
     {

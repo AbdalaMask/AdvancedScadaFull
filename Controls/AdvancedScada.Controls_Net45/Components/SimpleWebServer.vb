@@ -1,5 +1,4 @@
 ﻿Imports System.Drawing
-Imports System.Net
 Imports System.Net.Sockets
 Imports System.Windows.Forms
 
@@ -129,7 +128,7 @@ Public Class SimpleWebServer
 #Region "Private Methods"
     Public Shared Function GetIPv4Address(ByVal HostName As String) As System.Net.IPAddress
         'Check first to see if an IpAddress is being passed
-        If HostName IsNot Nothing AndAlso (String.Compare(HostName, "") <> 0) Then
+        If HostName IsNot Nothing AndAlso (String.Compare(HostName, String.Empty) <> 0) Then
             Try
                 Dim IPAddress As System.Net.IPAddress = New System.Net.IPAddress(0)
                 If System.Net.IPAddress.TryParse(HostName, IPAddress) Then
@@ -142,7 +141,7 @@ Public Class SimpleWebServer
 
 
         '* If it is blank, then use this computer's name
-        If HostName = "" Then
+        If HostName = String.Empty Then
             HostName = System.Net.Dns.GetHostName()
         End If
 

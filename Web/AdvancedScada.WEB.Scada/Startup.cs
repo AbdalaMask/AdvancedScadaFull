@@ -7,8 +7,8 @@ using System.ServiceModel;
 using AdvancedScada.BaseService.Client;
 using AdvancedScada.DriverBase;
 using AdvancedScada.IBaseService;
-using AdvancedScada.IBaseService.Common;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using AdvancedScada.Common;
+using static AdvancedScada.Common.XCollection;
 [assembly: OwinStartup(typeof(AdvancedScada.WEB.Scada.Startup))]
 
 namespace AdvancedScada.WEB.Scada

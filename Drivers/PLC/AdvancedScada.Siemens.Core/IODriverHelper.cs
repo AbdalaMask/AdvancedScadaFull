@@ -277,7 +277,7 @@ namespace AdvancedScada.Siemens.Core
 
                         lock (ISiemens)
                         {
-                            long[] dwRs = ISiemens.Read<long>($"{db.MemoryType}{db.StartAddress}", (ushort)db.Length);
+                            long[] dwRs = ISiemens.Read<long>($"{db.MemoryType}{db.StartAddress}", db.Length);
 
                             for (int j = 0; j < dwRs.Length; j++)
                             {
@@ -290,7 +290,7 @@ namespace AdvancedScada.Siemens.Core
 
                         lock (ISiemens)
                         {
-                            float[] rl1Rs = ISiemens.Read<float>($"{db.MemoryType}{db.StartAddress}", (ushort)db.Length);
+                            float[] rl1Rs = ISiemens.Read<float>($"{db.MemoryType}{db.StartAddress}", db.Length);
 
                             for (int j = 0; j < rl1Rs.Length; j++)
                             {
@@ -303,7 +303,7 @@ namespace AdvancedScada.Siemens.Core
 
                         lock (ISiemens)
                         {
-                            double[] rl2Rs = ISiemens.Read<double>($"{db.MemoryType}{db.StartAddress}", (ushort)db.Length);
+                            double[] rl2Rs = ISiemens.Read<double>($"{db.MemoryType}{db.StartAddress}", db.Length);
 
                             for (int j = 0; j < rl2Rs.Length; j++)
                             {

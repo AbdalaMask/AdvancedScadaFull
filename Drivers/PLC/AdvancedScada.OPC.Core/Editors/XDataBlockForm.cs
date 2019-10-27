@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using static AdvancedScada.Common.XCollection;
-using Convert = System.Convert;
-using Factory = OpcCom.Factory;
 using Server = Opc.Da.Server;
+using Factory = OpcCom.Factory;
+using Convert = System.Convert;
 using Type = System.Type;
 
 namespace AdvancedScada.OPC.Core.Editors
@@ -309,7 +309,7 @@ namespace AdvancedScada.OPC.Core.Editors
                 try
                 {
                     for (; ; )
-                        srv.ChangeBrowsePosition(OPCBROWSEDIRECTION.OPC_BROWSE_UP, "");
+                        srv.ChangeBrowsePosition(OPCBROWSEDIRECTION.OPC_BROWSE_UP, string.Empty);
                 }
                 catch (COMException) { };
                 channelsTree.Nodes.Clear();
@@ -369,7 +369,7 @@ namespace AdvancedScada.OPC.Core.Editors
             OpcRcw.Da.IEnumString es;
             if (nsType == OPCNAMESPACETYPE.OPC_NS_HIERARCHIAL)
             {
-                try { srv.BrowseOPCItemIDs(OPCBROWSETYPE.OPC_BRANCH, "", 0, 0, out es); }
+                try { srv.BrowseOPCItemIDs(OPCBROWSETYPE.OPC_BRANCH, string.Empty, 0, 0, out es); }
                 catch (COMException) { return; }
 
                 int fetched;
@@ -387,7 +387,7 @@ namespace AdvancedScada.OPC.Core.Editors
                         };
                         TreeNode node = root.Add(tmp[i]);
                         ImportOPCChannels(srv, node.Nodes);
-                        try { srv.ChangeBrowsePosition(OPCBROWSEDIRECTION.OPC_BROWSE_UP, ""); }
+                        try { srv.ChangeBrowsePosition(OPCBROWSEDIRECTION.OPC_BROWSE_UP, string.Empty); }
                         catch (Exception e)
                         {
                             EventscadaException?.Invoke(this.GetType().Name, string.Format("OPC server failed to handle OPC_BROWSE_UP request for item '{0}' ({1})", tmp[i], e.Message));
@@ -396,13 +396,13 @@ namespace AdvancedScada.OPC.Core.Editors
                     }
                 } while (fetched > 0);
 
-                try { srv.BrowseOPCItemIDs(OPCBROWSETYPE.OPC_LEAF, "", 0, 0, out es); }
+                try { srv.BrowseOPCItemIDs(OPCBROWSETYPE.OPC_LEAF, string.Empty, 0, 0, out es); }
                 catch (COMException) { return; }
                 IterateOPCItems(srv, root, es);
             }
             else if (nsType == OPCNAMESPACETYPE.OPC_NS_FLAT)
             {
-                try { srv.BrowseOPCItemIDs(OPCBROWSETYPE.OPC_FLAT, "", 0, 0, out es); }
+                try { srv.BrowseOPCItemIDs(OPCBROWSETYPE.OPC_FLAT, string.Empty, 0, 0, out es); }
                 catch (COMException) { return; }
                 IterateOPCItems(srv, root, es);
             }

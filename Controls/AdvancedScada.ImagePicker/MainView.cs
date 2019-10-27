@@ -1,5 +1,5 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using AdvancedScada.Images;
+﻿using AdvancedScada.Images;
+using ComponentFactory.Krypton.Toolkit;
 using ImagePicker;
 using Microsoft.Win32;
 using Svg;
@@ -96,8 +96,8 @@ namespace AdvancedScada.ImagePicker
         }
         private void MainView_Load(object sender, EventArgs e)
         {
-           
-            string imageType = "";
+
+            string imageType = string.Empty;
             try
             {
 
@@ -357,7 +357,7 @@ namespace AdvancedScada.ImagePicker
         #endregion
         #region pnlPictures
 
-      
+
 
         private void pnlPictures_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -434,7 +434,7 @@ namespace AdvancedScada.ImagePicker
         {
             toolTip1.Hide(this);
         }
-       #endregion
+        #endregion
         #region Export
 
 
@@ -595,7 +595,7 @@ namespace AdvancedScada.ImagePicker
         #endregion
         #region Event
 
-       
+
         private void BtnAddImageFiles_Click(object sender, EventArgs e)
         {
             var frm = new FormAddImage();

@@ -1,6 +1,6 @@
-﻿using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.Common;
+﻿using AdvancedScada.Common;
 using AdvancedScada.Common.Client;
+using AdvancedScada.Controls_Binding.DialogEditor;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
@@ -182,6 +182,7 @@ namespace AdvancedScada.Controls_Binding.Hydraulic
         [Category("PLC Properties")]
         public int ValueToWrite { get; set; }
         public string PLCAddressEnabled { get; set; }
+        public string PLCAddressHighlightX { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         private void ReleaseValue()
         {

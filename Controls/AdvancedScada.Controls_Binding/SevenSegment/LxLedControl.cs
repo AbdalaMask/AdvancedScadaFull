@@ -936,7 +936,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
                 // draw faded led(s)
                 subRect.Width = subRectWidth;
                 subRect.Height = subRectHeight;
-                subRect.X = (int)(i * subRect.Width + 5);
+                subRect.X = (i * subRect.Width + 5);
                 subRect.Y = 0;
                 subRect.Inflate(-charIntervals, -charIntervals);
                 // draw foreground led(s)

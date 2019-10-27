@@ -1,5 +1,4 @@
 ﻿using AdvancedScada.Common;
-using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IBaseService;
 using AdvancedScada.Management.BLManager;
@@ -28,7 +27,7 @@ namespace AdvancedScada.BaseService
 
         {
             ServiceHost serviceHost = null;
-             Type serviceType = null;
+            Type serviceType = null;
             try
             {
                 serviceType = typeof(ReadService);
@@ -52,8 +51,8 @@ namespace AdvancedScada.BaseService
                 }
 
                 var binding = GetNetTcpBinding();
-                serviceHost.AddServiceEndpoint(typeof(IReadService), binding, "");
-                
+                serviceHost.AddServiceEndpoint(typeof(IReadService), binding, string.Empty);
+
 
                 ////Enable metadata exchange
                 var smb = new ServiceMetadataBehavior();
@@ -74,15 +73,15 @@ namespace AdvancedScada.BaseService
 
             try
             {
-                
+
 
                 string address = string.Format(URI_DRIVER, Environment.MachineName, PORT, "Driver");
-               
+
                 NetTcpBinding netTcpBinding = GetNetTcpBinding();
                 serviceHost = new ServiceHost(typeof(ReadService));
-             
+
                 serviceHost.AddServiceEndpoint(typeof(IReadService), netTcpBinding, address);
-              
+
                 return serviceHost;
             }
             catch (Exception ex)

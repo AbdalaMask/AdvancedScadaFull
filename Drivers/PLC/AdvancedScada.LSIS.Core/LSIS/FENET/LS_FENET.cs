@@ -1,5 +1,4 @@
 ﻿using AdvancedScada.Common;
-using AdvancedScada.DriverBase;
 using AdvancedScada.Utils;
 using HslCommunication;
 using HslCommunication.Profinet.LSIS;
@@ -212,7 +211,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
             throw new NotImplementedException();
         }
 
-       
+
         public TValue Read<TValue>(string address)
         {
             if (typeof(TValue) == typeof(bool))
@@ -229,7 +228,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
 
             }
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
-          
+
         }
     }
-    }
+}

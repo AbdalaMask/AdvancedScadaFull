@@ -30,8 +30,8 @@ namespace AdvancedScada.BaseService.Client
                     return false;
                 }
 
-             
-                if (TagCollectionClient.Tags.Count > 1 && objChannelManager.Channels.Count>1)
+
+                if (TagCollectionClient.Tags.Count > 1 && objChannelManager.Channels.Count > 1)
                 {
                     return true;
                 }
@@ -60,7 +60,7 @@ namespace AdvancedScada.BaseService.Client
         }
 
 
-        
+
         [OperationContract(IsOneWay = true)]
         public void UpdateCollection(ConnectionState status, Dictionary<string, Tag> Tags)
         {
