@@ -102,80 +102,139 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
             }
             if (typeof(TValue) == typeof(ushort))
             {
-                var b = xGBCnet.ReadUInt16(address, length).Content;
 
-                return (TValue[])(object)b;
+                var b = xGBCnet.ReadUInt16(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
+
             }
             if (typeof(TValue) == typeof(int))
             {
-                var b = xGBCnet.ReadInt32(address, length).Content;
+                var b = xGBCnet.ReadInt32(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
 
-                return (TValue[])(object)b;
+
             }
             if (typeof(TValue) == typeof(uint))
             {
-                var b = xGBCnet.ReadUInt32(address, length).Content;
-                return (TValue[])(object)b;
+                var b = xGBCnet.ReadUInt32(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
+
             }
             if (typeof(TValue) == typeof(long))
             {
-                var b = xGBCnet.ReadInt64(address, length).Content;
-                return (TValue[])(object)b;
+                var b = xGBCnet.ReadInt64(address, length);
+
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
             }
             if (typeof(TValue) == typeof(ulong))
             {
-                var b = xGBCnet.ReadUInt64(address, length).Content;
-                return (TValue[])(object)b;
+                var b = xGBCnet.ReadUInt64(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
             }
 
             if (typeof(TValue) == typeof(short))
             {
-                var b = xGBCnet.ReadInt16(address, length).Content;
-                return (TValue[])(object)b;
+                var b = xGBCnet.ReadInt16(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
             }
             if (typeof(TValue) == typeof(double))
             {
-                var b = xGBCnet.ReadDouble(address, length).Content;
-                return (TValue[])(object)b;
+                var b = xGBCnet.ReadDouble(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
             }
             if (typeof(TValue) == typeof(float))
             {
-                var b = xGBCnet.ReadFloat(address, length).Content;
-                return (TValue[])(object)b;
+                var b = xGBCnet.ReadFloat(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
 
             }
             if (typeof(TValue) == typeof(string))
             {
-                var b = xGBCnet.ReadString(address, length).Content;
-                return (TValue[])(object)b;
+                var b = xGBCnet.ReadString(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
             }
-            else
-            {
-                EventscadaException?.Invoke(this.GetType().Name, "No Response from PLC");
-            }
+
+          
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
         #endregion
         private object ReadCoil(string address, ushort length)
         {
-            var bitArys = xGBCnet.Read(address, length);
-            return HslCommunication.BasicFramework.SoftBasic.ByteToBoolArray(bitArys.Content);
+            var b = xGBCnet.Read(address, length);
+            if (!b.IsSuccess)
+            {
+                throw new InvalidOperationException($"{b.Message}");
+            }
+            else
+            {
+                return HslCommunication.BasicFramework.SoftBasic.ByteToBoolArray(b.Content);
+            }
         }
 
-        public bool[] ReadDiscrete(string address, ushort length)
-        {
-            return xGBCnet.ReadBool(address, length).Content;
-        }
-
-        public bool ReadSingle(string address, ushort length)
-        {
-            return xGBCnet.ReadBool(address, length).Content[0];
-        }
-
-        public TValue[] ReadSingle<TValue>(string address, ushort length)
-        {
-            throw new NotImplementedException();
-        }
+       
         public TValue Read<TValue>(string address)
         {
             if (typeof(TValue) == typeof(bool))
@@ -183,7 +242,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
                 var read = xGBCnet.ReadBool(address, 1);
                 if (!read.IsSuccess)
                 {
-                    throw new NullReferenceException();
+                    throw new InvalidOperationException($"{read.Message}");
                 }
                 else
                 {

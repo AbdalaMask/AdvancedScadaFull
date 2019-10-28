@@ -12,18 +12,7 @@ using System.Threading.Tasks;
 
 namespace AdvancedScada.Images
 {
-    public enum ImageType
-    {
-        Colored,
-        GrayScaled,
-        Office2013,
-        DevAV, 
-        Svg
-    }
-    public enum ImageSize
-    {
-        
-    }
+     
     public class ImageResourceCache
     {
         private static readonly object mutex = new object();

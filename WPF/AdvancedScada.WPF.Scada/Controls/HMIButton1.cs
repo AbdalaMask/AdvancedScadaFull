@@ -7,6 +7,10 @@ using System.Windows.Media.Imaging;
 
 namespace AdvancedScada.WPF.Scada.Controls
 {
+    public class MyResource
+    {
+        public static readonly string ResourceName = "AdvancedScada.WPF.Scada";
+    }
     public class HMIButton1 : Control
     {
 
@@ -81,7 +85,7 @@ namespace AdvancedScada.WPF.Scada.Controls
             switch (ButtonColors)
             {
                 case ButtonColor.Gray:
-                    imageSource = new BitmapImage(new Uri("pack://application:,,,/AdvancedScada.WPF.Scada;component/Resources/18-6.bmp"));
+                    imageSource = new BitmapImage(new Uri($"pack://application:,,,/{MyResource.ResourceName};component/Resources/18-6.bmp"));
                     drawingContext.DrawImage(imageSource, new Rect(0, 0, width, height));
                     break;
                 case ButtonColor.Green:

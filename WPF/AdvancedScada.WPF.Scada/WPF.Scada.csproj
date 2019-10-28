@@ -107,6 +107,7 @@
     <Compile Include="Controls\HMIToolBer.xaml.cs">
       <DependentUpon>HMIToolBer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MyResource.cs" />
     <Compile Include="MainForm\FRM_Editr.xaml.cs">
       <DependentUpon>FRM_Editr.xaml</DependentUpon>
     </Compile>

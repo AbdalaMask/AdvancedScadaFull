@@ -163,21 +163,22 @@ namespace AdvancedScada.WPF.HMIControls.ButtonAll
         ImageSource imageSource;
         protected override void OnRender(DrawingContext drawingContext)
         {
+            
             double width = this.ActualWidth;
             double height = this.ActualHeight;
             double bevel = height * 0.1;
             switch (MotorColors)
             {
                 case MotorColor.Gray:
-                    imageSource = new BitmapImage(new Uri("pack://application:,,,/AdvancedScada.WPF.HMIControls;component/Images/AnnunciatorOff.png"));
+                    imageSource = new BitmapImage(new Uri($"pack://application:,,,/{MyResource.ResourceName};component/Images/AnnunciatorOff.png"));
                     drawingContext.DrawImage(imageSource, new Rect(0, 0, width, height));
                     break;
                 case MotorColor.Green:
-                    imageSource = new BitmapImage(new Uri("pack://application:,,,/AdvancedScada.WPF.HMIControls;component/Images/AnnunciatorOn.png"));
+                    imageSource = new BitmapImage(new Uri($"pack://application:,,,/{MyResource.ResourceName};component/Images/AnnunciatorOn.png"));
                     drawingContext.DrawImage(imageSource, new Rect(0, 0, width, height));
                     break;
                 default:
-                    imageSource = new BitmapImage(new Uri("pack://application:,,,/AdvancedScada.WPF.HMIControls;component/Images/AnnunciatorOff.png"));
+                    imageSource = new BitmapImage(new Uri($"pack://application:,,,/{MyResource.ResourceName};component/Images/AnnunciatorOff.png"));
                     drawingContext.DrawImage(imageSource, new Rect(0, 0, width, height));
                     break;
             }

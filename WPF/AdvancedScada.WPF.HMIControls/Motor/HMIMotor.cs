@@ -171,23 +171,23 @@ namespace AdvancedScada.WPF.HMIControls.Motor
             switch (MotorColors)
             {
                 case MotorColor.Gray:
-                    imageSource = new BitmapImage(new Uri("pack://application:,,,/AdvancedScada.WPF.HMIControls;component/Images/MotorGray.png"));
+                    imageSource = new BitmapImage(new Uri($"pack://application:,,,/{MyResource.ResourceName};component/Images/MotorGray.png"));
                     drawingContext.DrawImage(imageSource, new Rect(0, 0, width, height));
                     break;
                 case MotorColor.Green:
-                    imageSource = new BitmapImage(new Uri("pack://application:,,,/AdvancedScada.WPF.HMIControls;component/Images/MotorGreen.png"));
+                    imageSource = new BitmapImage(new Uri($"pack://application:,,,/{MyResource.ResourceName};component/Images/MotorGreen.png"));
                     drawingContext.DrawImage(imageSource, new Rect(0, 0, width, height));
                     break;
                 case MotorColor.Red:
-                    imageSource = new BitmapImage(new Uri("pack://application:,,,/AdvancedScada.WPF.HMIControls;component/Images/MotorRed.png"));
+                    imageSource = new BitmapImage(new Uri($"pack://application:,,,/{MyResource.ResourceName};component/Images/MotorRed.png"));
                     drawingContext.DrawImage(imageSource, new Rect(0, 0, width, height));
                     break;
                 case MotorColor.Yellow:
-                    imageSource = new BitmapImage(new Uri("pack://application:,,,/AdvancedScada.WPF.HMIControls;component/Images/MotorYellow.png"));
+                    imageSource = new BitmapImage(new Uri($"pack://application:,,,/{MyResource.ResourceName};component/Images/MotorYellow.png"));
                     drawingContext.DrawImage(imageSource, new Rect(0, 0, width, height));
                     break;
                 default:
-                    imageSource = new BitmapImage(new Uri("pack://application:,,,/AdvancedScada.WPF.HMIControls;component/Images/MotorGray.png"));
+                    imageSource = new BitmapImage(new Uri($"pack://application:,,,/{MyResource.ResourceName};component/Images/MotorGray.png"));
                     drawingContext.DrawImage(imageSource, new Rect(0, 0, width, height));
                     break;
             }
@@ -237,24 +237,24 @@ namespace AdvancedScada.WPF.HMIControls.Motor
                     switch (OutputTypes)
                     {
                         case OutputType.MomentarySet:
-                            Utilities.Write(PLCAddressClick, "1");
+                            Utilities.Write(PLCAddressClick, true);
                             break;
                         case OutputType.MomentaryReset:
-                            Utilities.Write(PLCAddressClick, "0");
+                            Utilities.Write(PLCAddressClick, false);
                             break;
                         case OutputType.SetTrue:
-                            Utilities.Write(PLCAddressClick, "1");
+                            Utilities.Write(PLCAddressClick, true);
                             break;
                         case OutputType.SetFalse:
-                            Utilities.Write(PLCAddressClick, "0");
+                            Utilities.Write(PLCAddressClick, false);
                             break;
                         case OutputType.Toggle:
 
                             var CurrentValue = Value;
                             if (CurrentValue)
-                                Utilities.Write(PLCAddressClick, "0");
+                                Utilities.Write(PLCAddressClick, false);
                             else
-                                Utilities.Write(PLCAddressClick, "1");
+                                Utilities.Write(PLCAddressClick, true);
                             break;
                         default:
 
@@ -280,10 +280,10 @@ namespace AdvancedScada.WPF.HMIControls.Motor
                     switch (OutputTypes)
                     {
                         case OutputType.MomentarySet:
-                            Utilities.Write(PLCAddressClick, "0");
+                            Utilities.Write(PLCAddressClick, false);
                             break;
                         case OutputType.MomentaryReset:
-                            Utilities.Write(PLCAddressClick, "1");
+                            Utilities.Write(PLCAddressClick, true);
                             break;
                     }
                 }

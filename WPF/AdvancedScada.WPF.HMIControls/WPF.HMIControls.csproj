@@ -131,6 +131,7 @@
     <Compile Include="ButtonAll\HMIButtonAll.xaml.cs">
       <DependentUpon>HMIButtonAll.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Class1.cs" />
     <Compile Include="Comm\EnumAll.cs" />
     <Compile Include="Comm\LicenseHMI.cs" />
     <Compile Include="Comm\ProgressConverter.cs" />
@@ -160,6 +161,7 @@
       <DependentUpon>HMIVacuumPump.xaml</DependentUpon>
     </Compile>
     <Compile Include="Motor\WaterPump.cs" />
+    <Compile Include="MyResource.cs" />
     <Compile Include="PilotLight\HMIMushroomButton.xaml.cs">
       <DependentUpon>HMIMushroomButton.xaml</DependentUpon>
     </Compile>

@@ -300,6 +300,7 @@ namespace AdvancedScada.LSIS.Core
                                 bitArys = new bool[db.Tags.Count];
                                 for (int i = 0; i < db.Tags.Count; i++)
                                 {
+                                    
                                     try
                                     {
                                         bitArys[i] = DriverAdapter.Read<bool>(db.Tags[i].Address);
@@ -307,6 +308,7 @@ namespace AdvancedScada.LSIS.Core
                                     catch (Exception ex)
                                     {
                                         EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                                        break;
 
                                     }
                                   
@@ -447,7 +449,7 @@ namespace AdvancedScada.LSIS.Core
             }
             catch (Exception ex)
             {
-                Disconnect();
+              
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
 
@@ -495,12 +497,12 @@ namespace AdvancedScada.LSIS.Core
                                     DriverAdapter = FENET[ch.ChannelName];
                                     break;
                             }
-                            if (DriverAdapter == null) return 0;
+                            if (DriverAdapter == null) return 1;
                             lock (DriverAdapter)
                                 switch (TagCollection.Tags[tagName].DataType)
                                 {
                                     case DataTypes.Bit:
-                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), value == "1" ? true : false);
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), value);
                                         break;
                                     case DataTypes.Byte:
                                         DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), byte.Parse(value));

@@ -149,52 +149,118 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
             if (typeof(TValue) == typeof(ushort))
             {
 
-                var result = fastEnet.ReadUInt16(address, length).Content;
-
-                return (TValue[])(object)result;
+                var b = fastEnet.ReadUInt16(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
+                
             }
             if (typeof(TValue) == typeof(int))
             {
-                var b = fastEnet.ReadInt32(address, length).Content;
+                var b = fastEnet.ReadInt32(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
 
-                return (TValue[])(object)b;
+                
             }
             if (typeof(TValue) == typeof(uint))
             {
-                var b = fastEnet.ReadUInt32(address, length).Content;
-                return (TValue[])(object)b;
+                var b = fastEnet.ReadUInt32(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
+                
             }
             if (typeof(TValue) == typeof(long))
             {
-                var b = fastEnet.ReadInt64(address, length).Content;
-                return (TValue[])(object)b;
+                var b = fastEnet.ReadInt64(address, length);
+
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
             }
             if (typeof(TValue) == typeof(ulong))
             {
-                var b = fastEnet.ReadUInt64(address, length).Content;
-                return (TValue[])(object)b;
+                var b = fastEnet.ReadUInt64(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
             }
 
             if (typeof(TValue) == typeof(short))
             {
-                var b = fastEnet.ReadInt16(address, length).Content;
-                return (TValue[])(object)b;
+                var b = fastEnet.ReadInt16(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
             }
             if (typeof(TValue) == typeof(double))
             {
-                var b = fastEnet.ReadDouble(address, length).Content;
-                return (TValue[])(object)b;
+                var b = fastEnet.ReadDouble(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
             }
             if (typeof(TValue) == typeof(float))
             {
-                var b = fastEnet.ReadFloat(address, length).Content;
-                return (TValue[])(object)b;
+                var b = fastEnet.ReadFloat(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
 
             }
             if (typeof(TValue) == typeof(string))
             {
-                var b = fastEnet.ReadString(address, length).Content;
-                return (TValue[])(object)b;
+                var b = fastEnet.ReadString(address, length);
+                if (!b.IsSuccess)
+                {
+                    throw new InvalidOperationException($"{b.Message}");
+                }
+                else
+                {
+                    return (TValue[])(object)b.Content;
+                }
             }
 
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
@@ -202,16 +268,19 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
         #endregion
         private object ReadCoil(string address, ushort length)
         {
-            var bitArys = fastEnet.Read(address, length);
-            return HslCommunication.BasicFramework.SoftBasic.ByteToBoolArray(bitArys.Content);
+            var b = fastEnet.Read(address, length);
+            if (!b.IsSuccess)
+            {
+                throw new InvalidOperationException($"{b.Message}");
+            }
+            else
+            {
+                return HslCommunication.BasicFramework.SoftBasic.ByteToBoolArray(b.Content);
+            }
+            
         }
 
-        public bool ReadSingle(string address, ushort length)
-        {
-            throw new NotImplementedException();
-        }
-
-
+     
         public TValue Read<TValue>(string address)
         {
             if (typeof(TValue) == typeof(bool))
@@ -219,9 +288,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
                 var read = fastEnet.ReadBool(address, 1);
                 if (!read.IsSuccess)
                 {
-                    
-                    
-                    throw new InvalidOperationException($"{typeof(TValue)}  {read.Message}");
+                    throw new InvalidOperationException($"{read.Message}");
                 }
                 else
                 {

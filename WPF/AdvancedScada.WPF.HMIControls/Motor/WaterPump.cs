@@ -89,15 +89,15 @@ namespace AdvancedScada.WPF.HMIControls.Motor
             switch (MotorColors)
             {
                 case MotorColor.Gray:
-                    imageSource = new BitmapImage(new Uri("pack://application:,,,/AdvancedScada.WPF.HMIControls;component/Images/RSCorPumpOff.png"));
+                    imageSource = new BitmapImage(new Uri($"pack://application:,,,/{MyResource.ResourceName};component/Images/RSCorPumpOff.png"));
                     drawingContext.DrawImage(imageSource, new Rect(0, 0, width, height));
                     break;
                 case MotorColor.Green:
-                    imageSource = new BitmapImage(new Uri("pack://application:,,,/AdvancedScada.WPF.HMIControls;component/Images/RSCorPumpOn.png"));
+                    imageSource = new BitmapImage(new Uri($"pack://application:,,,/{MyResource.ResourceName};component/Images/RSCorPumpOn.png"));
                     drawingContext.DrawImage(imageSource, new Rect(0, 0, width, height));
                     break;
                 default:
-                    imageSource = new BitmapImage(new Uri("pack://application:,,,/AdvancedScada.WPF.HMIControls;component/Images/RSCorPumpOff.png"));
+                    imageSource = new BitmapImage(new Uri($"pack://application:,,,/{MyResource.ResourceName};component/Images/RSCorPumpOff.png"));
                     drawingContext.DrawImage(imageSource, new Rect(0, 0, width, height));
                     break;
             }

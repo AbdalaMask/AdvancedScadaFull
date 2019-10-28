@@ -305,7 +305,7 @@ namespace AdvancedScada.Studio.Monitor
             _count++;
             return p;
         }
-        public void WriteTagValue(string NumValue)
+        public void WriteTagValue(dynamic NumValue)
         {
             try
             {
@@ -392,12 +392,12 @@ namespace AdvancedScada.Studio.Monitor
 
         private void mSetON_Click(object sender, EventArgs e)
         {
-            WriteTagValue("1");
+            WriteTagValue(true);
         }
 
         private void mSetOFF_Click(object sender, EventArgs e)
         {
-            WriteTagValue("0");
+            WriteTagValue(false);
         }
 
         private void mWriteTagValue_Click(object sender, EventArgs e)
