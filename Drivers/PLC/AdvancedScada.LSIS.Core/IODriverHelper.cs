@@ -21,7 +21,7 @@ namespace AdvancedScada.LSIS.Core
     {
 
         public static List<Channel> Channels = new List<Channel>();
-
+        public static readonly ManualResetEvent SendDone = new ManualResetEvent(true);
         //==================================LS===================================================
         private static Dictionary<string, LS_CNET> cnet = new Dictionary<string, LS_CNET>();
         private static Dictionary<string, LS_FENET> FENET = new Dictionary<string, LS_FENET>();
@@ -135,21 +135,21 @@ namespace AdvancedScada.LSIS.Core
                         {
                             try
                             {
-                                if (RequestWriteToClient.Count > 0)
-                                {
-                                    if (IsConnected)
-                                    {
-                                        foreach (RequestWrite item1 in RequestWriteToClient)
-                                        {
-                                            SendSuccess = write(item1);
-                                            break;
-                                        }
-                                        if (SendSuccess > 0)
-                                            RequestWriteToClient.Dequeue();
-                                    }
-                                }
-                                else
-                                {
+                                //if (RequestWriteToClient.Count > 0)
+                                //{
+                                //    if (IsConnected)
+                                //    {
+                                //        foreach (RequestWrite item1 in RequestWriteToClient)
+                                //        {
+                                //            SendSuccess = write(item1);
+                                //            break;
+                                //        }
+                                //        if (SendSuccess > 0)
+                                //            RequestWriteToClient.Dequeue();
+                                //    }
+                                //}
+                                //else
+                                //{
                                     try
                                     {
                                         foreach (Device dv in ch.Devices)
@@ -169,7 +169,7 @@ namespace AdvancedScada.LSIS.Core
                                         Disconnect();
                                         EventscadaException?.Invoke(this.GetType().Name, ex.Message);
                                     }
-                                }
+                                //}
                             }
                             catch (Exception)
                             {
@@ -269,7 +269,7 @@ namespace AdvancedScada.LSIS.Core
                         baseAddress = db.StartAddress * 8;
                         break;
                 }
-
+                SendDone.WaitOne(-1);
                 switch (db.DataType)
                 {
                     case DataTypes.BitOnByte:
@@ -460,14 +460,100 @@ namespace AdvancedScada.LSIS.Core
 
         public void WriteTag(string tagName, dynamic value)
         {
-            RequestWrite request = new RequestWrite()
+            //RequestWrite request = new RequestWrite()
+            //{
+            //    tagName = tagName,
+            //    value = value
+
+            //};
+            //RequestWriteToClient.Enqueue(request);
+            SendDone.Reset();
+            try
             {
-                tagName = tagName,
-                value = value
 
-            };
-            RequestWriteToClient.Enqueue(request);
+                string[] ary = tagName.Split('.');
+                string tagDevice = string.Format("{0}.{1}", ary[0], ary[1]);
+                foreach (Channel ch in Channels)
+                {
+                    foreach (Device dv in ch.Devices)
+                    {
 
+                        if (string.Format("{0}.{1}", ch.ChannelName, dv.DeviceName).Equals(tagDevice))
+                        {
+                            IDriverAdapter DriverAdapter = null;
+                            switch (ch.ConnectionType)
+                            {
+                                case "SerialPort":
+                                    DriverAdapter = cnet[ch.ChannelName];
+                                    break;
+
+                                case "Ethernet":
+                                    DriverAdapter = FENET[ch.ChannelName];
+                                    break;
+                            }
+                            if (DriverAdapter == null) return;
+                            lock (DriverAdapter)
+                                switch (TagCollection.Tags[tagName].DataType)
+                                {
+                                    case DataTypes.Bit:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), value);
+                                        break;
+                                    case DataTypes.Byte:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), byte.Parse(value));
+
+                                        break;
+                                    case DataTypes.Short:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), short.Parse(value));
+
+                                        break;
+                                    case DataTypes.UShort:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), ushort.Parse(value));
+
+                                        break;
+                                    case DataTypes.Int:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), int.Parse(value));
+
+                                        break;
+                                    case DataTypes.UInt:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), uint.Parse(value));
+
+                                        break;
+                                    case DataTypes.Long:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), long.Parse(value));
+
+                                        break;
+                                    case DataTypes.ULong:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), ulong.Parse(value));
+
+                                        break;
+                                    case DataTypes.Float:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), float.Parse(value));
+
+                                        break;
+                                    case DataTypes.Double:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), double.Parse(value));
+
+                                        break;
+                                    case DataTypes.String:
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), $"{value}");
+
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            }
+            finally
+            {
+                SendDone.Set();
+            }
         }
 
         public int write(RequestWrite data)
