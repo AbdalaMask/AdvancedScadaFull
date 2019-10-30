@@ -41,16 +41,6 @@
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txtServerName = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.btnLibraryImages = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.txtLibraryImages = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.btnTypeForms = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnLibraryImage = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.cboxTypeForms = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.cboxLibraryImage = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.FBD = new System.Windows.Forms.FolderBrowserDialog();
             this.btnCancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnOK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -66,8 +56,6 @@
             this.kryptonHeaderGroup1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cboxDatabaseTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtServerName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).BeginInit();
-            this.kryptonPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonNavigator1
@@ -82,8 +70,7 @@
             this.kryptonNavigator1.NavigatorMode = ComponentFactory.Krypton.Navigator.NavigatorMode.HeaderBarCheckButtonHeaderGroup;
             this.kryptonNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage1,
-            this.kryptonPage2,
-            this.kryptonPage3});
+            this.kryptonPage2});
             this.kryptonNavigator1.SelectedIndex = 0;
             this.kryptonNavigator1.Size = new System.Drawing.Size(466, 280);
             this.kryptonNavigator1.TabIndex = 0;
@@ -224,110 +211,6 @@
             this.kryptonLabel3.TabIndex = 0;
             this.kryptonLabel3.Values.Text = "Server Name :";
             // 
-            // kryptonPage3
-            // 
-            this.kryptonPage3.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.kryptonPage3.Controls.Add(this.btnLibraryImages);
-            this.kryptonPage3.Controls.Add(this.txtLibraryImages);
-            this.kryptonPage3.Controls.Add(this.kryptonLabel8);
-            this.kryptonPage3.Controls.Add(this.btnTypeForms);
-            this.kryptonPage3.Controls.Add(this.btnLibraryImage);
-            this.kryptonPage3.Controls.Add(this.cboxTypeForms);
-            this.kryptonPage3.Controls.Add(this.cboxLibraryImage);
-            this.kryptonPage3.Controls.Add(this.kryptonLabel6);
-            this.kryptonPage3.Controls.Add(this.kryptonLabel5);
-            this.kryptonPage3.Flags = 65534;
-            this.kryptonPage3.ImageSmall = global::AdvancedScada.Studio.Properties.Resources.Image_16x16;
-            this.kryptonPage3.LastVisibleSet = true;
-            this.kryptonPage3.Margin = new System.Windows.Forms.Padding(4);
-            this.kryptonPage3.MinimumSize = new System.Drawing.Size(67, 62);
-            this.kryptonPage3.Name = "kryptonPage3";
-            this.kryptonPage3.Size = new System.Drawing.Size(464, 226);
-            this.kryptonPage3.Text = "LibraryImage";
-            this.kryptonPage3.ToolTipTitle = "Page ToolTip";
-            this.kryptonPage3.UniqueName = "354B65BF2F8B410C0FA2A6BFB73894BC";
-            // 
-            // btnLibraryImages
-            // 
-            this.btnLibraryImages.Location = new System.Drawing.Point(406, 72);
-            this.btnLibraryImages.Margin = new System.Windows.Forms.Padding(4);
-            this.btnLibraryImages.Name = "btnLibraryImages";
-            this.btnLibraryImages.Size = new System.Drawing.Size(51, 25);
-            this.btnLibraryImages.TabIndex = 11;
-            this.btnLibraryImages.Values.Text = "...";
-            this.btnLibraryImages.Click += new System.EventHandler(this.BtnLibraryImages_Click);
-            // 
-            // txtLibraryImages
-            // 
-            this.txtLibraryImages.Location = new System.Drawing.Point(143, 70);
-            this.txtLibraryImages.Margin = new System.Windows.Forms.Padding(4);
-            this.txtLibraryImages.Name = "txtLibraryImages";
-            this.txtLibraryImages.Size = new System.Drawing.Size(253, 20);
-            this.txtLibraryImages.TabIndex = 10;
-            // 
-            // kryptonLabel8
-            // 
-            this.kryptonLabel8.Location = new System.Drawing.Point(11, 68);
-            this.kryptonLabel8.Margin = new System.Windows.Forms.Padding(4);
-            this.kryptonLabel8.Name = "kryptonLabel8";
-            this.kryptonLabel8.Size = new System.Drawing.Size(89, 20);
-            this.kryptonLabel8.TabIndex = 9;
-            this.kryptonLabel8.Values.Text = "LibraryImages:";
-            // 
-            // btnTypeForms
-            // 
-            this.btnTypeForms.Location = new System.Drawing.Point(406, 37);
-            this.btnTypeForms.Margin = new System.Windows.Forms.Padding(4);
-            this.btnTypeForms.Name = "btnTypeForms";
-            this.btnTypeForms.Size = new System.Drawing.Size(51, 25);
-            this.btnTypeForms.TabIndex = 5;
-            this.btnTypeForms.Values.Text = "...";
-            this.btnTypeForms.Click += new System.EventHandler(this.btnTypeForms_Click);
-            // 
-            // btnLibraryImage
-            // 
-            this.btnLibraryImage.Location = new System.Drawing.Point(406, 5);
-            this.btnLibraryImage.Margin = new System.Windows.Forms.Padding(4);
-            this.btnLibraryImage.Name = "btnLibraryImage";
-            this.btnLibraryImage.Size = new System.Drawing.Size(51, 25);
-            this.btnLibraryImage.TabIndex = 4;
-            this.btnLibraryImage.Values.Text = "...";
-            this.btnLibraryImage.Click += new System.EventHandler(this.btnLibraryImage_Click);
-            // 
-            // cboxTypeForms
-            // 
-            this.cboxTypeForms.Location = new System.Drawing.Point(143, 39);
-            this.cboxTypeForms.Margin = new System.Windows.Forms.Padding(4);
-            this.cboxTypeForms.Name = "cboxTypeForms";
-            this.cboxTypeForms.Size = new System.Drawing.Size(253, 20);
-            this.cboxTypeForms.TabIndex = 3;
-            // 
-            // cboxLibraryImage
-            // 
-            this.cboxLibraryImage.Location = new System.Drawing.Point(143, 2);
-            this.cboxLibraryImage.Margin = new System.Windows.Forms.Padding(4);
-            this.cboxLibraryImage.Name = "cboxLibraryImage";
-            this.cboxLibraryImage.Size = new System.Drawing.Size(255, 20);
-            this.cboxLibraryImage.TabIndex = 2;
-            // 
-            // kryptonLabel6
-            // 
-            this.kryptonLabel6.Location = new System.Drawing.Point(11, 38);
-            this.kryptonLabel6.Margin = new System.Windows.Forms.Padding(4);
-            this.kryptonLabel6.Name = "kryptonLabel6";
-            this.kryptonLabel6.Size = new System.Drawing.Size(59, 20);
-            this.kryptonLabel6.TabIndex = 1;
-            this.kryptonLabel6.Values.Text = "Symbols:";
-            // 
-            // kryptonLabel5
-            // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(11, 6);
-            this.kryptonLabel5.Margin = new System.Windows.Forms.Padding(4);
-            this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(84, 20);
-            this.kryptonLabel5.TabIndex = 0;
-            this.kryptonLabel5.Values.Text = "LibraryImage:";
-            // 
             // btnCancel
             // 
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
@@ -378,9 +261,6 @@
             this.kryptonHeaderGroup1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cboxDatabaseTypes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtServerName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).EndInit();
-            this.kryptonPage3.ResumeLayout(false);
-            this.kryptonPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -390,7 +270,6 @@
         private ComponentFactory.Krypton.Navigator.KryptonNavigator kryptonNavigator1;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage1;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage2;
-        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage3;
         private ComponentFactory.Krypton.Toolkit.KryptonDomainUpDown txtPort;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtIPAddress;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
@@ -400,17 +279,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox txtServerName;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnTypeForms;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnLibraryImage;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox cboxTypeForms;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox cboxLibraryImage;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
         private System.Windows.Forms.FolderBrowserDialog FBD;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnCancel;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnOK;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnLibraryImages;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtLibraryImages;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel8;
     }
 }

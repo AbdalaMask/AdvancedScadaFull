@@ -157,7 +157,7 @@ namespace AdvancedScada.LSIS.Core
 
                                             foreach (DataBlock db in dv.DataBlocks)
                                             {
-                                                if (!IsConnected) break;
+                                             
 
                                                 SendPackageLSIS(DriverAdapter, db);
                                             }

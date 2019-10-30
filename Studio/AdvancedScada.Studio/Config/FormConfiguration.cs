@@ -22,17 +22,14 @@ namespace AdvancedScada.Studio.Config
             {
                 Registry.SetValue("HKEY_CURRENT_USER\\Software\\FormConfiguration", "IPAddress", txtIPAddress.Text);
                 Registry.SetValue("HKEY_CURRENT_USER\\Software\\FormConfiguration", "Port", txtPort.Text);
-                Registry.SetValue("HKEY_CURRENT_USER\\Software\\FormConfiguration", "TypeLibrary", cboxLibraryImage.Text);
-                Registry.SetValue("HKEY_CURRENT_USER\\Software\\FormConfiguration", "TypeForms", cboxTypeForms.Text);
-
+ 
 
                 Settings.Default.teServer = txtServerName.Text;
                 Settings.Default.Port = txtPort.Text;
                 Settings.Default.IPAddress = txtIPAddress.Text;
                 Settings.Default.DatabaseTypes = DatabaseTypes;
 
-                Settings.Default.TypeLibrary = cboxLibraryImage.Text;
-                Settings.Default.TypeForms = cboxTypeForms.Text;
+           
 
                 Settings.Default.Save();
 
@@ -76,15 +73,7 @@ namespace AdvancedScada.Studio.Config
 
                 cboxDatabaseTypes.Text = Settings.Default.DatabaseTypes;
 
-                cboxLibraryImage.Text = Settings.Default.TypeLibrary;
-
-
-
-                cboxTypeForms.Text = Settings.Default.TypeForms;
-
-
-
-
+          
                 GetSQLServer();
 
                 txtIPAddress.Text = Settings.Default.IPAddress;
@@ -132,24 +121,6 @@ namespace AdvancedScada.Studio.Config
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
         }
-        private void btnLibraryImage_Click(object sender, EventArgs e)
-        {
-            if (FBD.ShowDialog() == DialogResult.OK) WriteKey("LibraryImage", FBD.SelectedPath);
-            cboxLibraryImage.Text = FBD.SelectedPath;
-        }
-
-        private void btnTypeForms_Click(object sender, EventArgs e)
-        {
-            if (FBD.ShowDialog() == DialogResult.OK) WriteKey("Symbols", FBD.SelectedPath);
-            cboxTypeForms.Text = FBD.SelectedPath;
-        }
-
-
-
-        private void BtnLibraryImages_Click(object sender, EventArgs e)
-        {
-            if (FBD.ShowDialog() == DialogResult.OK) WriteKey("LibraryImages", FBD.SelectedPath);
-            txtLibraryImages.Text = FBD.SelectedPath;
-        }
+      
     }
 }
