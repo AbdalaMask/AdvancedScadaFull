@@ -128,7 +128,7 @@ Public Module SqlDb
         Dim readValue = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\TestApp", "Name", Nothing)
         lbl_GREB.Text = CStr(My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\TestApp", "Grop_Type", Nothing))
         Dim dt2 As New DataTable
-        dt2 = GetRecors(String.Format("SELECT * FROM BatchsDetails WHERE BatchID='{0}'", GetRecors(String.Format("SELECT * FROM Batchs WHERE BatchName='{0}'", readValue)).Rows(0).Item(0)))
+        dt2 = GetRecors($"SELECT * FROM BatchsDetails WHERE BatchID='{GetRecors(String.Format("SELECT * FROM Batchs WHERE BatchName='{0}'", readValue)).Rows(0).Item(0) }'")
         '====================================================================
         For i As Integer = 0 To 6
             lbl_HighSpeed.Text = dt2.Rows(i).Item("HighSpeed").ToString
@@ -166,15 +166,20 @@ Public Module SqlDb
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Function Get_BatchsDetails(ByVal BatchName As String) As DataTable
-
-        con.Open()
-        Dim param(0) As SqlParameter
-
-        param(0) = New SqlParameter("@BatchName", SqlDbType.VarChar)
-        param(0).Value = BatchName
         Dim DT As New DataTable()
-        DT = SelectData("Get_BatchsDetails", param)
-        con.Close()
+        Try
+            con.Open()
+            Dim param(0) As SqlParameter
+
+            param(0) = New SqlParameter("@BatchName", SqlDbType.VarChar)
+            param(0).Value = BatchName
+
+            DT = SelectData("Get_BatchsDetails", param)
+            con.Close()
+
+        Catch
+
+        End Try
         Return DT
     End Function
 #End Region

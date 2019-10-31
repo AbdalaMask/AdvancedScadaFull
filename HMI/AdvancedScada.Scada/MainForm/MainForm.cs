@@ -99,15 +99,15 @@ namespace AdvancedScada.HMI.MainForm
             TankNameSelected[7] = LBL_Name_Silo8;
 
 
-            if (readValue == null) return;
-            LBL_BatchName.Text = readValue.ToString();
-            DataTable dt = new DataTable();
+            //if (readValue == null) return;
+            //LBL_BatchName.Text = readValue.ToString();
+            //DataTable dt = new DataTable();
 
-            dt = SqlDb.Get_BatchsDetails(LBL_BatchName.Text);
-            for (int i = 0; i <= 11; i++)
-            {
-                ListTankName.Add(dt.Rows[i]["TankName"].ToString());
-            }
+            //dt = SqlDb.Get_BatchsDetails(LBL_BatchName.Text);
+            //for (int i = 0; i <= 11; i++)
+            //{
+            //    ListTankName.Add(dt.Rows[i]["TankName"].ToString());
+            //}
 
         }
 
@@ -115,8 +115,8 @@ namespace AdvancedScada.HMI.MainForm
         {
             try
             {
-                //client?.Disconnect(XCollection.CURRENT_MACHINE);
-                // client?.Stop();
+                client?.Disconnect(XCollection.CURRENT_MACHINE);
+              
 
             }
             catch (CommunicationException ex)
@@ -149,7 +149,7 @@ namespace AdvancedScada.HMI.MainForm
                     Microsoft.Win32.Registry.SetValue("HKEY_CURRENT_USER\\Software\\TestApp", "LBL_Name_Silo8", LBL_Name_Silo8.Text);
 
                     client?.Disconnect(XCollection.CURRENT_MACHINE);
-                    //client.Stop();
+                     
                     Application.ExitThread();
 
                 }

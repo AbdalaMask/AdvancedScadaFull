@@ -201,6 +201,11 @@
             // 
             this.txtStartAddress.Location = new System.Drawing.Point(332, 98);
             this.txtStartAddress.Margin = new System.Windows.Forms.Padding(2);
+            this.txtStartAddress.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.txtStartAddress.Name = "txtStartAddress";
             this.txtStartAddress.Size = new System.Drawing.Size(135, 22);
             this.txtStartAddress.TabIndex = 18;

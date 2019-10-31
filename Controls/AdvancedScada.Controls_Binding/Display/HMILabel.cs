@@ -839,7 +839,7 @@ namespace AdvancedScada.Controls_Binding.Display
             }
 
 
-            base.Text = ResultText;
+            Utilities.SetLabelText(  this , ResultText);
         }
         #endregion
 

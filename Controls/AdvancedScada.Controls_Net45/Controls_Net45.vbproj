@@ -144,6 +144,15 @@
     <Compile Include="SevenSegment\DigitalDisplayControl.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="SevenSegment\SevenSegment2.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SevenSegment\SevenSegment3.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SevenSegment\SevenSegmentGDI.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TankAll\StackLight2.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -295,6 +304,45 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BarLevel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedZero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedDash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedDecimal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedEight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedFive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedFour.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedNine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedOne.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedSeven.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedSix.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedThree.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedTwo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

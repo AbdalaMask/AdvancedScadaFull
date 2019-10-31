@@ -24,6 +24,18 @@ namespace AdvancedScada.LSIS.Core.Editors
         {
             return $"{db.Tags.Count + 1}";
         }
+        int TagsCount = 0;
+        public string GetTagName()
+        {
+            foreach (var item in dv.DataBlocks)
+            {
+
+                TagsCount += item.Tags.Count;
+              
+
+            }
+            return $"TAG{1+TagsCount:d5}";
+        }
         private void btnOK_Click(object sender, EventArgs e)
         {
             try
@@ -69,30 +81,32 @@ namespace AdvancedScada.LSIS.Core.Editors
             try
             {
 
-                cboxDataType.SelectedItem = $"{this.db.DataType}";
+                
                 this.txtChannelName.Text = this.ch.ChannelName;
                 this.txtDeviceName.Text = this.dv.DeviceName;
                 this.txtDataBlock.Text = this.db.DataBlockName;
                 txtChannelId.Text = ch.ChannelId.ToString();
                 txtDeviceId.Text = Convert.ToString(ch.Devices.Count);
                 txtDataBlockId.Text = Convert.ToString(db.DataBlockId);
-
+                cboxDataType.DataSource = System.Enum.GetNames(typeof(DataTypes));
                 if (tg == null)
                 {
 
                     this.Text = "Add Tag";
                     txtTagId.Text = GetIDTag();
+                    txtTagName.Text = GetTagName();
+                    cboxDataType.SelectedItem = $"{this.db.DataType}";
                 }
                 else
                 {
 
-
+                    cboxDataType.SelectedItem = $"{this.db.DataType}";
 
                     this.Text = "Edit Tag";
                     txtTagId.Text = tg.TagId.ToString();
                     txtAddress.Text = tg.Address;
                     txtAddress.Enabled = true;
-                    cboxDataType.SelectedItem = $"{tg.DataType}";
+                   /// cboxDataType.SelectedItem = $"{tg.DataType}";
                     txtTagName.Text = tg.TagName;
                     txtDesc.Text = tg.Description;
                 }

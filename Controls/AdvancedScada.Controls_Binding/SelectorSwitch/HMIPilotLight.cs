@@ -19,7 +19,9 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
             MinHoldTimer.Tick += HoldTimer_Tick;
         }
 
+        #region PLC Properties
 
+        
         public bool HoldTimeMet;
         private int m_MaximumHoldTime = 3000;
         private int m_MinimumHoldTime = 500;
@@ -82,7 +84,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressText) || string.IsNullOrWhiteSpace(m_PLCAddressText) ||
                             Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
+                        var bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressText], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -188,7 +190,7 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
         [Category("PLC Properties")]
         public int ValueToWrite { get; set; }
         public string PLCAddressEnabled { get; set; }
-
+        #endregion
         private void ReleaseValue()
         {
             try
@@ -248,11 +250,9 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                             break;
                         case OutputType.Toggle:
 
-                            var CurrentValue = Value;
-                            if (CurrentValue)
-                                Utilities.Write(m_PLCAddressClick, false);
-                            else
-                                Utilities.Write(m_PLCAddressClick, true);
+                           
+                                Utilities.Write(m_PLCAddressClick, !Value);
+                            
                             break;
                         default:
 
