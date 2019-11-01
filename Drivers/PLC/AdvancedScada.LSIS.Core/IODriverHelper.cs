@@ -12,21 +12,16 @@ using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.LSIS.Core
 {
-    public class RequestWrite
-    {
-        public string tagName { get; set; }
-        public dynamic value { get; set; }
-
-    }
+    
     public class IODriverHelper : AdvancedScada.Common.IODriver
     {
 
         public static List<Channel> Channels = new List<Channel>();
-
+        public static readonly ManualResetEvent SendDone = new ManualResetEvent(true);
         //==================================LS===================================================
         private static Dictionary<string, LS_CNET> cnet = new Dictionary<string, LS_CNET>();
         private static Dictionary<string, LS_FENET> FENET = new Dictionary<string, LS_FENET>();
-        private static Queue<RequestWrite> RequestWriteToClient = new Queue<RequestWrite>();
+       
         private static bool IsConnected;
         private static int COUNTER;
 
@@ -105,7 +100,7 @@ namespace AdvancedScada.LSIS.Core
             {
                 IsConnected = true;
 
-                int SendSuccess = 0;
+               
                 Console.WriteLine(string.Format("STARTED: {0}", ++COUNTER));
                 threads = new Thread[Channels.Count];
 
@@ -145,23 +140,9 @@ namespace AdvancedScada.LSIS.Core
 
                                         foreach (DataBlock db in dv.DataBlocks)
                                         {
-                                            if (RequestWriteToClient.Count > 0)
-                                            {
-                                                if (IsConnected)
-                                                {
-                                                    foreach (RequestWrite item1 in RequestWriteToClient)
-                                                    {
-                                                        SendSuccess = write(item1);
-                                                        break;
-                                                    }
-                                                    if (SendSuccess > 0)
-                                                        RequestWriteToClient.Dequeue();
-                                                }
-                                            }
-                                            else
-                                            {
+                                            
                                                 SendPackageLSIS(DriverAdapter, db);
-                                            }
+                                             
 
                                         }
 
@@ -234,6 +215,7 @@ namespace AdvancedScada.LSIS.Core
         {
             try
             {
+                SendDone.WaitOne(-1);
                 int baseAddress = db.StartAddress;
                 switch (db.DataType)
                 {
@@ -244,7 +226,8 @@ namespace AdvancedScada.LSIS.Core
                         baseAddress = db.StartAddress * 2;
                         break;
                     case DataTypes.Bit when db.IsArray:
-                        baseAddress = ((db.StartAddress >= 16) ? (db.StartAddress / 16) : 0) * 2;
+                        // baseAddress = ((db.StartAddress >= 16) ? (db.StartAddress / 16) : 0) * 2;
+                        baseAddress = db.StartAddress * 2;
                         break;
                     case DataTypes.Byte:
                         baseAddress = db.StartAddress;
@@ -292,7 +275,7 @@ namespace AdvancedScada.LSIS.Core
                         {
                             lock (DriverAdapter)
                             {
-                                bitArys = DriverAdapter.Read<bool>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", (ushort)(2 * db.Length));
+                                bitArys = DriverAdapter.Read<bool>($"{db.MemoryType.Substring(0, 1)}{ baseAddress}", (ushort)(2 * db.Length));
                                 if (bitArys == null || bitArys.Length == 0) return;
                                 if (bitArys.Length > db.Tags.Count) return;
                                 for (var j = 0; j <= db.Tags.Count - 1; j++)
@@ -492,23 +475,10 @@ namespace AdvancedScada.LSIS.Core
 
         public void WriteTag(string tagName, dynamic value)
         {
-            RequestWrite request = new RequestWrite()
-            {
-                tagName = tagName,
-                value = value
 
-            };
-            RequestWriteToClient.Enqueue(request);
-
-        }
-
-        public int write(RequestWrite data)
-        {
-            var tagName = data.tagName;
-            var value = data.value;
             try
             {
-
+                SendDone.Reset();
                 string[] ary = tagName.Split('.');
                 string tagDevice = string.Format("{0}.{1}", ary[0], ary[1]);
                 foreach (Channel ch in Channels)
@@ -529,7 +499,7 @@ namespace AdvancedScada.LSIS.Core
                                     DriverAdapter = FENET[ch.ChannelName];
                                     break;
                             }
-                            if (DriverAdapter == null) return 1;
+                            if (DriverAdapter == null) return ;
                             lock (DriverAdapter)
                                 switch (TagCollection.Tags[tagName].DataType)
                                 {
@@ -588,8 +558,13 @@ namespace AdvancedScada.LSIS.Core
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
-            return 1;
+            finally
+            {
+                SendDone.Set();
+            }
         }
+
+        
 
         #endregion
     }

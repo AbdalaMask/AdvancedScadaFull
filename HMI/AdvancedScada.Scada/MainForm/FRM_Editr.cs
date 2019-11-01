@@ -64,7 +64,7 @@ namespace AdvancedScada.HMI.MainForm
 
         }
 
-        public void Write(string adr, string Value)
+        public void Write(string adr, dynamic Value)
         {
 
             Utilities.Write(adr, Value);
@@ -104,60 +104,60 @@ namespace AdvancedScada.HMI.MainForm
 
                 //'عنواين التردد السريع
 
-                Write("TEST.PLC.DW.DW23", txt_thnk_sp_hi_1.Text);
+                Write(txt_thnk_sp_hi_1.PLCAddressValueToWrite, txt_thnk_sp_hi_1.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:24", txt_thnk_sp_hi_2.Text);
+                Write(txt_thnk_sp_hi_2.PLCAddressValueToWrite, txt_thnk_sp_hi_2.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:26", txt_thnk_sp_hi_3.Text);
+                Write(txt_thnk_sp_hi_3.PLCAddressValueToWrite, txt_thnk_sp_hi_3.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:28", txt_thnk_sp_hi_4.Text);
+                Write(txt_thnk_sp_hi_4.PLCAddressValueToWrite, txt_thnk_sp_hi_4.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:30", txt_thnk_sp_hi_5.Text);
+                Write(txt_thnk_sp_hi_5.PLCAddressValueToWrite, txt_thnk_sp_hi_5.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:32", txt_thnk_sp_hi_6.Text);
+                Write(txt_thnk_sp_hi_6.PLCAddressValueToWrite, txt_thnk_sp_hi_6.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:34", txt_thnk_sp_hi_7.Text);
+                Write(txt_thnk_sp_hi_7.PLCAddressValueToWrite, txt_thnk_sp_hi_7.Text);
 
-                Write("TEST.PLC.StartAddress90.StartAddress90:148", txt_thnk_sp_hi_8.Text);
+                Write(txt_thnk_sp_hi_8.PLCAddressValueToWrite, txt_thnk_sp_hi_8.Text);
 
 
 
 
                 //عنواين التردد البطى
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:38", txt_thnk_sp_low_1.Text);
+                Write(txt_thnk_sp_low_1.PLCAddressValueToWrite, txt_thnk_sp_low_1.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:40", txt_thnk_sp_low_2.Text);
+                Write(txt_thnk_sp_low_2.PLCAddressValueToWrite, txt_thnk_sp_low_2.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:42", txt_thnk_sp_low_3.Text);
+                Write(txt_thnk_sp_low_3.PLCAddressValueToWrite, txt_thnk_sp_low_3.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:44", txt_thnk_sp_low_4.Text);
+                Write(txt_thnk_sp_low_4.PLCAddressValueToWrite, txt_thnk_sp_low_4.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:46", txt_thnk_sp_low_5.Text);
+                Write(txt_thnk_sp_low_5.PLCAddressValueToWrite, txt_thnk_sp_low_5.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:48", txt_thnk_sp_low_6.Text);
+                Write(txt_thnk_sp_low_6.PLCAddressValueToWrite, txt_thnk_sp_low_6.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:50", txt_thnk_sp_low_7.Text);
+                Write(txt_thnk_sp_low_7.PLCAddressValueToWrite, txt_thnk_sp_low_7.Text);
 
-                Write("TEST.PLC.StartAddress90.StartAddress90:150", txt_thnk_sp_low_8.Text);
+                Write(txt_thnk_sp_low_8.PLCAddressValueToWrite, txt_thnk_sp_low_8.Text);
 
 
                 //عنواين الوزن البطيى
-                Write("TEST.PLC.StartAddress22.StartAddress22:56", txt_thnk_low_1.Text);
+                Write(txt_thnk_low_1.PLCAddressValueToWrite, txt_thnk_low_1.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:58", txt_thnk_low_2.Text);
+                Write(txt_thnk_low_2.PLCAddressValueToWrite, txt_thnk_low_2.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:60", txt_thnk_low_3.Text);
+                Write(txt_thnk_low_3.PLCAddressValueToWrite, txt_thnk_low_3.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:62", txt_thnk_low_4.Text);
+                Write(txt_thnk_low_4.PLCAddressValueToWrite, txt_thnk_low_4.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:64", txt_thnk_low_5.Text);
+                Write(txt_thnk_low_5.PLCAddressValueToWrite, txt_thnk_low_5.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:66", txt_thnk_low_6.Text);
+                Write(txt_thnk_low_6.PLCAddressValueToWrite, txt_thnk_low_6.Text);
 
-                Write("TEST.PLC.StartAddress22.StartAddress22:68", txt_thnk_low_7.Text);
+                Write(txt_thnk_low_7.PLCAddressValueToWrite, txt_thnk_low_7.Text);
 
-                Write("TEST.PLC.StartAddress90.StartAddress90:146", txt_thnk_low_8.Text);
+                Write(txt_thnk_low_8.PLCAddressValueToWrite, txt_thnk_low_8.Text);
 
 
 
@@ -167,131 +167,131 @@ namespace AdvancedScada.HMI.MainForm
 
                 if (com_work_1.Text == "يعمل")
                 {
-                    Write("TEST.PLC.MB.MB0", "1");
+                    Write(com_work_1.PLCAddressValueToWrite, true);
 
                     Write(txt_thnk_set_1.PLCAddressValueToWrite, $"{int.Parse(txt_thnk_set_1.Text) - int.Parse(txt_thnk_fol_1.Text)}");
 
-                    Write("TEST.PLC.StartAddress22.StartAddress22:72", com_order_1.Text);
+                    Write(com_order_1.PLCAddressValueToWrite, com_order_1.Text);
 
                 }
                 else
                 {
-                    Write("TEST.PLC.StartAddress22.StartAddress22:72", "0");
+                    Write(com_order_1.PLCAddressValueToWrite, "0");
 
-                    Write("TEST.PLC.MB.MB0", "0");
+                    Write(com_work_1.PLCAddressValueToWrite, false);
 
                 }
 
                 if (com_work_2.Text == "يعمل")
                 {
-                    Write("TEST.PLC.MB.MB1", "1");
+                    Write(com_work_2.PLCAddressValueToWrite,true);
 
                     Write(txt_thnk_set_2.PLCAddressValueToWrite, $"{int.Parse(txt_thnk_set_2.Text) - int.Parse(txt_thnk_fol_2.Text)}");
 
-                    Write("TEST.PLC.StartAddress22.StartAddress22:74", com_order_2.Text);
+                    Write(com_order_2.PLCAddressValueToWrite, com_order_2.Text);
 
                 }
                 else
                 {
-                    Write("TEST.PLC.MB.MB1", "0");
+                    Write(com_work_2.PLCAddressValueToWrite, false);
 
-                    Write("TEST.PLC.StartAddress22.StartAddress22:74", "0");
+                    Write(com_order_2.PLCAddressValueToWrite, "0");
 
                 }
                 if (com_work_3.Text == "يعمل")
                 {
 
-                    Write("TEST.PLC.MB.MB2", "1");
+                    Write(com_work_3.PLCAddressValueToWrite, true);
 
                     Write(txt_thnk_set_3.PLCAddressValueToWrite, $"{int.Parse(txt_thnk_set_3.Text) - int.Parse(txt_thnk_fol_3.Text)}");
 
-                    Write("TEST.PLC.StartAddress22.StartAddress22:76", com_order_3.Text);
+                    Write(com_order_3.PLCAddressValueToWrite, com_order_3.Text);
 
                 }
                 else
                 {
-                    Write("TEST.PLC.MB.MB2", "0");
+                    Write(com_work_3.PLCAddressValueToWrite, false);
 
-                    Write("TEST.PLC.StartAddress22.StartAddress22:76", "0");
+                    Write(com_order_3.PLCAddressValueToWrite, "0");
 
                 }
                 if (com_work_4.Text == "يعمل")
                 {
-                    Write("TEST.PLC.MB.MB3", "1");
+                    Write(com_work_4.PLCAddressValueToWrite, true);
 
                     Write(txt_thnk_set_4.PLCAddressValueToWrite, $"{int.Parse(txt_thnk_set_4.Text) - int.Parse(txt_thnk_fol_4.Text)}");
 
-                    Write("TEST.PLC.StartAddress22.StartAddress22:78", com_order_4.Text);
+                    Write(com_order_4.PLCAddressValueToWrite, com_order_4.Text);
 
                 }
                 else
                 {
-                    Write("TEST.PLC.MB.MB3", "0");
+                    Write(com_work_4.PLCAddressValueToWrite, false);
 
-                    Write("TEST.PLC.StartAddress22.StartAddress22:78", "0");
+                    Write(com_order_4.PLCAddressValueToWrite, "0");
 
                 }
                 if (com_work_5.Text == "يعمل")
                 {
-                    Write("TEST.PLC.MB.MB4", "1");
+                    Write(com_work_5.PLCAddressValueToWrite, true);
 
                     Write(txt_thnk_set_5.PLCAddressValueToWrite, $"{int.Parse(txt_thnk_set_5.Text) - int.Parse(txt_thnk_fol_5.Text)}");
 
-                    Write("TEST.PLC.StartAddress22.StartAddress22:80", com_order_5.Text);
+                    Write(com_order_5.PLCAddressValueToWrite, com_order_5.Text);
 
                 }
                 else
                 {
-                    Write("TEST.PLC.MB.MB4", "0");
+                    Write(com_work_5.PLCAddressValueToWrite, false);
 
-                    Write("TEST.PLC.StartAddress22.StartAddress22:80", "0");
+                    Write(com_order_5.PLCAddressValueToWrite, "0");
 
                 }
                 if (com_work_6.Text == "يعمل")
                 {
-                    Write("TEST.PLC.MB.MB5", "1");
+                    Write(com_work_6.PLCAddressValueToWrite, true);
 
                     Write(txt_thnk_set_6.PLCAddressValueToWrite, $"{int.Parse(txt_thnk_set_6.Text) - int.Parse(txt_thnk_fol_6.Text)}");
 
-                    Write("TEST.PLC.StartAddress22.StartAddress22:82", com_order_6.Text);
+                    Write(com_order_6.PLCAddressValueToWrite, com_order_6.Text);
 
                 }
                 else
                 {
-                    Write("TEST.PLC.MB.MB5", "0");
+                    Write(com_work_6.PLCAddressValueToWrite,false);
 
-                    Write("TEST.PLC.StartAddress22.StartAddress22:82", "0");
+                    Write(com_order_6.PLCAddressValueToWrite, "0");
 
                 }
                 if (com_work_7.Text == "يعمل")
                 {
-                    Write("TEST.PLC.MB.MB6", "1");
+                    Write(com_work_7.PLCAddressValueToWrite, true);
 
                     Write(txt_thnk_set_7.PLCAddressValueToWrite, $"{int.Parse(txt_thnk_set_7.Text) - int.Parse(txt_thnk_fol_7.Text)}");
 
-                    Write("TEST.PLC.StartAddress22.StartAddress22:84", com_order_7.Text);
+                    Write(com_order_7.PLCAddressValueToWrite, com_order_7.Text);
                 }
                 else
                 {
-                    Write("TEST.PLC.MB.MB6", "0");
+                    Write(com_work_7.PLCAddressValueToWrite, false);
 
-                    Write("TEST.PLC.StartAddress22.StartAddress22:84", "0");
+                    Write(com_order_7.PLCAddressValueToWrite, "0");
 
                 }
 
                 if (com_work_8.Text == "يعمل")
                 {
-                    Write("TEST.PLC.MB.MB7", "1");
+                    Write(com_work_8.PLCAddressValueToWrite, true);
 
                     Write(txt_thnk_set_8.PLCAddressValueToWrite, $"{int.Parse(txt_thnk_set_8.Text) - int.Parse(txt_thnk_fol_8.Text)}");
 
-                    Write("TEST.PLC.StartAddress22.StartAddress22:86", com_order_8.Text);
+                    Write(com_order_8.PLCAddressValueToWrite, com_order_8.Text);
                 }
                 else
                 {
-                    Write("TEST.PLC.MB.MB7", "0");
+                    Write(com_work_8.PLCAddressValueToWrite, false);
 
-                    Write("TEST.PLC.StartAddress22.StartAddress22:86", "0");
+                    Write(com_order_8.PLCAddressValueToWrite, "0");
 
                 }
 
@@ -379,7 +379,7 @@ namespace AdvancedScada.HMI.MainForm
 
 
         }
-        public void Get_txt(DataTable dt, ComboBox comTankName, ref HMITextBoxInput txt_MixWeight, ref HMITextBoxInput txt_LowWeight, ref TextBox txt_FreeFallWeight, ref HMITextBoxInput txt_HighSpeed, ref HMITextBoxInput txt_LowSpeed, ref HMITextBoxInput num_Orders, ref ComboBox com_Werking, int x)
+        public void Get_txt(DataTable dt, ComboBox comTankName, ref HMITextBoxInput txt_MixWeight, ref HMITextBoxInput txt_LowWeight, ref TextBox txt_FreeFallWeight, ref HMITextBoxInput txt_HighSpeed, ref HMITextBoxInput txt_LowSpeed, ref HMITextBoxInput num_Orders, ref HMIComboBoxInput com_Werking, int x)
         {
 
             comTankName.Text = dt.Rows[x]["TankName"].ToString();

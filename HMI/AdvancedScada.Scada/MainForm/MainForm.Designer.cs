@@ -111,6 +111,7 @@ namespace AdvancedScada.HMI.MainForm
             this.Label2 = new System.Windows.Forms.Label();
             this.Panel9 = new System.Windows.Forms.Panel();
             this.Label3 = new System.Windows.Forms.Label();
+            this.hmiDigitalPanelMeter1 = new AdvancedScada.Controls_Binding.DigitalDisplay.HMIDigitalPanelMeter();
             this.hmiLedDisplay2 = new AdvancedScada.Controls_Binding.HslControl.Segment.HMILedDisplay();
             this.hmiLedSingle7 = new AdvancedScada.Controls_Binding.Leds.HMILedSingle();
             this.hmiLedSingle8 = new AdvancedScada.Controls_Binding.Leds.HMILedSingle();
@@ -136,7 +137,6 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiPilotLight3 = new AdvancedScada.Controls_Binding.SelectorSwitch.HMIPilotLight();
             this.hmiPilotLight2 = new AdvancedScada.Controls_Binding.SelectorSwitch.HMIPilotLight();
             this.hmiPilotLight1 = new AdvancedScada.Controls_Binding.SelectorSwitch.HMIPilotLight();
-            this.hmiDigitalPanelMeter1 = new AdvancedScada.Controls_Binding.DigitalDisplay.HMIDigitalPanelMeter();
             this.hmiLanternSimple1 = new AdvancedScada.Controls_Binding.HslControl.Lad.HMILanternSimple();
             this.hmiMushroomButton1 = new AdvancedScada.Controls_Binding.SelectorSwitch.HMIPushButton();
             this.hmiLabel44 = new AdvancedScada.Controls_Binding.Display.HMILabel();
@@ -1075,6 +1075,42 @@ namespace AdvancedScada.HMI.MainForm
             this.Label3.TabIndex = 0;
             this.Label3.Text = "XGT";
             // 
+            // hmiDigitalPanelMeter1
+            // 
+            this.hmiDigitalPanelMeter1.DecimalPosition = 0;
+            this.hmiDigitalPanelMeter1.ForeColor = System.Drawing.Color.LightGray;
+            this.hmiDigitalPanelMeter1.KeypadFontColor = System.Drawing.Color.WhiteSmoke;
+            this.hmiDigitalPanelMeter1.KeypadMaxValue = 0D;
+            this.hmiDigitalPanelMeter1.KeypadMinValue = 0D;
+            this.hmiDigitalPanelMeter1.KeypadScaleFactor = 1D;
+            this.hmiDigitalPanelMeter1.KeypadText = null;
+            this.hmiDigitalPanelMeter1.KeypadWidth = 300;
+            this.hmiDigitalPanelMeter1.Location = new System.Drawing.Point(381, 126);
+            this.hmiDigitalPanelMeter1.Name = "hmiDigitalPanelMeter1";
+            this.hmiDigitalPanelMeter1.NumberOfDigits = 5;
+            this.hmiDigitalPanelMeter1.PLCAddressClick = null;
+            this.hmiDigitalPanelMeter1.PLCAddressEnabled = null;
+            this.hmiDigitalPanelMeter1.PLCAddressHighlightX = null;
+            this.hmiDigitalPanelMeter1.PLCAddressKeypad = "CH1.PLC1.DataD1.TAG00167";
+            this.hmiDigitalPanelMeter1.PLCAddressText = "";
+            this.hmiDigitalPanelMeter1.PLCAddressValue = "CH1.PLC1.DataD1.TAG00167";
+            this.hmiDigitalPanelMeter1.PLCAddressVisible = "";
+            this.hmiDigitalPanelMeter1.Resolution = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.hmiDigitalPanelMeter1.Size = new System.Drawing.Size(208, 90);
+            this.hmiDigitalPanelMeter1.SuppressErrorDisplay = false;
+            this.hmiDigitalPanelMeter1.TabIndex = 554;
+            this.hmiDigitalPanelMeter1.Text = "شاشة الانفارتار";
+            this.hmiDigitalPanelMeter1.Value = 88F;
+            this.hmiDigitalPanelMeter1.ValueScaleFactor = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // hmiLedDisplay2
             // 
             this.hmiLedDisplay2.BackColor = System.Drawing.Color.Transparent;
@@ -1095,9 +1131,9 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedDisplay2.Name = "hmiLedDisplay2";
             this.hmiLedDisplay2.PLCAddressClick = null;
             this.hmiLedDisplay2.PLCAddressEnabled = null;
-            this.hmiLedDisplay2.PLCAddressKeypad = "CH2.PLC1.DataD.TAG00016";
+            this.hmiLedDisplay2.PLCAddressKeypad = "CH1.PLC1.DataD3.TAG00243";
             this.hmiLedDisplay2.PLCAddressText = "";
-            this.hmiLedDisplay2.PLCAddressValue = "CH2.PLC1.DataD.TAG00016";
+            this.hmiLedDisplay2.PLCAddressValue = "CH1.PLC1.DataD3.TAG00243";
             this.hmiLedDisplay2.PLCAddressVisible = "";
             this.hmiLedDisplay2.Size = new System.Drawing.Size(159, 50);
             this.hmiLedDisplay2.TabIndex = 553;
@@ -1541,12 +1577,6 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel3.InnerBorderLength = 2;
             this.hmiProcessLevel3.InnerBorderLightColor = System.Drawing.Color.White;
             this.hmiProcessLevel3.InverseDirection = false;
-            this.hmiProcessLevel3.KeypadFontColor = System.Drawing.Color.WhiteSmoke;
-            this.hmiProcessLevel3.KeypadMaxValue = 0D;
-            this.hmiProcessLevel3.KeypadMinValue = 0D;
-            this.hmiProcessLevel3.KeypadScaleFactor = 1D;
-            this.hmiProcessLevel3.KeypadText = null;
-            this.hmiProcessLevel3.KeypadWidth = 300;
             this.hmiProcessLevel3.Location = new System.Drawing.Point(275, 123);
             this.hmiProcessLevel3.MiddleBorderColor = System.Drawing.Color.Gray;
             this.hmiProcessLevel3.MiddleBorderLength = 0;
@@ -1554,11 +1584,12 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel3.OuterBorderDarkColor = System.Drawing.Color.DimGray;
             this.hmiProcessLevel3.OuterBorderLength = 3;
             this.hmiProcessLevel3.OuterBorderLightColor = System.Drawing.Color.White;
-            this.hmiProcessLevel3.PLCAddressClick = null;
+            this.hmiProcessLevel3.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
+            this.hmiProcessLevel3.PLCAddressClick = "CH1.PLC1.DataM2.TAG00030";
             this.hmiProcessLevel3.PLCAddressEnabled = null;
-            this.hmiProcessLevel3.PLCAddressKeypad = "CH3.PLC1.DataBlock2.TAG00021";
+            this.hmiProcessLevel3.PLCAddressKeypad = "CH1.PLC1.DataM2.TAG00030";
             this.hmiProcessLevel3.PLCAddressText = "";
-            this.hmiProcessLevel3.PLCAddressValue = "CH3.PLC1.DataBlock2.TAG00021";
+            this.hmiProcessLevel3.PLCAddressValue = "CH1.PLC1.DataM2.TAG00030";
             this.hmiProcessLevel3.PLCAddressVisible = "";
             this.hmiProcessLevel3.RoundRadius = 30;
             this.hmiProcessLevel3.ShadowColor = System.Drawing.Color.DimGray;
@@ -1611,12 +1642,6 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel2.InnerBorderLength = 2;
             this.hmiProcessLevel2.InnerBorderLightColor = System.Drawing.Color.White;
             this.hmiProcessLevel2.InverseDirection = true;
-            this.hmiProcessLevel2.KeypadFontColor = System.Drawing.Color.WhiteSmoke;
-            this.hmiProcessLevel2.KeypadMaxValue = 0D;
-            this.hmiProcessLevel2.KeypadMinValue = 0D;
-            this.hmiProcessLevel2.KeypadScaleFactor = 1D;
-            this.hmiProcessLevel2.KeypadText = null;
-            this.hmiProcessLevel2.KeypadWidth = 300;
             this.hmiProcessLevel2.Location = new System.Drawing.Point(169, 84);
             this.hmiProcessLevel2.MiddleBorderColor = System.Drawing.Color.Gray;
             this.hmiProcessLevel2.MiddleBorderLength = 0;
@@ -1624,11 +1649,12 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel2.OuterBorderDarkColor = System.Drawing.Color.DimGray;
             this.hmiProcessLevel2.OuterBorderLength = 3;
             this.hmiProcessLevel2.OuterBorderLightColor = System.Drawing.Color.White;
-            this.hmiProcessLevel2.PLCAddressClick = null;
+            this.hmiProcessLevel2.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
+            this.hmiProcessLevel2.PLCAddressClick = "CH1.PLC1.DataM2.TAG00030";
             this.hmiProcessLevel2.PLCAddressEnabled = null;
             this.hmiProcessLevel2.PLCAddressKeypad = "";
             this.hmiProcessLevel2.PLCAddressText = "";
-            this.hmiProcessLevel2.PLCAddressValue = "CH3.PLC1.DataBlock1.TAG00006";
+            this.hmiProcessLevel2.PLCAddressValue = "CH1.PLC1.DataM2.TAG00030";
             this.hmiProcessLevel2.PLCAddressVisible = "";
             this.hmiProcessLevel2.RoundRadius = 30;
             this.hmiProcessLevel2.ShadowColor = System.Drawing.Color.DimGray;
@@ -1681,31 +1707,25 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel1.InnerBorderLength = 2;
             this.hmiProcessLevel1.InnerBorderLightColor = System.Drawing.Color.White;
             this.hmiProcessLevel1.InverseDirection = true;
-            this.hmiProcessLevel1.KeypadFontColor = System.Drawing.Color.WhiteSmoke;
-            this.hmiProcessLevel1.KeypadMaxValue = 0D;
-            this.hmiProcessLevel1.KeypadMinValue = 0D;
-            this.hmiProcessLevel1.KeypadScaleFactor = 1D;
-            this.hmiProcessLevel1.KeypadText = null;
-            this.hmiProcessLevel1.KeypadWidth = 300;
-            this.hmiProcessLevel1.Location = new System.Drawing.Point(788, 595);
+            this.hmiProcessLevel1.Location = new System.Drawing.Point(788, 605);
             this.hmiProcessLevel1.MiddleBorderColor = System.Drawing.Color.Gray;
             this.hmiProcessLevel1.MiddleBorderLength = 0;
             this.hmiProcessLevel1.Name = "hmiProcessLevel1";
             this.hmiProcessLevel1.OuterBorderDarkColor = System.Drawing.Color.DimGray;
             this.hmiProcessLevel1.OuterBorderLength = 3;
             this.hmiProcessLevel1.OuterBorderLightColor = System.Drawing.Color.White;
-            this.hmiProcessLevel1.PLCAddressClick = null;
+            this.hmiProcessLevel1.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
+            this.hmiProcessLevel1.PLCAddressClick = "CH1.PLC1.DataM3.TAG00045";
             this.hmiProcessLevel1.PLCAddressEnabled = null;
             this.hmiProcessLevel1.PLCAddressKeypad = "CH1.PLC1.DataM3.TAG00045";
             this.hmiProcessLevel1.PLCAddressText = "";
-            this.hmiProcessLevel1.PLCAddressValue = "CH1.PLC1.DataM2.TAG00029";
+            this.hmiProcessLevel1.PLCAddressValue = "CH1.PLC1.DataM3.TAG00045";
             this.hmiProcessLevel1.PLCAddressVisible = "";
             this.hmiProcessLevel1.RoundRadius = 30;
             this.hmiProcessLevel1.ShadowColor = System.Drawing.Color.DimGray;
             this.hmiProcessLevel1.ShadowDepth = 8;
             this.hmiProcessLevel1.ShadowRate = 0.5F;
             this.hmiProcessLevel1.Size = new System.Drawing.Size(398, 31);
-            this.hmiProcessLevel1.SuppressErrorDisplay = false;
             this.hmiProcessLevel1.TabIndex = 535;
             this.hmiProcessLevel1.Text = "hmiProcessLevel1";
             this.hmiProcessLevel1.UpdateDuration = 500;
@@ -1741,7 +1761,7 @@ namespace AdvancedScada.HMI.MainForm
             this.LBL_ReportViewer.PLCAddressClick = null;
             this.LBL_ReportViewer.PLCAddressEnabled = null;
             this.LBL_ReportViewer.PLCAddressKeypad = "";
-            this.LBL_ReportViewer.PLCAddressValue = "TEST.PLC.StartAddress100bit.StartAddress100bit:100";
+            this.LBL_ReportViewer.PLCAddressValue = "CH1.PLC1.DataP2.TAG00293";
             this.LBL_ReportViewer.PollRate = 0;
             this.LBL_ReportViewer.Size = new System.Drawing.Size(69, 13);
             this.LBL_ReportViewer.TabIndex = 534;
@@ -2088,7 +2108,7 @@ namespace AdvancedScada.HMI.MainForm
             // 
             this.hmiPilotLight4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.hmiPilotLight4.LegendPlate = MfgControl.AdvancedHMI.Controls.PilotLight.LegendPlates.Small;
-            this.hmiPilotLight4.LightColor = MfgControl.AdvancedHMI.Controls.PilotLight.LightColors.Red;
+            this.hmiPilotLight4.LightColor = MfgControl.AdvancedHMI.Controls.PilotLight.LightColors.Yellow;
             this.hmiPilotLight4.LightColorOff = MfgControl.AdvancedHMI.Controls.PilotLight.LightColors.Yellow;
             this.hmiPilotLight4.Location = new System.Drawing.Point(4, 343);
             this.hmiPilotLight4.MaximumHoldTime = 3000;
@@ -2111,7 +2131,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiPilotLight3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.hmiPilotLight3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.hmiPilotLight3.LegendPlate = MfgControl.AdvancedHMI.Controls.PilotLight.LegendPlates.Small;
-            this.hmiPilotLight3.LightColor = MfgControl.AdvancedHMI.Controls.PilotLight.LightColors.Red;
+            this.hmiPilotLight3.LightColor = MfgControl.AdvancedHMI.Controls.PilotLight.LightColors.Blue;
             this.hmiPilotLight3.LightColorOff = MfgControl.AdvancedHMI.Controls.PilotLight.LightColors.Blue;
             this.hmiPilotLight3.Location = new System.Drawing.Point(4, 257);
             this.hmiPilotLight3.MaximumHoldTime = 3000;
@@ -2167,47 +2187,11 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiPilotLight1.PLCAddressText = "";
             this.hmiPilotLight1.PLCAddressValue = "CH1.PLC1.DataM1.TAG00012";
             this.hmiPilotLight1.PLCAddressVisible = "";
-            this.hmiPilotLight1.Size = new System.Drawing.Size(80, 117);
+            this.hmiPilotLight1.Size = new System.Drawing.Size(77, 113);
             this.hmiPilotLight1.TabIndex = 522;
             this.hmiPilotLight1.Text = "تشغيل";
             this.hmiPilotLight1.Value = false;
             this.hmiPilotLight1.ValueToWrite = 0;
-            // 
-            // hmiDigitalPanelMeter1
-            // 
-            this.hmiDigitalPanelMeter1.DecimalPosition = 0;
-            this.hmiDigitalPanelMeter1.ForeColor = System.Drawing.Color.LightGray;
-            this.hmiDigitalPanelMeter1.KeypadFontColor = System.Drawing.Color.WhiteSmoke;
-            this.hmiDigitalPanelMeter1.KeypadMaxValue = 0D;
-            this.hmiDigitalPanelMeter1.KeypadMinValue = 0D;
-            this.hmiDigitalPanelMeter1.KeypadScaleFactor = 1D;
-            this.hmiDigitalPanelMeter1.KeypadText = null;
-            this.hmiDigitalPanelMeter1.KeypadWidth = 300;
-            this.hmiDigitalPanelMeter1.Location = new System.Drawing.Point(427, 123);
-            this.hmiDigitalPanelMeter1.Name = "hmiDigitalPanelMeter1";
-            this.hmiDigitalPanelMeter1.NumberOfDigits = 5;
-            this.hmiDigitalPanelMeter1.PLCAddressClick = null;
-            this.hmiDigitalPanelMeter1.PLCAddressEnabled = null;
-            this.hmiDigitalPanelMeter1.PLCAddressHighlightX = null;
-            this.hmiDigitalPanelMeter1.PLCAddressKeypad = "CH1.PLC1.DataD1.TAG00167";
-            this.hmiDigitalPanelMeter1.PLCAddressText = "CH1.PLC1.DataD1.TAG00167";
-            this.hmiDigitalPanelMeter1.PLCAddressValue = "CH1.PLC1.DataD1.TAG00167";
-            this.hmiDigitalPanelMeter1.PLCAddressVisible = "";
-            this.hmiDigitalPanelMeter1.Resolution = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.hmiDigitalPanelMeter1.Size = new System.Drawing.Size(150, 65);
-            this.hmiDigitalPanelMeter1.SuppressErrorDisplay = false;
-            this.hmiDigitalPanelMeter1.TabIndex = 521;
-            this.hmiDigitalPanelMeter1.Text = "شاشة الانفارتار";
-            this.hmiDigitalPanelMeter1.Value = 0F;
-            this.hmiDigitalPanelMeter1.ValueScaleFactor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
             // 
             // hmiLanternSimple1
             // 
@@ -2273,6 +2257,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLabel44.PLCAddressClick = null;
             this.hmiLabel44.PLCAddressEnabled = null;
             this.hmiLabel44.PLCAddressKeypad = "";
+            this.hmiLabel44.PLCAddressValue = "CH1.PLC1.DataT1.TAG00109";
             this.hmiLabel44.PollRate = 0;
             this.hmiLabel44.Size = new System.Drawing.Size(22, 19);
             this.hmiLabel44.TabIndex = 4;
@@ -2314,6 +2299,7 @@ namespace AdvancedScada.HMI.MainForm
             this.thnk_rec_oil.PLCAddressClick = null;
             this.thnk_rec_oil.PLCAddressEnabled = null;
             this.thnk_rec_oil.PLCAddressKeypad = "";
+            this.thnk_rec_oil.PLCAddressValue = "CH1.PLC1.DataD3.TAG00245";
             this.thnk_rec_oil.PollRate = 0;
             this.thnk_rec_oil.Size = new System.Drawing.Size(75, 19);
             this.thnk_rec_oil.TabIndex = 3;
@@ -2355,6 +2341,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLabel46.PLCAddressClick = null;
             this.hmiLabel46.PLCAddressEnabled = null;
             this.hmiLabel46.PLCAddressKeypad = "";
+            this.hmiLabel46.PLCAddressValue = "CH1.PLC1.DataD3.TAG00247";
             this.hmiLabel46.PollRate = 0;
             this.hmiLabel46.Size = new System.Drawing.Size(75, 19);
             this.hmiLabel46.TabIndex = 2;
@@ -2375,10 +2362,10 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiWaterPump1.MinimumHoldTime = 500;
             this.hmiWaterPump1.Name = "hmiWaterPump1";
             this.hmiWaterPump1.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
-            this.hmiWaterPump1.PLCAddressClick = "CH2.PLC1.DataBlock2.TAG00021";
+            this.hmiWaterPump1.PLCAddressClick = "CH1.PLC1.DataM2.TAG00027";
             this.hmiWaterPump1.PLCAddressEnabled = null;
             this.hmiWaterPump1.PLCAddressText = "";
-            this.hmiWaterPump1.PLCAddressValue = "CH2.PLC1.DataBlock1.TAG00005";
+            this.hmiWaterPump1.PLCAddressValue = "CH1.PLC1.DataM2.TAG00027";
             this.hmiWaterPump1.PLCAddressVisible = "";
             this.hmiWaterPump1.Size = new System.Drawing.Size(101, 49);
             this.hmiWaterPump1.TabIndex = 517;
@@ -2400,7 +2387,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiIndicator1.PLCAddressClick = "";
             this.hmiIndicator1.PLCAddressEnabled = null;
             this.hmiIndicator1.PLCAddressText = "";
-            this.hmiIndicator1.PLCAddressValue = "CH1.PLC1.DataP1.TAG00058";
+            this.hmiIndicator1.PLCAddressValue = "CH1.PLC1.DataM2.TAG00025";
             this.hmiIndicator1.PLCAddressVisible = "";
             this.hmiIndicator1.SelectColor2 = false;
             this.hmiIndicator1.SelectColor3 = false;
@@ -2571,11 +2558,11 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiVacuumPump1.MaximumHoldTime = 3000;
             this.hmiVacuumPump1.MinimumHoldTime = 500;
             this.hmiVacuumPump1.Name = "hmiVacuumPump1";
-            this.hmiVacuumPump1.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.MomentarySet;
-            this.hmiVacuumPump1.PLCAddressClick = "";
+            this.hmiVacuumPump1.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
+            this.hmiVacuumPump1.PLCAddressClick = "CH1.PLC1.DataM3.TAG00040";
             this.hmiVacuumPump1.PLCAddressEnabled = null;
             this.hmiVacuumPump1.PLCAddressText = "";
-            this.hmiVacuumPump1.PLCAddressValue = "";
+            this.hmiVacuumPump1.PLCAddressValue = "CH1.PLC1.DataM3.TAG00040";
             this.hmiVacuumPump1.PLCAddressVisible = "";
             this.hmiVacuumPump1.Size = new System.Drawing.Size(60, 111);
             this.hmiVacuumPump1.TabIndex = 556;
@@ -2612,7 +2599,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiIndicator2.PLCAddressClick = "";
             this.hmiIndicator2.PLCAddressEnabled = null;
             this.hmiIndicator2.PLCAddressText = "";
-            this.hmiIndicator2.PLCAddressValue = "";
+            this.hmiIndicator2.PLCAddressValue = "CH1.PLC1.DataM2.TAG00026";
             this.hmiIndicator2.PLCAddressVisible = "";
             this.hmiIndicator2.SelectColor2 = false;
             this.hmiIndicator2.SelectColor3 = false;
@@ -2732,7 +2719,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLabel21.NumericFormat = null;
             this.hmiLabel21.PLCAddressClick = null;
             this.hmiLabel21.PLCAddressEnabled = null;
-            this.hmiLabel21.PLCAddressKeypad = "TEST.PLC.StartAddress90.StartAddress90:118";
+            this.hmiLabel21.PLCAddressKeypad = "CH1.PLC1.DataD2.TAG00231";
             this.hmiLabel21.PLCAddressValue = "CH1.PLC1.DataD2.TAG00231";
             this.hmiLabel21.PollRate = 0;
             this.hmiLabel21.Size = new System.Drawing.Size(51, 19);
@@ -2774,7 +2761,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLabel22.NumericFormat = null;
             this.hmiLabel22.PLCAddressClick = null;
             this.hmiLabel22.PLCAddressEnabled = null;
-            this.hmiLabel22.PLCAddressKeypad = "TEST.PLC.StartAddress90.StartAddress90:114";
+            this.hmiLabel22.PLCAddressKeypad = "CH1.PLC1.DataD2.TAG00227";
             this.hmiLabel22.PLCAddressValue = "CH1.PLC1.DataD2.TAG00227";
             this.hmiLabel22.PollRate = 0;
             this.hmiLabel22.Size = new System.Drawing.Size(51, 19);
@@ -4477,6 +4464,7 @@ namespace AdvancedScada.HMI.MainForm
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1284, 718);
+            this.Controls.Add(this.hmiDigitalPanelMeter1);
             this.Controls.Add(this.hmiLedDisplay2);
             this.Controls.Add(this.hmiLedSingle7);
             this.Controls.Add(this.hmiLedSingle8);
@@ -4505,7 +4493,6 @@ namespace AdvancedScada.HMI.MainForm
             this.Controls.Add(this.hmiPilotLight3);
             this.Controls.Add(this.hmiPilotLight2);
             this.Controls.Add(this.hmiPilotLight1);
-            this.Controls.Add(this.hmiDigitalPanelMeter1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.hmiMushroomButton1);
             this.Controls.Add(this.panel4);
@@ -4710,7 +4697,6 @@ namespace AdvancedScada.HMI.MainForm
         internal System.Windows.Forms.Panel panel5;
         internal System.Windows.Forms.Label Label5;
         internal System.Windows.Forms.Label Label1;
-        private HMIDigitalPanelMeter hmiDigitalPanelMeter1;
         private HMIPilotLight hmiPilotLight1;
         private HMIPilotLight hmiPilotLight2;
         private HMIPilotLight hmiPilotLight3;
@@ -4757,5 +4743,6 @@ namespace AdvancedScada.HMI.MainForm
         private Controls_Binding.HslControl.Lad.HMILanternSimple hmiLanternSimple2;
         private Controls_Binding.HslControl.Lad.HMILanternSimple hmiLanternSimple1;
         private Controls_Binding.HslControl.Pipe.HMIVacuumPump hmiVacuumPump1;
+        private HMIDigitalPanelMeter hmiDigitalPanelMeter1;
     }
 }

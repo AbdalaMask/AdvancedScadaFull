@@ -2,6 +2,7 @@
 using AdvancedScada.Common.Client;
 using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Net45;
+using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -13,9 +14,26 @@ namespace AdvancedScada.Controls_Binding.ProcessAll
     public class HMIProcessIndicator : DasNetIndicator.DAS_Net_ProcessIndicator, IPropertiesControls
     {
 
-
+        public HMIProcessIndicator()
+        {
+            MaxHoldTimer.Tick += MaxHoldTimer_Tick;
+            MinHoldTimer.Tick += HoldTimer_Tick;
+        }
         #region PLC Properties
+        public bool HoldTimeMet;
+        private int m_MaximumHoldTime = 3000;
+        private int m_MinimumHoldTime = 500;
+        //*****************************************
+        //* Property - Hold time before bit reset
+        //*****************************************
+        private readonly Timer MaxHoldTimer = new Timer();
 
+        //*****************************************
+        //* Property - Hold time before bit reset
+        //*****************************************
+        private readonly Timer MinHoldTimer = new Timer();
+        private readonly bool MouseIsDown = false;
+        public OutputType OutputType { get; set; }
         //*****************************************
         //* Property - Address in PLC to Link to
         //*****************************************
@@ -128,12 +146,120 @@ namespace AdvancedScada.Controls_Binding.ProcessAll
                 if (m_PLCAddressKeypad != value) m_PLCAddressKeypad = value;
             }
         }
+        [Category("PLC Properties")]
+        [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressClick { get; set; }
         public string PLCAddressEnabled { get; set; }
         [DefaultValue(true)]
         public bool SuppressErrorDisplay { get; set; }
 
         #endregion
+        private void ReleaseValue()
+        {
+            try
+            {
+                switch (OutputType)
+                {
+                    case OutputType.MomentarySet:
+                        Utilities.Write(PLCAddressClick, false);
+                        break;
+                    case OutputType.MomentaryReset:
+                        Utilities.Write(PLCAddressClick, true);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                DisplayError(ex.Message);
+            }
+        }
+
+        private void HoldTimer_Tick(object sender, EventArgs e)
+        {
+            MinHoldTimer.Enabled = false;
+            HoldTimeMet = true;
+            if (!MouseIsDown) ReleaseValue();
+        }
+
+        private void MaxHoldTimer_Tick(object sender, EventArgs e)
+        {
+            MaxHoldTimer.Enabled = false;
+            ReleaseValue();
+        }
+
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+
+
+            if (!string.IsNullOrWhiteSpace(PLCAddressClick) & Enabled && PLCAddressClick != null)
+            {
+                try
+                {
+                    switch (OutputType)
+                    {
+                        case OutputType.MomentarySet:
+                            Utilities.Write(PLCAddressClick, true);
+                            break;
+                        case OutputType.MomentaryReset:
+                            Utilities.Write(PLCAddressClick, false);
+                            break;
+                        case OutputType.SetTrue:
+                            Utilities.Write(PLCAddressClick, true);
+                            break;
+                        case OutputType.SetFalse:
+                            Utilities.Write(PLCAddressClick, false);
+                            break;
+                        case OutputType.Toggle:
+                            var CurrentValue = Value;
+                            if (CurrentValue)
+                                Utilities.Write(PLCAddressClick, false);
+                            else
+                                Utilities.Write(PLCAddressClick, true);
+                            break;
+                        default:
+
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    DisplayError("WRITE FAILED!" + ex.Message);
+                }
+
+                Invalidate();
+            }
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+
+            if (!string.IsNullOrWhiteSpace(PLCAddressClick) & Enabled)
+            {
+                try
+                {
+                    switch (OutputType)
+                    {
+                        case OutputType.MomentarySet:
+                            Utilities.Write(PLCAddressClick, false);
+                            break;
+                        case OutputType.MomentaryReset:
+                            Utilities.Write(PLCAddressClick, true);
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    DisplayError("WRITE FAILED!" + ex.Message);
+                }
+
+                Invalidate();
+            }
+        }
+
+
 
         #region "Error Display"
 
@@ -162,7 +288,7 @@ namespace AdvancedScada.Controls_Binding.ProcessAll
                 Utilities.DisplayError(this, ErrorMessage);
             }
         }
-
+        private string OriginalText;
         //**************************************************************************************
         //* Return the text back to its original after displaying the error for a few seconds.
         //**************************************************************************************
@@ -180,111 +306,6 @@ namespace AdvancedScada.Controls_Binding.ProcessAll
 
         #endregion
 
-        #region "Keypad popup for data entry"
-
-        private Keypad_v3 KeypadPopUp;
-
-       
-        public string KeypadText { get; set; }
-
-        private Color m_KeypadFontColor = Color.WhiteSmoke;
-
-        public Color KeypadFontColor
-        {
-            get { return m_KeypadFontColor; }
-            set { m_KeypadFontColor = value; }
-        }
-
-        private int m_KeypadWidth = 300;
-
-        public int KeypadWidth
-        {
-            get { return m_KeypadWidth; }
-            set { m_KeypadWidth = value; }
-        }
-
-        private double m_KeypadScaleFactor = 1;
-        private string OriginalText;
-
-        public double KeypadScaleFactor
-        {
-            get { return m_KeypadScaleFactor; }
-            set { m_KeypadScaleFactor = value; }
-        }
-
-        public double KeypadMinValue { get; set; }
-
-        public double KeypadMaxValue { get; set; }
-    
-
-        private void KeypadPopUp_ButtonClick(object sender, KeypadEventArgs e)
-        {
-            if (e.Key == "Quit")
-            {
-                KeypadPopUp.Visible = false;
-            }
-            else if (e.Key == "Enter")
-            {
-                if (KeypadPopUp.Value != null && string.Compare(KeypadPopUp.Value, string.Empty) != 0)
-                {
-                    try
-                    {
-                        if (KeypadMaxValue != KeypadMinValue)
-                            if ((Convert.ToDouble(KeypadPopUp.Value) < KeypadMinValue) |
-                                (Convert.ToDouble(KeypadPopUp.Value) > KeypadMaxValue))
-                            {
-                                MessageBox.Show("Value must be >" + KeypadMinValue + " and <" + KeypadMaxValue);
-                                return;
-                            }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Failed to validate value. " + ex.Message);
-                        return;
-                    }
-
-                    try
-                    {
-                        if ((KeypadScaleFactor == 1) | (KeypadScaleFactor == 0))
-                            Utilities.Write(m_PLCAddressKeypad, KeypadPopUp.Value);
-                        else
-                            Utilities.Write(m_PLCAddressKeypad,
-                                (Convert.ToDouble(KeypadPopUp.Value) / m_KeypadScaleFactor).ToString());
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Failed to write value. " + ex.Message);
-                    }
-                }
-
-                KeypadPopUp.Visible = false;
-            }
-        }
-
-        //***********************************************************
-        //* If labeled is clicked, pop up a keypad for data entry
-        //***********************************************************
-        protected override void OnClick(EventArgs e)
-        {
-            base.OnClick(e);
-
-            if (m_PLCAddressKeypad != null && (string.Compare(m_PLCAddressKeypad, string.Empty) != 0) & Enabled)
-            {
-                if (KeypadPopUp == null)
-                {
-                    KeypadPopUp = new Keypad_v3(m_KeypadWidth);
-                    KeypadPopUp.ButtonClick += KeypadPopUp_ButtonClick;
-                }
-
-                KeypadPopUp.Text = KeypadText;
-                KeypadPopUp.ForeColor = m_KeypadFontColor;
-                KeypadPopUp.Value = string.Empty;
-                KeypadPopUp.StartPosition = FormStartPosition.CenterScreen;
-                KeypadPopUp.TopMost = true;
-                KeypadPopUp.Show();
-            }
-        }
-
-        #endregion
+         
     }
 }

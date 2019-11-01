@@ -97,6 +97,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DialogEditor\GraphicDialogEditor.cs" />
+    <Compile Include="Display\HMIComboBoxInput.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Display\HMITextBoxInput.cs">
       <SubType>Component</SubType>
     </Compile>

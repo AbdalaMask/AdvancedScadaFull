@@ -249,10 +249,11 @@ namespace AdvancedScada.Controls_Binding.SelectorSwitch
                             Utilities.Write(m_PLCAddressClick, false);
                             break;
                         case OutputType.Toggle:
-
-                           
-                                Utilities.Write(m_PLCAddressClick, !Value);
-                            
+                            var CurrentValue = Value;
+                            if (!CurrentValue)
+                                Utilities.Write(m_PLCAddressClick, false);
+                            else
+                                Utilities.Write(m_PLCAddressClick, true);
                             break;
                         default:
 
