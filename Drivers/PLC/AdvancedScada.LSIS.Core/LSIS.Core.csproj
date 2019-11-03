@@ -50,6 +50,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ILSISAdapter.cs" />
     <Compile Include="IODriverHelper.cs" />
     <Compile Include="Editors\XChannelForm.cs">
       <SubType>Form</SubType>

@@ -121,75 +121,42 @@ namespace AdvancedScada.Delta.Core.Editors
             {
 
 
-                //switch ((DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedValue.ToString()))
-                //{
-                //    case DataTypes.Bit:
-                //        switch (ch.ChannelTypes)
+                switch ((DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedValue.ToString()))
+                {
+                    case DataTypes.Bit:
+                       
+                                txtAddressLength.Maximum = 2000;
+                                txtAddressLength.Minimum = 1;
+                            
 
-                //        {
-                //            case "LSIS":
-                //                txtAddressLength.Maximum = 1;
-                //                chkX10.Enabled = true;
-                //                txtAddressLength.Minimum = 1;
-                //                break;
-                //            case "Modbus":
-                //                txtAddressLength.Maximum = 2000;
-                //                txtAddressLength.Minimum = 1;
-                //                break;
-                //            default:
-                //                break;
-                //        }
-
-                //        break;
-                //    case DataTypes.Byte:
-                //        break;
-                //    case DataTypes.Short:
-                //        switch (ch.ChannelTypes)
-
-                //        {
-                //            case "LSIS":
-                //                if (ch.ConnectionType == "SerialPort")
-                //                {
-                //                    txtAddressLength.Maximum = 60;
-                //                    txtAddressLength.Minimum = 1;
-                //                    chkX10.Enabled = false;
-                //                }
-
-                //                else
-                //                {
-                //                    txtAddressLength.Maximum = 120;
-                //                    txtAddressLength.Minimum = 1;
-                //                    chkX10.Enabled = false;
-                //                }
-                //                break;
-                //            case "Modbus":
-                //                txtAddressLength.Maximum = 120;
-                //                txtAddressLength.Minimum = 1;
-                //                break;
-                //            default:
-                //                break;
-                //        }
-
-                //        break;
-                //    case DataTypes.UShort:
-                //        break;
-                //    case DataTypes.Int:
-                //        break;
-                //    case DataTypes.UInt:
-                //        break;
-                //    case DataTypes.Long:                        
-                //    case DataTypes.ULong:
-                //    case DataTypes.Float:
-                //    case DataTypes.Double:
-                //        txtAddressLength.Maximum = 60;
-                //        txtAddressLength.Minimum = 1;
-                //        chkX10.Enabled = false;
-                //        break;
-                //    case DataTypes.String:
-                //        break;
-                //    default:
-                //        break;
-                //}
+                        break;
+                    case DataTypes.Byte:
+                        break;
+                    case DataTypes.Short:
+                        
+                                txtAddressLength.Maximum = 120;
+                                txtAddressLength.Minimum = 1;
+                             
+                        break;
+                    case DataTypes.UShort:
+                        break;
+                    case DataTypes.Int:
+                        break;
+                    case DataTypes.UInt:
+                        break;
+                    case DataTypes.Long:
+                    case DataTypes.ULong:
+                    case DataTypes.Float:
+                    case DataTypes.Double:
+                        txtAddressLength.Maximum = 60;
+                        txtAddressLength.Minimum = 1;
+                       
+                        break;
+                    case DataTypes.String:
+                        break;
+                    default:
+                        break;
+                }
 
             }
             catch (Exception ex)

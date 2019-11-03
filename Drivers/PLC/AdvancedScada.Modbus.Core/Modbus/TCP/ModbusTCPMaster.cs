@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Common;
+using AdvancedScada.Modbus.Common;
 using AdvancedScada.Utils;
 using HslCommunication;
 using HslCommunication.ModBus;
@@ -7,7 +8,7 @@ using System.Net.Sockets;
 using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Modbus.Core.Modbus.TCP
 {
-    public class ModbusTCPMaster : IDriverAdapter
+    public class ModbusTCPMaster : IModbusAdapter
     {
         public bool IsConnected { get; set; } = false;
         public byte Station { get; set; }
@@ -78,7 +79,7 @@ namespace AdvancedScada.Modbus.Core.Modbus.TCP
 
 
             }
-            catch (SocketException ex)
+            catch (Exception ex)
             {
 
 
@@ -94,7 +95,7 @@ namespace AdvancedScada.Modbus.Core.Modbus.TCP
                 busTcpClient.ConnectClose();
                 return IsConnected;
             }
-            catch (SocketException ex)
+            catch (Exception ex)
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
                 return IsConnected;
@@ -185,5 +186,7 @@ namespace AdvancedScada.Modbus.Core.Modbus.TCP
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

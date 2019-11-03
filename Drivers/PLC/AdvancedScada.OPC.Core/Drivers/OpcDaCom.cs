@@ -58,11 +58,8 @@ namespace AdvancedScada.OPC.Core.Drivers
                     else
                     {
                         EventscadaException?.Invoke(this.GetType().Name, "ConnectedFailed");
+                        IsConnected = false;
                     }
-                    IsConnected = true;
-
-
-
 
                 }
             }
@@ -147,14 +144,13 @@ namespace AdvancedScada.OPC.Core.Drivers
 
         public string OPCGroup
         {
-            get;
-            set;
-        } = string.Empty;
-
+            get => oPCGroup;
+            set => oPCGroup = value;
+        }
         public string OPCTopic
         {
-            get;
-            set;
+            get => oPCTopic;
+            set => oPCTopic = value;
         }
 
 
@@ -176,6 +172,9 @@ namespace AdvancedScada.OPC.Core.Drivers
         }
 
         private int m_PollRateOverride = 500;
+        private string oPCGroup = string.Empty;
+        private string oPCTopic;
+
         public int PollRateOverride
         {
             get => m_PollRateOverride;

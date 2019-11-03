@@ -1,11 +1,12 @@
 ﻿using AdvancedScada.Common;
+using AdvancedScada.Modbus.Common;
 using HslCommunication.ModBus;
 using System;
 using System.IO.Ports;
 using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Modbus.Core.Modbus.ASCII
 {
-    public class ModbusASCIIMaster : IDriverAdapter
+    public class ModbusASCIIMaster : IModbusAdapter
     {
         private SerialPort serialPort;
 
@@ -47,7 +48,7 @@ namespace AdvancedScada.Modbus.Core.Modbus.ASCII
                 return IsConnected;
 
             }
-            catch (TimeoutException ex)
+            catch (Exception ex)
             {
 
 
@@ -63,7 +64,7 @@ namespace AdvancedScada.Modbus.Core.Modbus.ASCII
                 busAsciiClient.Close();
                 return IsConnected;
             }
-            catch (TimeoutException ex)
+            catch (Exception ex)
             {
 
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);

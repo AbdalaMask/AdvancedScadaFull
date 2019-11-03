@@ -133,6 +133,11 @@
             // 
             this.txtAddressLength.Location = new System.Drawing.Point(89, 127);
             this.txtAddressLength.Margin = new System.Windows.Forms.Padding(2);
+            this.txtAddressLength.Maximum = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
             this.txtAddressLength.Name = "txtAddressLength";
             this.txtAddressLength.Size = new System.Drawing.Size(141, 22);
             this.txtAddressLength.TabIndex = 23;
@@ -168,7 +173,7 @@
             this.txtDomain.Size = new System.Drawing.Size(135, 21);
             this.txtDomain.StateCommon.ComboBox.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.txtDomain.TabIndex = 21;
-            this.txtDomain.Text = "MX";
+            this.txtDomain.Text = "M";
             // 
             // txtPrefix
             // 
@@ -183,6 +188,11 @@
             // 
             this.txtStartAddress.Location = new System.Drawing.Point(332, 98);
             this.txtStartAddress.Margin = new System.Windows.Forms.Padding(2);
+            this.txtStartAddress.Maximum = new decimal(new int[] {
+            4000,
+            0,
+            0,
+            0});
             this.txtStartAddress.Name = "txtStartAddress";
             this.txtStartAddress.Size = new System.Drawing.Size(135, 22);
             this.txtStartAddress.TabIndex = 18;
@@ -419,6 +429,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "XDataBlockForm";
+            this.Text = "XDataBlockForm - (Administrator)";
             this.Load += new System.EventHandler(this.XDataBlockForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DxErrorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).EndInit();

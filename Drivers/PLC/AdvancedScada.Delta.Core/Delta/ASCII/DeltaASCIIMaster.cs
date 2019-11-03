@@ -1,11 +1,14 @@
-﻿using AdvancedScada.Common;
+﻿using AdvancedScada.Delta.Common;
 using HslCommunication.ModBus;
 using System;
 using System.IO.Ports;
 using static AdvancedScada.Common.XCollection;
+
+
+
 namespace AdvancedScada.IODriver.Delta.ASCII
 {
-    public class DeltaASCIIMaster : IDriverAdapter
+    public class DeltaASCIIMaster : IDeltaAdapter
     {
         private SerialPort serialPort;
 
@@ -43,11 +46,11 @@ namespace AdvancedScada.IODriver.Delta.ASCII
 
 
             }
-            catch (TimeoutException ex)
+            catch (Exception ex)
             {
 
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
                 return false;
             }
         }
@@ -59,10 +62,10 @@ namespace AdvancedScada.IODriver.Delta.ASCII
                 busAsciiClient.Close();
                 return true;
             }
-            catch (TimeoutException ex)
+            catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
                 return false;
             }
         }

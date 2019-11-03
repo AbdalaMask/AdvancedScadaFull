@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Common;
+using AdvancedScada.LSIS.Common;
 using AdvancedScada.Utils;
 using HslCommunication;
 using HslCommunication.Profinet.LSIS;
@@ -8,7 +9,7 @@ using System.Threading;
 using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.LSIS.Core.LSIS.FENET
 {
-    public class LS_FENET : IDriverAdapter
+    public class LS_FENET : ILSISAdapter
     {
         private XGBFastEnet fastEnet = null;
         private readonly int Port = 2004;
@@ -420,6 +421,11 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
 
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
 
+        }
+
+        public bool[] ReadDiscrete(string address, ushort length)
+        {
+            throw new NotImplementedException();
         }
     }
 }

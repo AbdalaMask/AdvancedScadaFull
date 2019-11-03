@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <Channel ChannelId="3" ChannelName="CH1" ChannelTypes="LSIS" Model="XGB" Rack="0" Slot="7" ConnectionType="Ethernet" Mode="FENET" IPAddress="211.230.110.59" Port="2004" Description="">
+    <Device DeviceId="1" DeviceName="PLC1" SlaveId="1" Description="CH3">
+      <DataBlock ChannelId="3" DeviceId="1" DataBlockId="1" DataBlockName="DataM1" TypeOfRead="" StartAddress="0" Length="1" DataType="Bit" MemoryType="MX" IsArray="True" Description="CH1">
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="1" TagName="TAG00001" Address="MX0" DataType="Bit" Description="CH1 0" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="2" TagName="TAG00002" Address="MX1" DataType="Bit" Description="CH1 1" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="3" TagName="TAG00003" Address="MX2" DataType="Bit" Description="CH1 2" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="4" TagName="TAG00004" Address="MX3" DataType="Bit" Description="CH1 3" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="5" TagName="TAG00005" Address="MX4" DataType="Bit" Description="CH1 4" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="6" TagName="TAG00006" Address="MX5" DataType="Bit" Description="CH1 5" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="7" TagName="TAG00007" Address="MX6" DataType="Bit" Description="CH1 6" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="8" TagName="TAG00008" Address="MX7" DataType="Bit" Description="CH1 7" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="9" TagName="TAG00009" Address="MX8" DataType="Bit" Description="CH1 8" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="10" TagName="TAG00010" Address="MX9" DataType="Bit" Description="CH1 9" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="11" TagName="TAG00011" Address="MXA" DataType="Bit" Description="CH1 A" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="12" TagName="TAG00012" Address="MXB" DataType="Bit" Description="CH1 B" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="13" TagName="TAG00013" Address="MXC" DataType="Bit" Description="CH1 C" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="14" TagName="TAG00014" Address="MXD" DataType="Bit" Description="CH1 D" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="15" TagName="TAG00015" Address="MXE" DataType="Bit" Description="CH1 E" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="16" TagName="TAG00016" Address="MXF" DataType="Bit" Description="CH1 F" />
+      </DataBlock>
+      <DataBlock ChannelId="3" DeviceId="1" DataBlockId="2" DataBlockName="DataM2" TypeOfRead="" StartAddress="6" Length="1" DataType="Bit" MemoryType="MX" IsArray="True" Description="Motor">
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="1" TagName="TAG00017" Address="MX60" DataType="Bit" Description="Motor 3C" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="2" TagName="TAG00018" Address="MX61" DataType="Bit" Description="Motor 3D" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="3" TagName="TAG00019" Address="MX62" DataType="Bit" Description="Motor 3E" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="4" TagName="TAG00020" Address="MX63" DataType="Bit" Description="Motor 3F" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="5" TagName="TAG00021" Address="MX64" DataType="Bit" Description="Motor 40" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="6" TagName="TAG00022" Address="MX65" DataType="Bit" Description="Motor 41" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="7" TagName="TAG00023" Address="MX66" DataType="Bit" Description="Motor 42" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="8" TagName="TAG00024" Address="MX67" DataType="Bit" Description="Motor 43" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="9" TagName="TAG00025" Address="MX68" DataType="Bit" Description="Motor 44" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="10" TagName="TAG00026" Address="MX69" DataType="Bit" Description="Motor 45" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="11" TagName="TAG00027" Address="MX6A" DataType="Bit" Description="Motor 46" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="12" TagName="TAG00028" Address="MX6B" DataType="Bit" Description="Motor 47" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="13" TagName="TAG00029" Address="MX6C" DataType="Bit" Description="Motor 48" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="14" TagName="TAG00030" Address="MX6D" DataType="Bit" Description="Motor 49" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="15" TagName="TAG00031" Address="MX6E" DataType="Bit" Description="Motor 4A" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="2" TagId="16" TagName="TAG00032" Address="MX6F" DataType="Bit" Description="Motor 4B" />
+      </DataBlock>
+      <DataBlock ChannelId="3" DeviceId="1" DataBlockId="3" DataBlockName="DataM3" TypeOfRead="" StartAddress="9" Length="1" DataType="Bit" MemoryType="MX" IsArray="True" Description="CH1">
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="1" TagName="TAG00033" Address="MX90" DataType="Bit" Description="CH1 5A" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="2" TagName="TAG00034" Address="MX91" DataType="Bit" Description="CH1 5B" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="3" TagName="TAG00035" Address="MX92" DataType="Bit" Description="CH1 5C" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="4" TagName="TAG00036" Address="MX93" DataType="Bit" Description="CH1 5D" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="5" TagName="TAG00037" Address="MX94" DataType="Bit" Description="CH1 5E" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="6" TagName="TAG00038" Address="MX95" DataType="Bit" Description="CH1 5F" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="7" TagName="TAG00039" Address="MX96" DataType="Bit" Description="CH1 60" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="8" TagName="TAG00040" Address="MX97" DataType="Bit" Description="CH1 61" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="9" TagName="TAG00041" Address="MX98" DataType="Bit" Description="CH1 62" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="10" TagName="TAG00042" Address="MX99" DataType="Bit" Description="CH1 63" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="11" TagName="TAG00043" Address="MX9A" DataType="Bit" Description="CH1 64" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="12" TagName="TAG00044" Address="MX9B" DataType="Bit" Description="CH1 65" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="13" TagName="TAG00045" Address="MX9C" DataType="Bit" Description="CH1 66" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="14" TagName="TAG00046" Address="MX9D" DataType="Bit" Description="CH1 67" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="15" TagName="TAG00047" Address="MX9E" DataType="Bit" Description="CH1 68" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="3" TagId="16" TagName="TAG00048" Address="MX9F" DataType="Bit" Description="CH1 69" />
+      </DataBlock>
+      <DataBlock ChannelId="3" DeviceId="1" DataBlockId="4" DataBlockName="DataP1" TypeOfRead="" StartAddress="0" Length="1" DataType="Bit" MemoryType="PX" IsArray="True" Description="CH1">
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="1" TagName="TAG00049" Address="PX0" DataType="Bit" Description="CH1 0" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="2" TagName="TAG00050" Address="PX1" DataType="Bit" Description="CH1 1" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="3" TagName="TAG00051" Address="PX2" DataType="Bit" Description="CH1 2" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="4" TagName="TAG00052" Address="PX3" DataType="Bit" Description="CH1 3" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="5" TagName="TAG00053" Address="PX4" DataType="Bit" Description="CH1 4" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="6" TagName="TAG00054" Address="PX5" DataType="Bit" Description="CH1 5" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="7" TagName="TAG00055" Address="PX6" DataType="Bit" Description="CH1 6" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="8" TagName="TAG00056" Address="PX7" DataType="Bit" Description="CH1 7" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="9" TagName="TAG00057" Address="PX8" DataType="Bit" Description="CH1 8" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="10" TagName="TAG00058" Address="PX9" DataType="Bit" Description="CH1 9" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="11" TagName="TAG00059" Address="PXA" DataType="Bit" Description="CH1 A" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="12" TagName="TAG00060" Address="PXB" DataType="Bit" Description="CH1 B" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="13" TagName="TAG00061" Address="PXC" DataType="Bit" Description="CH1 C" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="14" TagName="TAG00062" Address="PXD" DataType="Bit" Description="CH1 D" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="15" TagName="TAG00063" Address="PXE" DataType="Bit" Description="CH1 E" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="4" TagId="16" TagName="TAG00064" Address="PXF" DataType="Bit" Description="CH1 F" />
+      </DataBlock>
+      <DataBlock ChannelId="3" DeviceId="1" DataBlockId="5" DataBlockName="DataP2" TypeOfRead="" StartAddress="27" Length="3" DataType="Bit" MemoryType="PX" IsArray="False" Description="CH1">
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="5" TagId="1" TagName="TAG00065" Address="PX27" DataType="Bit" Description="CH1 1B" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="5" TagId="2" TagName="TAG00066" Address="PX28" DataType="Bit" Description="CH1 1C" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="5" TagId="3" TagName="TAG00067" Address="PX29" DataType="Bit" Description="CH1 1D" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="5" TagId="4" TagName="TAG00068" Address="PX2A" DataType="Bit" Description="CH1" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="5" TagId="5" TagName="TAG00069" Address="PX2C" DataType="Bit" Description="CH1" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="5" TagId="6" TagName="TAG00070" Address="PX2D" DataType="Bit" Description="CH1" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="5" TagId="7" TagName="TAG00071" Address="PX2E" DataType="Bit" Description="CH1" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="5" TagId="8" TagName="TAG00293" Address="MX50" DataType="Bit" Description="Report" />
+      </DataBlock>
+      <DataBlock ChannelId="3" DeviceId="1" DataBlockId="6" DataBlockName="DataT1" TypeOfRead="" StartAddress="0" Length="41" DataType="Short" MemoryType="TW" IsArray="True" Description="Timr waiting silo act">
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="1" TagName="TAG00072" Address="TW0" DataType="Short" Description="Timr waiting silo act 1" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="2" TagName="TAG00073" Address="TW1" DataType="Short" Description="Timr waiting silo act 2" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="3" TagName="TAG00074" Address="TW2" DataType="Short" Description="Timr waiting silo act 3" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="4" TagName="TAG00075" Address="TW3" DataType="Short" Description="Timr waiting silo act 4" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="5" TagName="TAG00076" Address="TW4" DataType="Short" Description="Timr waiting silo act 5" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="6" TagName="TAG00077" Address="TW5" DataType="Short" Description="Timr waiting silo act 6" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="7" TagName="TAG00078" Address="TW6" DataType="Short" Description="Timr waiting silo act 7" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="8" TagName="TAG00079" Address="TW7" DataType="Short" Description="Timr waiting silo act 8" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="9" TagName="TAG00080" Address="TW8" DataType="Short" Description="Timr waiting silo act 9" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="10" TagName="TAG00081" Address="TW9" DataType="Short" Description="Timr waiting silo act 10" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="11" TagName="TAG00082" Address="TW10" DataType="Short" Description="Timr waiting silo act 11" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="12" TagName="TAG00083" Address="TW11" DataType="Short" Description="Timr waiting silo act 12" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="13" TagName="TAG00084" Address="TW12" DataType="Short" Description="Timr waiting silo act 13" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="14" TagName="TAG00085" Address="TW13" DataType="Short" Description="Timr waiting silo act 14" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="15" TagName="TAG00086" Address="TW14" DataType="Short" Description="Timr waiting silo act 15" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="16" TagName="TAG00087" Address="TW15" DataType="Short" Description="Timr waiting silo act 16" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="17" TagName="TAG00088" Address="TW16" DataType="Short" Description="Timr waiting silo act 17" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="18" TagName="TAG00089" Address="TW17" DataType="Short" Description="Timr waiting silo act 18" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="19" TagName="TAG00090" Address="TW18" DataType="Short" Description="Timr waiting silo act 19" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="20" TagName="TAG00091" Address="TW19" DataType="Short" Description="Timr waiting silo act 20" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="21" TagName="TAG00092" Address="TW20" DataType="Short" Description="Timr waiting silo act 21" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="22" TagName="TAG00093" Address="TW21" DataType="Short" Description="Timr waiting silo act 22" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="23" TagName="TAG00094" Address="TW22" DataType="Short" Description="Timr waiting silo act 23" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="24" TagName="TAG00095" Address="TW23" DataType="Short" Description="Timr waiting silo act 24" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="25" TagName="TAG00096" Address="TW24" DataType="Short" Description="Timr waiting silo act 25" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="26" TagName="TAG00097" Address="TW25" DataType="Short" Description="Timr waiting silo act 26" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="27" TagName="TAG00098" Address="TW26" DataType="Short" Description="Timr waiting silo act 27" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="28" TagName="TAG00099" Address="TW27" DataType="Short" Description="Timr waiting silo act 28" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="29" TagName="TAG00100" Address="TW28" DataType="Short" Description="Timr waiting silo act 29" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="30" TagName="TAG00101" Address="TW29" DataType="Short" Description="Timr waiting silo act 30" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="31" TagName="TAG00102" Address="TW30" DataType="Short" Description="Timr waiting silo act 31" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="32" TagName="TAG00103" Address="TW31" DataType="Short" Description="Timr waiting silo act 32" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="33" TagName="TAG00104" Address="TW32" DataType="Short" Description="Timr waiting silo act 33" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="34" TagName="TAG00105" Address="TW33" DataType="Short" Description="Timr waiting silo act 34" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="35" TagName="TAG00106" Address="TW34" DataType="Short" Description="Timr waiting silo act 35" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="36" TagName="TAG00107" Address="TW35" DataType="Short" Description="Timr waiting silo act 36" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="37" TagName="TAG00108" Address="TW36" DataType="Short" Description="Timr waiting silo act 37" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="38" TagName="TAG00109" Address="TW37" DataType="Short" Description="Timr waiting silo act 38" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="39" TagName="TAG00110" Address="TW38" DataType="Short" Description="Timr waiting silo act 39" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="40" TagName="TAG00111" Address="TW39" DataType="Short" Description="Timr waiting silo act 40" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="41" TagName="TAG00112" Address="TW40" DataType="Short" Description="Timr waiting silo act 41" />
+      </DataBlock>
+      <DataBlock ChannelId="3" DeviceId="1" DataBlockId="7" DataBlockName="DataD1" TypeOfRead="" StartAddress="0" Length="60" DataType="Short" MemoryType="DW" IsArray="True" Description="total weight">
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="1" TagName="TAG00113" Address="DW0" DataType="Short" Description="total weight 1" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="2" TagName="TAG00114" Address="DW1" DataType="Short" Description="total weight 2" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="3" TagName="TAG00115" Address="DW2" DataType="Short" Description="total weight 3" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="4" TagName="TAG00116" Address="DW3" DataType="Short" Description="total weight 4" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="5" TagName="TAG00117" Address="DW4" DataType="Short" Description="total weight 5" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="6" TagName="TAG00118" Address="DW5" DataType="Short" Description="total weight 6" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="7" TagName="TAG00119" Address="DW6" DataType="Short" Description="total weight 7" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="8" TagName="TAG00120" Address="DW7" DataType="Short" Description="total weight 8" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="9" TagName="TAG00121" Address="DW8" DataType="Short" Description="total weight 9" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="10" TagName="TAG00122" Address="DW9" DataType="Short" Description="total weight 10" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="11" TagName="TAG00123" Address="DW10" DataType="Short" Description="total weight 11" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="12" TagName="TAG00124" Address="DW11" DataType="Short" Description="total weight 12" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="13" TagName="TAG00125" Address="DW12" DataType="Short" Description="total weight 13" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="14" TagName="TAG00126" Address="DW13" DataType="Short" Description="total weight 14" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="15" TagName="TAG00127" Address="DW14" DataType="Short" Description="total weight 15" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="16" TagName="TAG00128" Address="DW15" DataType="Short" Description="total weight 16" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="17" TagName="TAG00129" Address="DW16" DataType="Short" Description="total weight 17" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="18" TagName="TAG00130" Address="DW17" DataType="Short" Description="total weight 18" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="19" TagName="TAG00131" Address="DW18" DataType="Short" Description="total weight 19" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="20" TagName="TAG00132" Address="DW19" DataType="Short" Description="total weight 20" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="21" TagName="TAG00133" Address="DW20" DataType="Short" Description="total weight 21" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="22" TagName="TAG00134" Address="DW21" DataType="Short" Description="total weight 22" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="23" TagName="TAG00135" Address="DW22" DataType="Short" Description="total weight 23" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="24" TagName="TAG00136" Address="DW23" DataType="Short" Description="total weight 24" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="25" TagName="TAG00137" Address="DW24" DataType="Short" Description="total weight 25" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="26" TagName="TAG00138" Address="DW25" DataType="Short" Description="total weight 26" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="27" TagName="TAG00139" Address="DW26" DataType="Short" Description="total weight 27" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="28" TagName="TAG00140" Address="DW27" DataType="Short" Description="total weight 28" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="29" TagName="TAG00141" Address="DW28" DataType="Short" Description="total weight 29" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="30" TagName="TAG00142" Address="DW29" DataType="Short" Description="total weight 30" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="31" TagName="TAG00143" Address="DW30" DataType="Short" Description="total weight 31" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="32" TagName="TAG00144" Address="DW31" DataType="Short" Description="total weight 32" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="33" TagName="TAG00145" Address="DW32" DataType="Short" Description="total weight 33" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="34" TagName="TAG00146" Address="DW33" DataType="Short" Description="total weight 34" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="35" TagName="TAG00147" Address="DW34" DataType="Short" Description="total weight 35" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="36" TagName="TAG00148" Address="DW35" DataType="Short" Description="total weight 36" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="37" TagName="TAG00149" Address="DW36" DataType="Short" Description="total weight 37" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="38" TagName="TAG00150" Address="DW37" DataType="Short" Description="total weight 38" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="39" TagName="TAG00151" Address="DW38" DataType="Short" Description="total weight 39" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="40" TagName="TAG00152" Address="DW39" DataType="Short" Description="total weight 40" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="41" TagName="TAG00153" Address="DW40" DataType="Short" Description="total weight 41" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="42" TagName="TAG00154" Address="DW41" DataType="Short" Description="total weight 42" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="43" TagName="TAG00155" Address="DW42" DataType="Short" Description="total weight 43" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="44" TagName="TAG00156" Address="DW43" DataType="Short" Description="total weight 44" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="45" TagName="TAG00157" Address="DW44" DataType="Short" Description="total weight 45" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="46" TagName="TAG00158" Address="DW45" DataType="Short" Description="total weight 46" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="47" TagName="TAG00159" Address="DW46" DataType="Short" Description="total weight 47" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="48" TagName="TAG00160" Address="DW47" DataType="Short" Description="total weight 48" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="49" TagName="TAG00161" Address="DW48" DataType="Short" Description="total weight 49" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="50" TagName="TAG00162" Address="DW49" DataType="Short" Description="total weight 50" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="51" TagName="TAG00163" Address="DW50" DataType="Short" Description="total weight 51" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="52" TagName="TAG00164" Address="DW51" DataType="Short" Description="total weight 52" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="53" TagName="TAG00165" Address="DW52" DataType="Short" Description="total weight 53" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="54" TagName="TAG00166" Address="DW53" DataType="Short" Description="total weight 54" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="55" TagName="TAG00167" Address="DW54" DataType="Short" Description="total weight 55" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="56" TagName="TAG00168" Address="DW55" DataType="Short" Description="total weight 56" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="57" TagName="TAG00169" Address="DW56" DataType="Short" Description="total weight 57" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="58" TagName="TAG00170" Address="DW57" DataType="Short" Description="total weight 58" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="59" TagName="TAG00171" Address="DW58" DataType="Short" Description="total weight 59" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="7" TagId="60" TagName="TAG00172" Address="DW59" DataType="Short" Description="total weight 60" />
+      </DataBlock>
+      <DataBlock ChannelId="3" DeviceId="1" DataBlockId="8" DataBlockName="DataD2" TypeOfRead="" StartAddress="60" Length="60" DataType="Short" MemoryType="DW" IsArray="True" Description="last  weight">
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="1" TagName="TAG00173" Address="DW60" DataType="Short" Description="last  weight 1" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="2" TagName="TAG00174" Address="DW61" DataType="Short" Description="last  weight 2" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="3" TagName="TAG00175" Address="DW62" DataType="Short" Description="last  weight 3" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="4" TagName="TAG00176" Address="DW63" DataType="Short" Description="last  weight 4" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="5" TagName="TAG00177" Address="DW64" DataType="Short" Description="last  weight 5" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="6" TagName="TAG00178" Address="DW65" DataType="Short" Description="last  weight 6" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="7" TagName="TAG00179" Address="DW66" DataType="Short" Description="last  weight 7" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="8" TagName="TAG00180" Address="DW67" DataType="Short" Description="last  weight 8" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="9" TagName="TAG00181" Address="DW68" DataType="Short" Description="last  weight 9" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="10" TagName="TAG00182" Address="DW69" DataType="Short" Description="last  weight 10" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="11" TagName="TAG00183" Address="DW70" DataType="Short" Description="last  weight 11" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="12" TagName="TAG00184" Address="DW71" DataType="Short" Description="last  weight 12" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="13" TagName="TAG00185" Address="DW72" DataType="Short" Description="last  weight 13" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="14" TagName="TAG00186" Address="DW73" DataType="Short" Description="last  weight 14" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="15" TagName="TAG00187" Address="DW74" DataType="Short" Description="last  weight 15" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="16" TagName="TAG00188" Address="DW75" DataType="Short" Description="last  weight 16" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="17" TagName="TAG00189" Address="DW76" DataType="Short" Description="last  weight 17" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="18" TagName="TAG00190" Address="DW77" DataType="Short" Description="last  weight 18" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="19" TagName="TAG00191" Address="DW78" DataType="Short" Description="last  weight 19" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="20" TagName="TAG00192" Address="DW79" DataType="Short" Description="last  weight 20" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="21" TagName="TAG00193" Address="DW80" DataType="Short" Description="last  weight 21" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="22" TagName="TAG00194" Address="DW81" DataType="Short" Description="last  weight 22" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="23" TagName="TAG00195" Address="DW82" DataType="Short" Description="last  weight 23" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="24" TagName="TAG00196" Address="DW83" DataType="Short" Description="last  weight 24" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="25" TagName="TAG00197" Address="DW84" DataType="Short" Description="last  weight 25" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="26" TagName="TAG00198" Address="DW85" DataType="Short" Description="last  weight 26" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="27" TagName="TAG00199" Address="DW86" DataType="Short" Description="last  weight 27" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="28" TagName="TAG00200" Address="DW87" DataType="Short" Description="last  weight 28" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="29" TagName="TAG00201" Address="DW88" DataType="Short" Description="last  weight 29" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="30" TagName="TAG00202" Address="DW89" DataType="Short" Description="last  weight 30" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="31" TagName="TAG00203" Address="DW90" DataType="Short" Description="last  weight 31" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="32" TagName="TAG00204" Address="DW91" DataType="Short" Description="last  weight 32" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="33" TagName="TAG00205" Address="DW92" DataType="Short" Description="last  weight 33" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="34" TagName="TAG00206" Address="DW93" DataType="Short" Description="last  weight 34" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="35" TagName="TAG00207" Address="DW94" DataType="Short" Description="last  weight 35" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="36" TagName="TAG00208" Address="DW95" DataType="Short" Description="last  weight 36" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="37" TagName="TAG00209" Address="DW96" DataType="Short" Description="last  weight 37" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="38" TagName="TAG00210" Address="DW97" DataType="Short" Description="last  weight 38" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="39" TagName="TAG00211" Address="DW98" DataType="Short" Description="last  weight 39" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="40" TagName="TAG00212" Address="DW99" DataType="Short" Description="last  weight 40" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="41" TagName="TAG00213" Address="DW100" DataType="Short" Description="last  weight 41" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="42" TagName="TAG00214" Address="DW101" DataType="Short" Description="last  weight 42" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="43" TagName="TAG00215" Address="DW102" DataType="Short" Description="last  weight 43" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="44" TagName="TAG00216" Address="DW103" DataType="Short" Description="last  weight 44" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="45" TagName="TAG00217" Address="DW104" DataType="Short" Description="last  weight 45" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="46" TagName="TAG00218" Address="DW105" DataType="Short" Description="last  weight 46" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="47" TagName="TAG00219" Address="DW106" DataType="Short" Description="last  weight 47" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="48" TagName="TAG00220" Address="DW107" DataType="Short" Description="last  weight 48" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="49" TagName="TAG00221" Address="DW108" DataType="Short" Description="last  weight 49" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="50" TagName="TAG00222" Address="DW109" DataType="Short" Description="last  weight 50" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="51" TagName="TAG00223" Address="DW110" DataType="Short" Description="last  weight 51" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="52" TagName="TAG00224" Address="DW111" DataType="Short" Description="last  weight 52" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="53" TagName="TAG00225" Address="DW112" DataType="Short" Description="last  weight 53" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="54" TagName="TAG00226" Address="DW113" DataType="Short" Description="last  weight 54" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="55" TagName="TAG00227" Address="DW114" DataType="Short" Description="last  weight 55" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="56" TagName="TAG00228" Address="DW115" DataType="Short" Description="last  weight 56" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="57" TagName="TAG00229" Address="DW116" DataType="Short" Description="last  weight 57" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="58" TagName="TAG00230" Address="DW117" DataType="Short" Description="last  weight 58" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="59" TagName="TAG00231" Address="DW118" DataType="Short" Description="last  weight 59" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="8" TagId="60" TagName="TAG00232" Address="DW119" DataType="Short" Description="last  weight 60" />
+      </DataBlock>
+      <DataBlock ChannelId="3" DeviceId="1" DataBlockId="9" DataBlockName="DataD3" TypeOfRead="" StartAddress="120" Length="60" DataType="Short" MemoryType="DW" IsArray="True" Description="CH1">
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="1" TagName="TAG00233" Address="DW120" DataType="Short" Description="CH1 1" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="2" TagName="TAG00234" Address="DW121" DataType="Short" Description="CH1 2" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="3" TagName="TAG00235" Address="DW122" DataType="Short" Description="CH1 3" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="4" TagName="TAG00236" Address="DW123" DataType="Short" Description="CH1 4" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="5" TagName="TAG00237" Address="DW124" DataType="Short" Description="CH1 5" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="6" TagName="TAG00238" Address="DW125" DataType="Short" Description="CH1 6" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="7" TagName="TAG00239" Address="DW126" DataType="Short" Description="CH1 7" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="8" TagName="TAG00240" Address="DW127" DataType="Short" Description="CH1 8" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="9" TagName="TAG00241" Address="DW128" DataType="Short" Description="CH1 9" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="10" TagName="TAG00242" Address="DW129" DataType="Short" Description="CH1 10" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="11" TagName="TAG00243" Address="DW130" DataType="Short" Description="CH1 11" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="12" TagName="TAG00244" Address="DW131" DataType="Short" Description="CH1 12" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="13" TagName="TAG00245" Address="DW132" DataType="Short" Description="CH1 13" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="14" TagName="TAG00246" Address="DW133" DataType="Short" Description="CH1 14" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="15" TagName="TAG00247" Address="DW134" DataType="Short" Description="CH1 15" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="16" TagName="TAG00248" Address="DW135" DataType="Short" Description="CH1 16" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="17" TagName="TAG00249" Address="DW136" DataType="Short" Description="CH1 17" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="18" TagName="TAG00250" Address="DW137" DataType="Short" Description="CH1 18" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="19" TagName="TAG00251" Address="DW138" DataType="Short" Description="CH1 19" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="20" TagName="TAG00252" Address="DW139" DataType="Short" Description="CH1 20" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="21" TagName="TAG00253" Address="DW140" DataType="Short" Description="CH1 21" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="22" TagName="TAG00254" Address="DW141" DataType="Short" Description="CH1 22" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="23" TagName="TAG00255" Address="DW142" DataType="Short" Description="CH1 23" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="24" TagName="TAG00256" Address="DW143" DataType="Short" Description="CH1 24" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="25" TagName="TAG00257" Address="DW144" DataType="Short" Description="CH1 25" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="26" TagName="TAG00258" Address="DW145" DataType="Short" Description="CH1 26" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="27" TagName="TAG00259" Address="DW146" DataType="Short" Description="CH1 27" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="28" TagName="TAG00260" Address="DW147" DataType="Short" Description="CH1 28" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="29" TagName="TAG00261" Address="DW148" DataType="Short" Description="CH1 29" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="30" TagName="TAG00262" Address="DW149" DataType="Short" Description="CH1 30" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="31" TagName="TAG00263" Address="DW150" DataType="Short" Description="CH1 31" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="32" TagName="TAG00264" Address="DW151" DataType="Short" Description="CH1 32" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="33" TagName="TAG00265" Address="DW152" DataType="Short" Description="CH1 33" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="34" TagName="TAG00266" Address="DW153" DataType="Short" Description="CH1 34" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="35" TagName="TAG00267" Address="DW154" DataType="Short" Description="CH1 35" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="36" TagName="TAG00268" Address="DW155" DataType="Short" Description="CH1 36" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="37" TagName="TAG00269" Address="DW156" DataType="Short" Description="CH1 37" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="38" TagName="TAG00270" Address="DW157" DataType="Short" Description="CH1 38" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="39" TagName="TAG00271" Address="DW158" DataType="Short" Description="CH1 39" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="40" TagName="TAG00272" Address="DW159" DataType="Short" Description="CH1 40" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="41" TagName="TAG00273" Address="DW160" DataType="Short" Description="CH1 41" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="42" TagName="TAG00274" Address="DW161" DataType="Short" Description="CH1 42" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="43" TagName="TAG00275" Address="DW162" DataType="Short" Description="CH1 43" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="44" TagName="TAG00276" Address="DW163" DataType="Short" Description="CH1 44" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="45" TagName="TAG00277" Address="DW164" DataType="Short" Description="CH1 45" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="46" TagName="TAG00278" Address="DW165" DataType="Short" Description="CH1 46" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="47" TagName="TAG00279" Address="DW166" DataType="Short" Description="CH1 47" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="48" TagName="TAG00280" Address="DW167" DataType="Short" Description="CH1 48" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="49" TagName="TAG00281" Address="DW168" DataType="Short" Description="CH1 49" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="50" TagName="TAG00282" Address="DW169" DataType="Short" Description="CH1 50" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="51" TagName="TAG00283" Address="DW170" DataType="Short" Description="CH1 51" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="52" TagName="TAG00284" Address="DW171" DataType="Short" Description="CH1 52" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="53" TagName="TAG00285" Address="DW172" DataType="Short" Description="CH1 53" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="54" TagName="TAG00286" Address="DW173" DataType="Short" Description="CH1 54" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="55" TagName="TAG00287" Address="DW174" DataType="Short" Description="CH1 55" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="56" TagName="TAG00288" Address="DW175" DataType="Short" Description="CH1 56" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="57" TagName="TAG00289" Address="DW176" DataType="Short" Description="CH1 57" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="58" TagName="TAG00290" Address="DW177" DataType="Short" Description="CH1 58" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="59" TagName="TAG00291" Address="DW178" DataType="Short" Description="CH1 59" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="60" TagName="TAG00292" Address="DW179" DataType="Short" Description="CH1 60" />
+      </DataBlock>
+    </Device>
+  </Channel>
+</Root>

@@ -1,4 +1,4 @@
-﻿using AdvancedScada.Common;
+﻿using AdvancedScada.Delta.Common;
 using AdvancedScada.Utils;
 using HslCommunication;
 using HslCommunication.ModBus;
@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.IODriver.Delta.TCP
 {
-    public class DeltaTCPMaster : IDriverAdapter
+    public class DeltaTCPMaster : IDeltaAdapter
     {
         public bool IsConnected { get; set; } = false;
         public byte Station { get; set; }
@@ -76,7 +76,7 @@ namespace AdvancedScada.IODriver.Delta.TCP
 
 
             }
-            catch (SocketException ex)
+            catch (Exception ex)
             {
 
 
@@ -93,7 +93,7 @@ namespace AdvancedScada.IODriver.Delta.TCP
                 busTcpClient.ConnectClose();
                 return IsConnected;
             }
-            catch (SocketException ex)
+            catch (Exception ex)
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
                 return IsConnected;

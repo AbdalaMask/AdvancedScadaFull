@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Common;
+using AdvancedScada.Delta.Common;
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IODriver.Delta.ASCII;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Threading;
+using System.Threading.Tasks;
 using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Delta.Core
@@ -39,7 +41,7 @@ namespace AdvancedScada.Delta.Core
                 Channels.Add(chns);
 
 
-                IDriverAdapter DriverAdapter = null;
+                IDeltaAdapter DriverAdapter = null;
                 foreach (var dv in chns.Devices)
                 {
                     try
@@ -102,7 +104,7 @@ namespace AdvancedScada.Delta.Core
             }
         }
 
-        private static Thread[] threads;
+        private static Task[] taskArray;
         public void Connect()
         {
 
@@ -112,14 +114,13 @@ namespace AdvancedScada.Delta.Core
 
 
                 Console.WriteLine(string.Format("STARTED: {0}", ++COUNTER));
-                threads = new Thread[Channels.Count];
-
-                if (threads == null) throw new NullReferenceException("No Data");
+                taskArray = new Task[Channels.Count];
+                if (taskArray == null) throw new NullReferenceException("No Data");
                 for (int i = 0; i < Channels.Count; i++)
                 {
-                    threads[i] = new Thread((chParam) =>
+                    taskArray[i] = new Task((chParam) =>
                     {
-                        IDriverAdapter DriverAdapter = null;
+                        IDeltaAdapter DriverAdapter = null;
                         Channel ch = (Channel)chParam;
 
                         switch (ch.Mode)
@@ -175,13 +176,17 @@ namespace AdvancedScada.Delta.Core
                             }
                         }
 
-                    })
-                    {
-                        IsBackground = true
-                    };
-                    threads[i].Start(Channels[i]);
+                    }, Channels[i]);
+                    taskArray[i].Start();
                 }
+                foreach (var task in taskArray)
+                {
+                    var data = task.AsyncState as Channel;
+                    if (data != null)
+                        EventscadaException?.Invoke(this.GetType().Name, $"Task #{data.ChannelId} created at {data.ChannelName}, ran on thread #{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}.");
 
+
+                }
             }
             catch (Exception ex)
             {
@@ -198,10 +203,10 @@ namespace AdvancedScada.Delta.Core
                 Deltambe = null;
                 TagCollection.Tags.Clear();
                 Channels = null;
-                for (int i = 0; i < threads.Length; i++)
+                for (int i = 0; i < taskArray.Length; i++)
                 {
 
-                    threads[i].Abort();
+                    taskArray[i].Wait(100);
                 }
 
                 objConnectionState = ConnectionState.DISCONNECT;
@@ -216,7 +221,7 @@ namespace AdvancedScada.Delta.Core
 
         #endregion
         #region SendPackage All
-        private void SendPackageDelta(IDriverAdapter DriverAdapter, DataBlock db)
+        private void SendPackageDelta(IDeltaAdapter DriverAdapter, DataBlock db)
         {
             try
             {
@@ -226,7 +231,17 @@ namespace AdvancedScada.Delta.Core
                     case DataTypes.Bit:
                         lock (DriverAdapter)
                         {
-                            bool[] bitRs = DriverAdapter.Read<bool>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                            bool[] bitRs = null;
+                            if (db.TypeOfRead == "ReadCoilStatus")
+                            {
+                                bitRs = DriverAdapter.Read<bool>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                            }
+                            else if(db.TypeOfRead== "ReadInputStatus")
+                            {
+                                bitRs = DriverAdapter.ReadDiscrete($"{db.MemoryType}{db.StartAddress}", db.Length);
+                            }
+                            
+                          
                             if (bitRs == null) return;
                             int length = bitRs.Length;
                             if (bitRs.Length > db.Tags.Count) length = db.Tags.Count;
@@ -384,7 +399,7 @@ namespace AdvancedScada.Delta.Core
 
                         if (string.Format("{0}.{1}", ch.ChannelName, dv.DeviceName).Equals(tagDevice))
                         {
-                            IDriverAdapter DriverAdapter = null;
+                            IDeltaAdapter DriverAdapter = null;
 
 
                             switch (ch.Mode)
@@ -405,7 +420,7 @@ namespace AdvancedScada.Delta.Core
                                 switch (TagCollection.Tags[tagName].DataType)
                                 {
                                     case DataTypes.Bit:
-                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), value == "1" ? true : false);
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), value);
                                         break;
                                     case DataTypes.Byte:
                                         DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), byte.Parse(value));

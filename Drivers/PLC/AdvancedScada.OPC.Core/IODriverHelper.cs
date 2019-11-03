@@ -38,7 +38,7 @@ namespace AdvancedScada.OPC.Core
             try
             {
                 SendDone.WaitOne(-1);
-                lock (this)
+                lock (opcDaCom)
                 {
                     var wdArys = opcDaCom.Read(db.DataBlockName, 250, db);
                     if (wdArys == null || wdArys.Length == 0) return;
@@ -133,6 +133,14 @@ namespace AdvancedScada.OPC.Core
                             }
                         }, Channels[i]);
                         taskArray[i].Start();
+                    }
+                    foreach (var task in taskArray)
+                    {
+                        var data = task.AsyncState as Channel;
+                        if (data != null)
+                            EventscadaException?.Invoke(this.GetType().Name, $"Task #{data.ChannelId} created at {data.ChannelName}, ran on thread #{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}.");
+
+
                     }
                 }
 

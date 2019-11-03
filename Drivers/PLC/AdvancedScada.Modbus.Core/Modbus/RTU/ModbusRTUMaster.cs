@@ -1,11 +1,12 @@
 ﻿using AdvancedScada.Common;
+using AdvancedScada.Modbus.Common;
 using HslCommunication.ModBus;
 using System;
 using System.IO.Ports;
 using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Modbus.Core.Modbus.RTU
 {
-    public class ModbusRTUMaster : IDriverAdapter
+    public class ModbusRTUMaster : IModbusAdapter
     {
         private SerialPort serialPort;
 
@@ -43,7 +44,7 @@ namespace AdvancedScada.Modbus.Core.Modbus.RTU
                 return IsConnected;
 
             }
-            catch (TimeoutException ex)
+            catch (Exception ex)
             {
 
 
@@ -59,7 +60,7 @@ namespace AdvancedScada.Modbus.Core.Modbus.RTU
                 busRtuClient.Close();
                 return IsConnected;
             }
-            catch (TimeoutException ex)
+            catch (Exception ex)
             {
 
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);

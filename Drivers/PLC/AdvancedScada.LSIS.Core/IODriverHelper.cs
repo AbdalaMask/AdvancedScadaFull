@@ -1,6 +1,7 @@
 ﻿using AdvancedScada.Common;
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.LSIS.Common;
 using AdvancedScada.LSIS.Core.LSIS.Cnet;
 using AdvancedScada.LSIS.Core.LSIS.FENET;
 using System;
@@ -23,8 +24,8 @@ namespace AdvancedScada.LSIS.Core
         private static Dictionary<string, LS_FENET> FENET = new Dictionary<string, LS_FENET>();
        
         private static bool IsConnected;
-        private static int COUNTER;
-
+         
+        private static Task[] taskArray;
 
         #region IServiceDriver
         public string Name => "LSIS";
@@ -40,7 +41,7 @@ namespace AdvancedScada.LSIS.Core
                 Channels.Add(ch);
 
 
-                IDriverAdapter DriverAdapter = null;
+                ILSISAdapter DriverAdapter = null;
                 foreach (var dv in ch.Devices)
                 {
                     try
@@ -92,7 +93,7 @@ namespace AdvancedScada.LSIS.Core
             }
         }
 
-        private static Thread[] threads;
+    
         public void Connect()
         {
 
@@ -100,16 +101,16 @@ namespace AdvancedScada.LSIS.Core
             {
                 IsConnected = true;
 
-               
-                Console.WriteLine(string.Format("STARTED: {0}", ++COUNTER));
-                threads = new Thread[Channels.Count];
 
-                if (threads == null) throw new NullReferenceException("No Data");
+                
+                taskArray = new Task[Channels.Count];
+                if (taskArray == null) throw new NullReferenceException("No Data");
                 for (int i = 0; i < Channels.Count; i++)
                 {
-                    threads[i] = new Thread((chParam) =>
+                    
+                    taskArray[i] = new Task((chParam) =>
                     {
-                        IDriverAdapter DriverAdapter = null;
+                        ILSISAdapter DriverAdapter = null;
                         Channel ch = (Channel)chParam;
 
                         switch (ch.ConnectionType)
@@ -142,8 +143,6 @@ namespace AdvancedScada.LSIS.Core
                                         {
                                             
                                                 SendPackageLSIS(DriverAdapter, db);
-                                             
-
                                         }
 
                                     }
@@ -173,11 +172,17 @@ namespace AdvancedScada.LSIS.Core
                             }
                         }
 
-                    })
+                        
+                    }, Channels[i]);
+                    taskArray[i].Start();
+                    foreach (var task in taskArray)
                     {
-                        IsBackground = true
-                    };
-                    threads[i].Start(Channels[i]);
+                        var data = task.AsyncState as Channel;
+                        if (data != null)
+                            EventscadaException?.Invoke(this.GetType().Name, $"Task #{data.ChannelId} created at {data.ChannelName}, ran on thread #{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}.");
+
+
+                    }
                 }
 
             }
@@ -196,7 +201,11 @@ namespace AdvancedScada.LSIS.Core
 
                 TagCollection.Tags.Clear();
                 Channels = null;
-                
+                for (int i = 0; i < taskArray.Length; i++)
+                {
+
+                    taskArray[i].Wait(100);
+                }
 
                 objConnectionState = ConnectionState.DISCONNECT;
                 eventConnectionState?.Invoke(objConnectionState, string.Format("Server disconnect with PLC."));
@@ -211,7 +220,7 @@ namespace AdvancedScada.LSIS.Core
         #endregion
         #region SendPackage All
 
-        private void SendPackageLSIS(IDriverAdapter DriverAdapter, DataBlock db)
+        private void SendPackageLSIS(ILSISAdapter DriverAdapter, DataBlock db)
         {
             try
             {
@@ -488,7 +497,7 @@ namespace AdvancedScada.LSIS.Core
 
                         if (string.Format("{0}.{1}", ch.ChannelName, dv.DeviceName).Equals(tagDevice))
                         {
-                            IDriverAdapter DriverAdapter = null;
+                            ILSISAdapter DriverAdapter = null;
                             switch (ch.ConnectionType)
                             {
                                 case "SerialPort":

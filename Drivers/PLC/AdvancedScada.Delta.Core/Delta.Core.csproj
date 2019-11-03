@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\IDeltaAdapter.cs" />
     <Compile Include="Editors\XChannelForm.cs">
       <SubType>Form</SubType>
     </Compile>

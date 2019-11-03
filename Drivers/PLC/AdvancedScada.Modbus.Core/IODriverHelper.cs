@@ -1,6 +1,7 @@
 ﻿using AdvancedScada.Common;
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.Modbus.Common;
 using AdvancedScada.Modbus.Core.Modbus.ASCII;
 using AdvancedScada.Modbus.Core.Modbus.RTU;
 using AdvancedScada.Modbus.Core.Modbus.TCP;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Threading;
+using System.Threading.Tasks;
 using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Modbus.Core
 {
@@ -21,7 +23,7 @@ namespace AdvancedScada.Modbus.Core
         private static Dictionary<string, ModbusRTUMaster> rtu = new Dictionary<string, ModbusRTUMaster>();
         private static Dictionary<string, ModbusASCIIMaster> ascii = new Dictionary<string, ModbusASCIIMaster>();
 
-
+        private static Task[] taskArray;
         private static bool IsConnected;
         private static int COUNTER;
         #region IServiceDriver
@@ -39,7 +41,7 @@ namespace AdvancedScada.Modbus.Core
 
                 if (Channels == null) return;
                 Channels.Add(ch);
-                IDriverAdapter DriverAdapter = null;
+                IModbusAdapter DriverAdapter = null;
                 foreach (var dv in ch.Devices)
                 {
                     try
@@ -100,7 +102,7 @@ namespace AdvancedScada.Modbus.Core
             }
         }
 
-        private static Thread[] threads;
+        
         public void Connect()
         {
 
@@ -110,14 +112,13 @@ namespace AdvancedScada.Modbus.Core
 
 
                 Console.WriteLine(string.Format("STARTED: {0}", ++COUNTER));
-                threads = new Thread[Channels.Count];
-
-                if (threads == null) throw new NullReferenceException("No Data");
+                taskArray = new Task[Channels.Count];
+                if (taskArray == null) throw new NullReferenceException("No Data");
                 for (int i = 0; i < Channels.Count; i++)
                 {
-                    threads[i] = new Thread((chParam) =>
+                    taskArray[i] = new Task((chParam) =>
                     {
-                        IDriverAdapter DriverAdapter = null;
+                        IModbusAdapter DriverAdapter = null;
                         Channel ch = (Channel)chParam;
 
                         switch (ch.Mode)
@@ -172,13 +173,18 @@ namespace AdvancedScada.Modbus.Core
                             }
                         }
 
-                    })
-                    {
-                        IsBackground = true
-                    };
-                    threads[i].Start(Channels[i]);
+                    }, Channels[i]);
+                    taskArray[i].Start();
                 }
-
+                //Task.WaitAll(taskArray);
+                foreach (var task in taskArray)
+                {
+                    var data = task.AsyncState as Channel;
+                    if (data != null)
+                        EventscadaException?.Invoke(this.GetType().Name, $"Task #{data.ChannelId} created at {data.ChannelName}, ran on thread #{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}.");
+                                          
+                     
+                }
             }
             catch (Exception ex)
             {
@@ -195,10 +201,10 @@ namespace AdvancedScada.Modbus.Core
 
                 TagCollection.Tags.Clear();
                 Channels = null;
-                for (int i = 0; i < threads.Length; i++)
+                for (int i = 0; i < taskArray.Length; i++)
                 {
 
-                    threads[i].Abort();
+                    taskArray[i].Wait(100);
                 }
 
                 objConnectionState = ConnectionState.DISCONNECT;
@@ -214,7 +220,7 @@ namespace AdvancedScada.Modbus.Core
         #endregion
         #region SendPackage All
 
-        private void SendPackageModbus(IDriverAdapter DriverAdapter, DataBlock db)
+        private void SendPackageModbus(IModbusAdapter DriverAdapter, DataBlock db)
         {
             try
             {
@@ -224,8 +230,16 @@ namespace AdvancedScada.Modbus.Core
                     case DataTypes.Bit:
                         lock (DriverAdapter)
                         {
-
-                            bool[] bitRs = DriverAdapter.Read<bool>($"{db.StartAddress}", db.Length);
+                            bool[] bitRs = null;
+                            if (db.TypeOfRead == "ReadCoilStatus")
+                            {
+                                  bitRs = DriverAdapter.Read<bool>($"{db.StartAddress}", db.Length);
+                            }
+                            else if (db.TypeOfRead == "ReadInputStatus")
+                            {
+                               bitRs = DriverAdapter.ReadDiscrete($"{db.StartAddress}", db.Length);
+                            }
+                          
                             if (bitRs == null) return;
                             if (bitRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < db.Tags.Count; j++)
@@ -385,7 +399,7 @@ namespace AdvancedScada.Modbus.Core
 
                         if (string.Format("{0}.{1}", ch.ChannelName, dv.DeviceName).Equals(tagDevice))
                         {
-                            IDriverAdapter DriverAdapter = null;
+                            IModbusAdapter DriverAdapter = null;
 
 
                             switch (ch.Mode)
@@ -406,7 +420,7 @@ namespace AdvancedScada.Modbus.Core
                                 switch (TagCollection.Tags[tagName].DataType)
                                 {
                                     case DataTypes.Bit:
-                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), value == "1" ? true : false);
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), value);
                                         break;
                                     case DataTypes.Byte:
                                         DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), byte.Parse(value));

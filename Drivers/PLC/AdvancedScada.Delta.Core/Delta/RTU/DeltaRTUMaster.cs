@@ -1,11 +1,11 @@
-﻿using AdvancedScada.Common;
+﻿using AdvancedScada.Delta.Common;
 using HslCommunication.ModBus;
 using System;
 using System.IO.Ports;
 using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.IODriver.Delta.RTU
 {
-    public class DeltaRTUMaster : IDriverAdapter
+    public class DeltaRTUMaster : IDeltaAdapter
     {
         private SerialPort serialPort;
 
@@ -30,6 +30,8 @@ namespace AdvancedScada.IODriver.Delta.RTU
             try
             {
 
+
+
                 busRtuClient.SerialPortInni(sp =>
                 {
                     sp.PortName = serialPort.PortName;
@@ -38,12 +40,13 @@ namespace AdvancedScada.IODriver.Delta.RTU
                     sp.StopBits = serialPort.StopBits;
                     sp.Parity = serialPort.Parity;
                 });
+
                 busRtuClient.Open();
                 IsConnected = true;
                 return IsConnected;
 
             }
-            catch (TimeoutException ex)
+            catch (Exception ex)
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
                 return IsConnected;
@@ -57,7 +60,7 @@ namespace AdvancedScada.IODriver.Delta.RTU
                 busRtuClient.Close();
                 return IsConnected;
             }
-            catch (TimeoutException ex)
+            catch (Exception ex)
             {
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
                 return IsConnected;

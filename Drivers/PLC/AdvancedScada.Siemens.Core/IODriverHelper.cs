@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Threading;
+using System.Threading.Tasks;
 using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Siemens.Core
@@ -21,7 +22,7 @@ namespace AdvancedScada.Siemens.Core
         private static Dictionary<string, SiemensComPPI> _PLCPPI = new Dictionary<string, SiemensComPPI>();
         private static bool IsConnected;
         private static int COUNTER;
-
+        private static Task[] taskArray;
 
         #region IServiceDriver
         public string Name => "Siemens";
@@ -89,7 +90,7 @@ namespace AdvancedScada.Siemens.Core
             }
         }
 
-        private static Thread[] threads;
+         
         public void Connect()
         {
 
@@ -99,12 +100,11 @@ namespace AdvancedScada.Siemens.Core
 
 
                 Console.WriteLine(string.Format("STARTED: {0}", ++COUNTER));
-                threads = new Thread[Channels.Count];
-
-                if (threads == null) throw new NullReferenceException("No Data");
+                taskArray = new Task[Channels.Count];
+                if (taskArray == null) throw new NullReferenceException("No Data");
                 for (int i = 0; i < Channels.Count; i++)
                 {
-                    threads[i] = new Thread((chParam) =>
+                    taskArray[i] = new Task((chParam) =>
                     {
                         IDriverAdapter DriverAdapter = null;
                         Channel ch = (Channel)chParam;
@@ -166,11 +166,16 @@ namespace AdvancedScada.Siemens.Core
                             }
                         }
 
-                    })
+                    }, Channels[i]);
+                    taskArray[i].Start();
+                    foreach (var task in taskArray)
                     {
-                        IsBackground = true
-                    };
-                    threads[i].Start(Channels[i]);
+                        var data = task.AsyncState as Channel;
+                        if (data != null)
+                            EventscadaException?.Invoke(this.GetType().Name, $"Task #{data.ChannelId} created at {data.ChannelName}, ran on thread #{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}.");
+
+
+                    }
                 }
 
             }
@@ -189,10 +194,10 @@ namespace AdvancedScada.Siemens.Core
 
 
                 Channels = null;
-                for (int i = 0; i < threads.Length; i++)
+                for (int i = 0; i < taskArray.Length; i++)
                 {
 
-                    threads[i].Abort();
+                    taskArray[i].Wait(100);
                 }
 
                 objConnectionState = ConnectionState.DISCONNECT;
