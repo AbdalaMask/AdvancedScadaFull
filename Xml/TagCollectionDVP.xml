@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Root>
-  <Channel ChannelId="1" ChannelName="CH1" ChannelTypes="Delta" Model="DVP" Rack="0" Slot="0" ConnectionType="SerialPort" Mode="RTU" PortName="COM1" BaudRate="9600" DataBits="8" StopBits="One" Parity="None" Handshake="None" Description="CH1">
+  <Channel ChannelId="1" ChannelName="CH1" ChannelTypes="Delta" Model="DVP" Rack="0" Slot="0" ConnectionType="SerialPort" Mode="RTU" PortName="COM3" BaudRate="9600" DataBits="8" StopBits="One" Parity="None" Handshake="None" Description="CH1">
     <Device DeviceId="1" DeviceName="PLC1" SlaveId="1" Description="CH1">
       <DataBlock ChannelId="1" DeviceId="1" DataBlockId="1" DataBlockName="DataP1" TypeOfRead="ReadInputStatus" StartAddress="0" Length="8" DataType="Bit" MemoryType="X" IsArray="True" Description="CH1">
         <Tag ChannelId="1" DeviceId="1" DataBlockId="1" TagId="1" TagName="TAG00001" Address="X0" DataType="Bit" Description="CH1 1" />

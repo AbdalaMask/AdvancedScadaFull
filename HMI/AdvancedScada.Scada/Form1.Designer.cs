@@ -103,7 +103,7 @@
             0,
             0});
             this.sevenSegmentGDI1.ShowOffSegments = true;
-            this.sevenSegmentGDI1.Size = new System.Drawing.Size(396, 103);
+            this.sevenSegmentGDI1.Size = new System.Drawing.Size(354, 92);
             this.sevenSegmentGDI1.TabIndex = 2;
             this.sevenSegmentGDI1.Text = "sevenSegmentGDI1";
             this.sevenSegmentGDI1.Value = 0D;
@@ -112,9 +112,9 @@
             // 
             this.digitalDisplayControl1.BackColor = System.Drawing.Color.Transparent;
             this.digitalDisplayControl1.DigitColor = System.Drawing.Color.Red;
-            this.digitalDisplayControl1.Location = new System.Drawing.Point(410, 35);
+            this.digitalDisplayControl1.Location = new System.Drawing.Point(401, 12);
             this.digitalDisplayControl1.Name = "digitalDisplayControl1";
-            this.digitalDisplayControl1.Size = new System.Drawing.Size(227, 83);
+            this.digitalDisplayControl1.Size = new System.Drawing.Size(282, 92);
             this.digitalDisplayControl1.TabIndex = 3;
             this.digitalDisplayControl1.Text = "digitalDisplayControl1";
             // 

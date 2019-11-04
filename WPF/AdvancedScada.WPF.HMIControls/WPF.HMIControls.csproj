@@ -64,7 +64,19 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="ButtonAll\HMIButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ButtonAll\HMIButtonAll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Display\HMILable2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Display\HMILable3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,6 +124,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SevenSegment\HMISevenSegmentNew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SevenSegment\HMISevenSegmentsStack.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -127,15 +143,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ButtonAll\HMIAnnunciator.cs" />
+    <Compile Include="ButtonAll\HMIButton.xaml.cs">
+      <DependentUpon>HMIButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ButtonAll\HMIButton2.cs" />
     <Compile Include="ButtonAll\HMIButtonAll.xaml.cs">
       <DependentUpon>HMIButtonAll.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Comm\EnumAll.cs" />
     <Compile Include="Comm\LicenseHMI.cs" />
     <Compile Include="Comm\ProgressConverter.cs" />
     <Compile Include="Display\HMILable.cs" />
+    <Compile Include="Display\HMILable2.xaml.cs">
+      <DependentUpon>HMILable2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Display\HMILable3.xaml.cs">
+      <DependentUpon>HMILable3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Fun\HMIFun.xaml.cs">
       <DependentUpon>HMIFun.xaml</DependentUpon>
     </Compile>
@@ -192,6 +216,9 @@
     <Compile Include="SevenSegment\HMISevenSegment.xaml.cs">
       <DependentUpon>HMISevenSegment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SevenSegment\HMISevenSegmentNew.xaml.cs">
+      <DependentUpon>HMISevenSegmentNew.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SevenSegment\HMISevenSegmentsStack.xaml.cs">
       <DependentUpon>HMISevenSegmentsStack.xaml</DependentUpon>
     </Compile>
@@ -210,7 +237,7 @@
     </Compile>
     <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -269,6 +296,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\34-4.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DigitalPanelMeterR1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -141,8 +141,8 @@ namespace AdvancedScada.LSIS.Core
 
                                         foreach (DataBlock db in dv.DataBlocks)
                                         {
-                                            
-                                                SendPackageLSIS(DriverAdapter, db);
+                                            if (!IsConnected) break;
+                                            SendPackageLSIS(DriverAdapter, db);
                                         }
 
                                     }
@@ -473,7 +473,7 @@ namespace AdvancedScada.LSIS.Core
             }
             catch (Exception ex)
             {
-
+                Disconnect();
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
 

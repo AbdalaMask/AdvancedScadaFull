@@ -57,8 +57,8 @@ namespace HslCommunication.Profinet.LSIS
             int startIndex = CheckAddress(analysis.Content.Substring(3));
             switch (analysis.Content[1])
             {
-                case 'P': return OperateResult.CreateSuccessResult(pBuffer.GetBytes(startIndex, length));
-                case 'Q': return OperateResult.CreateSuccessResult(qBuffer.GetBytes(startIndex, length));
+                case 'P': return OperateResult.CreateSuccessResult(SoftBasic.BoolArrayToByte(pBuffer.GetBool(startIndex, length *= 8)));
+                case 'Q': return OperateResult.CreateSuccessResult(SoftBasic.BoolArrayToByte(qBuffer.GetBool(startIndex, length *= 8)));
                 case 'M': return OperateResult.CreateSuccessResult(SoftBasic.BoolArrayToByte(mBuffer.GetBool(startIndex, length *= 8)));
                 case 'D': return OperateResult.CreateSuccessResult(dBuffer.GetBytes(startIndex == 0 ? startIndex : startIndex *= 2, length));
                 default: return new OperateResult<byte[]>(StringResources.Language.NotSupportedDataType);
