@@ -14,7 +14,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.ServiceModel;
 using System.Windows.Forms;
-
+using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Controls_Binding.Alarm
 {
     [CallbackBehavior]
@@ -202,7 +202,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
                                 {
                                 List2[index1].TagName, string.Format("{0}", List2[index1].Value),
                                 DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")
-                            };
+                                };
 
                                 if (ser != LastValue)
                                 {
@@ -277,7 +277,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
 
         public void UpdateCollection(ConnectionState status, Dictionary<string, Tag> collection)
         {
-
+            eventConnectionChanged?.Invoke(status);
         }
     }
 }

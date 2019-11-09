@@ -50,7 +50,12 @@ namespace AdvancedScada.HMI.MainForm
                 }
                 client = ClientDriverHelper.GetInstance().GetReadService();
                 client.Connect(XCollection.CURRENT_MACHINE);
+                var tags = ClientDriverHelper.GetInstance().GetReadServiceWeb().GetCollection();
 
+                foreach (var item in tags)
+                {
+
+                }
             }
             catch (CommunicationException ex)
             {

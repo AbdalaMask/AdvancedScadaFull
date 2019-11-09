@@ -1,8 +1,10 @@
 ﻿using AdvancedScada.BaseService;
+using AdvancedScada.BaseService.Client;
 using AdvancedScada.Common;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 using System.Windows.Forms;
 using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Studio.Service
@@ -19,17 +21,18 @@ namespace AdvancedScada.Studio.Service
         public ServiceHost InitializeTags(bool Start = false)
         {
             ServiceHost host = null;
-
+            WebServiceHost objWebServiceHost = null;
             try
             {
 
                 eventConnectionState += new EventConnectionState(SetConnectionState);
                 new ServiceDriverHelper().InitializePLC();
                 host = new ServiceDriverHelper().InitializeReadServiceHttp();
+                objWebServiceHost= new ServiceDriverHelper().InitializeReadServiceWeb();
                 host.Opened += host_Opened;
                 host.Open();
 
-
+              
 
                 foreach (var se in host.Description.Endpoints)
                 {
@@ -39,6 +42,13 @@ namespace AdvancedScada.Studio.Service
                     DGServerUtils.Rows.Add(row);
                 }
 
+                foreach (var se in objWebServiceHost.Description.Endpoints)
+                {
+                    string[] row = { Convert.ToString(DateTime.Now), string.Format("{0}", se.Binding.Name), string.Format("{0}", se.Address) };
+
+
+                    DGServerUtils.Rows.Add(row);
+                }
 
                 if (host.State == CommunicationState.Opened) txtStatus.Text = "The Server is running";
 

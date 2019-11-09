@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using System.ServiceModel.Web;
 using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.BaseService
@@ -90,6 +91,29 @@ namespace AdvancedScada.BaseService
 
             }
             return serviceHost;
+        }
+        public WebServiceHost InitializeReadServiceWeb()
+        {
+            WebServiceHost objWebServiceHost = null;
+
+            try
+            {
+                Uri uriWeb = new Uri(string.Format(URI_DRIVERWeb2, Environment.MachineName, PORTWeb, "Driver"));
+                Uri uriWS = new Uri(string.Format(URI_DRIVERWeb2, Environment.MachineName, 8088, "Driver"));
+                 objWebServiceHost = new WebServiceHost(typeof(ReadServiceWeb));
+                WebHttpBinding objWebHttpBinding = GetWebHttpBinding();
+                WSHttpBinding objWSHttpBinding = GetWSHttpBinding();
+                objWebServiceHost.AddServiceEndpoint(typeof(IReadServiceWeb), objWebHttpBinding, uriWeb);
+                objWebServiceHost.AddServiceEndpoint(typeof(IReadServiceWeb), objWSHttpBinding, uriWS);
+                objWebServiceHost.Open();
+ 
+            }
+            catch (Exception ex)
+            {
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+
+            }
+            return objWebServiceHost;
         }
         private IODriver GetDriver(string ChannelTypes)
         {

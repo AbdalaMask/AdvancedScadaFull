@@ -99,7 +99,7 @@
         <Motor:WaterPump HorizontalAlignment="Left" Height="69" Margin="361,382,0,0" Grid.Row="2" VerticalAlignment="Top" Width="119" PLCAddressValue="CH1.PLC1.DataBlock2.TAG00021"/>
         <Display:HMILable x:Name="thnk_set_8_Copy1" HorizontalAlignment="Left" Height="19" Margin="442,280,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" PLCAddressValue="CH1.PLC1.DataBlock1.TAG00001" Text="000" Background="#FFC0FFC0" Foreground="#FF1B1818" BorderStyle="FixedSingle"/>
         <Display:HMILable x:Name="thnk_rec_8_Copy" HorizontalAlignment="Left" Height="19" Margin="442,304,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" PLCAddressValue="CH1.PLC1.DataBlock1.TAG00001" Text="000" Foreground="#FF1B1818" BorderStyle="FixedSingle" Background="#FFFFE0C0"/>
-        <SevenSegment:HMISevenSegmentNew HorizontalAlignment="Left" Height="78" Margin="479,64,0,0" Grid.Row="2" VerticalAlignment="Top" Width="152"   PLCAddressValue="CH1.PLC1.DataBlock1.TAG00002" PLCAddressClick="CH1.PLC1.DataBlock1.TAG00003" />
+        <SevenSegment:HMISevenSegmentNew HorizontalAlignment="Left" Height="78" Margin="479,64,0,0" Grid.Row="2" VerticalAlignment="Top" Width="147"   PLCAddressValue="CH1.PLC1.DataBlock1.TAG00002" PLCAddressClick="CH1.PLC1.DataBlock1.TAG00003" />
 
 
 

@@ -171,7 +171,7 @@
       <Name>IBaseService</Name>
     </ProjectReference>
     <ProjectReference Include="..\AdvancedScada.WPF.HMIControls\WPF.HMIControls.csproj">
-      <Project>{7BB41A25-5526-4284-A6EB-5A2801328EB7}</Project>
+      <Project>{7bb41a25-5526-4284-a6eb-5a2801328eb7}</Project>
       <Name>WPF.HMIControls</Name>
     </ProjectReference>
   </ItemGroup>

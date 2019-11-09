@@ -1,6 +1,7 @@
 ﻿using AdvancedScada.IBaseService;
 using System;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.BaseService.Client
@@ -25,7 +26,23 @@ namespace AdvancedScada.BaseService.Client
             }
             return new ClientDriverHelper();
         }
-
+        public IReadServiceWeb GetReadServiceWeb()
+        {
+            try
+            {
+                
+                
+                WebHttpBinding objWebHttpBinding = GetWebHttpBinding();
+                WebChannelFactory<IReadServiceWeb> cf = new WebChannelFactory<IReadServiceWeb>(objWebHttpBinding, new Uri(string.Format(URI_DRIVERWeb2, IP_ADDRESS, PORTWeb, "Driver")));
+                IReadServiceWeb client = cf.CreateChannel();
+                return client;
+            }
+            catch (Exception ex)
+            {
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            }
+            return null;
+        }
         public IReadService GetReadService()
         {
             try

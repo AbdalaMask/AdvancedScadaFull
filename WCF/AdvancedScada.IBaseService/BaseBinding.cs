@@ -7,9 +7,10 @@ namespace AdvancedScada.IBaseService
     public class BaseBinding
     {
         protected ushort PORT = 8086;
-
+        protected ushort PORTWeb = 8090;
         protected string URI_DRIVER = "net.tcp://{0}:{1}/DriverService/{2}";
         protected string URI_DRIVERWeb = "http://{0}/DriverService/{1}";
+        protected string URI_DRIVERWeb2 = "http://{0}:{1}/DriverService/{2}";
         protected const string DRIVER = "Driver";
 
 

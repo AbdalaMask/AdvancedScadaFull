@@ -207,7 +207,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DisplayError("WRITE FAILED!" + ex.Message);
             }
         }
 

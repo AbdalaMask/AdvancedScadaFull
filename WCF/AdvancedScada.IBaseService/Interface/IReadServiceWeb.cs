@@ -6,15 +6,18 @@ using System.ServiceModel.Web;
 
 namespace AdvancedScada.IBaseService
 {
-    [ServiceContract]
+    [ServiceContract()]
     public interface IReadServiceWeb
     {
-
-        [OperationContract]
         [FaultContract(typeof(IFaultException))]
-        [WebInvoke(Method = "GET", UriTemplate = "GetCollection", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "GetCollectionTag", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
         Dictionary<string, Tag> GetCollection();
 
-
+        [FaultContract(typeof(IFaultException))]
+        [WebInvoke(Method = "POST", UriTemplate = "WritePLC?TagName={TagName}&ValueTag={ValueTag}", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        [OperationContract()]
+        int WriteTag(string TagName, dynamic ValueTag);
+ 
     }
 }

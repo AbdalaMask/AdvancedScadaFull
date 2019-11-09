@@ -78,6 +78,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="Tulpep.NotificationWindow, Version=1.1.25.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Tulpep.NotificationWindow.1.1.25\lib\net40\Tulpep.NotificationWindow.dll</HintPath>

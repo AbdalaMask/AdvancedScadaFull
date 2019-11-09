@@ -229,6 +229,8 @@ namespace AdvancedScada.Studio.Monitor
                 client.Connect(XCollection.CURRENT_MACHINE);
 
                 IsConnected = true;
+
+              
             }
             catch (Exception ex)
             {

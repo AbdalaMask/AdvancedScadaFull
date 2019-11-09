@@ -1,4 +1,5 @@
-﻿using AdvancedScada.DriverBase;
+﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IBaseService;
 using AdvancedScada.Management.BLManager;
@@ -7,13 +8,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
-using static AdvancedScada.IBaseService.Common.XCollection;
+using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.BaseService
 {
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class ReadServiceWeb: IReadServiceWeb
     {
-        private ChannelService objChannelManager;
+        private readonly ChannelService objChannelManager;
         IODriver driverHelper = null;
         public ReadServiceWeb()
         {
@@ -45,7 +46,7 @@ namespace AdvancedScada.BaseService
             List<Tag> result = null;
             try
             {
-                
+
                 result = TagCollection.Tags.Values.ToList<Tag>();
             }
             catch (Exception ex)
@@ -55,11 +56,14 @@ namespace AdvancedScada.BaseService
             return result;
         }
 
-        public void WriteTag(string tagName, dynamic value)
+        
+
+        public int WriteTag(string tagName, dynamic Value)
         {
             try
             {
-                if (objChannelManager == null) return ;
+                
+                if (objChannelManager == null) return 0;
 
                 var strArrays = tagName.Split('.');
                 var str = $"{strArrays[0]}.{strArrays[1]}";
@@ -72,7 +76,7 @@ namespace AdvancedScada.BaseService
                         {
                             driverHelper = GetDriver(Channels.ChannelTypes);
 
-                            driverHelper?.WriteTag(tagName, value);
+                            driverHelper?.WriteTag(tagName, Value);
                             break;
                         }
                     }
@@ -83,7 +87,8 @@ namespace AdvancedScada.BaseService
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
                 throw new FaultException<IFaultException>(new IFaultException(ex.Message));
             }
-            
+            return 1;
+
         }
     }
 }

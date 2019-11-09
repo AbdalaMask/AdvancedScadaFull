@@ -1,7 +1,16 @@
 ﻿using AdvancedScada.DriverBase.Devices;
+using System.Runtime.Serialization;
 
 namespace AdvancedScada.Common
 {
+    [DataContract]
+    public class IODriverWrite
+    {
+        [DataMember]
+        public string TagName { get; set; }
+        [DataMember]
+        public dynamic Value { get; set; }
+    }
     public interface IODriver
     {
         string Name { get; }

@@ -44,10 +44,10 @@
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txtCategoryName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
-            this.fbd = new System.Windows.Forms.FolderBrowserDialog();
             this.Pic = new System.Windows.Forms.PictureBox();
             this.btnOK2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnCancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.fbd = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
@@ -207,9 +207,9 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(295, 49);
+            this.btnOK.Location = new System.Drawing.Point(216, 49);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(90, 25);
+            this.btnOK.Size = new System.Drawing.Size(110, 25);
             this.btnOK.TabIndex = 2;
             this.btnOK.Values.Text = "CategoryName";
             this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);

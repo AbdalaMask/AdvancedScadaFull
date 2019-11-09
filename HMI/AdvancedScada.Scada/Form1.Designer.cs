@@ -31,7 +31,6 @@
             this.sevenSegment21 = new AdvancedScada.Controls_Net45.SevenSegment2();
             this.sevenSegment31 = new AdvancedScada.Controls_Net45.SevenSegment3();
             this.sevenSegmentGDI1 = new AdvancedScada.Controls_Net45.SevenSegmentGDI();
-            this.digitalDisplayControl1 = new AdvancedScada.Controls_Net45.DigitalDisplayControl();
             this.SuspendLayout();
             // 
             // sevenSegment21
@@ -108,22 +107,11 @@
             this.sevenSegmentGDI1.Text = "sevenSegmentGDI1";
             this.sevenSegmentGDI1.Value = 0D;
             // 
-            // digitalDisplayControl1
-            // 
-            this.digitalDisplayControl1.BackColor = System.Drawing.Color.Transparent;
-            this.digitalDisplayControl1.DigitColor = System.Drawing.Color.Red;
-            this.digitalDisplayControl1.Location = new System.Drawing.Point(401, 12);
-            this.digitalDisplayControl1.Name = "digitalDisplayControl1";
-            this.digitalDisplayControl1.Size = new System.Drawing.Size(282, 92);
-            this.digitalDisplayControl1.TabIndex = 3;
-            this.digitalDisplayControl1.Text = "digitalDisplayControl1";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.digitalDisplayControl1);
             this.Controls.Add(this.sevenSegmentGDI1);
             this.Controls.Add(this.sevenSegment31);
             this.Controls.Add(this.sevenSegment21);
@@ -138,6 +126,5 @@
         private Controls_Net45.SevenSegment2 sevenSegment21;
         private Controls_Net45.SevenSegment3 sevenSegment31;
         private Controls_Net45.SevenSegmentGDI sevenSegmentGDI1;
-        private Controls_Net45.DigitalDisplayControl digitalDisplayControl1;
     }
 }

@@ -29,11 +29,7 @@ namespace AdvancedScada.BaseService
                         {
                             if (listCallbackChannels.Count > 0)
                             {
-                                //Action<IS7ConnectorServiceCallback> invoke = objIS7ConnectorServiceCallback => objIS7ConnectorServiceCallback.UpdateTagCollection(S7DriverHelper.TagCollection);
-                                //listCallbackChannels.ForEach(invoke);
-                                //Thread.Sleep(100);
-
-
+                                
                                 foreach (IServiceCallback item in listCallbackChannels)
                                 {
                                     try
