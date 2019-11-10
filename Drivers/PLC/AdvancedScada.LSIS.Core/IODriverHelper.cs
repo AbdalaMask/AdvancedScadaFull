@@ -41,7 +41,7 @@ namespace AdvancedScada.LSIS.Core
                 Channels.Add(ch);
 
 
-                ILSISAdapter DriverAdapter = null;
+                IDriverAdapter DriverAdapter = null;
                 foreach (var dv in ch.Devices)
                 {
                     try
@@ -110,7 +110,7 @@ namespace AdvancedScada.LSIS.Core
                     
                     taskArray[i] = new Task((chParam) =>
                     {
-                        ILSISAdapter DriverAdapter = null;
+                        IDriverAdapter DriverAdapter = null;
                         Channel ch = (Channel)chParam;
 
                         switch (ch.ConnectionType)
@@ -220,7 +220,7 @@ namespace AdvancedScada.LSIS.Core
         #endregion
         #region SendPackage All
 
-        private void SendPackageLSIS(ILSISAdapter DriverAdapter, DataBlock db)
+        private void SendPackageLSIS(IDriverAdapter DriverAdapter, DataBlock db)
         {
             try
             {
@@ -497,7 +497,7 @@ namespace AdvancedScada.LSIS.Core
 
                         if (string.Format("{0}.{1}", ch.ChannelName, dv.DeviceName).Equals(tagDevice))
                         {
-                            ILSISAdapter DriverAdapter = null;
+                            IDriverAdapter DriverAdapter = null;
                             switch (ch.ConnectionType)
                             {
                                 case "SerialPort":

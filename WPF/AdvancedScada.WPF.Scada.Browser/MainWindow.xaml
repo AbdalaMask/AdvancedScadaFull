@@ -1,0 +1,22 @@
+﻿<Window x:Class="AdvancedScada.WPF.Scada.Browser.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdvancedScada.WPF.Scada.Browser"
+                xmlns:Display="clr-namespace:AdvancedScada.WPF.HMIControls.Display;assembly=AdvancedScada.WPF.HMIControls" xmlns:ImageAll="clr-namespace:AdvancedScada.WPF.HMIControls.ImageAll;assembly=AdvancedScada.WPF.HMIControls" xmlns:ButtonAll="clr-namespace:AdvancedScada.WPF.HMIControls.ButtonAll;assembly=AdvancedScada.WPF.HMIControls" xmlns:HMIControls="clr-namespace:AdvancedScada.WPF.HMIControls;assembly=AdvancedScada.WPF.HMIControls" xmlns:Indicator="clr-namespace:AdvancedScada.WPF.HMIControls.Indicator;assembly=AdvancedScada.WPF.HMIControls" xmlns:SevenSegment="clr-namespace:AdvancedScada.WPF.HMIControls.SevenSegment;assembly=AdvancedScada.WPF.HMIControls" xmlns:TankAll="clr-namespace:AdvancedScada.WPF.HMIControls.HslControl.TankAll;assembly=AdvancedScada.WPF.HMIControls" xmlns:Led="clr-namespace:AdvancedScada.WPF.HMIControls.Led;assembly=AdvancedScada.WPF.HMIControls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="0,0,2,-6">
+        <ButtonAll:HMIButton3 HorizontalAlignment="Left" Height="110" Margin="10,0,0,0" VerticalAlignment="Top" Width="148"/>
+        <ButtonAll:HMIButton4 HorizontalAlignment="Left" Margin="217,132,0,154" Width="152"/>
+        <ButtonAll:HMIButton2 HorizontalAlignment="Left" Height="65" Margin="10,105,0,0" VerticalAlignment="Top" Width="148" RenderTransformOrigin="0.079,-0.293"/>
+        <Display:HMILable HorizontalAlignment="Left" Height="39" Margin="501,14,-473,0" VerticalAlignment="Top" Width="103" Text="66" PLCAddressValue="Ch1.PLC1.DataBlock1.TAG00001" BorderStyle="FixedSingle" PLCAddressKeypad="Ch1.PLC1.DataBlock1.TAG00001"/>
+        <Indicator:HMIIndicator HorizontalAlignment="Left" Height="93" Margin="163,17,0,0" VerticalAlignment="Top" Width="136" PLCAddressValue="CH3.PLC1.DataBlock1.TAG00002" Value="True"/>
+        <SevenSegment:HMISevenSegmentsStack HorizontalAlignment="Left" Height="106" Margin="406,241,0,0" VerticalAlignment="Top" Width="366" ElementsCount="6" Value="7" PLCAddressKeypad="CH3.PLC1.DataBlock2.TAG00019" PLCAddressValue="CH3.PLC1.DataBlock2.TAG00019" PenThickness="0" TiltAngle="5" SelectedFillBrush="#FF2350B0"/>
+        <TankAll:HMIBottle x:Name="t" HorizontalAlignment="Left" Height="199" Margin="698,10,0,0" VerticalAlignment="Top" Width="84" PLCAddressValue="CH3.PLC1.DataBlock2.TAG00018" Value="50"/>
+        <ImageAll:HMIImageContainerSvg HorizontalAlignment="Left" Height="134" Margin="22,175,0,0" VerticalAlignment="Top" Width="190" GraphicAllOff="pack://application:,,,/AdvancedScada.Images;component/svgimages/weather/Weather_3" GraphicSelect1="pack://application:,,,/AdvancedScada.Images;component/svgimages/buttons/Buttons_16" GraphicSelect2="pack://application:,,,/AdvancedScada.Images;component/svgimages/buttons/Buttons_18"/>
+        <SevenSegment:HMISevenSegmentNew HorizontalAlignment="Left" Height="76" Margin="470,94,0,0" VerticalAlignment="Top" Width="152" Value="8888"/>
+
+    </Grid>
+</Window>

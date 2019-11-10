@@ -1,12 +1,11 @@
 ﻿using AdvancedScada.Common;
-using AdvancedScada.LSIS.Common;
 using HslCommunication.Profinet.LSIS;
 using System;
 using System.IO.Ports;
 using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.LSIS.Core.LSIS.Cnet
 {
-    public class LS_CNET : ILSISAdapter
+    public class LS_CNET : IDriverAdapter
     {
         private SerialPort serialPort;
         private XGBCnet xGBCnet = null;
@@ -255,9 +254,6 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
 
         }
 
-        public bool[] ReadDiscrete(string address, ushort length)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
