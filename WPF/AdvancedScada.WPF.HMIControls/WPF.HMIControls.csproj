@@ -64,6 +64,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Alarm\HMIAlarm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ButtonAll\HMIButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,8 +144,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alarm\dgAlarmH.cs" />
+    <Compile Include="Alarm\HMIAlarm.xaml.cs">
+      <DependentUpon>HMIAlarm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ButtonAll\HMIAnnunciator.cs" />
     <Compile Include="ButtonAll\HMIButton.xaml.cs">
       <DependentUpon>HMIButton.xaml</DependentUpon>
@@ -163,6 +175,8 @@
     <Compile Include="Fun\HMIFun.xaml.cs">
       <DependentUpon>HMIFun.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Gauge\HMICircularGaugeControl.cs" />
+    <Compile Include="Gauge\TypeConverters.cs" />
     <Compile Include="HMIShapes.cs" />
     <Compile Include="HslControl\TankAll\HMIBottle.xaml.cs">
       <DependentUpon>HMIBottle.xaml</DependentUpon>
@@ -248,7 +262,12 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Themes\" />
+    <Resource Include="Images\BOScheduler_16x16.png" />
+    <Resource Include="Images\ExportToDOC_16x16.png" />
+    <Resource Include="Images\ExportToPDF_16x16.png" />
+    <Resource Include="Images\ExportToXLS_16x16.png" />
+    <Resource Include="Images\ImportImage_16x16.png" />
+    <Resource Include="Images\Printer_16x16.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\AnnunciatorOff.png" />

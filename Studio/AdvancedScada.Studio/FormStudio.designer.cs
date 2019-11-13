@@ -50,6 +50,11 @@
             this.kryptonRibbonGroupGallery1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupGallery();
             this.kryptonGalleryRange1 = new ComponentFactory.Krypton.Ribbon.KryptonGalleryRange();
             this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
+            this.kryptonRibbonGroup6 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
+            this.kryptonRibbonGroupTriple6 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
+            this.kryptonRibbonGroupButton1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonRibbonGroupButton2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonRibbonGroupButton3 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonTab2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup4 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple4 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
@@ -123,7 +128,8 @@
             this.kryptonRibbonGroup5,
             this.kryptonRibbonGroup1,
             this.kryptonRibbonGroup2,
-            this.kryptonRibbonGroup3});
+            this.kryptonRibbonGroup3,
+            this.kryptonRibbonGroup6});
             this.kryptonRibbonTab1.Text = "MainMenu";
             // 
             // kryptonRibbonGroup5
@@ -217,7 +223,8 @@
             this.kryptonRibbonGroupGallery1.DropButtonRanges.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonGalleryRange[] {
             this.kryptonGalleryRange1});
             this.kryptonRibbonGroupGallery1.ImageList = this.imageListLarge;
-            this.kryptonRibbonGroupGallery1.LargeItemCount = 5;
+            this.kryptonRibbonGroupGallery1.LargeItemCount = 1;
+            this.kryptonRibbonGroupGallery1.MediumItemCount = 1;
             this.kryptonRibbonGroupGallery1.SelectedIndexChanged += new System.EventHandler(this.kryptonRibbonGroupGallery1_SelectedIndexChanged);
             // 
             // imageListLarge
@@ -240,6 +247,34 @@
             this.imageListLarge.Images.SetKeyName(13, "user3.png");
             this.imageListLarge.Images.SetKeyName(14, "user1.png");
             this.imageListLarge.Images.SetKeyName(15, "user2.png");
+            // 
+            // kryptonRibbonGroup6
+            // 
+            this.kryptonRibbonGroup6.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
+            this.kryptonRibbonGroupTriple6});
+            this.kryptonRibbonGroup6.TextLine1 = "Alarms";
+            // 
+            // kryptonRibbonGroupTriple6
+            // 
+            this.kryptonRibbonGroupTriple6.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
+            this.kryptonRibbonGroupButton1,
+            this.kryptonRibbonGroupButton2,
+            this.kryptonRibbonGroupButton3});
+            // 
+            // kryptonRibbonGroupButton1
+            // 
+            this.kryptonRibbonGroupButton1.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.BOScheduler_32x32;
+            this.kryptonRibbonGroupButton1.TextLine1 = "Alarm classes";
+            // 
+            // kryptonRibbonGroupButton2
+            // 
+            this.kryptonRibbonGroupButton2.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.Number_32x32;
+            this.kryptonRibbonGroupButton2.TextLine1 = "Alarm Analog";
+            // 
+            // kryptonRibbonGroupButton3
+            // 
+            this.kryptonRibbonGroupButton3.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.DecreaseDecimal_32x32;
+            this.kryptonRibbonGroupButton3.TextLine1 = "Discrete Alarms";
             // 
             // kryptonRibbonTab2
             // 
@@ -511,6 +546,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::AdvancedScada.Studio.Properties.Resources.img_wemx_designer_5;
             this.pictureBox1.Location = new System.Drawing.Point(538, 3);
             this.pictureBox1.Name = "pictureBox1";
@@ -638,7 +674,6 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup2;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple3;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton barButtonLibraryImages;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup3;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupGallery kryptonRibbonGroupGallery1;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup4;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple4;
@@ -680,6 +715,12 @@
         private ComponentFactory.Krypton.Navigator.KryptonPage tabFormMain;
         private System.Windows.Forms.PictureBox pictureBox1;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupCheckBox CheckEnabele;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup6;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple6;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton1;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton2;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton3;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup3;
     }
 }
 

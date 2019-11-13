@@ -71,13 +71,21 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alarm\HMIAlarm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Alarm\HMIAlarm.Designer.cs">
+      <DependentUpon>HMIAlarm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Alarm\HMIAlarmMan.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -228,6 +236,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Segment\HMILCDMatrix.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -293,8 +306,13 @@
       <Name>Monitor</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <None Include="Resources\Printer_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Alarm\HMIAlarm.resx">
+      <DependentUpon>HMIAlarm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Alarm\HMIAlarmMan.resx">
       <DependentUpon>HMIAlarmMan.cs</DependentUpon>
     </EmbeddedResource>
@@ -310,6 +328,25 @@
     <EmbeddedResource Include="HslControl\Pipe\HMIPipeLine.resx">
       <DependentUpon>HMIPipeLine.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExportToPDF_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExportToDOC_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExportToXLS_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImportImage_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BOScheduler_16x16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

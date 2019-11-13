@@ -123,6 +123,16 @@ namespace AdvancedScada.Studio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BOScheduler_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("BOScheduler_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap BottomCenterHorizontalOutside_16x16 {
             get {
                 object obj = ResourceManager.GetObject("BottomCenterHorizontalOutside_16x16", resourceCulture);
@@ -226,6 +236,16 @@ namespace AdvancedScada.Studio.Properties {
         internal static System.Drawing.Bitmap Database_32x32 {
             get {
                 object obj = ResourceManager.GetObject("Database_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DecreaseDecimal_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("DecreaseDecimal_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -426,6 +446,16 @@ namespace AdvancedScada.Studio.Properties {
         internal static System.Drawing.Bitmap New {
             get {
                 object obj = ResourceManager.GetObject("New", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Number_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("Number_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

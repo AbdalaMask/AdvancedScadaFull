@@ -80,12 +80,31 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
     <Reference Include="Tulpep.NotificationWindow, Version=1.1.25.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Tulpep.NotificationWindow.1.1.25\lib\net40\Tulpep.NotificationWindow.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alarms\FrmAlarmAnalog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Alarms\FrmAlarmAnalog.Designer.cs">
+      <DependentUpon>FrmAlarmAnalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Alarms\FrmAlarmClasses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Alarms\FrmAlarmClasses.Designer.cs">
+      <DependentUpon>FrmAlarmClasses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Alarms\FrmDiscreteAlarm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Alarms\FrmDiscreteAlarm.Designer.cs">
+      <DependentUpon>FrmDiscreteAlarm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Config\FormConfiguration.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +218,9 @@
     <Compile Include="Tools\ContentHistory.Designer.cs">
       <DependentUpon>ContentHistory.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Alarms\FrmAlarmAnalog.resx">
+      <DependentUpon>FrmAlarmAnalog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Config\FormConfiguration.resx">
       <DependentUpon>FormConfiguration.cs</DependentUpon>
     </EmbeddedResource>
@@ -475,6 +497,16 @@
   <ItemGroup>
     <None Include="Resources\PLC SIEMENS.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BOScheduler_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DecreaseDecimal_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Number_32x32.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
