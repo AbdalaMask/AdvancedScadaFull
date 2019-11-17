@@ -491,8 +491,6 @@ Public Module SqlDb
         param(9) = New SqlParameter("@Tank8", SqlDbType.VarChar)
         param(9).Value = Tank8
 
-        param(9) = New SqlParameter("@Tank8", SqlDbType.VarChar)
-        param(9).Value = Tank8
 
         param(10) = New SqlParameter("@Tank9", SqlDbType.VarChar)
         param(10).Value = thnk_rec_oil

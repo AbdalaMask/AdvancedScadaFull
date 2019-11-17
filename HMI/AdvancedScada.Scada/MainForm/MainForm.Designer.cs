@@ -199,7 +199,6 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiMotor3 = new AdvancedScada.Controls_Binding.Motor.HMIMotor();
             this.hmiMotor2 = new AdvancedScada.Controls_Binding.Motor.HMIMotor();
             this.hmiMotor1 = new AdvancedScada.Controls_Binding.Motor.HMIMotor();
-            this.hmiSimpleWebServer1 = new AdvancedScada.Controls_Binding.Components.HMISimpleWebServer();
             this.Panel3.SuspendLayout();
             this.Panel14.SuspendLayout();
             this.Panel15.SuspendLayout();
@@ -219,7 +218,6 @@ namespace AdvancedScada.HMI.MainForm
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.Panel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.hmiSimpleWebServer1)).BeginInit();
             this.SuspendLayout();
             // 
             // Panel3
@@ -2467,11 +2465,11 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiIndicator2.Name = "hmiIndicator2";
             this.hmiIndicator2.OutlineColor = System.Drawing.Color.Transparent;
             this.hmiIndicator2.OutlineWidth = 1;
-            this.hmiIndicator2.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.MomentarySet;
-            this.hmiIndicator2.PLCAddressClick = "";
+            this.hmiIndicator2.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
+            this.hmiIndicator2.PLCAddressClick = "CH1.PLC1.DataM3.TAG00042";
             this.hmiIndicator2.PLCAddressEnabled = null;
             this.hmiIndicator2.PLCAddressText = "";
-            this.hmiIndicator2.PLCAddressValue = "CH1.PLC1.DataM2.TAG00026";
+            this.hmiIndicator2.PLCAddressValue = "CH1.PLC1.DataP2.TAG00067";
             this.hmiIndicator2.PLCAddressVisible = "";
             this.hmiIndicator2.SelectColor2 = false;
             this.hmiIndicator2.SelectColor3 = false;
@@ -3264,7 +3262,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle7.PLCAddressClick = "CH1.PLC1.DataM2.TAG00024";
             this.hmiLedSingle7.PLCAddressEnabled = null;
             this.hmiLedSingle7.PLCAddressText = "";
-            this.hmiLedSingle7.PLCAddressValue = "CH1.PLC1.DataM2.TAG00024";
+            this.hmiLedSingle7.PLCAddressValue = "CH1.PLC1.DataP3.TAG00301";
             this.hmiLedSingle7.PLCAddressVisible = "";
             this.hmiLedSingle7.RoundRadius = 30;
             this.hmiLedSingle7.Shape = DasNetIndicator.DAS_ShapeStyle.SS_Circle;
@@ -3315,7 +3313,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle8.PLCAddressClick = "CH1.PLC1.DataM2.TAG00023";
             this.hmiLedSingle8.PLCAddressEnabled = null;
             this.hmiLedSingle8.PLCAddressText = "";
-            this.hmiLedSingle8.PLCAddressValue = "CH1.PLC1.DataM2.TAG00023";
+            this.hmiLedSingle8.PLCAddressValue = "CH1.PLC1.DataP3.TAG00300";
             this.hmiLedSingle8.PLCAddressVisible = "";
             this.hmiLedSingle8.RoundRadius = 30;
             this.hmiLedSingle8.Shape = DasNetIndicator.DAS_ShapeStyle.SS_Circle;
@@ -3366,7 +3364,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle5.PLCAddressClick = "CH1.PLC1.DataM2.TAG00022";
             this.hmiLedSingle5.PLCAddressEnabled = null;
             this.hmiLedSingle5.PLCAddressText = "";
-            this.hmiLedSingle5.PLCAddressValue = "CH1.PLC1.DataM2.TAG00022";
+            this.hmiLedSingle5.PLCAddressValue = "CH1.PLC1.DataP3.TAG00299";
             this.hmiLedSingle5.PLCAddressVisible = "";
             this.hmiLedSingle5.RoundRadius = 30;
             this.hmiLedSingle5.Shape = DasNetIndicator.DAS_ShapeStyle.SS_Circle;
@@ -3417,7 +3415,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle6.PLCAddressClick = "CH1.PLC1.DataM2.TAG00021";
             this.hmiLedSingle6.PLCAddressEnabled = null;
             this.hmiLedSingle6.PLCAddressText = "";
-            this.hmiLedSingle6.PLCAddressValue = "CH1.PLC1.DataM2.TAG00021";
+            this.hmiLedSingle6.PLCAddressValue = "CH1.PLC1.DataP3.TAG00298";
             this.hmiLedSingle6.PLCAddressVisible = "";
             this.hmiLedSingle6.RoundRadius = 30;
             this.hmiLedSingle6.Shape = DasNetIndicator.DAS_ShapeStyle.SS_Circle;
@@ -3468,7 +3466,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle3.PLCAddressClick = "CH1.PLC1.DataM2.TAG00020";
             this.hmiLedSingle3.PLCAddressEnabled = null;
             this.hmiLedSingle3.PLCAddressText = "";
-            this.hmiLedSingle3.PLCAddressValue = "CH1.PLC1.DataM2.TAG00020";
+            this.hmiLedSingle3.PLCAddressValue = "CH1.PLC1.DataP3.TAG00297";
             this.hmiLedSingle3.PLCAddressVisible = "";
             this.hmiLedSingle3.RoundRadius = 30;
             this.hmiLedSingle3.Shape = DasNetIndicator.DAS_ShapeStyle.SS_Circle;
@@ -3519,7 +3517,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle4.PLCAddressClick = "CH1.PLC1.DataM2.TAG00019";
             this.hmiLedSingle4.PLCAddressEnabled = null;
             this.hmiLedSingle4.PLCAddressText = "";
-            this.hmiLedSingle4.PLCAddressValue = "CH1.PLC1.DataM2.TAG00019";
+            this.hmiLedSingle4.PLCAddressValue = "CH1.PLC1.DataP3.TAG00296";
             this.hmiLedSingle4.PLCAddressVisible = "";
             this.hmiLedSingle4.RoundRadius = 30;
             this.hmiLedSingle4.Shape = DasNetIndicator.DAS_ShapeStyle.SS_Circle;
@@ -3570,7 +3568,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle2.PLCAddressClick = "CH1.PLC1.DataM2.TAG00018";
             this.hmiLedSingle2.PLCAddressEnabled = null;
             this.hmiLedSingle2.PLCAddressText = "";
-            this.hmiLedSingle2.PLCAddressValue = "CH1.PLC1.DataM2.TAG00018";
+            this.hmiLedSingle2.PLCAddressValue = "CH1.PLC1.DataP3.TAG00295";
             this.hmiLedSingle2.PLCAddressVisible = "";
             this.hmiLedSingle2.RoundRadius = 30;
             this.hmiLedSingle2.Shape = DasNetIndicator.DAS_ShapeStyle.SS_Circle;
@@ -3621,7 +3619,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiLedSingle1.PLCAddressClick = "CH1.PLC1.DataM2.TAG00017";
             this.hmiLedSingle1.PLCAddressEnabled = null;
             this.hmiLedSingle1.PLCAddressText = "";
-            this.hmiLedSingle1.PLCAddressValue = "CH1.PLC1.DataM2.TAG00017";
+            this.hmiLedSingle1.PLCAddressValue = "CH1.PLC1.DataP3.TAG00294";
             this.hmiLedSingle1.PLCAddressVisible = "";
             this.hmiLedSingle1.RoundRadius = 30;
             this.hmiLedSingle1.Shape = DasNetIndicator.DAS_ShapeStyle.SS_Circle;
@@ -3680,11 +3678,10 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel3.OuterBorderLength = 3;
             this.hmiProcessLevel3.OuterBorderLightColor = System.Drawing.Color.White;
             this.hmiProcessLevel3.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
-            this.hmiProcessLevel3.PLCAddressClick = "CH1.PLC1.DataM2.TAG00030";
+            this.hmiProcessLevel3.PLCAddressClick = "CH1.PLC1.DataM3.TAG00046";
             this.hmiProcessLevel3.PLCAddressEnabled = null;
-            this.hmiProcessLevel3.PLCAddressKeypad = "CH1.PLC1.DataM2.TAG00030";
             this.hmiProcessLevel3.PLCAddressText = "";
-            this.hmiProcessLevel3.PLCAddressValue = "CH1.PLC1.DataM2.TAG00030";
+            this.hmiProcessLevel3.PLCAddressValue = "CH1.PLC1.DataP3.TAG00307";
             this.hmiProcessLevel3.PLCAddressVisible = "";
             this.hmiProcessLevel3.RoundRadius = 30;
             this.hmiProcessLevel3.ShadowColor = System.Drawing.Color.DimGray;
@@ -3696,7 +3693,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel3.Text = "hmiProcessLevel3";
             this.hmiProcessLevel3.UpdateDuration = 500;
             this.hmiProcessLevel3.UpdatePercentage = 0.1F;
-            this.hmiProcessLevel3.Value = false;
+            this.hmiProcessLevel3.Value = true;
             this.hmiProcessLevel3.Vertical = true;
             // 
             // hmiProcessLevel2
@@ -3745,11 +3742,10 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel2.OuterBorderLength = 3;
             this.hmiProcessLevel2.OuterBorderLightColor = System.Drawing.Color.White;
             this.hmiProcessLevel2.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
-            this.hmiProcessLevel2.PLCAddressClick = "CH1.PLC1.DataM2.TAG00030";
+            this.hmiProcessLevel2.PLCAddressClick = "CH1.PLC1.DataM3.TAG00046";
             this.hmiProcessLevel2.PLCAddressEnabled = null;
-            this.hmiProcessLevel2.PLCAddressKeypad = "";
             this.hmiProcessLevel2.PLCAddressText = "";
-            this.hmiProcessLevel2.PLCAddressValue = "CH1.PLC1.DataM2.TAG00030";
+            this.hmiProcessLevel2.PLCAddressValue = "CH1.PLC1.DataP3.TAG00307";
             this.hmiProcessLevel2.PLCAddressVisible = "";
             this.hmiProcessLevel2.RoundRadius = 30;
             this.hmiProcessLevel2.ShadowColor = System.Drawing.Color.DimGray;
@@ -3761,7 +3757,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel2.Text = "hmiProcessLevel2";
             this.hmiProcessLevel2.UpdateDuration = 500;
             this.hmiProcessLevel2.UpdatePercentage = 0.1F;
-            this.hmiProcessLevel2.Value = false;
+            this.hmiProcessLevel2.Value = true;
             this.hmiProcessLevel2.Vertical = false;
             // 
             // hmiProcessLevel1
@@ -3813,9 +3809,8 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel1.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
             this.hmiProcessLevel1.PLCAddressClick = "CH1.PLC1.DataM3.TAG00045";
             this.hmiProcessLevel1.PLCAddressEnabled = null;
-            this.hmiProcessLevel1.PLCAddressKeypad = "CH1.PLC1.DataM3.TAG00045";
             this.hmiProcessLevel1.PLCAddressText = "";
-            this.hmiProcessLevel1.PLCAddressValue = "CH1.PLC1.DataM3.TAG00045";
+            this.hmiProcessLevel1.PLCAddressValue = "CH1.PLC1.DataP3.TAG00306";
             this.hmiProcessLevel1.PLCAddressVisible = "";
             this.hmiProcessLevel1.RoundRadius = 30;
             this.hmiProcessLevel1.ShadowColor = System.Drawing.Color.DimGray;
@@ -3827,7 +3822,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiProcessLevel1.Text = "hmiProcessLevel1";
             this.hmiProcessLevel1.UpdateDuration = 500;
             this.hmiProcessLevel1.UpdatePercentage = 0.1F;
-            this.hmiProcessLevel1.Value = false;
+            this.hmiProcessLevel1.Value = true;
             this.hmiProcessLevel1.Vertical = false;
             // 
             // LBL_ReportViewer
@@ -4286,10 +4281,10 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiPilotLight1.MinimumHoldTime = 500;
             this.hmiPilotLight1.Name = "hmiPilotLight1";
             this.hmiPilotLight1.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
-            this.hmiPilotLight1.PLCAddressClick = "CH1.PLC1.DataM1.TAG00012";
+            this.hmiPilotLight1.PLCAddressClick = "CH1.PLC1.DataM1.TAG00015";
             this.hmiPilotLight1.PLCAddressEnabled = null;
             this.hmiPilotLight1.PLCAddressText = "";
-            this.hmiPilotLight1.PLCAddressValue = "CH1.PLC1.DataM1.TAG00012";
+            this.hmiPilotLight1.PLCAddressValue = "CH1.PLC1.DataM1.TAG00015";
             this.hmiPilotLight1.PLCAddressVisible = "";
             this.hmiPilotLight1.Size = new System.Drawing.Size(77, 113);
             this.hmiPilotLight1.TabIndex = 522;
@@ -4345,11 +4340,11 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiIndicator1.Name = "hmiIndicator1";
             this.hmiIndicator1.OutlineColor = System.Drawing.Color.Transparent;
             this.hmiIndicator1.OutlineWidth = 1;
-            this.hmiIndicator1.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.MomentarySet;
-            this.hmiIndicator1.PLCAddressClick = "";
+            this.hmiIndicator1.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
+            this.hmiIndicator1.PLCAddressClick = "CH1.PLC1.DataM3.TAG00041";
             this.hmiIndicator1.PLCAddressEnabled = null;
             this.hmiIndicator1.PLCAddressText = "";
-            this.hmiIndicator1.PLCAddressValue = "CH1.PLC1.DataM2.TAG00025";
+            this.hmiIndicator1.PLCAddressValue = "CH1.PLC1.DataP2.TAG00066";
             this.hmiIndicator1.PLCAddressVisible = "";
             this.hmiIndicator1.SelectColor2 = false;
             this.hmiIndicator1.SelectColor3 = false;
@@ -4407,7 +4402,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiMotor6.MinimumHoldTime = 500;
             this.hmiMotor6.Name = "hmiMotor6";
             this.hmiMotor6.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
-            this.hmiMotor6.PLCAddressClick = "CH1.PLC1.DataM2.TAG00022";
+            this.hmiMotor6.PLCAddressClick = "CH1.PLC1.DataM3.TAG00039";
             this.hmiMotor6.PLCAddressEnabled = null;
             this.hmiMotor6.PLCAddressText = "";
             this.hmiMotor6.PLCAddressValue = "CH1.PLC1.DataM2.TAG00022";
@@ -4427,7 +4422,7 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiMotor5.MinimumHoldTime = 500;
             this.hmiMotor5.Name = "hmiMotor5";
             this.hmiMotor5.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
-            this.hmiMotor5.PLCAddressClick = "CH1.PLC1.DataM2.TAG00021";
+            this.hmiMotor5.PLCAddressClick = "CH1.PLC1.DataM3.TAG00038";
             this.hmiMotor5.PLCAddressEnabled = null;
             this.hmiMotor5.PLCAddressText = "";
             this.hmiMotor5.PLCAddressValue = "CH1.PLC1.DataM2.TAG00021";
@@ -4447,10 +4442,10 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiMotor4.MinimumHoldTime = 500;
             this.hmiMotor4.Name = "hmiMotor4";
             this.hmiMotor4.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
-            this.hmiMotor4.PLCAddressClick = "CH1.PLC1.DataM2.TAG00020";
+            this.hmiMotor4.PLCAddressClick = "CH1.PLC1.DataM3.TAG00036";
             this.hmiMotor4.PLCAddressEnabled = null;
             this.hmiMotor4.PLCAddressText = "";
-            this.hmiMotor4.PLCAddressValue = "CH1.PLC1.DataM2.TAG00020";
+            this.hmiMotor4.PLCAddressValue = "CH1.PLC1.DataP3.TAG00297";
             this.hmiMotor4.PLCAddressVisible = "";
             this.hmiMotor4.Rotation = System.Drawing.RotateFlipType.RotateNoneFlipNone;
             this.hmiMotor4.Size = new System.Drawing.Size(46, 31);
@@ -4467,10 +4462,10 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiMotor3.MinimumHoldTime = 500;
             this.hmiMotor3.Name = "hmiMotor3";
             this.hmiMotor3.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
-            this.hmiMotor3.PLCAddressClick = "";
+            this.hmiMotor3.PLCAddressClick = "CH1.PLC1.DataM3.TAG00035";
             this.hmiMotor3.PLCAddressEnabled = null;
             this.hmiMotor3.PLCAddressText = "";
-            this.hmiMotor3.PLCAddressValue = "CH1.PLC1.DataM2.TAG00019";
+            this.hmiMotor3.PLCAddressValue = "CH1.PLC1.DataP3.TAG00296";
             this.hmiMotor3.PLCAddressVisible = "";
             this.hmiMotor3.Rotation = System.Drawing.RotateFlipType.RotateNoneFlipNone;
             this.hmiMotor3.Size = new System.Drawing.Size(46, 31);
@@ -4487,10 +4482,10 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiMotor2.MinimumHoldTime = 500;
             this.hmiMotor2.Name = "hmiMotor2";
             this.hmiMotor2.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
-            this.hmiMotor2.PLCAddressClick = "";
+            this.hmiMotor2.PLCAddressClick = "CH1.PLC1.DataM3.TAG00034";
             this.hmiMotor2.PLCAddressEnabled = null;
             this.hmiMotor2.PLCAddressText = "";
-            this.hmiMotor2.PLCAddressValue = "CH1.PLC1.DataM2.TAG00018";
+            this.hmiMotor2.PLCAddressValue = "CH1.PLC1.DataP3.TAG00295";
             this.hmiMotor2.PLCAddressVisible = "";
             this.hmiMotor2.Rotation = System.Drawing.RotateFlipType.RotateNoneFlipNone;
             this.hmiMotor2.Size = new System.Drawing.Size(46, 31);
@@ -4507,24 +4502,16 @@ namespace AdvancedScada.HMI.MainForm
             this.hmiMotor1.MinimumHoldTime = 500;
             this.hmiMotor1.Name = "hmiMotor1";
             this.hmiMotor1.OutputType = MfgControl.AdvancedHMI.Controls.OutputType.Toggle;
-            this.hmiMotor1.PLCAddressClick = "CH1.PLC1.DataM2.TAG00017";
+            this.hmiMotor1.PLCAddressClick = "CH1.PLC1.DataM3.TAG00033";
             this.hmiMotor1.PLCAddressEnabled = null;
             this.hmiMotor1.PLCAddressText = "";
-            this.hmiMotor1.PLCAddressValue = "CH1.PLC1.DataM2.TAG00017";
+            this.hmiMotor1.PLCAddressValue = "CH1.PLC1.DataP3.TAG00294";
             this.hmiMotor1.PLCAddressVisible = "";
             this.hmiMotor1.Rotation = System.Drawing.RotateFlipType.RotateNoneFlipNone;
             this.hmiMotor1.Size = new System.Drawing.Size(46, 31);
             this.hmiMotor1.TabIndex = 508;
             this.hmiMotor1.Value = false;
             this.hmiMotor1.ValueToWrite = 0;
-            // 
-            // hmiSimpleWebServer1
-            // 
-            this.hmiSimpleWebServer1.AutoStart = true;
-            this.hmiSimpleWebServer1.RefreshTime = 10;
-            this.hmiSimpleWebServer1.SourceForm = this;
-            this.hmiSimpleWebServer1.SynchronizingObject = this;
-            this.hmiSimpleWebServer1.TCPPort = 80;
             // 
             // MainForm
             // 
@@ -4642,7 +4629,6 @@ namespace AdvancedScada.HMI.MainForm
             this.panel5.PerformLayout();
             this.Panel9.ResumeLayout(false);
             this.Panel9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.hmiSimpleWebServer1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4805,7 +4791,6 @@ namespace AdvancedScada.HMI.MainForm
         private HMILedSingle hmiLedSingle6;
         private HMILedSingle hmiLedSingle7;
         private HMILedSingle hmiLedSingle8;
-        private HMISimpleWebServer hmiSimpleWebServer1;
         private Controls_Binding.HslControl.Segment.HMILedDisplay hmiLedDisplay1;
         private Controls_Binding.HslControl.Segment.HMILedDisplay hmiLedDisplay2;
         private Controls_Binding.HslControl.Lad.HMILanternSimple hmiLanternSimple2;

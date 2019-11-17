@@ -103,16 +103,24 @@ namespace AdvancedScada.HMI.MainForm
             TankNameSelected[6] = LBL_Name_Silo7;
             TankNameSelected[7] = LBL_Name_Silo8;
 
+            try
+            {
+          if (readValue == null) return;
+            LBL_BatchName.Text = readValue.ToString();
+            DataTable dt = new DataTable();
 
-            //if (readValue == null) return;
-            //LBL_BatchName.Text = readValue.ToString();
-            //DataTable dt = new DataTable();
+            dt = SqlDb.Get_BatchsDetails(LBL_BatchName.Text);
+            for (int i = 0; i <= 8; i++)
+            {
+                ListTankName.Add(dt.Rows[i]["TankName"].ToString());
+            }
+            }
+            catch  
+            {
 
-            //dt = SqlDb.Get_BatchsDetails(LBL_BatchName.Text);
-            //for (int i = 0; i <= 11; i++)
-            //{
-            //    ListTankName.Add(dt.Rows[i]["TankName"].ToString());
-            //}
+                
+            }
+          
 
         }
 
@@ -202,8 +210,8 @@ namespace AdvancedScada.HMI.MainForm
 
             try
             {
-                TankMixWeightFinel = new double[7];
-                int x = Convert.ToInt32(SqlDb.GET_LAST_ID("GET_LAST_BatchWeight_ID").Rows[0].ToString());
+                TankMixWeightFinel = new double[8];
+                int x = (int)SqlDb.GET_LAST_ID("GET_LAST_BatchWeight_ID").Rows[0][0];
                 DateTime d = Convert.ToDateTime(DateTimePicker1.Value.ToString("yyyy/MM/dd"));
 
 
@@ -288,14 +296,14 @@ namespace AdvancedScada.HMI.MainForm
             try
             {
 
-                TankMixWeight = new double[12];
+                TankMixWeight = new double[9];
                 if (LBL_ReportViewer.Value == "True" && ListTankName.Count > 0)
                 {
                     TankMixWeight = DynamicTankName(ListTankName, TankNameSelected, TankMixWeightRC);
 
 
 
-                    int x = Convert.ToInt32(SqlDb.GET_LAST_ID("GET_LAST_BatchFinal_ID").Rows[0][0].ToString());
+                    int x =(int) SqlDb.GET_LAST_ID("GET_LAST_BatchFinal_ID").Rows[0][0];
                     SqlDb.InsertNameTankFinal(x, LBL_BatchName.Text, ListTankName[0], ListTankName[1], ListTankName[2], ListTankName[3],
                         ListTankName[4], ListTankName[5], ListTankName[6],
                         ListTankName[7], int.Parse(lbl_DeyOfWeek.Text), DateTime.Parse(DateTimePicker1.Value.ToString("yyyy/MM/dd")), DateTimePicker1.Value.ToString("hh:mm:ss tt"));
@@ -322,7 +330,7 @@ namespace AdvancedScada.HMI.MainForm
 
             try
             {
-                Process.Start("ReportViewer.exe");
+                new ReportViewer.FRM_Rpot_All().ShowDialog();
             }
             catch (Exception ex)
             {

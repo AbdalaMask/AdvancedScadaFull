@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:AdvancedScada.WPF.HMIControls.Gauge">
+    
     <!-- Type converters-->
     <local:ImageOffsetConverter x:Key="imageOffsetConverter" />
     <local:RadiusToDiameterConverter x:Key="radiusToDiameterConverter"/>
@@ -10,8 +11,7 @@
     <local:BackgroundColorConverter x:Key="backgroundColorConverter" />
     <local:GlassEffectWidthConverter x:Key="glassEffectWidthConverter" />
     <local:ColorToSolidColorBrushConverter x:Key="colorToSolidColorBrushConverter" />
-
-
+ 
     <Style TargetType="local:HMICircularGaugeControl" >
         <Setter Property="ResetPointerOnStartUp" Value="True" />
         <Setter Property="ScaleValuePrecision" Value="5" />
@@ -154,5 +154,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    
 </ResourceDictionary>

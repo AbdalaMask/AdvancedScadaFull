@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Root>
-  <Channel ChannelId="3" ChannelName="CH1" ChannelTypes="LSIS" Model="XGB" Rack="0" Slot="7" ConnectionType="Ethernet" Mode="FENET" IPAddress="211.230.110.59" Port="2004" Description="">
+  <Channel ChannelId="3" ChannelName="CH1" ChannelTypes="LSIS" Model="XGB" Rack="0" Slot="0" ConnectionType="SerialPort" Mode="CNET" PortName="COM6" BaudRate="115200" DataBits="8" StopBits="One" Parity="None" Handshake="None" Description="CH1">
     <Device DeviceId="1" DeviceName="PLC1" SlaveId="1" Description="CH3">
       <DataBlock ChannelId="3" DeviceId="1" DataBlockId="1" DataBlockName="DataM1" TypeOfRead="" StartAddress="0" Length="1" DataType="Bit" MemoryType="MX" IsArray="True" Description="CH1">
         <Tag ChannelId="3" DeviceId="1" DataBlockId="1" TagId="1" TagName="TAG00001" Address="MX0" DataType="Bit" Description="CH1 0" />
@@ -83,6 +83,7 @@
         <Tag ChannelId="3" DeviceId="1" DataBlockId="5" TagId="6" TagName="TAG00070" Address="PX2D" DataType="Bit" Description="CH1" />
         <Tag ChannelId="3" DeviceId="1" DataBlockId="5" TagId="7" TagName="TAG00071" Address="PX2E" DataType="Bit" Description="CH1" />
         <Tag ChannelId="3" DeviceId="1" DataBlockId="5" TagId="8" TagName="TAG00293" Address="MX50" DataType="Bit" Description="Report" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="5" TagId="9" TagName="TAG00310" Address="MX100" DataType="Bit" Description="Timer run" />
       </DataBlock>
       <DataBlock ChannelId="3" DeviceId="1" DataBlockId="6" DataBlockName="DataT1" TypeOfRead="" StartAddress="0" Length="41" DataType="Short" MemoryType="TW" IsArray="True" Description="Timr waiting silo act">
         <Tag ChannelId="3" DeviceId="1" DataBlockId="6" TagId="1" TagName="TAG00072" Address="TW0" DataType="Short" Description="Timr waiting silo act 1" />
@@ -312,6 +313,24 @@
         <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="58" TagName="TAG00290" Address="DW177" DataType="Short" Description="CH1 58" />
         <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="59" TagName="TAG00291" Address="DW178" DataType="Short" Description="CH1 59" />
         <Tag ChannelId="3" DeviceId="1" DataBlockId="9" TagId="60" TagName="TAG00292" Address="DW179" DataType="Short" Description="CH1 60" />
+      </DataBlock>
+      <DataBlock ChannelId="3" DeviceId="1" DataBlockId="10" DataBlockName="DataP3" TypeOfRead="" StartAddress="4" Length="1" DataType="Bit" MemoryType="PX" IsArray="True" Description="">
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="1" TagName="TAG00294" Address="PX40" DataType="Bit" Description=" 28" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="2" TagName="TAG00295" Address="PX41" DataType="Bit" Description=" 29" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="3" TagName="TAG00296" Address="PX42" DataType="Bit" Description=" 2A" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="4" TagName="TAG00297" Address="PX43" DataType="Bit" Description=" 2B" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="5" TagName="TAG00298" Address="PX44" DataType="Bit" Description=" 2C" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="6" TagName="TAG00299" Address="PX45" DataType="Bit" Description=" 2D" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="7" TagName="TAG00300" Address="PX46" DataType="Bit" Description=" 2E" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="8" TagName="TAG00301" Address="PX47" DataType="Bit" Description=" 2F" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="9" TagName="TAG00302" Address="PX48" DataType="Bit" Description=" 30" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="10" TagName="TAG00303" Address="PX49" DataType="Bit" Description=" 31" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="11" TagName="TAG00304" Address="PX4A" DataType="Bit" Description=" 32" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="12" TagName="TAG00305" Address="PX4B" DataType="Bit" Description=" 33" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="13" TagName="TAG00306" Address="PX4C" DataType="Bit" Description=" 34" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="14" TagName="TAG00307" Address="PX4D" DataType="Bit" Description=" 35" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="15" TagName="TAG00308" Address="PX4E" DataType="Bit" Description=" 36" />
+        <Tag ChannelId="3" DeviceId="1" DataBlockId="10" TagId="16" TagName="TAG00309" Address="PX4F" DataType="Bit" Description=" 37" />
       </DataBlock>
     </Device>
   </Channel>

@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.Common;
+using HslCommunication;
 using HslCommunication.Profinet.LSIS;
 using System;
 using System.IO.Ports;
@@ -34,7 +35,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
 
                     try
                     {
-                        xGBCnet.SerialPortInni(sp =>
+                         xGBCnet.SerialPortInni(sp =>
                         {
                             sp.PortName = serialPort.PortName;
                             sp.BaudRate = serialPort.BaudRate;
@@ -43,6 +44,15 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
                             sp.Parity = serialPort.Parity;
                         });
                         xGBCnet.Open();
+                        if (xGBCnet.IsOpen())
+                        {
+                            EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedSuccess);
+                            IsConnected = true;
+                        }
+                        else
+                        {
+                            EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedFailed);
+                        }
                         IsConnected = true;
                         return IsConnected;
                     }

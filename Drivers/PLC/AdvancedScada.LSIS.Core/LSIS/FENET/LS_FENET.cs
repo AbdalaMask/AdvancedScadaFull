@@ -142,7 +142,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
 
         public TValue[] Read<TValue>(string address, ushort length)
         {
-            Thread.Sleep(500);
+           
             if (typeof(TValue) == typeof(bool))
             {
                 var b = ReadCoil(address, length);
@@ -270,7 +270,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
         #endregion
         private object ReadCoil(string address, ushort length)
         {
-            Thread.Sleep(500);
+             
             var b = fastEnet.Read(address, length);
             if (!b.IsSuccess)
             {
@@ -286,7 +286,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
      
         public TValue Read<TValue>(string address)
         {
-            Thread.Sleep(500);
+            
             if (typeof(TValue) == typeof(bool))
             {
                

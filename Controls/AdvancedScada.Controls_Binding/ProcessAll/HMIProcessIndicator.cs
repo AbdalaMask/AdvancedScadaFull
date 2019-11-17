@@ -21,8 +21,7 @@ namespace AdvancedScada.Controls_Binding.ProcessAll
         }
         #region PLC Properties
         public bool HoldTimeMet;
-        private int m_MaximumHoldTime = 3000;
-        private int m_MinimumHoldTime = 500;
+     
         //*****************************************
         //* Property - Hold time before bit reset
         //*****************************************
@@ -131,21 +130,7 @@ namespace AdvancedScada.Controls_Binding.ProcessAll
                 }
             }
         }
-        //*****************************************
-        //* Property - Address in PLC to Write Data To
-        //*****************************************
-        private string m_PLCAddressKeypad = string.Empty;
-
-        [Category("PLC Properties")]
-        [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
-        public string PLCAddressKeypad
-        {
-            get { return m_PLCAddressKeypad; }
-            set
-            {
-                if (m_PLCAddressKeypad != value) m_PLCAddressKeypad = value;
-            }
-        }
+       
         [Category("PLC Properties")]
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressClick { get; set; }

@@ -11,20 +11,24 @@ namespace AdvancedScada.Controls_Binding.Indicator
 {
     public class HMIIndicator : MfgControl.AdvancedHMI.Controls.Indicator, IPropertiesControls
     {
-
-        #region PLC Related Properties
-        private OutputType m_OutputType = OutputType.MomentarySet;
-        public OutputType OutputType
+        public HMIIndicator()
         {
-            get
-            {
-                return m_OutputType;
-            }
-            set
-            {
-                m_OutputType = value;
-            }
+            MaxHoldTimer.Tick += MaxHoldTimer_Tick;
+            MinHoldTimer.Tick += HoldTimer_Tick;
         }
+        #region PLC Related Properties
+        public bool HoldTimeMet;
+        //*****************************************
+        //* Property - Hold time before bit reset
+        //*****************************************
+        private readonly Timer MaxHoldTimer = new Timer();
+
+        //*****************************************
+        //* Property - Hold time before bit reset
+        //*****************************************
+        private readonly Timer MinHoldTimer = new Timer();
+        private readonly bool MouseIsDown = false;
+        public OutputType OutputType { get; set; }
         //*****************************************
         //* Property - Address in PLC to Link to
         //*****************************************
@@ -112,7 +116,7 @@ namespace AdvancedScada.Controls_Binding.Indicator
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressValue) || string.IsNullOrWhiteSpace(m_PLCAddressValue) ||
                             Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
+                        var bd = new Binding("SelectColor2", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -143,6 +147,110 @@ namespace AdvancedScada.Controls_Binding.Indicator
         public bool SuppressErrorDisplay { get; set; }
         public string PLCAddressEnabled { get; set; }
 
+        private void ReleaseValue()
+        {
+            try
+            {
+                switch (OutputType)
+                {
+                    case OutputType.MomentarySet:
+                        Utilities.Write(PLCAddressClick, false);
+                        break;
+                    case OutputType.MomentaryReset:
+                        Utilities.Write(PLCAddressClick, true);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                DisplayError(ex.Message);
+            }
+        }
+
+        private void HoldTimer_Tick(object sender, EventArgs e)
+        {
+            MinHoldTimer.Enabled = false;
+            HoldTimeMet = true;
+            if (!MouseIsDown) ReleaseValue();
+        }
+
+        private void MaxHoldTimer_Tick(object sender, EventArgs e)
+        {
+            MaxHoldTimer.Enabled = false;
+            ReleaseValue();
+        }
+
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+
+
+            if (!string.IsNullOrWhiteSpace(PLCAddressClick) & Enabled && PLCAddressClick != null)
+            {
+                try
+                {
+                    switch (OutputType)
+                    {
+                        case OutputType.MomentarySet:
+                            Utilities.Write(PLCAddressClick, true);
+                            break;
+                        case OutputType.MomentaryReset:
+                            Utilities.Write(PLCAddressClick, false);
+                            break;
+                        case OutputType.SetTrue:
+                            Utilities.Write(PLCAddressClick, true);
+                            break;
+                        case OutputType.SetFalse:
+                            Utilities.Write(PLCAddressClick, false);
+                            break;
+                        case OutputType.Toggle:
+                            var CurrentValue = SelectColor2;
+                            if (CurrentValue)
+                                Utilities.Write(PLCAddressClick, false);
+                            else
+                                Utilities.Write(PLCAddressClick, true);
+                            break;
+                        default:
+
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    DisplayError("WRITE FAILED!" + ex.Message);
+                }
+
+                Invalidate();
+            }
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+
+            if (!string.IsNullOrWhiteSpace(PLCAddressClick) & Enabled)
+            {
+                try
+                {
+                    switch (OutputType)
+                    {
+                        case OutputType.MomentarySet:
+                            Utilities.Write(PLCAddressClick, false);
+                            break;
+                        case OutputType.MomentaryReset:
+                            Utilities.Write(PLCAddressClick, true);
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    DisplayError("WRITE FAILED!" + ex.Message);
+                }
+
+                Invalidate();
+            }
+        }
 
         //***************************************
         //* Call backs for returned data

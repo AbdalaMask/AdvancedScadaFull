@@ -255,11 +255,9 @@ namespace AdvancedScada.Controls_Binding.Motor
                             break;
                         case OutputType.Toggle:
 
-                            var CurrentValue = Value;
-                            if (CurrentValue)
-                                Utilities.Write(m_PLCAddressClick, false);
-                            else
-                                Utilities.Write(m_PLCAddressClick, true);
+                       
+                                Utilities.Write(m_PLCAddressClick, Value);
+                       
                             break;
                         default:
 

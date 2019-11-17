@@ -163,7 +163,7 @@ namespace AdvancedScada.WPF.HMIControls.ButtonAll
         ImageSource imageSource;
         protected override void OnRender(DrawingContext drawingContext)
         {
-            
+
             double width = this.ActualWidth;
             double height = this.ActualHeight;
             double bevel = height * 0.1;

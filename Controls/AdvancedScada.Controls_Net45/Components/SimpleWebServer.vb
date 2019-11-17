@@ -97,17 +97,14 @@ Public Class SimpleWebServer
             m_SourceForm = m_SynchronizingObject
         End If
 
-        ''* Find the IPV4 address of this computer
-        'Dim LocalComputerName As String = System.Net.Dns.GetHostName() '* same as My.Computer.Name
-        Dim localAddr As System.Net.IPAddress '= GetIPv4Address(LocalComputerName)
 
-        'If localAddr Is Nothing Then
-        '    localAddr = System.Net.IPAddress.Parse("127.0.0.1")
-        'End If
+        '* Find the IPV4 address of this computer
+        Dim LocalComputerName As String = System.Net.Dns.GetHostName() '* same as My.Computer.Name
+        Dim localAddr As System.Net.IPAddress = GetIPv4Address(LocalComputerName)
 
-        '* 9-JUN-19 Beta 33 added so it attaches to any port
-        '* TODO: Update documentation Wiki
-        localAddr = System.Net.IPAddress.Any
+        If localAddr Is Nothing Then
+            localAddr = System.Net.IPAddress.Parse("127.0.0.1")
+        End If
 
         Try
             server = New TcpListener(localAddr, m_TCPPort)

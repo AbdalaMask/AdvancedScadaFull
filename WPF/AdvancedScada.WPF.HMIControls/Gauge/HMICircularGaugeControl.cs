@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 
 namespace AdvancedScada.WPF.HMIControls.Gauge
 {
@@ -1013,10 +1006,10 @@ namespace AdvancedScada.WPF.HMIControls.Gauge
             }
 
             //Add one line
-            oldcurr_realworldunit = ((double)(realworldunit) * (oldValue - MinValue));
+            oldcurr_realworldunit = ((realworldunit) * (oldValue - MinValue));
 
             //Add one line
-            newcurr_realworldunit = ((double)(realworldunit) * (newValue - MinValue));
+            newcurr_realworldunit = ((realworldunit) * (newValue - MinValue));
 
             Double oldcurrentvalueAngle = (ScaleStartAngle + oldcurr_realworldunit);
             Double newcurrentvalueAngle = (ScaleStartAngle + newcurr_realworldunit);
@@ -1046,10 +1039,10 @@ namespace AdvancedScada.WPF.HMIControls.Gauge
             }
 
             //Add one line
-            oldcurr_realworldunit = ((double)(realworldunit) * (oldValue - MinValue));
+            oldcurr_realworldunit = ((realworldunit) * (oldValue - MinValue));
 
             //Add one line
-            newcurr_realworldunit = ((double)(realworldunit) * (newValue - MinValue));
+            newcurr_realworldunit = ((realworldunit) * (newValue - MinValue));
 
             Double oldcurrentvalueAngle = (ScaleStartAngle + oldcurr_realworldunit);
             Double newcurrentvalueAngle = (ScaleStartAngle + newcurr_realworldunit);
@@ -1357,8 +1350,8 @@ namespace AdvancedScada.WPF.HMIControls.Gauge
         {
             Double angle_radian = (angle * Math.PI) / 180;
             //Radius-- is the Radius of the gauge
-            Double X = (Double)((Radius) + (radius) * Math.Cos(angle_radian));
-            Double Y = (Double)((Radius) + (radius) * Math.Sin(angle_radian));
+            Double X = ((Radius) + (radius) * Math.Cos(angle_radian));
+            Double Y = ((Radius) + (radius) * Math.Sin(angle_radian));
             Point p = new Point(X, Y);
             return p;
         }

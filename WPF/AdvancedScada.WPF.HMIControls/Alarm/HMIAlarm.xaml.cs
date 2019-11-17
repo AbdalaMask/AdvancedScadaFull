@@ -1,29 +1,27 @@
-﻿using System;
+﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.IBaseService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AdvancedScada.WPF.HMIControls.Alarm
 {
     /// <summary>
     /// Interaction logic for HMIAlarm.xaml
     /// </summary>
-    public partial class HMIAlarm : UserControl
+    public partial class HMIAlarm : UserControl, IServiceCallback
     {
         public HMIAlarm()
         {
             InitializeComponent();
         }
+
+        public void UpdateCollection(ConnectionState status, Dictionary<string, Tag> collection)
+        {
+            throw new NotImplementedException();
+        }
     }
-   
+
 }
