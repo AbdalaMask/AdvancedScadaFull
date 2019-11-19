@@ -324,7 +324,7 @@ namespace AdvancedScada.Controls.AHMI.Segment.DrawAll
                         return;
                     }
                 }
-            Label2:
+                Label2:
                 Blend float0 = new Blend();
                 bool flag1 = false;
                 float float3 = 0f;
@@ -859,7 +859,7 @@ namespace AdvancedScada.Controls.AHMI.Segment.DrawAll
                         goto Label0;
                     }
                 }
-            Label2:
+                Label2:
                 Blend float0 = new Blend();
                 bool flag1 = false;
                 float float3 = 0f;
@@ -1087,7 +1087,7 @@ namespace AdvancedScada.Controls.AHMI.Segment.DrawAll
                     region21.Dispose();
                 }
             }
-        Label0:
+            Label0:
             if (int_4 > 0)
             {
                 SolidBrush solidBrush8 = new SolidBrush(color_5);

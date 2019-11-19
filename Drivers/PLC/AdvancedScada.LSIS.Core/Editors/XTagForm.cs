@@ -31,10 +31,10 @@ namespace AdvancedScada.LSIS.Core.Editors
             {
 
                 TagsCount += item.Tags.Count;
-              
+
 
             }
-            return $"TAG{1+TagsCount:d5}";
+            return $"TAG{1 + TagsCount:d5}";
         }
         private void btnOK_Click(object sender, EventArgs e)
         {
@@ -81,7 +81,7 @@ namespace AdvancedScada.LSIS.Core.Editors
             try
             {
 
-                
+
                 this.txtChannelName.Text = this.ch.ChannelName;
                 this.txtDeviceName.Text = this.dv.DeviceName;
                 this.txtDataBlock.Text = this.db.DataBlockName;
@@ -106,7 +106,7 @@ namespace AdvancedScada.LSIS.Core.Editors
                     txtTagId.Text = tg.TagId.ToString();
                     txtAddress.Text = tg.Address;
                     txtAddress.Enabled = true;
-                   /// cboxDataType.SelectedItem = $"{tg.DataType}";
+                    /// cboxDataType.SelectedItem = $"{tg.DataType}";
                     txtTagName.Text = tg.TagName;
                     txtDesc.Text = tg.Description;
                 }

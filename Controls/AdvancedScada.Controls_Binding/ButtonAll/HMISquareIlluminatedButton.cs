@@ -19,7 +19,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         }
         #region PLC Properties
 
-       
+
         public bool HoldTimeMet;
         private int m_MaximumHoldTime = 3000;
         private int m_MinimumHoldTime = 500;

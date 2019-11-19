@@ -1,5 +1,6 @@
 ﻿using AdvancedScada;
 using AdvancedScada;
+using AdvancedScada.Common;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
 using AdvancedScada.Controls.AHMI.DigitalDisplay;
@@ -8,7 +9,6 @@ using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.DriverBase;
-using AdvancedScada.Common;
 using MfgControl.AdvancedHMI.Controls;
 using Microsoft.VisualBasic.CompilerServices;
 using System;

@@ -90,7 +90,7 @@ namespace AdvancedScada.Siemens.Core
             }
         }
 
-         
+
         public void Connect()
         {
 

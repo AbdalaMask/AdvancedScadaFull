@@ -1,14 +1,11 @@
-﻿<UserControl x:Class="AdvancedScada.WPF.HMIControls.HslControl.TankAll.HMIBottle"
+﻿<UserControl xmlns:WPF="clr-namespace:HslControls.WPF;assembly=AdvancedScada.WPF.HMIControls"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AdvancedScada.WPF.HMIControls.HslControl.TankAll"
-             xmlns:hsl="clr-namespace:HslControls.WPF;assembly=HslControls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:WPF1="clr-namespace:HslControls.WPF;assembly=HslControls"  x:Class="AdvancedScada.WPF.HMIControls.HslControl.TankAll.HMIBottle"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="200"  Loaded="UserControl_Loaded">
-           <hsl:HslBottle x:Name="Bottle"   Value="{Binding Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:HMIBottle}}}"/>
-
-
+    <!--<hsl:HslBottle x:Name="Bottle"   Value="{Binding Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:HMIBottle}}}"/>-->
 
 </UserControl>

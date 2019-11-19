@@ -1,7 +1,6 @@
 ﻿using AdvancedScada.Common;
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
-using AdvancedScada.LSIS.Common;
 using AdvancedScada.LSIS.Core.LSIS.Cnet;
 using AdvancedScada.LSIS.Core.LSIS.FENET;
 using System;
@@ -13,7 +12,7 @@ using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.LSIS.Core
 {
-    
+
     public class IODriverHelper : AdvancedScada.Common.IODriver
     {
 
@@ -22,9 +21,9 @@ namespace AdvancedScada.LSIS.Core
         //==================================LS===================================================
         private static Dictionary<string, LS_CNET> cnet = new Dictionary<string, LS_CNET>();
         private static Dictionary<string, LS_FENET> FENET = new Dictionary<string, LS_FENET>();
-       
+
         private static bool IsConnected;
-         
+
         private static Task[] taskArray;
 
         #region IServiceDriver
@@ -93,7 +92,7 @@ namespace AdvancedScada.LSIS.Core
             }
         }
 
-    
+
         public void Connect()
         {
 
@@ -102,12 +101,12 @@ namespace AdvancedScada.LSIS.Core
                 IsConnected = true;
 
 
-                
+
                 taskArray = new Task[Channels.Count];
                 if (taskArray == null) throw new NullReferenceException("No Data");
                 for (int i = 0; i < Channels.Count; i++)
                 {
-                    
+
                     taskArray[i] = new Task((chParam) =>
                     {
                         IDriverAdapter DriverAdapter = null;
@@ -172,7 +171,7 @@ namespace AdvancedScada.LSIS.Core
                             }
                         }
 
-                        
+
                     }, Channels[i]);
                     taskArray[i].Start();
                     foreach (var task in taskArray)
@@ -348,7 +347,7 @@ namespace AdvancedScada.LSIS.Core
                             short[] IntRs = null;
                             if (db.IsArray)
                             {
-                                 IntRs = DriverAdapter.Read<short>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
+                                IntRs = DriverAdapter.Read<short>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
                                 if (IntRs == null || IntRs.Length == 0) return;
                                 if (IntRs.Length > db.Tags.Count) return;
                                 for (int j = 0; j < IntRs.Length; j++)
@@ -508,7 +507,7 @@ namespace AdvancedScada.LSIS.Core
                                     DriverAdapter = FENET[ch.ChannelName];
                                     break;
                             }
-                            if (DriverAdapter == null) return ;
+                            if (DriverAdapter == null) return;
                             lock (DriverAdapter)
                                 switch (TagCollection.Tags[tagName].DataType)
                                 {
@@ -573,7 +572,7 @@ namespace AdvancedScada.LSIS.Core
             }
         }
 
-        
+
 
         #endregion
     }

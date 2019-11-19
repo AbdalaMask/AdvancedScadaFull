@@ -1,5 +1,6 @@
 ﻿using AdvancedScada;
 using AdvancedScada;
+using AdvancedScada.Common;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
 using AdvancedScada.Controls.AHMI.ProcessAll;
@@ -12,7 +13,6 @@ using AdvancedScada.Controls.Enum;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.Common;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.Collections.Generic;
@@ -1628,7 +1628,7 @@ namespace AdvancedScada.Controls.AHMI.ProcessAll
                             goto Label0;
                         }
                     }
-                Label2:
+                    Label2:
                     float int91 = (float)((double)(this._IndicatorSize + this._IndicatorGap) * this.double_0);
                     if (!this._Vertical)
                     {
@@ -1681,7 +1681,7 @@ namespace AdvancedScada.Controls.AHMI.ProcessAll
                             num++;
                         }
                     }
-                Label0:
+                    Label0:
                     if (this._BorderShape != DAS_BorderStyle.BS_RoundRect)
                     {
                         System.Drawing.Region region = new System.Drawing.Region(base.ClientRectangle);

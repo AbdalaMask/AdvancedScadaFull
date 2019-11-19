@@ -3,7 +3,6 @@ using AdvancedScada.Common;
 using AdvancedScada.Controls.Drivers;
 using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.IBaseService;
-using AdvancedScada.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,7 +21,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
 
     public class HMIAlarmMan : AdvancedScada.Controls_Net45.AlarmMan, IServiceCallback
     {
-        
+
 
         #region Public Methods
 
@@ -41,7 +40,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
 
         #endregion
 
-       
+
 
         #region PLC Properties
 
@@ -60,7 +59,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
 
         #endregion
 
-       
+
 
         #region Public Methods WCF
 
@@ -86,7 +85,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
         }
 
         public static string path = string.Empty;
-       
+
 
         public void DataChanged(List<Tag> registers)
         {
@@ -233,7 +232,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
 
         #region Private Methods     
 
-        
+
 
         protected override void OnCreateControl()
         {
@@ -243,7 +242,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
                 if (!DesignMode)
                 {
                     GetWCF();
-                    
+
                 }
             }
             catch (Exception ex)
@@ -273,7 +272,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
         }
 
 
-       
+
 
         public void UpdateCollection(ConnectionState status, Dictionary<string, Tag> collection)
         {

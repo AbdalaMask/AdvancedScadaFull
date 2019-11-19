@@ -7,7 +7,6 @@ using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.ServiceModel;
@@ -105,22 +104,22 @@ namespace AdvancedScada.HMI.MainForm
 
             try
             {
-          if (readValue == null) return;
-            LBL_BatchName.Text = readValue.ToString();
-            DataTable dt = new DataTable();
+                if (readValue == null) return;
+                LBL_BatchName.Text = readValue.ToString();
+                DataTable dt = new DataTable();
 
-            dt = SqlDb.Get_BatchsDetails(LBL_BatchName.Text);
-            for (int i = 0; i <= 8; i++)
-            {
-                ListTankName.Add(dt.Rows[i]["TankName"].ToString());
+                dt = SqlDb.Get_BatchsDetails(LBL_BatchName.Text);
+                for (int i = 0; i <= 8; i++)
+                {
+                    ListTankName.Add(dt.Rows[i]["TankName"].ToString());
+                }
             }
-            }
-            catch  
+            catch
             {
 
-                
+
             }
-          
+
 
         }
 
@@ -129,7 +128,7 @@ namespace AdvancedScada.HMI.MainForm
             try
             {
                 client?.Disconnect(XCollection.CURRENT_MACHINE);
-              
+
 
             }
             catch (CommunicationException ex)
@@ -162,7 +161,7 @@ namespace AdvancedScada.HMI.MainForm
                     Microsoft.Win32.Registry.SetValue("HKEY_CURRENT_USER\\Software\\TestApp", "LBL_Name_Silo8", LBL_Name_Silo8.Text);
 
                     client?.Disconnect(XCollection.CURRENT_MACHINE);
-                     
+
                     Application.ExitThread();
 
                 }
@@ -303,7 +302,7 @@ namespace AdvancedScada.HMI.MainForm
 
 
 
-                    int x =(int) SqlDb.GET_LAST_ID("GET_LAST_BatchFinal_ID").Rows[0][0];
+                    int x = (int)SqlDb.GET_LAST_ID("GET_LAST_BatchFinal_ID").Rows[0][0];
                     SqlDb.InsertNameTankFinal(x, LBL_BatchName.Text, ListTankName[0], ListTankName[1], ListTankName[2], ListTankName[3],
                         ListTankName[4], ListTankName[5], ListTankName[6],
                         ListTankName[7], int.Parse(lbl_DeyOfWeek.Text), DateTime.Parse(DateTimePicker1.Value.ToString("yyyy/MM/dd")), DateTimePicker1.Value.ToString("hh:mm:ss tt"));

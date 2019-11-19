@@ -1,5 +1,4 @@
 ﻿using Svg;
-using System;
 using System.Drawing;
 /*
  * @author  : Lasitha Ishan Petthawadu

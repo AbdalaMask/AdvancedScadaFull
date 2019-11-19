@@ -205,6 +205,6 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                 }
         }
 
-        
+
     }
 }

@@ -4,13 +4,12 @@ using AdvancedScada.Controls_Binding.DialogEditor;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
-using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.Leds
 {
-   
+
     public partial class HMILedSingle : DasNetIndicator.DAS_Net_Indicator, IPropertiesControls
     {
         public HMILedSingle()
@@ -20,7 +19,7 @@ namespace AdvancedScada.Controls_Binding.Leds
         }
         #region PLC Properties
 
-       
+
         public bool HoldTimeMet;
         private int m_MaximumHoldTime = 3000;
         private int m_MinimumHoldTime = 500;
@@ -257,9 +256,9 @@ namespace AdvancedScada.Controls_Binding.Leds
                             break;
                         case OutputType.Toggle:
 
-                             
-                                Utilities.Write(m_PLCAddressClick, !Value);
-                             
+
+                            Utilities.Write(m_PLCAddressClick, !Value);
+
                             break;
                         default:
 

@@ -35,14 +35,14 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
 
                     try
                     {
-                         xGBCnet.SerialPortInni(sp =>
-                        {
-                            sp.PortName = serialPort.PortName;
-                            sp.BaudRate = serialPort.BaudRate;
-                            sp.DataBits = serialPort.DataBits;
-                            sp.StopBits = serialPort.StopBits;
-                            sp.Parity = serialPort.Parity;
-                        });
+                        xGBCnet.SerialPortInni(sp =>
+                       {
+                           sp.PortName = serialPort.PortName;
+                           sp.BaudRate = serialPort.BaudRate;
+                           sp.DataBits = serialPort.DataBits;
+                           sp.StopBits = serialPort.StopBits;
+                           sp.Parity = serialPort.Parity;
+                       });
                         xGBCnet.Open();
                         if (xGBCnet.IsOpen())
                         {
@@ -227,7 +227,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
                 }
             }
 
-          
+
             throw new InvalidOperationException(string.Format("type '{0}' not supported.", typeof(TValue)));
         }
         #endregion
@@ -244,7 +244,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
             }
         }
 
-       
+
         public TValue Read<TValue>(string address)
         {
             if (typeof(TValue) == typeof(bool))
@@ -264,6 +264,6 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
 
         }
 
-       
+
     }
 }

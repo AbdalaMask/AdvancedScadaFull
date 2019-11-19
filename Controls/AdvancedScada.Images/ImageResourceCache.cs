@@ -7,12 +7,10 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Resources;
 using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdvancedScada.Images
 {
-     
+
     public class ImageResourceCache
     {
         private static readonly object mutex = new object();
@@ -56,10 +54,10 @@ namespace AdvancedScada.Images
         static ImageResourceCache defaultCore = null;
         public static ImageResourceCache Default(string ImageType)
         {
-            
-                if (defaultCore == null) defaultCore = DoLoad(ImageType);
-                return defaultCore;
-            
+
+            if (defaultCore == null) defaultCore = DoLoad(ImageType);
+            return defaultCore;
+
         }
 
         readonly static char[] splitCharacters = new char[] { '\\', '/' };
@@ -69,7 +67,7 @@ namespace AdvancedScada.Images
             return key.Split(splitCharacters);
         }
         [SecuritySafeCritical]
-        public static ImageResourceCache DoLoad( string ImageType)
+        public static ImageResourceCache DoLoad(string ImageType)
         {
             ImageResourceCache cache = GetChannelManager();
             cache.resources.Clear(); cache.resourcesByFileName.Clear();
@@ -79,20 +77,20 @@ namespace AdvancedScada.Images
                 string[] parts; string key, category;
                 while (e.MoveNext())
                 {
-                      key = e.Key as string;
-                        parts = Split(key);
-                    if(parts[0]== ImageType.ToLower())
+                    key = e.Key as string;
+                    parts = Split(key);
+                    if (parts[0] == ImageType.ToLower())
                     {
                         cache.resources.Add(key, (Stream)e.Value);
                         category = parts[1];
-                       key = parts[0] + @"\" + parts[parts.Length - 1];
+                        key = parts[0] + @"\" + parts[parts.Length - 1];
                         if (!cache.resourcesByFileName.ContainsKey(key))
                             cache.resourcesByFileName.Add(key, (Stream)e.Value);
                         continue;
                     }
-                     
-                    
-                    
+
+
+
                 }
             }
             return cache;

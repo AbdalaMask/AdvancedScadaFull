@@ -1,17 +1,12 @@
 ﻿using AdvancedScada.Common;
 using AdvancedScada.Controls_Binding.DialogEditor;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.Display
 {
-   public class HMIComboBoxInput: ComboBox, IPropertiesControls
+    public class HMIComboBoxInput : ComboBox, IPropertiesControls
     { //*****************************************
         //* Property - Address in PLC to Link to
         //*****************************************

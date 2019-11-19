@@ -238,7 +238,7 @@ namespace AdvancedScada.Controls_Binding.Segment
 
         public bool KeypadShowCurrentValue { get; set; }
 
-      
+
 
         private IKeyboard KeypadPopUp;
 

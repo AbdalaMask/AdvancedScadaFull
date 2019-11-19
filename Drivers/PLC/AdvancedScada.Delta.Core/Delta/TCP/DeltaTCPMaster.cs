@@ -3,7 +3,6 @@ using AdvancedScada.Utils;
 using HslCommunication;
 using HslCommunication.ModBus;
 using System;
-using System.Net.Sockets;
 using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.IODriver.Delta.TCP
 {

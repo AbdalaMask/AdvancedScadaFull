@@ -118,7 +118,7 @@ namespace AdvancedScada.Controls_Binding.Linear
         }
 
         public string PLCAddressClick { get; set; }
-        public string PLCAddressEnabled { get ; set; }
+        public string PLCAddressEnabled { get; set; }
 
 
 

@@ -5,7 +5,6 @@ using ComponentFactory.Krypton.Toolkit;
 using HslScada.Studio.Tools;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Forms;
 using static AdvancedScada.Common.XCollection;
 
@@ -13,7 +12,7 @@ namespace AdvancedScada.Studio.LinkToSQL
 {
     public partial class XSQLMaster : KryptonForm
     {
-        
+
         public bool IsDataChanged;
 
         private string _lblValueInfo = string.Empty;

@@ -1,10 +1,8 @@
-﻿using AdvancedScada.Common;
-using AdvancedScada.Modbus.Common;
+﻿using AdvancedScada.Modbus.Common;
 using AdvancedScada.Utils;
 using HslCommunication;
 using HslCommunication.ModBus;
 using System;
-using System.Net.Sockets;
 using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Modbus.Core.Modbus.TCP
 {
@@ -187,6 +185,6 @@ namespace AdvancedScada.Modbus.Core.Modbus.TCP
             throw new NotImplementedException();
         }
 
-        
+
     }
 }

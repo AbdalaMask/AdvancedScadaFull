@@ -18,6 +18,6 @@ namespace AdvancedScada.IBaseService
         [WebInvoke(Method = "POST", UriTemplate = "WritePLC?TagName={TagName}&ValueTag={ValueTag}", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         [OperationContract()]
         int WriteTag(string TagName, dynamic ValueTag);
- 
+
     }
 }

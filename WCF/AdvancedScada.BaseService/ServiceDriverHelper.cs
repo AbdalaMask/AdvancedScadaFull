@@ -100,13 +100,13 @@ namespace AdvancedScada.BaseService
             {
                 Uri uriWeb = new Uri(string.Format(URI_DRIVERWeb2, Environment.MachineName, PORTWeb, "Driver"));
                 Uri uriWS = new Uri(string.Format(URI_DRIVERWeb2, Environment.MachineName, 8088, "Driver"));
-                 objWebServiceHost = new WebServiceHost(typeof(ReadServiceWeb));
+                objWebServiceHost = new WebServiceHost(typeof(ReadServiceWeb));
                 WebHttpBinding objWebHttpBinding = GetWebHttpBinding();
                 WSHttpBinding objWSHttpBinding = GetWSHttpBinding();
                 objWebServiceHost.AddServiceEndpoint(typeof(IReadServiceWeb), objWebHttpBinding, uriWeb);
                 objWebServiceHost.AddServiceEndpoint(typeof(IReadServiceWeb), objWSHttpBinding, uriWS);
                 objWebServiceHost.Open();
- 
+
             }
             catch (Exception ex)
             {

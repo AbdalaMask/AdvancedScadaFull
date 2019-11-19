@@ -9,12 +9,12 @@ using System.Windows.Forms;
 namespace AdvancedScada.Controls_Binding.ImageAll
 {
 
-    
+
     public class HMIImageContainer : MfgControl.AdvancedHMI.Controls.GraphicIndicator, IPropertiesControls
     {
         #region PLC Properties
 
-       
+
         //*****************************************
         //* Property - Address in PLC to Link to
         //*****************************************
@@ -152,8 +152,8 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         #endregion
         [DefaultValue(true)]
         public bool SuppressErrorDisplay { get; set; }
-        public string PLCAddressValue { get ; set; }
-        public string PLCAddressEnabled { get ; set ; }
+        public string PLCAddressValue { get; set; }
+        public string PLCAddressEnabled { get; set; }
 
         #region "Error Display"
 

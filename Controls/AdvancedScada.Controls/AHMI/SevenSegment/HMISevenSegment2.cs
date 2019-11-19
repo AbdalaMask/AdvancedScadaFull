@@ -1,5 +1,7 @@
 ﻿using AdvancedScada;
 using AdvancedScada;
+using AdvancedScada.Common;
+using AdvancedScada.Common.Client;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
 using AdvancedScada.Controls.AHMI.SevenSegment;
@@ -9,8 +11,6 @@ using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls_Net45;
 using AdvancedScada.DriverBase;
-using AdvancedScada.Common.Client;
-using AdvancedScada.Common;
 using AdvancedScada.Monitor;
 using MfgControl.AdvancedHMI.Controls;
 using System;

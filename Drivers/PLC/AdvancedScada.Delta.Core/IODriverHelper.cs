@@ -236,12 +236,12 @@ namespace AdvancedScada.Delta.Core
                             {
                                 bitRs = DriverAdapter.Read<bool>($"{db.MemoryType}{db.StartAddress}", db.Length);
                             }
-                            else if(db.TypeOfRead== "ReadInputStatus")
+                            else if (db.TypeOfRead == "ReadInputStatus")
                             {
                                 bitRs = DriverAdapter.ReadDiscrete($"{db.MemoryType}{db.StartAddress}", db.Length);
                             }
-                            
-                          
+
+
                             if (bitRs == null) return;
                             int length = bitRs.Length;
                             if (bitRs.Length > db.Tags.Count) length = db.Tags.Count;

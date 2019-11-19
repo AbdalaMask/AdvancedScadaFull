@@ -12,7 +12,7 @@ using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.BaseService
 {
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class ReadServiceWeb: IReadServiceWeb
+    public class ReadServiceWeb : IReadServiceWeb
     {
         private readonly ChannelService objChannelManager;
         IODriver driverHelper = null;
@@ -56,13 +56,13 @@ namespace AdvancedScada.BaseService
             return result;
         }
 
-        
+
 
         public int WriteTag(string tagName, dynamic Value)
         {
             try
             {
-                
+
                 if (objChannelManager == null) return 0;
 
                 var strArrays = tagName.Split('.');

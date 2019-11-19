@@ -1,6 +1,5 @@
 ﻿using AdvancedScada.Common;
 using AdvancedScada.Common.Client;
-using AdvancedScada.Controls_Binding;
 using AdvancedScada.Controls_Binding.DialogEditor;
 using MfgControl.AdvancedHMI.Controls;
 using System;
@@ -65,7 +64,7 @@ namespace AdvancedScada.Controls_Binding.Bulb
             set { _on = value; this.Invalidate(); }
         }
 
- 
+
         #endregion
 
         #region Constructor
@@ -175,7 +174,7 @@ namespace AdvancedScada.Controls_Binding.Bulb
 
         #endregion
 
-        
+
         #region PLC Properties
 
 
@@ -415,7 +414,7 @@ namespace AdvancedScada.Controls_Binding.Bulb
                             break;
                         case OutputType.Toggle:
 
-                            var CurrentValue = true ;
+                            var CurrentValue = true;
                             if (CurrentValue)
                                 Utilities.Write(m_PLCAddressClick, false);
                             else

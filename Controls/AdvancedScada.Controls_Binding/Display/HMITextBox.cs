@@ -2,19 +2,15 @@
 using AdvancedScada.Common.Client;
 using AdvancedScada.Controls_Binding.DialogEditor;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.Monitor;
 using System;
 using System.ComponentModel;
-using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Design;
-using System.Security.Permissions;
 using System.Windows.Forms;
-using System.Windows.Forms.Design;
 
 namespace AdvancedScada.Controls_Binding.Display
 {
-     
+
     public class HMITextBox : System.Windows.Forms.TextBox, IPropertiesControls
     {
         //*****************************************
@@ -782,5 +778,5 @@ namespace AdvancedScada.Controls_Binding.Display
 
         #endregion
     }
- 
+
 }

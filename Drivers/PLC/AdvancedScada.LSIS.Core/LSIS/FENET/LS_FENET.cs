@@ -4,7 +4,6 @@ using HslCommunication;
 using HslCommunication.Profinet.LSIS;
 using System;
 using System.Net.Sockets;
-using System.Threading;
 using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.LSIS.Core.LSIS.FENET
 {
@@ -142,13 +141,13 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
 
         public TValue[] Read<TValue>(string address, ushort length)
         {
-           
+
             if (typeof(TValue) == typeof(bool))
             {
                 var b = ReadCoil(address, length);
                 return (TValue[])b;
             }
-            else if(typeof(TValue) == typeof(ushort))
+            else if (typeof(TValue) == typeof(ushort))
             {
 
                 var b = fastEnet.ReadUInt16(address, length);
@@ -160,7 +159,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
                 {
                     return (TValue[])(object)b.Content;
                 }
-                
+
             }
             else if (typeof(TValue) == typeof(int))
             {
@@ -174,7 +173,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
                     return (TValue[])(object)b.Content;
                 }
 
-                
+
             }
             else if (typeof(TValue) == typeof(uint))
             {
@@ -187,7 +186,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
                 {
                     return (TValue[])(object)b.Content;
                 }
-                
+
             }
             else if (typeof(TValue) == typeof(long))
             {
@@ -270,7 +269,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
         #endregion
         private object ReadCoil(string address, ushort length)
         {
-             
+
             var b = fastEnet.Read(address, length);
             if (!b.IsSuccess)
             {
@@ -280,16 +279,16 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
             {
                 return HslCommunication.BasicFramework.SoftBasic.ByteToBoolArray(b.Content);
             }
-            
+
         }
 
-     
+
         public TValue Read<TValue>(string address)
         {
-            
+
             if (typeof(TValue) == typeof(bool))
             {
-               
+
                 var read = fastEnet.ReadBool(address, 1);
                 if (!read.IsSuccess)
                 {
@@ -422,6 +421,6 @@ namespace AdvancedScada.LSIS.Core.LSIS.FENET
 
         }
 
-       
+
     }
 }

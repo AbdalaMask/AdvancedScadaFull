@@ -30,8 +30,8 @@ namespace AdvancedScada.BaseService.Client
         {
             try
             {
-                
-                
+
+
                 WebHttpBinding objWebHttpBinding = GetWebHttpBinding();
                 WebChannelFactory<IReadServiceWeb> cf = new WebChannelFactory<IReadServiceWeb>(objWebHttpBinding, new Uri(string.Format(URI_DRIVERWeb2, IP_ADDRESS, PORTWeb, "Driver")));
                 IReadServiceWeb client = cf.CreateChannel();

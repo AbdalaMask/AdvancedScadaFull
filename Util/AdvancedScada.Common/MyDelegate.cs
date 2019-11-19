@@ -1,6 +1,4 @@
 ﻿using AdvancedScada.DriverBase.Devices;
-using System;
-using System.Linq;
 
 namespace AdvancedScada.Common
 {

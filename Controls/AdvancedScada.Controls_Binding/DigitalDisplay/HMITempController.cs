@@ -14,7 +14,7 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
 
         #region PLC Properties
 
-        
+
         //*****************************************
         //* Property - What to do to bit in PLC
         //*****************************************

@@ -3,7 +3,7 @@
     public interface IDriverAdapter
     {
         bool IsConnected { get; set; }
-       
+
 
         bool Connection();
         bool Disconnection();

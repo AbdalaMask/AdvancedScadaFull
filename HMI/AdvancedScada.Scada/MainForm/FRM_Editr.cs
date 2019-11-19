@@ -184,7 +184,7 @@ namespace AdvancedScada.HMI.MainForm
 
                 if (com_work_2.Text == "يعمل")
                 {
-                    Write(com_work_2.PLCAddressValueToWrite,true);
+                    Write(com_work_2.PLCAddressValueToWrite, true);
 
                     Write(txt_thnk_set_2.PLCAddressValueToWrite, $"{int.Parse(txt_thnk_set_2.Text) - int.Parse(txt_thnk_fol_2.Text)}");
 
@@ -258,7 +258,7 @@ namespace AdvancedScada.HMI.MainForm
                 }
                 else
                 {
-                    Write(com_work_6.PLCAddressValueToWrite,false);
+                    Write(com_work_6.PLCAddressValueToWrite, false);
 
                     Write(com_order_6.PLCAddressValueToWrite, "0");
 

@@ -32,13 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Fizzler, Version=1.2.0.0, Culture=neutral, PublicKeyToken=4ebff4844e382110, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Fizzler.1.2.0\lib\netstandard2.0\Fizzler.dll</HintPath>
     </Reference>
     <Reference Include="HslControls, Version=2.2.5.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\HslControls.2.2.5\lib\net45\HslControls.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Drawing">
@@ -49,6 +50,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
@@ -66,15 +68,31 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="AHMI\SelectorSwitch\HMIMushroomButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AHMI\SelectorSwitch\HMIPilotLightSmall.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AHMI\SelectorSwitch\HMIPushButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AHMI\SelectorSwitch\HMISelectorSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Alarm\HMIAlarm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ButtonAll\HMIButton.xaml">
+    <Page Include="ButtonAll\HMIButtonAll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ButtonAll\HMIButtonAll.xaml">
+    <Page Include="ButtonAll\HMIPushButtonAll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -91,6 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HslControl\TankAll\HMIBottle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HslControl\TankAll\UserControl1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,17 +174,28 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AHMI\SelectorSwitch\HMIMushroomButton.xaml.cs">
+      <DependentUpon>HMIMushroomButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AHMI\SelectorSwitch\HMIPilotLightSmall.xaml.cs">
+      <DependentUpon>HMIPilotLightSmall.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AHMI\SelectorSwitch\HMIPushButton.xaml.cs">
+      <DependentUpon>HMIPushButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AHMI\SelectorSwitch\HMISelectorSwitch.xaml.cs">
+      <DependentUpon>HMISelectorSwitch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Alarm\dgAlarmH.cs" />
     <Compile Include="Alarm\HMIAlarm.xaml.cs">
       <DependentUpon>HMIAlarm.xaml</DependentUpon>
     </Compile>
     <Compile Include="ButtonAll\HMIAnnunciator.cs" />
-    <Compile Include="ButtonAll\HMIButton.xaml.cs">
-      <DependentUpon>HMIButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ButtonAll\HMIButton2.cs" />
     <Compile Include="ButtonAll\HMIButtonAll.xaml.cs">
       <DependentUpon>HMIButtonAll.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ButtonAll\HMIPushButtonAll.xaml.cs">
+      <DependentUpon>HMIPushButtonAll.xaml</DependentUpon>
     </Compile>
     <Compile Include="Comm\EnumAll.cs" />
     <Compile Include="Comm\LicenseHMI.cs" />
@@ -182,6 +215,9 @@
     <Compile Include="HMIShapes.cs" />
     <Compile Include="HslControl\TankAll\HMIBottle.xaml.cs">
       <DependentUpon>HMIBottle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HslControl\TankAll\UserControl1.xaml.cs">
+      <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="ImageAll\HMIImageContainerSvg.cs" />
     <Compile Include="Indicator\HMIIndicator.xaml.cs">
@@ -321,6 +357,32 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\DigitalPanelMeterR1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\BlackButton.png" />
+    <Resource Include="Images\BlackButtonPressed.png" />
+    <Resource Include="Images\BlueButton.png" />
+    <Resource Include="Images\BlueButtonPressed.png" />
+    <Resource Include="Images\BluePilotOff.png" />
+    <Resource Include="Images\BluePilotOn.png" />
+    <Resource Include="Images\EstopButton.png" />
+    <Resource Include="Images\EstopButtonDown.png" />
+    <Resource Include="Images\GreenButton.png" />
+    <Resource Include="Images\GreenButtonPressed.png" />
+    <Resource Include="Images\GreenPilotOff.png" />
+    <Resource Include="Images\GreenPilotOn.png" />
+    <Resource Include="Images\LegendPlateShort.png" />
+    <Resource Include="Images\RedButton.png" />
+    <Resource Include="Images\RedButtonPressed.png" />
+    <Resource Include="Images\RedPilotOff.png" />
+    <Resource Include="Images\RedPilotOn.png" />
+    <Resource Include="Images\WhitePilotOff.png" />
+    <Resource Include="Images\WhitePilotOn.png" />
+    <Resource Include="Images\YellowPilotOff.png" />
+    <Resource Include="Images\YellowPilotOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DigitalPanelMeter.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

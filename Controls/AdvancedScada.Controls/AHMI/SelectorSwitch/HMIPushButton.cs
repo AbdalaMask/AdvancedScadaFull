@@ -1,5 +1,6 @@
 ﻿using AdvancedScada;
 using AdvancedScada;
+using AdvancedScada.Common;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
 using AdvancedScada.Controls.AHMI.SelectorSwitch;
@@ -7,7 +8,6 @@ using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Common;
 using AdvancedScada.Monitor;
 using MfgControl.AdvancedHMI.Controls;
 using System;

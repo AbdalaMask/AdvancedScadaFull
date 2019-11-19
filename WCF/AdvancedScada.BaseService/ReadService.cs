@@ -29,7 +29,7 @@ namespace AdvancedScada.BaseService
                         {
                             if (listCallbackChannels.Count > 0)
                             {
-                                
+
                                 foreach (IServiceCallback item in listCallbackChannels)
                                 {
                                     try

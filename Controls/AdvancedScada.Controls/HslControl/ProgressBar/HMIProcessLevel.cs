@@ -1,5 +1,6 @@
 ﻿using AdvancedScada;
 using AdvancedScada;
+using AdvancedScada.Common;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.DialogEditor;
 using AdvancedScada.Controls.DialogEditor;
@@ -8,7 +9,6 @@ using AdvancedScada.Controls.HslControl.ProgressBar;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls_Net45;
-using AdvancedScada.Common;
 using HslControls;
 using MfgControl.AdvancedHMI.Controls;
 using System;

@@ -1,5 +1,6 @@
 ﻿using AdvancedScada;
 using AdvancedScada;
+using AdvancedScada.Common;
 using AdvancedScada.Controls;
 using AdvancedScada.Controls.AHMI;
 using AdvancedScada.Controls.AHMI.Components;
@@ -7,7 +8,6 @@ using AdvancedScada.Controls.Drivers;
 using AdvancedScada.Controls.Drivers;
 using AdvancedScada.Controls.Subscription;
 using AdvancedScada.Controls.Subscription;
-using AdvancedScada.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;

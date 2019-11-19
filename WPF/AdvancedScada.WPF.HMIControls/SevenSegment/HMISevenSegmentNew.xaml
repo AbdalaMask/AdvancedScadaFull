@@ -8,8 +8,8 @@
     <Viewbox>
         <Canvas Height=" 50" Width=" 100"  >
             <!--Step1-->
-            <Image Canvas.Left=" 0" Canvas.Top=" 0" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/AdvancedScada.WPF.HMIControls;component/Resources/DigitalPanelMeterR1.png" Stretch="UniformToFill" Height="50" Width=" 100" />
-            <local:HMISevenSegmentsStack HorizontalAlignment="Center" Height="29" VerticalAlignment="Center" Width="80" ElementsCount="5" Value="{Binding Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:HMISevenSegmentNew}}}" Canvas.Left="10" Canvas.Top="12.5" GapWidth="1" HorizSegDivider="11" TiltAngle="3" PenThickness="0" PLCAddressKeypad="{Binding PLCAddressClick, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:HMISevenSegmentNew}}}" PLCAddressValue="{Binding PLCAddressValue, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:HMISevenSegmentNew}}}" SelectedFillBrush="#FFE41629"/>
+            <Image Canvas.Left=" 0" Canvas.Top=" 0" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/AdvancedScada.WPF.HMIControls;component/Images/DigitalPanelMeter.png" Stretch="UniformToFill" Height="50" Width=" 100" />
+            <local:HMISevenSegmentsStack HorizontalAlignment="Center" Height="24" VerticalAlignment="Center" Width="78" ElementsCount="5" Value="{Binding Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:HMISevenSegmentNew}}}" Canvas.Left="11" Canvas.Top="12" GapWidth="1" HorizSegDivider="11" TiltAngle="3" PenThickness="0" PLCAddressKeypad="{Binding PLCAddressClick, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:HMISevenSegmentNew}}}" PLCAddressValue="{Binding PLCAddressValue, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:HMISevenSegmentNew}}}" SelectedFillBrush="#FFE41629"/>
 
         </Canvas>
 

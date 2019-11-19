@@ -230,7 +230,7 @@ namespace AdvancedScada.Studio.Monitor
 
                 IsConnected = true;
 
-              
+
             }
             catch (Exception ex)
             {
@@ -494,7 +494,7 @@ namespace AdvancedScada.Studio.Monitor
 
                                                             DGMonitorForm[4, i].Value = List2[j].Value.Value;
                                                             DGMonitorForm[5, i].Value = $"{List2[j].Value.TimeSpan.ToString("yyyy-MM-dd HH:mm:ss.fff")}";
-                                                           // DGMonitorForm[5, i].Value = $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}";
+                                                            // DGMonitorForm[5, i].Value = $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}";
                                                         }
 
 

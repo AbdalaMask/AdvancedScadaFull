@@ -1,5 +1,4 @@
 ﻿using AdvancedScada.BaseService;
-using AdvancedScada.BaseService.Client;
 using AdvancedScada.Common;
 using ComponentFactory.Krypton.Toolkit;
 using System;
@@ -28,11 +27,11 @@ namespace AdvancedScada.Studio.Service
                 eventConnectionState += new EventConnectionState(SetConnectionState);
                 new ServiceDriverHelper().InitializePLC();
                 host = new ServiceDriverHelper().InitializeReadServiceHttp();
-                objWebServiceHost= new ServiceDriverHelper().InitializeReadServiceWeb();
+                objWebServiceHost = new ServiceDriverHelper().InitializeReadServiceWeb();
                 host.Opened += host_Opened;
                 host.Open();
 
-              
+
 
                 foreach (var se in host.Description.Endpoints)
                 {

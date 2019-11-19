@@ -4,9 +4,9 @@ using Opc;
 using Opc.Da;
 using System;
 using static AdvancedScada.Common.XCollection;
-using Server = Opc.Da.Server;
-using Factory = OpcCom.Factory;
 using Convert = System.Convert;
+using Factory = OpcCom.Factory;
+using Server = Opc.Da.Server;
 
 namespace AdvancedScada.OPC.Core.Drivers
 {

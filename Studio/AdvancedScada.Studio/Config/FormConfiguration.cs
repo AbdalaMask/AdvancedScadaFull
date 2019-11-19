@@ -4,7 +4,6 @@ using Microsoft.Win32;
 using System;
 using System.Data;
 using System.Data.Sql;
-using System.Windows.Forms;
 using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Studio.Config
 {
@@ -22,14 +21,14 @@ namespace AdvancedScada.Studio.Config
             {
                 Registry.SetValue("HKEY_CURRENT_USER\\Software\\FormConfiguration", "IPAddress", txtIPAddress.Text);
                 Registry.SetValue("HKEY_CURRENT_USER\\Software\\FormConfiguration", "Port", txtPort.Text);
- 
+
 
                 Settings.Default.teServer = txtServerName.Text;
                 Settings.Default.Port = txtPort.Text;
                 Settings.Default.IPAddress = txtIPAddress.Text;
                 Settings.Default.DatabaseTypes = DatabaseTypes;
 
-           
+
 
                 Settings.Default.Save();
 
@@ -73,7 +72,7 @@ namespace AdvancedScada.Studio.Config
 
                 cboxDatabaseTypes.Text = Settings.Default.DatabaseTypes;
 
-          
+
                 GetSQLServer();
 
                 txtIPAddress.Text = Settings.Default.IPAddress;
@@ -121,6 +120,6 @@ namespace AdvancedScada.Studio.Config
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
         }
-      
+
     }
 }

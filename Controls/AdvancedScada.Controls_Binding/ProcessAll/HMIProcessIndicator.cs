@@ -1,11 +1,9 @@
 ﻿using AdvancedScada.Common;
 using AdvancedScada.Common.Client;
 using AdvancedScada.Controls_Binding.DialogEditor;
-using AdvancedScada.Controls_Net45;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
-using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
 
@@ -21,7 +19,7 @@ namespace AdvancedScada.Controls_Binding.ProcessAll
         }
         #region PLC Properties
         public bool HoldTimeMet;
-     
+
         //*****************************************
         //* Property - Hold time before bit reset
         //*****************************************
@@ -130,7 +128,7 @@ namespace AdvancedScada.Controls_Binding.ProcessAll
                 }
             }
         }
-       
+
         [Category("PLC Properties")]
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressClick { get; set; }
@@ -291,6 +289,6 @@ namespace AdvancedScada.Controls_Binding.ProcessAll
 
         #endregion
 
-         
+
     }
 }

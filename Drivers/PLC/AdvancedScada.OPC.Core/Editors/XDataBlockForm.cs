@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using static AdvancedScada.Common.XCollection;
-using Server = Opc.Da.Server;
-using Factory = OpcCom.Factory;
 using Convert = System.Convert;
+using Factory = OpcCom.Factory;
+using Server = Opc.Da.Server;
 using Type = System.Type;
 
 namespace AdvancedScada.OPC.Core.Editors

@@ -5,10 +5,8 @@ using AdvancedScada.Controls_Net45;
 using MfgControl.AdvancedHMI.Controls;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Design;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace AdvancedScada.Controls_Binding.ImageAll
@@ -354,7 +352,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         private Keypad_v3 KeypadPopUp;
 
-      
+
 
         public string PLCAddressClick { get; set; }
         public string PLCAddressEnabled { get; set; }

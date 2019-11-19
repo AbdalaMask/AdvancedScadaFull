@@ -21,7 +21,7 @@ namespace AdvancedScada.Controls_Binding.Motor
         }
         #region PLC Properties
 
-       
+
         public bool HoldTimeMet;
         private int m_MaximumHoldTime = 3000;
         private int m_MinimumHoldTime = 500;
@@ -192,7 +192,7 @@ namespace AdvancedScada.Controls_Binding.Motor
         #endregion
         #region Event
 
-       
+
         public event EventHandler ValueChanged;
 
 
@@ -255,9 +255,9 @@ namespace AdvancedScada.Controls_Binding.Motor
                             break;
                         case OutputType.Toggle:
 
-                       
-                                Utilities.Write(m_PLCAddressClick, Value);
-                       
+
+                            Utilities.Write(m_PLCAddressClick, Value);
+
                             break;
                         default:
 

@@ -102,7 +102,7 @@ namespace AdvancedScada.Modbus.Core
             }
         }
 
-        
+
         public void Connect()
         {
 
@@ -182,8 +182,8 @@ namespace AdvancedScada.Modbus.Core
                     var data = task.AsyncState as Channel;
                     if (data != null)
                         EventscadaException?.Invoke(this.GetType().Name, $"Task #{data.ChannelId} created at {data.ChannelName}, ran on thread #{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}.");
-                                          
-                     
+
+
                 }
             }
             catch (Exception ex)
@@ -233,13 +233,13 @@ namespace AdvancedScada.Modbus.Core
                             bool[] bitRs = null;
                             if (db.TypeOfRead == "ReadCoilStatus")
                             {
-                                  bitRs = DriverAdapter.Read<bool>($"{db.StartAddress}", db.Length);
+                                bitRs = DriverAdapter.Read<bool>($"{db.StartAddress}", db.Length);
                             }
                             else if (db.TypeOfRead == "ReadInputStatus")
                             {
-                               bitRs = DriverAdapter.ReadDiscrete($"{db.StartAddress}", db.Length);
+                                bitRs = DriverAdapter.ReadDiscrete($"{db.StartAddress}", db.Length);
                             }
-                          
+
                             if (bitRs == null) return;
                             if (bitRs.Length > db.Tags.Count) return;
                             for (int j = 0; j < db.Tags.Count; j++)

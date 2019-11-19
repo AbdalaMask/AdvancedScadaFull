@@ -124,19 +124,19 @@ namespace AdvancedScada.Delta.Core.Editors
                 switch ((DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedValue.ToString()))
                 {
                     case DataTypes.Bit:
-                       
-                                txtAddressLength.Maximum = 2000;
-                                txtAddressLength.Minimum = 1;
-                            
+
+                        txtAddressLength.Maximum = 2000;
+                        txtAddressLength.Minimum = 1;
+
 
                         break;
                     case DataTypes.Byte:
                         break;
                     case DataTypes.Short:
-                        
-                                txtAddressLength.Maximum = 120;
-                                txtAddressLength.Minimum = 1;
-                             
+
+                        txtAddressLength.Maximum = 120;
+                        txtAddressLength.Minimum = 1;
+
                         break;
                     case DataTypes.UShort:
                         break;
@@ -150,7 +150,7 @@ namespace AdvancedScada.Delta.Core.Editors
                     case DataTypes.Double:
                         txtAddressLength.Maximum = 60;
                         txtAddressLength.Minimum = 1;
-                       
+
                         break;
                     case DataTypes.String:
                         break;

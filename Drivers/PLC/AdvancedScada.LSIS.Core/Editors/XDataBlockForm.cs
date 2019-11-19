@@ -202,15 +202,15 @@ namespace AdvancedScada.LSIS.Core.Editors
                         chkX10.Enabled = true;
                         if (chkX16.Checked)
                         {
-                        txtAddressLength.Maximum = 1;
-                        txtAddressLength.Minimum = 1;
+                            txtAddressLength.Maximum = 1;
+                            txtAddressLength.Minimum = 1;
                         }
                         break;
                     case DataTypes.Byte:
                         break;
                     case DataTypes.Short:
 
-                        if (ch.ConnectionType == "SerialPort" )
+                        if (ch.ConnectionType == "SerialPort")
                         {
                             txtAddressLength.Maximum = 60;
                             txtAddressLength.Minimum = 1;

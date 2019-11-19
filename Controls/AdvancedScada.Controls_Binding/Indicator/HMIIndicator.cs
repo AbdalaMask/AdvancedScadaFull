@@ -281,7 +281,7 @@ namespace AdvancedScada.Controls_Binding.Indicator
                 ErrorDisplayTime.Enabled = true;
                 Utilities.DisplayError(this, ErrorMessage);
                 Text = ErrorMessage;
-                
+
             }
         }
 
