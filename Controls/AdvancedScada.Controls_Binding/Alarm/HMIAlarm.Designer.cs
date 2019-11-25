@@ -32,14 +32,14 @@
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -71,7 +71,7 @@
             this.toolStripButton6});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(667, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(794, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -79,26 +79,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButton1
             // 
@@ -109,6 +89,11 @@
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "toolStripButton1";
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButton2
             // 
             this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -117,6 +102,11 @@
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton2.Text = "toolStripButton2";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButton3
             // 
@@ -127,6 +117,11 @@
             this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton3.Text = "toolStripButton3";
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButton4
             // 
             this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -135,6 +130,11 @@
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton4.Text = "toolStripButton4";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButton5
             // 
@@ -159,9 +159,9 @@
             // 
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.toolStrip2.Location = new System.Drawing.Point(0, 263);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 264);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(667, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(794, 25);
             this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -171,7 +171,7 @@
             this.ColStatus.HeaderText = "Status";
             this.ColStatus.Name = "ColStatus";
             this.ColStatus.ReadOnly = true;
-            this.ColStatus.Width = 100;
+            this.ColStatus.Width = 120;
             // 
             // ColAlarmType
             // 
@@ -179,14 +179,14 @@
             this.ColAlarmType.HeaderText = "AlarmType";
             this.ColAlarmType.Name = "ColAlarmType";
             this.ColAlarmType.ReadOnly = true;
-            this.ColAlarmType.Width = 101;
+            this.ColAlarmType.Width = 121;
             // 
             // ColMessage
             // 
             this.ColMessage.HeaderText = "Message";
             this.ColMessage.Name = "ColMessage";
             this.ColMessage.ReadOnly = true;
-            this.ColMessage.Width = 202;
+            this.ColMessage.Width = 241;
             // 
             // ColTime
             // 
@@ -194,7 +194,7 @@
             this.ColTime.HeaderText = "Time";
             this.ColTime.Name = "ColTime";
             this.ColTime.ReadOnly = true;
-            this.ColTime.Width = 101;
+            this.ColTime.Width = 119;
             // 
             // ColDate
             // 
@@ -202,7 +202,7 @@
             this.ColDate.HeaderText = "Date";
             this.ColDate.Name = "ColDate";
             this.ColDate.ReadOnly = true;
-            this.ColDate.Width = 101;
+            this.ColDate.Width = 120;
             // 
             // ColNo
             // 
@@ -210,7 +210,7 @@
             this.ColNo.HeaderText = "No";
             this.ColNo.Name = "ColNo";
             this.ColNo.ReadOnly = true;
-            this.ColNo.Width = 61;
+            this.ColNo.Width = 72;
             // 
             // DGAlarm
             // 
@@ -231,7 +231,7 @@
             this.DGAlarm.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGAlarm.ShowCellErrors = false;
             this.DGAlarm.ShowRowErrors = false;
-            this.DGAlarm.Size = new System.Drawing.Size(667, 238);
+            this.DGAlarm.Size = new System.Drawing.Size(794, 239);
             this.DGAlarm.TabIndex = 3;
             // 
             // HMIAlarm
@@ -242,7 +242,7 @@
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.toolStrip1);
             this.Name = "HMIAlarm";
-            this.Size = new System.Drawing.Size(667, 288);
+            this.Size = new System.Drawing.Size(794, 289);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGAlarm)).EndInit();

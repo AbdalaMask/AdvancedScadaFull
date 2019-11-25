@@ -32,6 +32,22 @@ namespace AdvancedScada.Studio.Editors
                 }
             }
         }
+        public void LoadPlug(string ImageUrl)
+        {
+            DirectoryInfo di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+            foreach (FileInfo fi in di.GetFiles($"AdvancedScada.{ImageUrl}.Core.dll"))
+            {
+                Assembly lib = Assembly.LoadFrom(fi.FullName);
+                foreach (Type t in lib.GetExportedTypes())
+                {
+                    if (t.GetInterface(typeof(IODriver).FullName) != null)
+                    {
+                        IODriver plug = (IODriver)Activator.CreateInstance(t);
+                        picSelectedDrivers.Image = plug.ImageUrl;
+                    }
+                }
+            }
+        }
         private void XSelectedDrivers_Load(object sender, EventArgs e)
         {
             cboxSelectedDrivers.Items.Clear();
@@ -57,27 +73,7 @@ namespace AdvancedScada.Studio.Editors
         {
             DriverTypes = cboxSelectedDrivers.Text;
 
-            switch (cboxSelectedDrivers.Text)
-            {
-                case "Siemens":
-                    picSelectedDrivers.Image = Properties.Resources.PLC_SIEMENS;
-                    break;
-                case "LSIS":
-                    picSelectedDrivers.Image = Properties.Resources.P00135;
-                    break;
-                case "Delta":
-                    picSelectedDrivers.Image = Properties.Resources.DVP10MC11T_300x300;
-                    break;
-                case "Modbus":
-                    picSelectedDrivers.Image = Properties.Resources.Modbus;
-                    break;
-                case "OPC":
-                    picSelectedDrivers.Image = Properties.Resources.OPC;
-                    break;
-                default:
-                    picSelectedDrivers.Image = Properties.Resources.img_wemx_designer_5;
-                    break;
-            }
+            LoadPlug(DriverTypes);
 
         }
     }

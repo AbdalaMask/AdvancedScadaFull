@@ -3,6 +3,7 @@ using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.OPC.Core.Drivers;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using static AdvancedScada.Common.XCollection;
@@ -27,7 +28,7 @@ namespace AdvancedScada.OPC.Core
 
         public string Name => "OPC";
 
-
+        public Image ImageUrl => Properties.Resources.OPC;
 
 
         #endregion

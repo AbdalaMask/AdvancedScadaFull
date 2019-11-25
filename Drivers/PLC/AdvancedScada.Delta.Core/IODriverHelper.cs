@@ -7,6 +7,7 @@ using AdvancedScada.IODriver.Delta.RTU;
 using AdvancedScada.IODriver.Delta.TCP;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO.Ports;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,6 +30,7 @@ namespace AdvancedScada.Delta.Core
         #region IServiceDriver
 
         public string Name => "Delta";
+        public Image ImageUrl => Properties.Resources.DVP10MC11T_300x300;
         public void InitializeService(Channel chns)
         {
 

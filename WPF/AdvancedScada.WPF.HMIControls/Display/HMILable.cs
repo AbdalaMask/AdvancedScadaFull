@@ -64,8 +64,10 @@ namespace AdvancedScada.WPF.HMIControls.Display
             string txt = this.Text;
             if (!string.IsNullOrEmpty(txt))
             {
+#pragma warning disable CS0618 // Type or member is obsolete
                 FormattedText formattedText = new FormattedText(txt, System.Globalization.CultureInfo.CurrentUICulture, FlowDirection.LeftToRight,
                     new Typeface(base.FontFamily, base.FontStyle, base.FontWeight, base.FontStretch), base.FontSize, base.Foreground);
+#pragma warning restore CS0618 // Type or member is obsolete
                 Point pt = new Point((this.TextAlignment == TextAlignment.Center ? (width - formattedText.Width) * 0.5 :
                    this.TextAlignment == TextAlignment.Left ? bevel : width - bevel - formattedText.Width), (height - formattedText.Height) * 0.5);
                 drawingContext.DrawText(formattedText, pt);

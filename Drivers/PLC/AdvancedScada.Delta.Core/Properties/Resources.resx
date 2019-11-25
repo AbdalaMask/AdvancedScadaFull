@@ -133,4 +133,7 @@
   <data name="DMT" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DMT.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="DVP10MC11T_300x300" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVP10MC11T-300x300.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

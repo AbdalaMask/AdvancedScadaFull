@@ -99,5 +99,15 @@ namespace AdvancedScada.Siemens.Core.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PLC_SIEMENS {
+            get {
+                object obj = ResourceManager.GetObject("PLC_SIEMENS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

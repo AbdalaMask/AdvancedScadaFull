@@ -280,6 +280,10 @@
       <Project>{1d570e9a-e5b4-44dd-946d-9d73cfa4a535}</Project>
       <Name>DriverBase</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Studio\AdvancedScada.Management\Management.csproj">
+      <Project>{8FEAB090-6B9A-4C8D-AD4A-B5C9062152A0}</Project>
+      <Name>Management</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Util\AdvancedScada.Common\Common.csproj">
       <Project>{ef8e1580-bdc2-4426-8d2d-bb866fc66305}</Project>
       <Name>Common</Name>

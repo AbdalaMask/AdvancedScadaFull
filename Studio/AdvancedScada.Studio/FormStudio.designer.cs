@@ -52,9 +52,8 @@
             this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
             this.kryptonRibbonGroup6 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple6 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
-            this.kryptonRibbonGroupButton1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
-            this.kryptonRibbonGroupButton2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
-            this.kryptonRibbonGroupButton3 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.btnAlarmclasses = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.btnAlarms = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonTab2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup4 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple4 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
@@ -257,24 +256,20 @@
             // kryptonRibbonGroupTriple6
             // 
             this.kryptonRibbonGroupTriple6.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
-            this.kryptonRibbonGroupButton1,
-            this.kryptonRibbonGroupButton2,
-            this.kryptonRibbonGroupButton3});
+            this.btnAlarmclasses,
+            this.btnAlarms});
             // 
-            // kryptonRibbonGroupButton1
+            // btnAlarmclasses
             // 
-            this.kryptonRibbonGroupButton1.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.BOScheduler_32x32;
-            this.kryptonRibbonGroupButton1.TextLine1 = "Alarm classes";
+            this.btnAlarmclasses.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.BOScheduler_32x32;
+            this.btnAlarmclasses.TextLine1 = "Alarm classes";
+            this.btnAlarmclasses.Click += new System.EventHandler(this.btnAlarmclasses_Click);
             // 
-            // kryptonRibbonGroupButton2
+            // btnAlarms
             // 
-            this.kryptonRibbonGroupButton2.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.Number_32x32;
-            this.kryptonRibbonGroupButton2.TextLine1 = "Alarm Analog";
-            // 
-            // kryptonRibbonGroupButton3
-            // 
-            this.kryptonRibbonGroupButton3.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.DecreaseDecimal_32x32;
-            this.kryptonRibbonGroupButton3.TextLine1 = "Discrete Alarms";
+            this.btnAlarms.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.DecreaseDecimal_32x32;
+            this.btnAlarms.TextLine1 = "Alarms";
+            this.btnAlarms.Click += new System.EventHandler(this.btnDiscreteAlarms_Click);
             // 
             // kryptonRibbonTab2
             // 
@@ -717,9 +712,8 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupCheckBox CheckEnabele;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup6;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple6;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton1;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton2;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton3;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btnAlarmclasses;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btnAlarms;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup3;
     }
 }

@@ -7,6 +7,7 @@ using AdvancedScada.Modbus.Core.Modbus.RTU;
 using AdvancedScada.Modbus.Core.Modbus.TCP;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO.Ports;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace AdvancedScada.Modbus.Core
         private static int COUNTER;
         #region IServiceDriver
         public string Name => "Modbus";
+        public Image ImageUrl => Properties.Resources.Modbus;
         public void InitializeService(Channel ch)
         {
 

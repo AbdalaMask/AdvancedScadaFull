@@ -5,6 +5,7 @@ using AdvancedScada.LSIS.Core.LSIS.Cnet;
 using AdvancedScada.LSIS.Core.LSIS.FENET;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO.Ports;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,6 +29,8 @@ namespace AdvancedScada.LSIS.Core
 
         #region IServiceDriver
         public string Name => "LSIS";
+
+        public Image ImageUrl => Properties.Resources.P00135;
         public void InitializeService(Channel ch)
         {
 

@@ -33,7 +33,7 @@ Public Class Tank
         End Set
     End Property
 
-    Private m_Text As String = ""
+    Private m_Text As String = String.Empty
     Public Property LegendText() As String
         Get
             Return m_Text

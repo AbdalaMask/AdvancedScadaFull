@@ -328,7 +328,7 @@ namespace AdvancedScada.Controls.AHMI.ProcessAll.DrawAll
                         return;
                     }
                 }
-                Label2:
+            Label2:
                 Blend float0 = new Blend();
                 bool flag1 = false;
                 float float3 = 0f;
@@ -789,7 +789,7 @@ namespace AdvancedScada.Controls.AHMI.ProcessAll.DrawAll
                         goto Label0;
                     }
                 }
-                Label2:
+            Label2:
                 Blend float0 = new Blend();
                 bool flag1 = false;
                 float float3 = 0f;
@@ -1017,7 +1017,7 @@ namespace AdvancedScada.Controls.AHMI.ProcessAll.DrawAll
                     region21.Dispose();
                 }
             }
-            Label0:
+        Label0:
             if (int_3 > 0)
             {
                 SolidBrush solidBrush8 = new SolidBrush(color_5);
@@ -1347,7 +1347,7 @@ namespace AdvancedScada.Controls.AHMI.ProcessAll.DrawAll
                         goto Label0;
                     }
                 }
-                Label2:
+            Label2:
                 Blend float0 = new Blend();
                 bool flag1 = false;
                 float float3 = 0f;
@@ -1575,7 +1575,7 @@ namespace AdvancedScada.Controls.AHMI.ProcessAll.DrawAll
                     region21.Dispose();
                 }
             }
-            Label0:
+        Label0:
             if (int_4 > 0)
             {
                 SolidBrush solidBrush8 = new SolidBrush(color_5);
@@ -2165,7 +2165,7 @@ namespace AdvancedScada.Controls.AHMI.ProcessAll.DrawAll
                         goto Label0;
                     }
                 }
-                Label2:
+            Label2:
                 Blend float0 = new Blend();
                 bool flag1 = false;
                 float float3 = 0f;
@@ -2393,7 +2393,7 @@ namespace AdvancedScada.Controls.AHMI.ProcessAll.DrawAll
                     region21.Dispose();
                 }
             }
-            Label0:
+        Label0:
             if (int_5 > 0)
             {
                 SolidBrush solidBrush8 = new SolidBrush(color_5);

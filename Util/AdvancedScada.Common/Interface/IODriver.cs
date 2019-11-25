@@ -1,4 +1,5 @@
 ﻿using AdvancedScada.DriverBase.Devices;
+using System.Drawing;
 using System.Runtime.Serialization;
 
 namespace AdvancedScada.Common
@@ -14,6 +15,7 @@ namespace AdvancedScada.Common
     public interface IODriver
     {
         string Name { get; }
+        Image ImageUrl { get; }
         void InitializeService(Channel ch);
         void Connect();
         void Disconnect();

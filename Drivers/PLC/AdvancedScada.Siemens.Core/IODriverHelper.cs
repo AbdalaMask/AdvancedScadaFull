@@ -5,6 +5,7 @@ using AdvancedScada.Siemens.Core.Siemens;
 using HslCommunication.Profinet.Siemens;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO.Ports;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace AdvancedScada.Siemens.Core
 
         #region IServiceDriver
         public string Name => "Siemens";
+        public Image ImageUrl => Properties.Resources.PLC_SIEMENS;
         public void InitializeService(Channel ch)
         {
 

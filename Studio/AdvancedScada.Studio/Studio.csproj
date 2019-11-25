@@ -87,11 +87,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alarms\FrmAlarmAnalog.cs">
+    <Compile Include="Alarms\FrmAddAlarm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Alarms\FrmAlarmAnalog.Designer.cs">
-      <DependentUpon>FrmAlarmAnalog.cs</DependentUpon>
+    <Compile Include="Alarms\FrmAddAlarm.Designer.cs">
+      <DependentUpon>FrmAddAlarm.cs</DependentUpon>
     </Compile>
     <Compile Include="Alarms\FrmAlarmClasses.cs">
       <SubType>Form</SubType>
@@ -218,8 +218,11 @@
     <Compile Include="Tools\ContentHistory.Designer.cs">
       <DependentUpon>ContentHistory.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Alarms\FrmAlarmAnalog.resx">
-      <DependentUpon>FrmAlarmAnalog.cs</DependentUpon>
+    <EmbeddedResource Include="Alarms\FrmAddAlarm.resx">
+      <DependentUpon>FrmAddAlarm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Alarms\FrmDiscreteAlarm.resx">
+      <DependentUpon>FrmDiscreteAlarm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Config\FormConfiguration.resx">
       <DependentUpon>FormConfiguration.cs</DependentUpon>

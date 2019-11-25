@@ -109,5 +109,15 @@ namespace AdvancedScada.Delta.Core.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DVP10MC11T_300x300 {
+            get {
+                object obj = ResourceManager.GetObject("DVP10MC11T_300x300", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

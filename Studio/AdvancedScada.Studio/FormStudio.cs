@@ -1,6 +1,7 @@
 ﻿using AdvancedScada.Common;
 using AdvancedScada.ImagePicker;
 using AdvancedScada.Management.BLManager;
+using AdvancedScada.Studio.Alarms;
 using AdvancedScada.Studio.Config;
 using AdvancedScada.Studio.DB;
 using AdvancedScada.Studio.DB.SQL;
@@ -455,6 +456,48 @@ namespace AdvancedScada.Studio
                 Settings.Default.CheckEnabele = false;
                 Settings.Default.Save();
             }
+        }
+
+        private void btnDiscreteAlarms_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(FrmDiscreteAlarm))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            KryptonPage page = NewPage("DiscreteAlarm ", 0, new FrmDiscreteAlarm());
+            TabForm.Pages.Add(page);
+        }
+
+        private void btnAlarmAnalog_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(FrmAddAlarm))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            KryptonPage page = NewPage("AlarmAnalog ", 0, new FrmAddAlarm());
+            TabForm.Pages.Add(page);
+        }
+
+        private void btnAlarmclasses_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(FrmAlarmClasses))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            KryptonPage page = NewPage("AlarmClasses ", 0, new FrmAlarmClasses());
+            TabForm.Pages.Add(page);
         }
     }
 }
