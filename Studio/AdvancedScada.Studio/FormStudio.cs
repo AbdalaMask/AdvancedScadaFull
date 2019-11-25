@@ -342,7 +342,7 @@ namespace AdvancedScada.Studio
 
             ThisNotificationPopup.Popup();
 
-
+            btnFormMain_Click();
             var objChannelManager = ChannelService.GetChannelManager();
             var xmlFile = objChannelManager.ReadKey(objChannelManager.XML_NAME_DEFAULT);
             if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile)) return;
@@ -471,7 +471,19 @@ namespace AdvancedScada.Studio
             KryptonPage page = NewPage("DiscreteAlarm ", 0, new FrmDiscreteAlarm());
             TabForm.Pages.Add(page);
         }
-
+        private void btnFormMain_Click()
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(FormMain))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            KryptonPage page = NewPage("FormMain ", 0, new FormMain());
+            TabForm.Pages.Add(page);
+        }
         private void btnAlarmAnalog_Click(object sender, EventArgs e)
         {
             foreach (Form form in Application.OpenForms)

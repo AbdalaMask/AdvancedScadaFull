@@ -80,8 +80,6 @@
             this.SQLItem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.TabForm = new ComponentFactory.Krypton.Docking.KryptonDockableNavigator();
-            this.tabFormMain = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelFill = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonDockableWorkspace = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
@@ -96,9 +94,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TabForm)).BeginInit();
             this.TabForm.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tabFormMain)).BeginInit();
-            this.tabFormMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelFill)).BeginInit();
             this.panelFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel)).BeginInit();
@@ -117,6 +112,7 @@
             this.kryptonRibbon1.RibbonTabs.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab[] {
             this.kryptonRibbonTab1,
             this.kryptonRibbonTab2});
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = this.kryptonRibbonTab1;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1284, 115);
             this.kryptonRibbon1.TabIndex = 0;
@@ -519,36 +515,9 @@
             this.TabForm.Location = new System.Drawing.Point(217, 9);
             this.TabForm.Margin = new System.Windows.Forms.Padding(4);
             this.TabForm.Name = "TabForm";
-            this.TabForm.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
-            this.tabFormMain});
-            this.TabForm.SelectedIndex = 0;
             this.TabForm.Size = new System.Drawing.Size(1058, 624);
             this.TabForm.TabIndex = 3;
             this.TabForm.CloseAction += new System.EventHandler<ComponentFactory.Krypton.Navigator.CloseActionEventArgs>(this.TabForm_CloseAction);
-            // 
-            // tabFormMain
-            // 
-            this.tabFormMain.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.tabFormMain.Controls.Add(this.pictureBox1);
-            this.tabFormMain.Flags = 65534;
-            this.tabFormMain.LastVisibleSet = true;
-            this.tabFormMain.MinimumSize = new System.Drawing.Size(50, 50);
-            this.tabFormMain.Name = "tabFormMain";
-            this.tabFormMain.Size = new System.Drawing.Size(1056, 597);
-            this.tabFormMain.Text = "FormMain";
-            this.tabFormMain.ToolTipTitle = "Page ToolTip";
-            this.tabFormMain.UniqueName = "856e9eb72b0442579ebb1eca4eecc969";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = global::AdvancedScada.Studio.Properties.Resources.img_wemx_designer_5;
-            this.pictureBox1.Location = new System.Drawing.Point(538, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(515, 315);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // panelFill
             // 
@@ -642,9 +611,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TabForm)).EndInit();
             this.TabForm.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tabFormMain)).EndInit();
-            this.tabFormMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelFill)).EndInit();
             this.panelFill.ResumeLayout(false);
             this.panelFill.PerformLayout();
@@ -707,8 +673,6 @@
         private ComponentFactory.Krypton.Docking.KryptonDockableWorkspace kryptonDockableWorkspace;
         private System.Windows.Forms.GroupBox groupBox1;
         private Tulpep.NotificationWindow.PopupNotifier ThisNotificationPopup;
-        private ComponentFactory.Krypton.Navigator.KryptonPage tabFormMain;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupCheckBox CheckEnabele;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup6;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple6;
