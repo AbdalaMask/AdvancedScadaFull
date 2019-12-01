@@ -71,10 +71,10 @@ namespace AdvancedScada.Studio.Alarms
                 var result = openFileDialog.ShowDialog();
                 if (result == DialogResult.OK) // Test result.
                 {
-                    //   InitializeData(openFileDialog.FileName);
+                    
                     objAlarmManager.Alarms.Clear();
                     objAlarmManager.XmlPath = openFileDialog.FileName;
-                    //InitializeData(openFileDialog.FileName);
+                    InitializeData(openFileDialog.FileName);
                     IsDataChanged = true;
                 }
             }

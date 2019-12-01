@@ -31,7 +31,7 @@ namespace AdvancedScada.Delta.Core
 
         public string Name => "Delta";
         public Image ImageUrl => Properties.Resources.DVP10MC11T_300x300;
-        public void InitializeService(Channel chns)
+        public void InitializeService(Channel ch)
         {
 
             try
@@ -40,18 +40,18 @@ namespace AdvancedScada.Delta.Core
                 //=================================================================
 
                 if (Channels == null) return;
-                Channels.Add(chns);
+                Channels.Add(ch);
 
 
                 IDeltaAdapter DriverAdapter = null;
-                foreach (var dv in chns.Devices)
+                foreach (var dv in ch.Devices)
                 {
                     try
                     {
-                        switch (chns.ConnectionType)
+                        switch (ch.ConnectionType)
                         {
                             case "SerialPort":
-                                var dis = (DISerialPort)chns;
+                                var dis = (DISerialPort)ch;
                                 var sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
                                 {
                                     Handshake = dis.Handshake
@@ -61,20 +61,20 @@ namespace AdvancedScada.Delta.Core
                                 {
                                     case "RTU":
                                         DriverAdapter = new DeltaRTUMaster(dv.SlaveId, sp);
-                                        Deltartu.Add(chns.ChannelName, (DeltaRTUMaster)DriverAdapter);
+                                        Deltartu.Add(ch.ChannelName, (DeltaRTUMaster)DriverAdapter);
                                         break;
                                     case "ASCII":
                                         DriverAdapter = new DeltaASCIIMaster(dv.SlaveId, sp);
-                                        Deltaascii.Add(chns.ChannelName, (DeltaASCIIMaster)DriverAdapter);
+                                        Deltaascii.Add(ch.ChannelName, (DeltaASCIIMaster)DriverAdapter);
                                         break;
                                 }
                                 break;
                             case "Ethernet":
-                                var die = (DIEthernet)chns;
+                                var die = (DIEthernet)ch;
 
 
                                 DriverAdapter = new DeltaTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
-                                Deltambe.Add(chns.ChannelName, (DeltaTCPMaster)DriverAdapter);
+                                Deltambe.Add(ch.ChannelName, (DeltaTCPMaster)DriverAdapter);
 
 
                                 break;
@@ -87,11 +87,11 @@ namespace AdvancedScada.Delta.Core
                     }
                     foreach (var db in dv.DataBlocks)
                     {
-
+                        DataBlockCollection.DataBlocks.Add($"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}", db);
                         foreach (var tg in db.Tags)
                         {
                             TagCollection.Tags.Add(
-                                $"{chns.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
+                                $"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
 
                         }
                     }

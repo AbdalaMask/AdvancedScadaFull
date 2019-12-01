@@ -11,5 +11,7 @@ namespace AdvancedScada.IBaseService
 
         [OperationContract(IsOneWay = true)]
         void UpdateCollection(ConnectionState status, Dictionary<string, Tag> collection);
+        [OperationContract(IsOneWay = true)]
+        void UpdateCollectionDataBlock(ConnectionState status, Dictionary<string, DataBlock> collection);
     }
 }

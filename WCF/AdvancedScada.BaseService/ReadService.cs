@@ -35,8 +35,12 @@ namespace AdvancedScada.BaseService
                                     try
                                     {
                                         if (((ICommunicationObject)item).State == CommunicationState.Opened)
+                                        {
                                             item.UpdateCollection(XCollection.objConnectionState, TagCollection.Tags);
-                                        Thread.Sleep(100);
+                                            item.UpdateCollectionDataBlock(XCollection.objConnectionState, DataBlockCollection.DataBlocks);
+                                            Thread.Sleep(100);
+                                        }
+                                           
 
                                     }
                                     catch (Exception ex)

@@ -9,19 +9,19 @@ namespace AdvancedScada.WPF.HMIControls.SevenSegment
     /// <summary>
     /// Interaction logic for HMISevenSegmentNew.xaml
     /// </summary>
-    public partial class HMISevenSegmentNew : UserControl
+    public partial class HMIDigitalPanelMeter : UserControl
     {
-        public HMISevenSegmentNew()
+        public HMIDigitalPanelMeter()
         {
             InitializeComponent();
         }
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
-     "Value", typeof(string), typeof(HMISevenSegmentNew), new PropertyMetadata("0"));
+     "Value", typeof(string), typeof(HMIDigitalPanelMeter), new PropertyMetadata("0"));
         public static readonly DependencyProperty PLCAddressValueProperty = DependencyProperty.Register(
-         "PLCAddressValue", typeof(string), typeof(HMISevenSegmentNew), new PropertyMetadata("0"));
+         "PLCAddressValue", typeof(string), typeof(HMIDigitalPanelMeter), new PropertyMetadata("0"));
 
         public static readonly DependencyProperty PLCAddressClickProperty = DependencyProperty.Register(
-          "PLCAddressClick", typeof(string), typeof(HMISevenSegmentNew), new PropertyMetadata("0"));
+          "PLCAddressClick", typeof(string), typeof(HMIDigitalPanelMeter), new PropertyMetadata("0"));
 
 
         [Category("HMI")]

@@ -44,9 +44,13 @@ namespace AdvancedScada.BaseService.Client
                     {
 
                         foreach (var db in dv.DataBlocks)
+                        {
+                            DataBlockCollectionClient.DataBlocks.Add($"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}", db);
                             foreach (var tg in db.Tags)
                                 TagCollectionClient.Tags.Add(
                                     $"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
+                        }
+                          
                     }
 
             }
@@ -74,6 +78,36 @@ namespace AdvancedScada.BaseService.Client
                     tagsClient[author.Key].TimeSpan = author.Value.TimeSpan;
                 }
 
+        }
+        [OperationContract(IsOneWay = true)]
+        public void UpdateCollectionDataBlock(ConnectionState status, Dictionary<string, DataBlock> DataBlocks)
+        {
+            eventConnectionChanged?.Invoke(status);
+            var DataBlocksClient = DataBlockCollectionClient.DataBlocks;
+            if (DataBlocksClient == null) throw new ArgumentNullException(nameof(DataBlocksClient));
+            foreach (var author in DataBlocks)
+                if (DataBlocksClient.ContainsKey(author.Key))
+                {
+                   
+                    DataBlocksClient[author.Key].ChannelId = author.Value.ChannelId;
+                    DataBlocksClient[author.Key].DeviceId = author.Value.DeviceId;
+                    DataBlocksClient[author.Key].DataBlockId = author.Value.DataBlockId;
+                    DataBlocksClient[author.Key].DataBlockName = author.Value.DataBlockName;
+                    DataBlocksClient[author.Key].DataType = author.Value.DataType;
+                    DataBlocksClient[author.Key].Length = author.Value.Length;
+                    DataBlocksClient[author.Key].StartAddress = author.Value.StartAddress;
+                    DataBlocksClient[author.Key].MemoryType = author.Value.MemoryType;
+                    DataBlocksClient[author.Key].IsArray = author.Value.IsArray;
+                    DataBlocksClient[author.Key].Tags = author.Value.Tags;
+                    List<Tag> list = DataBlocksClient[author.Key].Tags;
+                    for (var i = 0; i < list.Count; i++)
+                    {
+                        list[i].Value = author.Value.Tags[i].Value;
+                        list[i].TimeSpan = author.Value.Tags[i].TimeSpan;
+
+                    }
+
+                }
         }
     }
 }

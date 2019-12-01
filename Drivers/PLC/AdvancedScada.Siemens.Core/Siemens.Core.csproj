@@ -61,6 +61,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\IPLCS7Adapter.cs" />
     <Compile Include="Editors\XChannelForm.cs">
       <SubType>Form</SubType>
     </Compile>

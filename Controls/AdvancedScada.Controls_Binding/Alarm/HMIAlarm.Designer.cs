@@ -1,4 +1,6 @@
-﻿namespace AdvancedScada.Controls_Binding.Alarm
+﻿using AdvancedScada.Common;
+
+namespace AdvancedScada.Controls_Binding.Alarm
 {
     partial class HMIAlarm
     {
@@ -15,6 +17,7 @@
         {
             if (disposing && (components != null))
             {
+                client?.Disconnect(XCollection.CURRENT_MACHINE);
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -43,16 +46,21 @@
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.ColStatus = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.ColAlarmType = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.ColMessage = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.ColTime = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.ColDate = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.ColNo = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.DGAlarm = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.ColNo = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ColDate = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ColTime = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ColTriggerTeg = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ColMessage = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ColAlarmType = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ColStatus = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGAlarm)).BeginInit();
             this.SuspendLayout();
+            // 
+            // kryptonManager1
+            // 
+            this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Blue;
             // 
             // toolStrip1
             // 
@@ -165,53 +173,6 @@
             this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
             // 
-            // ColStatus
-            // 
-            this.ColStatus.FillWeight = 50F;
-            this.ColStatus.HeaderText = "Status";
-            this.ColStatus.Name = "ColStatus";
-            this.ColStatus.ReadOnly = true;
-            this.ColStatus.Width = 120;
-            // 
-            // ColAlarmType
-            // 
-            this.ColAlarmType.FillWeight = 50F;
-            this.ColAlarmType.HeaderText = "AlarmType";
-            this.ColAlarmType.Name = "ColAlarmType";
-            this.ColAlarmType.ReadOnly = true;
-            this.ColAlarmType.Width = 121;
-            // 
-            // ColMessage
-            // 
-            this.ColMessage.HeaderText = "Message";
-            this.ColMessage.Name = "ColMessage";
-            this.ColMessage.ReadOnly = true;
-            this.ColMessage.Width = 241;
-            // 
-            // ColTime
-            // 
-            this.ColTime.FillWeight = 50F;
-            this.ColTime.HeaderText = "Time";
-            this.ColTime.Name = "ColTime";
-            this.ColTime.ReadOnly = true;
-            this.ColTime.Width = 119;
-            // 
-            // ColDate
-            // 
-            this.ColDate.FillWeight = 50F;
-            this.ColDate.HeaderText = "Date";
-            this.ColDate.Name = "ColDate";
-            this.ColDate.ReadOnly = true;
-            this.ColDate.Width = 120;
-            // 
-            // ColNo
-            // 
-            this.ColNo.FillWeight = 30F;
-            this.ColNo.HeaderText = "No";
-            this.ColNo.Name = "ColNo";
-            this.ColNo.ReadOnly = true;
-            this.ColNo.Width = 72;
-            // 
             // DGAlarm
             // 
             this.DGAlarm.AllowUserToAddRows = false;
@@ -221,6 +182,7 @@
             this.ColNo,
             this.ColDate,
             this.ColTime,
+            this.ColTriggerTeg,
             this.ColMessage,
             this.ColAlarmType,
             this.ColStatus});
@@ -233,6 +195,59 @@
             this.DGAlarm.ShowRowErrors = false;
             this.DGAlarm.Size = new System.Drawing.Size(794, 239);
             this.DGAlarm.TabIndex = 3;
+            // 
+            // ColNo
+            // 
+            this.ColNo.FillWeight = 30F;
+            this.ColNo.HeaderText = "No";
+            this.ColNo.Name = "ColNo";
+            this.ColNo.ReadOnly = true;
+            this.ColNo.Width = 48;
+            // 
+            // ColDate
+            // 
+            this.ColDate.FillWeight = 120F;
+            this.ColDate.HeaderText = "Date";
+            this.ColDate.Name = "ColDate";
+            this.ColDate.ReadOnly = true;
+            this.ColDate.Width = 190;
+            // 
+            // ColTime
+            // 
+            this.ColTime.FillWeight = 50F;
+            this.ColTime.HeaderText = "Time";
+            this.ColTime.Name = "ColTime";
+            this.ColTime.ReadOnly = true;
+            this.ColTime.Width = 79;
+            // 
+            // ColTriggerTeg
+            // 
+            this.ColTriggerTeg.HeaderText = "TriggerTeg";
+            this.ColTriggerTeg.Name = "ColTriggerTeg";
+            this.ColTriggerTeg.Width = 159;
+            // 
+            // ColMessage
+            // 
+            this.ColMessage.HeaderText = "Message";
+            this.ColMessage.Name = "ColMessage";
+            this.ColMessage.ReadOnly = true;
+            this.ColMessage.Width = 158;
+            // 
+            // ColAlarmType
+            // 
+            this.ColAlarmType.FillWeight = 50F;
+            this.ColAlarmType.HeaderText = "AlarmType";
+            this.ColAlarmType.Name = "ColAlarmType";
+            this.ColAlarmType.ReadOnly = true;
+            this.ColAlarmType.Width = 80;
+            // 
+            // ColStatus
+            // 
+            this.ColStatus.FillWeight = 50F;
+            this.ColStatus.HeaderText = "Status";
+            this.ColStatus.Name = "ColStatus";
+            this.ColStatus.ReadOnly = true;
+            this.ColStatus.Width = 79;
             // 
             // HMIAlarm
             // 
@@ -267,12 +282,13 @@
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStrip toolStrip2;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ColStatus;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ColAlarmType;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ColMessage;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ColTime;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ColDate;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ColNo;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView DGAlarm;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ColNo;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ColDate;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ColTime;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ColTriggerTeg;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ColMessage;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ColAlarmType;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ColStatus;
     }
 }

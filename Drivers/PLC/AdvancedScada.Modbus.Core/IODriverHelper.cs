@@ -85,7 +85,7 @@ namespace AdvancedScada.Modbus.Core
                     }
                     foreach (var db in dv.DataBlocks)
                     {
-
+                        DataBlockCollection.DataBlocks.Add($"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}", db);
                         foreach (var tg in db.Tags)
                         {
                             TagCollection.Tags.Add(

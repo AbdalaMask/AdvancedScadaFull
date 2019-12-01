@@ -318,6 +318,11 @@ namespace AdvancedScada.Controls.Subscription
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateCollectionDataBlock(Common.ConnectionState status, Dictionary<string, DataBlock> collection)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

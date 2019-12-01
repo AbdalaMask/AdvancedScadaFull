@@ -5,9 +5,10 @@ namespace AdvancedScada.WPF.HMIControls.Alarm
 {
     public class dgAlarmH
     {
-        public int No { get; set; }
-        public DateTime Date { get; set; }
-        public DateTime Time { get; set; }
+        public string No { get; set; }
+        public string Date { get; set; }
+        public string Time { get; set; }
+        public string TriggerTeg { get; set; }
         public string Message { get; set; }
         public string AlarmType { get; set; }
         public string Status { get; set; }

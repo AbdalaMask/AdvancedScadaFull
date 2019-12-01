@@ -1,4 +1,7 @@
 ﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.Siemens.Core.Common;
+using AdvancedScada.Utils;
 using HslCommunication;
 using HslCommunication.Profinet.Siemens;
 using System;
@@ -7,7 +10,7 @@ using System.Net.Sockets;
 using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Siemens.Core.Siemens
 {
-    public class SiemensNet : IDriverAdapter
+    public class SiemensNet : IPLCS7Adapter
     {
         private SiemensS7Net siemensTcpNet = null;
         private SiemensPLCS siemensPLCSelected = SiemensPLCS.S1200;
@@ -45,6 +48,14 @@ namespace AdvancedScada.Siemens.Core.Siemens
 
         public bool Connection()
         {
+            if (!System.Net.IPAddress.TryParse(iPAddress, out System.Net.IPAddress address))
+            {
+                EventscadaException?.Invoke(this.GetType().Name, DemoUtils.IpAddressInputWrong);
+                return false;
+            }
+
+            
+            
             var stopwatch = Stopwatch.StartNew();
 
             try
@@ -65,13 +76,14 @@ namespace AdvancedScada.Siemens.Core.Siemens
 
                     if (connect.IsSuccess)
                     {
-
+                        EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedSuccess);
                         IsConnected = true;
                     }
                     else
                     {
-                        IsConnected = false;
+                        EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedFailed);
                     }
+                    return IsConnected;
                 }
                 catch (Exception ex)
                 {
@@ -118,12 +130,14 @@ namespace AdvancedScada.Siemens.Core.Siemens
 
             return true;
         }
+     
 
         public TValue[] Read<TValue>(string address, ushort length)
         {
             if (typeof(TValue) == typeof(bool))
             {
-                var b = siemensTcpNet.Read(address, length).Content;
+             
+                var b = siemensTcpNet.ReadBool (address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(ushort))
@@ -185,6 +199,11 @@ namespace AdvancedScada.Siemens.Core.Siemens
 
 
         public bool ReadSingle(string address, ushort length)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object ReadStruct(DataBlock structType, ushort length)
         {
             throw new NotImplementedException();
         }

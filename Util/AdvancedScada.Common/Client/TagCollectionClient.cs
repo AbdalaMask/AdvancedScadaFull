@@ -7,7 +7,12 @@ namespace AdvancedScada.Common.Client
     {
         public static Dictionary<string, Tag> Tags { get; set; } = new Dictionary<string, Tag>();
     }
+    public static class DataBlockCollectionClient
+    {
 
+
+        public static Dictionary<string, DataBlock> DataBlocks { get; set; } = new Dictionary<string, DataBlock>();
+    }
 
 }
 namespace AdvancedScada.Common
@@ -15,5 +20,11 @@ namespace AdvancedScada.Common
     public class TagCollection
     {
         public static Dictionary<string, Tag> Tags { get; set; } = new Dictionary<string, Tag>();
+    }
+    public static class DataBlockCollection
+    {
+
+        
+        public static Dictionary<string, DataBlock> DataBlocks { get; set; } = new Dictionary<string, DataBlock>();
     }
 }

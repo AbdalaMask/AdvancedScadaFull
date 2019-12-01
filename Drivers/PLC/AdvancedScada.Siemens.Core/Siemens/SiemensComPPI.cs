@@ -1,4 +1,7 @@
 ﻿using AdvancedScada.Common;
+using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.Siemens.Core.Common;
+using HslCommunication;
 using HslCommunication.Profinet.Siemens;
 using System;
 using System.Diagnostics;
@@ -6,7 +9,7 @@ using System.IO.Ports;
 using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Siemens.Core.Siemens
 {
-    public class SiemensComPPI : IDriverAdapter
+    public class SiemensComPPI : IPLCS7Adapter
     {
         private SiemensPPI siemensPPI = null;
         private const int DELAY = 100; // delay 100 ms
@@ -40,7 +43,17 @@ namespace AdvancedScada.Siemens.Core.Siemens
                 });
                 siemensPPI.Open();
                 siemensPPI.Station = station;
+                if (siemensPPI.IsOpen())
+                {
+                    EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedSuccess);
+                    IsConnected = true;
+                }
+                else
+                {
+                    EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedFailed);
+                }
                 IsConnected = true;
+              
 
                 stopwatch.Stop();
                 return IsConnected;
@@ -145,6 +158,11 @@ namespace AdvancedScada.Siemens.Core.Siemens
             throw new NotImplementedException();
         }
         public bool ReadSingle(string address, ushort length)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object ReadStruct(DataBlock structType, ushort length)
         {
             throw new NotImplementedException();
         }

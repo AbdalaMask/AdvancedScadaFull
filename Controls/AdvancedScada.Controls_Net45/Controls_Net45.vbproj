@@ -74,6 +74,9 @@
     <Compile Include="AlarmMan\Designers\ListViewDesignerForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="BarLevel\AnalogMovingIndicator.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\SimpleWebServer.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -100,6 +103,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DigitalPanel\RollingDigit.vb" />
+    <Compile Include="IniParser.vb" />
     <Compile Include="Keyboard\AlphaKeyboard_v3.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -302,9 +306,7 @@
       <Name>DriverBase</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BarLevel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\RedZero.png" />
   </ItemGroup>

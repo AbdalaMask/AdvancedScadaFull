@@ -45,6 +45,7 @@
     <Reference Include="Microsoft.Expression.Drawing">
       <HintPath>..\Microsoft.Expression.Drawing.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="Svg, Version=3.0.0.0, Culture=neutral, PublicKeyToken=12a0bac221edeae2, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Svg.3.0.84\lib\net452\Svg.dll</HintPath>
     </Reference>
@@ -52,6 +53,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -87,6 +89,10 @@
     <Page Include="Alarm\HMIAlarm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Alarm\ResourceDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ButtonAll\HMIButtonAll.xaml">
       <SubType>Designer</SubType>
@@ -148,11 +154,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SevenSegment\HMISevenSegment.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SevenSegment\HMISevenSegmentNew.xaml">
+    <Page Include="SevenSegment\HMIDigitalPanelMeter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -265,11 +267,8 @@
     </Compile>
     <Compile Include="SevenSegment\ArrangedPanel.cs" />
     <Compile Include="SevenSegment\CharItem.cs" />
-    <Compile Include="SevenSegment\HMISevenSegment.xaml.cs">
-      <DependentUpon>HMISevenSegment.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SevenSegment\HMISevenSegmentNew.xaml.cs">
-      <DependentUpon>HMISevenSegmentNew.xaml</DependentUpon>
+    <Compile Include="SevenSegment\HMIDigitalPanelMeter.xaml.cs">
+      <DependentUpon>HMIDigitalPanelMeter.xaml</DependentUpon>
     </Compile>
     <Compile Include="SevenSegment\HMISevenSegmentsStack.xaml.cs">
       <DependentUpon>HMISevenSegmentsStack.xaml</DependentUpon>
@@ -334,6 +333,10 @@
     <ProjectReference Include="..\..\Drivers\AdvancedScada.DriverBase\DriverBase.csproj">
       <Project>{1D570E9A-E5B4-44DD-946D-9D73CFA4A535}</Project>
       <Name>DriverBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Studio\AdvancedScada.Management\Management.csproj">
+      <Project>{8FEAB090-6B9A-4C8D-AD4A-B5C9062152A0}</Project>
+      <Name>Management</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Util\AdvancedScada.Common\Common.csproj">
       <Project>{ef8e1580-bdc2-4426-8d2d-bb866fc66305}</Project>

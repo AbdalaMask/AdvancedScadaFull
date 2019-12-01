@@ -55,6 +55,7 @@
             this.PGDB = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.txtDBNumber = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.PGIsArray = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.txtDomain = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.chkCreateTag = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.txtAddressLength = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -64,7 +65,6 @@
             this.cboxDataType2 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonLabel11 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.txtDomain = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DxErrorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).BeginInit();
@@ -321,6 +321,8 @@
             this.kryptonNavigator1.Size = new System.Drawing.Size(560, 147);
             this.kryptonNavigator1.TabIndex = 27;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
+            this.kryptonNavigator1.Selected += new System.EventHandler<ComponentFactory.Krypton.Navigator.KryptonPageEventArgs>(this.kryptonNavigator1_Selected);
+            this.kryptonNavigator1.TabClicked += new System.EventHandler<ComponentFactory.Krypton.Navigator.KryptonPageEventArgs>(this.kryptonNavigator1_TabClicked);
             // 
             // PGDB
             // 
@@ -367,6 +369,13 @@
             this.PGIsArray.Text = "IsArray";
             this.PGIsArray.ToolTipTitle = "Page ToolTip";
             this.PGIsArray.UniqueName = "f63be40881154f33978e176609306190";
+            // 
+            // txtDomain
+            // 
+            this.txtDomain.Location = new System.Drawing.Point(328, 75);
+            this.txtDomain.Name = "txtDomain";
+            this.txtDomain.Size = new System.Drawing.Size(135, 20);
+            this.txtDomain.TabIndex = 34;
             // 
             // chkCreateTag
             // 
@@ -450,14 +459,6 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(562, 28);
             this.kryptonPanel1.TabIndex = 6;
-            // 
-            // txtDomain
-            // 
-            this.txtDomain.Location = new System.Drawing.Point(328, 75);
-            this.txtDomain.Name = "txtDomain";
-            this.txtDomain.Size = new System.Drawing.Size(135, 20);
-            this.txtDomain.TabIndex = 34;
-            this.txtDomain.Text = " ";
             // 
             // XDataBlockForm
             // 

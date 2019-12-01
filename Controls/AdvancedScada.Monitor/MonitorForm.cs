@@ -526,6 +526,11 @@ namespace AdvancedScada.Monitor
                 EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
         }
+
+        public void UpdateCollectionDataBlock(ConnectionState status, Dictionary<string, DataBlock> collection)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

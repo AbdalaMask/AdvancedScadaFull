@@ -4,10 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdvancedScada.WPF.Scada"
-        xmlns:PilotLight="clr-namespace:AdvancedScada.WPF.HMIControls.PilotLight;assembly=AdvancedScada.WPF.HMIControls" xmlns:SelectorSwitch="clr-namespace:AdvancedScada.WPF.HMIControls.AHMI.SelectorSwitch;assembly=AdvancedScada.WPF.HMIControls" xmlns:WPF="clr-namespace:HslControls.WPF;assembly=HslControls" xmlns:ButtonAll="clr-namespace:AdvancedScada.WPF.HMIControls.ButtonAll;assembly=AdvancedScada.WPF.HMIControls" xmlns:TankAll="clr-namespace:AdvancedScada.WPF.HMIControls.HslControl.TankAll;assembly=AdvancedScada.WPF.HMIControls" x:Class="AdvancedScada.WPF.Scada.MainWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:PilotLight="clr-namespace:AdvancedScada.WPF.HMIControls.PilotLight;assembly=AdvancedScada.WPF.HMIControls" xmlns:SelectorSwitch="clr-namespace:AdvancedScada.WPF.HMIControls.AHMI.SelectorSwitch;assembly=AdvancedScada.WPF.HMIControls" xmlns:WPF="clr-namespace:HslControls.WPF;assembly=HslControls" xmlns:ButtonAll="clr-namespace:AdvancedScada.WPF.HMIControls.ButtonAll;assembly=AdvancedScada.WPF.HMIControls" xmlns:TankAll="clr-namespace:AdvancedScada.WPF.HMIControls.HslControl.TankAll;assembly=AdvancedScada.WPF.HMIControls" xmlns:Alarm="clr-namespace:AdvancedScada.WPF.HMIControls.Alarm;assembly=AdvancedScada.WPF.HMIControls" xmlns:SevenSegment="clr-namespace:AdvancedScada.WPF.HMIControls.SevenSegment;assembly=AdvancedScada.WPF.HMIControls" x:Class="AdvancedScada.WPF.Scada.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="861.194" Width="1071.457">
     <Grid>
- 
+
+        <Alarm:HMIAlarm HorizontalAlignment="Left" Height="426" Margin="23,20,0,0" VerticalAlignment="Top" Width="994"/>
+
     </Grid>
 </Window>

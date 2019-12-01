@@ -10,6 +10,7 @@ using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using static AdvancedScada.Common.XCollection;
 
@@ -1169,6 +1170,35 @@ namespace AdvancedScada.Studio.Editors
         private void treeViewSI_MouseClick(object sender, MouseEventArgs e)
         {
 
+        }
+        
+        private void btnButtonExportTags_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileDialog1.Filter = "Text Files (*.Text)|*.Text|All files (*.*)|*.*";
+              
+                DialogResult dr = saveFileDialog1.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var item in TagCollection.Tags)
+                    {
+                        var tgName = '"';
+
+                        sb.AppendLine($"public const string {(item.Key.Replace('.', '_'))} = {tgName} {item.Key.ToString()} {tgName}; ");
+                    }
+                   
+                    File.WriteAllText(saveFileDialog1.FileName, sb.ToString());
+                   
+                     IsDataChanged = false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+               // txtHistory.Text += string.Format("+ ERROR: {0}" + Environment.NewLine, ex.Message);
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AdvancedScada.Common;
 using AdvancedScada.DriverBase;
 using AdvancedScada.DriverBase.Devices;
+using AdvancedScada.Siemens.Core.Common;
 using AdvancedScada.Siemens.Core.Siemens;
 using HslCommunication.Profinet.Siemens;
 using System;
@@ -40,7 +41,7 @@ namespace AdvancedScada.Siemens.Core
                 Channels.Add(ch);
 
 
-                IDriverAdapter DriverAdapter = null;
+                IPLCS7Adapter DriverAdapter = null;
                 foreach (var dv in ch.Devices)
                 {
                     try
@@ -73,7 +74,7 @@ namespace AdvancedScada.Siemens.Core
                     }
                     foreach (var db in dv.DataBlocks)
                     {
-
+                        DataBlockCollection.DataBlocks.Add($"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}", db);
                         foreach (var tg in db.Tags)
                         {
                             TagCollection.Tags.Add(
@@ -108,7 +109,7 @@ namespace AdvancedScada.Siemens.Core
                 {
                     taskArray[i] = new Task((chParam) =>
                     {
-                        IDriverAdapter DriverAdapter = null;
+                        IPLCS7Adapter DriverAdapter = null;
                         Channel ch = (Channel)chParam;
                         try
                         {
@@ -214,7 +215,7 @@ namespace AdvancedScada.Siemens.Core
 
         #endregion
         #region SendPackage All
-        private void SendPackageSiemens(IDriverAdapter ISiemens, Device dv, DataBlock db)
+        private void SendPackageSiemens(IPLCS7Adapter ISiemens, Device dv, DataBlock db)
         {
             try
             {
@@ -346,7 +347,7 @@ namespace AdvancedScada.Siemens.Core
 
                         if (string.Format("{0}.{1}", ch.ChannelName, dv.DeviceName).Equals(tagDevice))
                         {
-                            IDriverAdapter DriverAdapter = null;
+                            IPLCS7Adapter DriverAdapter = null;
                             switch (ch.ConnectionType)
                             {
                                 case "SerialPort":
