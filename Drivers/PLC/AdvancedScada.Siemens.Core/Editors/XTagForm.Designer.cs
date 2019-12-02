@@ -33,7 +33,6 @@
             this.txtTagName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.txtAddress = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.txtTagId = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnOK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -98,14 +97,6 @@
             this.kryptonLabel9.Size = new System.Drawing.Size(57, 20);
             this.kryptonLabel9.TabIndex = 29;
             this.kryptonLabel9.Values.Text = "Address:";
-            // 
-            // txtAddress
-            // 
-            this.txtAddress.Location = new System.Drawing.Point(84, 95);
-            this.txtAddress.Margin = new System.Windows.Forms.Padding(2);
-            this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(141, 20);
-            this.txtAddress.TabIndex = 28;
             // 
             // txtTagId
             // 
@@ -279,7 +270,6 @@
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.txtTagName);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonLabel8);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonLabel9);
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.txtAddress);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.txtTagId);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonLabel10);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.cboxDataType);
@@ -303,10 +293,10 @@
             // 
             // txtStartAddress
             // 
-            this.txtStartAddress.Location = new System.Drawing.Point(229, 95);
+            this.txtStartAddress.Location = new System.Drawing.Point(84, 91);
             this.txtStartAddress.Margin = new System.Windows.Forms.Padding(2);
             this.txtStartAddress.Name = "txtStartAddress";
-            this.txtStartAddress.Size = new System.Drawing.Size(56, 20);
+            this.txtStartAddress.Size = new System.Drawing.Size(141, 20);
             this.txtStartAddress.TabIndex = 33;
             this.txtStartAddress.Text = "0.0";
             this.txtStartAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -351,7 +341,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtTagName;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel8;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel9;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtAddress;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtTagId;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel10;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnOK;

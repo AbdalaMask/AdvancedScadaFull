@@ -84,18 +84,47 @@ namespace AdvancedScada.Siemens.Core.Editors
                 for (var i = 0; i < txtAddressLength.Value; i++)
                 {
                     var tg = new Tag()
+;
+                    tg.TagId = i + 1;
+                    tg.ChannelId = int.Parse(txtChannelId.Text);
+                    tg.DeviceId = int.Parse(txtDeviceId.Text);
+                    tg.DataBlockId = int.Parse(txtDataBlockId.Text);
+                    tg.TagName = $"TAG{i + TagsCount:d5}";
+                    switch (db.DataType)
                     {
-                        TagId = i + 1,
-                        ChannelId = int.Parse(txtChannelId.Text),
-                        DeviceId = int.Parse(txtDeviceId.Text),
-                        DataBlockId = int.Parse(txtDataBlockId.Text),
-                        TagName =
-                        $"TAG{i + TagsCount:d5}",
-                        Address = $"{txtDomain.Text.Trim()}{txtStartAddress.Value + i*2}",
-                        DataType =
-                        (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType2.SelectedItem.ToString()),
-                        Description = $"{txtDesc.Text} {i + 1}"
-                    };
+                        case DataTypes.BitOnByte:
+                            break;
+                        case DataTypes.BitOnWord:
+                            break;
+                        case DataTypes.Bit:
+                            tg.Address = $"{txtDomain.Text.Trim()}{txtStartAddress.Value}.{i}";
+                            break;
+                        case DataTypes.Byte:
+                            break;
+                        case DataTypes.Short:
+                        case DataTypes.UShort:
+                            tg.Address = $"{txtDomain.Text.Trim()}{txtStartAddress.Value + i * 2}";
+                            break;
+                        case DataTypes.Int:
+                            break;
+                        case DataTypes.UInt:
+                            break;
+                        case DataTypes.Long:
+                            break;
+                        case DataTypes.ULong:
+                            break;
+                        case DataTypes.Float:
+                            break;
+                        case DataTypes.Double:
+                            break;
+                        case DataTypes.String:
+                            break;
+                        default:
+                            break;
+                    }
+                   
+                    tg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType2.SelectedItem.ToString());
+                    tg.Description = $"{txtDesc.Text} {i + 1}";
                     db.Tags.Add(tg);
                 }
         }
@@ -160,7 +189,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                             DataBlockId = dv.DataBlocks.Count + 1,
                             DataBlockName = txtDataBlock.Text,
                             TypeOfRead = string.Empty,
-                            StartAddress = 0,
+                            StartAddress = ushort.Parse(txtDBNumber.Text),
                             MemoryType = txtDBNumber.Text,
                             Description = txtDesc.Text,
                             Length = 0,

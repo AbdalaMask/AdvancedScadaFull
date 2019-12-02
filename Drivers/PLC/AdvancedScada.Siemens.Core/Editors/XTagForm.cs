@@ -46,7 +46,17 @@ namespace AdvancedScada.Siemens.Core.Editors
                     newTg.DataBlockId = int.Parse(txtDataBlockId.Text);
                     newTg.TagId = db.Tags.Count + 1;
                     newTg.TagName = txtTagName.Text;
-                    newTg.Address = string.Format("{0}{1}", txtAddress.Text, txtStartAddress.Text);
+                  
+                    if (db.IsArray)
+                    {
+                        newTg.Address = string.Format("{0}",txtStartAddress.Text);
+                    }
+                    else
+                    {
+                        var dbFrm = string.Format("DB{0}", db.StartAddress);
+                        newTg.Address = string.Format("{0}{1}", dbFrm, txtStartAddress.Text);
+                    }
+                   
                     newTg.Description = txtDesc.Text;
                     newTg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString());
 
@@ -59,7 +69,16 @@ namespace AdvancedScada.Siemens.Core.Editors
                     tg.DeviceId = int.Parse(txtDeviceId.Text);
                     tg.DataBlockId = int.Parse(txtDataBlockId.Text);
                     tg.TagName = txtTagName.Text;
-                    tg.Address = txtAddress.Text;
+                    if (db.IsArray)
+                    {
+                        tg.Address = string.Format("{0}", txtStartAddress.Text);
+                    }
+                    else
+                    {
+                        var dbFrm = string.Format("DB{0}", db.StartAddress);
+                        tg.Address = string.Format("{0}{1}", dbFrm, txtStartAddress.Text);
+                    }
+                   
                     tg.Description = txtDesc.Text;
                     tg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString());
 
@@ -94,6 +113,7 @@ namespace AdvancedScada.Siemens.Core.Editors
 
                     this.Text = "Add Tag";
                     txtTagId.Text = GetIDTag();
+                    txtTagName.Text = GetTagName();
                 }
                 else
                 {
@@ -102,8 +122,8 @@ namespace AdvancedScada.Siemens.Core.Editors
 
                     this.Text = "Edit Tag";
                     txtTagId.Text = tg.TagId.ToString();
-                    txtAddress.Text = tg.Address;
-                    txtAddress.Enabled = true;
+                    txtStartAddress.Text = tg.Address;
+                    
                     cboxDataType.SelectedItem = $"{tg.DataType}";
                     txtTagName.Text = tg.TagName;
                     txtDesc.Text = tg.Description;
@@ -119,41 +139,65 @@ namespace AdvancedScada.Siemens.Core.Editors
         {
             Close();
         }
+        public string GetTagName()
+        {
+            foreach (var item in dv.DataBlocks)
+            {
 
+                TagsCount += item.Tags.Count;
+
+
+            }
+            return $"TAG{1 + TagsCount:d5}";
+        }
         private void CboxDataType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tg == null)
-            {
-                switch (cboxDataType.SelectedIndex)
-                {
-                    case 0:
-                        txtAddress.Text = string.Format("DB{0}.DBX", db.StartAddress);
-                        break;
-                    case 1:
-                        txtAddress.Text = string.Empty;
-                        break;
-                    case 2:
-                        txtAddress.Text = string.Format("DB{0}.DBW", db.StartAddress);
-                        break;
-                    case 3:
-                        txtAddress.Text = string.Empty;
-                        break;
-                    case 4:
-                        txtAddress.Text = string.Format("DB{0}.DBW", db.StartAddress);
-                        break;
-                    case 5:
-                        txtAddress.Text = string.Format("DB{0}.DBD", db.StartAddress);
-                        break;
-                    case 6:
-                        txtAddress.Text = string.Format("DB{0}.DBD", db.StartAddress);
-                        break;
-                    case 7:
-                        txtAddress.Text = string.Format("DB{0}.DBB", db.StartAddress);
-                        break;
-                    default:
-                        break;
-                }
-            }
+            //if (tg == null)
+            //{
+            //    switch ((DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString()))
+            //    {
+            //        case DataTypes.BitOnByte:
+            //            txtStartAddress.Text = string.Format("DB{0}", db.StartAddress);
+            //            break;
+            //        case DataTypes.BitOnWord:
+            //            break;
+            //        case DataTypes.Bit:
+            //            txtStartAddress.Text = string.Format("DB{0}", db.StartAddress);
+            //            break;
+            //        case DataTypes.Byte:
+            //            break;
+            //        case DataTypes.Short:
+            //            txtStartAddress.Text = string.Format("DB{0}", db.StartAddress);
+            //            break;
+            //        case DataTypes.UShort:
+            //            txtStartAddress.Text = string.Format("DB{0}", db.StartAddress);
+            //            break;
+            //        case DataTypes.Int:
+            //            txtStartAddress.Text = string.Format("DB{0}", db.StartAddress);
+            //            break;
+            //        case DataTypes.UInt:
+            //            txtStartAddress.Text = string.Format("DB{0}", db.StartAddress);
+            //            break;
+            //        case DataTypes.Long:
+            //            txtStartAddress.Text = string.Format("DB{0}", db.StartAddress);
+            //            break;
+            //        case DataTypes.ULong:
+            //            txtStartAddress.Text = string.Format("DB{0}", db.StartAddress);
+            //            break;
+            //        case DataTypes.Float:
+            //            txtStartAddress.Text = string.Format("DB{0}", db.StartAddress);
+            //            break;
+            //        case DataTypes.Double:
+            //            txtStartAddress.Text = string.Format("DB{0}", db.StartAddress);
+            //            break;
+            //        case DataTypes.String:
+            //            txtStartAddress.Text = string.Format("DB{0}", db.StartAddress);
+            //            break;
+            //        default:
+            //            break;
+            //    }
+                
+            //}
         }
     }
 }

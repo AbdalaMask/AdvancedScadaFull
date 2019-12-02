@@ -219,108 +219,119 @@ namespace AdvancedScada.Siemens.Core
         {
             try
             {
-
-                switch (db.DataType)
+                if (!db.IsArray)
                 {
-                    case DataTypes.Bit:
+                    lock (ISiemens)
+                    {
+                        ISiemens.ReadStruct(db, db.StartAddress);
 
-                        lock (ISiemens)
-                        {
-
-                            bool[] bitRs = ISiemens.Read<bool>($"{db.MemoryType}{db.StartAddress}", db.Length);
-
-                            int length = bitRs.Length;
-                            if (bitRs.Length > db.Tags.Count) length = db.Tags.Count;
-                            for (int j = 0; j < length; j++)
-                            {
-                                db.Tags[j].Value = bitRs[j];
-                                db.Tags[j].TimeSpan = DateTime.Now;
-                            }
-                        }
-                        break;
-                    case DataTypes.Short:
-
-                        lock (ISiemens)
-                        {
-                            short[] IntRs = ISiemens.Read<Int16>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                            if (IntRs.Length > db.Tags.Count) return;
-                            for (int j = 0; j < IntRs.Length; j++)
-                            {
-
-                                db.Tags[j].Value = IntRs[j];
-                                db.Tags[j].TimeSpan = DateTime.Now;
-                            }
-                        }
-                        break;
-                    case DataTypes.Int:
-
-                        lock (ISiemens)
-                        {
-                            int[] DIntRs = ISiemens.Read<Int32>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                            if (DIntRs.Length > db.Tags.Count) return;
-                            for (int j = 0; j < DIntRs.Length; j++)
-                            {
-                                db.Tags[j].Value = DIntRs[j];
-                                db.Tags[j].TimeSpan = DateTime.Now;
-                            }
-                        }
-                        break;
-                    case DataTypes.UInt:
-
-                        lock (ISiemens)
-                        {
-                            var wdRs = ISiemens.Read<uint>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                            if (wdRs == null) return;
-                            if (wdRs.Length > db.Tags.Count) return;
-                            for (int j = 0; j < wdRs.Length; j++)
-                            {
-
-                                db.Tags[j].Value = wdRs[j];
-
-                                db.Tags[j].TimeSpan = DateTime.Now;
-                            }
-                        }
-                        break;
-                    case DataTypes.Long:
-
-                        lock (ISiemens)
-                        {
-                            long[] dwRs = ISiemens.Read<long>($"{db.MemoryType}{db.StartAddress}", db.Length);
-
-                            for (int j = 0; j < dwRs.Length; j++)
-                            {
-                                db.Tags[j].Value = dwRs[j];
-                                db.Tags[j].TimeSpan = DateTime.Now;
-                            }
-                        }
-                        break;
-                    case DataTypes.Float:
-
-                        lock (ISiemens)
-                        {
-                            float[] rl1Rs = ISiemens.Read<float>($"{db.MemoryType}{db.StartAddress}", db.Length);
-
-                            for (int j = 0; j < rl1Rs.Length; j++)
-                            {
-                                db.Tags[j].Value = rl1Rs[j];
-                                db.Tags[j].TimeSpan = DateTime.Now;
-                            }
-                        }
-                        break;
-                    case DataTypes.Double:
-
-                        lock (ISiemens)
-                        {
-                            double[] rl2Rs = ISiemens.Read<double>($"{db.MemoryType}{db.StartAddress}", db.Length);
-
-                            for (int j = 0; j < rl2Rs.Length; j++)
-                            {
-                                db.Tags[j].Value = rl2Rs[j];
-                                db.Tags[j].TimeSpan = DateTime.Now;
-                            }
-                        }
-                        break;
+                    }
                 }
+                else
+                {
+                    switch (db.DataType)
+                    {
+                        case DataTypes.Bit:
+
+                            lock (ISiemens)
+                            {
+
+                                bool[] bitRs = ISiemens.Read<bool>($"{db.MemoryType}{db.StartAddress}", db.Length);
+
+                                int length = bitRs.Length;
+                                if (bitRs.Length > db.Tags.Count) length = db.Tags.Count;
+                                for (int j = 0; j < length; j++)
+                                {
+                                    db.Tags[j].Value = bitRs[j];
+                                    db.Tags[j].TimeSpan = DateTime.Now;
+                                }
+                            }
+                            break;
+                        case DataTypes.Short:
+
+                            lock (ISiemens)
+                            {
+                                short[] IntRs = ISiemens.Read<Int16>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                                if (IntRs.Length > db.Tags.Count) return;
+                                for (int j = 0; j < IntRs.Length; j++)
+                                {
+
+                                    db.Tags[j].Value = IntRs[j];
+                                    db.Tags[j].TimeSpan = DateTime.Now;
+                                }
+                            }
+                            break;
+                        case DataTypes.Int:
+
+                            lock (ISiemens)
+                            {
+                                int[] DIntRs = ISiemens.Read<Int32>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                                if (DIntRs.Length > db.Tags.Count) return;
+                                for (int j = 0; j < DIntRs.Length; j++)
+                                {
+                                    db.Tags[j].Value = DIntRs[j];
+                                    db.Tags[j].TimeSpan = DateTime.Now;
+                                }
+                            }
+                            break;
+                        case DataTypes.UInt:
+
+                            lock (ISiemens)
+                            {
+                                var wdRs = ISiemens.Read<uint>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                                if (wdRs == null) return;
+                                if (wdRs.Length > db.Tags.Count) return;
+                                for (int j = 0; j < wdRs.Length; j++)
+                                {
+
+                                    db.Tags[j].Value = wdRs[j];
+
+                                    db.Tags[j].TimeSpan = DateTime.Now;
+                                }
+                            }
+                            break;
+                        case DataTypes.Long:
+
+                            lock (ISiemens)
+                            {
+                                long[] dwRs = ISiemens.Read<long>($"{db.MemoryType}{db.StartAddress}", db.Length);
+
+                                for (int j = 0; j < dwRs.Length; j++)
+                                {
+                                    db.Tags[j].Value = dwRs[j];
+                                    db.Tags[j].TimeSpan = DateTime.Now;
+                                }
+                            }
+                            break;
+                        case DataTypes.Float:
+
+                            lock (ISiemens)
+                            {
+                                float[] rl1Rs = ISiemens.Read<float>($"{db.MemoryType}{db.StartAddress}", db.Length);
+
+                                for (int j = 0; j < rl1Rs.Length; j++)
+                                {
+                                    db.Tags[j].Value = rl1Rs[j];
+                                    db.Tags[j].TimeSpan = DateTime.Now;
+                                }
+                            }
+                            break;
+                        case DataTypes.Double:
+
+                            lock (ISiemens)
+                            {
+                                double[] rl2Rs = ISiemens.Read<double>($"{db.MemoryType}{db.StartAddress}", db.Length);
+
+                                for (int j = 0; j < rl2Rs.Length; j++)
+                                {
+                                    db.Tags[j].Value = rl2Rs[j];
+                                    db.Tags[j].TimeSpan = DateTime.Now;
+                                }
+                            }
+                            break;
+                    }
+                }
+               
             }
             catch (Exception ex)
             {
@@ -363,7 +374,7 @@ namespace AdvancedScada.Siemens.Core
                                 switch (TagCollection.Tags[tagName].DataType)
                                 {
                                     case DataTypes.Bit:
-                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), value == "1" ? true : false);
+                                        DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), value == true ? true : false);
                                         break;
                                     case DataTypes.Byte:
                                         DriverAdapter.Write(string.Format("{0}", TagCollection.Tags[tagName].Address), byte.Parse(value));

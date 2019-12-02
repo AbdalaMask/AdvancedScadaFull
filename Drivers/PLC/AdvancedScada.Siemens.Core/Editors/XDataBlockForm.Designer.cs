@@ -347,7 +347,7 @@
             this.txtDBNumber.Name = "txtDBNumber";
             this.txtDBNumber.Size = new System.Drawing.Size(135, 20);
             this.txtDBNumber.TabIndex = 26;
-            this.txtDBNumber.Text = " ";
+            this.txtDBNumber.Text = " 0";
             // 
             // PGIsArray
             // 
