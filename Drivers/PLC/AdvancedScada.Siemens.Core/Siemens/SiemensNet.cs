@@ -1,5 +1,4 @@
-﻿using AdvancedScada.Common;
-using AdvancedScada.DriverBase.Devices;
+﻿using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.Siemens.Core.Common;
 using AdvancedScada.Utils;
 using HslCommunication;
@@ -54,8 +53,8 @@ namespace AdvancedScada.Siemens.Core.Siemens
                 return false;
             }
 
-            
-            
+
+
             var stopwatch = Stopwatch.StartNew();
 
             try
@@ -143,7 +142,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
 
             return true;
         }
-     
+
 
         public TValue[] Read<TValue>(string address, ushort length)
         {
@@ -216,15 +215,92 @@ namespace AdvancedScada.Siemens.Core.Siemens
             throw new NotImplementedException();
         }
 
-        public object ReadStruct(DataBlock structType, ushort length)
+        public void ReadStruct(DataBlock structType, ushort length)
         {
-            int numBytes = GetStructSize(structType);
-            // now read the package
-            OperateResult<byte[]> read = siemensTcpNet.Read($"DB{structType.StartAddress}.0",(ushort) numBytes);
-            if (read.IsSuccess)
-                // and decode it
-                return FromBytes(structType, read.Content);
-            throw new NotImplementedException();
+            //int numBytes = GetStructSize(structType);
+            //// now read the package
+            //OperateResult<byte[]> read = siemensTcpNet.Read($"DB{structType.StartAddress}.0", (ushort)numBytes);
+            //if (read.IsSuccess)
+            //    // and decode it
+            //   FromBytes(structType, read.Content);
+            var infos = structType.Tags;
+            lock (structType)
+            {
+
+
+                foreach (Tag info in infos)
+                {
+                    switch (info.DataType)
+                    {
+                        case DriverBase.DataTypes.BitOnByte:
+                            break;
+                        case DriverBase.DataTypes.BitOnWord:
+                            break;
+                        case DriverBase.DataTypes.Bit:
+
+                            info.Value = siemensTcpNet.ReadBool(info.Address).Content;
+                            info.TimeSpan = DateTime.Now;
+
+                            break;
+                        case DriverBase.DataTypes.Byte:
+                            info.Value = siemensTcpNet.ReadByte(info.Address).Content;
+                            info.TimeSpan = DateTime.Now;
+
+                            break;
+                        case DriverBase.DataTypes.Short:
+                            info.Value = siemensTcpNet.ReadInt16(info.Address).Content;
+                            info.TimeSpan = DateTime.Now;
+
+                            break;
+                        case DriverBase.DataTypes.UShort:
+                            info.Value = siemensTcpNet.ReadUInt16(info.Address).Content;
+                            info.TimeSpan = DateTime.Now;
+
+                            break;
+                        case DriverBase.DataTypes.Int:
+                            info.Value = siemensTcpNet.ReadInt32(info.Address).Content;
+                            info.TimeSpan = DateTime.Now;
+
+                            break;
+                        case DriverBase.DataTypes.UInt:
+                            info.Value = siemensTcpNet.ReadUInt32(info.Address).Content;
+                            info.TimeSpan = DateTime.Now;
+
+                            break;
+                        case DriverBase.DataTypes.Long:
+                            info.Value = siemensTcpNet.ReadInt64(info.Address).Content;
+                            info.TimeSpan = DateTime.Now;
+
+                            break;
+                        case DriverBase.DataTypes.ULong:
+
+                            info.Value = siemensTcpNet.ReadUInt64(info.Address).Content;
+                            info.TimeSpan = DateTime.Now;
+
+                            break;
+                        case DriverBase.DataTypes.Float:
+                            info.Value = siemensTcpNet.ReadFloat(info.Address).Content;
+
+                            info.TimeSpan = DateTime.Now;
+
+                            break;
+                        case DriverBase.DataTypes.Double:
+                            info.Value = siemensTcpNet.ReadDouble(info.Address).Content;
+
+                            info.TimeSpan = DateTime.Now;
+
+                            break;
+                        case DriverBase.DataTypes.String:
+                            info.Value = siemensTcpNet.ReadString(info.Address).Content;
+                            info.TimeSpan = DateTime.Now;
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+            }
+            //throw new NotImplementedException();
         }
         public static int GetStructSize(DataBlock structType)
         {
@@ -294,7 +370,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
         /// <param name="structType">The struct type</param>
         /// <param name="bytes">The array of bytes</param>
         /// <returns>The object depending on the struct type or null if fails(array-length != struct-length</returns>
-        public  object FromBytes(DataBlock structType, byte[] bytes)
+        public object FromBytes(DataBlock structType, byte[] bytes)
         {
             if (bytes == null)
                 return null;
@@ -399,7 +475,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
                         break;
                     case DriverBase.DataTypes.Double:
                         info.Value = siemensTcpNet.ByteTransform.TransDouble(bytes, (int)numBytes);
-                        
+
                         info.TimeSpan = DateTime.Now;
                         numBytes += 4;
                         break;
@@ -410,7 +486,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     default:
                         break;
                 }
-                
+
             }
             return infos;
         }

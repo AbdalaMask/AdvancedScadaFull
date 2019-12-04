@@ -122,7 +122,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                         default:
                             break;
                     }
-                   
+
                     tg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType2.SelectedItem.ToString());
                     tg.Description = $"{txtDesc.Text} {i + 1}";
                     db.Tags.Add(tg);
@@ -159,7 +159,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                     if (db == null)
                     {
 
-                        if(Tab== "IsArray")
+                        if (Tab == "IsArray")
                         {
                             var dbNew = new DataBlock()
                             {
@@ -182,28 +182,28 @@ namespace AdvancedScada.Siemens.Core.Editors
                         }
                         else
                         {
-                         var dbNew = new DataBlock()
-                        {
-                            ChannelId = ch.ChannelId,
-                            DeviceId = dv.DeviceId,
-                            DataBlockId = dv.DataBlocks.Count + 1,
-                            DataBlockName = txtDataBlock.Text,
-                            TypeOfRead = string.Empty,
-                            StartAddress = ushort.Parse(txtDBNumber.Text),
-                            MemoryType = txtDBNumber.Text,
-                            Description = txtDesc.Text,
-                            Length = 0,
-                            DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", cboxDataType.SelectedItem)),
-                            IsArray = false,
-                            Tags = new List<Tag>()
-                        };
-                          
+                            var dbNew = new DataBlock()
+                            {
+                                ChannelId = ch.ChannelId,
+                                DeviceId = dv.DeviceId,
+                                DataBlockId = dv.DataBlocks.Count + 1,
+                                DataBlockName = txtDataBlock.Text,
+                                TypeOfRead = string.Empty,
+                                StartAddress = ushort.Parse(txtDBNumber.Text),
+                                MemoryType = txtDBNumber.Text,
+                                Description = txtDesc.Text,
+                                Length = 0,
+                                DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", cboxDataType.SelectedItem)),
+                                IsArray = false,
+                                Tags = new List<Tag>()
+                            };
+
 
                             eventDataBlockChanged?.Invoke(dbNew, true);
                         }
-                      
 
-                    
+
+
                         Close();
                     }
                     else

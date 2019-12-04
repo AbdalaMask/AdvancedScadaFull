@@ -46,17 +46,17 @@ namespace AdvancedScada.Siemens.Core.Editors
                     newTg.DataBlockId = int.Parse(txtDataBlockId.Text);
                     newTg.TagId = db.Tags.Count + 1;
                     newTg.TagName = txtTagName.Text;
-                  
+
                     if (db.IsArray)
                     {
-                        newTg.Address = string.Format("{0}",txtStartAddress.Text);
+                        newTg.Address = string.Format("{0}", txtStartAddress.Text);
                     }
                     else
                     {
                         var dbFrm = string.Format("DB{0}", db.StartAddress);
-                        newTg.Address = string.Format("{0}{1}", dbFrm, txtStartAddress.Text);
+                        newTg.Address = string.Format("{0}.{1}", dbFrm, txtStartAddress.Text);
                     }
-                   
+
                     newTg.Description = txtDesc.Text;
                     newTg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString());
 
@@ -78,7 +78,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                         var dbFrm = string.Format("DB{0}", db.StartAddress);
                         tg.Address = string.Format("{0}{1}", dbFrm, txtStartAddress.Text);
                     }
-                   
+
                     tg.Description = txtDesc.Text;
                     tg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString());
 
@@ -123,7 +123,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                     this.Text = "Edit Tag";
                     txtTagId.Text = tg.TagId.ToString();
                     txtStartAddress.Text = tg.Address;
-                    
+
                     cboxDataType.SelectedItem = $"{tg.DataType}";
                     txtTagName.Text = tg.TagName;
                     txtDesc.Text = tg.Description;
@@ -196,7 +196,7 @@ namespace AdvancedScada.Siemens.Core.Editors
             //        default:
             //            break;
             //    }
-                
+
             //}
         }
     }

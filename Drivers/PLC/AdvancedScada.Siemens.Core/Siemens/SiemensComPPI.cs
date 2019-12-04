@@ -1,5 +1,4 @@
-﻿using AdvancedScada.Common;
-using AdvancedScada.DriverBase.Devices;
+﻿using AdvancedScada.DriverBase.Devices;
 using AdvancedScada.Siemens.Core.Common;
 using HslCommunication;
 using HslCommunication.Profinet.Siemens;
@@ -53,7 +52,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedFailed);
                 }
                 IsConnected = true;
-              
+
 
                 stopwatch.Stop();
                 return IsConnected;
@@ -162,15 +161,15 @@ namespace AdvancedScada.Siemens.Core.Siemens
             throw new NotImplementedException();
         }
 
-        public object ReadStruct(DataBlock structType, ushort length)
+        public void ReadStruct(DataBlock structType, ushort length)
         {
-            int numBytes = GetStructSize(structType);
-            // now read the package
-            OperateResult<byte[]> read = siemensPPI.Read($"DB{structType.StartAddress}.0", (ushort)numBytes);
-            if (read.IsSuccess)
-                // and decode it
-                return FromBytes(structType, read.Content);
-            throw new NotImplementedException();
+            //int numBytes = GetStructSize(structType);
+            //// now read the package
+            //OperateResult<byte[]> read = siemensPPI.Read($"DB{structType.StartAddress}.0", (ushort)numBytes);
+            //if (read.IsSuccess)
+            //    // and decode it
+            //    return FromBytes(structType, read.Content);
+            //throw new NotImplementedException();
         }
         public static int GetStructSize(DataBlock structType)
         {
@@ -350,7 +349,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
                         numBytes += 4;
                         break;
                     case DriverBase.DataTypes.String:
-                        info.Value = siemensPPI.ReadString(info.Address,64).Content;
+                        info.Value = siemensPPI.ReadString(info.Address, 64).Content;
                         info.TimeSpan = DateTime.Now;
                         break;
                     default:
