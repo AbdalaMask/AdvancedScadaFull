@@ -14,19 +14,9 @@ namespace HslScada.Studio.Tools
         private void UserPropertyGrid_Load(object sender, EventArgs e)
         {
             XCollection.EventPvGridChannelGet += EventPvGridChannel;
-            XCollection.EventPvGridDeviceGet += EventPvGridDevice;
-            XCollection.EventPvGridDataBlockGet += EventPvGridDataBlock;
+            
         }
 
-        private void EventPvGridDataBlock(object Value, bool Visible)
-        {
-            PvGridDataBlock.SelectedObject = Value;
-        }
-
-        private void EventPvGridDevice(object Value, bool Visible)
-        {
-            PvGridDevice.SelectedObject = Value;
-        }
 
         private void EventPvGridChannel(object Value, bool Visible)
         {

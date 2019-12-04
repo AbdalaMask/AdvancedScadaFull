@@ -46,7 +46,7 @@ namespace AdvancedScada.Studio
             if (Settings.Default.ApplicationSkinName != string.Empty && Settings.Default.ApplicationSkinName != null)
             {
                 var cpu = (PaletteModeManager)Enum.Parse(typeof(PaletteModeManager), Settings.Default["ApplicationSkinName"].ToString());
-                navigatorOutlook.DismissPopups();
+             
                 kryptonManager1.GlobalPaletteMode = cpu;
             }
 
@@ -58,28 +58,28 @@ namespace AdvancedScada.Studio
             switch (kryptonRibbonGroupGallery1.SelectedIndex)
             {
                 case 0:
-                    navigatorOutlook.DismissPopups();
+                 
                     kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2010Blue;
                     break;
                 case 1:
-                    navigatorOutlook.DismissPopups();
+                  
                     kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2010Black;
                     break;
                 case 2:
-                    navigatorOutlook.DismissPopups();
+                   
                     kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2010Silver;
                     break;
                 case 3:
-                    navigatorOutlook.DismissPopups();
+                    
                     kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2007Black;
                     break;
                 case 4:
-                    navigatorOutlook.DismissPopups();
+                   
                     kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2007Blue;
                     break;
                 case 5:
-                    navigatorOutlook.DismissPopups();
-                    kryptonManager1.GlobalPaletteMode = PaletteModeManager.SparkleOrange;
+                   
+                    kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office365Blue;
                     break;
                 default:
                     break;
@@ -160,22 +160,7 @@ namespace AdvancedScada.Studio
         #region Navigator
 
 
-        private void buttonSpecExpandCollapse_Click(object sender, EventArgs e)
-        {
-            // Are we currently showing fully expanded?
-            if (navigatorOutlook.NavigatorMode == NavigatorMode.OutlookFull)
-            {
-                // Switch to mini mode and reverse direction of arrow
-                navigatorOutlook.NavigatorMode = NavigatorMode.OutlookMini;
-                buttonSpecExpandCollapse.TypeRestricted = PaletteNavButtonSpecStyle.ArrowRight;
-            }
-            else
-            {
-                // Switch to full mode and reverse direction of arrow
-                navigatorOutlook.NavigatorMode = NavigatorMode.OutlookFull;
-                buttonSpecExpandCollapse.TypeRestricted = PaletteNavButtonSpecStyle.ArrowLeft;
-            }
-        }
+      
 
         private void ServiceItem_Click(object sender, EventArgs e)
         {
@@ -348,7 +333,7 @@ namespace AdvancedScada.Studio
             if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile)) return;
             var chList = objChannelManager.GetChannels(xmlFile);
             if (chList.Count < 1) return;
-            ServiceItem.PerformClick();
+           
         }
         private void FormStudio_FormClosing(object sender, FormClosingEventArgs e)
         {

@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             this.DGAlarmAnalog = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.ColName = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ColAlarmText = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ColAlarmCalss = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ColValue = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ColTriggerTeg = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ColDataBlock = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ColDevice = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ColChannel = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.AlarmAnalogContext = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu();
             this.kryptonContextMenuHeading1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
@@ -44,14 +52,6 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.kryptonHeader2 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.ColName = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.ColAlarmText = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.ColAlarmCalss = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.ColValue = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.ColTriggerTeg = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.ColDataBlock = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.ColDevice = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.ColChannel = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGAlarmAnalog)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +60,6 @@
             // 
             this.DGAlarmAnalog.AllowUserToAddRows = false;
             this.DGAlarmAnalog.AllowUserToDeleteRows = false;
-            this.DGAlarmAnalog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGAlarmAnalog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColName,
             this.ColAlarmText,
@@ -77,8 +76,63 @@
             this.DGAlarmAnalog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGAlarmAnalog.ShowCellErrors = false;
             this.DGAlarmAnalog.ShowRowErrors = false;
-            this.DGAlarmAnalog.Size = new System.Drawing.Size(800, 377);
+            this.DGAlarmAnalog.Size = new System.Drawing.Size(955, 377);
             this.DGAlarmAnalog.TabIndex = 1;
+            // 
+            // ColName
+            // 
+            this.ColName.HeaderText = "Name";
+            this.ColName.Name = "ColName";
+            this.ColName.Width = 95;
+            // 
+            // ColAlarmText
+            // 
+            this.ColAlarmText.HeaderText = "AlarmText";
+            this.ColAlarmText.Name = "ColAlarmText";
+            this.ColAlarmText.Width = 95;
+            // 
+            // ColAlarmCalss
+            // 
+            this.ColAlarmCalss.HeaderText = "AlarmCalss";
+            this.ColAlarmCalss.Name = "ColAlarmCalss";
+            this.ColAlarmCalss.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColAlarmCalss.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColAlarmCalss.Width = 95;
+            // 
+            // ColValue
+            // 
+            this.ColValue.HeaderText = "Value";
+            this.ColValue.Name = "ColValue";
+            this.ColValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColValue.Width = 95;
+            // 
+            // ColTriggerTeg
+            // 
+            this.ColTriggerTeg.HeaderText = "TriggerTeg";
+            this.ColTriggerTeg.Name = "ColTriggerTeg";
+            this.ColTriggerTeg.Width = 94;
+            // 
+            // ColDataBlock
+            // 
+            this.ColDataBlock.HeaderText = "DataBlock";
+            this.ColDataBlock.Name = "ColDataBlock";
+            this.ColDataBlock.ReadOnly = true;
+            this.ColDataBlock.Width = 95;
+            // 
+            // ColDevice
+            // 
+            this.ColDevice.HeaderText = "Device";
+            this.ColDevice.Name = "ColDevice";
+            this.ColDevice.ReadOnly = true;
+            this.ColDevice.Width = 95;
+            // 
+            // ColChannel
+            // 
+            this.ColChannel.HeaderText = "Channel";
+            this.ColChannel.Name = "ColChannel";
+            this.ColChannel.ReadOnly = true;
+            this.ColChannel.Width = 95;
             // 
             // AlarmAnalogContext
             // 
@@ -123,7 +177,7 @@
             this.toolStripSeparator4});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(800, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(955, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -181,7 +235,7 @@
             this.kryptonHeader2.Location = new System.Drawing.Point(0, 25);
             this.kryptonHeader2.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonHeader2.Name = "kryptonHeader2";
-            this.kryptonHeader2.Size = new System.Drawing.Size(800, 23);
+            this.kryptonHeader2.Size = new System.Drawing.Size(955, 23);
             this.kryptonHeader2.TabIndex = 1;
             this.kryptonHeader2.Values.Description = "";
             this.kryptonHeader2.Values.Heading = "AlarmList";
@@ -193,70 +247,15 @@
             this.toolStrip2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStrip2.Location = new System.Drawing.Point(0, 425);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(800, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(955, 25);
             this.toolStrip2.TabIndex = 6;
             this.toolStrip2.Text = "toolStrip2";
-            // 
-            // ColName
-            // 
-            this.ColName.HeaderText = "Name";
-            this.ColName.Name = "ColName";
-            this.ColName.Width = 95;
-            // 
-            // ColAlarmText
-            // 
-            this.ColAlarmText.HeaderText = "AlarmText";
-            this.ColAlarmText.Name = "ColAlarmText";
-            this.ColAlarmText.Width = 95;
-            // 
-            // ColAlarmCalss
-            // 
-            this.ColAlarmCalss.HeaderText = "AlarmCalss";
-            this.ColAlarmCalss.Name = "ColAlarmCalss";
-            this.ColAlarmCalss.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColAlarmCalss.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColAlarmCalss.Width = 95;
-            // 
-            // ColValue
-            // 
-            this.ColValue.HeaderText = "Value";
-            this.ColValue.Name = "ColValue";
-            this.ColValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColValue.Width = 95;
-            // 
-            // ColTriggerTeg
-            // 
-            this.ColTriggerTeg.HeaderText = "TriggerTeg";
-            this.ColTriggerTeg.Name = "ColTriggerTeg";
-            this.ColTriggerTeg.Width = 94;
-            // 
-            // ColDataBlock
-            // 
-            this.ColDataBlock.HeaderText = "DataBlock";
-            this.ColDataBlock.Name = "ColDataBlock";
-            this.ColDataBlock.ReadOnly = true;
-            this.ColDataBlock.Width = 95;
-            // 
-            // ColDevice
-            // 
-            this.ColDevice.HeaderText = "Device";
-            this.ColDevice.Name = "ColDevice";
-            this.ColDevice.ReadOnly = true;
-            this.ColDevice.Width = 95;
-            // 
-            // ColChannel
-            // 
-            this.ColChannel.HeaderText = "Channel";
-            this.ColChannel.Name = "ColChannel";
-            this.ColChannel.ReadOnly = true;
-            this.ColChannel.Width = 95;
             // 
             // FrmDiscreteAlarm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(955, 450);
             this.ControlBox = false;
             this.Controls.Add(this.DGAlarmAnalog);
             this.Controls.Add(this.kryptonHeader2);

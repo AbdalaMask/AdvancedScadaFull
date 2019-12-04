@@ -158,22 +158,22 @@ namespace AdvancedScada.Studio.Monitor
                 }
                 if (dvCurrent != null)
                 {
-                    EventPvGridDeviceGet?.Invoke(dvCurrent, true);
+                    EventPvGridChannelGet?.Invoke(dvCurrent, true);
 
                 }
                 else
                 {
-                    EventPvGridDeviceGet?.Invoke(dvCurrent, false);
+                    EventPvGridChannelGet?.Invoke(dvCurrent, false);
                 }
                 if (dbCurrent != null)
                 {
-                    EventPvGridDataBlockGet?.Invoke(dbCurrent, true);
+                    EventPvGridChannelGet?.Invoke(dbCurrent, true);
 
 
                 }
                 else
                 {
-                    EventPvGridDataBlockGet?.Invoke(dbCurrent, false);
+                    EventPvGridChannelGet?.Invoke(dbCurrent, false);
 
 
                 }

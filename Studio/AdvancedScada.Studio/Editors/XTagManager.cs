@@ -222,19 +222,42 @@ namespace AdvancedScada.Studio.Editors
                     case 0:
                         chCurrent = objChannelManager.GetByChannelName(treeViewSI.SelectedNode.Text);
                         DGMonitorForm.Rows.Clear();
+                        switch (chCurrent.ConnectionType)
+                        {
+                            case "SerialPort":
+
+                                var dis = (DISerialPort)chCurrent;
+                                EventPvGridChannelGet?.Invoke(dis, true);
+
+                                break;
+                            case "Ethernet":
+
+                                var die = (DIEthernet)chCurrent;
+                                EventPvGridChannelGet?.Invoke(die, true);
+
+                                break;
+                        }
                         break;
                     case 1:
                         chCurrent = objChannelManager.GetByChannelName(treeViewSI.SelectedNode.Parent.Text);
                         dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, selectedNode);
                         DGMonitorForm.Rows.Clear();
-
+                        EventPvGridChannelGet?.Invoke(dvCurrent, true);
                         break;
                     case 2:
                         chCurrent = objChannelManager.GetByChannelName(treeViewSI.SelectedNode.Parent.Parent.Text);
                         dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
                         dbCurrent = objDataBlockManager.GetByDataBlockName(dvCurrent, treeViewSI.SelectedNode.Text);
                         DGMonitorForm.Rows.Clear();
+                        if (dbCurrent != null)
+                        {
+                            EventPvGridChannelGet?.Invoke(dbCurrent, true);
+                            if (dbCurrent.Tags != null)
+                            {
+                                lblTagCount.Text = $"Total: {dbCurrent.Tags.Count} tags";
+                            }
 
+                        }
                         foreach (Tag tg in dbCurrent.Tags)
                         {
                             string[] row = { string.Format("{0}", tg.TagId), tg.TagName, string.Format("{0}", tg.Address), string.Format("{0}", tg.DataType), tg.Description };
@@ -247,55 +270,55 @@ namespace AdvancedScada.Studio.Editors
                         DGMonitorForm.Rows.Clear();
                         break;
                 }
-                if (chCurrent == null)
-                {
-                    EventPvGridChannelGet?.Invoke(chCurrent, false);
+                //if (chCurrent == null)
+                //{
+                //    EventPvGridChannelGet?.Invoke(chCurrent, false);
 
-                }
-                else
-                {
-                    switch (chCurrent.ConnectionType)
-                    {
-                        case "SerialPort":
+                //}
+                //else
+                //{
+                //    switch (chCurrent.ConnectionType)
+                //    {
+                //        case "SerialPort":
 
-                            var dis = (DISerialPort)chCurrent;
-                            EventPvGridChannelGet?.Invoke(dis, true);
+                //            var dis = (DISerialPort)chCurrent;
+                //            EventPvGridChannelGet?.Invoke(dis, true);
 
-                            break;
-                        case "Ethernet":
+                //            break;
+                //        case "Ethernet":
 
-                            var die = (DIEthernet)chCurrent;
-                            EventPvGridChannelGet?.Invoke(die, true);
+                //            var die = (DIEthernet)chCurrent;
+                //            EventPvGridChannelGet?.Invoke(die, true);
 
-                            break;
-                    }
-
-
-                }
-                if (dvCurrent != null)
-                {
-                    EventPvGridDeviceGet?.Invoke(dvCurrent, true);
-
-                }
-                else
-                {
-                    EventPvGridDeviceGet?.Invoke(dvCurrent, false);
-                }
-                if (dbCurrent != null)
-                {
-                    EventPvGridDataBlockGet?.Invoke(dbCurrent, true);
-                    if (dbCurrent.Tags != null)
-                    {
-                        lblTagCount.Text = $"Total: {dbCurrent.Tags.Count} tags";
-                    }
-
-                }
-                else
-                {
-                    EventPvGridDataBlockGet?.Invoke(dbCurrent, false);
+                //            break;
+                //    }
 
 
-                }
+                //}
+                //if (dvCurrent != null)
+                //{
+                //    EventPvGridChannelGet?.Invoke(dvCurrent, true);
+
+                //}
+                //else
+                //{
+                //    EventPvGridChannelGet?.Invoke(dvCurrent, false);
+                //}
+                //if (dbCurrent != null)
+                //{
+                //    EventPvGridChannelGet?.Invoke(dbCurrent, true);
+                //    if (dbCurrent.Tags != null)
+                //    {
+                //        lblTagCount.Text = $"Total: {dbCurrent.Tags.Count} tags";
+                //    }
+
+                //}
+                //else
+                //{
+                //    EventPvGridChannelGet?.Invoke(dbCurrent, false);
+
+
+                //}
 
             }
             catch (Exception ex)
@@ -1197,7 +1220,7 @@ namespace AdvancedScada.Studio.Editors
             catch (Exception ex)
             {
 
-               // txtHistory.Text += string.Format("+ ERROR: {0}" + Environment.NewLine, ex.Message);
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
         }
     }

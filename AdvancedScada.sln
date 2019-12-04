@@ -75,6 +75,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Images", "Controls\Advanced
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Util\AdvancedScada.Common\Common.csproj", "{EF8E1580-BDC2-4426-8D2D-BB866FC66305}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KryptonOutlookGrid", "Util\KryptonOutlookGrid\KryptonOutlookGrid\KryptonOutlookGrid.csproj", "{8532CA10-4C92-411E-99B4-65106628D131}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KryptonOutlookGrid.SandBox", "Util\KryptonOutlookGrid\KryptonOutlookGrid.SandBox\KryptonOutlookGrid.SandBox.csproj", "{07D41E03-A98F-401A-9D4E-E1C5A04ED843}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -307,6 +311,22 @@ Global
 		{EF8E1580-BDC2-4426-8D2D-BB866FC66305}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EF8E1580-BDC2-4426-8D2D-BB866FC66305}.Release|x86.ActiveCfg = Release|Any CPU
 		{EF8E1580-BDC2-4426-8D2D-BB866FC66305}.Release|x86.Build.0 = Release|Any CPU
+		{8532CA10-4C92-411E-99B4-65106628D131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8532CA10-4C92-411E-99B4-65106628D131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8532CA10-4C92-411E-99B4-65106628D131}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8532CA10-4C92-411E-99B4-65106628D131}.Debug|x86.Build.0 = Debug|Any CPU
+		{8532CA10-4C92-411E-99B4-65106628D131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8532CA10-4C92-411E-99B4-65106628D131}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8532CA10-4C92-411E-99B4-65106628D131}.Release|x86.ActiveCfg = Release|Any CPU
+		{8532CA10-4C92-411E-99B4-65106628D131}.Release|x86.Build.0 = Release|Any CPU
+		{07D41E03-A98F-401A-9D4E-E1C5A04ED843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07D41E03-A98F-401A-9D4E-E1C5A04ED843}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07D41E03-A98F-401A-9D4E-E1C5A04ED843}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{07D41E03-A98F-401A-9D4E-E1C5A04ED843}.Debug|x86.Build.0 = Debug|Any CPU
+		{07D41E03-A98F-401A-9D4E-E1C5A04ED843}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07D41E03-A98F-401A-9D4E-E1C5A04ED843}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07D41E03-A98F-401A-9D4E-E1C5A04ED843}.Release|x86.ActiveCfg = Release|Any CPU
+		{07D41E03-A98F-401A-9D4E-E1C5A04ED843}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -341,6 +361,8 @@ Global
 		{7F8029DA-1B94-4B1D-B91F-5B21DBF2F3A2} = {D0B07350-1C4B-4484-836A-B450309F94AD}
 		{F1E3254B-4F1A-4946-B5D9-8C474F0015E7} = {3F39B096-049E-452F-AC7F-AA6F167C5886}
 		{EF8E1580-BDC2-4426-8D2D-BB866FC66305} = {BE6E8E66-E008-4C37-99DD-CE60BDEB7349}
+		{8532CA10-4C92-411E-99B4-65106628D131} = {BE6E8E66-E008-4C37-99DD-CE60BDEB7349}
+		{07D41E03-A98F-401A-9D4E-E1C5A04ED843} = {BE6E8E66-E008-4C37-99DD-CE60BDEB7349}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {204AF3B5-65D3-431D-B11A-887625B7EECD}

@@ -115,7 +115,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.toolStripSeparator4});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(963, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1138, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -178,7 +178,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.lblSelectedTagName});
             this.toolStrip2.Location = new System.Drawing.Point(0, 614);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(963, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(1138, 25);
             this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -229,8 +229,8 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.DGMonitorForm);
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonDockableWorkspace1);
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonHeader1);
-            this.kryptonSplitContainer1.Size = new System.Drawing.Size(963, 589);
-            this.kryptonSplitContainer1.SplitterDistance = 168;
+            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1138, 589);
+            this.kryptonSplitContainer1.SplitterDistance = 198;
             this.kryptonSplitContainer1.TabIndex = 6;
             // 
             // treeViewSI
@@ -263,7 +263,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             treeNode3,
             treeNode6,
             treeNode9});
-            this.treeViewSI.Size = new System.Drawing.Size(168, 566);
+            this.treeViewSI.Size = new System.Drawing.Size(198, 566);
             this.treeViewSI.TabIndex = 1;
             this.treeViewSI.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewSI_AfterSelect);
             this.treeViewSI.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewSI_NodeMouseClick);
@@ -315,7 +315,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.kryptonHeader2.Location = new System.Drawing.Point(0, 0);
             this.kryptonHeader2.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonHeader2.Name = "kryptonHeader2";
-            this.kryptonHeader2.Size = new System.Drawing.Size(168, 23);
+            this.kryptonHeader2.Size = new System.Drawing.Size(198, 23);
             this.kryptonHeader2.TabIndex = 0;
             this.kryptonHeader2.Values.Description = "";
             this.kryptonHeader2.Values.Heading = "SQLServerList";
@@ -326,7 +326,6 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.DGMonitorForm.AllowUserToAddRows = false;
             this.DGMonitorForm.AllowUserToDeleteRows = false;
             this.DGMonitorForm.AllowUserToResizeRows = false;
-            this.DGMonitorForm.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGMonitorForm.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colTagId,
             this.ColumnName,
@@ -344,7 +343,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.DGMonitorForm.Name = "DGMonitorForm";
             this.DGMonitorForm.RowHeadersVisible = false;
             this.DGMonitorForm.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGMonitorForm.Size = new System.Drawing.Size(790, 566);
+            this.DGMonitorForm.Size = new System.Drawing.Size(935, 566);
             this.DGMonitorForm.TabIndex = 3;
             this.DGMonitorForm.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DGMonitorForm_MouseDoubleClick);
             this.DGMonitorForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DGMonitorForm_MouseDown);
@@ -354,45 +353,53 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.colTagId.HeaderText = "TagId";
             this.colTagId.Name = "colTagId";
             this.colTagId.ReadOnly = true;
+            this.colTagId.Width = 99;
             // 
             // ColumnName
             // 
             this.ColumnName.HeaderText = "Name";
             this.ColumnName.Name = "ColumnName";
             this.ColumnName.ReadOnly = true;
+            this.ColumnName.Width = 98;
             // 
             // colTagName
             // 
             this.colTagName.HeaderText = "TagName";
             this.colTagName.Name = "colTagName";
             this.colTagName.ReadOnly = true;
+            this.colTagName.Width = 99;
             // 
             // colDataBlock
             // 
             this.colDataBlock.HeaderText = "DataBlock";
             this.colDataBlock.Name = "colDataBlock";
             this.colDataBlock.ReadOnly = true;
+            this.colDataBlock.Width = 99;
             // 
             // colDevice
             // 
             this.colDevice.HeaderText = "Device";
             this.colDevice.Name = "colDevice";
             this.colDevice.ReadOnly = true;
+            this.colDevice.Width = 98;
             // 
             // ColChannel
             // 
             this.ColChannel.HeaderText = "Channel";
             this.ColChannel.Name = "ColChannel";
+            this.ColChannel.Width = 99;
             // 
             // ColCylce
             // 
             this.ColCylce.HeaderText = "Cylce";
             this.ColCylce.Name = "ColCylce";
+            this.ColCylce.Width = 98;
             // 
             // ColDescripton
             // 
             this.ColDescripton.HeaderText = "Descripton";
             this.ColDescripton.Name = "ColDescripton";
+            this.ColDescripton.Width = 99;
             // 
             // kryptonDockableWorkspace1
             // 
@@ -408,7 +415,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.kryptonDockableWorkspace1.Root.UniqueName = "5b53109fabe9406dadf51391b1e3d4f6";
             this.kryptonDockableWorkspace1.Root.WorkspaceControl = this.kryptonDockableWorkspace1;
             this.kryptonDockableWorkspace1.ShowMaximizeButton = false;
-            this.kryptonDockableWorkspace1.Size = new System.Drawing.Size(790, 566);
+            this.kryptonDockableWorkspace1.Size = new System.Drawing.Size(935, 566);
             this.kryptonDockableWorkspace1.TabIndex = 0;
             this.kryptonDockableWorkspace1.TabStop = true;
             // 
@@ -419,7 +426,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             this.kryptonHeader1.Location = new System.Drawing.Point(0, 0);
             this.kryptonHeader1.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonHeader1.Name = "kryptonHeader1";
-            this.kryptonHeader1.Size = new System.Drawing.Size(790, 23);
+            this.kryptonHeader1.Size = new System.Drawing.Size(935, 23);
             this.kryptonHeader1.TabIndex = 1;
             this.kryptonHeader1.Values.Description = "";
             this.kryptonHeader1.Values.Heading = "TagList";
@@ -483,7 +490,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(963, 639);
+            this.ClientSize = new System.Drawing.Size(1138, 639);
             this.ControlBox = false;
             this.Controls.Add(this.kryptonSplitContainer1);
             this.Controls.Add(this.toolStrip1);

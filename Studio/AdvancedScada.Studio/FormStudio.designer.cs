@@ -33,9 +33,10 @@
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonRibbon1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbon();
             this.kryptonRibbonTab1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
-            this.kryptonRibbonGroup5 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
-            this.kryptonRibbonGroupTriple5 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
-            this.mExit = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonRibbonGroup3 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
+            this.kryptonRibbonGroupGallery1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupGallery();
+            this.kryptonGalleryRange1 = new ComponentFactory.Krypton.Ribbon.KryptonGalleryRange();
+            this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
             this.kryptonRibbonGroup1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.mConfiguration = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
@@ -43,21 +44,21 @@
             this.CheckEnabele = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupCheckBox();
             this.kryptonRibbonGroupTriple2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.mPCControllercs = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonRibbonGroup7 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
+            this.kryptonRibbonGroupTriple7 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
+            this.mTags = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.mMontorng = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.mHistoricalData = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroup2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple3 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.barButtonLibraryImages = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
-            this.kryptonRibbonGroup3 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
-            this.kryptonRibbonGroupGallery1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupGallery();
-            this.kryptonGalleryRange1 = new ComponentFactory.Krypton.Ribbon.KryptonGalleryRange();
-            this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
             this.kryptonRibbonGroup6 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple6 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.btnAlarmclasses = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.btnAlarms = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
-            this.kryptonRibbonTab2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
-            this.kryptonRibbonGroup4 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
-            this.kryptonRibbonGroupTriple4 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
-            this.mnMonioring = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonRibbonGroup5 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
+            this.kryptonRibbonGroupTriple5 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
+            this.mExit = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.barCheckEnabele = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.popupMenuNotifyIcon = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu();
@@ -68,17 +69,6 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.kryptonDockingManager = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
-            this.navigatorOutlook = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
-            this.buttonSpecExpandCollapse = new ComponentFactory.Krypton.Navigator.ButtonSpecNavigator();
-            this.Main = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.SQLManagerItem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.TagManagerItem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.LoggingItem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.ServiceItem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.SQL = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.SQLiteItem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.SQLItem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.TabForm = new ComponentFactory.Krypton.Docking.KryptonDockableNavigator();
             this.panelFill = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
@@ -86,12 +76,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ThisNotificationPopup = new Tulpep.NotificationWindow.PopupNotifier();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.navigatorOutlook)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Main)).BeginInit();
-            this.Main.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SQL)).BeginInit();
-            this.SQL.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TabForm)).BeginInit();
             this.TabForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelFill)).BeginInit();
@@ -110,9 +94,7 @@
             this.kryptonRibbon1.InDesignHelperMode = true;
             this.kryptonRibbon1.Name = "kryptonRibbon1";
             this.kryptonRibbon1.RibbonTabs.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab[] {
-            this.kryptonRibbonTab1,
-            this.kryptonRibbonTab2});
-            this.kryptonRibbon1.SelectedContext = null;
+            this.kryptonRibbonTab1});
             this.kryptonRibbon1.SelectedTab = this.kryptonRibbonTab1;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1284, 115);
             this.kryptonRibbon1.TabIndex = 0;
@@ -120,30 +102,67 @@
             // kryptonRibbonTab1
             // 
             this.kryptonRibbonTab1.Groups.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup[] {
-            this.kryptonRibbonGroup5,
-            this.kryptonRibbonGroup1,
-            this.kryptonRibbonGroup2,
             this.kryptonRibbonGroup3,
-            this.kryptonRibbonGroup6});
+            this.kryptonRibbonGroup1,
+            this.kryptonRibbonGroup7,
+            this.kryptonRibbonGroup2,
+            this.kryptonRibbonGroup6,
+            this.kryptonRibbonGroup5});
             this.kryptonRibbonTab1.Text = "MainMenu";
             // 
-            // kryptonRibbonGroup5
+            // kryptonRibbonGroup3
             // 
-            this.kryptonRibbonGroup5.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
-            this.kryptonRibbonGroupTriple5});
-            this.kryptonRibbonGroup5.TextLine1 = "Exit";
+            this.kryptonRibbonGroup3.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
+            this.kryptonRibbonGroupGallery1});
+            this.kryptonRibbonGroup3.TextLine1 = "Skin";
             // 
-            // kryptonRibbonGroupTriple5
+            // kryptonRibbonGroupGallery1
             // 
-            this.kryptonRibbonGroupTriple5.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
-            this.mExit});
+            this.kryptonRibbonGroupGallery1.DropButtonRanges.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonGalleryRange[] {
+            this.kryptonGalleryRange1});
+            this.kryptonRibbonGroupGallery1.ImageList = this.imageListLarge;
+            this.kryptonRibbonGroupGallery1.LargeItemCount = 1;
+            this.kryptonRibbonGroupGallery1.MediumItemCount = 1;
+            this.kryptonRibbonGroupGallery1.SelectedIndexChanged += new System.EventHandler(this.kryptonRibbonGroupGallery1_SelectedIndexChanged);
             // 
-            // mExit
+            // imageListLarge
             // 
-            this.mExit.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.Stop;
-            this.mExit.ImageSmall = global::AdvancedScada.Studio.Properties.Resources.Stop;
-            this.mExit.TextLine1 = "Exit";
-            this.mExit.Click += new System.EventHandler(this.mExit_Click);
+            this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
+            this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListLarge.Images.SetKeyName(0, "DeepBlue_48x48.png");
+            this.imageListLarge.Images.SetKeyName(1, "Dracula_48x48.png");
+            this.imageListLarge.Images.SetKeyName(2, "DXStyle_48x48.png");
+            this.imageListLarge.Images.SetKeyName(3, "Helsing_48x48.png");
+            this.imageListLarge.Images.SetKeyName(4, "LightGray_48x48.png");
+            this.imageListLarge.Images.SetKeyName(5, "MetropolisDark_48x48.png");
+            this.imageListLarge.Images.SetKeyName(6, "MetropolisLight_48x48.png");
+            this.imageListLarge.Images.SetKeyName(7, "Office2007Black_48x48.png");
+            this.imageListLarge.Images.SetKeyName(8, "Office2007Blue_48x48.png");
+            this.imageListLarge.Images.SetKeyName(9, "Office2007Silver_48x48.png");
+            this.imageListLarge.Images.SetKeyName(10, "Office2010Black_48x48.png");
+            this.imageListLarge.Images.SetKeyName(11, "Office2010Blue_48x48.png");
+            this.imageListLarge.Images.SetKeyName(12, "Office2010Silver_48x48.png");
+            this.imageListLarge.Images.SetKeyName(13, "Office2013_48x48.png");
+            this.imageListLarge.Images.SetKeyName(14, "Office2013DarkGray_48x48.png");
+            this.imageListLarge.Images.SetKeyName(15, "Office2013LightGray_48x48.png");
+            this.imageListLarge.Images.SetKeyName(16, "Office2016Black_48x48.png");
+            this.imageListLarge.Images.SetKeyName(17, "Office2016BlackSE_48x48.png");
+            this.imageListLarge.Images.SetKeyName(18, "Office2016Colorful_48x48.png");
+            this.imageListLarge.Images.SetKeyName(19, "Office2016ColorfulSE_48x48.png");
+            this.imageListLarge.Images.SetKeyName(20, "Office2016DarkGraySE_48x48.png");
+            this.imageListLarge.Images.SetKeyName(21, "Office2016White_48x48.png");
+            this.imageListLarge.Images.SetKeyName(22, "Office2016WhiteSE_48x48.png");
+            this.imageListLarge.Images.SetKeyName(23, "Office2019Black_48x48.png");
+            this.imageListLarge.Images.SetKeyName(24, "Office2019Colorful_48x48.png");
+            this.imageListLarge.Images.SetKeyName(25, "Office2019DarkGray_48x48.png");
+            this.imageListLarge.Images.SetKeyName(26, "Office2019White_48x48.png");
+            this.imageListLarge.Images.SetKeyName(27, "Seven_48x48.png");
+            this.imageListLarge.Images.SetKeyName(28, "Super_48x48.png");
+            this.imageListLarge.Images.SetKeyName(29, "TouchlineDark_48x48.png");
+            this.imageListLarge.Images.SetKeyName(30, "VS2010_48x48.png");
+            this.imageListLarge.Images.SetKeyName(31, "VS2017Blue_48x48.png");
+            this.imageListLarge.Images.SetKeyName(32, "VS2017Dark_48x48.png");
+            this.imageListLarge.Images.SetKeyName(33, "VS2017Light_48x48.png");
             // 
             // kryptonRibbonGroup1
             // 
@@ -161,7 +180,7 @@
             // 
             // mConfiguration
             // 
-            this.mConfiguration.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.Convert_32x32;
+            this.mConfiguration.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.IDE_32x32;
             this.mConfiguration.TextLine1 = "Configuration";
             this.mConfiguration.Click += new System.EventHandler(this.mConfiguration_Click);
             // 
@@ -189,6 +208,40 @@
             this.mPCControllercs.TextLine1 = "PCControllercs";
             this.mPCControllercs.Click += new System.EventHandler(this.mPCControllercs_Click);
             // 
+            // kryptonRibbonGroup7
+            // 
+            this.kryptonRibbonGroup7.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
+            this.kryptonRibbonGroupTriple7});
+            this.kryptonRibbonGroup7.TextLine1 = "Tags";
+            // 
+            // kryptonRibbonGroupTriple7
+            // 
+            this.kryptonRibbonGroupTriple7.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
+            this.mTags,
+            this.mMontorng,
+            this.mHistoricalData});
+            // 
+            // mTags
+            // 
+            this.mTags.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.Tag_32x32;
+            this.mTags.ImageSmall = global::AdvancedScada.Studio.Properties.Resources.Tag_16x16;
+            this.mTags.TextLine1 = "Tags";
+            this.mTags.Click += new System.EventHandler(this.TagManagerItem_Click);
+            // 
+            // mMontorng
+            // 
+            this.mMontorng.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.Show_32x32;
+            this.mMontorng.ImageSmall = global::AdvancedScada.Studio.Properties.Resources.Show_16x16;
+            this.mMontorng.TextLine1 = "Montorng";
+            this.mMontorng.Click += new System.EventHandler(this.mnMonioring_Click);
+            // 
+            // mHistoricalData
+            // 
+            this.mHistoricalData.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.Database_32x32;
+            this.mHistoricalData.ImageSmall = global::AdvancedScada.Studio.Properties.Resources.Database_16x16;
+            this.mHistoricalData.TextLine1 = "Historical Data";
+            this.mHistoricalData.Click += new System.EventHandler(this.SQLManagerItem_Click);
+            // 
             // kryptonRibbonGroup2
             // 
             this.kryptonRibbonGroup2.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
@@ -204,44 +257,8 @@
             // 
             this.barButtonLibraryImages.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.Image_32x32;
             this.barButtonLibraryImages.ImageSmall = global::AdvancedScada.Studio.Properties.Resources.Image_16x16;
-            this.barButtonLibraryImages.TextLine1 = "LibraryImages";
+            this.barButtonLibraryImages.TextLine1 = "ImagePicker";
             this.barButtonLibraryImages.Click += new System.EventHandler(this.barButtonLibraryImages_Click);
-            // 
-            // kryptonRibbonGroup3
-            // 
-            this.kryptonRibbonGroup3.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
-            this.kryptonRibbonGroupGallery1});
-            this.kryptonRibbonGroup3.TextLine1 = "Skin";
-            // 
-            // kryptonRibbonGroupGallery1
-            // 
-            this.kryptonRibbonGroupGallery1.DropButtonRanges.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonGalleryRange[] {
-            this.kryptonGalleryRange1});
-            this.kryptonRibbonGroupGallery1.ImageList = this.imageListLarge;
-            this.kryptonRibbonGroupGallery1.LargeItemCount = 1;
-            this.kryptonRibbonGroupGallery1.MediumItemCount = 1;
-            this.kryptonRibbonGroupGallery1.SelectedIndexChanged += new System.EventHandler(this.kryptonRibbonGroupGallery1_SelectedIndexChanged);
-            // 
-            // imageListLarge
-            // 
-            this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
-            this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListLarge.Images.SetKeyName(0, "star_yellow.png");
-            this.imageListLarge.Images.SetKeyName(1, "star_blue.png");
-            this.imageListLarge.Images.SetKeyName(2, "star_green.png");
-            this.imageListLarge.Images.SetKeyName(3, "star_grey.png");
-            this.imageListLarge.Images.SetKeyName(4, "star_red.png");
-            this.imageListLarge.Images.SetKeyName(5, "arrow_up_green.png");
-            this.imageListLarge.Images.SetKeyName(6, "arrow_down_green.png");
-            this.imageListLarge.Images.SetKeyName(7, "arrow_left_green.png");
-            this.imageListLarge.Images.SetKeyName(8, "arrow_right_green.png");
-            this.imageListLarge.Images.SetKeyName(9, "arrow_up_blue.png");
-            this.imageListLarge.Images.SetKeyName(10, "arrow_down_blue.png");
-            this.imageListLarge.Images.SetKeyName(11, "arrow_left_blue.png");
-            this.imageListLarge.Images.SetKeyName(12, "arrow_right_blue.png");
-            this.imageListLarge.Images.SetKeyName(13, "user3.png");
-            this.imageListLarge.Images.SetKeyName(14, "user1.png");
-            this.imageListLarge.Images.SetKeyName(15, "user2.png");
             // 
             // kryptonRibbonGroup6
             // 
@@ -267,28 +284,23 @@
             this.btnAlarms.TextLine1 = "Alarms";
             this.btnAlarms.Click += new System.EventHandler(this.btnDiscreteAlarms_Click);
             // 
-            // kryptonRibbonTab2
+            // kryptonRibbonGroup5
             // 
-            this.kryptonRibbonTab2.Groups.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup[] {
-            this.kryptonRibbonGroup4});
-            this.kryptonRibbonTab2.Text = "Monioring";
+            this.kryptonRibbonGroup5.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
+            this.kryptonRibbonGroupTriple5});
+            this.kryptonRibbonGroup5.TextLine1 = "Exit";
             // 
-            // kryptonRibbonGroup4
+            // kryptonRibbonGroupTriple5
             // 
-            this.kryptonRibbonGroup4.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
-            this.kryptonRibbonGroupTriple4});
+            this.kryptonRibbonGroupTriple5.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
+            this.mExit});
             // 
-            // kryptonRibbonGroupTriple4
+            // mExit
             // 
-            this.kryptonRibbonGroupTriple4.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
-            this.mnMonioring});
-            // 
-            // mnMonioring
-            // 
-            this.mnMonioring.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.Example_32x32;
-            this.mnMonioring.ImageSmall = global::AdvancedScada.Studio.Properties.Resources.Example_16x16;
-            this.mnMonioring.TextLine1 = "Monioring";
-            this.mnMonioring.Click += new System.EventHandler(this.mnMonioring_Click);
+            this.mExit.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.Stop;
+            this.mExit.ImageSmall = global::AdvancedScada.Studio.Properties.Resources.Stop;
+            this.mExit.TextLine1 = "Exit";
+            this.mExit.Click += new System.EventHandler(this.mExit_Click);
             // 
             // barCheckEnabele
             // 
@@ -350,180 +362,20 @@
             this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
-            // navigatorOutlook
-            // 
-            this.navigatorOutlook.AutoSize = true;
-            this.navigatorOutlook.Button.ButtonDisplayLogic = ComponentFactory.Krypton.Navigator.ButtonDisplayLogic.None;
-            this.navigatorOutlook.Button.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Navigator.ButtonSpecNavigator[] {
-            this.buttonSpecExpandCollapse});
-            this.navigatorOutlook.Button.CloseButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Hide;
-            this.navigatorOutlook.Dock = System.Windows.Forms.DockStyle.Left;
-            this.navigatorOutlook.Header.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.DockInactive;
-            this.navigatorOutlook.Header.HeaderValuesPrimary.MapHeading = ComponentFactory.Krypton.Navigator.MapKryptonPageText.Text;
-            this.navigatorOutlook.Header.HeaderValuesPrimary.MapImage = ComponentFactory.Krypton.Navigator.MapKryptonPageImage.None;
-            this.navigatorOutlook.Location = new System.Drawing.Point(9, 9);
-            this.navigatorOutlook.Margin = new System.Windows.Forms.Padding(4);
-            this.navigatorOutlook.Name = "navigatorOutlook";
-            this.navigatorOutlook.NavigatorMode = ComponentFactory.Krypton.Navigator.NavigatorMode.OutlookFull;
-            this.navigatorOutlook.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
-            this.Main,
-            this.SQL});
-            this.navigatorOutlook.SelectedIndex = 0;
-            this.navigatorOutlook.Size = new System.Drawing.Size(195, 624);
-            this.navigatorOutlook.TabIndex = 0;
-            // 
-            // buttonSpecExpandCollapse
-            // 
-            this.buttonSpecExpandCollapse.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.ArrowLeft;
-            this.buttonSpecExpandCollapse.TypeRestricted = ComponentFactory.Krypton.Navigator.PaletteNavButtonSpecStyle.ArrowLeft;
-            this.buttonSpecExpandCollapse.UniqueName = "22C3A3B1DC494B5F22C3A3B1DC494B5F";
-            this.buttonSpecExpandCollapse.Click += new System.EventHandler(this.buttonSpecExpandCollapse_Click);
-            // 
-            // Main
-            // 
-            this.Main.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.Main.Controls.Add(this.SQLManagerItem);
-            this.Main.Controls.Add(this.TagManagerItem);
-            this.Main.Controls.Add(this.LoggingItem);
-            this.Main.Controls.Add(this.ServiceItem);
-            this.Main.Flags = 65534;
-            this.Main.ImageSmall = global::AdvancedScada.Studio.Properties.Resources.Example_16x16;
-            this.Main.LastVisibleSet = true;
-            this.Main.Margin = new System.Windows.Forms.Padding(4);
-            this.Main.MinimumSize = new System.Drawing.Size(193, 62);
-            this.Main.Name = "Main";
-            this.Main.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
-            this.Main.Size = new System.Drawing.Size(193, 525);
-            this.Main.Text = "Management";
-            this.Main.TextDescription = "Palettes";
-            this.Main.TextTitle = "Palettes";
-            this.Main.ToolTipTitle = "Page ToolTip";
-            this.Main.UniqueName = "64378E1F7C03429B64378E1F7C03429B";
-            // 
-            // SQLManagerItem
-            // 
-            this.SQLManagerItem.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.NavigatorOverflow;
-            this.SQLManagerItem.Dock = System.Windows.Forms.DockStyle.Top;
-            this.SQLManagerItem.Location = new System.Drawing.Point(13, 123);
-            this.SQLManagerItem.Margin = new System.Windows.Forms.Padding(4);
-            this.SQLManagerItem.Name = "SQLManagerItem";
-            this.SQLManagerItem.Size = new System.Drawing.Size(167, 37);
-            this.SQLManagerItem.TabIndex = 3;
-            this.SQLManagerItem.Values.Image = global::AdvancedScada.Studio.Properties.Resources.Database_16x16;
-            this.SQLManagerItem.Values.Text = "SQLManager";
-            this.SQLManagerItem.Click += new System.EventHandler(this.SQLManagerItem_Click);
-            // 
-            // TagManagerItem
-            // 
-            this.TagManagerItem.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.NavigatorOverflow;
-            this.TagManagerItem.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TagManagerItem.Location = new System.Drawing.Point(13, 86);
-            this.TagManagerItem.Margin = new System.Windows.Forms.Padding(4);
-            this.TagManagerItem.Name = "TagManagerItem";
-            this.TagManagerItem.Size = new System.Drawing.Size(167, 37);
-            this.TagManagerItem.TabIndex = 2;
-            this.TagManagerItem.Values.Image = global::AdvancedScada.Studio.Properties.Resources.Tag;
-            this.TagManagerItem.Values.Text = "Tag Manager";
-            this.TagManagerItem.Click += new System.EventHandler(this.TagManagerItem_Click);
-            // 
-            // LoggingItem
-            // 
-            this.LoggingItem.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.NavigatorOverflow;
-            this.LoggingItem.Dock = System.Windows.Forms.DockStyle.Top;
-            this.LoggingItem.Location = new System.Drawing.Point(13, 49);
-            this.LoggingItem.Margin = new System.Windows.Forms.Padding(4);
-            this.LoggingItem.Name = "LoggingItem";
-            this.LoggingItem.Size = new System.Drawing.Size(167, 37);
-            this.LoggingItem.TabIndex = 1;
-            this.LoggingItem.Values.Image = global::AdvancedScada.Studio.Properties.Resources.HistoryItem_16x16;
-            this.LoggingItem.Values.Text = "Logging";
-            this.LoggingItem.Click += new System.EventHandler(this.LoggingItem_Click);
-            // 
-            // ServiceItem
-            // 
-            this.ServiceItem.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.NavigatorOverflow;
-            this.ServiceItem.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ServiceItem.Location = new System.Drawing.Point(13, 12);
-            this.ServiceItem.Margin = new System.Windows.Forms.Padding(4);
-            this.ServiceItem.Name = "ServiceItem";
-            this.ServiceItem.Size = new System.Drawing.Size(167, 37);
-            this.ServiceItem.StateNormal.Back.ImageAlign = ComponentFactory.Krypton.Toolkit.PaletteRectangleAlign.Control;
-            this.ServiceItem.StateNormal.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.TopLeft;
-            this.ServiceItem.TabIndex = 0;
-            this.ServiceItem.Values.Image = global::AdvancedScada.Studio.Properties.Resources.Convert_16x16;
-            this.ServiceItem.Values.Text = "Service";
-            this.ServiceItem.Click += new System.EventHandler(this.ServiceItem_Click);
-            // 
-            // SQL
-            // 
-            this.SQL.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.SQL.Controls.Add(this.SQLiteItem);
-            this.SQL.Controls.Add(this.SQLItem);
-            this.SQL.Flags = 65534;
-            this.SQL.ImageSmall = global::AdvancedScada.Studio.Properties.Resources.Database_16x16;
-            this.SQL.LastVisibleSet = true;
-            this.SQL.Margin = new System.Windows.Forms.Padding(4);
-            this.SQL.MinimumSize = new System.Drawing.Size(193, 62);
-            this.SQL.Name = "SQL";
-            this.SQL.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
-            this.SQL.Size = new System.Drawing.Size(193, 521);
-            this.SQL.Text = "Database";
-            this.SQL.TextDescription = "Database";
-            this.SQL.TextTitle = "Database";
-            this.SQL.ToolTipTitle = "Page ToolTip";
-            this.SQL.UniqueName = "24D4FC840D914CC024D4FC840D914CC0";
-            // 
-            // SQLiteItem
-            // 
-            this.SQLiteItem.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.NavigatorOverflow;
-            this.SQLiteItem.Dock = System.Windows.Forms.DockStyle.Top;
-            this.SQLiteItem.Location = new System.Drawing.Point(13, 49);
-            this.SQLiteItem.Margin = new System.Windows.Forms.Padding(4);
-            this.SQLiteItem.Name = "SQLiteItem";
-            this.SQLiteItem.Size = new System.Drawing.Size(167, 37);
-            this.SQLiteItem.TabIndex = 2;
-            this.SQLiteItem.Values.Image = global::AdvancedScada.Studio.Properties.Resources.Database_16x16;
-            this.SQLiteItem.Values.Text = "SQLite";
-            this.SQLiteItem.Click += new System.EventHandler(this.SQLiteItem_Click);
-            // 
-            // SQLItem
-            // 
-            this.SQLItem.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.NavigatorOverflow;
-            this.SQLItem.Dock = System.Windows.Forms.DockStyle.Top;
-            this.SQLItem.Location = new System.Drawing.Point(13, 12);
-            this.SQLItem.Margin = new System.Windows.Forms.Padding(4);
-            this.SQLItem.Name = "SQLItem";
-            this.SQLItem.Size = new System.Drawing.Size(167, 37);
-            this.SQLItem.TabIndex = 1;
-            this.SQLItem.Values.Image = global::AdvancedScada.Studio.Properties.Resources.Database_16x16;
-            this.SQLItem.Values.Text = "Microsoft SQL Server";
-            this.SQLItem.Click += new System.EventHandler(this.SQLItem_Click);
-            // 
-            // kryptonPanel1
-            // 
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.kryptonPanel1.Location = new System.Drawing.Point(204, 9);
-            this.kryptonPanel1.Margin = new System.Windows.Forms.Padding(4);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(13, 624);
-            this.kryptonPanel1.TabIndex = 2;
-            // 
             // TabForm
             // 
             this.TabForm.Button.ButtonDisplayLogic = ComponentFactory.Krypton.Navigator.ButtonDisplayLogic.None;
             this.TabForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TabForm.Location = new System.Drawing.Point(217, 9);
+            this.TabForm.Location = new System.Drawing.Point(9, 9);
             this.TabForm.Margin = new System.Windows.Forms.Padding(4);
             this.TabForm.Name = "TabForm";
-            this.TabForm.Size = new System.Drawing.Size(1058, 624);
+            this.TabForm.Size = new System.Drawing.Size(1266, 624);
             this.TabForm.TabIndex = 3;
             this.TabForm.CloseAction += new System.EventHandler<ComponentFactory.Krypton.Navigator.CloseActionEventArgs>(this.TabForm_CloseAction);
             // 
             // panelFill
             // 
             this.panelFill.Controls.Add(this.TabForm);
-            this.panelFill.Controls.Add(this.kryptonPanel1);
-            this.panelFill.Controls.Add(this.navigatorOutlook);
             this.panelFill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelFill.Location = new System.Drawing.Point(0, 115);
             this.panelFill.Margin = new System.Windows.Forms.Padding(9);
@@ -603,17 +455,10 @@
             this.Load += new System.EventHandler(this.FormStudio_Load);
             this.Resize += new System.EventHandler(this.FormStudio_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.navigatorOutlook)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Main)).EndInit();
-            this.Main.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.SQL)).EndInit();
-            this.SQL.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TabForm)).EndInit();
             this.TabForm.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelFill)).EndInit();
             this.panelFill.ResumeLayout(false);
-            this.panelFill.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel)).EndInit();
             this.kryptonPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableWorkspace)).EndInit();
@@ -629,16 +474,12 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonTab kryptonRibbonTab1;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup1;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple1;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonTab kryptonRibbonTab2;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple2;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton mPCControllercs;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup2;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple3;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton barButtonLibraryImages;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupGallery kryptonRibbonGroupGallery1;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup4;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple4;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton mnMonioring;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton mConfiguration;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton mSQLServerUtils;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton barCheckEnabele;
@@ -656,17 +497,6 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private ComponentFactory.Krypton.Docking.KryptonDockingManager kryptonDockingManager;
-        private ComponentFactory.Krypton.Navigator.KryptonNavigator navigatorOutlook;
-        private ComponentFactory.Krypton.Navigator.ButtonSpecNavigator buttonSpecExpandCollapse;
-        private ComponentFactory.Krypton.Navigator.KryptonPage Main;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton SQLManagerItem;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton TagManagerItem;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton LoggingItem;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton ServiceItem;
-        private ComponentFactory.Krypton.Navigator.KryptonPage SQL;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton SQLiteItem;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton SQLItem;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Docking.KryptonDockableNavigator TabForm;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel panelFill;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel;
@@ -679,6 +509,11 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btnAlarmclasses;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btnAlarms;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup3;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup7;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple7;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton mTags;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton mMontorng;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton mHistoricalData;
     }
 }
 
