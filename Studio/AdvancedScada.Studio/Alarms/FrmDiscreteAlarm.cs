@@ -18,16 +18,16 @@ namespace AdvancedScada.Studio.Alarms
             objAlarmManager.Alarms.Clear();
             objAlarmManager.XmlPath = xmlPath;
             var chList = objAlarmManager.GetAlarms(xmlPath);
-          
-          
-                DGAlarmAnalog.Rows.Clear();
-                foreach (var tg in chList)
-                {
-                    string[] row = { tg.Name, string.Format("{0}", tg.AlarmText), string.Format("{0}", tg.AlarmCalss), tg.Value, tg.TriggerTeg, tg.DataBlock, tg.Device, tg.Channel };
 
-                    DGAlarmAnalog.Rows.Add(row);
-                }
-            
+
+            DGAlarmAnalog.Rows.Clear();
+            foreach (var tg in chList)
+            {
+                string[] row = { tg.Name, string.Format("{0}", tg.AlarmText), string.Format("{0}", tg.AlarmCalss), tg.Value, tg.TriggerTeg, tg.DataBlock, tg.Device, tg.Channel };
+
+                DGAlarmAnalog.Rows.Add(row);
+            }
+
         }
         private void FrmDiscreteAlarm_Load(object sender, System.EventArgs e)
         {
@@ -71,7 +71,7 @@ namespace AdvancedScada.Studio.Alarms
                 var result = openFileDialog.ShowDialog();
                 if (result == DialogResult.OK) // Test result.
                 {
-                    
+
                     objAlarmManager.Alarms.Clear();
                     objAlarmManager.XmlPath = openFileDialog.FileName;
                     InitializeData(openFileDialog.FileName);

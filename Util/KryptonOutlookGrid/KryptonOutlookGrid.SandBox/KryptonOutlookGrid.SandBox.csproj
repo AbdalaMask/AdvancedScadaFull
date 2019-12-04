@@ -414,12 +414,6 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\KryptonOutlookGrid\KryptonOutlookGrid.csproj">
-      <Project>{8532ca10-4c92-411e-99b4-65106628d131}</Project>
-      <Name>KryptonOutlookGrid</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

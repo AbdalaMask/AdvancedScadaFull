@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Microsoft.VisualBasic.Devices;
 using Microsoft.Win32;
+using System;
+using System.Windows.Forms;
 
 namespace AdvancedScada.Studio
 {

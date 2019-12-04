@@ -92,34 +92,7 @@ namespace AdvancedScada.Studio.Config
         {
             DatabaseTypes = cboxDatabaseTypes.Text;
         }
-        public void WriteKey(string keyName, string keyValue)
-        {
-            try
-            {
-                RegistryKey regKey;
-                regKey = Registry.CurrentUser.CreateSubKey(@"Software\HMI");
-                regKey.SetValue(keyName, keyValue);
-                regKey.Close();
-            }
-            catch (Exception ex)
-            {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-            }
-        }
-        public void WriteKeySymbolFactory(string keyName, string keyValue)
-        {
-            try
-            {
-                RegistryKey regKey;
-                regKey = Registry.LocalMachine.CreateSubKey(@"Software\\Software Toolbox\\Symbol Factory .NET\\2.0.0.221");
-                regKey.SetValue(keyName, keyValue);
-                regKey.Close();
-            }
-            catch (Exception ex)
-            {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
-            }
-        }
+
 
     }
 }

@@ -71,7 +71,7 @@
             this.kryptonNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage1,
             this.kryptonPage2});
-            this.kryptonNavigator1.SelectedIndex = 0;
+            this.kryptonNavigator1.SelectedIndex = 1;
             this.kryptonNavigator1.Size = new System.Drawing.Size(466, 280);
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "Configuration";
@@ -96,10 +96,10 @@
             // 
             // txtPort
             // 
-            this.txtPort.Location = new System.Drawing.Point(120, 32);
+            this.txtPort.Location = new System.Drawing.Point(313, 3);
             this.txtPort.Margin = new System.Windows.Forms.Padding(4);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(141, 22);
+            this.txtPort.Size = new System.Drawing.Size(132, 22);
             this.txtPort.StateCommon.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Far;
             this.txtPort.TabIndex = 3;
             this.txtPort.Text = "8080";
@@ -115,7 +115,7 @@
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(10, 32);
+            this.kryptonLabel2.Location = new System.Drawing.Point(269, 5);
             this.kryptonLabel2.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(36, 20);
@@ -178,7 +178,6 @@
             this.cboxDatabaseTypes.Size = new System.Drawing.Size(265, 21);
             this.cboxDatabaseTypes.StateCommon.ComboBox.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.cboxDatabaseTypes.TabIndex = 1;
-            this.cboxDatabaseTypes.Text = "kryptonComboBox2";
             this.cboxDatabaseTypes.SelectedIndexChanged += new System.EventHandler(this.cboxDatabaseTypes_SelectedIndexChanged);
             // 
             // kryptonLabel4
@@ -200,7 +199,6 @@
             this.txtServerName.Size = new System.Drawing.Size(268, 21);
             this.txtServerName.StateCommon.ComboBox.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.txtServerName.TabIndex = 1;
-            this.txtServerName.Text = "kryptonComboBox1";
             // 
             // kryptonLabel3
             // 

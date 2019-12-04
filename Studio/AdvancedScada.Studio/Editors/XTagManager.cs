@@ -1194,13 +1194,13 @@ namespace AdvancedScada.Studio.Editors
         {
 
         }
-        
+
         private void btnButtonExportTags_Click(object sender, EventArgs e)
         {
             try
             {
                 saveFileDialog1.Filter = "Text Files (*.Text)|*.Text|All files (*.*)|*.*";
-              
+
                 DialogResult dr = saveFileDialog1.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
@@ -1211,10 +1211,10 @@ namespace AdvancedScada.Studio.Editors
 
                         sb.AppendLine($"public const string {(item.Key.Replace('.', '_'))} = {tgName} {item.Key.ToString()} {tgName}; ");
                     }
-                   
+
                     File.WriteAllText(saveFileDialog1.FileName, sb.ToString());
-                   
-                     IsDataChanged = false;
+
+                    IsDataChanged = false;
                 }
             }
             catch (Exception ex)

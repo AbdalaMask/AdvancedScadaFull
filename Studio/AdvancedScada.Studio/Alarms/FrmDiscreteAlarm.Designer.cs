@@ -70,9 +70,11 @@
             this.ColDevice,
             this.ColChannel});
             this.DGAlarmAnalog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DGAlarmAnalog.HideOuterBorders = true;
             this.DGAlarmAnalog.KryptonContextMenu = this.AlarmAnalogContext;
             this.DGAlarmAnalog.Location = new System.Drawing.Point(0, 48);
             this.DGAlarmAnalog.Name = "DGAlarmAnalog";
+            this.DGAlarmAnalog.RowHeadersVisible = false;
             this.DGAlarmAnalog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGAlarmAnalog.ShowCellErrors = false;
             this.DGAlarmAnalog.ShowRowErrors = false;

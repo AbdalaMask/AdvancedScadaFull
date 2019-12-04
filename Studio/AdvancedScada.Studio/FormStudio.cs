@@ -1,4 +1,5 @@
-﻿using AdvancedScada.Common;
+﻿using AdvancedScada.BaseService;
+using AdvancedScada.Common;
 using AdvancedScada.ImagePicker;
 using AdvancedScada.Management.BLManager;
 using AdvancedScada.Studio.Alarms;
@@ -18,8 +19,10 @@ using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using Microsoft.Win32;
 using System;
+using System.ServiceModel;
+using System.ServiceModel.Web;
 using System.Windows.Forms;
-
+using static AdvancedScada.Common.XCollection;
 namespace AdvancedScada.Studio
 {
     public partial class FormStudio : KryptonForm
@@ -46,7 +49,7 @@ namespace AdvancedScada.Studio
             if (Settings.Default.ApplicationSkinName != string.Empty && Settings.Default.ApplicationSkinName != null)
             {
                 var cpu = (PaletteModeManager)Enum.Parse(typeof(PaletteModeManager), Settings.Default["ApplicationSkinName"].ToString());
-             
+
                 kryptonManager1.GlobalPaletteMode = cpu;
             }
 
@@ -58,27 +61,27 @@ namespace AdvancedScada.Studio
             switch (kryptonRibbonGroupGallery1.SelectedIndex)
             {
                 case 0:
-                 
+
                     kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2010Blue;
                     break;
                 case 1:
-                  
+
                     kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2010Black;
                     break;
                 case 2:
-                   
+
                     kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2010Silver;
                     break;
                 case 3:
-                    
+
                     kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2007Black;
                     break;
                 case 4:
-                   
+
                     kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2007Blue;
                     break;
                 case 5:
-                   
+
                     kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office365Blue;
                     break;
                 default:
@@ -160,7 +163,7 @@ namespace AdvancedScada.Studio
         #region Navigator
 
 
-      
+
 
         private void ServiceItem_Click(object sender, EventArgs e)
         {
@@ -296,6 +299,97 @@ namespace AdvancedScada.Studio
 
 
         #region Form
+        public ServiceHost InitializeTags(bool Start = false)
+        {
+            ServiceHost host = null;
+            WebServiceHost objWebServiceHost = null;
+            try
+            {
+
+                eventConnectionState += new EventConnectionState(SetConnectionState);
+                new ServiceDriverHelper().InitializePLC();
+                host = new ServiceDriverHelper().InitializeReadServiceHttp();
+                objWebServiceHost = new ServiceDriverHelper().InitializeReadServiceWeb();
+                host.Opened += host_Opened;
+                host.Open();
+
+
+
+              
+                if (host.State == CommunicationState.Opened) txtStatus.Text = "The Server is running";
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            }
+
+
+            this.Text = "ServerUtils : AdvancedScada";
+            return host;
+        }
+        private ConnectionState _ConnState = ConnectionState.DISCONNECT;
+
+        private void SetConnectionState(ConnectionState connState, string msg)
+        {
+
+            try
+            {
+
+                if (!this.IsDisposed)
+                {
+                    this.Invoke((MethodInvoker)delegate ()
+                    {
+                        if (connState != _ConnState)
+                        {
+                            switch (connState)
+                            {
+                                case ConnectionState.CONNECT:
+                                    lblConnectState.Image = Properties.Resources.Connect16px;
+                                    lblConnectState.Text = "Connected";
+                                    break;
+                                case ConnectionState.DISCONNECT:
+                                    lblConnectState.Image = Properties.Resources.Disconnect16px;
+                                    lblConnectState.Text = "Disonnect";
+                                    break;
+                            }
+
+                            _ConnState = connState;
+                        }
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+            }
+
+        }
+        private void ServiceBase_eventChannelCount(int ChannelCount, bool IsNew)
+        {
+            if (IsNew)
+            {
+                var ChannelCount2 = int.Parse(txtChannelCount.Text);
+
+                txtChannelCount.Text = $"{ChannelCount2 + ChannelCount}";
+            }
+            else
+            {
+                var ChannelCount2 = int.Parse(txtChannelCount.Text);
+
+                txtChannelCount.Text = $"{ChannelCount2 - ChannelCount}";
+            }
+        }
+
+        public void host_Opened(object sender, EventArgs e)
+        {
+
+            txtStatus.Text = "The Server is running";
+        }
         private void FormStudio_Load(object sender, EventArgs e)
         {
             Left = SystemInformation.WorkingArea.Size.Width - Size.Width;
@@ -310,7 +404,15 @@ namespace AdvancedScada.Studio
                 Logger logger = new Logger { ID = Logger.Loggers.Count + 1, LogType = _logType, TIME = _time, MESSAGE = _message };
                 Logger.Loggers.Add(logger);
             };
+            try
+            {
+                EventChannelCount += ServiceBase_eventChannelCount;
+            }
+            catch (Exception ex)
+            {
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
 
+            }
             // Setup docking functionality
             KryptonDockingWorkspace w = kryptonDockingManager.ManageWorkspace(kryptonDockableWorkspace);
             kryptonDockingManager.ManageControl(panelFill, w);
@@ -333,7 +435,19 @@ namespace AdvancedScada.Studio
             if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile)) return;
             var chList = objChannelManager.GetChannels(xmlFile);
             if (chList.Count < 1) return;
-           
+          
+
+            try
+            {
+
+                 InitializeTags(true);
+
+            }
+            catch (Exception ex)
+            {
+
+                
+            }
         }
         private void FormStudio_FormClosing(object sender, FormClosingEventArgs e)
         {

@@ -35,7 +35,6 @@
             this.kryptonRibbonTab1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup3 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupGallery1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupGallery();
-            this.kryptonGalleryRange1 = new ComponentFactory.Krypton.Ribbon.KryptonGalleryRange();
             this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
             this.kryptonRibbonGroup1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
@@ -67,6 +66,13 @@
             this.ItemView = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.ItemExit = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.txtStatus = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.txtChannelCount = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.lblConnectState = new System.Windows.Forms.ToolStripLabel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.kryptonDockingManager = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
             this.TabForm = new ComponentFactory.Krypton.Docking.KryptonDockableNavigator();
@@ -75,7 +81,9 @@
             this.kryptonDockableWorkspace = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ThisNotificationPopup = new Tulpep.NotificationWindow.PopupNotifier();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TabForm)).BeginInit();
             this.TabForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelFill)).BeginInit();
@@ -95,6 +103,7 @@
             this.kryptonRibbon1.Name = "kryptonRibbon1";
             this.kryptonRibbon1.RibbonTabs.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab[] {
             this.kryptonRibbonTab1});
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = this.kryptonRibbonTab1;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1284, 115);
             this.kryptonRibbon1.TabIndex = 0;
@@ -118,8 +127,6 @@
             // 
             // kryptonRibbonGroupGallery1
             // 
-            this.kryptonRibbonGroupGallery1.DropButtonRanges.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonGalleryRange[] {
-            this.kryptonGalleryRange1});
             this.kryptonRibbonGroupGallery1.ImageList = this.imageListLarge;
             this.kryptonRibbonGroupGallery1.LargeItemCount = 1;
             this.kryptonRibbonGroupGallery1.MediumItemCount = 1;
@@ -347,11 +354,61 @@
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1,
+            this.txtStatus,
+            this.toolStripSeparator1,
+            this.toolStripLabel2,
+            this.txtChannelCount,
+            this.toolStripSeparator2,
+            this.toolStripLabel3,
+            this.lblConnectState});
             this.toolStrip1.Location = new System.Drawing.Point(0, 757);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1284, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(42, 22);
+            this.toolStripLabel1.Text = "Status:";
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(86, 22);
+            this.txtStatus.Text = "toolStripLabel2";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(87, 22);
+            this.toolStripLabel2.Text = "ChannelCount:";
+            // 
+            // txtChannelCount
+            // 
+            this.txtChannelCount.Name = "txtChannelCount";
+            this.txtChannelCount.Size = new System.Drawing.Size(13, 22);
+            this.txtChannelCount.Text = "0";
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(81, 22);
+            this.toolStripLabel3.Text = "ConnectState:";
+            // 
+            // lblConnectState
+            // 
+            this.lblConnectState.Name = "lblConnectState";
+            this.lblConnectState.Size = new System.Drawing.Size(86, 22);
+            this.lblConnectState.Text = "toolStripLabel4";
             // 
             // notifyIcon1
             // 
@@ -436,6 +493,11 @@
             this.ThisNotificationPopup.TitleFont = new System.Drawing.Font("Segoe UI", 9F);
             this.ThisNotificationPopup.TitleText = null;
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // FormStudio
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -455,6 +517,8 @@
             this.Load += new System.EventHandler(this.FormStudio_Load);
             this.Resize += new System.EventHandler(this.FormStudio_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TabForm)).EndInit();
             this.TabForm.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelFill)).EndInit();
@@ -485,7 +549,6 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton barCheckEnabele;
         private System.Windows.Forms.ImageList imageListSmall;
         private System.Windows.Forms.ImageList imageListLarge;
-        private ComponentFactory.Krypton.Ribbon.KryptonGalleryRange kryptonGalleryRange1;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup5;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple5;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton mExit;
@@ -514,6 +577,14 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton mTags;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton mMontorng;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton mHistoricalData;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripLabel txtStatus;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripLabel txtChannelCount;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripLabel lblConnectState;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 
