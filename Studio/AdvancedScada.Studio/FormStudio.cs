@@ -149,6 +149,7 @@ namespace AdvancedScada.Studio
                 }
             KryptonPage page = NewPage("MonitorForm", 0, new PLC_MonitorForm());
             TabForm.Pages.Add(page);
+            TabForm.SelectedPage = page;
         }
         private void mExit_Click(object sender, EventArgs e)
         {
@@ -178,6 +179,7 @@ namespace AdvancedScada.Studio
             }
             KryptonPage page = NewPage("ServerUtils", 0, new FormServerUtils());
             TabForm.Pages.Add(page);
+            TabForm.SelectedPage = page;
 
         }
 
@@ -193,6 +195,7 @@ namespace AdvancedScada.Studio
             }
             KryptonPage page = NewPage("FormLogging ", 0, new XtraFormLogging());
             TabForm.Pages.Add(page);
+            TabForm.SelectedPage = page;
         }
 
         private void TagManagerItem_Click(object sender, EventArgs e)
@@ -207,6 +210,7 @@ namespace AdvancedScada.Studio
             }
             KryptonPage page = NewPage("TagManager", 0, new XTagManager());
             TabForm.Pages.Add(page);
+            TabForm.SelectedPage = page;
         }
 
         private void SQLManagerItem_Click(object sender, EventArgs e)
@@ -219,6 +223,7 @@ namespace AdvancedScada.Studio
                 }
             KryptonPage page = NewPage("SQLMaster ", 0, new XSQLMaster());
             TabForm.Pages.Add(page);
+            TabForm.SelectedPage = page;
 
         }
 
@@ -234,6 +239,7 @@ namespace AdvancedScada.Studio
             }
             KryptonPage page = NewPage("SQL ", 0, new SQLFormCreate());
             TabForm.Pages.Add(page);
+            TabForm.SelectedPage = page;
         }
 
         private void SQLiteItem_Click(object sender, EventArgs e)
@@ -248,6 +254,7 @@ namespace AdvancedScada.Studio
             }
             KryptonPage page = NewPage("SQLite ", 0, new SQLiteFormCreate());
             TabForm.Pages.Add(page);
+            TabForm.SelectedPage = page;
         }
         #endregion
 
