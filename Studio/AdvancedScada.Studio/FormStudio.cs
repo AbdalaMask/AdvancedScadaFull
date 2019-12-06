@@ -566,7 +566,7 @@ namespace AdvancedScada.Studio
                     return;
                 }
             }
-            KryptonPage page = NewPage("FormMain ", 0, new FormMain());
+            KryptonPage page = NewPage("FormMain", 0, new FormMain());
             TabForm.Pages.Add(page);
             TabForm.SelectedPage = page;
         }
@@ -580,7 +580,7 @@ namespace AdvancedScada.Studio
                     return;
                 }
             }
-            KryptonPage page = NewPage("AlarmAnalog ", 0, new FrmAddAlarm());
+            KryptonPage page = NewPage("AlarmAnalog", 0, new FrmAddAlarm());
             TabForm.Pages.Add(page);
             TabForm.SelectedPage = page;
         }
@@ -595,7 +595,7 @@ namespace AdvancedScada.Studio
                     return;
                 }
             }
-            KryptonPage page = NewPage("AlarmClasses ", 0, new FrmAlarmClasses());
+            KryptonPage page = NewPage("AlarmClasses", 0, new FrmAlarmClasses());
             TabForm.Pages.Add(page);
             TabForm.SelectedPage = page;
         }
