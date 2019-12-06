@@ -33,7 +33,7 @@
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonRibbon1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbon();
             this.kryptonRibbonTab1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
-            this.kryptonRibbonGroup3 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
+            this.GrSkin = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupGallery1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupGallery();
             this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
             this.kryptonRibbonGroup1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
@@ -94,7 +94,7 @@
             // 
             // kryptonManager1
             // 
-            this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2007Blue;
+            this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2007Black;
             // 
             // kryptonRibbon1
             // 
@@ -109,7 +109,7 @@
             // kryptonRibbonTab1
             // 
             this.kryptonRibbonTab1.Groups.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup[] {
-            this.kryptonRibbonGroup3,
+            this.GrSkin,
             this.kryptonRibbonGroup1,
             this.kryptonRibbonGroup7,
             this.kryptonRibbonGroup2,
@@ -117,11 +117,11 @@
             this.kryptonRibbonGroup5});
             this.kryptonRibbonTab1.Text = "MainMenu";
             // 
-            // kryptonRibbonGroup3
+            // GrSkin
             // 
-            this.kryptonRibbonGroup3.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
+            this.GrSkin.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
             this.kryptonRibbonGroupGallery1});
-            this.kryptonRibbonGroup3.TextLine1 = "Skin";
+            this.GrSkin.TextLine1 = "Skin";
             // 
             // kryptonRibbonGroupGallery1
             // 
@@ -556,7 +556,7 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple6;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btnAlarmclasses;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btnAlarms;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup3;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup GrSkin;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup7;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple7;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton mTags;

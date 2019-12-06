@@ -15,6 +15,7 @@ using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Windows.Forms;
@@ -53,42 +54,26 @@ namespace AdvancedScada.Studio
 
                 kryptonManager1.GlobalPaletteMode = cpu;
             }
-
+            SkinNameList.AddRange(System.Enum.GetNames(typeof(PaletteModeManager)));
         }
         #region bar
         private string SkinName;
+        List<string > SkinNameList = new List<string >();
         private void kryptonRibbonGroupGallery1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (kryptonRibbonGroupGallery1.SelectedIndex)
+            try
             {
-                case 0:
+                kryptonManager1.GlobalPaletteMode = (PaletteModeManager)System.Enum.Parse(typeof(PaletteModeManager), $"{SkinNameList[kryptonRibbonGroupGallery1.SelectedIndex]}");
 
-                    kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2010Blue;
-                    break;
-                case 1:
-
-                    kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2010Black;
-                    break;
-                case 2:
-
-                    kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2010Silver;
-                    break;
-                case 3:
-
-                    kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2007Black;
-                    break;
-                case 4:
-
-                    kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2007Blue;
-                    break;
-                case 5:
-
-                    kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office365Blue;
-                    break;
-                default:
-                    break;
+                SkinName = kryptonManager1.GlobalPaletteMode.ToString();
+                GrSkin.TextLine1 = SkinName;
             }
-            SkinName = kryptonManager1.GlobalPaletteMode.ToString();
+            catch (Exception ex)
+            {
+
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
+            }
+
         }
 
         private void barCheckEnabele_Click(object sender, EventArgs e)
