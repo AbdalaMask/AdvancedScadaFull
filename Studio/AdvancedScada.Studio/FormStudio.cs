@@ -5,14 +5,10 @@ using AdvancedScada.Management.BLManager;
 using AdvancedScada.Studio.Alarms;
 using AdvancedScada.Studio.Config;
 using AdvancedScada.Studio.DB;
-using AdvancedScada.Studio.DB.SQL;
-using AdvancedScada.Studio.DB.SQLite;
 using AdvancedScada.Studio.Editors;
 using AdvancedScada.Studio.LinkToSQL;
-using AdvancedScada.Studio.Logging;
 using AdvancedScada.Studio.Monitor;
 using AdvancedScada.Studio.Properties;
-using AdvancedScada.Studio.Service;
 using AdvancedScada.Studio.Tools;
 using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Navigator;
@@ -144,7 +140,11 @@ namespace AdvancedScada.Studio
             foreach (Form form in Application.OpenForms)
                 if (form.GetType() == typeof(PLC_MonitorForm))
                 {
-                    form.Activate();
+                    foreach (var item in TabForm.Pages)
+                    {
+                        if (item.Text == "MonitorForm")
+                            TabForm.SelectedPage = item;
+                    }
                     return;
                 }
             KryptonPage page = NewPage("MonitorForm", 0, new PLC_MonitorForm());
@@ -165,46 +165,19 @@ namespace AdvancedScada.Studio
 
 
 
-
-        private void ServiceItem_Click(object sender, EventArgs e)
-        {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(FormServerUtils))
-                {
-                    form.Activate();
-
-                    return;
-                }
-            }
-            KryptonPage page = NewPage("ServerUtils", 0, new FormServerUtils());
-            TabForm.Pages.Add(page);
-            TabForm.SelectedPage = page;
-
-        }
-
-        private void LoggingItem_Click(object sender, EventArgs e)
-        {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(XtraFormLogging))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            KryptonPage page = NewPage("FormLogging ", 0, new XtraFormLogging());
-            TabForm.Pages.Add(page);
-            TabForm.SelectedPage = page;
-        }
-
+ 
         private void TagManagerItem_Click(object sender, EventArgs e)
         {
             foreach (Form form in Application.OpenForms)
             {
                 if (form.GetType() == typeof(XTagManager))
                 {
-                    form.Activate();
+                    foreach (var item in TabForm.Pages)
+                    {
+                      if(  item.Text == "TagManager")
+                             TabForm.SelectedPage = item;
+                    } 
+                   
                     return;
                 }
             }
@@ -218,44 +191,21 @@ namespace AdvancedScada.Studio
             foreach (Form form in Application.OpenForms)
                 if (form.GetType() == typeof(XSQLMaster))
                 {
-                    form.Activate();
+                    foreach (var item in TabForm.Pages)
+                    {
+                        if (item.Text == "SQLMaster")
+                            TabForm.SelectedPage = item;
+                    }
+
                     return;
                 }
-            KryptonPage page = NewPage("SQLMaster ", 0, new XSQLMaster());
+            KryptonPage page = NewPage("SQLMaster", 0, new XSQLMaster());
             TabForm.Pages.Add(page);
             TabForm.SelectedPage = page;
 
         }
 
-        private void SQLItem_Click(object sender, EventArgs e)
-        {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(SQLFormCreate))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            KryptonPage page = NewPage("SQL ", 0, new SQLFormCreate());
-            TabForm.Pages.Add(page);
-            TabForm.SelectedPage = page;
-        }
-
-        private void SQLiteItem_Click(object sender, EventArgs e)
-        {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(SQLiteFormCreate))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            KryptonPage page = NewPage("SQLite ", 0, new SQLiteFormCreate());
-            TabForm.Pages.Add(page);
-            TabForm.SelectedPage = page;
-        }
+    
         #endregion
 
         #region KryptonPage
@@ -406,11 +356,7 @@ namespace AdvancedScada.Studio
             Registry.SetValue("HKEY_CURRENT_USER\\Software\\FormConfiguration", "IPAddress", "localhost");
             Registry.SetValue("HKEY_CURRENT_USER\\Software\\FormConfiguration", "Port", "8080");
 
-            XCollection.EventscadaLogger += (_Id, _logType, _time, _message) =>
-            {
-                Logger logger = new Logger { ID = Logger.Loggers.Count + 1, LogType = _logType, TIME = _time, MESSAGE = _message };
-                Logger.Loggers.Add(logger);
-            };
+          
             try
             {
                 EventChannelCount += ServiceBase_eventChannelCount;
@@ -526,18 +472,7 @@ namespace AdvancedScada.Studio
                     }
                 }
             }
-            else if (e.Item.Text == "ServerUtils")
-            {
-                foreach (Form form in Application.OpenForms)
-                {
-                    if (form.GetType() == typeof(FormServerUtils))
-                    {
-
-                        Application.ExitThread();
-                    }
-                }
-            }
-
+            
 
         }
 
@@ -570,7 +505,11 @@ namespace AdvancedScada.Studio
             {
                 if (form.GetType() == typeof(FrmDiscreteAlarm))
                 {
-                    form.Activate();
+                    foreach (var item in TabForm.Pages)
+                    {
+                        if (item.Text == "DiscreteAlarm")
+                            TabForm.SelectedPage = item;
+                    }
                     return;
                 }
             }
