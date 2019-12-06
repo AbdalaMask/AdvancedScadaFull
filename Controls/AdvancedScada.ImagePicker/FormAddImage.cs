@@ -21,11 +21,18 @@ namespace ImagePicker
         }
         private List<string> DirSearch(string sDir)
         {
-            var files = new List<string>();
+            List<string> files = new List<string>();
             try
             {
-                foreach (var f in Directory.GetFiles(sDir)) files.Add(f);
-                foreach (var d in Directory.GetDirectories(sDir)) files.AddRange(DirSearch(d));
+                foreach (string f in Directory.GetFiles(sDir))
+                {
+                    files.Add(f);
+                }
+
+                foreach (string d in Directory.GetDirectories(sDir))
+                {
+                    files.AddRange(DirSearch(d));
+                }
             }
             catch (Exception excpt)
             {
@@ -41,7 +48,7 @@ namespace ImagePicker
 
         private void BtnSelectedPath_Click(object sender, EventArgs e)
         {
-            var SelectedPath = string.Empty;
+            string SelectedPath = string.Empty;
             imageListBoxControl.Items.Clear();
             if (fbd.ShowDialog() == DialogResult.OK)
             {
@@ -65,13 +72,13 @@ namespace ImagePicker
         {
             try
             {
-                var newName = Path.GetExtension(imageListBoxControl.SelectedItem.ToString());
+                string newName = Path.GetExtension(imageListBoxControl.SelectedItem.ToString());
                 if (newName.EndsWith(".svg"))
                 {
 
                     SVGSample.svg.SVGParser.MaximumSize = new Size(1000, 700);
-                    var svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(imageListBoxControl.SelectedItem.ToString());
-                    var bitmap = SVGSample.svg.SVGParser.GetBitmapFromSVG(imageListBoxControl.SelectedItem.ToString());
+                    Svg.SvgDocument svgDocument = SVGSample.svg.SVGParser.GetSvgDocument(imageListBoxControl.SelectedItem.ToString());
+                    Bitmap bitmap = SVGSample.svg.SVGParser.GetBitmapFromSVG(imageListBoxControl.SelectedItem.ToString());
                     Pic.Image = bitmap;
                 }
                 else
@@ -83,7 +90,7 @@ namespace ImagePicker
             {
             }
         }
-        public static void UpdateResourceFile(Hashtable data, String path)
+        public static void UpdateResourceFile(Hashtable data, string path)
         {
             Hashtable resourceEntries = new Hashtable();
 
@@ -95,21 +102,28 @@ namespace ImagePicker
                 foreach (DictionaryEntry d in reader)
                 {
                     if (d.Value == null)
+                    {
                         resourceEntries.Add(d.Key.ToString(), string.Empty);
+                    }
                     else
+                    {
                         resourceEntries.Add(d.Key.ToString(), d.Value.ToString());
+                    }
                 }
                 reader.Close();
             }
 
             //Modify resources here...
-            foreach (String key in data.Keys)
+            foreach (string key in data.Keys)
             {
                 if (!resourceEntries.ContainsKey(key))
                 {
 
-                    String value = data[key].ToString();
-                    if (value == null) value = string.Empty;
+                    string value = data[key].ToString();
+                    if (value == null)
+                    {
+                        value = string.Empty;
+                    }
 
                     resourceEntries.Add(key, value);
                 }
@@ -118,7 +132,7 @@ namespace ImagePicker
             //Write the combined resource file
             ResXResourceWriter resourceWriter = new ResXResourceWriter(path);
 
-            foreach (String key in resourceEntries.Keys)
+            foreach (string key in resourceEntries.Keys)
             {
                 resourceWriter.AddResource(key, resourceEntries[key]);
             }
@@ -131,25 +145,25 @@ namespace ImagePicker
             int i = 0;
             rsxw = new ResXResourceWriter(string.Format(CategoryName, txtCategoryName.Text));
 
-            foreach (var file in dirs)
+            foreach (string file in dirs)
             {
                 if (file.EndsWith(".jpg") || file.EndsWith(".png") || file.EndsWith(".bmp") || file.EndsWith(".BMP") ||
                     file.EndsWith(".JPG") || file.EndsWith(".gif") || file.EndsWith(".wmf") || file.EndsWith(".svg") || file.EndsWith(".Xaml"))
                 {
 
-                    var newName = $"{ txtCategoryName.Text}_" + i++;
+                    string newName = $"{ txtCategoryName.Text}_" + i++;
                     if (file.EndsWith(".svg") || file.EndsWith(".Xaml"))
                     {
                         try
                         {
 
 
-                            var xmlDoc = new XmlDocument
+                            XmlDocument xmlDoc = new XmlDocument
                             {
                                 XmlResolver = null
                             };
                             xmlDoc.Load(file);
-                            var GETXML = xmlDoc.InnerXml;
+                            string GETXML = xmlDoc.InnerXml;
 
 
                             //  Pic.Image = bitmap;
@@ -157,7 +171,7 @@ namespace ImagePicker
                         }
                         catch (Exception ex)
                         {
-                            EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                            EventscadaException?.Invoke(GetType().Name, ex.Message);
                             continue;
                         }
 

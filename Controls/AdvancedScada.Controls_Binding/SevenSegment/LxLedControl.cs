@@ -37,17 +37,17 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         public LxLedControl()
         {
             // double buffered
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             // support transplant background
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             // default color
-            this.ForeColor = Color.LightGreen;
-            this.BackColor = Color.Transparent;
+            ForeColor = Color.LightGreen;
+            BackColor = Color.Transparent;
             // event handler
-            this.Click += new EventHandler(EvClick);
-            this.KeyDown += new KeyEventHandler(EvKeyDown);
-            this.GotFocus += new EventHandler(EvFocus);
-            this.LostFocus += new EventHandler(EvFocus);
+            Click += new EventHandler(EvClick);
+            KeyDown += new KeyEventHandler(EvKeyDown);
+            GotFocus += new EventHandler(EvFocus);
+            LostFocus += new EventHandler(EvFocus);
         }
 
         /// <summary>
@@ -89,11 +89,11 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
             segmentPath = (GraphicsPath)(m_CachedPaths[nIndex - 1].Clone());
             // offset path to desired position
             offsetMatrix = new Matrix();
-            offsetMatrix.Translate((float)rectBound.X, (float)rectBound.Y);
+            offsetMatrix.Translate(rectBound.X, rectBound.Y);
             segmentPath.Transform(offsetMatrix);
             // clip drawing(optimize drawing)
             segmentBrush = new SolidBrush(colSegment);
-            g.Clip = new Region(this.ClientRectangle);
+            g.Clip = new Region(ClientRectangle);
             g.FillPath(segmentBrush, segmentPath);
             // clear resources
             segmentBrush.Dispose();
@@ -775,7 +775,9 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
             for (int i = 0; i < 8; ++i)
             {
                 if (m_CachedPaths[i] == null)
+                {
                     m_CachedPaths[i] = new GraphicsPath();
+                }
             }
             // top '-'
             pathPointCollection[0].X = segmentWidth * bevelRate + segmentInterval;
@@ -792,7 +794,10 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
             pathPointCollection[5].Y = segmentWidth;
             m_CachedPaths[0].AddPolygon(pathPointCollection);
             m_CachedPaths[0].CloseFigure();
-            if (UseItalicStyle) m_CachedPaths[0].Transform(mx);
+            if (UseItalicStyle)
+            {
+                m_CachedPaths[0].Transform(mx);
+            }
 
             // upper right '|'
             pathPointCollection[0].X = rectBound.Width - segmentWidth;
@@ -809,7 +814,10 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
             pathPointCollection[5].Y = (rectBound.Height >> 1) - segmentWidth * 0.5f - segmentInterval;
             m_CachedPaths[1].AddPolygon(pathPointCollection);
             m_CachedPaths[1].CloseFigure();
-            if (UseItalicStyle) m_CachedPaths[1].Transform(mx);
+            if (UseItalicStyle)
+            {
+                m_CachedPaths[1].Transform(mx);
+            }
 
             // bottom right '|'
             pathPointCollection[0].X = rectBound.Width - segmentWidth;
@@ -826,7 +834,10 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
             pathPointCollection[5].Y = rectBound.Height - segmentWidth - segmentInterval;
             m_CachedPaths[2].AddPolygon(pathPointCollection);
             m_CachedPaths[2].CloseFigure();
-            if (UseItalicStyle) m_CachedPaths[2].Transform(mx);
+            if (UseItalicStyle)
+            {
+                m_CachedPaths[2].Transform(mx);
+            }
 
             // bottom '-'
             pathPointCollection[0].X = segmentWidth * bevelRate + segmentInterval;
@@ -843,7 +854,10 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
             pathPointCollection[5].Y = rectBound.Height;
             m_CachedPaths[3].AddPolygon(pathPointCollection);
             m_CachedPaths[3].CloseFigure();
-            if (UseItalicStyle) m_CachedPaths[3].Transform(mx);
+            if (UseItalicStyle)
+            {
+                m_CachedPaths[3].Transform(mx);
+            }
 
             // bottom left '|'
             pathPointCollection[0].X = 0f;
@@ -860,7 +874,10 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
             pathPointCollection[5].Y = rectBound.Height - segmentInterval - segmentWidth * bevelRate * 2;
             m_CachedPaths[4].AddPolygon(pathPointCollection);
             m_CachedPaths[4].CloseFigure();
-            if (UseItalicStyle) m_CachedPaths[4].Transform(mx);
+            if (UseItalicStyle)
+            {
+                m_CachedPaths[4].Transform(mx);
+            }
 
             // upper left '|'
             pathPointCollection[0].X = 0f;
@@ -877,7 +894,10 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
             pathPointCollection[5].Y = (rectBound.Height >> 1) - segmentWidth * 0.5f - segmentInterval;
             m_CachedPaths[5].AddPolygon(pathPointCollection);
             m_CachedPaths[5].CloseFigure();
-            if (UseItalicStyle) m_CachedPaths[5].Transform(mx);
+            if (UseItalicStyle)
+            {
+                m_CachedPaths[5].Transform(mx);
+            }
 
             // draw med '-'
             pathPointCollection[0].X = (segmentWidth * 0.5f) + segmentInterval;
@@ -894,7 +914,10 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
             pathPointCollection[5].Y = (rectBound.Height >> 1) + segmentWidth * 0.5f;
             m_CachedPaths[6].AddPolygon(pathPointCollection);
             m_CachedPaths[6].CloseFigure();
-            if (UseItalicStyle) m_CachedPaths[6].Transform(mx);
+            if (UseItalicStyle)
+            {
+                m_CachedPaths[6].Transform(mx);
+            }
 
             // draw dot
             pathDotCollection[0].X = 0f;
@@ -907,7 +930,10 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
             pathDotCollection[3].Y = rectBound.Height - segmentWidth;
             m_CachedPaths[7].AddPolygon(pathDotCollection);
             m_CachedPaths[7].CloseFigure();
-            if (UseItalicStyle) m_CachedPaths[7].Transform(mx);
+            if (UseItalicStyle)
+            {
+                m_CachedPaths[7].Transform(mx);
+            }
             // ok change state
             m_bIsCacheBuild = true;
         }
@@ -916,7 +942,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         /// </summary>
         private void DrawChars(Graphics g, float segmentWidth, float segmentInterval)
         {
-            Rectangle clientRect = this.ClientRectangle;
+            Rectangle clientRect = ClientRectangle;
             Rectangle subRect = new Rectangle();
             int subRectWidth = (int)(clientRect.Height * WIDTHHEIGHTRATIO);
             int subRectHeight = clientRect.Height;
@@ -927,9 +953,13 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
             if (m_enumAlign == Alignment.Right)
             {
                 if (Text.Length >= totalElements)
+                {
                     beginIndex_right = 0;
+                }
                 else
+                {
                     beginIndex_right = totalElements - Text.Length;
+                }
             }
             for (int i = 0; i < totalElements; ++i)
             {
@@ -975,7 +1005,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         /// <param name="segmentInterval">[out] the interval between segments.</param>
         private void CalculateDrawingParams(out float segmentWidth, out float segmentInterval)
         {
-            float subRectWidth = this.ClientRectangle.Height * WIDTHHEIGHTRATIO;
+            float subRectWidth = ClientRectangle.Height * WIDTHHEIGHTRATIO;
             segmentWidth = subRectWidth * m_fWidthSegWidthRatio;
             segmentInterval = subRectWidth * m_fWidthIntervalRatio;
         }
@@ -1024,8 +1054,10 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
             g.FillPath(br, roundRect);
             if (bDrawBorder)
             {
-                Pen pen = new Pen(colBorder);
-                pen.Width = nBorderWidth;
+                Pen pen = new Pen(colBorder)
+                {
+                    Width = nBorderWidth
+                };
                 g.DrawPath(pen, roundRect);
                 pen.Dispose();
             }
@@ -1078,7 +1110,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         private void DrawBackground(Graphics g)
         {
             Rectangle rect = ClientRectangle;
-            Color borderColor = this.Focused ? m_colFocusedBorderColour : m_colBorderColour;
+            Color borderColor = Focused ? m_colFocusedBorderColour : m_colBorderColour;
             if (m_bRoundRect)
             {
                 DrawRoundRect(g, rect, m_nCornerRadius, m_colCustomBk1, m_colCustomBk2,
@@ -1087,7 +1119,10 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
             else
             {
                 if (m_colCustomBk1 == Color.Transparent)
+                {
                     return;
+                }
+
                 DrawNormalRect(g, rect, m_colCustomBk1, m_colCustomBk2,
                     borderColor, m_nBorderWidth, m_bGradientBackground, m_nBorderWidth != 0);
             }
@@ -1163,7 +1198,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         /// <summary>
         /// The cached path information
         /// </summary>
-        private GraphicsPath[] m_CachedPaths = new GraphicsPath[8];
+        private readonly GraphicsPath[] m_CachedPaths = new GraphicsPath[8];
         /// <summary>
         /// Indicate whether the cached painting information is built.
         /// </summary>
@@ -1253,14 +1288,14 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(false)]
         public bool UseItalicStyle
         {
-            get
-            {
-                return m_italicMode;
-            }
+            get => m_italicMode;
             set
             {
                 if (m_italicMode == value)
+                {
                     return;
+                }
+
                 m_italicMode = value;
                 // rebuild cache
                 m_bIsCacheBuild = false;
@@ -1280,14 +1315,14 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(false)]
         public bool UseSmoothingMode
         {
-            get
-            {
-                return m_smoothingMode;
-            }
+            get => m_smoothingMode;
             set
             {
                 if (m_smoothingMode == value)
+                {
                     return;
+                }
+
                 m_smoothingMode = value;
                 if (!m_bIsInitializing)
                 {
@@ -1305,14 +1340,14 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(1)]
         public int BorderWidth
         {
-            get
-            {
-                return m_nBorderWidth;
-            }
+            get => m_nBorderWidth;
             set
             {
                 if (m_nBorderWidth == value)
+                {
                     return;
+                }
+
                 if (value >= 0 && value <= 5)
                 {
                     m_nBorderWidth = value;
@@ -1337,14 +1372,14 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(typeof(System.Drawing.Color), "Gray")]
         public Color BorderColour
         {
-            get
-            {
-                return m_colBorderColour;
-            }
+            get => m_colBorderColour;
             set
             {
                 if (value == m_colBorderColour)
+                {
                     return;
+                }
+
                 m_colBorderColour = value;
                 if (!m_bIsInitializing)
                 {
@@ -1361,14 +1396,14 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(typeof(System.Drawing.Color), "Cyan")]
         public Color FocusedBorderColour
         {
-            get
-            {
-                return m_colFocusedBorderColour;
-            }
+            get => m_colFocusedBorderColour;
             set
             {
                 if (value == m_colFocusedBorderColour)
+                {
                     return;
+                }
+
                 m_colFocusedBorderColour = value;
                 if (!m_bIsInitializing)
                 {
@@ -1385,16 +1420,16 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(50)]
         public byte HighlightOpaque
         {
-            get
-            {
-                return m_nHighlightOpaque;
-            }
+            get => m_nHighlightOpaque;
             set
             {
                 if (value <= 100)
                 {
                     if (m_nHighlightOpaque == value)
+                    {
                         return;
+                    }
+
                     m_nHighlightOpaque = value;
                     if (!m_bIsInitializing)
                     {
@@ -1416,14 +1451,14 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(false)]
         public bool ShowHighlight
         {
-            get
-            {
-                return m_bShowHighlight;
-            }
+            get => m_bShowHighlight;
             set
             {
                 if (m_bShowHighlight == value)
+                {
                     return;
+                }
+
                 m_bShowHighlight = value;
                 if (!m_bIsInitializing)
                 {
@@ -1440,16 +1475,16 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(5)]
         public int CornerRadius
         {
-            get
-            {
-                return m_nCornerRadius;
-            }
+            get => m_nCornerRadius;
             set
             {
                 if (value >= 1 && value <= 10)
                 {
                     if (m_nCornerRadius == value)
+                    {
                         return;
+                    }
+
                     m_nCornerRadius = value;
                     if (m_bIsInitializing)
                     {
@@ -1471,14 +1506,14 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(false)]
         public bool GradientBackground
         {
-            get
-            {
-                return m_bGradientBackground;
-            }
+            get => m_bGradientBackground;
             set
             {
                 if (m_bGradientBackground == value)
+                {
                     return;
+                }
+
                 m_bGradientBackground = value;
                 if (!m_bIsInitializing)
                 {
@@ -1495,10 +1530,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(typeof(System.Drawing.Color), "System.Drawing.Color.Black")]
         public Color BackColour_1
         {
-            get
-            {
-                return m_colCustomBk1;
-            }
+            get => m_colCustomBk1;
             set
             {
                 m_colCustomBk1 = value;
@@ -1517,10 +1549,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(typeof(System.Drawing.Color), "System.Drawing.Color.DimGray")]
         public Color BackColour_2
         {
-            get
-            {
-                return m_colCustomBk2;
-            }
+            get => m_colCustomBk2;
             set
             {
                 m_colCustomBk2 = value;
@@ -1539,14 +1568,14 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(false)]
         public bool RoundCorner
         {
-            get
-            {
-                return m_bRoundRect;
-            }
+            get => m_bRoundRect;
             set
             {
                 if (m_bRoundRect == value)
+                {
                     return;
+                }
+
                 m_bRoundRect = value;
                 if (!m_bIsInitializing)
                 {
@@ -1563,10 +1592,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(40)]
         public int SegmentIntervalRatio
         {
-            get
-            {
-                return (int)((m_fWidthIntervalRatio - 0.01f) * 1000);
-            }
+            get => (int)((m_fWidthIntervalRatio - 0.01f) * 1000);
             set
             {
                 if (value >= 0 && value <= 100)
@@ -1594,10 +1620,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(typeof(LxLedControl.Alignment), "Left")]
         public Alignment TextAlignment
         {
-            get
-            {
-                return m_enumAlign;
-            }
+            get => m_enumAlign;
             set
             {
                 m_enumAlign = value;
@@ -1616,11 +1639,9 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(50)]
         public int SegmentWidthRatio
         {
-            get
-            {
+            get =>
                 // :-(
-                return (int)((m_fWidthSegWidthRatio - 0.1f) * 500);
-            }
+                (int)((m_fWidthSegWidthRatio - 0.1f) * 500);
             set
             {
                 if (value >= 0 && value <= 100)
@@ -1648,10 +1669,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(5)]
         public int TotalCharCount
         {
-            get
-            {
-                return m_nCharacterNumber;
-            }
+            get => m_nCharacterNumber;
             set
             {
                 if (value >= 2)
@@ -1677,10 +1695,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(0.25)]
         public float BevelRate
         {
-            get
-            {
-                return m_fBevelRate * 2;
-            }
+            get => m_fBevelRate * 2;
             set
             {
                 if (value >= 0 && value <= 1)
@@ -1708,14 +1723,14 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue(typeof(Color), "System.Color.DimGray")]
         public Color FadedColour
         {
-            get
-            {
-                return m_colFadedColour;
-            }
+            get => m_colFadedColour;
             set
             {
                 if (m_colFadedColour == value)
+                {
                     return;
+                }
+
                 m_colFadedColour = value;
                 if (!m_bIsInitializing)
                 {
@@ -1732,10 +1747,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         DefaultValue("HELLO")]
         public override string Text
         {
-            get
-            {
-                return base.Text;
-            }
+            get => base.Text;
             set
             {
                 base.Text = value.ToUpper();
@@ -1751,14 +1763,8 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         [Browsable(false)]
         public override Image BackgroundImage
         {
-            get
-            {
-                return base.BackgroundImage;
-            }
-            set
-            {
-                base.BackgroundImage = null;
-            }
+            get => base.BackgroundImage;
+            set => base.BackgroundImage = null;
         }
         /// <summary>
         /// Does not support background image layout
@@ -1766,10 +1772,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         [Browsable(false)]
         public override ImageLayout BackgroundImageLayout
         {
-            get
-            {
-                return base.BackgroundImageLayout;
-            }
+            get => base.BackgroundImageLayout;
             set
             {
                 // do nothing
@@ -1781,10 +1784,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         [Browsable(false)]
         public override Font Font
         {
-            get
-            {
-                return base.Font;
-            }
+            get => base.Font;
             set
             {
                 // do nothing
@@ -1811,7 +1811,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
 
         private void EvClick(object sender, EventArgs e)
         {
-            this.Focus();
+            Focus();
         }
 
         private void EvKeyDown(object sender, KeyEventArgs e)
@@ -1821,7 +1821,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
                 // the clip-board is not always stable
                 try
                 {
-                    Clipboard.SetText(this.Text);
+                    Clipboard.SetText(Text);
                 }
                 catch
                 {
@@ -1832,7 +1832,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
 
         private void EvFocus(object sender, EventArgs e)
         {
-            this.Invalidate();
+            Invalidate();
         }
 
         #endregion

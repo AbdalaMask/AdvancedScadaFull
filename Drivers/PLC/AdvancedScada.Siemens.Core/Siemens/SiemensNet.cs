@@ -11,16 +11,16 @@ namespace AdvancedScada.Siemens.Core.Siemens
 {
     public class SiemensNet : IPLCS7Adapter
     {
-        private SiemensS7Net siemensTcpNet = null;
-        private SiemensPLCS siemensPLCSelected = SiemensPLCS.S1200;
+        private readonly SiemensS7Net siemensTcpNet = null;
+        private readonly SiemensPLCS siemensPLCSelected = SiemensPLCS.S1200;
         private const int DELAY = 10;
 
         public bool _IsConnected = false;
         public byte station;
-        private SiemensPLCS cpu;
-        private string iPAddress;
-        private short rack;
-        private short slot;
+        private readonly SiemensPLCS cpu;
+        private readonly string iPAddress;
+        private readonly short rack;
+        private readonly short slot;
 
         public bool IsConnected { get => _IsConnected; set => _IsConnected = value; }
         public byte Station { get => station; set => station = value; }
@@ -49,13 +49,13 @@ namespace AdvancedScada.Siemens.Core.Siemens
         {
             if (!System.Net.IPAddress.TryParse(iPAddress, out System.Net.IPAddress address))
             {
-                EventscadaException?.Invoke(this.GetType().Name, DemoUtils.IpAddressInputWrong);
+                EventscadaException?.Invoke(GetType().Name, DemoUtils.IpAddressInputWrong);
                 return false;
             }
 
 
 
-            var stopwatch = Stopwatch.StartNew();
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             try
             {
@@ -75,18 +75,18 @@ namespace AdvancedScada.Siemens.Core.Siemens
 
                     if (connect.IsSuccess)
                     {
-                        EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedSuccess);
+                        EventscadaException?.Invoke(GetType().Name, StringResources.Language.ConnectedSuccess);
                         IsConnected = true;
                     }
                     else
                     {
-                        EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedFailed);
+                        EventscadaException?.Invoke(GetType().Name, StringResources.Language.ConnectedFailed);
                     }
                     return IsConnected;
                 }
                 catch (Exception ex)
                 {
-                    EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                    EventscadaException?.Invoke(GetType().Name, ex.Message);
                 }
 
 
@@ -97,7 +97,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
             catch (SocketException ex)
             {
                 stopwatch.Stop();
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
 
             }
             return IsConnected;
@@ -113,7 +113,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
             }
             catch (SocketException ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return IsConnected;
         }
@@ -149,56 +149,56 @@ namespace AdvancedScada.Siemens.Core.Siemens
             if (typeof(TValue) == typeof(bool))
             {
 
-                var b = ReadCoil(address, length);
+                object b = ReadCoil(address, length);
                 return (TValue[])b;
             }
             if (typeof(TValue) == typeof(ushort))
             {
-                var b = siemensTcpNet.ReadUInt16(address, length).Content;
+                ushort[] b = siemensTcpNet.ReadUInt16(address, length).Content;
 
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(int))
             {
-                var b = siemensTcpNet.ReadInt32(address, length).Content;
+                int[] b = siemensTcpNet.ReadInt32(address, length).Content;
 
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(uint))
             {
-                var b = siemensTcpNet.ReadUInt32(address, length).Content;
+                uint[] b = siemensTcpNet.ReadUInt32(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(long))
             {
-                var b = siemensTcpNet.ReadInt64(address, length).Content;
+                long[] b = siemensTcpNet.ReadInt64(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(ulong))
             {
-                var b = siemensTcpNet.ReadUInt64(address, length).Content;
+                ulong[] b = siemensTcpNet.ReadUInt64(address, length).Content;
                 return (TValue[])(object)b;
             }
 
             if (typeof(TValue) == typeof(short))
             {
-                var b = siemensTcpNet.ReadInt16(address, length).Content;
+                short[] b = siemensTcpNet.ReadInt16(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(double))
             {
-                var b = siemensTcpNet.ReadDouble(address, length).Content;
+                double[] b = siemensTcpNet.ReadDouble(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(float))
             {
-                var b = siemensTcpNet.ReadFloat(address, length).Content;
+                float[] b = siemensTcpNet.ReadFloat(address, length).Content;
                 return (TValue[])(object)b;
 
             }
             if (typeof(TValue) == typeof(string))
             {
-                var b = siemensTcpNet.ReadString(address, length).Content;
+                string b = siemensTcpNet.ReadString(address, length).Content;
                 return (TValue[])(object)b;
             }
 
@@ -223,7 +223,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
             //if (read.IsSuccess)
             //    // and decode it
             //   FromBytes(structType, read.Content);
-            var infos = structType.Tags;
+            System.Collections.Generic.List<Tag> infos = structType.Tags;
             lock (structType)
             {
 
@@ -306,7 +306,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
         {
             double numBytes = 0.0;
 
-            var infos = structType.Tags;
+            System.Collections.Generic.List<Tag> infos = structType.Tags;
             foreach (Tag info in infos)
             {
                 switch (info.DataType)
@@ -326,34 +326,49 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.UShort:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         numBytes += 2;
                         break;
                     case DriverBase.DataTypes.Int:
                     case DriverBase.DataTypes.UInt:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         numBytes += 4;
                         break;
                     case DriverBase.DataTypes.Long:
                     case DriverBase.DataTypes.ULong:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         numBytes += 4;
                         break;
                     case DriverBase.DataTypes.Float:
                     case DriverBase.DataTypes.Double:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         numBytes += 4;
                         break;
                     case DriverBase.DataTypes.String:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         numBytes += 2;
                         break;
                     default:
@@ -373,17 +388,21 @@ namespace AdvancedScada.Siemens.Core.Siemens
         public object FromBytes(DataBlock structType, byte[] bytes)
         {
             if (bytes == null)
+            {
                 return null;
+            }
 
             if (bytes.Length != GetStructSize(structType))
+            {
                 return null;
+            }
 
             // and decode it
             int bytePos = 0;
             int bitPos = 0;
             double numBytes = 0.0;
 
-            var infos = structType.Tags;
+            System.Collections.Generic.List<Tag> infos = structType.Tags;
 
             foreach (Tag info in infos)
             {
@@ -396,7 +415,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.Bit:
                         // get the value
                         bytePos = (int)Math.Floor(numBytes);
-                        bitPos = (int)((numBytes - (double)bytePos) / 0.125);
+                        bitPos = (int)((numBytes - bytePos) / 0.125);
                         if ((bytes[bytePos] & (int)Math.Pow(2, bitPos)) != 0)
                         {
                             info.Value = true;
@@ -422,7 +441,10 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.Short:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         info.Value = siemensTcpNet.ByteTransform.TransInt16(bytes, (int)numBytes);
                         info.TimeSpan = DateTime.Now;
                         numBytes += 2;
@@ -430,7 +452,10 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.UShort:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         info.Value = siemensTcpNet.ByteTransform.TransUInt16(bytes, (int)numBytes);
                         info.TimeSpan = DateTime.Now;
                         numBytes += 2;
@@ -438,7 +463,10 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.Int:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         info.Value = siemensTcpNet.ByteTransform.TransInt32(bytes, (int)numBytes);
                         info.TimeSpan = DateTime.Now;
                         numBytes += 4;
@@ -446,7 +474,10 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.UInt:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         info.Value = siemensTcpNet.ByteTransform.TransUInt32(bytes, (int)numBytes);
                         info.TimeSpan = DateTime.Now;
                         numBytes += 4;
@@ -454,7 +485,10 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.Long:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         info.Value = siemensTcpNet.ByteTransform.TransInt64(bytes, (int)numBytes);
                         info.TimeSpan = DateTime.Now;
                         numBytes += 4;
@@ -462,7 +496,10 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.ULong:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         info.Value = siemensTcpNet.ByteTransform.TransUInt64(bytes, (int)numBytes);
                         info.TimeSpan = DateTime.Now;
                         numBytes += 4;

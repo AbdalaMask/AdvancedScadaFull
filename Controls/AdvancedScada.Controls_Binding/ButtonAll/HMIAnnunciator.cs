@@ -23,7 +23,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressValue
         {
-            get { return m_PLCAddressValue; }
+            get => m_PLCAddressValue;
             set
             {
                 if (m_PLCAddressValue != value)
@@ -34,8 +34,12 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressValue) || string.IsNullOrWhiteSpace(m_PLCAddressValue) ||
-                            Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
+                            Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -59,10 +63,13 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressHighlightX
         {
-            get { return _PLCAddressHighlight; }
+            get => _PLCAddressHighlight;
             set
             {
-                if (_PLCAddressHighlight != value) _PLCAddressHighlight = value;
+                if (_PLCAddressHighlight != value)
+                {
+                    _PLCAddressHighlight = value;
+                }
             }
         }
 
@@ -76,7 +83,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressText
         {
-            get { return m_PLCAddressText; }
+            get => m_PLCAddressText;
             set
             {
                 if (m_PLCAddressText != value)
@@ -87,8 +94,12 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                     try
                     {
                         if (string.IsNullOrEmpty(m_PLCAddressText) || string.IsNullOrWhiteSpace(m_PLCAddressText) ||
-                            Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressText], "Value", true);
+                            Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressText], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception e1)
@@ -108,7 +119,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressVisible
         {
-            get { return m_PLCAddressVisible; }
+            get => m_PLCAddressVisible;
             set
             {
                 if (m_PLCAddressVisible != value)
@@ -117,8 +128,12 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                     try
                     {
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) || string.IsNullOrWhiteSpace(m_PLCAddressVisible) ||
-                            Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                            Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -138,7 +153,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressEnabled
         {
-            get { return m_PLCAddressEnabled; }
+            get => m_PLCAddressEnabled;
             set
             {
                 if (m_PLCAddressEnabled != value)
@@ -148,8 +163,12 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressEnabled) || string.IsNullOrWhiteSpace(m_PLCAddressEnabled) ||
-                            Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Enabled", TagCollectionClient.Tags[m_PLCAddressEnabled], "Value", true);
+                            Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Enabled", TagCollectionClient.Tags[m_PLCAddressEnabled], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -171,18 +190,21 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressSelectTextAlternate
         {
-            get { return m_PLCAddressSelectTextAlternate; }
+            get => m_PLCAddressSelectTextAlternate;
             set
             {
-                if (m_PLCAddressSelectTextAlternate != value) m_PLCAddressSelectTextAlternate = value;
+                if (m_PLCAddressSelectTextAlternate != value)
+                {
+                    m_PLCAddressSelectTextAlternate = value;
+                }
             }
         }
 
         [DefaultValue("0")]
         public override string Text
         {
-            get { return base.Text; }
-            set { base.Text = value; }
+            get => base.Text;
+            set => base.Text = value;
         }
         //******************************************************************************************
         //* Use the base control's text property and make it visible as a property on the designer
@@ -192,8 +214,13 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
             try
             {
                 if (OutputType == OutputType.MomentarySet)
+                {
                     Utilities.Write(PLCAddressClick, "0");
-                else if (OutputType == OutputType.MomentaryReset) Utilities.Write(PLCAddressClick, "1");
+                }
+                else if (OutputType == OutputType.MomentaryReset)
+                {
+                    Utilities.Write(PLCAddressClick, "1");
+                }
             }
             catch (Exception ex)
             {
@@ -214,11 +241,14 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         [Category("PLC Properties")]
         public int MinimumHoldTime
         {
-            get { return m_MinimumHoldTime; }
+            get => m_MinimumHoldTime;
             set
             {
                 m_MinimumHoldTime = value;
-                if (value > 0) MinHoldTimer.Interval = value;
+                if (value > 0)
+                {
+                    MinHoldTimer.Interval = value;
+                }
             }
         }
 
@@ -231,11 +261,14 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         [Category("PLC Properties")]
         public int MaximumHoldTime
         {
-            get { return m_MaximumHoldTime; }
+            get => m_MaximumHoldTime;
             set
             {
                 m_MaximumHoldTime = value;
-                if (value > 0) MaxHoldTimer.Interval = value;
+                if (value > 0)
+                {
+                    MaxHoldTimer.Interval = value;
+                }
             }
         }
 
@@ -254,7 +287,10 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         {
             MinHoldTimer.Enabled = false;
             HoldTimeMet = true;
-            if (!MouseIsDown) ReleaseValue();
+            if (!MouseIsDown)
+            {
+                ReleaseValue();
+            }
         }
 
         private void MaxHoldTimer_Tick(object sender, EventArgs e)
@@ -269,16 +305,18 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
             try
             {
                 MouseIsDown = false;
-                if (this.Enabled)
+                if (Enabled)
                 {
-                    this.Invalidate();
+                    Invalidate();
                 }
                 if (PLCAddressClick != null && string.Compare(PLCAddressClick, string.Empty) != 0)
+                {
                     if (HoldTimeMet || m_MinimumHoldTime <= 0)
                     {
                         MaxHoldTimer.Enabled = false;
                         ReleaseValue();
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -295,19 +333,34 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
 
             if (PLCAddressClick != null && string.Compare(PLCAddressClick, string.Empty) != 0 && Enabled &&
                 PLCAddressClick != null)
+            {
                 try
                 {
                     if (OutputType == OutputType.MomentarySet)
                     {
                         Utilities.Write(PLCAddressClick, "1");
-                        if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
-                        if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
+                        if (m_MinimumHoldTime > 0)
+                        {
+                            MinHoldTimer.Enabled = true;
+                        }
+
+                        if (m_MaximumHoldTime > 0)
+                        {
+                            MaxHoldTimer.Enabled = true;
+                        }
                     }
                     else if (OutputType == OutputType.MomentaryReset)
                     {
                         Utilities.Write(PLCAddressClick, "0");
-                        if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
-                        if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
+                        if (m_MinimumHoldTime > 0)
+                        {
+                            MinHoldTimer.Enabled = true;
+                        }
+
+                        if (m_MaximumHoldTime > 0)
+                        {
+                            MaxHoldTimer.Enabled = true;
+                        }
                     }
 
                     else if (OutputType == OutputType.SetTrue)
@@ -322,19 +375,22 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
 
                     else if (OutputType == OutputType.Toggle)
                     {
-                        var CurrentValue = Convert.ToBoolean(Value);
+                        bool CurrentValue = Convert.ToBoolean(Value);
                         if (CurrentValue)
+                        {
                             Utilities.Write(PLCAddressClick, "0");
+                        }
                         else
+                        {
                             Utilities.Write(PLCAddressClick, "1");
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
                     Utilities.DisplayError(this, ex.Message);
                 }
-
-
+            }
         }
 
         #endregion
@@ -363,7 +419,10 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                 }
 
                 //* Save the text to return to
-                if (!ErrorDisplayTime.Enabled) OriginalText = Text;
+                if (!ErrorDisplayTime.Enabled)
+                {
+                    OriginalText = Text;
+                }
 
                 ErrorDisplayTime.Enabled = true;
 

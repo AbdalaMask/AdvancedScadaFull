@@ -17,7 +17,10 @@ namespace AdvancedScada.Management.SQLManager
         {
             lock (mutex)
             {
-                if (_instance == null) _instance = new TableManager();
+                if (_instance == null)
+                {
+                    _instance = new TableManager();
+                }
             }
 
             return _instance;
@@ -31,10 +34,17 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                if (db == null) throw new NullReferenceException("The Table is null reference exception");
-                var fDv = IsExisted(dv, db);
+                if (db == null)
+                {
+                    throw new NullReferenceException("The Table is null reference exception");
+                }
+
+                Table fDv = IsExisted(dv, db);
                 if (fDv != null)
+                {
                     throw new Exception($"Table name: '{db.TableName}' is existed");
+                }
+
                 dv.Tables.Add(db);
             }
             catch (Exception ex)
@@ -52,11 +62,19 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                if (db == null) throw new NullReferenceException("The Table is null reference exception");
-                var fCh = IsExisted(dv, db);
+                if (db == null)
+                {
+                    throw new NullReferenceException("The Table is null reference exception");
+                }
+
+                Table fCh = IsExisted(dv, db);
                 if (fCh != null)
+                {
                     throw new Exception($"Table name: '{db.TableName}' is existed");
-                foreach (var item in dv.Tables)
+                }
+
+                foreach (Table item in dv.Tables)
+                {
                     if (item.TableId == db.TableId)
                     {
                         item.TableId = db.TableId;
@@ -65,6 +83,7 @@ namespace AdvancedScada.Management.SQLManager
 
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -81,8 +100,12 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                var result = GetTablekId(dv, dbId);
-                if (result == null) throw new KeyNotFoundException("Table Id is not found exception");
+                Table result = GetTablekId(dv, dbId);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("Table Id is not found exception");
+                }
+
                 dv.Tables.Remove(result);
             }
             catch (Exception ex)
@@ -100,8 +123,12 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                var result = GetByTableName(dv, dbName);
-                if (result == null) throw new KeyNotFoundException("Table name is not found exception");
+                Table result = GetByTableName(dv, dbName);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("Table name is not found exception");
+                }
+
                 dv.Tables.Remove(result);
             }
             catch (Exception ex)
@@ -119,13 +146,19 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                if (db == null) throw new NullReferenceException("The Table is null reference exception");
-                foreach (var item in dv.Tables)
+                if (db == null)
+                {
+                    throw new NullReferenceException("The Table is null reference exception");
+                }
+
+                foreach (Table item in dv.Tables)
+                {
                     if (item.TableId == db.TableId)
                     {
                         dv.Tables.Remove(item);
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -144,12 +177,14 @@ namespace AdvancedScada.Management.SQLManager
             Table result = null;
             try
             {
-                foreach (var item in dv.Tables)
+                foreach (Table item in dv.Tables)
+                {
                     if (item.TableId != db.TableId && item.TableName.Equals(db.TableName))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -170,12 +205,14 @@ namespace AdvancedScada.Management.SQLManager
             Table result = null;
             try
             {
-                foreach (var item in ch.Tables)
+                foreach (Table item in ch.Tables)
+                {
                     if (item.TableId == chId)
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -196,12 +233,14 @@ namespace AdvancedScada.Management.SQLManager
             Table result = null;
             try
             {
-                foreach (var item in ch.Tables)
+                foreach (Table item in ch.Tables)
+                {
                     if (item.TableName.Equals(chName))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -218,16 +257,18 @@ namespace AdvancedScada.Management.SQLManager
         /// <returns>Danh sách gói dữ liệu</returns>
         public static List<Table> GetTables(XmlNode dvNode)
         {
-            var dbList = new List<Table>();
+            List<Table> dbList = new List<Table>();
             try
             {
                 foreach (XmlNode dbNote in dvNode)
                 {
-                    var db = new Table();
-                    db.TableId = int.Parse(dbNote.Attributes[Table_ID].Value);
-                    db.TableName = dbNote.Attributes[Table_NAME].Value;
-                    db.Description = dbNote.Attributes[Description].Value;
-                    db.Columns = ColumnManager.GetTags(dbNote);
+                    Table db = new Table
+                    {
+                        TableId = int.Parse(dbNote.Attributes[Table_ID].Value),
+                        TableName = dbNote.Attributes[Table_NAME].Value,
+                        Description = dbNote.Attributes[Description].Value,
+                        Columns = ColumnManager.GetTags(dbNote)
+                    };
                     dbList.Add(db);
                 }
             }

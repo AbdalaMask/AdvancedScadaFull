@@ -17,11 +17,11 @@ namespace AdvancedScada.Studio.Alarms
         {
             objAlarmManager.Alarms.Clear();
             objAlarmManager.XmlPath = xmlPath;
-            var chList = objAlarmManager.GetAlarms(xmlPath);
+            System.Collections.Generic.List<ClassAlarm> chList = objAlarmManager.GetAlarms(xmlPath);
 
 
             DGAlarmAnalog.Rows.Clear();
-            foreach (var tg in chList)
+            foreach (ClassAlarm tg in chList)
             {
                 string[] row = { tg.Name, string.Format("{0}", tg.AlarmText), string.Format("{0}", tg.AlarmCalss), tg.Value, tg.TriggerTeg, tg.DataBlock, tg.Device, tg.Channel };
 
@@ -32,8 +32,12 @@ namespace AdvancedScada.Studio.Alarms
         private void FrmDiscreteAlarm_Load(object sender, System.EventArgs e)
         {
             objAlarmManager = AlarmManagers.GetAlarmManager();
-            var xmlFile = objAlarmManager.ReadKey(AlarmManagers.XML_NAME_DEFAULT);
-            if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile)) return;
+            string xmlFile = objAlarmManager.ReadKey(AlarmManagers.XML_NAME_DEFAULT);
+            if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile))
+            {
+                return;
+            }
+
             InitializeData(xmlFile);
         }
 
@@ -43,11 +47,11 @@ namespace AdvancedScada.Studio.Alarms
             {
 
 
-                var saveFileDialog = new SaveFileDialog { Filter = "Xml Files (*.xml)|*.xml|All files (*.*)|*.*", FileName = "XML_NAME_DEFAULT" };
-                var dr = saveFileDialog.ShowDialog();
+                SaveFileDialog saveFileDialog = new SaveFileDialog { Filter = "Xml Files (*.xml)|*.xml|All files (*.*)|*.*", FileName = "XML_NAME_DEFAULT" };
+                DialogResult dr = saveFileDialog.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    var xmlPath = saveFileDialog.FileName;
+                    string xmlPath = saveFileDialog.FileName;
                     objAlarmManager.CreatFile(xmlPath);
 
 
@@ -57,7 +61,7 @@ namespace AdvancedScada.Studio.Alarms
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -67,8 +71,8 @@ namespace AdvancedScada.Studio.Alarms
             {
                 //ItemSQLServer.Enabled = true;
 
-                var openFileDialog = new OpenFileDialog { Filter = "Xml Files (*.xml)|*.xml|All files (*.*)|*.*", FileName = "config" };
-                var result = openFileDialog.ShowDialog();
+                OpenFileDialog openFileDialog = new OpenFileDialog { Filter = "Xml Files (*.xml)|*.xml|All files (*.*)|*.*", FileName = "config" };
+                DialogResult result = openFileDialog.ShowDialog();
                 if (result == DialogResult.OK) // Test result.
                 {
 
@@ -80,7 +84,7 @@ namespace AdvancedScada.Studio.Alarms
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -95,7 +99,7 @@ namespace AdvancedScada.Studio.Alarms
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -105,7 +109,7 @@ namespace AdvancedScada.Studio.Alarms
 
 
 
-            var tgFrm = new FrmAddAlarm();
+            FrmAddAlarm tgFrm = new FrmAddAlarm();
             tgFrm.eventAlarmChanged += (Ar, isNew) =>
             {
                 objAlarmManager.AddAlarm(Ar);
@@ -126,14 +130,14 @@ namespace AdvancedScada.Studio.Alarms
             if (DGAlarmAnalog.SelectedRows.Count == 1)
             {
                 string tgName = (string)DGAlarmAnalog.SelectedRows[0].Cells[0].Value;
-                var tgCurrent = objAlarmManager.GetByAlarmName(tgName);
+                ClassAlarm tgCurrent = objAlarmManager.GetByAlarmName(tgName);
 
-                var tgFrm = new FrmAddAlarm(tgCurrent);
+                FrmAddAlarm tgFrm = new FrmAddAlarm(tgCurrent);
                 tgFrm.eventAlarmChanged += (Ar, isNew) =>
                 {
                     objAlarmManager.UpdateAlarm(Ar);
                     DGAlarmAnalog.Rows.Clear();
-                    foreach (var tg in objAlarmManager.Alarms)
+                    foreach (ClassAlarm tg in objAlarmManager.Alarms)
                     {
                         string[] row = { tg.Name, string.Format("{0}", tg.AlarmText), string.Format("{0}", tg.AlarmCalss), tg.Value, tg.TriggerTeg, tg.DataBlock, tg.Device, tg.Channel };
 

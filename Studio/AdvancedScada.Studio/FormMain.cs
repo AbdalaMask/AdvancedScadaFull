@@ -26,7 +26,7 @@ namespace AdvancedScada.Studio
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            var CPUName = Convert.ToString(Registry.GetValue("HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\SYSTEM\\CentralProcessor\\0", "ProcessorNameString", null));
+            string CPUName = Convert.ToString(Registry.GetValue("HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\SYSTEM\\CentralProcessor\\0", "ProcessorNameString", null));
 
             Label14.Text = CPUName;
             lblcname.Text = Environment.MachineName;
@@ -59,12 +59,33 @@ namespace AdvancedScada.Studio
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (ProgressBar1.Value < cpu1) ProgressBar1.Value += 1;
-            else if (ProgressBar1.Value > cpu1) ProgressBar1.Value -= 1;
-            if (ProgressBar2.Value < ram) ProgressBar2.Value += 1;
-            else if (ProgressBar2.Value > ram) ProgressBar2.Value -= 1;
-            if (ProgressBar3.Value < cpu2) ProgressBar3.Value += 1;
-            else if (ProgressBar3.Value > cpu2) ProgressBar3.Value -= 1;
+            if (ProgressBar1.Value < cpu1)
+            {
+                ProgressBar1.Value += 1;
+            }
+            else if (ProgressBar1.Value > cpu1)
+            {
+                ProgressBar1.Value -= 1;
+            }
+
+            if (ProgressBar2.Value < ram)
+            {
+                ProgressBar2.Value += 1;
+            }
+            else if (ProgressBar2.Value > ram)
+            {
+                ProgressBar2.Value -= 1;
+            }
+
+            if (ProgressBar3.Value < cpu2)
+            {
+                ProgressBar3.Value += 1;
+            }
+            else if (ProgressBar3.Value > cpu2)
+            {
+                ProgressBar3.Value -= 1;
+            }
+
             Label3.Text = ProgressBar1.Value + "%";
             Label4.Text = ProgressBar2.Value + "%";
             Label6.Text = ProgressBar3.Value + "%";

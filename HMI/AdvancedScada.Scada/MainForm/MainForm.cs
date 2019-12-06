@@ -49,9 +49,9 @@ namespace AdvancedScada.HMI.MainForm
                 }
                 client = ClientDriverHelper.GetInstance().GetReadService();
                 client.Connect(XCollection.CURRENT_MACHINE);
-                var tags = ClientDriverHelper.GetInstance().GetReadServiceWeb().GetCollection();
+                Dictionary<string, DriverBase.Devices.Tag> tags = ClientDriverHelper.GetInstance().GetReadServiceWeb().GetCollection();
 
-                foreach (var item in tags)
+                foreach (KeyValuePair<string, DriverBase.Devices.Tag> item in tags)
                 {
 
                 }
@@ -59,7 +59,7 @@ namespace AdvancedScada.HMI.MainForm
             catch (CommunicationException ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             InitializeComponent();
         }
@@ -71,7 +71,7 @@ namespace AdvancedScada.HMI.MainForm
 
 
 
-            var readValue = Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\Software\\TestApp", "Name", null);
+            object readValue = Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\Software\\TestApp", "Name", null);
             TankMixWeightRC[0] = thnk_rec_1;
             TankMixWeightRC[1] = thnk_rec_2;
             TankMixWeightRC[2] = thnk_rec_3;
@@ -104,7 +104,11 @@ namespace AdvancedScada.HMI.MainForm
 
             try
             {
-                if (readValue == null) return;
+                if (readValue == null)
+                {
+                    return;
+                }
+
                 LBL_BatchName.Text = readValue.ToString();
                 DataTable dt = new DataTable();
 
@@ -134,7 +138,7 @@ namespace AdvancedScada.HMI.MainForm
             catch (CommunicationException ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -167,7 +171,7 @@ namespace AdvancedScada.HMI.MainForm
                 }
                 catch (Exception ex)
                 {
-                    EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                    EventscadaException?.Invoke(GetType().Name, ex.Message);
                 }
             }
             else
@@ -189,7 +193,7 @@ namespace AdvancedScada.HMI.MainForm
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
 
@@ -285,7 +289,7 @@ namespace AdvancedScada.HMI.MainForm
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return TankMixWeightFinel;
@@ -333,7 +337,7 @@ namespace AdvancedScada.HMI.MainForm
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
         }

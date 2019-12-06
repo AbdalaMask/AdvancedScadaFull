@@ -15,7 +15,7 @@ namespace AdvancedScada.BaseService
     public class ReadServiceWeb : IReadServiceWeb
     {
         private readonly ChannelService objChannelManager;
-        IODriver driverHelper = null;
+        private IODriver driverHelper = null;
         public ReadServiceWeb()
         {
             objChannelManager = ChannelService.GetChannelManager();
@@ -23,7 +23,7 @@ namespace AdvancedScada.BaseService
         private IODriver GetDriver(string ChannelTypes)
         {
             IODriver DriverHelper = null;
-            var objFunctions = GetIODriver.GetFunctions();
+            GetIODriver objFunctions = GetIODriver.GetFunctions();
             DriverHelper =
                        objFunctions.GetAssembly($@"\AdvancedScada.{ChannelTypes}.Core.dll",
                            $"AdvancedScada.{ChannelTypes}.Core.IODriverHelper");
@@ -63,15 +63,18 @@ namespace AdvancedScada.BaseService
             try
             {
 
-                if (objChannelManager == null) return 0;
-
-                var strArrays = tagName.Split('.');
-                var str = $"{strArrays[0]}.{strArrays[1]}";
-                foreach (var Channels in objChannelManager.Channels)
+                if (objChannelManager == null)
                 {
-                    foreach (var dv in Channels.Devices)
+                    return 0;
+                }
+
+                string[] strArrays = tagName.Split('.');
+                string str = $"{strArrays[0]}.{strArrays[1]}";
+                foreach (Channel Channels in objChannelManager.Channels)
+                {
+                    foreach (Device dv in Channels.Devices)
                     {
-                        var bEquals = $"{Channels.ChannelName}.{dv.DeviceName}".Equals(str);
+                        bool bEquals = $"{Channels.ChannelName}.{dv.DeviceName}".Equals(str);
                         if (bEquals)
                         {
                             driverHelper = GetDriver(Channels.ChannelTypes);
@@ -84,7 +87,7 @@ namespace AdvancedScada.BaseService
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
                 throw new FaultException<IFaultException>(new IFaultException(ex.Message));
             }
             return 1;

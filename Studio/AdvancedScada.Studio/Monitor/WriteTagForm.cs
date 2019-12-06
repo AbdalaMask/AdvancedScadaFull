@@ -31,7 +31,10 @@ namespace AdvancedScada.Studio.Monitor
             // This call is required by the designer.
             InitializeComponent();
 
-            if (_SelectedTag == null) return;
+            if (_SelectedTag == null)
+            {
+                return;
+            }
             // txtAddress.Items.AddRange(_SelectedTag);
 
             this.client = client;
@@ -41,7 +44,9 @@ namespace AdvancedScada.Studio.Monitor
         {
             //   client = DriverHelper.GetInstance().GetReadService();
             if (client != null)
+            {
                 client.WriteTag(txtAddress.Text, txtValue.Text);
+            }
 
             Thread.Sleep(50);
 

@@ -14,14 +14,14 @@ namespace AdvancedScada.Utils.Compression
         {
             byte[] compressedBytes;
 
-            using (var uncompressedStream = new MemoryStream(Encoding.UTF8.GetBytes(uncompressedString)))
+            using (MemoryStream uncompressedStream = new MemoryStream(Encoding.UTF8.GetBytes(uncompressedString)))
             {
-                var compressedStream = new MemoryStream();
+                MemoryStream compressedStream = new MemoryStream();
 
                 // setting the leaveOpen parameter to true to ensure that compressedStream will not be closed when compressorStream is disposed
                 // this allows compressorStream to close and flush its buffers to compressedStream and guarantees that compressedStream.ToArray() can be called afterward
                 // although MSDN documentation states that ToArray() can be called on a closed MemoryStream, this approach avoids relying on that very odd behavior should it ever change
-                using (var compressorStream = new DeflateStream(compressedStream, CompressionLevel.Fastest, true))
+                using (DeflateStream compressorStream = new DeflateStream(compressedStream, CompressionLevel.Fastest, true))
                 {
                     uncompressedStream.CopyTo(compressorStream);
                 }
@@ -40,11 +40,11 @@ namespace AdvancedScada.Utils.Compression
         {
             byte[] decompressedBytes;
 
-            var compressedStream = new MemoryStream(Convert.FromBase64String(compressedString));
+            MemoryStream compressedStream = new MemoryStream(Convert.FromBase64String(compressedString));
 
-            using (var decompressorStream = new DeflateStream(compressedStream, CompressionMode.Decompress))
+            using (DeflateStream decompressorStream = new DeflateStream(compressedStream, CompressionMode.Decompress))
             {
-                using (var decompressedStream = new MemoryStream())
+                using (MemoryStream decompressedStream = new MemoryStream())
                 {
                     decompressorStream.CopyTo(decompressedStream);
 
@@ -65,14 +65,14 @@ namespace AdvancedScada.Utils.Compression
         {
             byte[] compressedBytes;
 
-            using (var uncompressedStream = new MemoryStream(Encoding.UTF8.GetBytes(uncompressedString)))
+            using (MemoryStream uncompressedStream = new MemoryStream(Encoding.UTF8.GetBytes(uncompressedString)))
             {
-                var compressedStream = new MemoryStream();
+                MemoryStream compressedStream = new MemoryStream();
 
                 // setting the leaveOpen parameter to true to ensure that compressedStream will not be closed when compressorStream is disposed
                 // this allows compressorStream to close and flush its buffers to compressedStream and guarantees that compressedStream.ToArray() can be called afterward
                 // although MSDN documentation states that ToArray() can be called on a closed MemoryStream, this approach avoids relying on that very odd behavior should it ever change
-                using (var compressorStream = new DeflateStream(compressedStream, CompressionLevel.Fastest, true))
+                using (DeflateStream compressorStream = new DeflateStream(compressedStream, CompressionLevel.Fastest, true))
                 {
                     uncompressedStream.CopyTo(compressorStream);
                 }
@@ -92,11 +92,11 @@ namespace AdvancedScada.Utils.Compression
         {
             byte[] decompressedBytes;
 
-            var compressedStream = new MemoryStream(Convert.FromBase64String(compressedString));
+            MemoryStream compressedStream = new MemoryStream(Convert.FromBase64String(compressedString));
 
-            using (var decompressorStream = new DeflateStream(compressedStream, CompressionMode.Decompress))
+            using (DeflateStream decompressorStream = new DeflateStream(compressedStream, CompressionMode.Decompress))
             {
-                using (var decompressedStream = new MemoryStream())
+                using (MemoryStream decompressedStream = new MemoryStream())
                 {
                     decompressorStream.CopyTo(decompressedStream);
 

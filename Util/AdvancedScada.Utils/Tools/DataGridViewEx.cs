@@ -8,7 +8,9 @@ namespace AdvancedScada.Utils.Tools
         {
             // if not remote desktop session then enable double-buffering optimization
             if (!System.Windows.Forms.SystemInformation.TerminalServerSession)
+            {
                 DoubleBuffered = true;
+            }
         }
     }
 }

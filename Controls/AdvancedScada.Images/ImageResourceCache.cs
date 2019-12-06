@@ -14,8 +14,8 @@ namespace AdvancedScada.Images
     public class ImageResourceCache
     {
         private static readonly object mutex = new object();
-        readonly Dictionary<string, Stream> resources;
-        readonly IDictionary<string, Stream> resourcesByFileName;
+        private readonly Dictionary<string, Stream> resources;
+        private readonly IDictionary<string, Stream> resourcesByFileName;
         private static ImageResourceCache _instance;
         public ImageResourceCache()
         {
@@ -26,24 +26,26 @@ namespace AdvancedScada.Images
         {
             lock (mutex)
             {
-                if (_instance == null) _instance = new ImageResourceCache();
+                if (_instance == null)
+                {
+                    _instance = new ImageResourceCache();
+                }
             }
 
             return _instance;
         }
         public ResXResourceReader GetImages(string resourceName)
         {
-            if (!this.resources.ContainsKey(resourceName))
+            if (!resources.ContainsKey(resourceName))
             {
                 return null;
             }
-            ResXResourceReader rsxr = new ResXResourceReader(this.resources[resourceName]);
+            ResXResourceReader rsxr = new ResXResourceReader(resources[resourceName]);
             return rsxr;
         }
         public Stream GetResource(string resourceName)
         {
-            Stream result = null;
-            return (resourceName != null) && resources.TryGetValue(resourceName, out result) ? result : null;
+            return (resourceName != null) && resources.TryGetValue(resourceName, out Stream result) ? result : null;
         }
         internal ICollection GetKeys() { return resources.Keys; }
         public string[] GetAllResourceKeys()
@@ -51,16 +53,20 @@ namespace AdvancedScada.Images
             return resources.Keys.Count == 0 ? null : resources.Keys.ToArray();
         }
 
-        static ImageResourceCache defaultCore = null;
+        private static ImageResourceCache defaultCore = null;
         public static ImageResourceCache Default(string ImageType)
         {
 
-            if (defaultCore == null) defaultCore = DoLoad(ImageType);
+            if (defaultCore == null)
+            {
+                defaultCore = DoLoad(ImageType);
+            }
+
             return defaultCore;
 
         }
 
-        readonly static char[] splitCharacters = new char[] { '\\', '/' };
+        private static readonly char[] splitCharacters = new char[] { '\\', '/' };
         [System.Runtime.CompilerServices.MethodImpl(256)]
         public static string[] Split(string key)
         {
@@ -85,7 +91,10 @@ namespace AdvancedScada.Images
                         category = parts[1];
                         key = parts[0] + @"\" + parts[parts.Length - 1];
                         if (!cache.resourcesByFileName.ContainsKey(key))
+                        {
                             cache.resourcesByFileName.Add(key, (Stream)e.Value);
+                        }
+
                         continue;
                     }
 
@@ -99,7 +108,7 @@ namespace AdvancedScada.Images
 
         public static readonly Assembly ImagesAssembly = Assembly.GetExecutingAssembly();
         [SecuritySafeCritical]
-        static ResourceReader DoLoadResourceReader()
+        private static ResourceReader DoLoadResourceReader()
         {
             List<string> resources = new List<string>(AssemblyBuilder.GetExecutingAssembly().GetManifestResourceNames());
             return new ResourceReader(ImagesAssembly.GetManifestResourceStream(ResourceName));

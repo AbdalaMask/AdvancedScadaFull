@@ -19,7 +19,10 @@ namespace AdvancedScada.Management.BLManager
         {
             lock (mutex)
             {
-                if (_instance == null) _instance = new TagService();
+                if (_instance == null)
+                {
+                    _instance = new TagService();
+                }
             }
 
             return _instance;
@@ -33,13 +36,17 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                if (tg == null) throw new NullReferenceException("The Tag is null reference exception");
+                if (tg == null)
+                {
+                    throw new NullReferenceException("The Tag is null reference exception");
+                }
+
                 IsExisted(db, tg);
                 db.Tags.Add(tg);
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -52,9 +59,14 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                if (tg == null) throw new NullReferenceException("The Tag is null reference exception");
+                if (tg == null)
+                {
+                    throw new NullReferenceException("The Tag is null reference exception");
+                }
+
                 IsExisted(db, tg);
-                foreach (var item in db.Tags)
+                foreach (Tag item in db.Tags)
+                {
                     if (item.TagId == tg.TagId)
                     {
                         item.TagId = tg.TagId;
@@ -64,10 +76,11 @@ namespace AdvancedScada.Management.BLManager
 
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -80,13 +93,17 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                var result = GetByTagId(db, tgId);
-                if (result == null) throw new KeyNotFoundException("Tag Id is not found exception");
+                Tag result = GetByTagId(db, tgId);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("Tag Id is not found exception");
+                }
+
                 db.Tags.Remove(result);
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -99,13 +116,17 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                var result = GetByTagName(db, dbName);
-                if (result == null) throw new KeyNotFoundException("Tag name is not found exception");
+                Tag result = GetByTagName(db, dbName);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("Tag name is not found exception");
+                }
+
                 db.Tags.Remove(result);
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -118,17 +139,23 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                if (tg == null) throw new NullReferenceException("The Tag is null reference exception");
-                foreach (var item in db.Tags)
+                if (tg == null)
+                {
+                    throw new NullReferenceException("The Tag is null reference exception");
+                }
+
+                foreach (Tag item in db.Tags)
+                {
                     if (item.TagId == tg.TagId)
                     {
                         db.Tags.Remove(item);
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -143,17 +170,22 @@ namespace AdvancedScada.Management.BLManager
             Tag result = null;
             try
             {
-                foreach (var item in db.Tags)
+                foreach (Tag item in db.Tags)
                 {
                     if (item.TagId != tg.TagId && item.TagName.Equals(tg.TagName))
+                    {
                         throw new InvalidOperationException($"Tag name: '{tg.TagName}' is existed");
+                    }
+
                     if (item.TagId != tg.TagId && item.Address.Equals(tg.Address))
+                    {
                         throw new InvalidOperationException($"Tag address: '{tg.Address}' is existed");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -170,16 +202,18 @@ namespace AdvancedScada.Management.BLManager
             Tag result = null;
             try
             {
-                foreach (var item in db.Tags)
+                foreach (Tag item in db.Tags)
+                {
                     if (item.TagId == tgId)
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -196,16 +230,18 @@ namespace AdvancedScada.Management.BLManager
             Tag result = null;
             try
             {
-                foreach (var item in db.Tags)
+                foreach (Tag item in db.Tags)
+                {
                     if (item.TagName.Equals(tgName))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -223,16 +259,18 @@ namespace AdvancedScada.Management.BLManager
             Tag result = null;
             try
             {
-                foreach (var item in db.Tags)
+                foreach (Tag item in db.Tags)
+                {
                     if (item.Address.Equals(tgAddress))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -245,26 +283,28 @@ namespace AdvancedScada.Management.BLManager
         /// <returns>Danh sách gói dữ liệu</returns>
         public List<Tag> GetTags(XmlNode dbNote)
         {
-            var dbList = new List<Tag>();
+            List<Tag> dbList = new List<Tag>();
             try
             {
                 foreach (XmlNode item in dbNote)
                 {
-                    var tg = new Tag();
-                    tg.ChannelId = int.Parse(dbNote.Attributes[CHANNEL_ID].Value);
-                    tg.DeviceId = int.Parse(dbNote.Attributes[DEVICE_ID].Value);
-                    tg.DataBlockId = int.Parse(dbNote.Attributes[DATABLOCK_ID].Value);
-                    tg.TagId = int.Parse(item.Attributes[TAG_ID].Value);
-                    tg.TagName = item.Attributes[TAG_NAME].Value;
-                    tg.Address = item.Attributes[ADDRESS].Value;
-                    tg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", item.Attributes[DATA_TYPE].Value));
-                    tg.Description = item.Attributes[ChannelService.DESCRIPTION].Value;
+                    Tag tg = new Tag
+                    {
+                        ChannelId = int.Parse(dbNote.Attributes[CHANNEL_ID].Value),
+                        DeviceId = int.Parse(dbNote.Attributes[DEVICE_ID].Value),
+                        DataBlockId = int.Parse(dbNote.Attributes[DATABLOCK_ID].Value),
+                        TagId = int.Parse(item.Attributes[TAG_ID].Value),
+                        TagName = item.Attributes[TAG_NAME].Value,
+                        Address = item.Attributes[ADDRESS].Value,
+                        DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", item.Attributes[DATA_TYPE].Value)),
+                        Description = item.Attributes[ChannelService.DESCRIPTION].Value
+                    };
                     dbList.Add(tg);
                 }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return dbList;

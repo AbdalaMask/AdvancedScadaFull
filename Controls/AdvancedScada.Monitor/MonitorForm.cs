@@ -64,17 +64,23 @@ namespace AdvancedScada.Monitor
                     List<TreeNode> tgList = new List<TreeNode>();
                     foreach (DataBlock db in dv.DataBlocks)
                     {
-                        TreeNode dbNode = new TreeNode(db.DataBlockName);
-                        dbNode.StateImageIndex = 2;
+                        TreeNode dbNode = new TreeNode(db.DataBlockName)
+                        {
+                            StateImageIndex = 2
+                        };
                         tgList.Add(dbNode);
                     }
 
-                    TreeNode dvNode = new TreeNode(dv.DeviceName, tgList.ToArray());
-                    dvNode.StateImageIndex = 1;
+                    TreeNode dvNode = new TreeNode(dv.DeviceName, tgList.ToArray())
+                    {
+                        StateImageIndex = 1
+                    };
                     dvList.Add(dvNode);
                 }
-                TreeNode chNode = new TreeNode(ch.ChannelName, dvList.ToArray());
-                chNode.StateImageIndex = 0;
+                TreeNode chNode = new TreeNode(ch.ChannelName, dvList.ToArray())
+                {
+                    StateImageIndex = 0
+                };
                 treeViewSI.Nodes.Add(chNode);
             }
         }
@@ -82,7 +88,11 @@ namespace AdvancedScada.Monitor
         {
             try
             {
-                if (treeViewSI.SelectedNode == null) return;
+                if (treeViewSI.SelectedNode == null)
+                {
+                    return;
+                }
+
                 int Level = treeViewSI.SelectedNode.Level;
                 string selectedNode = treeViewSI.SelectedNode.Text;
                 DataBlock dbCurrent = null; //Node: DataBlock
@@ -141,13 +151,13 @@ namespace AdvancedScada.Monitor
                     {
                         case "SerialPort":
 
-                            var dis = (DISerialPort)chCurrent;
+                            DISerialPort dis = (DISerialPort)chCurrent;
                             EventPvGridChannelGet?.Invoke(dis, true);
 
                             break;
                         case "Ethernet":
 
-                            var die = (DIEthernet)chCurrent;
+                            DIEthernet die = (DIEthernet)chCurrent;
                             EventPvGridChannelGet?.Invoke(die, true);
 
                             break;
@@ -179,7 +189,7 @@ namespace AdvancedScada.Monitor
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
         private KryptonPage NewUserPropertyGrid()
@@ -189,10 +199,12 @@ namespace AdvancedScada.Monitor
         private KryptonPage NewPages(string name, int image, Control content)
         {
             // Create new page with title and image
-            KryptonPage p = new KryptonPage();
-            p.Text = name;
-            p.TextTitle = name;
-            p.TextDescription = name;
+            KryptonPage p = new KryptonPage
+            {
+                Text = name,
+                TextTitle = name,
+                TextDescription = name
+            };
 
 
             // Add the control for display inside the page
@@ -215,8 +227,12 @@ namespace AdvancedScada.Monitor
             objDeviceManager = DeviceService.GetDeviceManager();
             objDataBlockManager = DataBlockService.GetDataBlockManager();
             objTagManager = TagService.GetTagManager();
-            var xmlFile = objChannelManager.ReadKey(objChannelManager.XML_NAME_DEFAULT);
-            if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile)) return;
+            string xmlFile = objChannelManager.ReadKey(objChannelManager.XML_NAME_DEFAULT);
+            if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile))
+            {
+                return;
+            }
+
             InitializeData(xmlFile);
             SetCreateChannel();
         }
@@ -228,7 +244,7 @@ namespace AdvancedScada.Monitor
 
 
 
-                var ic = new InstanceContext(this);
+                InstanceContext ic = new InstanceContext(this);
                 XCollection.CURRENT_MACHINE = new Machine
                 {
                     MachineName = Environment.MachineName,
@@ -251,7 +267,7 @@ namespace AdvancedScada.Monitor
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
 
@@ -269,19 +285,22 @@ namespace AdvancedScada.Monitor
                 try
                 {
                     if (client != null)
+                    {
                         client.Disconnect(XCollection.CURRENT_MACHINE);
+                    }
+
                     IsConnected = false;
                 }
                 catch (Exception ex)
                 {
-                    EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                    EventscadaException?.Invoke(GetType().Name, ex.Message);
                 }
 
 
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
         private void DGMonitorForm_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -297,7 +316,7 @@ namespace AdvancedScada.Monitor
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
         #region WriteTagValue
@@ -306,7 +325,11 @@ namespace AdvancedScada.Monitor
         {
             try
             {
-                if (treeViewSI.SelectedNode == null) return;
+                if (treeViewSI.SelectedNode == null)
+                {
+                    return;
+                }
+
                 int Level = treeViewSI.SelectedNode.Level;
                 string selectedNode = treeViewSI.SelectedNode.Text;
                 if (Level == 2)
@@ -315,10 +338,10 @@ namespace AdvancedScada.Monitor
                     Device dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
                     DataBlock dbCurrent = objDataBlockManager.GetByDataBlockName(dvCurrent, treeViewSI.SelectedNode.Text);
 
-                    var channelName = chCurrent.ChannelName;
-                    var DeviceName = dvCurrent.DeviceName;
+                    string channelName = chCurrent.ChannelName;
+                    string DeviceName = dvCurrent.DeviceName;
 
-                    var DataBlockName = dbCurrent.DataBlockName;
+                    string DataBlockName = dbCurrent.DataBlockName;
 
 
 
@@ -335,16 +358,16 @@ namespace AdvancedScada.Monitor
                         Thread.Sleep(50);
                     }
                     else
+                    {
                         lblSelectedTagName.Text = string.Empty;
-
-
+                    }
                 }
 
 
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
         private void DGMonitorForm_SelectionChanged(object sender, EventArgs e)
@@ -368,7 +391,11 @@ namespace AdvancedScada.Monitor
             {
 
 
-                if (treeViewSI.SelectedNode == null) return;
+                if (treeViewSI.SelectedNode == null)
+                {
+                    return;
+                }
+
                 int Level = treeViewSI.SelectedNode.Level;
                 string selectedNode = treeViewSI.SelectedNode.Text;
 
@@ -378,10 +405,10 @@ namespace AdvancedScada.Monitor
                     Device dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
                     DataBlock dbCurrent = objDataBlockManager.GetByDataBlockName(dvCurrent, treeViewSI.SelectedNode.Text);
 
-                    var channelName = chCurrent.ChannelName;
-                    var DeviceName = dvCurrent.DeviceName;
+                    string channelName = chCurrent.ChannelName;
+                    string DeviceName = dvCurrent.DeviceName;
 
-                    var DataBlockName = dbCurrent.DataBlockName;
+                    string DataBlockName = dbCurrent.DataBlockName;
 
 
 
@@ -391,21 +418,21 @@ namespace AdvancedScada.Monitor
 
                         lblSelectedTagName.Text = $"{SelectedTag}{channelName}.{DeviceName}.{DataBlockName}.{tgName}";
 
-                        var objWriteTagForm = new WriteTagForm(lblSelectedTagName.Text, client) { StartPosition = FormStartPosition.CenterParent, ShowInTaskbar = false };
+                        WriteTagForm objWriteTagForm = new WriteTagForm(lblSelectedTagName.Text, client) { StartPosition = FormStartPosition.CenterParent, ShowInTaskbar = false };
 
                         objWriteTagForm.ShowDialog();
                         Thread.Sleep(50);
                     }
                     else
+                    {
                         lblSelectedTagName.Text = string.Empty;
-
-
+                    }
                 }
 
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -416,7 +443,11 @@ namespace AdvancedScada.Monitor
         {
             try
             {
-                if (treeViewSI.SelectedNode == null) return;
+                if (treeViewSI.SelectedNode == null)
+                {
+                    return;
+                }
+
                 int Level = treeViewSI.SelectedNode.Level;
                 string selectedNode = treeViewSI.SelectedNode.Text;
 
@@ -426,10 +457,10 @@ namespace AdvancedScada.Monitor
                     Device dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
                     DataBlock dbCurrent = objDataBlockManager.GetByDataBlockName(dvCurrent, treeViewSI.SelectedNode.Text);
 
-                    var channelName = chCurrent.ChannelName;
-                    var DeviceName = dvCurrent.DeviceName;
+                    string channelName = chCurrent.ChannelName;
+                    string DeviceName = dvCurrent.DeviceName;
 
-                    var DataBlockName = dbCurrent.DataBlockName;
+                    string DataBlockName = dbCurrent.DataBlockName;
 
 
 
@@ -443,16 +474,16 @@ namespace AdvancedScada.Monitor
 
                     }
                     else
+                    {
                         lblSelectedTagName.Text = string.Empty;
-
-
+                    }
                 }
 
 
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -483,30 +514,33 @@ namespace AdvancedScada.Monitor
 
                             if (Tags != null)
                             {
-                                var List2 = Tags.Where(item => dbCurrent.Tags.Any(p => p.ChannelId == item.Value.ChannelId
+                                List<KeyValuePair<string, Tag>> List2 = Tags.Where(item => dbCurrent.Tags.Any(p => p.ChannelId == item.Value.ChannelId
                                                                                       && p.DeviceId == item.Value.DeviceId && p.DataBlockId == item.Value.DataBlockId)).ToList();
 
                                 for (int i = 0; i < DGMonitorForm.RowCount; i++)
                                 {
 
-                                    for (var y = 0; y < List2.Count; y++)
+                                    for (int y = 0; y < List2.Count; y++)
                                     {
                                         if (DGMonitorForm[0, i].Value != null)
+                                        {
                                             if (List2[y].Value.TagId.Equals(int.Parse(DGMonitorForm[0, i].Value.ToString())))
                                             {
 
                                                 if (DGMonitorForm[1, i].Value != null)
+                                                {
                                                     for (int j = 0; j < List2.Count; j++)
+                                                    {
                                                         if (List2[j].Value.TagName.Equals(DGMonitorForm[1, i].Value.ToString()))
                                                         {
 
                                                             DGMonitorForm[4, i].Value = List2[j].Value.Value;
                                                             DGMonitorForm[5, i].Value = $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}";
                                                         }
-
-
+                                                    }
+                                                }
                                             }
-
+                                        }
                                     }
 
                                 }
@@ -523,7 +557,7 @@ namespace AdvancedScada.Monitor
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 

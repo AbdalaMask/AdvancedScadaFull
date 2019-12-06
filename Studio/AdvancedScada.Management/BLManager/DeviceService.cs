@@ -27,7 +27,10 @@ namespace AdvancedScada.Management.BLManager
         {
             lock (mutex)
             {
-                if (_instance == null) _instance = new DeviceService();
+                if (_instance == null)
+                {
+                    _instance = new DeviceService();
+                }
             }
 
             return _instance;
@@ -41,14 +44,22 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                if (dv == null) throw new NullReferenceException("The device is null reference exception");
-                var fDv = IsExisted(ch, dv);
-                if (fDv != null) throw new Exception($"Device name: '{dv.DeviceName}' is existed");
+                if (dv == null)
+                {
+                    throw new NullReferenceException("The device is null reference exception");
+                }
+
+                Device fDv = IsExisted(ch, dv);
+                if (fDv != null)
+                {
+                    throw new Exception($"Device name: '{dv.DeviceName}' is existed");
+                }
+
                 ch.Devices.Add(dv);
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -61,10 +72,19 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                if (dv == null) throw new NullReferenceException("The Device is null reference exception");
-                var fCh = IsExisted(ch, dv);
-                if (fCh != null) throw new Exception($"Device name: '{dv.DeviceName}' is existed");
-                foreach (var item in ch.Devices)
+                if (dv == null)
+                {
+                    throw new NullReferenceException("The Device is null reference exception");
+                }
+
+                Device fCh = IsExisted(ch, dv);
+                if (fCh != null)
+                {
+                    throw new Exception($"Device name: '{dv.DeviceName}' is existed");
+                }
+
+                foreach (Device item in ch.Devices)
+                {
                     if (item.DeviceId == dv.DeviceId)
                     {
                         item.DeviceId = dv.DeviceId;
@@ -74,10 +94,11 @@ namespace AdvancedScada.Management.BLManager
                         item.DataBlocks = dv.DataBlocks;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -90,13 +111,17 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                var result = GetByDeviceId(ch, chId);
-                if (result == null) throw new KeyNotFoundException("Device Id is not found exception");
+                Device result = GetByDeviceId(ch, chId);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("Device Id is not found exception");
+                }
+
                 ch.Devices.Remove(result);
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -109,13 +134,17 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                var result = GetByDeviceName(ch, chName);
-                if (result == null) throw new KeyNotFoundException("Device name is not found exception");
+                Device result = GetByDeviceName(ch, chName);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("Device name is not found exception");
+                }
+
                 ch.Devices.Remove(result);
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -128,17 +157,23 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                if (dv == null) throw new NullReferenceException("The Device is null reference exception");
-                foreach (var item in ch.Devices)
+                if (dv == null)
+                {
+                    throw new NullReferenceException("The Device is null reference exception");
+                }
+
+                foreach (Device item in ch.Devices)
+                {
                     if (item.DeviceId == dv.DeviceId)
                     {
                         ch.Devices.Remove(item);
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -153,16 +188,18 @@ namespace AdvancedScada.Management.BLManager
             Device result = null;
             try
             {
-                foreach (var item in ch.Devices)
+                foreach (Device item in ch.Devices)
+                {
                     if (item.DeviceId != dv.DeviceId && item.DeviceName.Equals(dv.DeviceName))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -179,16 +216,18 @@ namespace AdvancedScada.Management.BLManager
             Device result = null;
             try
             {
-                foreach (var item in ch.Devices)
+                foreach (Device item in ch.Devices)
+                {
                     if (item.DeviceId == chId)
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -205,16 +244,18 @@ namespace AdvancedScada.Management.BLManager
             Device result = null;
             try
             {
-                foreach (var item in ch.Devices)
+                foreach (Device item in ch.Devices)
+                {
                     if (item.DeviceName.Equals(chName))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -227,23 +268,25 @@ namespace AdvancedScada.Management.BLManager
         /// <returns>Danh sách thiết bị</returns>
         public List<Device> GetDevices(XmlNode chNode)
         {
-            var dvList = new List<Device>();
+            List<Device> dvList = new List<Device>();
             try
             {
                 foreach (XmlNode dvNode in chNode)
                 {
-                    var newDevice = new Device();
-                    newDevice.DeviceId = int.Parse(dvNode.Attributes[DEVICE_ID].Value);
-                    newDevice.DeviceName = dvNode.Attributes[DEVICE_NAME].Value;
-                    newDevice.SlaveId = short.Parse(dvNode.Attributes[SLAVE_ID].Value);
-                    newDevice.Description = dvNode.Attributes[ChannelService.DESCRIPTION].Value;
-                    newDevice.DataBlocks = objDataBlockManager.GetDataBlocks(dvNode);
+                    Device newDevice = new Device
+                    {
+                        DeviceId = int.Parse(dvNode.Attributes[DEVICE_ID].Value),
+                        DeviceName = dvNode.Attributes[DEVICE_NAME].Value,
+                        SlaveId = short.Parse(dvNode.Attributes[SLAVE_ID].Value),
+                        Description = dvNode.Attributes[ChannelService.DESCRIPTION].Value,
+                        DataBlocks = objDataBlockManager.GetDataBlocks(dvNode)
+                    };
                     dvList.Add(newDevice);
                 }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return dvList;
@@ -291,7 +334,7 @@ namespace AdvancedScada.Management.BLManager
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return device;
         }
@@ -310,7 +353,7 @@ namespace AdvancedScada.Management.BLManager
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return GetInt;
         }

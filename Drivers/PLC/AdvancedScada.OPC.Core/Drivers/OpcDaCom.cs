@@ -4,9 +4,9 @@ using Opc;
 using Opc.Da;
 using System;
 using static AdvancedScada.Common.XCollection;
-using Convert = System.Convert;
-using Factory = OpcCom.Factory;
 using Server = Opc.Da.Server;
+using Factory = OpcCom.Factory;
+using Convert = System.Convert;
 
 namespace AdvancedScada.OPC.Core.Drivers
 {
@@ -28,7 +28,10 @@ namespace AdvancedScada.OPC.Core.Drivers
         {
             lock (mutex)
             {
-                if (_instance == null) _instance = new OpcDaCom();
+                if (_instance == null)
+                {
+                    _instance = new OpcDaCom();
+                }
             }
 
             return _instance;
@@ -46,18 +49,23 @@ namespace AdvancedScada.OPC.Core.Drivers
                 if (DLL == null)
                 {
                     if (DLL != null && DLL.IsConnected)
+                    {
                         DLL.Disconnect();
-                    DLL = new Server(fact, null);
-                    DLL.Url = new URL(m_OPCServerPath + "/" + OPCServer);
+                    }
+
+                    DLL = new Server(fact, null)
+                    {
+                        Url = new URL(m_OPCServerPath + "/" + OPCServer)
+                    };
                     DLL.Connect();
                     if (DLL.IsConnected)
                     {
-                        EventscadaException?.Invoke(this.GetType().Name, "ConnectedSuccess");
+                        EventscadaException?.Invoke(GetType().Name, "ConnectedSuccess");
                         IsConnected = true;
                     }
                     else
                     {
-                        EventscadaException?.Invoke(this.GetType().Name, "ConnectedFailed");
+                        EventscadaException?.Invoke(GetType().Name, "ConnectedFailed");
                         IsConnected = false;
                     }
 
@@ -65,7 +73,7 @@ namespace AdvancedScada.OPC.Core.Drivers
             }
             catch (Exception)
             {
-                EventscadaException?.Invoke(this.GetType().Name, "ConnectedFailed");
+                EventscadaException?.Invoke(GetType().Name, "ConnectedFailed");
                 IsConnected = false;
             }
             return IsConnected;
@@ -79,6 +87,7 @@ namespace AdvancedScada.OPC.Core.Drivers
                 if (DLL != null)
                 {
                     if (DLL.IsConnected)
+                    {
                         try
                         {
                             DLL.Disconnect();
@@ -86,6 +95,8 @@ namespace AdvancedScada.OPC.Core.Drivers
                         catch
                         {
                         }
+                    }
+
                     DLL.Dispose();
                     fact.Dispose();
                 }
@@ -99,7 +110,7 @@ namespace AdvancedScada.OPC.Core.Drivers
             {
 
 
-                EventscadaException?.Invoke(this.GetType().Name, "ConnectedFailed");
+                EventscadaException?.Invoke(GetType().Name, "ConnectedFailed");
 
                 throw ex;
             }
@@ -132,7 +143,9 @@ namespace AdvancedScada.OPC.Core.Drivers
 
                 //* Strip off the path separator because it is added in CreateDLLInstance
                 if (m_OPCServerPath.LastIndexOf("/") == m_OPCServerPath.Length - 1 || m_OPCServerPath.LastIndexOf("\\") == m_OPCServerPath.Length - 1)
+                {
                     m_OPCServerPath = m_OPCServerPath.Substring(0, m_OPCServerPath.Length - 1);
+                }
             }
         }
 
@@ -166,7 +179,10 @@ namespace AdvancedScada.OPC.Core.Drivers
                 if (m_DisableSubscriptions != value)
                 {
                     m_DisableSubscriptions = value;
-                    if (SubscriptionState != null) SubscriptionState.Active = !m_DisableSubscriptions;
+                    if (SubscriptionState != null)
+                    {
+                        SubscriptionState.Active = !m_DisableSubscriptions;
+                    }
                 }
             }
         }
@@ -180,51 +196,72 @@ namespace AdvancedScada.OPC.Core.Drivers
             get => m_PollRateOverride;
             set
             {
-                if (value >= 0) m_PollRateOverride = value;
+                if (value >= 0)
+                {
+                    m_PollRateOverride = value;
+                }
             }
         }
         #endregion
         #region Read/Write Interface to Driver
         public int BeginRead(string startAddress, int numberOfElements)
         {
-            if (DLL == null) Connection();
+            if (DLL == null)
+            {
+                Connection();
+            }
 
             //*********************************************************************
             //* If Async Mode, then return immediately and return value on event
             //*********************************************************************
             if (TransactionID < 32767)
+            {
                 TransactionID += 1;
+            }
             else
+            {
                 TransactionID = 0;
-
+            }
 
             if (ReadSubscriptionState == null)
             {
-                ReadSubscriptionState = new SubscriptionState();
-                ReadSubscriptionState.Name = "AsyncReadGroup";
+                ReadSubscriptionState = new SubscriptionState
+                {
+                    Name = "AsyncReadGroup"
+                };
 
                 ReadSubscription = DLL.CreateSubscription(ReadSubscriptionState);
             }
 
 
-            var Items = new Item[1];
+            Item[] Items = new Item[1];
             Items[0] = new Item();
 
             if (OPCTopic != null && string.Compare(OPCTopic, string.Empty) != 0)
+            {
                 Items[0].ItemName = "[" + OPCTopic + "]";
+            }
             else
+            {
                 Items[0].ItemName = string.Empty;
+            }
 
             Items[0].ItemName += startAddress;
 
-            if (numberOfElements > 1) Items[0].ItemName += ",L" + numberOfElements;
+            if (numberOfElements > 1)
+            {
+                Items[0].ItemName += ",L" + numberOfElements;
+            }
 
             Items[0].SamplingRate = 250;
             Items[0].ClientHandle = TransactionID;
 
-            var ItemRes = ReadSubscription.AddItems(Items);
+            ItemResult[] ItemRes = ReadSubscription.AddItems(Items);
 
-            for (var i = 0; i < ItemRes.Length; i++) Items[i].ServerHandle = ItemRes[i].ServerHandle;
+            for (int i = 0; i < ItemRes.Length; i++)
+            {
+                Items[i].ServerHandle = ItemRes[i].ServerHandle;
+            }
 
             DLL.Read(Items);
 
@@ -241,29 +278,34 @@ namespace AdvancedScada.OPC.Core.Drivers
 
 
 
-                if (DLL == null) Connection();
-
+                if (DLL == null)
+                {
+                    Connection();
+                }
 
                 SubscribedItems = new Item[db.Tags.Count];
 
 
-                for (var i = 0; i < db.Tags.Count; i++)
+                for (int i = 0; i < db.Tags.Count; i++)
                 {
-                    SubscribedItems[i] = new Item();
-                    SubscribedItems[i].ItemName = db.Tags[i].Address;
-                    SubscribedItems[i].SamplingRate = 50;
-                    SubscribedItems[i].Active = true;
-                    SubscribedItems[i].ClientHandle = i;
+                    SubscribedItems[i] = new Item
+                    {
+                        ItemName = db.Tags[i].Address,
+                        SamplingRate = 50,
+                        Active = true,
+                        ClientHandle = i
+                    };
                 }
 
 
                 ItemValue[] values = DLL.Read(SubscribedItems);
 
-                var ArraySize = 0;
-                var ReturnValues = new string[values.Length];
-                var ArrayValues = string.Empty;
+                int ArraySize = 0;
+                string[] ReturnValues = new string[values.Length];
+                string ArrayValues = string.Empty;
                 if (values.Length > 0)
-                    for (var i = 0; i < values.Length; i++)
+                {
+                    for (int i = 0; i < values.Length; i++)
                     {
                         ArrayValues = string.Empty;
                         if (values[i].Value is Array)
@@ -272,13 +314,15 @@ namespace AdvancedScada.OPC.Core.Drivers
 
                             if (ArraySize > 0)
                             {
-                                var ar = (Array)values[i].Value;
-                                var ari = (Array)values[i].Value;
+                                Array ar = (Array)values[i].Value;
+                                Array ari = (Array)values[i].Value;
 
-                                var tempVar = ((Array)values[i].Value).Length;
+                                int tempVar = ((Array)values[i].Value).Length;
 
-                                foreach (var item in ari) ArrayValues += $"/{item}";
-
+                                foreach (object item in ari)
+                                {
+                                    ArrayValues += $"/{item}";
+                                }
 
                                 ReturnValues[i] = ArrayValues;
                             }
@@ -292,8 +336,11 @@ namespace AdvancedScada.OPC.Core.Drivers
 
 
                     }
+                }
                 else
+                {
                     ReturnValues[0] = Convert.ToString(values[0].Value);
+                }
 
                 return ReturnValues;
             }
@@ -321,40 +368,56 @@ namespace AdvancedScada.OPC.Core.Drivers
 
         public int Write(string startAddress, int numberOfElements, string[] dataToWrite)
         {
-            if (DLL == null) Connection();
+            if (DLL == null)
+            {
+                Connection();
+            }
 
-            var items = new Item[1];
+            Item[] items = new Item[1];
             items[0] = new Item();
 
             //* If there is a topic then add it to the Item Name
             if (!string.IsNullOrEmpty(OPCTopic))
+            {
                 items[0].ItemName = "[" + OPCTopic + "]" + startAddress;
+            }
             else
+            {
                 items[0].ItemName = startAddress;
+            }
             //items(0).ItemName &= startAddress
 
             //* If Writing multiple elements, add the length to the Item Nam
-            if (numberOfElements > 1) items[0].ItemName += ",L" + numberOfElements;
-
-            //* Create an array OPC ItemValue
-            var Values = new ItemValue[numberOfElements];
-            for (var i = 0; i < numberOfElements; i++)
+            if (numberOfElements > 1)
             {
-                Values[i] = new ItemValue(items[i]);
-                Values[i].Value = Convert.ToString(dataToWrite[i]);
+                items[0].ItemName += ",L" + numberOfElements;
             }
 
-            var x = DLL.Write(Values);
+            //* Create an array OPC ItemValue
+            ItemValue[] Values = new ItemValue[numberOfElements];
+            for (int i = 0; i < numberOfElements; i++)
+            {
+                Values[i] = new ItemValue(items[i])
+                {
+                    Value = Convert.ToString(dataToWrite[i])
+                };
+            }
+
+            IdentifiedResult[] x = DLL.Write(Values);
 
 
-            if (x[0].ResultID == ResultID.S_OK) return 0;
-            EventscadaException?.Invoke(this.GetType().Name, "Failed to Write to " + items[0].ItemName);
+            if (x[0].ResultID == ResultID.S_OK)
+            {
+                return 0;
+            }
+
+            EventscadaException?.Invoke(GetType().Name, "Failed to Write to " + items[0].ItemName);
             return 0;
         }
 
         public int Write(string startAddress, string dataToWrite)
         {
-            var temp = new string[1];
+            string[] temp = new string[1];
             temp[0] = dataToWrite;
             return Write(startAddress, 1, temp);
         }
@@ -366,6 +429,7 @@ namespace AdvancedScada.OPC.Core.Drivers
                 if (DLL != null)
                 {
                     if (DLL.IsConnected)
+                    {
                         try
                         {
                             DLL.Disconnect();
@@ -373,6 +437,8 @@ namespace AdvancedScada.OPC.Core.Drivers
                         catch
                         {
                         }
+                    }
+
                     DLL.Dispose();
                     fact.Dispose();
                 }
@@ -386,7 +452,7 @@ namespace AdvancedScada.OPC.Core.Drivers
             {
 
 
-                EventscadaException?.Invoke(this.GetType().Name, "ConnectedFailed");
+                EventscadaException?.Invoke(GetType().Name, "ConnectedFailed");
 
             }
         }

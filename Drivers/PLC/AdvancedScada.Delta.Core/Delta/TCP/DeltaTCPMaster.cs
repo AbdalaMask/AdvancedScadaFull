@@ -32,13 +32,13 @@ namespace AdvancedScada.IODriver.Delta.TCP
 
             if (!System.Net.IPAddress.TryParse(IP, out System.Net.IPAddress address))
             {
-                EventscadaException?.Invoke(this.GetType().Name, DemoUtils.IpAddressInputWrong);
+                EventscadaException?.Invoke(GetType().Name, DemoUtils.IpAddressInputWrong);
                 return false;
             }
 
             if (!int.TryParse($"{Port}", out int port))
             {
-                EventscadaException?.Invoke(this.GetType().Name, DemoUtils.PortInputWrong);
+                EventscadaException?.Invoke(GetType().Name, DemoUtils.PortInputWrong);
                 return false;
             }
 
@@ -47,27 +47,29 @@ namespace AdvancedScada.IODriver.Delta.TCP
             {
 
                 busTcpClient?.ConnectClose();
-                busTcpClient = new ModbusTcpNet(IP, Port, Station);
-                busTcpClient.AddressStartWithZero = true;
-                busTcpClient.IsStringReverse = false;
+                busTcpClient = new ModbusTcpNet(IP, Port, Station)
+                {
+                    AddressStartWithZero = true,
+                    IsStringReverse = false
+                };
 
                 try
                 {
                     OperateResult connect = busTcpClient.ConnectServer();
                     if (connect.IsSuccess)
                     {
-                        EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedSuccess);
+                        EventscadaException?.Invoke(GetType().Name, StringResources.Language.ConnectedSuccess);
                         IsConnected = true;
                     }
                     else
                     {
-                        EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedFailed);
+                        EventscadaException?.Invoke(GetType().Name, StringResources.Language.ConnectedFailed);
                     }
                     return IsConnected;
                 }
                 catch (Exception ex)
                 {
-                    EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                    EventscadaException?.Invoke(GetType().Name, ex.Message);
                     return IsConnected;
                 }
 
@@ -79,7 +81,7 @@ namespace AdvancedScada.IODriver.Delta.TCP
             {
 
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
                 return IsConnected;
 
             }
@@ -94,7 +96,7 @@ namespace AdvancedScada.IODriver.Delta.TCP
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
                 return IsConnected;
             }
 
@@ -104,13 +106,13 @@ namespace AdvancedScada.IODriver.Delta.TCP
 
         public bool[] ReadDiscrete(string address, ushort length)
         {
-            var Address = DMT.DevToAddrW("DVP", address, Station);
+            int Address = DMT.DevToAddrW("DVP", address, Station);
             return busTcpClient.ReadDiscrete($"{Address}", length).Content;
         }
 
         public bool Write(string address, dynamic value)
         {
-            var Address = DMT.DevToAddrW("DVP", address, Station);
+            int Address = DMT.DevToAddrW("DVP", address, Station);
             if (value is bool)
             {
                 busTcpClient.Write($"{Address}", value);
@@ -125,59 +127,59 @@ namespace AdvancedScada.IODriver.Delta.TCP
 
         public TValue[] Read<TValue>(string address, ushort length)
         {
-            var Address = DMT.DevToAddrW("DVP", address, Station);
+            int Address = DMT.DevToAddrW("DVP", address, Station);
             if (typeof(TValue) == typeof(bool))
             {
-                var b = busTcpClient.ReadCoil($"{Address}", length).Content;
+                bool[] b = busTcpClient.ReadCoil($"{Address}", length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(ushort))
             {
-                var b = busTcpClient.ReadUInt16($"{Address}", length).Content;
+                ushort[] b = busTcpClient.ReadUInt16($"{Address}", length).Content;
 
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(int))
             {
-                var b = busTcpClient.ReadInt32($"{Address}", length).Content;
+                int[] b = busTcpClient.ReadInt32($"{Address}", length).Content;
 
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(uint))
             {
-                var b = busTcpClient.ReadUInt32($"{Address}", length).Content;
+                uint[] b = busTcpClient.ReadUInt32($"{Address}", length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(long))
             {
-                var b = busTcpClient.ReadInt64($"{Address}", length).Content;
+                long[] b = busTcpClient.ReadInt64($"{Address}", length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(ulong))
             {
-                var b = busTcpClient.ReadUInt64($"{Address}", length).Content;
+                ulong[] b = busTcpClient.ReadUInt64($"{Address}", length).Content;
                 return (TValue[])(object)b;
             }
 
             if (typeof(TValue) == typeof(short))
             {
-                var b = busTcpClient.ReadInt16($"{Address}", length).Content;
+                short[] b = busTcpClient.ReadInt16($"{Address}", length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(double))
             {
-                var b = busTcpClient.ReadDouble($"{Address}", length).Content;
+                double[] b = busTcpClient.ReadDouble($"{Address}", length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(float))
             {
-                var b = busTcpClient.ReadFloat($"{Address}", length).Content;
+                float[] b = busTcpClient.ReadFloat($"{Address}", length).Content;
                 return (TValue[])(object)b;
 
             }
             if (typeof(TValue) == typeof(string))
             {
-                var b = busTcpClient.ReadString($"{Address}", length).Content;
+                string b = busTcpClient.ReadString($"{Address}", length).Content;
                 return (TValue[])(object)b;
             }
 

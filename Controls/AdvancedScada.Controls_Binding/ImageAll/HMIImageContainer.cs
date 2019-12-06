@@ -47,7 +47,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressValueSelect1
         {
-            get { return m_PLCAddressSelect1; }
+            get => m_PLCAddressSelect1;
             set
             {
                 if (m_PLCAddressSelect1 != value)
@@ -57,8 +57,12 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     try
                     {
                         if (string.IsNullOrEmpty(m_PLCAddressSelect1) ||
-                       string.IsNullOrWhiteSpace(m_PLCAddressSelect1) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("ValueSelect1", TagCollectionClient.Tags[m_PLCAddressSelect1], "Value", true);
+                       string.IsNullOrWhiteSpace(m_PLCAddressSelect1) || Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("ValueSelect1", TagCollectionClient.Tags[m_PLCAddressSelect1], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -77,7 +81,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressValueSelect2
         {
-            get { return m_PLCAddressSelect2; }
+            get => m_PLCAddressSelect2;
             set
             {
                 if (m_PLCAddressSelect2 != value)
@@ -89,8 +93,12 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                         // If Not String.IsNullOrEmpty(m_PLCAddressVisible) Then
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressSelect2) ||
-                            string.IsNullOrWhiteSpace(m_PLCAddressSelect2) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("ValueSelect2", TagCollectionClient.Tags[m_PLCAddressSelect2], "Value", true);
+                            string.IsNullOrWhiteSpace(m_PLCAddressSelect2) || Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("ValueSelect2", TagCollectionClient.Tags[m_PLCAddressSelect2], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
@@ -106,7 +114,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressVisible
         {
-            get { return m_PLCAddressVisible; }
+            get => m_PLCAddressVisible;
             set
             {
                 if (m_PLCAddressVisible != value)
@@ -118,8 +126,12 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                         // If Not String.IsNullOrEmpty(m_PLCAddressVisible) Then
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
-                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
@@ -135,10 +147,13 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressText2
         {
-            get { return m_PLCAddressText2; }
+            get => m_PLCAddressText2;
             set
             {
-                if (m_PLCAddressText2 != value) m_PLCAddressText2 = value;
+                if (m_PLCAddressText2 != value)
+                {
+                    m_PLCAddressText2 = value;
+                }
             }
         }
 
@@ -146,8 +161,8 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressClick
         {
-            get { return m_PLCAddressClick; }
-            set { m_PLCAddressClick = value; }
+            get => m_PLCAddressClick;
+            set => m_PLCAddressClick = value;
         }
         #endregion
         [DefaultValue(true)]
@@ -174,7 +189,10 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                 }
 
                 //* Save the text to return to
-                if (!ErrorDisplayTime.Enabled) OriginalText = Text;
+                if (!ErrorDisplayTime.Enabled)
+                {
+                    OriginalText = Text;
+                }
 
                 ErrorDisplayTime.Enabled = true;
                 Utilities.DisplayError(this, ErrorMessage);

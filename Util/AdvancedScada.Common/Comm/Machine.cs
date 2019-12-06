@@ -19,57 +19,33 @@ namespace AdvancedScada.Common
         [DataMember]
         public int MachineId
         {
-            get
-            {
-                return _MachineId;
-            }
+            get => _MachineId;
 
-            set
-            {
-                _MachineId = value;
-            }
+            set => _MachineId = value;
         }
 
         [DataMember]
         public string MachineName
         {
-            get
-            {
-                return _MachineName;
-            }
+            get => _MachineName;
 
-            set
-            {
-                _MachineName = value;
-            }
+            set => _MachineName = value;
         }
 
         [DataMember]
         public string IPAddress
         {
-            get
-            {
-                return _IPAddress;
-            }
+            get => _IPAddress;
 
-            set
-            {
-                _IPAddress = value;
-            }
+            set => _IPAddress = value;
         }
 
         [DataMember]
         public string Description
         {
-            get
-            {
-                return _Description;
-            }
+            get => _Description;
 
-            set
-            {
-                _Description = value;
-            }
+            set => _Description = value;
         }
     }
 }

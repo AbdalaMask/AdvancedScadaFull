@@ -14,8 +14,7 @@ namespace AdvancedScada.BaseService
     public class ServiceDriverHelper : BaseBinding
     {
         public static ConnectionState objConnectionState = ConnectionState.DISCONNECT;
-
-        IODriver driverHelper = null;
+        private IODriver driverHelper = null;
         private ushort _SerialNo;
         public Dictionary<string, IODriver> RequestsDriver { get; set; }
 
@@ -33,7 +32,7 @@ namespace AdvancedScada.BaseService
             {
                 serviceType = typeof(ReadService);
 
-                var baseAddresses = new Uri[2]
+                Uri[] baseAddresses = new Uri[2]
                 {
                     new Uri(string.Format(URI_DRIVER, Environment.MachineName, PORT, "Driver")),
                     new Uri(string.Format(URI_DRIVERWeb,Environment.MachineName, "Driver"))
@@ -41,29 +40,33 @@ namespace AdvancedScada.BaseService
 
 
                 serviceHost = new ServiceHost(serviceType, baseAddresses);
-                var throttle = serviceHost.Description.Behaviors.Find<ServiceThrottlingBehavior>();
+                ServiceThrottlingBehavior throttle = serviceHost.Description.Behaviors.Find<ServiceThrottlingBehavior>();
                 if (throttle == null)
                 {
-                    throttle = new ServiceThrottlingBehavior();
-                    throttle.MaxConcurrentCalls = int.MaxValue;
-                    throttle.MaxConcurrentSessions = int.MaxValue;
-                    throttle.MaxConcurrentInstances = int.MaxValue;
+                    throttle = new ServiceThrottlingBehavior
+                    {
+                        MaxConcurrentCalls = int.MaxValue,
+                        MaxConcurrentSessions = int.MaxValue,
+                        MaxConcurrentInstances = int.MaxValue
+                    };
                     serviceHost.Description.Behaviors.Add(throttle);
                 }
 
-                var binding = GetNetTcpBinding();
+                NetTcpBinding binding = GetNetTcpBinding();
                 serviceHost.AddServiceEndpoint(typeof(IReadService), binding, string.Empty);
 
 
                 ////Enable metadata exchange
-                var smb = new ServiceMetadataBehavior();
-                smb.HttpGetUrl = new Uri(string.Format(URI_DRIVERWeb, Environment.MachineName, "Driver"));
-                smb.HttpGetEnabled = true;
+                ServiceMetadataBehavior smb = new ServiceMetadataBehavior
+                {
+                    HttpGetUrl = new Uri(string.Format(URI_DRIVERWeb, Environment.MachineName, "Driver")),
+                    HttpGetEnabled = true
+                };
                 serviceHost.Description.Behaviors.Add(smb);
             }
             catch (CommunicationException ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return serviceHost;
@@ -87,7 +90,7 @@ namespace AdvancedScada.BaseService
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
 
             }
             return serviceHost;
@@ -110,7 +113,7 @@ namespace AdvancedScada.BaseService
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
 
             }
             return objWebServiceHost;
@@ -118,7 +121,7 @@ namespace AdvancedScada.BaseService
         private IODriver GetDriver(string ChannelTypes)
         {
             IODriver DriverHelper = null;
-            var objFunctions = GetIODriver.GetFunctions();
+            GetIODriver objFunctions = GetIODriver.GetFunctions();
             DriverHelper =
                        objFunctions.GetAssembly($@"\AdvancedScada.{ChannelTypes}.Core.dll",
                            $"AdvancedScada.{ChannelTypes}.Core.IODriverHelper");
@@ -126,29 +129,35 @@ namespace AdvancedScada.BaseService
         }
         public bool InitializePLC()
         {
-            var objChannelManager = ChannelService.GetChannelManager();
+            ChannelService objChannelManager = ChannelService.GetChannelManager();
             try
             {
                 RequestsDriver.Clear();
-                var xmlFile = objChannelManager.ReadKey(objChannelManager.XML_NAME_DEFAULT);
-                if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile)) return false;
+                string xmlFile = objChannelManager.ReadKey(objChannelManager.XML_NAME_DEFAULT);
+                if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile))
+                {
+                    return false;
+                }
+
                 objChannelManager.Channels.Clear();
                 TagCollection.Tags.Clear();
-                var channels = objChannelManager.GetChannels(xmlFile);
-                var objFunctions = GetIODriver.GetFunctions();
+                List<Channel> channels = objChannelManager.GetChannels(xmlFile);
+                GetIODriver objFunctions = GetIODriver.GetFunctions();
                 ////Sort.
                 channels.Sort(delegate (Channel x, Channel y)
                 {
                     return x.ChannelTypes.CompareTo(y.ChannelTypes);
                 });
-                foreach (var item in channels)
+                foreach (Channel item in channels)
                 {
 
                     driverHelper = GetDriver(item.ChannelTypes);
                     if (driverHelper != null)
+                    {
                         driverHelper.InitializeService(item);
+                    }
                 }
-                foreach (var item in channels)
+                foreach (Channel item in channels)
                 {
                     _SerialNo = (ushort)(_SerialNo++ % 255 + 1);
                     driverHelper = GetDriver(item.ChannelTypes);
@@ -160,8 +169,9 @@ namespace AdvancedScada.BaseService
                     {
                         RequestsDriver.Add(item.ChannelTypes, driverHelper);
                         if (driverHelper != null)
+                        {
                             driverHelper?.Connect();
-
+                        }
                     }
 
                 }
@@ -172,7 +182,7 @@ namespace AdvancedScada.BaseService
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return true;
 
@@ -192,7 +202,7 @@ namespace AdvancedScada.BaseService
             catch (System.Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return true;
         }

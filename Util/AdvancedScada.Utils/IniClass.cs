@@ -21,8 +21,8 @@ namespace AdvancedScada.Utils
         // INI 값 읽기
         public string GetIniValue(string Section, string Key, string iniPath)
         {
-            var temp = new StringBuilder(255);
-            var i = GetPrivateProfileString(Section, Key, string.Empty, temp, 255, iniPath);
+            StringBuilder temp = new StringBuilder(255);
+            int i = GetPrivateProfileString(Section, Key, string.Empty, temp, 255, iniPath);
             return temp.ToString();
         }
 

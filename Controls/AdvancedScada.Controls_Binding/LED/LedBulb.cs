@@ -25,9 +25,9 @@ namespace AdvancedScada.Controls_Binding.Bulb
 
         private Color _color;
         private bool _on = true;
-        private Color _reflectionColor = Color.FromArgb(180, 255, 255, 255);
-        private Color[] _surroundColor = new Color[] { Color.FromArgb(0, 255, 255, 255) };
-        private Timer _timer = new Timer();
+        private readonly Color _reflectionColor = Color.FromArgb(180, 255, 255, 255);
+        private readonly Color[] _surroundColor = new Color[] { Color.FromArgb(0, 255, 255, 255) };
+        private readonly Timer _timer = new Timer();
 
         /// <summary>
         /// Gets or Sets the color of the LED light
@@ -35,13 +35,13 @@ namespace AdvancedScada.Controls_Binding.Bulb
         [DefaultValue(typeof(Color), "153, 255, 54")]
         public Color Color
         {
-            get { return _color; }
+            get => _color;
             set
             {
                 _color = value;
-                this.DarkColor = ControlPaint.Dark(_color);
-                this.DarkDarkColor = ControlPaint.DarkDark(_color);
-                this.Invalidate();  // Redraw the control
+                DarkColor = ControlPaint.Dark(_color);
+                DarkDarkColor = ControlPaint.DarkDark(_color);
+                Invalidate();  // Redraw the control
             }
         }
 
@@ -60,8 +60,8 @@ namespace AdvancedScada.Controls_Binding.Bulb
         /// </summary>
         public bool On
         {
-            get { return _on; }
-            set { _on = value; this.Invalidate(); }
+            get => _on;
+            set { _on = value; Invalidate(); }
         }
 
 
@@ -77,9 +77,9 @@ namespace AdvancedScada.Controls_Binding.Bulb
             | ControlStyles.UserPaint
             | ControlStyles.SupportsTransparentBackColor, true);
 
-            this.Color = Color.FromArgb(255, 153, 255, 54);
+            Color = Color.FromArgb(255, 153, 255, 54);
             _timer.Tick += new EventHandler(
-                (object sender, EventArgs e) => { this.On = !this.On; }
+                (object sender, EventArgs e) => { On = !On; }
             );
             MaxHoldTimer.Tick += MaxHoldTimer_Tick;
             MinHoldTimer.Tick += HoldTimer_Tick;
@@ -95,12 +95,12 @@ namespace AdvancedScada.Controls_Binding.Bulb
         protected override void OnPaint(PaintEventArgs e)
         {
             // Create an offscreen graphics object for double buffering
-            Bitmap offScreenBmp = new Bitmap(this.ClientRectangle.Width, this.ClientRectangle.Height);
+            Bitmap offScreenBmp = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
             using (System.Drawing.Graphics g = Graphics.FromImage(offScreenBmp))
             {
                 g.SmoothingMode = SmoothingMode.HighQuality;
                 // Draw the control
-                drawControl(g, this.On);
+                drawControl(g, On);
                 // Draw the image to the screen
                 e.Graphics.DrawImageUnscaled(offScreenBmp, 0, 0);
             }
@@ -112,43 +112,50 @@ namespace AdvancedScada.Controls_Binding.Bulb
         private void drawControl(Graphics g, bool on)
         {
             // Is the bulb on or off
-            Color lightColor = (on) ? this.Color : Color.FromArgb(150, this.DarkColor);
-            Color darkColor = (on) ? this.DarkColor : this.DarkDarkColor;
+            Color lightColor = (on) ? Color : Color.FromArgb(150, DarkColor);
+            Color darkColor = (on) ? DarkColor : DarkDarkColor;
 
             // Calculate the dimensions of the bulb
-            int width = this.Width - (this.Padding.Left + this.Padding.Right);
-            int height = this.Height - (this.Padding.Top + this.Padding.Bottom);
+            int width = Width - (Padding.Left + Padding.Right);
+            int height = Height - (Padding.Top + Padding.Bottom);
             // Diameter is the lesser of width and height
             int diameter = Math.Min(width, height);
             // Subtract 1 pixel so ellipse doesn't get cut off
             diameter = Math.Max(diameter - 1, 1);
 
             // Draw the background ellipse
-            var rectangle = new Rectangle(this.Padding.Left, this.Padding.Top, diameter, diameter);
+            Rectangle rectangle = new Rectangle(Padding.Left, Padding.Top, diameter, diameter);
             g.FillEllipse(new SolidBrush(darkColor), rectangle);
 
             // Draw the glow gradient
-            var path = new GraphicsPath();
+            GraphicsPath path = new GraphicsPath();
             path.AddEllipse(rectangle);
-            var pathBrush = new PathGradientBrush(path);
-            pathBrush.CenterColor = lightColor;
-            pathBrush.SurroundColors = new Color[] { Color.FromArgb(0, lightColor) };
+            PathGradientBrush pathBrush = new PathGradientBrush(path)
+            {
+                CenterColor = lightColor,
+                SurroundColors = new Color[] { Color.FromArgb(0, lightColor) }
+            };
             g.FillEllipse(pathBrush, rectangle);
 
             // Draw the white reflection gradient
-            var offset = Convert.ToInt32(diameter * .15F);
-            var diameter1 = Convert.ToInt32(rectangle.Width * .8F);
-            var whiteRect = new Rectangle(rectangle.X - offset, rectangle.Y - offset, diameter1, diameter1);
-            var path1 = new GraphicsPath();
+            int offset = Convert.ToInt32(diameter * .15F);
+            int diameter1 = Convert.ToInt32(rectangle.Width * .8F);
+            Rectangle whiteRect = new Rectangle(rectangle.X - offset, rectangle.Y - offset, diameter1, diameter1);
+            GraphicsPath path1 = new GraphicsPath();
             path1.AddEllipse(whiteRect);
-            var pathBrush1 = new PathGradientBrush(path);
-            pathBrush1.CenterColor = _reflectionColor;
-            pathBrush1.SurroundColors = _surroundColor;
+            PathGradientBrush pathBrush1 = new PathGradientBrush(path)
+            {
+                CenterColor = _reflectionColor,
+                SurroundColors = _surroundColor
+            };
             g.FillEllipse(pathBrush1, whiteRect);
 
             // Draw the border
-            g.SetClip(this.ClientRectangle);
-            if (this.On) g.DrawEllipse(new Pen(Color.FromArgb(85, Color.Black), 1F), rectangle);
+            g.SetClip(ClientRectangle);
+            if (On)
+            {
+                g.DrawEllipse(new Pen(Color.FromArgb(85, Color.Black), 1F), rectangle);
+            }
         }
 
         /// <summary>
@@ -159,14 +166,14 @@ namespace AdvancedScada.Controls_Binding.Bulb
         {
             if (milliseconds > 0)
             {
-                this.On = true;
+                On = true;
                 _timer.Interval = milliseconds;
                 _timer.Enabled = true;
             }
             else
             {
                 _timer.Enabled = false;
-                this.On = false;
+                On = false;
             }
         }
 
@@ -230,7 +237,7 @@ namespace AdvancedScada.Controls_Binding.Bulb
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressText
         {
-            get { return m_PLCAddressText; }
+            get => m_PLCAddressText;
             set
             {
                 if (m_PLCAddressText != value)
@@ -241,8 +248,12 @@ namespace AdvancedScada.Controls_Binding.Bulb
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressText) || string.IsNullOrWhiteSpace(m_PLCAddressText) ||
-                            AdvancedScada.Controls_Binding.Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressText], "Value", true);
+                            AdvancedScada.Controls_Binding.Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressText], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -257,7 +268,7 @@ namespace AdvancedScada.Controls_Binding.Bulb
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressVisible
         {
-            get { return m_PLCAddressVisible; }
+            get => m_PLCAddressVisible;
             set
             {
                 if (m_PLCAddressVisible != value)
@@ -269,8 +280,12 @@ namespace AdvancedScada.Controls_Binding.Bulb
                         // If Not String.IsNullOrEmpty(m_PLCAddressVisible) Then
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
-                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || AdvancedScada.Controls_Binding.Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || AdvancedScada.Controls_Binding.Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
@@ -286,7 +301,7 @@ namespace AdvancedScada.Controls_Binding.Bulb
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressValue
         {
-            get { return m_PLCAddressValue; }
+            get => m_PLCAddressValue;
             set
             {
                 if (m_PLCAddressValue != value)
@@ -297,8 +312,12 @@ namespace AdvancedScada.Controls_Binding.Bulb
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressValue) || string.IsNullOrWhiteSpace(m_PLCAddressValue) ||
-                            AdvancedScada.Controls_Binding.Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
+                            AdvancedScada.Controls_Binding.Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -313,17 +332,20 @@ namespace AdvancedScada.Controls_Binding.Bulb
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressClick
         {
-            get { return m_PLCAddressClick; }
+            get => m_PLCAddressClick;
             set
             {
-                if (m_PLCAddressClick != value) m_PLCAddressClick = value;
+                if (m_PLCAddressClick != value)
+                {
+                    m_PLCAddressClick = value;
+                }
             }
         }
 
         public OutputType OutputType
         {
-            get { return m_OutputType; }
-            set { m_OutputType = value; }
+            get => m_OutputType;
+            set => m_OutputType = value;
         }
 
         [DefaultValue(false)]
@@ -332,22 +354,28 @@ namespace AdvancedScada.Controls_Binding.Bulb
         [Category("PLC Properties")]
         public int MinimumHoldTime
         {
-            get { return m_MinimumHoldTime; }
+            get => m_MinimumHoldTime;
             set
             {
                 m_MinimumHoldTime = value;
-                if (value > 0) MinHoldTimer.Interval = value;
+                if (value > 0)
+                {
+                    MinHoldTimer.Interval = value;
+                }
             }
         }
 
         [Category("PLC Properties")]
         public int MaximumHoldTime
         {
-            get { return m_MaximumHoldTime; }
+            get => m_MaximumHoldTime;
             set
             {
                 m_MaximumHoldTime = value;
-                if (value > 0) MaxHoldTimer.Interval = value;
+                if (value > 0)
+                {
+                    MaxHoldTimer.Interval = value;
+                }
             }
         }
 
@@ -379,7 +407,10 @@ namespace AdvancedScada.Controls_Binding.Bulb
         {
             MinHoldTimer.Enabled = false;
             HoldTimeMet = true;
-            if (!MouseIsDown) ReleaseValue();
+            if (!MouseIsDown)
+            {
+                ReleaseValue();
+            }
         }
 
         private void MaxHoldTimer_Tick(object sender, EventArgs e)
@@ -414,11 +445,16 @@ namespace AdvancedScada.Controls_Binding.Bulb
                             break;
                         case OutputType.Toggle:
 
-                            var CurrentValue = true;
+                            bool CurrentValue = true;
                             if (CurrentValue)
+                            {
                                 Utilities.Write(m_PLCAddressClick, false);
+                            }
                             else
+                            {
                                 Utilities.Write(m_PLCAddressClick, true);
+                            }
+
                             break;
                         default:
 
@@ -479,7 +515,10 @@ namespace AdvancedScada.Controls_Binding.Bulb
                 }
 
                 //* Save the text to return to
-                if (!ErrorDisplayTime.Enabled) OriginalText = Text;
+                if (!ErrorDisplayTime.Enabled)
+                {
+                    OriginalText = Text;
+                }
 
                 ErrorDisplayTime.Enabled = true;
 

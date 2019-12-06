@@ -5,7 +5,7 @@
 
         public static string GetProcessorID()
         {
-            return "";
+            return string.Empty;
         }
     }
 }

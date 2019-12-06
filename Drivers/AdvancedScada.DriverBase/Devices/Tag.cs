@@ -41,10 +41,7 @@ namespace AdvancedScada.DriverBase.Devices
         [DataMember]
         public string Address
         {
-            get
-            {
-                return address;
-            }
+            get => address;
             set
             {
                 address = value;
@@ -54,10 +51,7 @@ namespace AdvancedScada.DriverBase.Devices
         [DataMember]
         public int TagId
         {
-            get
-            {
-                return _TagId;
-            }
+            get => _TagId;
 
             set
             {
@@ -69,10 +63,7 @@ namespace AdvancedScada.DriverBase.Devices
         [DataMember]
         public string TagName
         {
-            get
-            {
-                return _TagName;
-            }
+            get => _TagName;
 
             set
             {
@@ -84,10 +75,7 @@ namespace AdvancedScada.DriverBase.Devices
         [DataMember]
         public dynamic Value
         {
-            get
-            {
-                return _Value;
-            }
+            get => _Value;
 
             set
             {
@@ -99,10 +87,7 @@ namespace AdvancedScada.DriverBase.Devices
         [DataMember]
         public DateTime TimeSpan
         {
-            get
-            {
-                return _TimeSpan;
-            }
+            get => _TimeSpan;
 
             set
             {
@@ -114,10 +99,7 @@ namespace AdvancedScada.DriverBase.Devices
         [DataMember]
         public string Description
         {
-            get
-            {
-                return _Description;
-            }
+            get => _Description;
 
             set
             {
@@ -132,7 +114,7 @@ namespace AdvancedScada.DriverBase.Devices
 
         protected virtual void OnPropertyChanged(string newName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(newName));
             }

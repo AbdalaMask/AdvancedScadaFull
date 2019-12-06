@@ -38,7 +38,7 @@ namespace AdvancedScada.Controls_Binding.Indicator
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressText
         {
-            get { return m_PLCAddressText; }
+            get => m_PLCAddressText;
             set
             {
                 if (m_PLCAddressText != value)
@@ -49,8 +49,12 @@ namespace AdvancedScada.Controls_Binding.Indicator
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressText) || string.IsNullOrWhiteSpace(m_PLCAddressText) ||
-                            Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressText], "Value", true);
+                            Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressText], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -70,7 +74,7 @@ namespace AdvancedScada.Controls_Binding.Indicator
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressVisible
         {
-            get { return m_PLCAddressVisible; }
+            get => m_PLCAddressVisible;
             set
             {
                 if (m_PLCAddressVisible != value)
@@ -82,8 +86,12 @@ namespace AdvancedScada.Controls_Binding.Indicator
                         // If Not String.IsNullOrEmpty(m_PLCAddressVisible) Then
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
-                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
@@ -104,7 +112,7 @@ namespace AdvancedScada.Controls_Binding.Indicator
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressValue
         {
-            get { return m_PLCAddressValue; }
+            get => m_PLCAddressValue;
             set
             {
                 if (m_PLCAddressValue != value)
@@ -115,8 +123,12 @@ namespace AdvancedScada.Controls_Binding.Indicator
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressValue) || string.IsNullOrWhiteSpace(m_PLCAddressValue) ||
-                            Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("SelectColor2", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
+                            Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("SelectColor2", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -136,10 +148,13 @@ namespace AdvancedScada.Controls_Binding.Indicator
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressClick
         {
-            get { return m_PLCAddressClick; }
+            get => m_PLCAddressClick;
             set
             {
-                if (m_PLCAddressClick != value) m_PLCAddressClick = value;
+                if (m_PLCAddressClick != value)
+                {
+                    m_PLCAddressClick = value;
+                }
             }
         }
 
@@ -171,7 +186,10 @@ namespace AdvancedScada.Controls_Binding.Indicator
         {
             MinHoldTimer.Enabled = false;
             HoldTimeMet = true;
-            if (!MouseIsDown) ReleaseValue();
+            if (!MouseIsDown)
+            {
+                ReleaseValue();
+            }
         }
 
         private void MaxHoldTimer_Tick(object sender, EventArgs e)
@@ -205,11 +223,16 @@ namespace AdvancedScada.Controls_Binding.Indicator
                             Utilities.Write(PLCAddressClick, false);
                             break;
                         case OutputType.Toggle:
-                            var CurrentValue = SelectColor2;
+                            bool CurrentValue = SelectColor2;
                             if (CurrentValue)
+                            {
                                 Utilities.Write(PLCAddressClick, false);
+                            }
                             else
+                            {
                                 Utilities.Write(PLCAddressClick, true);
+                            }
+
                             break;
                         default:
 
@@ -276,7 +299,10 @@ namespace AdvancedScada.Controls_Binding.Indicator
                 }
 
                 //* Save the text to return to
-                if (!ErrorDisplayTime.Enabled) OriginalText = Text;
+                if (!ErrorDisplayTime.Enabled)
+                {
+                    OriginalText = Text;
+                }
 
                 ErrorDisplayTime.Enabled = true;
                 Utilities.DisplayError(this, ErrorMessage);

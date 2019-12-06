@@ -24,7 +24,7 @@ namespace AdvancedScada.Common
     public static class DataBlockCollection
     {
 
-        
+
         public static Dictionary<string, DataBlock> DataBlocks { get; set; } = new Dictionary<string, DataBlock>();
     }
 }

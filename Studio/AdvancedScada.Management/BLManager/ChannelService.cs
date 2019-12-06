@@ -45,7 +45,11 @@ namespace AdvancedScada.Management.BLManager
         {
             get
             {
-                if (TagCollection.Tags.Count == 0) throw new NullReferenceException("No element");
+                if (TagCollection.Tags.Count == 0)
+                {
+                    throw new NullReferenceException("No element");
+                }
+
                 return TagCollection.Tags[tagName];
             }
         }
@@ -55,8 +59,8 @@ namespace AdvancedScada.Management.BLManager
         [Browsable(false)]
         public List<Channel> Channels
         {
-            get { return _Channels; }
-            set { _Channels = value; }
+            get => _Channels;
+            set => _Channels = value;
         }
         [Browsable(false)]
         public Channel CurrentChannel
@@ -71,12 +75,23 @@ namespace AdvancedScada.Management.BLManager
         {
             get
             {
-                if (Channels.Count == 0) return 1;
-                var last = Channels[0].ChannelId;
-                foreach (var ch in Channels)
+                if (Channels.Count == 0)
                 {
-                    if (ch.Devices == null) ch.Devices = new List<Device>();
-                    if (ch.ChannelId > last) last = ch.ChannelId;
+                    return 1;
+                }
+
+                int last = Channels[0].ChannelId;
+                foreach (Channel ch in Channels)
+                {
+                    if (ch.Devices == null)
+                    {
+                        ch.Devices = new List<Device>();
+                    }
+
+                    if (ch.ChannelId > last)
+                    {
+                        last = ch.ChannelId;
+                    }
                 }
                 return last + 1;
             }
@@ -89,7 +104,10 @@ namespace AdvancedScada.Management.BLManager
         {
             lock (mutex)
             {
-                if (_instance == null) _instance = new ChannelService();
+                if (_instance == null)
+                {
+                    _instance = new ChannelService();
+                }
             }
 
             return _instance;
@@ -104,14 +122,22 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                if (ch == null) throw new NullReferenceException("The Channel is null reference exception");
-                var fCh = IsExisted(ch);
-                if (fCh != null) throw new Exception($"Channel name: '{ch.ChannelName}' is existed");
+                if (ch == null)
+                {
+                    throw new NullReferenceException("The Channel is null reference exception");
+                }
+
+                Channel fCh = IsExisted(ch);
+                if (fCh != null)
+                {
+                    throw new Exception($"Channel name: '{ch.ChannelName}' is existed");
+                }
+
                 _Channels.Add(ch);
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -123,10 +149,19 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                if (ch == null) throw new NullReferenceException("The Channel is null reference exception");
-                var fCh = IsExisted(ch);
-                if (fCh != null) throw new Exception($"Channel name: '{ch.ChannelName}' is existed");
-                foreach (var item in _Channels)
+                if (ch == null)
+                {
+                    throw new NullReferenceException("The Channel is null reference exception");
+                }
+
+                Channel fCh = IsExisted(ch);
+                if (fCh != null)
+                {
+                    throw new Exception($"Channel name: '{ch.ChannelName}' is existed");
+                }
+
+                foreach (Channel item in _Channels)
+                {
                     if (item.ChannelId == ch.ChannelId)
                     {
                         item.ChannelName = ch.ChannelName;
@@ -141,8 +176,8 @@ namespace AdvancedScada.Management.BLManager
                         switch (ch.ConnectionType)
                         {
                             case "SerialPort":
-                                var sp = (DISerialPort)item;
-                                var spParam = (DISerialPort)ch;
+                                DISerialPort sp = (DISerialPort)item;
+                                DISerialPort spParam = (DISerialPort)ch;
                                 sp.PortName = spParam.PortName;
                                 sp.BaudRate = spParam.BaudRate;
                                 sp.DataBits = spParam.DataBits;
@@ -151,17 +186,18 @@ namespace AdvancedScada.Management.BLManager
                                 sp.Handshake = spParam.Handshake;
                                 break;
                             case "Ethernet":
-                                var en = (DIEthernet)item;
-                                var enParam = (DIEthernet)ch;
+                                DIEthernet en = (DIEthernet)item;
+                                DIEthernet enParam = (DIEthernet)ch;
                                 en.IPAddress = enParam.IPAddress;
                                 en.Port = enParam.Port;
                                 break;
                         }
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -173,13 +209,17 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                var result = GetByChannelId(chId);
-                if (result == null) throw new KeyNotFoundException("Channel Id is not found exception");
+                Channel result = GetByChannelId(chId);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("Channel Id is not found exception");
+                }
+
                 _Channels.Remove(result);
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -191,13 +231,17 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                var result = GetByChannelName(chName);
-                if (result == null) throw new KeyNotFoundException("Channel name is not found exception");
+                Channel result = GetByChannelName(chName);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("Channel name is not found exception");
+                }
+
                 _Channels.Remove(result);
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -209,17 +253,23 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                if (ch == null) throw new NullReferenceException("The Channel is null reference exception");
-                foreach (var item in _Channels)
+                if (ch == null)
+                {
+                    throw new NullReferenceException("The Channel is null reference exception");
+                }
+
+                foreach (Channel item in _Channels)
+                {
                     if (item.ChannelId == ch.ChannelId)
                     {
                         _Channels.Remove(item);
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -233,16 +283,18 @@ namespace AdvancedScada.Management.BLManager
             Channel result = null;
             try
             {
-                foreach (var item in _Channels)
+                foreach (Channel item in _Channels)
+                {
                     if (item.ChannelId != ch.ChannelId && item.ChannelName.Equals(ch.ChannelName))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -258,16 +310,18 @@ namespace AdvancedScada.Management.BLManager
             Channel result = null;
             try
             {
-                foreach (var item in _Channels)
+                foreach (Channel item in _Channels)
+                {
                     if (item.ChannelId == chId)
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -283,16 +337,18 @@ namespace AdvancedScada.Management.BLManager
             Channel result = null;
             try
             {
-                foreach (var item in _Channels)
+                foreach (Channel item in _Channels)
+                {
                     if (item.ChannelName.Equals(chName))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -306,24 +362,27 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                var xmlDoc = new XmlDocument();
+                XmlDocument xmlDoc = new XmlDocument();
                 if (string.IsNullOrEmpty(XmlPath) || string.IsNullOrWhiteSpace(XmlPath))
+                {
                     XmlPath = ReadKey(XML_NAME_DEFAULT);
+                }
+
                 xmlDoc.Load(XmlPath);
-                var nodes = xmlDoc.SelectNodes(ROOT);
+                XmlNodeList nodes = xmlDoc.SelectNodes(ROOT);
                 foreach (XmlNode rootNode in nodes)
                 {
-                    var channelNodeList = rootNode.SelectNodes(CHANNEL);
+                    XmlNodeList channelNodeList = rootNode.SelectNodes(CHANNEL);
                     foreach (XmlNode chNode in channelNodeList)
                     {
                         Channel newChannel = null;
-                        var connType = chNode.Attributes[Connection_Type].Value;
+                        string connType = chNode.Attributes[Connection_Type].Value;
 
                         switch (connType)
                         {
                             case "SerialPort":
                                 newChannel = new DISerialPort();
-                                var dis = (DISerialPort)newChannel;
+                                DISerialPort dis = (DISerialPort)newChannel;
                                 dis.PortName = chNode.Attributes[PORT_NAME].Value;
                                 dis.BaudRate = int.Parse(chNode.Attributes[BAUDRATE].Value);
                                 dis.DataBits = int.Parse(chNode.Attributes[DATABITS].Value);
@@ -335,7 +394,7 @@ namespace AdvancedScada.Management.BLManager
                                 break;
                             case "Ethernet":
                                 newChannel = new DIEthernet();
-                                var die = (DIEthernet)newChannel;
+                                DIEthernet die = (DIEthernet)newChannel;
                                 die.IPAddress = chNode.Attributes[IP_ADDRESS].Value;
                                 die.Port = short.Parse(chNode.Attributes[PORT].Value);
                                 break;
@@ -360,7 +419,7 @@ namespace AdvancedScada.Management.BLManager
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return _Channels;
@@ -376,16 +435,20 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                if (File.Exists(pathXml)) File.Delete(pathXml);
-                var element = new XElement(ROOT);
-                var doc = new XDocument(element);
+                if (File.Exists(pathXml))
+                {
+                    File.Delete(pathXml);
+                }
+
+                XElement element = new XElement(ROOT);
+                XDocument doc = new XDocument(element);
                 doc.Save(pathXml);
                 XmlPath = pathXml;
                 WriteKey(XML_NAME_DEFAULT, pathXml);
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -396,16 +459,19 @@ namespace AdvancedScada.Management.BLManager
         /// <returns>Giá trị của key</returns>
         public string ReadKey(string keyName)
         {
-            var result = string.Empty;
+            string result = string.Empty;
             try
             {
                 RegistryKey regKey;
                 regKey = Registry.CurrentUser.OpenSubKey(@"Software\AdvancedScada"); //HKEY_CURRENR_USER\Software\VSSCD
-                if (regKey != null) result = (string)regKey.GetValue(keyName);
+                if (regKey != null)
+                {
+                    result = (string)regKey.GetValue(keyName);
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -427,7 +493,7 @@ namespace AdvancedScada.Management.BLManager
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -439,14 +505,14 @@ namespace AdvancedScada.Management.BLManager
                 WriteKey(XML_NAME_DEFAULT, pathXml);
                 CreatFile(pathXml);
                 XmlPath = pathXml;
-                var xmlDoc = new XmlDocument();
+                XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(pathXml);
-                var root = xmlDoc.SelectSingleNode(ROOT);
+                XmlNode root = xmlDoc.SelectSingleNode(ROOT);
 
                 // List Channels.
-                foreach (var ch in Channels)
+                foreach (Channel ch in Channels)
                 {
-                    var chElement = xmlDoc.CreateElement(CHANNEL);
+                    XmlElement chElement = xmlDoc.CreateElement(CHANNEL);
                     chElement.SetAttribute(CHANNEL_ID, $"{ch.ChannelId}");
                     chElement.SetAttribute(CHANNEL_NAME, ch.ChannelName);
                     chElement.SetAttribute(CHANNEL_Types, ch.ChannelTypes);
@@ -458,7 +524,7 @@ namespace AdvancedScada.Management.BLManager
                     switch (ch.ConnectionType)
                     {
                         case "SerialPort":
-                            var dis = (DISerialPort)ch;
+                            DISerialPort dis = (DISerialPort)ch;
                             chElement.SetAttribute(PORT_NAME, dis.PortName);
                             chElement.SetAttribute(BAUDRATE, $"{dis.BaudRate}");
                             chElement.SetAttribute(DATABITS, $"{dis.DataBits}");
@@ -467,7 +533,7 @@ namespace AdvancedScada.Management.BLManager
                             chElement.SetAttribute(HANDSHAKE, $"{dis.Handshake}");
                             break;
                         case "Ethernet":
-                            var die = (DIEthernet)ch;
+                            DIEthernet die = (DIEthernet)ch;
                             chElement.SetAttribute(IP_ADDRESS, die.IPAddress);
                             chElement.SetAttribute(PORT, $"{die.Port}");
                             break;
@@ -475,22 +541,28 @@ namespace AdvancedScada.Management.BLManager
 
                     chElement.SetAttribute(DESCRIPTION, ch.Description);
                     root.AppendChild(chElement);
-                    if (ch.Devices.Count == 0) continue;
+                    if (ch.Devices.Count == 0)
+                    {
+                        continue;
+                    }
 
                     // List Devices.
-                    foreach (var dv in ch.Devices)
+                    foreach (Device dv in ch.Devices)
                     {
-                        var dvElement = xmlDoc.CreateElement(DeviceService.DEVICE);
+                        XmlElement dvElement = xmlDoc.CreateElement(DeviceService.DEVICE);
                         dvElement.SetAttribute(DeviceService.DEVICE_ID, $"{dv.DeviceId}");
                         dvElement.SetAttribute(DeviceService.DEVICE_NAME, dv.DeviceName);
                         dvElement.SetAttribute(DeviceService.SLAVE_ID, $"{dv.SlaveId}");
                         dvElement.SetAttribute(DESCRIPTION, dv.Description);
                         chElement.AppendChild(dvElement);
-                        if (dv.DataBlocks.Count == 0) continue;
-                        // List DataBlock.
-                        foreach (var db in dv.DataBlocks)
+                        if (dv.DataBlocks.Count == 0)
                         {
-                            var dbElement = xmlDoc.CreateElement(DataBlockService.DATABLOCK);
+                            continue;
+                        }
+                        // List DataBlock.
+                        foreach (DataBlock db in dv.DataBlocks)
+                        {
+                            XmlElement dbElement = xmlDoc.CreateElement(DataBlockService.DATABLOCK);
                             dbElement.SetAttribute(DataBlockService.CHANNEL_ID, $"{db.ChannelId}");
                             dbElement.SetAttribute(DataBlockService.DEVICE_ID, $"{db.DeviceId}");
                             dbElement.SetAttribute(DataBlockService.DATABLOCK_ID, $"{db.DataBlockId}");
@@ -505,9 +577,9 @@ namespace AdvancedScada.Management.BLManager
                             dvElement.AppendChild(dbElement);
 
                             // List Tags.
-                            foreach (var tg in db.Tags)
+                            foreach (Tag tg in db.Tags)
                             {
-                                var tgElement = xmlDoc.CreateElement(TagService.TAG);
+                                XmlElement tgElement = xmlDoc.CreateElement(TagService.TAG);
                                 tgElement.SetAttribute(DataBlockService.CHANNEL_ID, $"{db.ChannelId}");
                                 tgElement.SetAttribute(DataBlockService.DEVICE_ID, $"{db.DeviceId}");
                                 tgElement.SetAttribute(DataBlockService.DATABLOCK_ID, $"{db.DataBlockId}");
@@ -526,7 +598,7 @@ namespace AdvancedScada.Management.BLManager
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -536,16 +608,18 @@ namespace AdvancedScada.Management.BLManager
             List<Device> result = null;
             try
             {
-                foreach (var item in _Channels)
+                foreach (Channel item in _Channels)
+                {
                     if (item.ChannelName.Equals(channel.ChannelName))
                     {
                         result = item.Devices;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -566,7 +640,7 @@ namespace AdvancedScada.Management.BLManager
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
 
             }
             return result;
@@ -583,7 +657,7 @@ namespace AdvancedScada.Management.BLManager
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -638,7 +712,7 @@ namespace AdvancedScada.Management.BLManager
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return ch;
         }

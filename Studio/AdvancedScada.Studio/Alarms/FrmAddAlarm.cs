@@ -18,7 +18,7 @@ namespace AdvancedScada.Studio.Alarms
         private readonly ChannelService objChannelManager;
         private readonly DataBlockService objDataBlockManager;
         private readonly DeviceService objDeviceManager;
-        private TagService objTagManager;
+        private readonly TagService objTagManager;
         public FrmAddAlarm()
         {
             objChannelManager = ChannelService.GetChannelManager();
@@ -44,16 +44,17 @@ namespace AdvancedScada.Studio.Alarms
             {
                 if (Alarm == null)
                 {
-                    var newAlarm = new ClassAlarm();
-
-                    newAlarm.TriggerTeg = txtTagName.Text;
-                    newAlarm.Channel = txtChannel.Text;
-                    newAlarm.Name = ColName.Text;
-                    newAlarm.DataBlock = txtDataBlock.Text;
-                    newAlarm.Device = txtDevice.Text;
-                    newAlarm.AlarmCalss = ColAlarmCalss.Text;
-                    newAlarm.AlarmText = ColAlarmText.Text;
-                    newAlarm.Value = ColValue.Text;
+                    ClassAlarm newAlarm = new ClassAlarm
+                    {
+                        TriggerTeg = txtTagName.Text,
+                        Channel = txtChannel.Text,
+                        Name = ColName.Text,
+                        DataBlock = txtDataBlock.Text,
+                        Device = txtDevice.Text,
+                        AlarmCalss = ColAlarmCalss.Text,
+                        AlarmText = ColAlarmText.Text,
+                        Value = ColValue.Text
+                    };
 
                     eventAlarmChanged?.Invoke(newAlarm, true);
                 }
@@ -74,7 +75,7 @@ namespace AdvancedScada.Studio.Alarms
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -107,14 +108,14 @@ namespace AdvancedScada.Studio.Alarms
         {
             try
             {
-                var ch = objChannelManager.GetByChannelName(txtChannel.Text);
+                Channel ch = objChannelManager.GetByChannelName(txtChannel.Text);
                 txtDevice.DataSource = ch.Devices.ToList();
                 txtDevice.DisplayMember = "DeviceName";
                 txtDevice.ValueMember = "DeviceId";
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -122,15 +123,15 @@ namespace AdvancedScada.Studio.Alarms
         {
             try
             {
-                var chCurrent = objChannelManager.GetByChannelName(txtChannel.Text);
-                var dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, txtDevice.Text);
+                Channel chCurrent = objChannelManager.GetByChannelName(txtChannel.Text);
+                Device dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, txtDevice.Text);
                 txtDataBlock.DataSource = dvCurrent.DataBlocks.ToList();
                 txtDataBlock.DisplayMember = "DataBlockName";
                 txtDataBlock.ValueMember = "DataBlockId";
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -138,9 +139,9 @@ namespace AdvancedScada.Studio.Alarms
         {
             try
             {
-                var chCurrent = objChannelManager.GetByChannelName(txtChannel.Text);
-                var dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, txtDevice.Text);
-                var dbCurrent = objDataBlockManager.GetByDataBlockName(dvCurrent, txtDataBlock.Text);
+                Channel chCurrent = objChannelManager.GetByChannelName(txtChannel.Text);
+                Device dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, txtDevice.Text);
+                DataBlock dbCurrent = objDataBlockManager.GetByDataBlockName(dvCurrent, txtDataBlock.Text);
                 bS7Tags = new BindingList<Tag>(dbCurrent.Tags);
                 txtTagName.DataSource = dbCurrent.Tags.ToList();
                 txtTagName.DisplayMember = "TagName";
@@ -148,7 +149,7 @@ namespace AdvancedScada.Studio.Alarms
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 

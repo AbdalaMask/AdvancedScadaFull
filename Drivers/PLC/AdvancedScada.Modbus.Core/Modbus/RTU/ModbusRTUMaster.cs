@@ -7,7 +7,7 @@ namespace AdvancedScada.Modbus.Core.Modbus.RTU
 {
     public class ModbusRTUMaster : IModbusAdapter
     {
-        private SerialPort serialPort;
+        private readonly SerialPort serialPort;
 
         public bool IsConnected { get; set; }
         public byte Station { get; set; }
@@ -23,10 +23,12 @@ namespace AdvancedScada.Modbus.Core.Modbus.RTU
         {
 
             busRtuClient?.Close();
-            busRtuClient = new ModbusRtu(Station);
-            busRtuClient.AddressStartWithZero = true;
+            busRtuClient = new ModbusRtu(Station)
+            {
+                AddressStartWithZero = true,
 
-            busRtuClient.IsStringReverse = false;
+                IsStringReverse = false
+            };
             try
             {
 
@@ -47,7 +49,7 @@ namespace AdvancedScada.Modbus.Core.Modbus.RTU
             {
 
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
                 return IsConnected;
             }
         }
@@ -62,7 +64,7 @@ namespace AdvancedScada.Modbus.Core.Modbus.RTU
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
                 return IsConnected;
             }
         }
@@ -95,56 +97,56 @@ namespace AdvancedScada.Modbus.Core.Modbus.RTU
         {
             if (typeof(TValue) == typeof(bool))
             {
-                var b = busRtuClient.ReadCoil(address, length).Content;
+                bool[] b = busRtuClient.ReadCoil(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(ushort))
             {
-                var b = busRtuClient.ReadUInt16(address, length).Content;
+                ushort[] b = busRtuClient.ReadUInt16(address, length).Content;
 
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(int))
             {
-                var b = busRtuClient.ReadInt32(address, length).Content;
+                int[] b = busRtuClient.ReadInt32(address, length).Content;
 
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(uint))
             {
-                var b = busRtuClient.ReadUInt32(address, length).Content;
+                uint[] b = busRtuClient.ReadUInt32(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(long))
             {
-                var b = busRtuClient.ReadInt64(address, length).Content;
+                long[] b = busRtuClient.ReadInt64(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(ulong))
             {
-                var b = busRtuClient.ReadUInt64(address, length).Content;
+                ulong[] b = busRtuClient.ReadUInt64(address, length).Content;
                 return (TValue[])(object)b;
             }
 
             if (typeof(TValue) == typeof(short))
             {
-                var b = busRtuClient.ReadInt16(address, length).Content;
+                short[] b = busRtuClient.ReadInt16(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(double))
             {
-                var b = busRtuClient.ReadDouble(address, length).Content;
+                double[] b = busRtuClient.ReadDouble(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(float))
             {
-                var b = busRtuClient.ReadFloat(address, length).Content;
+                float[] b = busRtuClient.ReadFloat(address, length).Content;
                 return (TValue[])(object)b;
 
             }
             if (typeof(TValue) == typeof(string))
             {
-                var b = busRtuClient.ReadString(address, length).Content;
+                string b = busRtuClient.ReadString(address, length).Content;
                 return (TValue[])(object)b;
             }
 

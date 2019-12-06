@@ -10,16 +10,16 @@ namespace AdvancedScada.Utils
     public class KryptonPropertyGrid : PropertyGrid
     {
         private IPalette _palette;
-        private PaletteRedirect _paletteRedirect;
+        private readonly PaletteRedirect _paletteRedirect;
 
         #region ... Properties...
-        Color _gradientMiddleColor = Color.Gray;
+        private Color _gradientMiddleColor = Color.Gray;
         [Browsable(true), Category("Appearance-Extended")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [DefaultValue("Color.Gray")]
         public Color GradientMiddleColor
         {
-            get { return _gradientMiddleColor; }
+            get => _gradientMiddleColor;
             set { _gradientMiddleColor = value; Invalidate(); }
         }
         #endregion
@@ -34,7 +34,9 @@ namespace AdvancedScada.Utils
 
             // add Palette Handler
             if (_palette != null)
+            {
                 _palette.PalettePaint += new EventHandler<PaletteLayoutEventArgs>(OnPalettePaint);
+            }
 
             KryptonManager.GlobalPaletteChanged += new EventHandler(OnGlobalPaletteChanged);
 
@@ -49,12 +51,12 @@ namespace AdvancedScada.Utils
 
         private void InitColors()
         {
-            this.ToolStripRenderer = ToolStripManager.Renderer;
+            ToolStripRenderer = ToolStripManager.Renderer;
             _gradientMiddleColor = _palette.ColorTable.ToolStripGradientMiddle;
-            this.HelpBackColor = _palette.ColorTable.MenuStripGradientBegin;
-            this.HelpForeColor = _palette.ColorTable.StatusStripText;
-            this.LineColor = _palette.ColorTable.ToolStripGradientMiddle;
-            this.CategoryForeColor = _palette.ColorTable.StatusStripText;
+            HelpBackColor = _palette.ColorTable.MenuStripGradientBegin;
+            HelpForeColor = _palette.ColorTable.StatusStripText;
+            LineColor = _palette.ColorTable.ToolStripGradientMiddle;
+            CategoryForeColor = _palette.ColorTable.StatusStripText;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -77,7 +79,9 @@ namespace AdvancedScada.Utils
         private void OnGlobalPaletteChanged(object sender, EventArgs e)
         {
             if (_palette != null)
+            {
                 _palette.PalettePaint -= new EventHandler<PaletteLayoutEventArgs>(OnPalettePaint);
+            }
 
             _palette = KryptonManager.CurrentGlobalPalette;
             _paletteRedirect.Target = _palette;

@@ -10,7 +10,7 @@ namespace AdvancedScada.Delta.Core.Editors
     public partial class XChannelForm : AdvancedScada.Management.Editors.XChannelForm
     {
 
-        private string _DriverTypes;
+        private readonly string _DriverTypes;
 
 
         public XChannelForm()
@@ -51,9 +51,9 @@ namespace AdvancedScada.Delta.Core.Editors
 
 
                     cboxConnType.Enabled = false;
-                    this.Text = "Edit Channel   " + ch.ChannelTypes;
-                    this.txtChannelName.Text = ch.ChannelName;
-                    this.cboxConnType.SelectedItem = $"{ch.ConnectionType}";
+                    Text = "Edit Channel   " + ch.ChannelTypes;
+                    txtChannelName.Text = ch.ChannelName;
+                    cboxConnType.SelectedItem = $"{ch.ConnectionType}";
 
                     txtDesc.Text = ch.ChannelName;
                     switch (ch.ConnectionType)
@@ -85,8 +85,8 @@ namespace AdvancedScada.Delta.Core.Editors
                 {
 
                     cboxConnType.Enabled = true;
-                    this.Text = "Add Channel    " + _DriverTypes;
-                    this.cboxConnType.SelectedIndex = 0;
+                    Text = "Add Channel    " + _DriverTypes;
+                    cboxConnType.SelectedIndex = 0;
                     cboxPort.SelectedIndex = 0;
                     cboxBaudRate.SelectedIndex = 3;
                     cboxDataBits.SelectedIndex = 1;
@@ -120,7 +120,7 @@ namespace AdvancedScada.Delta.Core.Editors
                     errorProvider1.SetError(txtChannelName, "The channel name is empty");
                     return;
                 }
-                var ConnType = $"{cboxConnType.SelectedItem}";
+                string ConnType = $"{cboxConnType.SelectedItem}";
                 TabControlDelta.SelectedIndex = cboxConnType.SelectedIndex;
                 errorProvider1.Clear();
                 switch (ConnType)
@@ -149,7 +149,11 @@ namespace AdvancedScada.Delta.Core.Editors
                             {
                                 dis.ChannelId = objChannelManager.Channels.Count + 1;
 
-                                if (eventChannelChanged != null) eventChannelChanged(dis, true);
+                                if (eventChannelChanged != null)
+                                {
+                                    eventChannelChanged(dis, true);
+                                }
+
                                 EventscadaLogger?.Invoke(1, "ChannelManager", $"{DateTime.Now}", "Add Channel");
 
                             }
@@ -158,7 +162,11 @@ namespace AdvancedScada.Delta.Core.Editors
                                 dis.ChannelId = ch.ChannelId;
                                 dis.Devices = ch.Devices;
 
-                                if (eventChannelChanged != null) eventChannelChanged(dis, false);
+                                if (eventChannelChanged != null)
+                                {
+                                    eventChannelChanged(dis, false);
+                                }
+
                                 EventscadaLogger?.Invoke(1, "ChannelManager", $"{DateTime.Now}", "Editor Channel");
 
                             }
@@ -215,7 +223,7 @@ namespace AdvancedScada.Delta.Core.Editors
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 

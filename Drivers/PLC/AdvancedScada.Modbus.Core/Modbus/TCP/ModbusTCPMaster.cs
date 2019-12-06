@@ -31,13 +31,13 @@ namespace AdvancedScada.Modbus.Core.Modbus.TCP
         {
             if (!System.Net.IPAddress.TryParse(IP, out System.Net.IPAddress address))
             {
-                EventscadaException?.Invoke(this.GetType().Name, DemoUtils.IpAddressInputWrong);
+                EventscadaException?.Invoke(GetType().Name, DemoUtils.IpAddressInputWrong);
                 return false;
             }
 
             if (!int.TryParse($"{Port}", out int port))
             {
-                EventscadaException?.Invoke(this.GetType().Name, DemoUtils.PortInputWrong);
+                EventscadaException?.Invoke(GetType().Name, DemoUtils.PortInputWrong);
                 return false;
             }
 
@@ -47,29 +47,31 @@ namespace AdvancedScada.Modbus.Core.Modbus.TCP
             {
 
                 busTcpClient?.ConnectClose();
-                busTcpClient = new ModbusTcpNet(IP, Port, Station);
-                busTcpClient.AddressStartWithZero = true;
+                busTcpClient = new ModbusTcpNet(IP, Port, Station)
+                {
+                    AddressStartWithZero = true,
 
 
-                busTcpClient.IsStringReverse = false;
+                    IsStringReverse = false
+                };
 
                 try
                 {
                     OperateResult connect = busTcpClient.ConnectServer();
                     if (connect.IsSuccess)
                     {
-                        EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedSuccess);
+                        EventscadaException?.Invoke(GetType().Name, StringResources.Language.ConnectedSuccess);
                         IsConnected = true;
                     }
                     else
                     {
-                        EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedFailed);
+                        EventscadaException?.Invoke(GetType().Name, StringResources.Language.ConnectedFailed);
                     }
                     return IsConnected;
                 }
                 catch (Exception ex)
                 {
-                    EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                    EventscadaException?.Invoke(GetType().Name, ex.Message);
                     return IsConnected;
                 }
 
@@ -81,7 +83,7 @@ namespace AdvancedScada.Modbus.Core.Modbus.TCP
             {
 
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
                 return IsConnected;
             }
         }
@@ -95,7 +97,7 @@ namespace AdvancedScada.Modbus.Core.Modbus.TCP
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
                 return IsConnected;
             }
 
@@ -121,56 +123,56 @@ namespace AdvancedScada.Modbus.Core.Modbus.TCP
 
             if (typeof(TValue) == typeof(bool))
             {
-                var b = busTcpClient.ReadCoil(address, length).Content;
+                bool[] b = busTcpClient.ReadCoil(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(ushort))
             {
-                var b = busTcpClient.ReadUInt16(address, length).Content;
+                ushort[] b = busTcpClient.ReadUInt16(address, length).Content;
 
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(int))
             {
-                var b = busTcpClient.ReadInt32(address, length).Content;
+                int[] b = busTcpClient.ReadInt32(address, length).Content;
 
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(uint))
             {
-                var b = busTcpClient.ReadUInt32(address, length).Content;
+                uint[] b = busTcpClient.ReadUInt32(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(long))
             {
-                var b = busTcpClient.ReadInt64(address, length).Content;
+                long[] b = busTcpClient.ReadInt64(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(ulong))
             {
-                var b = busTcpClient.ReadUInt64(address, length).Content;
+                ulong[] b = busTcpClient.ReadUInt64(address, length).Content;
                 return (TValue[])(object)b;
             }
 
             if (typeof(TValue) == typeof(short))
             {
-                var b = busTcpClient.ReadInt16(address, length).Content;
+                short[] b = busTcpClient.ReadInt16(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(double))
             {
-                var b = busTcpClient.ReadDouble(address, length).Content;
+                double[] b = busTcpClient.ReadDouble(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(float))
             {
-                var b = busTcpClient.ReadFloat(address, length).Content;
+                float[] b = busTcpClient.ReadFloat(address, length).Content;
                 return (TValue[])(object)b;
 
             }
             if (typeof(TValue) == typeof(string))
             {
-                var b = busTcpClient.ReadString(address, length).Content;
+                string b = busTcpClient.ReadString(address, length).Content;
                 return (TValue[])(object)b;
             }
 

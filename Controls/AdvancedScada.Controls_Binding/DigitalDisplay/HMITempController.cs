@@ -47,7 +47,7 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressValue
         {
-            get { return m_PLCAddressValue; }
+            get => m_PLCAddressValue;
             set
             {
                 if (m_PLCAddressValue != value)
@@ -57,8 +57,12 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressValue) || string.IsNullOrWhiteSpace(m_PLCAddressValue) ||
-                            Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
+                            Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -72,47 +76,47 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
         [Category("Numeric Display")]
         public decimal ScaleFactor
         {
-            get { return _ValueScaleFactor; }
-            set { _ValueScaleFactor = value; }
+            get => _ValueScaleFactor;
+            set => _ValueScaleFactor = value;
         }
 
         [Category("PLC Properties")]
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressClick1
         {
-            get { return m_PLCAddressClick1; }
-            set { m_PLCAddressClick1 = value; }
+            get => m_PLCAddressClick1;
+            set => m_PLCAddressClick1 = value;
         }
 
         [Category("PLC Properties")]
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressClick2
         {
-            get { return m_PLCAddressClick2; }
-            set { m_PLCAddressClick2 = value; }
+            get => m_PLCAddressClick2;
+            set => m_PLCAddressClick2 = value;
         }
 
         [Category("PLC Properties")]
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressClick3
         {
-            get { return m_PLCAddressClick3; }
-            set { m_PLCAddressClick3 = value; }
+            get => m_PLCAddressClick3;
+            set => m_PLCAddressClick3 = value;
         }
 
         [Category("PLC Properties")]
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressClick4
         {
-            get { return m_PLCAddressClick4; }
-            set { m_PLCAddressClick4 = value; }
+            get => m_PLCAddressClick4;
+            set => m_PLCAddressClick4 = value;
         }
 
         [Category("PLC Properties")]
         public OutputType OutputType
         {
-            get { return m_OutputType; }
-            set { m_OutputType = value; }
+            get => m_OutputType;
+            set => m_OutputType = value;
         }
 
         [DefaultValue(false)]
@@ -165,6 +169,7 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
         private void MouseDownAction(string PLCAddress)
         {
             if (PLCAddress != null && string.Compare(PLCAddress, string.Empty) != 0)
+            {
                 try
                 {
                     switch (m_OutputType)
@@ -182,12 +187,17 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
                             Utilities.Write(PLCAddress, false);
                             break;
                         case OutputType.Toggle:
-                            var CurrentValue = false;
+                            bool CurrentValue = false;
                             CurrentValue = Convert.ToBoolean(PLCAddress);
                             if (CurrentValue)
+                            {
                                 Utilities.Write(PLCAddress, false);
+                            }
                             else
+                            {
                                 Utilities.Write(PLCAddress, true);
+                            }
+
                             break;
                     }
                 }
@@ -195,11 +205,13 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
                 {
                     DisplayError(ex.Message);
                 }
+            }
         }
 
         private void MouseUpAction(string PLCAddress)
         {
             if (PLCAddress != null && (string.Compare(PLCAddress, string.Empty) != 0) & Enabled)
+            {
                 try
                 {
                     switch (OutputType)
@@ -216,6 +228,7 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
                 {
                     DisplayError(ex.Message);
                 }
+            }
         }
 
         #region "Error Display"
@@ -238,7 +251,11 @@ namespace AdvancedScada.Controls_Binding.DigitalDisplay
                 }
 
                 //* Save the text to return to
-                if (!ErrorDisplayTime.Enabled) OriginalText = Text;
+                if (!ErrorDisplayTime.Enabled)
+                {
+                    OriginalText = Text;
+                }
+
                 Utilities.DisplayError(this, ErrorMessage);
                 ErrorDisplayTime.Enabled = true;
 

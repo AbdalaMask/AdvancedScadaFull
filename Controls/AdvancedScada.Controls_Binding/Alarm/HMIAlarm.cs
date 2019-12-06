@@ -24,8 +24,12 @@ namespace AdvancedScada.Controls_Binding.Alarm
             InitializeComponent();
             dbCurrent = new List<ClassAlarm>();
             objAlarmManager = AlarmManagers.GetAlarmManager();
-            var xmlFile = objAlarmManager.ReadKey(AlarmManagers.XML_NAME_DEFAULT);
-            if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile)) return;
+            string xmlFile = objAlarmManager.ReadKey(AlarmManagers.XML_NAME_DEFAULT);
+            if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile))
+            {
+                return;
+            }
+
             dbCurrent = InitializeData(xmlFile);
         }
         private List<ClassAlarm> InitializeData(string xmlPath)
@@ -35,7 +39,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
             return objAlarmManager.GetAlarms(xmlPath);
 
 
-         
+
         }
         protected override void OnCreateControl()
         {
@@ -56,7 +60,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
 
         public void GetWCF()
         {
-            var ic = new InstanceContext(this);
+            InstanceContext ic = new InstanceContext(this);
             XCollection.CURRENT_MACHINE = new Machine
             {
                 MachineName = Environment.MachineName,
@@ -85,13 +89,13 @@ namespace AdvancedScada.Controls_Binding.Alarm
                 {
                     if (Tags != null)
                     {
-                        var List2 = Tags.Where(item => dbCurrent.Any(p => p.Channel == item.Key.Split('.')[0]
+                        List<KeyValuePair<string, Tag>> List2 = Tags.Where(item => dbCurrent.Any(p => p.Channel == item.Key.Split('.')[0]
                         && p.Device == item.Key.Split('.')[1] && p.DataBlock == item.Key.Split('.')[2])).ToList();
                         DGAlarm.Rows.Clear();
                         int i = 1;
-                        foreach (var author in dbCurrent)
+                        foreach (ClassAlarm author in dbCurrent)
                         {
-                            var tagName = $"{author.Channel}.{author.Device}.{author.DataBlock}.{author.TriggerTeg}";
+                            string tagName = $"{author.Channel}.{author.Device}.{author.DataBlock}.{author.TriggerTeg}";
 
                             if (Tags.ContainsKey(tagName) && Tags[tagName].TagName == author.TriggerTeg)
                             {
@@ -102,12 +106,12 @@ namespace AdvancedScada.Controls_Binding.Alarm
                                     case DriverBase.DataTypes.BitOnWord:
                                         break;
                                     case DriverBase.DataTypes.Bit:
-                                        var LastValue = string.Empty;
+                                        string LastValue = string.Empty;
                                         if (Tags[tagName].Value == bool.Parse(author.Value))
                                         {
                                             string[] row = { $"{i++}", $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}", DateTime.Now.ToShortTimeString(), tagName, author.AlarmText, string.Format("{0}", author.AlarmCalss), author.Value };
                                             DGAlarm.Rows.Add(row);
-                                           
+
                                         }
                                         break;
                                     case DriverBase.DataTypes.Byte:
@@ -117,7 +121,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
                                         {
                                             string[] row = { $"{i++}", $"{DateTime.Now.ToShortDateString()}", DateTime.Now.ToShortTimeString(), tagName, author.AlarmText, string.Format("{0}", author.AlarmCalss), author.Value };
                                             DGAlarm.Rows.Add(row);
-                                           
+
                                         }
                                         break;
                                     case DriverBase.DataTypes.UShort:

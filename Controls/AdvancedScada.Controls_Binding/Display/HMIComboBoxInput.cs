@@ -16,8 +16,8 @@ namespace AdvancedScada.Controls_Binding.Display
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressValueToWrite
         {
-            get { return m_PLCAddressValueToWrite; }
-            set { m_PLCAddressValueToWrite = value; }
+            get => m_PLCAddressValueToWrite;
+            set => m_PLCAddressValueToWrite = value;
 
 
         }
@@ -35,8 +35,12 @@ namespace AdvancedScada.Controls_Binding.Display
         public void ValueToWrite()
         {
             if (string.IsNullOrEmpty(m_PLCAddressValueToWrite) || string.IsNullOrWhiteSpace(m_PLCAddressValueToWrite) ||
-                          Controls_Binding.Licenses.LicenseManager.IsInDesignMode) return;
-            Utilities.Write(m_PLCAddressValueToWrite, this.Text);
+                          Controls_Binding.Licenses.LicenseManager.IsInDesignMode)
+            {
+                return;
+            }
+
+            Utilities.Write(m_PLCAddressValueToWrite, Text);
 
         }
     }

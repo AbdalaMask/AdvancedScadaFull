@@ -30,100 +30,52 @@ namespace AdvancedScada.Controls.Drivers
 
         public string PLCAddress
         {
-            get
-            {
-                return m_PLCAddress;
-            }
-            set
-            {
-                m_PLCAddress = value;
-            }
+            get => m_PLCAddress;
+            set => m_PLCAddress = value;
         }
 
         public int NumberOfElements
         {
-            get
-            {
-                return m_NumberOfElements;
-            }
-            set
-            {
-                m_NumberOfElements = value;
-            }
+            get => m_NumberOfElements;
+            set => m_NumberOfElements = value;
         }
 
         public double ScaleFactor
         {
-            get
-            {
-                return m_ScaleFactor;
-            }
-            set
-            {
-                m_ScaleFactor = value;
-            }
+            get => m_ScaleFactor;
+            set => m_ScaleFactor = value;
         }
 
         public double ScaleOffset
         {
-            get
-            {
-                return m_ScaleOffset;
-            }
-            set
-            {
-                m_ScaleOffset = value;
-            }
+            get => m_ScaleOffset;
+            set => m_ScaleOffset = value;
         }
 
         [Browsable(false)]
         public string LastValue
         {
-            get
-            {
-                return m_LastValue;
-            }
-            set
-            {
-                m_LastValue = value;
-            }
+            get => m_LastValue;
+            set => m_LastValue = value;
         }
 
         [Browsable(false)]
         public int SubscriptionID
         {
-            get
-            {
-                return m_SubscriptionID;
-            }
-            set
-            {
-                m_SubscriptionID = value;
-            }
+            get => m_SubscriptionID;
+            set => m_SubscriptionID = value;
         }
 
         public string Description
         {
-            get
-            {
-                return m_Description;
-            }
-            set
-            {
-                m_Description = value;
-            }
+            get => m_Description;
+            set => m_Description = value;
         }
 
         public string Name
         {
-            get
-            {
-                return m_Name;
-            }
-            set
-            {
-                m_Name = value;
-            }
+            get => m_Name;
+            set => m_Name = value;
         }
 
         public PLCAddressItem()
@@ -174,8 +126,7 @@ namespace AdvancedScada.Controls.Drivers
             {
                 return value;
             }
-            double result;
-            if (double.TryParse(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo, out result))
+            if (double.TryParse(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo, out double result))
             {
                 return Conversions.ToString(result * m_ScaleFactor + m_ScaleOffset);
             }
@@ -193,15 +144,17 @@ namespace AdvancedScada.Controls.Drivers
 
         public PLCAddressItem Clone()
         {
-            PLCAddressItem pLCAddressItem = new PLCAddressItem();
-            pLCAddressItem.Name = m_Name;
-            pLCAddressItem.PLCAddress = m_PLCAddress;
-            pLCAddressItem.NumberOfElements = m_NumberOfElements;
-            pLCAddressItem.ScaleFactor = m_ScaleFactor;
-            pLCAddressItem.ScaleOffset = m_ScaleOffset;
-            pLCAddressItem.LastValue = m_LastValue;
-            pLCAddressItem.Description = m_Description;
-            pLCAddressItem.SubscriptionID = m_SubscriptionID;
+            PLCAddressItem pLCAddressItem = new PLCAddressItem
+            {
+                Name = m_Name,
+                PLCAddress = m_PLCAddress,
+                NumberOfElements = m_NumberOfElements,
+                ScaleFactor = m_ScaleFactor,
+                ScaleOffset = m_ScaleOffset,
+                LastValue = m_LastValue,
+                Description = m_Description,
+                SubscriptionID = m_SubscriptionID
+            };
             return pLCAddressItem;
         }
     }

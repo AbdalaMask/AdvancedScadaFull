@@ -15,7 +15,7 @@ namespace AdvancedScada.Studio.LinkToSQL
 
         public bool IsDataChanged;
 
-        private string _lblValueInfo = string.Empty;
+        private readonly string _lblValueInfo = string.Empty;
         private ServerManager objServerManager;
 
         public string SelecteCopy_Paste;
@@ -30,9 +30,9 @@ namespace AdvancedScada.Studio.LinkToSQL
         {
             objServerManager.SQLServers.Clear();
             objServerManager.XmlPath = xmlPath;
-            var chList = objServerManager.GetServers(xmlPath);
+            List<Server> chList = objServerManager.GetServers(xmlPath);
             treeViewSI.Nodes.Clear();
-            foreach (var ch in chList)
+            foreach (Server ch in chList)
             {
                 List<TreeNode> dvList = new List<TreeNode>();
                 ////Sort.
@@ -41,22 +41,28 @@ namespace AdvancedScada.Studio.LinkToSQL
                     return x.DataBaseName.CompareTo(y.DataBaseName);
                 });
 
-                foreach (var dv in ch.DataBase)
+                foreach (DataBase dv in ch.DataBase)
                 {
                     List<TreeNode> tgList = new List<TreeNode>();
-                    foreach (var db in dv.Tables)
+                    foreach (Table db in dv.Tables)
                     {
-                        TreeNode dbNode = new TreeNode(db.TableName);
-                        dbNode.StateImageIndex = 2;
+                        TreeNode dbNode = new TreeNode(db.TableName)
+                        {
+                            StateImageIndex = 2
+                        };
                         tgList.Add(dbNode);
                     }
 
-                    TreeNode dvNode = new TreeNode(dv.DataBaseName, tgList.ToArray());
-                    dvNode.StateImageIndex = 1;
+                    TreeNode dvNode = new TreeNode(dv.DataBaseName, tgList.ToArray())
+                    {
+                        StateImageIndex = 1
+                    };
                     dvList.Add(dvNode);
                 }
-                TreeNode chNode = new TreeNode(ch.ServerName, dvList.ToArray());
-                chNode.StateImageIndex = 0;
+                TreeNode chNode = new TreeNode(ch.ServerName, dvList.ToArray())
+                {
+                    StateImageIndex = 0
+                };
                 treeViewSI.Nodes.Add(chNode);
             }
         }
@@ -71,8 +77,12 @@ namespace AdvancedScada.Studio.LinkToSQL
             kryptonDockingManager1.AddAutoHiddenGroup("Control", DockingEdge.Right, new KryptonPage[] { NewUserPropertyGrid() });
 
             objServerManager = ServerManager.GetServerManager();
-            var xmlFile = objServerManager.ReadKey(ServerManager.XML_NAME_DEFAULT);
-            if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile)) return;
+            string xmlFile = objServerManager.ReadKey(ServerManager.XML_NAME_DEFAULT);
+            if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile))
+            {
+                return;
+            }
+
             InitializeData(xmlFile);
         }
 
@@ -83,11 +93,11 @@ namespace AdvancedScada.Studio.LinkToSQL
                 ItemSQLServer.Enabled = true;
                 ItemDataBase.Enabled = true;
                 ItemTable.Enabled = true;
-                var saveFileDialog = new SaveFileDialog { Filter = "Xml Files (*.xml)|*.xml|All files (*.*)|*.*", FileName = "XML_NAME_DEFAULT" };
-                var dr = saveFileDialog.ShowDialog();
+                SaveFileDialog saveFileDialog = new SaveFileDialog { Filter = "Xml Files (*.xml)|*.xml|All files (*.*)|*.*", FileName = "XML_NAME_DEFAULT" };
+                DialogResult dr = saveFileDialog.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    var xmlPath = saveFileDialog.FileName;
+                    string xmlPath = saveFileDialog.FileName;
                     objServerManager.CreatFile(xmlPath);
                     treeViewSI.Nodes.Clear();
 
@@ -97,7 +107,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -108,8 +118,8 @@ namespace AdvancedScada.Studio.LinkToSQL
                 ItemSQLServer.Enabled = true;
                 ItemDataBase.Enabled = true;
                 ItemTable.Enabled = true;
-                var openFileDialog = new OpenFileDialog { Filter = "Xml Files (*.xml)|*.xml|All files (*.*)|*.*", FileName = "config" };
-                var result = openFileDialog.ShowDialog();
+                OpenFileDialog openFileDialog = new OpenFileDialog { Filter = "Xml Files (*.xml)|*.xml|All files (*.*)|*.*", FileName = "config" };
+                DialogResult result = openFileDialog.ShowDialog();
                 if (result == DialogResult.OK) // Test result.
                 {
                     //   InitializeData(openFileDialog.FileName);
@@ -121,7 +131,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -136,7 +146,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
         #endregion
@@ -147,10 +157,12 @@ namespace AdvancedScada.Studio.LinkToSQL
         private KryptonPage NewPages(string name, int image, Control content)
         {
             // Create new page with title and image
-            KryptonPage p = new KryptonPage();
-            p.Text = name;
-            p.TextTitle = name;
-            p.TextDescription = name;
+            KryptonPage p = new KryptonPage
+            {
+                Text = name,
+                TextTitle = name,
+                TextDescription = name
+            };
 
 
 
@@ -166,13 +178,17 @@ namespace AdvancedScada.Studio.LinkToSQL
         {
             try
             {
-                if (treeViewSI.SelectedNode == null) return;
+                if (treeViewSI.SelectedNode == null)
+                {
+                    return;
+                }
+
                 int Level = treeViewSI.SelectedNode.Level;
                 string selectedNode = treeViewSI.SelectedNode.Text;
                 Table dbCurrent = null; //Node: Table
                 DataBase dvCurrent = null; //Node: DataBase
                 Server chCurrent = null; //N
-                this.Selection();
+                Selection();
                 switch (Level)
                 {
                     case 0:
@@ -191,7 +207,7 @@ namespace AdvancedScada.Studio.LinkToSQL
                         dbCurrent = TableManager.GetByTableName(dvCurrent, treeViewSI.SelectedNode.Text);
                         DGMonitorForm.Rows.Clear();
 
-                        foreach (var item in dbCurrent.Columns)
+                        foreach (Column item in dbCurrent.Columns)
                         {
                             string[] row = { string.Format("{0}", item.ColumnId), item.ColumnName, item.TagName, item.DataBlock, item.Device, item.Channel, item.Cycle, item.Description };
 
@@ -239,7 +255,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -257,7 +273,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -274,13 +290,17 @@ namespace AdvancedScada.Studio.LinkToSQL
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
         private void Selection()
         {
-            if (treeViewSI.SelectedNode == null) return;
+            if (treeViewSI.SelectedNode == null)
+            {
+                return;
+            }
+
             int Level = treeViewSI.SelectedNode.Level;
             switch (Level)
             {
@@ -316,7 +336,11 @@ namespace AdvancedScada.Studio.LinkToSQL
             {
                 Server chCurrent = null;
                 XAddDataBase dvFrm = null;
-                if (treeViewSI.SelectedNode == null) return;
+                if (treeViewSI.SelectedNode == null)
+                {
+                    return;
+                }
+
                 int Level = treeViewSI.SelectedNode.Level;
                 switch (Level)
                 {
@@ -333,8 +357,10 @@ namespace AdvancedScada.Studio.LinkToSQL
                     try
                     {
 
-                        TreeNode dvNode = new TreeNode(dv.DataBaseName);
-                        dvNode.StateImageIndex = 1;
+                        TreeNode dvNode = new TreeNode(dv.DataBaseName)
+                        {
+                            StateImageIndex = 1
+                        };
                         switch (Level)
                         {
                             case 0:
@@ -350,7 +376,7 @@ namespace AdvancedScada.Studio.LinkToSQL
                     catch (Exception ex)
                     {
 
-                        EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                        EventscadaException?.Invoke(GetType().Name, ex.Message);
                     }
                 };
                 dvFrm.ShowDialog();
@@ -358,7 +384,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -369,7 +395,11 @@ namespace AdvancedScada.Studio.LinkToSQL
                 Server chCurrent = null;
                 DataBase dvCurrent = null;
                 XAddTable dbFrm = null;
-                if (treeViewSI.SelectedNode == null) return;
+                if (treeViewSI.SelectedNode == null)
+                {
+                    return;
+                }
+
                 int Level = treeViewSI.SelectedNode.Level;
                 switch (Level)
                 {
@@ -388,8 +418,10 @@ namespace AdvancedScada.Studio.LinkToSQL
                     try
                     {
 
-                        TreeNode dbNode = new TreeNode(db.TableName);
-                        dbNode.StateImageIndex = 2;
+                        TreeNode dbNode = new TreeNode(db.TableName)
+                        {
+                            StateImageIndex = 2
+                        };
                         switch (Level)
                         {
                             case 1:
@@ -405,7 +437,7 @@ namespace AdvancedScada.Studio.LinkToSQL
                     catch (Exception ex)
                     {
 
-                        EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                        EventscadaException?.Invoke(GetType().Name, ex.Message);
                     }
                 };
                 dbFrm.ShowDialog();
@@ -413,7 +445,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -421,19 +453,22 @@ namespace AdvancedScada.Studio.LinkToSQL
         {
             try
             {
-                if (treeViewSI.SelectedNode == null) return;
+                if (treeViewSI.SelectedNode == null)
+                {
+                    return;
+                }
 
                 Server chCurrent = objServerManager.GetBySQLServerName(treeViewSI.SelectedNode.Parent.Parent.Text);
                 DataBase dvCurrent = DataBaseManager.GetByDataBaseName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
                 Table dbCurrent = TableManager.GetByTableName(dvCurrent, treeViewSI.SelectedNode.Text);
-                var tgFrm = new XAddColumn(chCurrent, dvCurrent, dbCurrent);
+                XAddColumn tgFrm = new XAddColumn(chCurrent, dvCurrent, dbCurrent);
                 tgFrm.eventColumnChanged += tg =>
                 {
 
                     try
                     {
                         DGMonitorForm.Rows.Clear();
-                        foreach (var item in dbCurrent.Columns)
+                        foreach (Column item in dbCurrent.Columns)
                         {
                             string[] row = { string.Format("{0}", item.ColumnId), item.ColumnName, item.TagName, item.DataBlock, item.Device, item.Channel, item.Cycle, item.Description };
 
@@ -445,7 +480,7 @@ namespace AdvancedScada.Studio.LinkToSQL
                     catch (Exception ex)
                     {
 
-                        EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                        EventscadaException?.Invoke(GetType().Name, ex.Message);
                     }
                 };
                 tgFrm.ShowDialog();
@@ -453,7 +488,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -462,21 +497,23 @@ namespace AdvancedScada.Studio.LinkToSQL
             try
             {
 
-                var chFrm = new XAddServer(objServerManager);
+                XAddServer chFrm = new XAddServer(objServerManager);
                 chFrm.eventSQLServerChanged += ch =>
                 {
                     try
                     {
 
-                        TreeNode chNode = new TreeNode(ch.ServerName);
-                        chNode.StateImageIndex = 0;
+                        TreeNode chNode = new TreeNode(ch.ServerName)
+                        {
+                            StateImageIndex = 0
+                        };
                         treeViewSI.Nodes.Add(chNode);
                         IsDataChanged = true;
                     }
                     catch (Exception ex)
                     {
 
-                        EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                        EventscadaException?.Invoke(GetType().Name, ex.Message);
                     }
 
                 };
@@ -485,7 +522,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -493,7 +530,11 @@ namespace AdvancedScada.Studio.LinkToSQL
         {
             try
             {
-                if (e.Button != System.Windows.Forms.MouseButtons.Left) return;
+                if (e.Button != System.Windows.Forms.MouseButtons.Left)
+                {
+                    return;
+                }
+
                 int Level = treeViewSI.SelectedNode.Level;
                 string selectedNode = treeViewSI.SelectedNode.Text;
                 Server chCurrent = null;
@@ -503,7 +544,7 @@ namespace AdvancedScada.Studio.LinkToSQL
                 {
                     case 0:
                         chCurrent = objServerManager.GetBySQLServerName(selectedNode);
-                        var chFrm = new XAddServer(objServerManager, chCurrent);
+                        XAddServer chFrm = new XAddServer(objServerManager, chCurrent);
                         chFrm.eventSQLServerChanged += ch =>
                         {
 
@@ -515,7 +556,7 @@ namespace AdvancedScada.Studio.LinkToSQL
                     case 1:
                         chCurrent = objServerManager.GetBySQLServerName(treeViewSI.SelectedNode.Parent.Text);
                         dvCurrent = DataBaseManager.GetByDataBaseName(chCurrent, selectedNode);
-                        var dvFrm = new XAddDataBase(chCurrent, dvCurrent);
+                        XAddDataBase dvFrm = new XAddDataBase(chCurrent, dvCurrent);
                         dvFrm.eventDataBaseChanged += dv =>
                         {
 
@@ -535,7 +576,7 @@ namespace AdvancedScada.Studio.LinkToSQL
                             treeViewSI.SelectedNode.Text = db.TableName;
                             DGMonitorForm.Rows.Clear();
 
-                            foreach (var item in dbCurrent.Columns)
+                            foreach (Column item in dbCurrent.Columns)
                             {
                                 string[] row = { string.Format("{0}", item.ColumnId), item.ColumnName, item.TagName, item.DataBlock, item.Device, item.Channel, item.Cycle, item.Description };
 
@@ -552,7 +593,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -560,7 +601,11 @@ namespace AdvancedScada.Studio.LinkToSQL
         {
             try
             {
-                if (treeViewSI.SelectedNode == null) return;
+                if (treeViewSI.SelectedNode == null)
+                {
+                    return;
+                }
+
                 int Level = treeViewSI.SelectedNode.Level;
                 string selectedNode = treeViewSI.SelectedNode.Text;
                 DialogResult result;
@@ -570,7 +615,7 @@ namespace AdvancedScada.Studio.LinkToSQL
                         result = MessageBox.Show(this, string.Format("Are you sure delete channel: {0}?", selectedNode), "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (result == System.Windows.Forms.DialogResult.Yes)
                         {
-                            var fCh = objServerManager.GetBySQLServerName(selectedNode);
+                            Server fCh = objServerManager.GetBySQLServerName(selectedNode);
                             objServerManager.Delete(fCh);
                             treeViewSI.SelectedNode.Remove();
                             IsDataChanged = true;
@@ -580,7 +625,7 @@ namespace AdvancedScada.Studio.LinkToSQL
                         result = MessageBox.Show(this, string.Format("Are you sure delete device: {0} of the channel: {1}?", selectedNode, treeViewSI.SelectedNode.Parent.Text), "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (result == System.Windows.Forms.DialogResult.Yes)
                         {
-                            var fCh = objServerManager.GetBySQLServerName(treeViewSI.SelectedNode.Parent.Text);
+                            Server fCh = objServerManager.GetBySQLServerName(treeViewSI.SelectedNode.Parent.Text);
                             DataBaseManager.Delete(fCh, selectedNode);
                             treeViewSI.SelectedNode.Remove();
                             IsDataChanged = true;
@@ -590,9 +635,9 @@ namespace AdvancedScada.Studio.LinkToSQL
                         result = MessageBox.Show(this, string.Format("Are you sure delete datablock: {0} of the device: {1}, channel: {2}?", selectedNode, treeViewSI.SelectedNode.Parent.Text, treeViewSI.SelectedNode.Parent.Parent.Text), "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (result == System.Windows.Forms.DialogResult.Yes)
                         {
-                            var chCurrent = objServerManager.GetBySQLServerName(treeViewSI.SelectedNode.Parent.Parent.Text);
-                            var dvCurrent = DataBaseManager.GetByDataBaseName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
-                            var dbCurrent = TableManager.GetByTableName(dvCurrent, treeViewSI.SelectedNode.Text);
+                            Server chCurrent = objServerManager.GetBySQLServerName(treeViewSI.SelectedNode.Parent.Parent.Text);
+                            DataBase dvCurrent = DataBaseManager.GetByDataBaseName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
+                            Table dbCurrent = TableManager.GetByTableName(dvCurrent, treeViewSI.SelectedNode.Text);
                             TableManager.Delete(dvCurrent, dbCurrent);
                             treeViewSI.SelectedNode.Remove();
                             IsDataChanged = true;
@@ -605,7 +650,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -662,7 +707,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -679,7 +724,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
         #endregion
@@ -688,29 +733,33 @@ namespace AdvancedScada.Studio.LinkToSQL
         {
             try
             {
-                if (treeViewSI.SelectedNode == null) return;
+                if (treeViewSI.SelectedNode == null)
+                {
+                    return;
+                }
+
                 int Level = treeViewSI.SelectedNode.Level;
                 string selectedNode = treeViewSI.SelectedNode.Text;
 
                 if (Level == 2)
                 {
-                    var chCurrent = objServerManager.GetBySQLServerName(treeViewSI.SelectedNode.Parent.Parent.Text);
-                    var dvCurrent = DataBaseManager.GetByDataBaseName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
-                    var dbCurrent = TableManager.GetByTableName(dvCurrent, treeViewSI.SelectedNode.Text);
+                    Server chCurrent = objServerManager.GetBySQLServerName(treeViewSI.SelectedNode.Parent.Parent.Text);
+                    DataBase dvCurrent = DataBaseManager.GetByDataBaseName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
+                    Table dbCurrent = TableManager.GetByTableName(dvCurrent, treeViewSI.SelectedNode.Text);
 
-                    var channelName = chCurrent.ServerName;
-                    var DeviceName = dvCurrent.DataBaseName;
+                    string channelName = chCurrent.ServerName;
+                    string DeviceName = dvCurrent.DataBaseName;
 
-                    var DataBlockName = dbCurrent.TableName;
+                    string DataBlockName = dbCurrent.TableName;
 
 
 
                     if (DGMonitorForm.SelectedRows.Count == 1)
                     {
                         string tgName = (string)DGMonitorForm.SelectedRows[0].Cells[1].Value;
-                        var tgCurrent = ColumnManager.GetByTagName(dbCurrent, tgName);
+                        Column tgCurrent = ColumnManager.GetByTagName(dbCurrent, tgName);
 
-                        var tgFrm = new XAddColumn(chCurrent, dvCurrent, dbCurrent, tgCurrent);
+                        XAddColumn tgFrm = new XAddColumn(chCurrent, dvCurrent, dbCurrent, tgCurrent);
                         tgFrm.eventColumnChanged += tg =>
                         {
 
@@ -730,7 +779,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -744,14 +793,14 @@ namespace AdvancedScada.Studio.LinkToSQL
 
                 if (Level == 2)
                 {
-                    var chCurrent = objServerManager.GetBySQLServerName(treeViewSI.SelectedNode.Parent.Parent.Text);
-                    var dvCurrent = DataBaseManager.GetByDataBaseName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
-                    var dbCurrent = TableManager.GetByTableName(dvCurrent, treeViewSI.SelectedNode.Text);
+                    Server chCurrent = objServerManager.GetBySQLServerName(treeViewSI.SelectedNode.Parent.Parent.Text);
+                    DataBase dvCurrent = DataBaseManager.GetByDataBaseName(chCurrent, treeViewSI.SelectedNode.Parent.Text);
+                    Table dbCurrent = TableManager.GetByTableName(dvCurrent, treeViewSI.SelectedNode.Text);
 
-                    var channelName = chCurrent.ServerName;
-                    var DeviceName = dvCurrent.DataBaseName;
+                    string channelName = chCurrent.ServerName;
+                    string DeviceName = dvCurrent.DataBaseName;
 
-                    var DataBlockName = dbCurrent.TableName;
+                    string DataBlockName = dbCurrent.TableName;
 
 
 
@@ -770,7 +819,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 

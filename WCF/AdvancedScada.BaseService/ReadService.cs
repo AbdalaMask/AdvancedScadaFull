@@ -13,9 +13,9 @@ namespace AdvancedScada.BaseService
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.PerSession)]
     public class ReadService : IReadService
     {
-        private List<IServiceCallback> listCallbackChannels = new List<IServiceCallback>();
-        IODriver driverHelper = null;
-        private ChannelService objChannelManager;
+        private readonly List<IServiceCallback> listCallbackChannels = new List<IServiceCallback>();
+        private IODriver driverHelper = null;
+        private readonly ChannelService objChannelManager;
         public ReadService()
         {
             objChannelManager = ChannelService.GetChannelManager();
@@ -40,7 +40,7 @@ namespace AdvancedScada.BaseService
                                             item.UpdateCollectionDataBlock(XCollection.objConnectionState, DataBlockCollection.DataBlocks);
                                             Thread.Sleep(100);
                                         }
-                                           
+
 
                                     }
                                     catch (Exception ex)
@@ -48,7 +48,7 @@ namespace AdvancedScada.BaseService
                                         if (listCallbackChannels.Remove(item))
                                         {
                                             eventLoggingMessage?.Invoke(string.Format("Removed Callback Channel: {0} | Exception: {1}", item.GetHashCode(), ex.Message));
-                                            EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                                            EventscadaException?.Invoke(GetType().Name, ex.Message);
                                             EventChannelCount?.Invoke(1, false);
                                         }
                                     }
@@ -64,7 +64,9 @@ namespace AdvancedScada.BaseService
                     catch (Exception ex)
                     {
                         if (ex.InnerException == null)
-                            EventscadaException?.Invoke(this.GetType().Name, "+ Event ConnectorServiceCallback: " + ex.Message);
+                        {
+                            EventscadaException?.Invoke(GetType().Name, "+ Event ConnectorServiceCallback: " + ex.Message);
+                        }
                     }
                     finally
                     {
@@ -76,7 +78,7 @@ namespace AdvancedScada.BaseService
         private IODriver GetDriver(string ChannelTypes)
         {
             IODriver DriverHelper = null;
-            var objFunctions = GetIODriver.GetFunctions();
+            GetIODriver objFunctions = GetIODriver.GetFunctions();
             DriverHelper =
                        objFunctions.GetAssembly($@"\AdvancedScada.{ChannelTypes}.Core.dll",
                            $"AdvancedScada.{ChannelTypes}.Core.IODriverHelper");
@@ -137,7 +139,7 @@ namespace AdvancedScada.BaseService
             }
             finally
             {
-                GC.SuppressFinalize((object)this);
+                GC.SuppressFinalize(this);
             }
         }
 
@@ -149,15 +151,18 @@ namespace AdvancedScada.BaseService
         {
             try
             {
-                if (objChannelManager == null) return;
-
-                var strArrays = tagName.Split('.');
-                var str = $"{strArrays[0]}.{strArrays[1]}";
-                foreach (var Channels in objChannelManager.Channels)
+                if (objChannelManager == null)
                 {
-                    foreach (var dv in Channels.Devices)
+                    return;
+                }
+
+                string[] strArrays = tagName.Split('.');
+                string str = $"{strArrays[0]}.{strArrays[1]}";
+                foreach (DriverBase.Devices.Channel Channels in objChannelManager.Channels)
+                {
+                    foreach (DriverBase.Devices.Device dv in Channels.Devices)
                     {
-                        var bEquals = $"{Channels.ChannelName}.{dv.DeviceName}".Equals(str);
+                        bool bEquals = $"{Channels.ChannelName}.{dv.DeviceName}".Equals(str);
                         if (bEquals)
                         {
                             driverHelper = GetDriver(Channels.ChannelTypes);
@@ -170,7 +175,7 @@ namespace AdvancedScada.BaseService
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
                 throw new FaultException<IFaultException>(new IFaultException(ex.Message));
             }
 

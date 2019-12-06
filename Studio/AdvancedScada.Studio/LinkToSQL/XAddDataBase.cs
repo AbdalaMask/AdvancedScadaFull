@@ -35,13 +35,19 @@ namespace AdvancedScada.Studio.LinkToSQL
                     DxErrorProvider1.Clear();
                     if (dbs == null)
                     {
-                        var dbsNew = new DataBase();
-                        dbsNew.DataBaseId = SQl.DataBase.Count + 1;
-                        dbsNew.DataBaseName = txtDataBaseName.Text;
-                        dbsNew.Description = txtDesc.Text;
+                        DataBase dbsNew = new DataBase
+                        {
+                            DataBaseId = SQl.DataBase.Count + 1,
+                            DataBaseName = txtDataBaseName.Text,
+                            Description = txtDesc.Text
+                        };
                         //dvNew.DataBlocks = new List<DataBlock>();
                         DataBaseManager.Add(SQl, dbsNew);
-                        if (eventDataBaseChanged != null) eventDataBaseChanged(dbsNew);
+                        if (eventDataBaseChanged != null)
+                        {
+                            eventDataBaseChanged(dbsNew);
+                        }
+
                         Close();
                     }
                     else
@@ -51,7 +57,10 @@ namespace AdvancedScada.Studio.LinkToSQL
                         dbs.Description = txtDesc.Text;
 
                         DataBaseManager.Update(SQl, dbs);
-                        if (eventDataBaseChanged != null) eventDataBaseChanged(dbs);
+                        if (eventDataBaseChanged != null)
+                        {
+                            eventDataBaseChanged(dbs);
+                        }
 
                         Close();
                     }
@@ -60,7 +69,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -94,7 +103,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
     }

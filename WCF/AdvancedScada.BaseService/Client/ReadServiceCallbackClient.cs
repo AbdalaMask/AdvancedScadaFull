@@ -19,12 +19,12 @@ namespace AdvancedScada.BaseService.Client
         public static bool LoadTagCollection()
         {
 
-            var objChannelManager = ChannelService.GetChannelManager();
+            ChannelService objChannelManager = ChannelService.GetChannelManager();
 
             try
             {
 
-                var xmlFile = objChannelManager.ReadKey(objChannelManager.XML_NAME_DEFAULT);
+                string xmlFile = objChannelManager.ReadKey(objChannelManager.XML_NAME_DEFAULT);
                 if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile))
                 {
                     return false;
@@ -37,22 +37,25 @@ namespace AdvancedScada.BaseService.Client
                 }
                 objChannelManager.Channels.Clear();
                 TagCollectionClient.Tags.Clear();
-                var channels = objChannelManager.GetChannels(xmlFile);
+                List<Channel> channels = objChannelManager.GetChannels(xmlFile);
 
-                foreach (var ch in channels)
-                    foreach (var dv in ch.Devices)
+                foreach (Channel ch in channels)
+                {
+                    foreach (Device dv in ch.Devices)
                     {
 
-                        foreach (var db in dv.DataBlocks)
+                        foreach (DataBlock db in dv.DataBlocks)
                         {
                             DataBlockCollectionClient.DataBlocks.Add($"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}", db);
-                            foreach (var tg in db.Tags)
+                            foreach (Tag tg in db.Tags)
+                            {
                                 TagCollectionClient.Tags.Add(
                                     $"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
+                            }
                         }
-                          
-                    }
 
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -69,26 +72,36 @@ namespace AdvancedScada.BaseService.Client
         public void UpdateCollection(ConnectionState status, Dictionary<string, Tag> Tags)
         {
             eventConnectionChanged?.Invoke(status);
-            var tagsClient = TagCollectionClient.Tags;
-            if (tagsClient == null) throw new ArgumentNullException(nameof(tagsClient));
-            foreach (var author in Tags)
+            Dictionary<string, Tag> tagsClient = TagCollectionClient.Tags;
+            if (tagsClient == null)
+            {
+                throw new ArgumentNullException(nameof(tagsClient));
+            }
+
+            foreach (KeyValuePair<string, Tag> author in Tags)
+            {
                 if (tagsClient.ContainsKey(author.Key))
                 {
                     tagsClient[author.Key].Value = author.Value.Value;
                     tagsClient[author.Key].TimeSpan = author.Value.TimeSpan;
                 }
-
+            }
         }
         [OperationContract(IsOneWay = true)]
         public void UpdateCollectionDataBlock(ConnectionState status, Dictionary<string, DataBlock> DataBlocks)
         {
             eventConnectionChanged?.Invoke(status);
-            var DataBlocksClient = DataBlockCollectionClient.DataBlocks;
-            if (DataBlocksClient == null) throw new ArgumentNullException(nameof(DataBlocksClient));
-            foreach (var author in DataBlocks)
+            Dictionary<string, DataBlock> DataBlocksClient = DataBlockCollectionClient.DataBlocks;
+            if (DataBlocksClient == null)
+            {
+                throw new ArgumentNullException(nameof(DataBlocksClient));
+            }
+
+            foreach (KeyValuePair<string, DataBlock> author in DataBlocks)
+            {
                 if (DataBlocksClient.ContainsKey(author.Key))
                 {
-                   
+
                     DataBlocksClient[author.Key].ChannelId = author.Value.ChannelId;
                     DataBlocksClient[author.Key].DeviceId = author.Value.DeviceId;
                     DataBlocksClient[author.Key].DataBlockId = author.Value.DataBlockId;
@@ -100,7 +113,7 @@ namespace AdvancedScada.BaseService.Client
                     DataBlocksClient[author.Key].IsArray = author.Value.IsArray;
                     DataBlocksClient[author.Key].Tags = author.Value.Tags;
                     List<Tag> list = DataBlocksClient[author.Key].Tags;
-                    for (var i = 0; i < list.Count; i++)
+                    for (int i = 0; i < list.Count; i++)
                     {
                         list[i].Value = author.Value.Tags[i].Value;
                         list[i].TimeSpan = author.Value.Tags[i].TimeSpan;
@@ -108,6 +121,7 @@ namespace AdvancedScada.BaseService.Client
                     }
 
                 }
+            }
         }
     }
 }

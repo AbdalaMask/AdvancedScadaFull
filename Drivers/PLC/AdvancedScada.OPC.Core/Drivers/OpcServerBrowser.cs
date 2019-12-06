@@ -44,7 +44,7 @@ namespace AdvancedScada.OPC.Core.Drivers
         public OpcServerBrowser()
         {
             CLSID_OPCEnum = new Guid("{13486D51-4821-11D2-A494-3CB306C10000}");
-            var typeFromCLSID = Type.GetTypeFromCLSID(CLSID_OPCEnum);
+            Type typeFromCLSID = Type.GetTypeFromCLSID(CLSID_OPCEnum);
             ifSrvList = (IOPCServerList)Activator.CreateInstance(typeFromCLSID);
         }
 
@@ -54,12 +54,12 @@ namespace AdvancedScada.OPC.Core.Drivers
             CLSID_OPCEnum = new Guid("{13486D51-4821-11D2-A494-3CB306C10000}");
             if (ComputerName != null && ComputerName != string.Empty)
             {
-                var typeFromCLSID = Type.GetTypeFromCLSID(CLSID_OPCEnum, ComputerName);
+                Type typeFromCLSID = Type.GetTypeFromCLSID(CLSID_OPCEnum, ComputerName);
                 ifSrvList = (IOPCServerList)Activator.CreateInstance(typeFromCLSID);
             }
             else
             {
-                var typeFromCLSID = Type.GetTypeFromCLSID(CLSID_OPCEnum);
+                Type typeFromCLSID = Type.GetTypeFromCLSID(CLSID_OPCEnum);
                 ifSrvList = (IOPCServerList)Activator.CreateInstance(typeFromCLSID);
             }
         }
@@ -99,8 +99,7 @@ namespace AdvancedScada.OPC.Core.Drivers
 
         public void GetServerList(Guid[] catList, out string[] Servers)
         {
-            Guid[] guidArray;
-            GetServerList(catList, out Servers, out guidArray);
+            GetServerList(catList, out Servers, out Guid[] guidArray);
             guidArray = null;
         }
 
@@ -112,21 +111,24 @@ namespace AdvancedScada.OPC.Core.Drivers
 
         public void GetServerList(Guid[] catList, out string[] Servers, out Guid[] ClsIDs)
         {
-            object obj2;
             Servers = null;
             ClsIDs = null;
-            if (ifSrvList == null) throw new Exception(string.Format("GetServerList failed with error code {hr}", -2147467262));
-            ifSrvList.EnumClassesOfCategories(catList.Length, catList, 0, null, out obj2);
+            if (ifSrvList == null)
+            {
+                throw new Exception(string.Format("GetServerList failed with error code {hr}", -2147467262));
+            }
+
+            ifSrvList.EnumClassesOfCategories(catList.Length, catList, 0, null, out object obj2);
             if (obj2 != null)
             {
-                var o = (IEnumGUID)obj2;
+                IEnumGUID o = (IEnumGUID)obj2;
                 obj2 = null;
                 o.Reset();
-                var index = 0;
-                var rgelt = CLSID_OPCEnum;
-                var guidArray = new Guid[50];
+                int index = 0;
+                Guid rgelt = CLSID_OPCEnum;
+                Guid[] guidArray = new Guid[50];
 
-                var pceltFetched = 0;
+                int pceltFetched = 0;
 
                 do
                 {
@@ -140,10 +142,10 @@ namespace AdvancedScada.OPC.Core.Drivers
 
                 Marshal.ReleaseComObject(o);
                 o = null;
-                var strArray = new string[index];
-                var guidArray2 = new Guid[index];
-                var num3 = 0;
-                for (var i = 0; i < index; i++)
+                string[] strArray = new string[index];
+                Guid[] guidArray2 = new Guid[index];
+                int num3 = 0;
+                for (int i = 0; i < index; i++)
                 {
                     string ppszProgID = null;
                     string ppszUserType = null;
@@ -162,7 +164,7 @@ namespace AdvancedScada.OPC.Core.Drivers
                 {
                     Servers = new string[num3];
                     ClsIDs = new Guid[num3];
-                    for (var j = 0; j < num3; j++)
+                    for (int j = 0; j < num3; j++)
                     {
                         Servers[j] = strArray[j];
                         ClsIDs[j] = guidArray2[j];
@@ -183,10 +185,18 @@ namespace AdvancedScada.OPC.Core.Drivers
             else
             {
                 if (V2 && V3)
+                {
                     catList = new[] { new Guid("{63D5F432-CFE4-11d1-B2C8-0060083BA1FB}"), new Guid("{CC603642-66D7-48f1-B69A-B625E73652D7}") };
+                }
                 else if (V2)
+                {
                     catList = new[] { new Guid("{63D5F432-CFE4-11d1-B2C8-0060083BA1FB}") };
-                else if (V3) catList = new[] { new Guid("{CC603642-66D7-48f1-B69A-B625E73652D7}") };
+                }
+                else if (V3)
+                {
+                    catList = new[] { new Guid("{CC603642-66D7-48f1-B69A-B625E73652D7}") };
+                }
+
                 GetServerList(catList, out Servers);
             }
         }

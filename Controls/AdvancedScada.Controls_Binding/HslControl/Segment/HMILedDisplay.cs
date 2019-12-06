@@ -16,13 +16,13 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
         public event EventHandler ValueChanged;
         public HMILedDisplay()
         {
-            this.BackColor = System.Drawing.Color.Transparent;
-            this.DisplayBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.DisplayNumber = 8;
-            this.DisplayText = "123.45";
-            this.ForeColor = System.Drawing.Color.Black;
-            this.LedNumberSize = 2;
-            this.Margin = new System.Windows.Forms.Padding(3, 11, 3, 11);
+            BackColor = System.Drawing.Color.Transparent;
+            DisplayBackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            DisplayNumber = 8;
+            DisplayText = "123.45";
+            ForeColor = System.Drawing.Color.Black;
+            LedNumberSize = 2;
+            Margin = new System.Windows.Forms.Padding(3, 11, 3, 11);
         }
 
         #region PLC Related Properties
@@ -49,7 +49,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressText
         {
-            get { return m_PLCAddressText; }
+            get => m_PLCAddressText;
             set
             {
                 if (m_PLCAddressText != value)
@@ -60,8 +60,12 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressText) || string.IsNullOrWhiteSpace(m_PLCAddressText) ||
-                                 Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressText], "Value", true);
+                                 Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressText], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -76,7 +80,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressVisible
         {
-            get { return m_PLCAddressVisible; }
+            get => m_PLCAddressVisible;
             set
             {
                 if (m_PLCAddressVisible != value)
@@ -87,8 +91,12 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) || string.IsNullOrWhiteSpace(m_PLCAddressVisible) ||
-                                 Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                                 Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -103,7 +111,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressValue
         {
-            get { return m_PLCAddressValue; }
+            get => m_PLCAddressValue;
             set
             {
                 if (m_PLCAddressValue != value)
@@ -114,8 +122,12 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressValue) || string.IsNullOrWhiteSpace(m_PLCAddressValue) ||
-                                 Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
+                                 Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -129,7 +141,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
 
         public string Value
         {
-            get { return m_Value; }
+            get => m_Value;
             set
             {
                 if (value != m_Value)
@@ -137,14 +149,17 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
                     if (value != null)
                     {
                         m_Value = value;
-                        this.DisplayText = m_Value;
+                        DisplayText = m_Value;
                         OnvalueChanged(EventArgs.Empty);
                     }
                     else
                     {
                         //* version 3.99f
                         if (!string.IsNullOrEmpty(m_Value))
+                        {
                             OnvalueChanged(EventArgs.Empty);
+                        }
+
                         m_Value = string.Empty;
                         base.Text = string.Empty;
                     }
@@ -158,7 +173,10 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
         public bool SuppressErrorDisplay { get; set; }
         protected virtual void OnvalueChanged(EventArgs e)
         {
-            if (ValueChanged != null) ValueChanged(this, e);
+            if (ValueChanged != null)
+            {
+                ValueChanged(this, e);
+            }
         }
         #endregion
 
@@ -181,12 +199,12 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
                 //* Save the text to return to
                 if (!ErrorDisplayTime.Enabled)
                 {
-                    OriginalText = this.Text;
+                    OriginalText = Text;
                 }
 
                 ErrorDisplayTime.Enabled = true;
                 Utilities.DisplayError(this, ErrorMessage);
-                this.Text = ErrorMessage;
+                Text = ErrorMessage;
             }
         }
 
@@ -218,10 +236,13 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
         [Category("PLC Properties")]
         public string PLCAddressKeypad
         {
-            get { return m_PLCAddressKeypad; }
+            get => m_PLCAddressKeypad;
             set
             {
-                if (m_PLCAddressKeypad != value) m_PLCAddressKeypad = value;
+                if (m_PLCAddressKeypad != value)
+                {
+                    m_PLCAddressKeypad = value;
+                }
             }
         }
 
@@ -231,24 +252,24 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
 
         public Color KeypadFontColor
         {
-            get { return m_KeypadFontColor; }
-            set { m_KeypadFontColor = value; }
+            get => m_KeypadFontColor;
+            set => m_KeypadFontColor = value;
         }
 
         private int m_KeypadWidth = 300;
 
         public int KeypadWidth
         {
-            get { return m_KeypadWidth; }
-            set { m_KeypadWidth = value; }
+            get => m_KeypadWidth;
+            set => m_KeypadWidth = value;
         }
 
         private double m_KeypadScaleFactor = 1;
 
         public double KeypadScaleFactor
         {
-            get { return m_KeypadScaleFactor; }
-            set { m_KeypadScaleFactor = value; }
+            get => m_KeypadScaleFactor;
+            set => m_KeypadScaleFactor = value;
         }
 
         public double KeypadMinValue { get; set; }
@@ -270,12 +291,14 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
                     try
                     {
                         if (KeypadMaxValue != KeypadMinValue)
+                        {
                             if ((Convert.ToDouble(KeypadPopUp.Value) < KeypadMinValue) |
                                 (Convert.ToDouble(KeypadPopUp.Value) > KeypadMaxValue))
                             {
                                 DisplayError("Value must be >" + KeypadMinValue + " and <" + KeypadMaxValue);
                                 return;
                             }
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -291,8 +314,8 @@ namespace AdvancedScada.Controls_Binding.HslControl.Segment
                         }
                         else
                         {
-                            var v = Convert.ToDouble(KeypadPopUp.Value);
-                            var z = v / m_KeypadScaleFactor;
+                            double v = Convert.ToDouble(KeypadPopUp.Value);
+                            double z = v / m_KeypadScaleFactor;
                             Utilities.Write(m_PLCAddressKeypad,
                                 (Convert.ToDouble(KeypadPopUp.Value) / m_KeypadScaleFactor).ToString());
                         }

@@ -17,7 +17,10 @@ namespace AdvancedScada.Management.SQLManager
         {
             lock (mutex)
             {
-                if (_instance == null) _instance = new DataBaseManager();
+                if (_instance == null)
+                {
+                    _instance = new DataBaseManager();
+                }
             }
 
             return _instance;
@@ -31,9 +34,17 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                if (dv == null) throw new NullReferenceException("The device is null reference exception");
-                var fDv = IsExisted(ch, dv);
-                if (fDv != null) throw new Exception($"Device name: '{dv.DataBaseName}' is existed");
+                if (dv == null)
+                {
+                    throw new NullReferenceException("The device is null reference exception");
+                }
+
+                DataBase fDv = IsExisted(ch, dv);
+                if (fDv != null)
+                {
+                    throw new Exception($"Device name: '{dv.DataBaseName}' is existed");
+                }
+
                 ch.DataBase.Add(dv);
             }
             catch (Exception ex)
@@ -51,10 +62,19 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                if (dv == null) throw new NullReferenceException("The Device is null reference exception");
-                var fCh = IsExisted(ch, dv);
-                if (fCh != null) throw new Exception($"Device name: '{dv.DataBaseName}' is existed");
-                foreach (var item in ch.DataBase)
+                if (dv == null)
+                {
+                    throw new NullReferenceException("The Device is null reference exception");
+                }
+
+                DataBase fCh = IsExisted(ch, dv);
+                if (fCh != null)
+                {
+                    throw new Exception($"Device name: '{dv.DataBaseName}' is existed");
+                }
+
+                foreach (DataBase item in ch.DataBase)
+                {
                     if (item.DataBaseId == dv.DataBaseId)
                     {
                         item.DataBaseId = dv.DataBaseId;
@@ -64,6 +84,7 @@ namespace AdvancedScada.Management.SQLManager
                         // item.DataBlocks = dv.DataBlocks;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -80,8 +101,12 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                var result = GetByDeviceId(ch, chId);
-                if (result == null) throw new KeyNotFoundException("Device Id is not found exception");
+                DataBase result = GetByDeviceId(ch, chId);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("Device Id is not found exception");
+                }
+
                 ch.DataBase.Remove(result);
             }
             catch (Exception ex)
@@ -99,8 +124,12 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                var result = GetByDataBaseName(ch, chName);
-                if (result == null) throw new KeyNotFoundException("Device name is not found exception");
+                DataBase result = GetByDataBaseName(ch, chName);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("Device name is not found exception");
+                }
+
                 ch.DataBase.Remove(result);
             }
             catch (Exception ex)
@@ -118,13 +147,19 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                if (dv == null) throw new NullReferenceException("The Device is null reference exception");
-                foreach (var item in ch.DataBase)
+                if (dv == null)
+                {
+                    throw new NullReferenceException("The Device is null reference exception");
+                }
+
+                foreach (DataBase item in ch.DataBase)
+                {
                     if (item.DataBaseId == dv.DataBaseId)
                     {
                         ch.DataBase.Remove(item);
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -143,12 +178,14 @@ namespace AdvancedScada.Management.SQLManager
             DataBase result = null;
             try
             {
-                foreach (var item in ch.DataBase)
+                foreach (DataBase item in ch.DataBase)
+                {
                     if (item.DataBaseId != dv.DataBaseId && item.DataBaseName.Equals(dv.DataBaseName))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -169,12 +206,14 @@ namespace AdvancedScada.Management.SQLManager
             DataBase result = null;
             try
             {
-                foreach (var item in ch.DataBase)
+                foreach (DataBase item in ch.DataBase)
+                {
                     if (item.DataBaseId == chId)
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -195,12 +234,14 @@ namespace AdvancedScada.Management.SQLManager
             DataBase result = null;
             try
             {
-                foreach (var item in ch.DataBase)
+                foreach (DataBase item in ch.DataBase)
+                {
                     if (item.DataBaseName.Equals(chName))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -217,16 +258,18 @@ namespace AdvancedScada.Management.SQLManager
         /// <returns>Danh sách thiết bị</returns>
         public static List<DataBase> GetDevices(XmlNode chNode)
         {
-            var dvList = new List<DataBase>();
+            List<DataBase> dvList = new List<DataBase>();
             try
             {
                 foreach (XmlNode dvNode in chNode)
                 {
-                    var newDataBase = new DataBase();
-                    newDataBase.DataBaseId = int.Parse(dvNode.Attributes[DataBase_ID].Value);
-                    newDataBase.DataBaseName = dvNode.Attributes[DataBase_NAME].Value;
-                    newDataBase.Description = dvNode.Attributes[ServerManager.DESCRIPTION].Value;
-                    newDataBase.Tables = TableManager.GetTables(dvNode);
+                    DataBase newDataBase = new DataBase
+                    {
+                        DataBaseId = int.Parse(dvNode.Attributes[DataBase_ID].Value),
+                        DataBaseName = dvNode.Attributes[DataBase_NAME].Value,
+                        Description = dvNode.Attributes[ServerManager.DESCRIPTION].Value,
+                        Tables = TableManager.GetTables(dvNode)
+                    };
                     dvList.Add(newDataBase);
                 }
             }

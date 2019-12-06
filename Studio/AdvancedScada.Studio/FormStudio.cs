@@ -32,9 +32,14 @@ namespace AdvancedScada.Studio
         public static void SetLabelText(TextBox Label, string Text)
         {
             if (Label.InvokeRequired)
+            {
                 Label.Invoke(new SetLabelTextInvoker(SetLabelText), Label, Text);
+            }
             else
+            {
                 Label.Text += Text;
+            }
+
             Application.DoEvents();
         }
         #endregion
@@ -44,14 +49,14 @@ namespace AdvancedScada.Studio
             InitializeComponent();
             if (Settings.Default.ApplicationSkinName != string.Empty && Settings.Default.ApplicationSkinName != null)
             {
-                var cpu = (PaletteModeManager)Enum.Parse(typeof(PaletteModeManager), Settings.Default["ApplicationSkinName"].ToString());
+                PaletteModeManager cpu = (PaletteModeManager)Enum.Parse(typeof(PaletteModeManager), Settings.Default["ApplicationSkinName"].ToString());
 
                 kryptonManager1.GlobalPaletteMode = cpu;
             }
 
         }
         #region bar
-        string SkinName;
+        private string SkinName;
         private void kryptonRibbonGroupGallery1_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (kryptonRibbonGroupGallery1.SelectedIndex)
@@ -108,12 +113,15 @@ namespace AdvancedScada.Studio
         private void mConfiguration_Click(object sender, EventArgs e)
         {
             foreach (Form form in Application.OpenForms)
+            {
                 if (form.GetType() == typeof(FormConfiguration))
                 {
                     form.Activate();
                     return;
                 }
-            var child = new FormConfiguration();
+            }
+
+            FormConfiguration child = new FormConfiguration();
             child.Show();
         }
 
@@ -126,7 +134,7 @@ namespace AdvancedScada.Studio
         {
             try
             {
-                var frm = new MainView();
+                MainView frm = new MainView();
                 frm.Show();
             }
             catch (Exception ex)
@@ -138,15 +146,20 @@ namespace AdvancedScada.Studio
         private void mnMonioring_Click(object sender, EventArgs e)
         {
             foreach (Form form in Application.OpenForms)
+            {
                 if (form.GetType() == typeof(PLC_MonitorForm))
                 {
-                    foreach (var item in TabForm.Pages)
+                    foreach (KryptonPage item in TabForm.Pages)
                     {
                         if (item.Text == "MonitorForm")
+                        {
                             TabForm.SelectedPage = item;
+                        }
                     }
                     return;
                 }
+            }
+
             KryptonPage page = NewPage("MonitorForm", 0, new PLC_MonitorForm());
             TabForm.Pages.Add(page);
             TabForm.SelectedPage = page;
@@ -154,7 +167,10 @@ namespace AdvancedScada.Studio
         private void mExit_Click(object sender, EventArgs e)
         {
             if (SkinName != string.Empty && SkinName != null)
+            {
                 Settings.Default["ApplicationSkinName"] = SkinName;
+            }
+
             Settings.Default.Save();
             Application.ExitThread();
         }
@@ -165,19 +181,21 @@ namespace AdvancedScada.Studio
 
 
 
- 
+
         private void TagManagerItem_Click(object sender, EventArgs e)
         {
             foreach (Form form in Application.OpenForms)
             {
                 if (form.GetType() == typeof(XTagManager))
                 {
-                    foreach (var item in TabForm.Pages)
+                    foreach (KryptonPage item in TabForm.Pages)
                     {
-                      if(  item.Text == "TagManager")
-                             TabForm.SelectedPage = item;
-                    } 
-                   
+                        if (item.Text == "TagManager")
+                        {
+                            TabForm.SelectedPage = item;
+                        }
+                    }
+
                     return;
                 }
             }
@@ -189,23 +207,28 @@ namespace AdvancedScada.Studio
         private void SQLManagerItem_Click(object sender, EventArgs e)
         {
             foreach (Form form in Application.OpenForms)
+            {
                 if (form.GetType() == typeof(XSQLMaster))
                 {
-                    foreach (var item in TabForm.Pages)
+                    foreach (KryptonPage item in TabForm.Pages)
                     {
                         if (item.Text == "SQLMaster")
+                        {
                             TabForm.SelectedPage = item;
+                        }
                     }
 
                     return;
                 }
+            }
+
             KryptonPage page = NewPage("SQLMaster", 0, new XSQLMaster());
             TabForm.Pages.Add(page);
             TabForm.SelectedPage = page;
 
         }
 
-    
+
         #endregion
 
         #region KryptonPage
@@ -217,11 +240,13 @@ namespace AdvancedScada.Studio
         private KryptonPage NewPages(string name, int image, System.Windows.Forms.Control content)
         {
             // Create new page with title and image
-            KryptonPage p = new KryptonPage();
-            p.Text = name + _count.ToString();
-            p.TextTitle = name + _count.ToString();
-            p.TextDescription = name + _count.ToString();
-            p.ImageSmall = imageListSmall.Images[image];
+            KryptonPage p = new KryptonPage
+            {
+                Text = name + _count.ToString(),
+                TextTitle = name + _count.ToString(),
+                TextDescription = name + _count.ToString(),
+                ImageSmall = imageListSmall.Images[image]
+            };
 
             // Add the control for display inside the page
             content.Dock = DockStyle.Fill;
@@ -235,11 +260,13 @@ namespace AdvancedScada.Studio
         {
 
             // Create new page with title and image
-            KryptonPage p = new KryptonPage();
-            p.Text = name;
-            p.TextTitle = name;
-            p.TextDescription = name;
-            p.ImageSmall = imageListSmall.Images[image];
+            KryptonPage p = new KryptonPage
+            {
+                Text = name,
+                TextTitle = name,
+                TextDescription = name,
+                ImageSmall = imageListSmall.Images[image]
+            };
 
             // Add the control for display inside the page
             KryptonForm contentDoc = (KryptonForm)content;
@@ -273,19 +300,19 @@ namespace AdvancedScada.Studio
 
 
 
-                if (host.State == CommunicationState.Opened) txtStatus.Text = "The Server is running";
-
-
-
+                if (host.State == CommunicationState.Opened)
+                {
+                    txtStatus.Text = "The Server is running";
+                }
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
 
-            this.Text = "ServerUtils : AdvancedScada";
+            Text = "ServerUtils : AdvancedScada";
             return host;
         }
         private ConnectionState _ConnState = ConnectionState.DISCONNECT;
@@ -296,9 +323,9 @@ namespace AdvancedScada.Studio
             try
             {
 
-                if (!this.IsDisposed)
+                if (!IsDisposed)
                 {
-                    this.Invoke((MethodInvoker)delegate ()
+                    Invoke((MethodInvoker)delegate ()
                     {
                         if (connState != _ConnState)
                         {
@@ -322,7 +349,7 @@ namespace AdvancedScada.Studio
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
         }
@@ -330,13 +357,13 @@ namespace AdvancedScada.Studio
         {
             if (IsNew)
             {
-                var ChannelCount2 = int.Parse(txtChannelCount.Text);
+                int ChannelCount2 = int.Parse(txtChannelCount.Text);
 
                 txtChannelCount.Text = $"{ChannelCount2 + ChannelCount}";
             }
             else
             {
-                var ChannelCount2 = int.Parse(txtChannelCount.Text);
+                int ChannelCount2 = int.Parse(txtChannelCount.Text);
 
                 txtChannelCount.Text = $"{ChannelCount2 - ChannelCount}";
             }
@@ -356,14 +383,14 @@ namespace AdvancedScada.Studio
             Registry.SetValue("HKEY_CURRENT_USER\\Software\\FormConfiguration", "IPAddress", "localhost");
             Registry.SetValue("HKEY_CURRENT_USER\\Software\\FormConfiguration", "Port", "8080");
 
-          
+
             try
             {
                 EventChannelCount += ServiceBase_eventChannelCount;
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
 
             }
             // Setup docking functionality
@@ -383,12 +410,18 @@ namespace AdvancedScada.Studio
             ThisNotificationPopup.Popup();
 
             btnFormMain_Click();
-            var objChannelManager = ChannelService.GetChannelManager();
-            var xmlFile = objChannelManager.ReadKey(objChannelManager.XML_NAME_DEFAULT);
-            if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile)) return;
-            var chList = objChannelManager.GetChannels(xmlFile);
-            if (chList.Count < 1) return;
+            ChannelService objChannelManager = ChannelService.GetChannelManager();
+            string xmlFile = objChannelManager.ReadKey(objChannelManager.XML_NAME_DEFAULT);
+            if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile))
+            {
+                return;
+            }
 
+            System.Collections.Generic.List<DriverBase.Devices.Channel> chList = objChannelManager.GetChannels(xmlFile);
+            if (chList.Count < 1)
+            {
+                return;
+            }
 
             try
             {
@@ -399,17 +432,22 @@ namespace AdvancedScada.Studio
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
         private void FormStudio_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing) WindowState = FormWindowState.Minimized;
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                WindowState = FormWindowState.Minimized;
+            }
+
             notifyIcon1.Visible = true;
             e.Cancel = true;
             if (SkinName != string.Empty && SkinName != null)
+            {
                 Settings.Default["ApplicationSkinName"] = SkinName;
-
+            }
         }
         #endregion
 
@@ -418,12 +456,18 @@ namespace AdvancedScada.Studio
         #region popupMenuNotifyIcon
         private void ItemExit_Click(object sender, EventArgs e)
         {
-            var rs = MessageBox.Show(this, "You sure you want to save?", "MSG_QUESTION", MessageBoxButtons.YesNo,
+            DialogResult rs = MessageBox.Show(this, "You sure you want to save?", "MSG_QUESTION", MessageBoxButtons.YesNo,
                MessageBoxIcon.Question);
             if (SkinName != string.Empty)
+            {
                 Settings.Default["ApplicationSkinName"] = SkinName;
+            }
+
             Settings.Default.Save();
-            if (rs == DialogResult.Yes) Application.ExitThread();
+            if (rs == DialogResult.Yes)
+            {
+                Application.ExitThread();
+            }
         }
 
         private void ItemView_Click(object sender, EventArgs e)
@@ -439,7 +483,9 @@ namespace AdvancedScada.Studio
         private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right && IsHandleCreated)
+            {
                 popupMenuNotifyIcon.Show(MousePosition);
+            }
         }
 
         private void FormStudio_Resize(object sender, EventArgs e)
@@ -472,7 +518,7 @@ namespace AdvancedScada.Studio
                     }
                 }
             }
-            
+
 
         }
 
@@ -505,10 +551,12 @@ namespace AdvancedScada.Studio
             {
                 if (form.GetType() == typeof(FrmDiscreteAlarm))
                 {
-                    foreach (var item in TabForm.Pages)
+                    foreach (KryptonPage item in TabForm.Pages)
                     {
                         if (item.Text == "DiscreteAlarm")
+                        {
                             TabForm.SelectedPage = item;
+                        }
                     }
                     return;
                 }

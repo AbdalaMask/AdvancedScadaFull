@@ -15,10 +15,10 @@ namespace AdvancedScada.Siemens.Core.Editors
         public XTagForm(Channel chParam, Device dvParam, DataBlock dbParam, Tag tgParam = null)
         {
             InitializeComponent();
-            this.dv = dvParam;
-            this.db = dbParam;
-            this.ch = chParam;
-            this.tg = tgParam;
+            dv = dvParam;
+            db = dbParam;
+            ch = chParam;
+            tg = tgParam;
         }
         public string GetIDTag()
         {
@@ -28,24 +28,29 @@ namespace AdvancedScada.Siemens.Core.Editors
         {
             try
             {
-                foreach (var item in dv.DataBlocks)
+                foreach (DataBlock item in dv.DataBlocks)
                 {
 
                     TagsCount += item.Tags.Count;
                     if (db != null)
                     {
-                        if (db.DataBlockName.Equals(item.DataBlockName)) break;
+                        if (db.DataBlockName.Equals(item.DataBlockName))
+                        {
+                            break;
+                        }
                     }
 
                 }
                 if (tg == null)
                 {
-                    Tag newTg = new Tag();
-                    newTg.ChannelId = int.Parse(txtChannelId.Text);
-                    newTg.DeviceId = int.Parse(txtDeviceId.Text);
-                    newTg.DataBlockId = int.Parse(txtDataBlockId.Text);
-                    newTg.TagId = db.Tags.Count + 1;
-                    newTg.TagName = txtTagName.Text;
+                    Tag newTg = new Tag
+                    {
+                        ChannelId = int.Parse(txtChannelId.Text),
+                        DeviceId = int.Parse(txtDeviceId.Text),
+                        DataBlockId = int.Parse(txtDataBlockId.Text),
+                        TagId = db.Tags.Count + 1,
+                        TagName = txtTagName.Text
+                    };
 
                     if (db.IsArray)
                     {
@@ -53,14 +58,18 @@ namespace AdvancedScada.Siemens.Core.Editors
                     }
                     else
                     {
-                        var dbFrm = string.Format("DB{0}", db.StartAddress);
+                        string dbFrm = string.Format("DB{0}", db.StartAddress);
                         newTg.Address = string.Format("{0}.{1}", dbFrm, txtStartAddress.Text);
                     }
 
                     newTg.Description = txtDesc.Text;
                     newTg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString());
 
-                    if (eventTagChanged != null) eventTagChanged(newTg, true);
+                    if (eventTagChanged != null)
+                    {
+                        eventTagChanged(newTg, true);
+                    }
+
                     txtTagId.Text = GetIDTag();
                 }
                 else
@@ -75,21 +84,23 @@ namespace AdvancedScada.Siemens.Core.Editors
                     }
                     else
                     {
-                        var dbFrm = string.Format("DB{0}", db.StartAddress);
+                        string dbFrm = string.Format("DB{0}", db.StartAddress);
                         tg.Address = string.Format("{0}{1}", dbFrm, txtStartAddress.Text);
                     }
 
                     tg.Description = txtDesc.Text;
                     tg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString());
 
-                    if (eventTagChanged != null) eventTagChanged(tg, false);
-
+                    if (eventTagChanged != null)
+                    {
+                        eventTagChanged(tg, false);
+                    }
                 }
                 Close();
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
         }
@@ -100,10 +111,10 @@ namespace AdvancedScada.Siemens.Core.Editors
             {
                 cboxDataType.Items.AddRange(System.Enum.GetNames(typeof(DataTypes)));
 
-                cboxDataType.SelectedItem = $"{this.db.DataType}";
-                this.txtChannelName.Text = this.ch.ChannelName;
-                this.txtDeviceName.Text = this.dv.DeviceName;
-                this.txtDataBlock.Text = this.db.DataBlockName;
+                cboxDataType.SelectedItem = $"{db.DataType}";
+                txtChannelName.Text = ch.ChannelName;
+                txtDeviceName.Text = dv.DeviceName;
+                txtDataBlock.Text = db.DataBlockName;
                 txtChannelId.Text = ch.ChannelId.ToString();
                 txtDeviceId.Text = Convert.ToString(ch.Devices.Count);
                 txtDataBlockId.Text = Convert.ToString(db.DataBlockId);
@@ -111,7 +122,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                 if (tg == null)
                 {
 
-                    this.Text = "Add Tag";
+                    Text = "Add Tag";
                     txtTagId.Text = GetIDTag();
                     txtTagName.Text = GetTagName();
                 }
@@ -120,7 +131,7 @@ namespace AdvancedScada.Siemens.Core.Editors
 
 
 
-                    this.Text = "Edit Tag";
+                    Text = "Edit Tag";
                     txtTagId.Text = tg.TagId.ToString();
                     txtStartAddress.Text = tg.Address;
 
@@ -131,7 +142,7 @@ namespace AdvancedScada.Siemens.Core.Editors
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -141,7 +152,7 @@ namespace AdvancedScada.Siemens.Core.Editors
         }
         public string GetTagName()
         {
-            foreach (var item in dv.DataBlocks)
+            foreach (DataBlock item in dv.DataBlocks)
             {
 
                 TagsCount += item.Tags.Count;

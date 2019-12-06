@@ -8,8 +8,7 @@ namespace AdvancedScada.Modbus.Core.Editors
 {
     public partial class XDataBlockForm : AdvancedScada.Management.Editors.XDataBlockForm
     {
-
-        int TagsCount = 1;
+        private readonly int TagsCount = 1;
 
 
 
@@ -29,23 +28,30 @@ namespace AdvancedScada.Modbus.Core.Editors
         public void AddressCreateTagModbus(DataBlock db, bool IsNew, int TagsCount = 1)
         {
 
-            if (IsNew == false) db.Tags.Clear();
-            foreach (var item in dv.DataBlocks)
+            if (IsNew == false)
+            {
+                db.Tags.Clear();
+            }
+
+            foreach (DataBlock item in dv.DataBlocks)
             {
 
                 TagsCount += item.Tags.Count;
                 if (db != null)
                 {
-                    if (db.DataBlockName.Equals(item.DataBlockName)) break;
+                    if (db.DataBlockName.Equals(item.DataBlockName))
+                    {
+                        break;
+                    }
                 }
 
             }
             if (chkCreateTag.Checked)
             {
 
-                for (var i = 0; i < txtAddressLength.Value; i++)
+                for (int i = 0; i < txtAddressLength.Value; i++)
                 {
-                    var tg = new Tag()
+                    Tag tg = new Tag()
                     {
                         ChannelId = int.Parse(txtChannelId.Text),
                         DeviceId = int.Parse(txtDeviceId.Text),
@@ -105,7 +111,7 @@ namespace AdvancedScada.Modbus.Core.Editors
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -190,7 +196,7 @@ namespace AdvancedScada.Modbus.Core.Editors
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -202,7 +208,7 @@ namespace AdvancedScada.Modbus.Core.Editors
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -227,7 +233,7 @@ namespace AdvancedScada.Modbus.Core.Editors
 
                     if (db == null)
                     {
-                        var dbNew = new DataBlock()
+                        DataBlock dbNew = new DataBlock()
                         {
                             ChannelId = ch.ChannelId,
                             DeviceId = dv.DeviceId,
@@ -273,7 +279,7 @@ namespace AdvancedScada.Modbus.Core.Editors
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 

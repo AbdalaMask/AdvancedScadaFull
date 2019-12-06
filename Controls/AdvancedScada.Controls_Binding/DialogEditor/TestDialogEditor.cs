@@ -21,11 +21,18 @@ namespace AdvancedScada.Controls_Binding.DialogEditor
         public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
         {
             // Attempts to obtain an IWindowsFormsEditorService.
-            var edSvc = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
-            if (ReferenceEquals(edSvc, null)) return null;
-            using (var form = new MonitorForm(value.ToString()))
+            IWindowsFormsEditorService edSvc = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
+            if (ReferenceEquals(edSvc, null))
             {
-                if (edSvc.ShowDialog(form) == DialogResult.OK) return form.lblSelectedTagName.Text;
+                return null;
+            }
+
+            using (MonitorForm form = new MonitorForm(value.ToString()))
+            {
+                if (edSvc.ShowDialog(form) == DialogResult.OK)
+                {
+                    return form.lblSelectedTagName.Text;
+                }
             }
 
             // If OK was not pressed, return the original value

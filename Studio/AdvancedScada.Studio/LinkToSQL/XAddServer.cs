@@ -29,12 +29,14 @@ namespace AdvancedScada.Studio.LinkToSQL
             {
                 if (SQ == null)
                 {
-                    var clsSql = new Server();
-                    clsSql.ServerId = Convert.ToInt32(txtServerId.Text);
-                    clsSql.ServerName = txtServerName.Text;
-                    clsSql.UserName = txtUserName.Text;
-                    clsSql.Passwerd = Convert.ToInt32(txtPasswerd.Text);
-                    clsSql.Description = txtDesc.Text;
+                    Server clsSql = new Server
+                    {
+                        ServerId = Convert.ToInt32(txtServerId.Text),
+                        ServerName = txtServerName.Text,
+                        UserName = txtUserName.Text,
+                        Passwerd = Convert.ToInt32(txtPasswerd.Text),
+                        Description = txtDesc.Text
+                    };
                     objServerManager.Add(clsSql);
                     eventSQLServerChanged?.Invoke(clsSql);
                     System.Windows.Forms.DialogResult dialogResult = DialogResult;
@@ -56,7 +58,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
         }
@@ -85,15 +87,25 @@ namespace AdvancedScada.Studio.LinkToSQL
                 Text = "Add SQL";
                 txtServerId.Text += 1;
             }
-            var rk = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
-            var instances = (string[])rk.GetValue("InstalledInstances");
+            RegistryKey rk = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
+            string[] instances = (string[])rk.GetValue("InstalledInstances");
             if (instances != null)
+            {
                 if (instances.Length > 0)
-                    foreach (var element in instances)
+                {
+                    foreach (string element in instances)
+                    {
                         if (element == "MSSQLSERVER")
+                        {
                             txtServerName.Items.Add(Environment.MachineName);
+                        }
                         else
+                        {
                             txtServerName.Items.Add(Environment.MachineName + "\\" + element);
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -9,9 +9,7 @@ namespace AdvancedScada.Siemens.Core.Editors
 {
     public partial class XDataBlockForm : AdvancedScada.Management.Editors.XDataBlockForm
     {
-
-
-        int TagsCount = 1;
+        private readonly int TagsCount = 1;
 
         public XDataBlockForm()
         {
@@ -63,33 +61,42 @@ namespace AdvancedScada.Siemens.Core.Editors
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
         public void AddressCreateTagSiemensIsArray(DataBlock db, bool IsNew, int TagsCount = 1)
         {
-            if (IsNew == false) db.Tags.Clear();
-            foreach (var item in dv.DataBlocks)
+            if (IsNew == false)
+            {
+                db.Tags.Clear();
+            }
+
+            foreach (DataBlock item in dv.DataBlocks)
             {
 
                 TagsCount += item.Tags.Count;
                 if (db != null)
                 {
-                    if (db.DataBlockName.Equals(item.DataBlockName)) break;
+                    if (db.DataBlockName.Equals(item.DataBlockName))
+                    {
+                        break;
+                    }
                 }
 
             }
             if (chkCreateTag.Checked)
-                for (var i = 0; i < txtAddressLength.Value; i++)
+            {
+                for (int i = 0; i < txtAddressLength.Value; i++)
                 {
-                    var tg = new Tag()
-;
-                    tg.TagId = i + 1;
-                    tg.ChannelId = int.Parse(txtChannelId.Text);
-                    tg.DeviceId = int.Parse(txtDeviceId.Text);
-                    tg.DataBlockId = int.Parse(txtDataBlockId.Text);
-                    tg.TagName = $"TAG{i + TagsCount:d5}";
+                    Tag tg = new Tag
+                    {
+                        TagId = i + 1,
+                        ChannelId = int.Parse(txtChannelId.Text),
+                        DeviceId = int.Parse(txtDeviceId.Text),
+                        DataBlockId = int.Parse(txtDataBlockId.Text),
+                        TagName = $"TAG{i + TagsCount:d5}"
+                    };
                     switch (db.DataType)
                     {
                         case DataTypes.BitOnByte:
@@ -127,6 +134,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                     tg.Description = $"{txtDesc.Text} {i + 1}";
                     db.Tags.Add(tg);
                 }
+            }
         }
 
         private void cboxDataType_SelectedIndexChanged(object sender, EventArgs e)
@@ -134,8 +142,7 @@ namespace AdvancedScada.Siemens.Core.Editors
 
         }
 
-
-        string Tab = string.Empty;
+        private string Tab = string.Empty;
         private void btnOK_Click(object sender, EventArgs e)
         {
             try
@@ -161,7 +168,7 @@ namespace AdvancedScada.Siemens.Core.Editors
 
                         if (Tab == "IsArray")
                         {
-                            var dbNew = new DataBlock()
+                            DataBlock dbNew = new DataBlock()
                             {
                                 ChannelId = ch.ChannelId,
                                 DeviceId = dv.DeviceId,
@@ -182,7 +189,7 @@ namespace AdvancedScada.Siemens.Core.Editors
                         }
                         else
                         {
-                            var dbNew = new DataBlock()
+                            DataBlock dbNew = new DataBlock()
                             {
                                 ChannelId = ch.ChannelId,
                                 DeviceId = dv.DeviceId,
@@ -229,7 +236,7 @@ namespace AdvancedScada.Siemens.Core.Editors
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 

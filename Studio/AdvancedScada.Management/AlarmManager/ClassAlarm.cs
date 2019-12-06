@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdvancedScada.Management.AlarmManager
+﻿namespace AdvancedScada.Management.AlarmManager
 {
-  public  class ClassAlarm
+    public class ClassAlarm
     {
         public string Name { get; set; }
         public string AlarmText { get; set; }
@@ -16,6 +10,6 @@ namespace AdvancedScada.Management.AlarmManager
         public string DataBlock { get; set; }
         public string Device { get; set; }
         public string Channel { get; set; }
-       
+
     }
 }

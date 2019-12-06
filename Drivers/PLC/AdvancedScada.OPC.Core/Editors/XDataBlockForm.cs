@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using static AdvancedScada.Common.XCollection;
-using Convert = System.Convert;
-using Factory = OpcCom.Factory;
 using Server = Opc.Da.Server;
+using Factory = OpcCom.Factory;
+using Convert = System.Convert;
 using Type = System.Type;
 
 namespace AdvancedScada.OPC.Core.Editors
@@ -81,22 +81,27 @@ namespace AdvancedScada.OPC.Core.Editors
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
         public string[] GetDataType(List<OPCChannelInfo> Subscribed)
         {
-            var serverName = txtOPCServer.Text;
-            var hostName = txtOPCServerPath.Text;
+            string serverName = txtOPCServer.Text;
+            string hostName = txtOPCServerPath.Text;
 
-            _server = new Server(fact, null);
-            _server.Url = new URL(hostName + "/" +
-                                  serverName);
+            _server = new Server(fact, null)
+            {
+                Url = new URL(hostName + "/" +
+                                  serverName)
+            };
             _server.Connect();
 
             SubscribedCollection = new List<string>();
 
-            for (var i = 0; i < Subscribed.Count; i++) SubscribedCollection.Add(Subscribed[i].channel);
+            for (int i = 0; i < Subscribed.Count; i++)
+            {
+                SubscribedCollection.Add(Subscribed[i].channel);
+            }
 
             if (SubscriptionOPC == null)
             {
@@ -109,43 +114,74 @@ namespace AdvancedScada.OPC.Core.Editors
 
 
 
-            for (var i = 0; i < SubscribedCollection.Count; i++)
+            for (int i = 0; i < SubscribedCollection.Count; i++)
             {
-                SubscribedItems[i] = new Item();
-                SubscribedItems[i].ItemName = SubscribedCollection[i];
-                SubscribedItems[i].SamplingRate = 200;
-                SubscribedItems[i].Active = true;
-                SubscribedItems[i].ClientHandle = i;
+                SubscribedItems[i] = new Item
+                {
+                    ItemName = SubscribedCollection[i],
+                    SamplingRate = 200,
+                    Active = true,
+                    ClientHandle = i
+                };
             }
             ItemResult = SubscriptionOPC.AddItems(SubscribedItems);
 
             ItemValue[] values = _server.Read(SubscribedItems);
 
-            var ArraySize = values.Length;
-            if (values[0].Value is Array) ArraySize = ((Array)values[0].Value).Length - 1;
-            var ReturnValues = new string[ArraySize];
-            for (var i = 0; i < values.Length; i++)
+            int ArraySize = values.Length;
+            if (values[0].Value is Array)
             {
-                if (values[i].Value is string) ReturnValues[i] = "String";
+                ArraySize = ((Array)values[0].Value).Length - 1;
+            }
+
+            string[] ReturnValues = new string[ArraySize];
+            for (int i = 0; i < values.Length; i++)
+            {
+                if (values[i].Value is string)
+                {
+                    ReturnValues[i] = "String";
+                }
+
                 if (values[i].Value is bool)
+                {
                     ReturnValues[i] = "Bit";
+                }
                 else if (values[i].Value is byte)
+                {
                     ReturnValues[i] = "Byte";
+                }
                 else if (values[i].Value is float)
+                {
                     ReturnValues[i] = "Float";
+                }
                 else if (values[i].Value is char)
+                {
                     ReturnValues[i] = "char";
+                }
                 else if (values[i].Value is short)
+                {
                     ReturnValues[i] = "Short";
+                }
                 else if (values[i].Value is int)
+                {
                     ReturnValues[i] = "Int";
+                }
                 else if (values[i].Value is double)
+                {
                     ReturnValues[i] = "Double";
+                }
                 else if (values[i].Value is Array)
+                {
                     ReturnValues[i] = "Array";
+                }
                 else if (values[i].Value is uint)
+                {
                     ReturnValues[i] = "UInt";
-                else if (values[i].Value is ushort) ReturnValues[i] = "UShort";
+                }
+                else if (values[i].Value is ushort)
+                {
+                    ReturnValues[i] = "UShort";
+                }
                 //else
                 //{
                 //    ReturnValues[i] = "null";
@@ -155,6 +191,7 @@ namespace AdvancedScada.OPC.Core.Editors
             if (_server != null)
             {
                 if (_server.IsConnected)
+                {
                     try
                     {
                         _server.Disconnect();
@@ -162,6 +199,8 @@ namespace AdvancedScada.OPC.Core.Editors
                     catch
                     {
                     }
+                }
+
                 _server.Dispose();
 
             }
@@ -171,37 +210,49 @@ namespace AdvancedScada.OPC.Core.Editors
         public void AddressCreateTagOPC(DataBlock db, bool IsNew, int TagsCount = 1)
         {
 
-            if (IsNew == false) db.Tags.Clear();
-            foreach (var item in dv.DataBlocks)
+            if (IsNew == false)
+            {
+                db.Tags.Clear();
+            }
+
+            foreach (DataBlock item in dv.DataBlocks)
             {
 
                 TagsCount += item.Tags.Count;
                 if (db != null)
+                {
                     if (db.DataBlockName.Equals(item.DataBlockName))
+                    {
                         break;
-
+                    }
+                }
             }
-            var type = GetDataType(Channels);
+            string[] type = GetDataType(Channels);
 
-            for (var i = 0; i < Channels.Count; i++)
+            for (int i = 0; i < Channels.Count; i++)
             {
                 // Find out what the type is before you try to get the value
 
-                var tg = new Tag();
-
-
-                tg.ChannelId = int.Parse(txtChannelId.Text);
-                tg.DeviceId = int.Parse(txtDeviceId.Text);
-                tg.DataBlockId = int.Parse(txtDataBlockId.Text);
-                tg.TagId = i + 1;
-                tg.TagName = $"TAG{i + TagsCount:d5}";
-                tg.Address = $"{Channels[i].channel}";
-                tg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), $"{type[i]}");
-                var channelsArray = Channels[i].channel.Split('.');
+                Tag tg = new Tag
+                {
+                    ChannelId = int.Parse(txtChannelId.Text),
+                    DeviceId = int.Parse(txtDeviceId.Text),
+                    DataBlockId = int.Parse(txtDataBlockId.Text),
+                    TagId = i + 1,
+                    TagName = $"TAG{i + TagsCount:d5}",
+                    Address = $"{Channels[i].channel}",
+                    DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), $"{type[i]}")
+                };
+                string[] channelsArray = Channels[i].channel.Split('.');
                 if (channelsArray.Length >= 4)
+                {
                     tg.Description = $"{Channels[i].channel.Split('.')[3]}";
+                }
                 else
+                {
                     tg.Description = $"{Channels[i].channel.Split('.')[2]}";
+                }
+
                 db.Tags.Add(tg);
 
             }
@@ -219,7 +270,7 @@ namespace AdvancedScada.OPC.Core.Editors
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             try
             {
@@ -233,7 +284,7 @@ namespace AdvancedScada.OPC.Core.Editors
 
                     if (db == null)
                     {
-                        var dbNew = new DataBlock
+                        DataBlock dbNew = new DataBlock
                         {
                             ChannelId = ch.ChannelId,
                             DeviceId = dv.DeviceId,
@@ -249,8 +300,10 @@ namespace AdvancedScada.OPC.Core.Editors
                         };
 
                         AddressCreateTagOPC(dbNew, true, TagsCount);
-                        if (eventDataBlockChanged != null) eventDataBlockChanged(dbNew, true);
-
+                        if (eventDataBlockChanged != null)
+                        {
+                            eventDataBlockChanged(dbNew, true);
+                        }
                     }
                     else
                     {
@@ -268,15 +321,17 @@ namespace AdvancedScada.OPC.Core.Editors
 
                         AddressCreateTagOPC(db, false);
 
-                        if (eventDataBlockChanged != null) eventDataBlockChanged(db, false);
-
+                        if (eventDataBlockChanged != null)
+                        {
+                            eventDataBlockChanged(db, false);
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -288,7 +343,7 @@ namespace AdvancedScada.OPC.Core.Editors
 
         private void connectButton_Click(object sender, EventArgs e)
         {
-            var serverName = txtOPCServer.Text;
+            string serverName = txtOPCServer.Text;
 
             Type t;
             //if (localServerButton.Checked)
@@ -309,7 +364,9 @@ namespace AdvancedScada.OPC.Core.Editors
                 try
                 {
                     for (; ; )
+                    {
                         srv.ChangeBrowsePosition(OPCBROWSEDIRECTION.OPC_BROWSE_UP, string.Empty);
+                    }
                 }
                 catch (COMException) { };
                 channelsTree.Nodes.Clear();
@@ -338,14 +395,18 @@ namespace AdvancedScada.OPC.Core.Editors
 
         }
         #region channelsTree
-        void SaveOPCChannels(TreeNodeCollection root)
+        private void SaveOPCChannels(TreeNodeCollection root)
         {
             foreach (TreeNode node in root)
             {
                 if (node.Nodes.Count > 0)
+                {
                     SaveOPCChannels(node.Nodes);
+                }
                 else if (node.Checked)
+                {
                     Channels.Add((OPCChannelInfo)node.Tag);
+                }
             }
         }
 
@@ -357,15 +418,14 @@ namespace AdvancedScada.OPC.Core.Editors
                 if (node.Nodes.Count > 0)
                 {
                     // If the current node has child nodes, call the CheckAllChildsNodes method recursively.
-                    this.CheckAllChildNodes(node, nodeChecked);
+                    CheckAllChildNodes(node, nodeChecked);
                 }
             }
         }
 
-        void ImportOPCChannels(IOPCBrowseServerAddressSpace srv, TreeNodeCollection root)
+        private void ImportOPCChannels(IOPCBrowseServerAddressSpace srv, TreeNodeCollection root)
         {
-            OPCNAMESPACETYPE nsType;
-            srv.QueryOrganization(out nsType);
+            srv.QueryOrganization(out OPCNAMESPACETYPE nsType);
             OpcRcw.Da.IEnumString es;
             if (nsType == OPCNAMESPACETYPE.OPC_NS_HIERARCHIAL)
             {
@@ -382,7 +442,7 @@ namespace AdvancedScada.OPC.Core.Editors
                         try { srv.ChangeBrowsePosition(OPCBROWSEDIRECTION.OPC_BROWSE_DOWN, tmp[i]); }
                         catch (Exception e)
                         {
-                            EventscadaException?.Invoke(this.GetType().Name, string.Format("OPC server failed to handle OPC_BROWSE_DOWN request for item '{0}' ({1})", tmp[i], e.Message));
+                            EventscadaException?.Invoke(GetType().Name, string.Format("OPC server failed to handle OPC_BROWSE_DOWN request for item '{0}' ({1})", tmp[i], e.Message));
                             continue;
                         };
                         TreeNode node = root.Add(tmp[i]);
@@ -390,7 +450,7 @@ namespace AdvancedScada.OPC.Core.Editors
                         try { srv.ChangeBrowsePosition(OPCBROWSEDIRECTION.OPC_BROWSE_UP, string.Empty); }
                         catch (Exception e)
                         {
-                            EventscadaException?.Invoke(this.GetType().Name, string.Format("OPC server failed to handle OPC_BROWSE_UP request for item '{0}' ({1})", tmp[i], e.Message));
+                            EventscadaException?.Invoke(GetType().Name, string.Format("OPC server failed to handle OPC_BROWSE_UP request for item '{0}' ({1})", tmp[i], e.Message));
                             continue;
                         };
                     }
@@ -417,16 +477,20 @@ namespace AdvancedScada.OPC.Core.Editors
                 string[] tmp = new string[100];
                 es.RemoteNext(tmp.Length, tmp, out fetched);
                 for (int i = 0; i < fetched; i++)
+                {
                     AddTreeNode(srv, root, tmp[i]);
+                }
             } while (fetched > 0);
         }
 
         private void AddTreeNode(IOPCBrowseServerAddressSpace srv, TreeNodeCollection root, string tag)
         {
             TreeNode item = root.Add(tag);
-            OPCChannelInfo channel = new OPCChannelInfo();
-            channel.progId = txtOPCServer.Text;
-            channel.host = txtOPCServerPath.Text;
+            OPCChannelInfo channel = new OPCChannelInfo
+            {
+                progId = txtOPCServer.Text,
+                host = txtOPCServerPath.Text
+            };
             srv.GetItemID(tag, out channel.channel);
             item.Tag = channel;
         }
@@ -440,7 +504,7 @@ namespace AdvancedScada.OPC.Core.Editors
                 {
                     /* Calls the CheckAllChildNodes method, passing in the current 
                     Checked value of the TreeNode whose checked state changed. */
-                    this.CheckAllChildNodes(e.Node, e.Node.Checked);
+                    CheckAllChildNodes(e.Node, e.Node.Checked);
                 }
             }
         }

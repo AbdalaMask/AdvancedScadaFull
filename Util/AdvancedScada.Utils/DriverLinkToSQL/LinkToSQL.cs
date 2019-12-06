@@ -37,7 +37,9 @@ namespace AdvancedScada.Utils.DriverLinkToSQL
                         {
                             string name = reader.GetString(0);
                             if ("master;model;tempdb;msdb;pubs".IndexOf(name) < 0)
+                            {
                                 cbDatabase.Add(name);
+                            }
                         }
                     }
                 }
@@ -73,7 +75,9 @@ namespace AdvancedScada.Utils.DriverLinkToSQL
                             {
                                 string name = reader.GetString(0);
                                 if ("master;model;tempdb;msdb;pubs".IndexOf(name) < 0)
+                                {
                                     cbTable.Add(name);
+                                }
                             }
                         }
                     }
@@ -83,7 +87,7 @@ namespace AdvancedScada.Utils.DriverLinkToSQL
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
 
@@ -115,7 +119,7 @@ namespace AdvancedScada.Utils.DriverLinkToSQL
                 }
                 catch (Exception ex)
                 {
-                    EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                    EventscadaException?.Invoke(GetType().Name, ex.Message);
 
                 }
             }

@@ -21,9 +21,9 @@ namespace AdvancedScada.Utils.Compression
         }
         public static byte[] DecompressString(byte[] data)
         {
-            using (var compressedStream = new MemoryStream(data))
-            using (var zipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
-            using (var resultStream = new MemoryStream())
+            using (MemoryStream compressedStream = new MemoryStream(data))
+            using (GZipStream zipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
+            using (MemoryStream resultStream = new MemoryStream())
             {
                 zipStream.CopyTo(resultStream);
                 return resultStream.ToArray();

@@ -29,7 +29,10 @@ namespace AdvancedScada.Management.SQLManager
         {
             lock (mutex)
             {
-                if (_instance == null) _instance = new ServerManager();
+                if (_instance == null)
+                {
+                    _instance = new ServerManager();
+                }
             }
 
             return _instance;
@@ -40,9 +43,17 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                if (SQ == null) throw new NullReferenceException("The SQLServer is null reference exception");
-                var fCh = IsExisted(SQ);
-                if (fCh != null) throw new Exception($"SQLServer name: '{SQ.ServerName}' is existed");
+                if (SQ == null)
+                {
+                    throw new NullReferenceException("The SQLServer is null reference exception");
+                }
+
+                Server fCh = IsExisted(SQ);
+                if (fCh != null)
+                {
+                    throw new Exception($"SQLServer name: '{SQ.ServerName}' is existed");
+                }
+
                 SQLServers.Add(SQ);
             }
             catch (Exception ex)
@@ -55,17 +66,19 @@ namespace AdvancedScada.Management.SQLManager
             Server result = null;
             try
             {
-                foreach (var item in SQLServers)
+                foreach (Server item in SQLServers)
+                {
                     if (item.ServerId != ch.ServerId && item.ServerName.Equals(ch.ServerName))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -75,10 +88,19 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                if (ch == null) throw new NullReferenceException("The SQLServer is null reference exception");
-                var fCh = IsExisted(ch);
-                if (fCh != null) throw new Exception($"SQLServer name: '{ch.ServerName}' is existed");
-                foreach (var item in SQLServers)
+                if (ch == null)
+                {
+                    throw new NullReferenceException("The SQLServer is null reference exception");
+                }
+
+                Server fCh = IsExisted(ch);
+                if (fCh != null)
+                {
+                    throw new Exception($"SQLServer name: '{ch.ServerName}' is existed");
+                }
+
+                foreach (Server item in SQLServers)
+                {
                     if (item.ServerId == ch.ServerId)
                     {
                         item.ServerName = ch.ServerName;
@@ -88,25 +110,30 @@ namespace AdvancedScada.Management.SQLManager
                         item.ServerId = ch.ServerId;
 
                     }
+                }
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
         public void Delete(int chId)
         {
             try
             {
-                var result = GetBySQLServerId(chId);
-                if (result == null) throw new KeyNotFoundException("SQLServer Id is not found exception");
+                Server result = GetBySQLServerId(chId);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("SQLServer Id is not found exception");
+                }
+
                 SQLServers.Remove(result);
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -118,14 +145,18 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                var result = GetBySQLServerName(chName);
-                if (result == null) throw new KeyNotFoundException("SQLServer name is not found exception");
+                Server result = GetBySQLServerName(chName);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("SQLServer name is not found exception");
+                }
+
                 SQLServers.Remove(result);
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -137,18 +168,24 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                if (ch == null) throw new NullReferenceException("The SQLServer is null reference exception");
-                foreach (var item in SQLServers)
+                if (ch == null)
+                {
+                    throw new NullReferenceException("The SQLServer is null reference exception");
+                }
+
+                foreach (Server item in SQLServers)
+                {
                     if (item.ServerId == ch.ServerId)
                     {
                         SQLServers.Remove(item);
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
         public Server GetBySQLServerId(int chId)
@@ -156,17 +193,19 @@ namespace AdvancedScada.Management.SQLManager
             Server result = null;
             try
             {
-                foreach (var item in SQLServers)
+                foreach (Server item in SQLServers)
+                {
                     if (item.ServerId == chId)
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return result;
         }
@@ -181,17 +220,19 @@ namespace AdvancedScada.Management.SQLManager
             Server result = null;
             try
             {
-                foreach (var item in SQLServers)
+                foreach (Server item in SQLServers)
+                {
                     if (item.ServerName.Equals(chName))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -200,17 +241,20 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                var xmlDoc = new XmlDocument();
+                XmlDocument xmlDoc = new XmlDocument();
                 if (string.IsNullOrEmpty(XmlPath) || string.IsNullOrWhiteSpace(XmlPath))
+                {
                     XmlPath = ReadKey(XML_NAME_DEFAULT);
+                }
+
                 xmlDoc.Load(XmlPath);
-                var nodes = xmlDoc.SelectNodes(ROOT);
+                XmlNodeList nodes = xmlDoc.SelectNodes(ROOT);
                 foreach (XmlNode rootNode in nodes)
                 {
-                    var channelNodeList = rootNode.SelectNodes(Server);
+                    XmlNodeList channelNodeList = rootNode.SelectNodes(Server);
                     foreach (XmlNode chNode in channelNodeList)
                     {
-                        var newServer = new Server();
+                        Server newServer = new Server();
 
 
                         if (newServer != null)
@@ -229,7 +273,7 @@ namespace AdvancedScada.Management.SQLManager
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return SQLServers;
@@ -238,9 +282,13 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                if (File.Exists(pathXml)) File.Delete(pathXml);
-                var element = new XElement(ROOT);
-                var doc = new XDocument(element);
+                if (File.Exists(pathXml))
+                {
+                    File.Delete(pathXml);
+                }
+
+                XElement element = new XElement(ROOT);
+                XDocument doc = new XDocument(element);
                 doc.Save(pathXml);
                 XmlPath = pathXml;
                 WriteKey(XML_NAME_DEFAULT, pathXml);
@@ -248,7 +296,7 @@ namespace AdvancedScada.Management.SQLManager
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -259,17 +307,20 @@ namespace AdvancedScada.Management.SQLManager
         /// <returns>Giá trị của key</returns>
         public string ReadKey(string keyName)
         {
-            var result = string.Empty;
+            string result = string.Empty;
             try
             {
                 RegistryKey regKey;
                 regKey = Registry.CurrentUser.OpenSubKey(@"Software\IndustrialHMI"); //HKEY_CURRENR_USER\Software\VSSCD
-                if (regKey != null) result = (string)regKey.GetValue(keyName);
+                if (regKey != null)
+                {
+                    result = (string)regKey.GetValue(keyName);
+                }
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -292,7 +343,7 @@ namespace AdvancedScada.Management.SQLManager
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
         public void Save(string pathXml)
@@ -302,44 +353,50 @@ namespace AdvancedScada.Management.SQLManager
                 WriteKey(XML_NAME_DEFAULT, pathXml);
                 CreatFile(pathXml);
                 XmlPath = pathXml;
-                var xmlDoc = new XmlDocument();
+                XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(pathXml);
-                var root = xmlDoc.SelectSingleNode(ROOT);
+                XmlNode root = xmlDoc.SelectSingleNode(ROOT);
 
                 // List SQLServers.
-                foreach (var ch in SQLServers)
+                foreach (Server ch in SQLServers)
                 {
-                    var chElement = xmlDoc.CreateElement(Server);
+                    XmlElement chElement = xmlDoc.CreateElement(Server);
                     chElement.SetAttribute(Server_ID, $"{ch.ServerId}");
                     chElement.SetAttribute(Server_NAME, ch.ServerName);
                     chElement.SetAttribute(User_Name, ch.UserName);
                     chElement.SetAttribute(Passwerd, $"{ch.Passwerd}");
                     chElement.SetAttribute(DESCRIPTION, ch.Description);
                     root.AppendChild(chElement);
-                    if (ch.DataBase.Count == 0) continue;
+                    if (ch.DataBase.Count == 0)
+                    {
+                        continue;
+                    }
 
                     // List DataBase.
-                    foreach (var dv in ch.DataBase)
+                    foreach (DataBase dv in ch.DataBase)
                     {
-                        var dvElement = xmlDoc.CreateElement(DataBaseManager.DataBase);
+                        XmlElement dvElement = xmlDoc.CreateElement(DataBaseManager.DataBase);
                         dvElement.SetAttribute(DataBaseManager.DataBase_ID, $"{dv.DataBaseId}");
                         dvElement.SetAttribute(DataBaseManager.DataBase_NAME, dv.DataBaseName);
                         dvElement.SetAttribute(DESCRIPTION, dv.Description);
                         chElement.AppendChild(dvElement);
-                        if (dv.Tables.Count == 0) continue;
-                        // List Tables.
-                        foreach (var db in dv.Tables)
+                        if (dv.Tables.Count == 0)
                         {
-                            var dbElement = xmlDoc.CreateElement(TableManager.Tabled);
+                            continue;
+                        }
+                        // List Tables.
+                        foreach (Table db in dv.Tables)
+                        {
+                            XmlElement dbElement = xmlDoc.CreateElement(TableManager.Tabled);
                             dbElement.SetAttribute(TableManager.Table_ID, $"{db.TableId}");
                             dbElement.SetAttribute(TableManager.Table_NAME, db.TableName);
                             dbElement.SetAttribute(DESCRIPTION, db.Description);
                             dvElement.AppendChild(dbElement);
 
                             // List Columns.
-                            foreach (var tg in db.Columns)
+                            foreach (Column tg in db.Columns)
                             {
-                                var tgElement = xmlDoc.CreateElement(ColumnManager.Column);
+                                XmlElement tgElement = xmlDoc.CreateElement(ColumnManager.Column);
                                 tgElement.SetAttribute(ColumnManager.Column_ID, $"{tg.ColumnId}");
                                 tgElement.SetAttribute(ColumnManager.TAG_NAME, tg.TagName);
                                 tgElement.SetAttribute(ColumnManager.Column_NAME, $"{tg.ColumnName}");
@@ -359,7 +416,7 @@ namespace AdvancedScada.Management.SQLManager
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
     }

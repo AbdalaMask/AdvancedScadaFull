@@ -34,9 +34,10 @@ namespace AdvancedScada.Studio.IE
         }
         private void btnExecute_Click(object sender, EventArgs e)
         {
-            if (eventDataBlockChanged != null) eventDataBlockChanged(db);
-
-
+            if (eventDataBlockChanged != null)
+            {
+                eventDataBlockChanged(db);
+            }
 
             DialogResult = DialogResult.OK;
         }
@@ -48,18 +49,20 @@ namespace AdvancedScada.Studio.IE
 
         private void btnPathFile_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.FileName = "*.xls";
-            openFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                FileName = "*.xls",
+                Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*"
+            };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
                 PathFile.Text = openFileDialog.FileName;
-                var excel = new ExcelPackage(fileInfo);
+                ExcelPackage excel = new ExcelPackage(fileInfo);
 
-                foreach (var worksheet in excel.Workbook.Worksheets)
+                foreach (ExcelWorksheet worksheet in excel.Workbook.Worksheets)
                 {
-                    this.cboxSheet.Items.Add(worksheet.Name);
+                    cboxSheet.Items.Add(worksheet.Name);
                 }
 
             }
@@ -70,7 +73,7 @@ namespace AdvancedScada.Studio.IE
             try
             {
 
-                var dt = ExcelUtils.ReadExcel(PathFile.Text, cboxSheet.Text);
+                DataTable dt = ExcelUtils.ReadExcel(PathFile.Text, cboxSheet.Text);
 
                 short counter = 0;
                 DGImportForm.Rows.Clear();
@@ -78,7 +81,7 @@ namespace AdvancedScada.Studio.IE
                 foreach (DataRow item in dt.Rows)
                 {
                     counter++;
-                    var newTag = new Tag
+                    Tag newTag = new Tag
                     {
                         TagId = counter,
                         TagName = $"{item["TagName"]}",
@@ -102,7 +105,7 @@ namespace AdvancedScada.Studio.IE
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 

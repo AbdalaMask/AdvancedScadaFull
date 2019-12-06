@@ -20,8 +20,8 @@ namespace AdvancedScada.LSIS.Core
         public static List<Channel> Channels = new List<Channel>();
         public static readonly ManualResetEvent SendDone = new ManualResetEvent(true);
         //==================================LS===================================================
-        private static Dictionary<string, LS_CNET> cnet = new Dictionary<string, LS_CNET>();
-        private static Dictionary<string, LS_FENET> FENET = new Dictionary<string, LS_FENET>();
+        private static readonly Dictionary<string, LS_CNET> cnet = new Dictionary<string, LS_CNET>();
+        private static readonly Dictionary<string, LS_FENET> FENET = new Dictionary<string, LS_FENET>();
 
         private static bool IsConnected;
 
@@ -39,20 +39,24 @@ namespace AdvancedScada.LSIS.Core
 
                 //=================================================================
 
-                if (Channels == null) return;
+                if (Channels == null)
+                {
+                    return;
+                }
+
                 Channels.Add(ch);
 
 
                 IDriverAdapter DriverAdapter = null;
-                foreach (var dv in ch.Devices)
+                foreach (Device dv in ch.Devices)
                 {
                     try
                     {
                         switch (ch.ConnectionType)
                         {
                             case "SerialPort":
-                                var dis = (DISerialPort)ch;
-                                var sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
+                                DISerialPort dis = (DISerialPort)ch;
+                                SerialPort sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
                                 {
                                     Handshake = dis.Handshake
                                 };
@@ -61,7 +65,7 @@ namespace AdvancedScada.LSIS.Core
                                 cnet.Add(ch.ChannelName, (LS_CNET)DriverAdapter);
                                 break;
                             case "Ethernet":
-                                var die = (DIEthernet)ch;
+                                DIEthernet die = (DIEthernet)ch;
 
                                 DriverAdapter = new LS_FENET(die.CPU, die.IPAddress, die.Port, (byte)die.Slot);
                                 FENET.Add(ch.ChannelName, (LS_FENET)DriverAdapter);
@@ -72,12 +76,12 @@ namespace AdvancedScada.LSIS.Core
                     }
                     catch (Exception ex)
                     {
-                        EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                        EventscadaException?.Invoke(GetType().Name, ex.Message);
                     }
-                    foreach (var db in dv.DataBlocks)
+                    foreach (DataBlock db in dv.DataBlocks)
                     {
                         DataBlockCollection.DataBlocks.Add($"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}", db);
-                        foreach (var tg in db.Tags)
+                        foreach (Tag tg in db.Tags)
                         {
                             TagCollection.Tags.Add(
                                 $"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
@@ -90,7 +94,7 @@ namespace AdvancedScada.LSIS.Core
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
 
             }
         }
@@ -106,7 +110,11 @@ namespace AdvancedScada.LSIS.Core
 
 
                 taskArray = new Task[Channels.Count];
-                if (taskArray == null) throw new NullReferenceException("No Data");
+                if (taskArray == null)
+                {
+                    throw new NullReferenceException("No Data");
+                }
+
                 for (int i = 0; i < Channels.Count; i++)
                 {
 
@@ -143,7 +151,11 @@ namespace AdvancedScada.LSIS.Core
 
                                         foreach (DataBlock db in dv.DataBlocks)
                                         {
-                                            if (!IsConnected) break;
+                                            if (!IsConnected)
+                                            {
+                                                break;
+                                            }
+
                                             SendPackageLSIS(DriverAdapter, db);
                                         }
 
@@ -152,7 +164,7 @@ namespace AdvancedScada.LSIS.Core
                                 catch (Exception ex)
                                 {
                                     Disconnect();
-                                    EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                                    EventscadaException?.Invoke(GetType().Name, ex.Message);
                                 }
 
                             }
@@ -177,20 +189,20 @@ namespace AdvancedScada.LSIS.Core
 
                     }, Channels[i]);
                     taskArray[i].Start();
-                    foreach (var task in taskArray)
+                    foreach (Task task in taskArray)
                     {
-                        var data = task.AsyncState as Channel;
+                        Channel data = task.AsyncState as Channel;
                         if (data != null)
-                            EventscadaException?.Invoke(this.GetType().Name, $"Task #{data.ChannelId} created at {data.ChannelName}, ran on thread #{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}.");
-
-
+                        {
+                            EventscadaException?.Invoke(GetType().Name, $"Task #{data.ChannelId} created at {data.ChannelName}, ran on thread #{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}.");
+                        }
                     }
                 }
 
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -214,7 +226,7 @@ namespace AdvancedScada.LSIS.Core
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
 
             }
         }
@@ -269,10 +281,18 @@ namespace AdvancedScada.LSIS.Core
                     case DataTypes.BitOnWord:
                         lock (DriverAdapter)
                         {
-                            var bitArys2 = DriverAdapter.Read<bool>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", (ushort)(2 * db.Length));
-                            if (bitArys2 == null || bitArys2.Length == 0) return;
-                            if (bitArys2.Length > db.Tags.Count) return;
-                            for (var j = 0; j <= db.Tags.Count - 1; j++)
+                            bool[] bitArys2 = DriverAdapter.Read<bool>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", (ushort)(2 * db.Length));
+                            if (bitArys2 == null || bitArys2.Length == 0)
+                            {
+                                return;
+                            }
+
+                            if (bitArys2.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
+                            for (int j = 0; j <= db.Tags.Count - 1; j++)
                             {
                                 db.Tags[j].Value = bitArys2[j];
                                 db.Tags[j].TimeSpan = DateTime.Now;
@@ -287,9 +307,17 @@ namespace AdvancedScada.LSIS.Core
                             lock (DriverAdapter)
                             {
                                 bitArys = DriverAdapter.Read<bool>($"{db.MemoryType.Substring(0, 1)}{ baseAddress}", (ushort)(2 * db.Length));
-                                if (bitArys == null || bitArys.Length == 0) return;
-                                if (bitArys.Length > db.Tags.Count) return;
-                                for (var j = 0; j <= db.Tags.Count - 1; j++)
+                                if (bitArys == null || bitArys.Length == 0)
+                                {
+                                    return;
+                                }
+
+                                if (bitArys.Length > db.Tags.Count)
+                                {
+                                    return;
+                                }
+
+                                for (int j = 0; j <= db.Tags.Count - 1; j++)
                                 {
                                     db.Tags[j].Value = bitArys[j];
                                     db.Tags[j].TimeSpan = DateTime.Now;
@@ -304,7 +332,11 @@ namespace AdvancedScada.LSIS.Core
                                 for (int i = 0; i < db.Tags.Count; i++)
                                 {
                                     bitArys[i] = DriverAdapter.Read<bool>(db.Tags[i].Address);
-                                    if (bitArys == null || bitArys.Length == 0) return;
+                                    if (bitArys == null || bitArys.Length == 0)
+                                    {
+                                        return;
+                                    }
+
                                     db.Tags[i].Value = bitArys[i];
                                     db.Tags[i].TimeSpan = DateTime.Now;
                                 }
@@ -320,9 +352,17 @@ namespace AdvancedScada.LSIS.Core
                             if (db.IsArray)
                             {
                                 byteArys = DriverAdapter.Read<byte>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", (ushort)(2 * db.Length));
-                                if (byteArys == null || byteArys.Length == 0) return;
-                                if (byteArys.Length > db.Tags.Count) return;
-                                for (var j = 0; j <= db.Tags.Count - 1; j++)
+                                if (byteArys == null || byteArys.Length == 0)
+                                {
+                                    return;
+                                }
+
+                                if (byteArys.Length > db.Tags.Count)
+                                {
+                                    return;
+                                }
+
+                                for (int j = 0; j <= db.Tags.Count - 1; j++)
                                 {
                                     db.Tags[j].Value = byteArys[j];
                                     db.Tags[j].TimeSpan = DateTime.Now;
@@ -336,7 +376,11 @@ namespace AdvancedScada.LSIS.Core
                                     for (int i = 0; i < db.Tags.Count; i++)
                                     {
                                         byteArys[i] = DriverAdapter.Read<byte>(db.Tags[i].Address);
-                                        if (byteArys == null || byteArys.Length == 0) return;
+                                        if (byteArys == null || byteArys.Length == 0)
+                                        {
+                                            return;
+                                        }
+
                                         db.Tags[i].Value = byteArys[i];
                                         db.Tags[i].TimeSpan = DateTime.Now;
                                     }
@@ -351,8 +395,16 @@ namespace AdvancedScada.LSIS.Core
                             if (db.IsArray)
                             {
                                 IntRs = DriverAdapter.Read<short>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
-                                if (IntRs == null || IntRs.Length == 0) return;
-                                if (IntRs.Length > db.Tags.Count) return;
+                                if (IntRs == null || IntRs.Length == 0)
+                                {
+                                    return;
+                                }
+
+                                if (IntRs.Length > db.Tags.Count)
+                                {
+                                    return;
+                                }
+
                                 for (int j = 0; j < IntRs.Length; j++)
                                 {
                                     db.Tags[j].Value = IntRs[j];
@@ -367,7 +419,11 @@ namespace AdvancedScada.LSIS.Core
                                     for (int i = 0; i < db.Tags.Count; i++)
                                     {
                                         IntRs[i] = DriverAdapter.Read<short>(db.Tags[i].Address);
-                                        if (IntRs == null || IntRs.Length == 0) return;
+                                        if (IntRs == null || IntRs.Length == 0)
+                                        {
+                                            return;
+                                        }
+
                                         db.Tags[i].Value = IntRs[i];
                                         db.Tags[i].TimeSpan = DateTime.Now;
                                     }
@@ -379,9 +435,17 @@ namespace AdvancedScada.LSIS.Core
                         lock (DriverAdapter)
                         {
                             ushort[] ushortArys = DriverAdapter.Read<ushort>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
-                            if (ushortArys == null || ushortArys.Length == 0) return;
-                            if (ushortArys.Length > db.Tags.Count) return;
-                            for (var j = 0; j <= db.Tags.Count - 1; j++)
+                            if (ushortArys == null || ushortArys.Length == 0)
+                            {
+                                return;
+                            }
+
+                            if (ushortArys.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
+                            for (int j = 0; j <= db.Tags.Count - 1; j++)
                             {
                                 db.Tags[j].Value = ushortArys[j];
                                 db.Tags[j].TimeSpan = DateTime.Now;
@@ -392,8 +456,16 @@ namespace AdvancedScada.LSIS.Core
                         lock (DriverAdapter)
                         {
                             int[] DIntRs = DriverAdapter.Read<int>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
-                            if (DIntRs == null || DIntRs.Length == 0) return;
-                            if (DIntRs.Length > db.Tags.Count) return;
+                            if (DIntRs == null || DIntRs.Length == 0)
+                            {
+                                return;
+                            }
+
+                            if (DIntRs.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < DIntRs.Length; j++)
                             {
                                 db.Tags[j].Value = DIntRs[j];
@@ -404,9 +476,17 @@ namespace AdvancedScada.LSIS.Core
                     case DataTypes.UInt:
                         lock (DriverAdapter)
                         {
-                            var wdRs = DriverAdapter.Read<uint>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
-                            if (wdRs == null || wdRs.Length == 0) return;
-                            if (wdRs.Length > db.Tags.Count) return;
+                            uint[] wdRs = DriverAdapter.Read<uint>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
+                            if (wdRs == null || wdRs.Length == 0)
+                            {
+                                return;
+                            }
+
+                            if (wdRs.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < db.Tags.Count; j++)
                             {
                                 db.Tags[j].Value = wdRs[j];
@@ -418,8 +498,16 @@ namespace AdvancedScada.LSIS.Core
                         lock (DriverAdapter)
                         {
                             long[] dwRs = DriverAdapter.Read<long>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
-                            if (dwRs == null || dwRs.Length == 0) return;
-                            if (dwRs.Length > db.Tags.Count) return;
+                            if (dwRs == null || dwRs.Length == 0)
+                            {
+                                return;
+                            }
+
+                            if (dwRs.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < dwRs.Length; j++)
                             {
                                 db.Tags[j].Value = dwRs[j];
@@ -431,8 +519,16 @@ namespace AdvancedScada.LSIS.Core
                         lock (DriverAdapter)
                         {
                             ulong[] dwRs = DriverAdapter.Read<ulong>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
-                            if (dwRs == null || dwRs.Length == 0) return;
-                            if (dwRs.Length > db.Tags.Count) return;
+                            if (dwRs == null || dwRs.Length == 0)
+                            {
+                                return;
+                            }
+
+                            if (dwRs.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < dwRs.Length; j++)
                             {
                                 db.Tags[j].Value = dwRs[j];
@@ -444,8 +540,16 @@ namespace AdvancedScada.LSIS.Core
                         lock (DriverAdapter)
                         {
                             float[] rl1Rs = DriverAdapter.Read<float>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
-                            if (rl1Rs == null || rl1Rs.Length == 0) return;
-                            if (rl1Rs.Length > db.Tags.Count) return;
+                            if (rl1Rs == null || rl1Rs.Length == 0)
+                            {
+                                return;
+                            }
+
+                            if (rl1Rs.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < rl1Rs.Length; j++)
                             {
                                 db.Tags[j].Value = rl1Rs[j];
@@ -457,8 +561,16 @@ namespace AdvancedScada.LSIS.Core
                         lock (DriverAdapter)
                         {
                             double[] rl2Rs = DriverAdapter.Read<double>($"{db.MemoryType.Substring(0, 1)}{baseAddress}", db.Length);
-                            if (rl2Rs == null || rl2Rs.Length == 0) return;
-                            if (rl2Rs.Length > db.Tags.Count) return;
+                            if (rl2Rs == null || rl2Rs.Length == 0)
+                            {
+                                return;
+                            }
+
+                            if (rl2Rs.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < rl2Rs.Length; j++)
                             {
                                 db.Tags[j].Value = rl2Rs[j];
@@ -476,7 +588,7 @@ namespace AdvancedScada.LSIS.Core
             catch (Exception ex)
             {
                 Disconnect();
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
         }
@@ -510,8 +622,13 @@ namespace AdvancedScada.LSIS.Core
                                     DriverAdapter = FENET[ch.ChannelName];
                                     break;
                             }
-                            if (DriverAdapter == null) return;
+                            if (DriverAdapter == null)
+                            {
+                                return;
+                            }
+
                             lock (DriverAdapter)
+                            {
                                 switch (TagCollection.Tags[tagName].DataType)
                                 {
                                     case DataTypes.Bit:
@@ -560,14 +677,14 @@ namespace AdvancedScada.LSIS.Core
                                     default:
                                         break;
                                 }
-
+                            }
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             finally
             {

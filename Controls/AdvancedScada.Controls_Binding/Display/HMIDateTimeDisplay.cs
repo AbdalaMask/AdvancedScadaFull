@@ -14,8 +14,8 @@ namespace AdvancedScada.Controls_Binding.Display
 
         public string DisplayFormat
         {
-            get { return m_DisplayFormat; }
-            set { m_DisplayFormat = value; }
+            get => m_DisplayFormat;
+            set => m_DisplayFormat = value;
         }
 
         #endregion
@@ -25,10 +25,14 @@ namespace AdvancedScada.Controls_Binding.Display
         public HMIDateTimeDisplay()
         {
             if (ForeColor == Color.FromKnownColor(KnownColor.ControlText) || ForeColor == Color.FromArgb(0, 0, 0))
+            {
                 ForeColor = Color.WhiteSmoke;
+            }
 
-            UpdateTimer = new Timer();
-            UpdateTimer.Interval = 1000;
+            UpdateTimer = new Timer
+            {
+                Interval = 1000
+            };
             UpdateTimer.Tick += UpdateTick;
 
             UpdateTick(this, EventArgs.Empty);
@@ -37,6 +41,7 @@ namespace AdvancedScada.Controls_Binding.Display
         protected override void Dispose(bool disposing)
         {
             if (disposing)
+            {
                 try
                 {
                     if (UpdateTimer != null)
@@ -49,6 +54,7 @@ namespace AdvancedScada.Controls_Binding.Display
                 {
                     base.Dispose(disposing);
                 }
+            }
         }
 
         #endregion
@@ -60,17 +66,25 @@ namespace AdvancedScada.Controls_Binding.Display
             base.OnCreateControl();
 
             if (DesignMode)
+            {
                 UpdateTick(this, EventArgs.Empty);
+            }
             else
+            {
                 UpdateTimer.Enabled = true;
+            }
         }
 
         private void UpdateTick(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(m_DisplayFormat))
+            {
                 Text = DateTime.Now.ToString();
+            }
             else
+            {
                 Text = DateTime.Now.ToString(m_DisplayFormat);
+            }
         }
 
         #endregion

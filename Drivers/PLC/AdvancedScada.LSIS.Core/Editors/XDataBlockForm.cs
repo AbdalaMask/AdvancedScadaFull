@@ -10,7 +10,7 @@ namespace AdvancedScada.LSIS.Core.Editors
     public partial class XDataBlockForm : AdvancedScada.Management.Editors.XDataBlockForm
     {
         private int IDX;
-        int TagsCount = 1;
+        private int TagsCount = 1;
 
 
         public XDataBlockForm()
@@ -29,25 +29,32 @@ namespace AdvancedScada.LSIS.Core.Editors
         #region LSIS
         public void AddressCreateTagWord(DataBlock db, bool IsNew)
         {
-            if (IsNew == false) db.Tags.Clear();
-            foreach (var item in dv.DataBlocks)
+            if (IsNew == false)
+            {
+                db.Tags.Clear();
+            }
+
+            foreach (DataBlock item in dv.DataBlocks)
             {
 
                 TagsCount += item.Tags.Count;
                 if (db != null)
                 {
-                    if (db.DataBlockName.Equals(item.DataBlockName)) break;
+                    if (db.DataBlockName.Equals(item.DataBlockName))
+                    {
+                        break;
+                    }
                 }
 
             }
-            var y = txtStartAddress.Value;
+            decimal y = txtStartAddress.Value;
             if (chkCreateTag.Checked)
             {
 
-                for (var i = 0; i < txtAddressLength.Value; i++)
+                for (int i = 0; i < txtAddressLength.Value; i++)
                 {
 
-                    var tg = new Tag()
+                    Tag tg = new Tag()
                     {
                         ChannelId = int.Parse(txtChannelId.Text),
                         DeviceId = int.Parse(txtDeviceId.Text),
@@ -67,31 +74,43 @@ namespace AdvancedScada.LSIS.Core.Editors
         }
         public void AddressCreateTagBitHex(DataBlock db, int Address, int Save_BufAddr, bool IsNew)
         {
-            var hex1 = 0;
-            if (IsNew == false) db.Tags.Clear();
-            foreach (var item in dv.DataBlocks)
+            int hex1 = 0;
+            if (IsNew == false)
+            {
+                db.Tags.Clear();
+            }
+
+            foreach (DataBlock item in dv.DataBlocks)
             {
 
                 TagsCount += item.Tags.Count;
                 if (db != null)
                 {
-                    if (db.DataBlockName.Equals(item.DataBlockName)) break;
+                    if (db.DataBlockName.Equals(item.DataBlockName))
+                    {
+                        break;
+                    }
                 }
 
             }
             if (chkCreateTag.Checked)
             {
-                var y = Address;
+                int y = Address;
                 hex1 = (int)HexadecimalToDecimal.HexToDec(Address.ToString());
-                for (var i = Address; i < Save_BufAddr + y; i++)
+                for (int i = Address; i < Save_BufAddr + y; i++)
                 {
-                    var hexaNumber = string.Empty;
-                    var tg = new Tag() { TagId = IDX += 1 };
+                    string hexaNumber = string.Empty;
+                    Tag tg = new Tag() { TagId = IDX += 1 };
 
                     if (hex1 == 0)
+                    {
                         hexaNumber = "0";
+                    }
                     else
+                    {
                         hexaNumber = DecimalToHex.GetDecimalToHex(long.Parse(hex1.ToString()));
+                    }
+
                     tg.ChannelId = int.Parse(txtChannelId.Text);
                     tg.DeviceId = int.Parse(txtDeviceId.Text);
                     tg.DataBlockId = int.Parse(txtDataBlockId.Text);
@@ -107,26 +126,33 @@ namespace AdvancedScada.LSIS.Core.Editors
         }
         public void AddressCreateTagBit(DataBlock db, int Address, int Save_BufAddr, bool IsNew)
         {
-            var hex1 = Address;
-            if (IsNew == false) db.Tags.Clear();
-            foreach (var item in dv.DataBlocks)
+            int hex1 = Address;
+            if (IsNew == false)
+            {
+                db.Tags.Clear();
+            }
+
+            foreach (DataBlock item in dv.DataBlocks)
             {
 
                 TagsCount += item.Tags.Count;
                 if (db != null)
                 {
-                    if (db.DataBlockName.Equals(item.DataBlockName)) break;
+                    if (db.DataBlockName.Equals(item.DataBlockName))
+                    {
+                        break;
+                    }
                 }
 
             }
             if (chkCreateTag.Checked)
             {
-                var y = Address;
+                int y = Address;
 
-                for (var i = Address; i < Save_BufAddr + y; i++)
+                for (int i = Address; i < Save_BufAddr + y; i++)
                 {
-                    var hexaNumber = string.Empty;
-                    var tg = new Tag() { TagId = IDX += 1 };
+                    string hexaNumber = string.Empty;
+                    Tag tg = new Tag() { TagId = IDX += 1 };
 
 
                     tg.ChannelId = int.Parse(txtChannelId.Text);
@@ -182,7 +208,7 @@ namespace AdvancedScada.LSIS.Core.Editors
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -254,7 +280,7 @@ namespace AdvancedScada.LSIS.Core.Editors
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -266,7 +292,7 @@ namespace AdvancedScada.LSIS.Core.Editors
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -274,8 +300,8 @@ namespace AdvancedScada.LSIS.Core.Editors
         {
             try
             {
-                var Address = 0;
-                var Save_BufAddr = 0;
+                int Address = 0;
+                int Save_BufAddr = 0;
 
 
                 switch (cboxDataType.Text)
@@ -305,7 +331,7 @@ namespace AdvancedScada.LSIS.Core.Editors
 
                     if (db == null)
                     {
-                        var dbNew = new DataBlock()
+                        DataBlock dbNew = new DataBlock()
                         {
                             ChannelId = ch.ChannelId,
                             DeviceId = dv.DeviceId,
@@ -326,11 +352,22 @@ namespace AdvancedScada.LSIS.Core.Editors
                         {
                             case "Bit":
                             case "Byte":
-                                if (chkCreateTag.Checked && chkIsHex.Checked) AddressCreateTagBitHex(dbNew, Address, Save_BufAddr, true);
-                                else AddressCreateTagBit(dbNew, Address, Save_BufAddr, true);
+                                if (chkCreateTag.Checked && chkIsHex.Checked)
+                                {
+                                    AddressCreateTagBitHex(dbNew, Address, Save_BufAddr, true);
+                                }
+                                else
+                                {
+                                    AddressCreateTagBit(dbNew, Address, Save_BufAddr, true);
+                                }
+
                                 break;
                             default:
-                                if (chkCreateTag.Checked) AddressCreateTagWord(dbNew, true);
+                                if (chkCreateTag.Checked)
+                                {
+                                    AddressCreateTagWord(dbNew, true);
+                                }
+
                                 break;
                         }
 
@@ -357,11 +394,22 @@ namespace AdvancedScada.LSIS.Core.Editors
                         {
                             case "Bit":
                             case "Byte":
-                                if (chkCreateTag.Checked && chkIsHex.Checked) AddressCreateTagBitHex(db, Address, Save_BufAddr, false);
-                                else AddressCreateTagBit(db, Address, Save_BufAddr, false);
+                                if (chkCreateTag.Checked && chkIsHex.Checked)
+                                {
+                                    AddressCreateTagBitHex(db, Address, Save_BufAddr, false);
+                                }
+                                else
+                                {
+                                    AddressCreateTagBit(db, Address, Save_BufAddr, false);
+                                }
+
                                 break;
                             default:
-                                if (chkCreateTag.Checked) AddressCreateTagWord(db, false);
+                                if (chkCreateTag.Checked)
+                                {
+                                    AddressCreateTagWord(db, false);
+                                }
+
                                 break;
                         }
 
@@ -372,7 +420,7 @@ namespace AdvancedScada.LSIS.Core.Editors
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 

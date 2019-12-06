@@ -8,7 +8,7 @@ using static AdvancedScada.Common.XCollection;
 
 namespace AdvancedScada.Management.AlarmManager
 {
-  public  class AlarmManagers
+    public class AlarmManagers
     {
         public const string ROOT = "Root";
         public const string AllAlarm = "Alarm";
@@ -31,7 +31,10 @@ namespace AdvancedScada.Management.AlarmManager
         {
             lock (mutex)
             {
-                if (_instance == null) _instance = new AlarmManagers();
+                if (_instance == null)
+                {
+                    _instance = new AlarmManagers();
+                }
             }
 
             return _instance;
@@ -42,9 +45,17 @@ namespace AdvancedScada.Management.AlarmManager
         {
             try
             {
-                if (SQ == null) throw new NullReferenceException("The Alarm is null reference exception");
-                var fCh = IsExisted(SQ);
-                if (fCh != null) throw new Exception($"Alarm name: '{SQ.Name}' is existed");
+                if (SQ == null)
+                {
+                    throw new NullReferenceException("The Alarm is null reference exception");
+                }
+
+                ClassAlarm fCh = IsExisted(SQ);
+                if (fCh != null)
+                {
+                    throw new Exception($"Alarm name: '{SQ.Name}' is existed");
+                }
+
                 Alarms.Add(SQ);
             }
             catch (Exception ex)
@@ -57,17 +68,19 @@ namespace AdvancedScada.Management.AlarmManager
             ClassAlarm result = null;
             try
             {
-                foreach (var item in Alarms)
+                foreach (ClassAlarm item in Alarms)
+                {
                     if (item.Name.Equals(ch.Name))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -77,10 +90,19 @@ namespace AdvancedScada.Management.AlarmManager
         {
             try
             {
-                if (ch == null) throw new NullReferenceException("The Alarms is null reference exception");
-                var fCh = IsExisted(ch);
-                if (fCh != null) throw new Exception($"Alarms name: '{ch.Name}' is existed");
-                foreach (var item in Alarms)
+                if (ch == null)
+                {
+                    throw new NullReferenceException("The Alarms is null reference exception");
+                }
+
+                ClassAlarm fCh = IsExisted(ch);
+                if (fCh != null)
+                {
+                    throw new Exception($"Alarms name: '{ch.Name}' is existed");
+                }
+
+                foreach (ClassAlarm item in Alarms)
+                {
                     if (item.Name == ch.Name)
                     {
                         item.Name = ch.Name;
@@ -93,14 +115,15 @@ namespace AdvancedScada.Management.AlarmManager
                         item.DataBlock = ch.DataBlock;
 
                     }
+                }
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
-        
+
 
         /// <summary>
         ///     Xóa kênh.
@@ -110,14 +133,18 @@ namespace AdvancedScada.Management.AlarmManager
         {
             try
             {
-                var result = GetByAlarmName(chName);
-                if (result == null) throw new KeyNotFoundException("Alarms name is not found exception");
+                ClassAlarm result = GetByAlarmName(chName);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("Alarms name is not found exception");
+                }
+
                 Alarms.Remove(result);
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -129,21 +156,27 @@ namespace AdvancedScada.Management.AlarmManager
         {
             try
             {
-                if (ch == null) throw new NullReferenceException("The Alarms is null reference exception");
-                foreach (var item in Alarms)
+                if (ch == null)
+                {
+                    throw new NullReferenceException("The Alarms is null reference exception");
+                }
+
+                foreach (ClassAlarm item in Alarms)
+                {
                     if (item.Name == ch.Name)
                     {
                         Alarms.Remove(item);
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
-      
+
 
         /// <summary>
         ///     Tìm kiếm kênh theo tên kênh.
@@ -155,17 +188,19 @@ namespace AdvancedScada.Management.AlarmManager
             ClassAlarm result = null;
             try
             {
-                foreach (var item in Alarms)
+                foreach (ClassAlarm item in Alarms)
+                {
                     if (item.Name.Equals(chName))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -174,22 +209,25 @@ namespace AdvancedScada.Management.AlarmManager
         {
             try
             {
-                var xmlDoc = new XmlDocument();
+                XmlDocument xmlDoc = new XmlDocument();
                 if (string.IsNullOrEmpty(XmlPath) || string.IsNullOrWhiteSpace(XmlPath))
+                {
                     XmlPath = ReadKey(XML_NAME_DEFAULT);
+                }
+
                 xmlDoc.Load(XmlPath);
-                var nodes = xmlDoc.SelectNodes(ROOT);
+                XmlNodeList nodes = xmlDoc.SelectNodes(ROOT);
                 foreach (XmlNode rootNode in nodes)
                 {
-                    var channelNodeList = rootNode.SelectNodes(AllAlarm);
+                    XmlNodeList channelNodeList = rootNode.SelectNodes(AllAlarm);
                     foreach (XmlNode chNode in channelNodeList)
                     {
-                        var newClassAlarm = new ClassAlarm();
+                        ClassAlarm newClassAlarm = new ClassAlarm();
 
 
                         if (newClassAlarm != null)
                         {
-                           
+
                             newClassAlarm.Name = chNode.Attributes[Alarm_NAME].Value;
                             newClassAlarm.AlarmCalss = chNode.Attributes[Alarm_Calss].Value;
                             newClassAlarm.AlarmText = chNode.Attributes[Alarm_Text].Value;
@@ -207,7 +245,7 @@ namespace AdvancedScada.Management.AlarmManager
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return Alarms;
@@ -216,9 +254,13 @@ namespace AdvancedScada.Management.AlarmManager
         {
             try
             {
-                if (File.Exists(pathXml)) File.Delete(pathXml);
-                var element = new XElement(ROOT);
-                var doc = new XDocument(element);
+                if (File.Exists(pathXml))
+                {
+                    File.Delete(pathXml);
+                }
+
+                XElement element = new XElement(ROOT);
+                XDocument doc = new XDocument(element);
                 doc.Save(pathXml);
                 XmlPath = pathXml;
                 WriteKey(XML_NAME_DEFAULT, pathXml);
@@ -226,7 +268,7 @@ namespace AdvancedScada.Management.AlarmManager
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -237,17 +279,20 @@ namespace AdvancedScada.Management.AlarmManager
         /// <returns>Giá trị của key</returns>
         public string ReadKey(string keyName)
         {
-            var result = string.Empty;
+            string result = string.Empty;
             try
             {
                 RegistryKey regKey;
                 regKey = Registry.CurrentUser.OpenSubKey(@"Software\IndustrialHMI"); //HKEY_CURRENR_USER\Software\VSSCD
-                if (regKey != null) result = (string)regKey.GetValue(keyName);
+                if (regKey != null)
+                {
+                    result = (string)regKey.GetValue(keyName);
+                }
             }
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -270,7 +315,7 @@ namespace AdvancedScada.Management.AlarmManager
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
         public void Save(string pathXml)
@@ -280,15 +325,15 @@ namespace AdvancedScada.Management.AlarmManager
                 WriteKey(XML_NAME_DEFAULT, pathXml);
                 CreatFile(pathXml);
                 XmlPath = pathXml;
-                var xmlDoc = new XmlDocument();
+                XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(pathXml);
-                var root = xmlDoc.SelectSingleNode(ROOT);
+                XmlNode root = xmlDoc.SelectSingleNode(ROOT);
 
                 // List SQLServers.
-                foreach (var ch in Alarms)
+                foreach (ClassAlarm ch in Alarms)
                 {
-                    var chElement = xmlDoc.CreateElement(AllAlarm);
-                    
+                    XmlElement chElement = xmlDoc.CreateElement(AllAlarm);
+
                     chElement.SetAttribute(Alarm_NAME, ch.Name);
                     chElement.SetAttribute(Alarm_Calss, ch.AlarmCalss);
                     chElement.SetAttribute(Alarm_Text, ch.AlarmText);
@@ -299,7 +344,7 @@ namespace AdvancedScada.Management.AlarmManager
                     chElement.SetAttribute(Alarm_Value, ch.Value);
 
                     root.AppendChild(chElement);
-                    
+
                 }
 
                 xmlDoc.Save(pathXml);
@@ -307,7 +352,7 @@ namespace AdvancedScada.Management.AlarmManager
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
     }

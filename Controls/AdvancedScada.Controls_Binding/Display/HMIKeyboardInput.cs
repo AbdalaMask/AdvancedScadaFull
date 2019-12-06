@@ -27,8 +27,8 @@ namespace AdvancedScada.Controls_Binding.Display
 
         public OutputType OutputType
         {
-            get { return m_OutputType; }
-            set { m_OutputType = value; }
+            get => m_OutputType;
+            set => m_OutputType = value;
         }
 
         //*****************************************
@@ -40,7 +40,7 @@ namespace AdvancedScada.Controls_Binding.Display
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressText
         {
-            get { return m_PLCAddressText; }
+            get => m_PLCAddressText;
             set
             {
                 if (m_PLCAddressText != value)
@@ -51,8 +51,12 @@ namespace AdvancedScada.Controls_Binding.Display
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressText) || string.IsNullOrWhiteSpace(m_PLCAddressText) ||
-                            Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressGetFocusValue], "Value", true);
+                            Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressGetFocusValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -72,7 +76,7 @@ namespace AdvancedScada.Controls_Binding.Display
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressVisible
         {
-            get { return m_PLCAddressVisible; }
+            get => m_PLCAddressVisible;
             set
             {
                 if (m_PLCAddressVisible != value)
@@ -84,8 +88,12 @@ namespace AdvancedScada.Controls_Binding.Display
                         // If Not String.IsNullOrEmpty(m_PLCAddressVisible) Then
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
-                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
@@ -106,7 +114,7 @@ namespace AdvancedScada.Controls_Binding.Display
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressGetFocusValue
         {
-            get { return m_PLCAddressGetFocusValue; }
+            get => m_PLCAddressGetFocusValue;
             set
             {
                 if (m_PLCAddressGetFocusValue != value)
@@ -118,8 +126,12 @@ namespace AdvancedScada.Controls_Binding.Display
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressGetFocusValue) ||
                             string.IsNullOrWhiteSpace(m_PLCAddressGetFocusValue) ||
-                            Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressGetFocusValue], "Value", true);
+                            Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressGetFocusValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -139,10 +151,13 @@ namespace AdvancedScada.Controls_Binding.Display
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressWriteValue
         {
-            get { return m_PLCAddressWriteValue; }
+            get => m_PLCAddressWriteValue;
             set
             {
-                if (m_PLCAddressWriteValue != value) m_PLCAddressWriteValue = value;
+                if (m_PLCAddressWriteValue != value)
+                {
+                    m_PLCAddressWriteValue = value;
+                }
             }
         }
 
@@ -175,7 +190,10 @@ namespace AdvancedScada.Controls_Binding.Display
                 }
 
                 //* Save the text to return to
-                if (!ErrorDisplayTime.Enabled) OriginalText = Text;
+                if (!ErrorDisplayTime.Enabled)
+                {
+                    OriginalText = Text;
+                }
 
                 ErrorDisplayTime.Enabled = true;
 
@@ -207,9 +225,13 @@ namespace AdvancedScada.Controls_Binding.Display
             try
             {
                 if (m_PLCAddressWriteValue != null)
+                {
                     Utilities.Write(m_PLCAddressWriteValue, double.Parse(Text));
+                }
                 else
+                {
                     MessageBox.Show("PLCAddressWriteValue not set to anything");
+                }
             }
             catch (Exception ex)
             {

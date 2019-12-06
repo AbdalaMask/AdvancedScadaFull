@@ -34,30 +34,34 @@ namespace AdvancedScada.ImagePicker
         #region Fild
 
         public static System.Windows.Controls.Canvas previewTarget;
+
         //// Create a ResXResourceReader for the file items.resx.
         //private ResXResourceReader rsxr;
 
-        Dictionary<int, string> ImageListCurrentTip = new Dictionary<int, string>();
+        private readonly Dictionary<int, string> ImageListCurrentTip = new Dictionary<int, string>();
         // local variable declarations
         public string CategoryName = "Category_Files\\{0}.resx";
         public ResXResourceWriter rsxw = null;
-        ImageList il32 = null;
-        Dictionary<int, Image> ImageListCurrentImage = new Dictionary<int, Image>();
+        private ImageList il32 = null;
+        private readonly Dictionary<int, Image> ImageListCurrentImage = new Dictionary<int, Image>();
 
         #endregion
 
         public string ReadKey(string keyName)
         {
-            var result = string.Empty;
+            string result = string.Empty;
             try
             {
                 RegistryKey regKey;
                 regKey = Registry.CurrentUser.OpenSubKey(@"Software\HMI"); //HKEY_CURRENR_USER\Software\VSSCD
-                if (regKey != null) result = (string)regKey.GetValue(keyName);
+                if (regKey != null)
+                {
+                    result = (string)regKey.GetValue(keyName);
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -74,7 +78,8 @@ namespace AdvancedScada.ImagePicker
         {
             Close();
         }
-        readonly static char[] splitCharacters = new char[] { '\\', '/' };
+
+        private static readonly char[] splitCharacters = new char[] { '\\', '/' };
         [System.Runtime.CompilerServices.MethodImpl(256)]
         public static string[] Split(string key)
         {
@@ -83,11 +88,15 @@ namespace AdvancedScada.ImagePicker
         public void GetImageFolderName(string imageType)
         {
 
-            var category = ImageResourceCache.DoLoad(imageType).GetAllResourceKeys();
+            string[] category = ImageResourceCache.DoLoad(imageType).GetAllResourceKeys();
             string[] parts;
             ListBoxCategoryName.Items.Clear();
-            if (category == null) return;
-            foreach (var item2 in category)
+            if (category == null)
+            {
+                return;
+            }
+
+            foreach (string item2 in category)
             {
                 parts = Split(item2);
                 ListBoxCategoryName.Items.Add(parts[1]);
@@ -127,7 +136,7 @@ namespace AdvancedScada.ImagePicker
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
 
@@ -142,9 +151,11 @@ namespace AdvancedScada.ImagePicker
         #region list
         private void ListBoxCategoryName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            il32 = new ImageList();
-            il32.ColorDepth = ColorDepth.Depth32Bit;
-            il32.ImageSize = new Size(50, 50);
+            il32 = new ImageList
+            {
+                ColorDepth = ColorDepth.Depth32Bit,
+                ImageSize = new Size(50, 50)
+            };
             ImageListCurrentImage.Clear();
             ImageListCurrentTip.Clear();
             string imageType;
@@ -168,11 +179,14 @@ namespace AdvancedScada.ImagePicker
             {
                 imageType = "svgimages";
             }
-            var rsxr = ImageResourceCache.Default(imageType).GetImages($"{imageType}/{ListBoxCategoryName.SelectedItem}");
-            if (rsxr == null) return;
+            ResXResourceReader rsxr = ImageResourceCache.Default(imageType).GetImages($"{imageType}/{ListBoxCategoryName.SelectedItem}");
+            if (rsxr == null)
+            {
+                return;
+            }
 
             string newName = string.Empty;
-            var i = 0;
+            int i = 0;
             foreach (DictionaryEntry file in rsxr)
             {
                 Image bitmap;
@@ -213,7 +227,7 @@ namespace AdvancedScada.ImagePicker
                 {
                     try
                     {
-                        var returnImage = Convert.FromBase64String($"{file.Value}");
+                        byte[] returnImage = Convert.FromBase64String($"{file.Value}");
                         newName = $"{file.Key}";
                         MemoryStream ms = new MemoryStream(returnImage);
                         bitmap = new Metafile(ms);
@@ -234,7 +248,7 @@ namespace AdvancedScada.ImagePicker
                 {
                     try
                     {
-                        var returnImage = Convert.FromBase64String($"{file.Value}");
+                        byte[] returnImage = Convert.FromBase64String($"{file.Value}");
                         newName = $"{file.Key}";
                         MemoryStream ms = new MemoryStream(returnImage);
                         bitmap = Image.FromStream(ms);
@@ -337,7 +351,7 @@ namespace AdvancedScada.ImagePicker
         {
 
             string SvgNew2 = null;
-            var tmg = ImageResourceCache.DoLoad(ImageType).GetResource($"{ImageType}/{Group}");
+            Stream tmg = ImageResourceCache.DoLoad(ImageType).GetResource($"{ImageType}/{Group}");
             using (ResXResourceReader rsxr = new ResXResourceReader(tmg))
             {
 
@@ -363,9 +377,9 @@ namespace AdvancedScada.ImagePicker
         {
             try
             {
-                var bitmap = ImageListCurrentImage[pnlPictures.SelectedIndex];
-                var stringBitmap = ImageListCurrentTip[pnlPictures.SelectedIndex].Split('.');
-                var bitmapMessage = string.Format("Name:{0} Height:{1} Width:{2} ", stringBitmap[0] + Environment.NewLine, stringBitmap[1] + Environment.NewLine, stringBitmap[2]);
+                Image bitmap = ImageListCurrentImage[pnlPictures.SelectedIndex];
+                string[] stringBitmap = ImageListCurrentTip[pnlPictures.SelectedIndex].Split('.');
+                string bitmapMessage = string.Format("Name:{0} Height:{1} Width:{2} ", stringBitmap[0] + Environment.NewLine, stringBitmap[1] + Environment.NewLine, stringBitmap[2]);
 
                 toolTip1.Active = true;
                 toolTip1.Show(bitmapMessage, this);
@@ -376,26 +390,26 @@ namespace AdvancedScada.ImagePicker
                     Group = $"{ListBoxCategoryName.SelectedItem}";
                     NameUri = stringBitmap[0];
 
-                    var Setimages = FromSvgRes("svgimages", Group, NameUri);
+                    string Setimages = FromSvgRes("svgimages", Group, NameUri);
                     OnImagSVGSelected_Clicked?.Invoke(Setimages);
-                    this.DialogResult = System.Windows.Forms.DialogResult.OK;
-                    this.Close();
+                    DialogResult = System.Windows.Forms.DialogResult.OK;
+                    Close();
                 }
                 //====================================================================================
                 if (OnStringImageSelected_Clicked != null)
                 {
                     Group = $"{ListBoxCategoryName.SelectedItem}";
                     NameUri = stringBitmap[0];
-                    var Setimages = MakeUri("svgimages");
+                    string Setimages = MakeUri("svgimages");
 
                     OnStringImageSelected_Clicked?.Invoke(Setimages);
-                    this.DialogResult = System.Windows.Forms.DialogResult.OK;
-                    this.Close();
+                    DialogResult = System.Windows.Forms.DialogResult.OK;
+                    Close();
                 }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             //try
             //{
@@ -440,9 +454,9 @@ namespace AdvancedScada.ImagePicker
 
         private void BtnExportPNG_Click(object sender, EventArgs e)
         {
-            var bitmap = il32.Images[pnlPictures.SelectedIndex];
+            Image bitmap = il32.Images[pnlPictures.SelectedIndex];
 
-            var newName = $"Image";
+            string newName = $"Image";
 
             newName = newName + ".PNG";
 
@@ -453,7 +467,9 @@ namespace AdvancedScada.ImagePicker
                 saveFileDialog1.RestoreDirectory = true;
                 saveFileDialog1.FileName = newName;
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
                     bitmap.Save(saveFileDialog1.FileName, ImageFormat.Png);
+                }
             }
             catch
             {
@@ -470,9 +486,9 @@ namespace AdvancedScada.ImagePicker
         private void BtnExportICO_Click(object sender, EventArgs e)
         {
 
-            var bitmap = il32.Images[pnlPictures.SelectedIndex];
+            Image bitmap = il32.Images[pnlPictures.SelectedIndex];
 
-            var newName = $"Image";
+            string newName = $"Image";
 
             newName = newName + ".Ico";
 
@@ -483,7 +499,9 @@ namespace AdvancedScada.ImagePicker
                 saveFileDialog1.RestoreDirectory = true;
                 saveFileDialog1.FileName = newName;
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
                     bitmap.Save(saveFileDialog1.FileName, ImageFormat.Icon);
+                }
             }
             catch
             {
@@ -499,9 +517,9 @@ namespace AdvancedScada.ImagePicker
 
         private void BtnExportGIF_Click(object sender, EventArgs e)
         {
-            var bitmap = il32.Images[pnlPictures.SelectedIndex];
+            Image bitmap = il32.Images[pnlPictures.SelectedIndex];
 
-            var newName = $"Image";
+            string newName = $"Image";
 
             newName = newName + ".gif";
 
@@ -512,7 +530,9 @@ namespace AdvancedScada.ImagePicker
                 saveFileDialog1.RestoreDirectory = true;
                 saveFileDialog1.FileName = newName;
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
                     bitmap.Save(saveFileDialog1.FileName, ImageFormat.Gif);
+                }
             }
             catch
             {
@@ -528,28 +548,33 @@ namespace AdvancedScada.ImagePicker
 
         private void BtnExportXaml_Click(object sender, EventArgs e)
         {
-            var pic = il32.Images[pnlPictures.SelectedIndex];
-            var newName = $"Image";
+            Image pic = il32.Images[pnlPictures.SelectedIndex];
+            string newName = $"Image";
             newName = newName + ".Xaml";
             try
             {
-                var xamlOutputText = string.Empty;
-                var xamlOutput = string.Empty;
+                string xamlOutputText = string.Empty;
+                string xamlOutput = string.Empty;
 
-                previewTarget = new System.Windows.Controls.Canvas();
-                previewTarget.Background = Brushes.Transparent;
+                previewTarget = new System.Windows.Controls.Canvas
+                {
+                    Background = Brushes.Transparent
+                };
                 Rectangle rectangle = null;
-                var bitmap = new Bitmap(pic);
+                Bitmap bitmap = new Bitmap(pic);
                 previewTarget.Height = bitmap.Height;
                 previewTarget.Width = bitmap.Width;
 
 
-                for (var y = 0; y < bitmap.Height; ++y)
-                    for (var x = 0; x < bitmap.Width; ++x)
+                for (int y = 0; y < bitmap.Height; ++y)
+                {
+                    for (int x = 0; x < bitmap.Width; ++x)
                     {
-                        var pixel = bitmap.GetPixel(x, y);
-                        rectangle = new Rectangle();
-                        rectangle.Fill = new SolidColorBrush(Color.FromArgb(pixel.A, pixel.R, pixel.G, pixel.B));
+                        System.Drawing.Color pixel = bitmap.GetPixel(x, y);
+                        rectangle = new Rectangle
+                        {
+                            Fill = new SolidColorBrush(Color.FromArgb(pixel.A, pixel.R, pixel.G, pixel.B))
+                        };
                         rectangle.Height = rectangle.Width = 1.0;
                         rectangle.SetValue(System.Windows.Controls.Canvas.LeftProperty, (double)x);
                         rectangle.SetValue(System.Windows.Controls.Canvas.TopProperty, (double)y);
@@ -558,14 +583,17 @@ namespace AdvancedScada.ImagePicker
 
                         Application.DoEvents();
                     }
+                }
 
                 Application.DoEvents();
 
-                var settings = new XmlWriterSettings();
-                settings.Indent = true;
-                settings.IndentChars = "\t";
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                var output = new StringBuilder();
+                XmlWriterSettings settings = new XmlWriterSettings
+                {
+                    Indent = true,
+                    IndentChars = "\t",
+                    ConformanceLevel = ConformanceLevel.Fragment
+                };
+                StringBuilder output = new StringBuilder();
                 XamlWriter.Save(previewTarget, XmlWriter.Create(output, settings));
                 xamlOutputText = output.ToString();
                 saveFileDialog1.Filter = "Xaml Files(*.Xaml)|*.Xaml|All files (*.*)|*.*";
@@ -598,7 +626,7 @@ namespace AdvancedScada.ImagePicker
 
         private void BtnAddImageFiles_Click(object sender, EventArgs e)
         {
-            var frm = new FormAddImage();
+            FormAddImage frm = new FormAddImage();
             frm.ShowDialog();
         }
 

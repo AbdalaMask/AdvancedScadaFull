@@ -63,21 +63,15 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
         private string OriginalText;
         public OutputType OutputType
         {
-            get
-            {
-                return m_OutputType;
-            }
-            set
-            {
-                m_OutputType = value;
-            }
+            get => m_OutputType;
+            set => m_OutputType = value;
         }
 
         [Category("PLC Properties")]
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressText
         {
-            get { return m_PLCAddressText; }
+            get => m_PLCAddressText;
             set
             {
                 if (m_PLCAddressText != value)
@@ -88,8 +82,12 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressText) || string.IsNullOrWhiteSpace(m_PLCAddressText) ||
-                                 Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressText], "Value", true);
+                                 Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressText], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -104,7 +102,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressVisible
         {
-            get { return m_PLCAddressVisible; }
+            get => m_PLCAddressVisible;
             set
             {
                 if (m_PLCAddressVisible != value)
@@ -115,8 +113,12 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) || string.IsNullOrWhiteSpace(m_PLCAddressVisible) ||
-                                 Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                                 Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -131,7 +133,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressValue
         {
-            get { return m_PLCAddressValue; }
+            get => m_PLCAddressValue;
             set
             {
                 if (m_PLCAddressValue != value)
@@ -142,8 +144,12 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressValue) || string.IsNullOrWhiteSpace(m_PLCAddressValue) ||
-                                 Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
+                                 Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -158,10 +164,13 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressClick
         {
-            get { return m_PLCAddressClick; }
+            get => m_PLCAddressClick;
             set
             {
-                if (m_PLCAddressClick != value) m_PLCAddressClick = value;
+                if (m_PLCAddressClick != value)
+                {
+                    m_PLCAddressClick = value;
+                }
             }
         }
 
@@ -171,22 +180,28 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
         [Category("PLC Properties")]
         public int MinimumHoldTime
         {
-            get { return m_MinimumHoldTime; }
+            get => m_MinimumHoldTime;
             set
             {
                 m_MinimumHoldTime = value;
-                if (value > 0) MinHoldTimer.Interval = value;
+                if (value > 0)
+                {
+                    MinHoldTimer.Interval = value;
+                }
             }
         }
 
         [Category("PLC Properties")]
         public int MaximumHoldTime
         {
-            get { return m_MaximumHoldTime; }
+            get => m_MaximumHoldTime;
             set
             {
                 m_MaximumHoldTime = value;
-                if (value > 0) MaxHoldTimer.Interval = value;
+                if (value > 0)
+                {
+                    MaxHoldTimer.Interval = value;
+                }
             }
         }
 
@@ -220,7 +235,10 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
         {
             MinHoldTimer.Enabled = false;
             HoldTimeMet = true;
-            if (!MouseIsDown) ReleaseValue();
+            if (!MouseIsDown)
+            {
+                ReleaseValue();
+            }
         }
 
         private void MaxHoldTimer_Tick(object sender, EventArgs e)
@@ -260,11 +278,16 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
                             break;
                         case OutputType.Toggle:
 
-                            var CurrentValue = Value;
+                            bool CurrentValue = Value;
                             if (CurrentValue)
+                            {
                                 Utilities.Write(m_PLCAddressClick, false);
+                            }
                             else
+                            {
                                 Utilities.Write(m_PLCAddressClick, true);
+                            }
+
                             break;
                         default:
 
@@ -316,7 +339,10 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
 
         protected virtual void OnValueChanged(object sender, EventArgs e)
         {
-            if (ValueChanged != null) ValueChanged(this, e);
+            if (ValueChanged != null)
+            {
+                ValueChanged(this, e);
+            }
         }
         #endregion
         #region "Basic Properties"
@@ -326,15 +352,12 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
         public MotorColor _SelactadMotorColor = MotorColor.Green;
         public MotorColor SelactadMotorColor
         {
-            get { return _SelactadMotorColor; }
-            set
-            {
-                _SelactadMotorColor = value;
-            }
+            get => _SelactadMotorColor;
+            set => _SelactadMotorColor = value;
         }
         public bool Value
         {
-            get { return m_Value; }
+            get => m_Value;
             set
             {
                 if (m_Value != value)
@@ -343,7 +366,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
                     if (!value)
                     {
 
-                        this.EdgeColor = System.Drawing.Color.Gray;
+                        EdgeColor = System.Drawing.Color.Gray;
                     }
                     else
                     {
@@ -351,11 +374,11 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
                         {
                             case MotorColor.Green:
 
-                                this.EdgeColor = System.Drawing.Color.ForestGreen;
+                                EdgeColor = System.Drawing.Color.ForestGreen;
                                 break;
                             case MotorColor.Red:
 
-                                this.EdgeColor = System.Drawing.Color.Red;
+                                EdgeColor = System.Drawing.Color.Red;
                                 break;
                             default:
                                 break;
@@ -395,12 +418,12 @@ namespace AdvancedScada.Controls_Binding.HslControl.Valves
                 //* Save the text to return to
                 if (!ErrorDisplayTime.Enabled)
                 {
-                    OriginalText = this.Text;
+                    OriginalText = Text;
                 }
 
                 ErrorDisplayTime.Enabled = true;
                 Utilities.DisplayError(this, ErrorMessage);
-                this.Text = ErrorMessage;
+                Text = ErrorMessage;
             }
         }
 

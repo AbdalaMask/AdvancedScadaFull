@@ -22,7 +22,7 @@ namespace AdvancedScada.Studio.LinkToSQL
         private readonly ChannelService objChannelManager;
         private readonly DataBlockService objDataBlockManager;
         private readonly DeviceService objDeviceManager;
-        private TagService objTagManager;
+        private readonly TagService objTagManager;
         private readonly Server SQL;
         private readonly Table Tb;
         public XAddColumn()
@@ -56,8 +56,11 @@ namespace AdvancedScada.Studio.LinkToSQL
             {
                 if (Co == null)
                 {
-                    var newColumn = new Column();
-                    newColumn.ColumnId = Tb.Columns.Count + 1; ;
+                    Column newColumn = new Column
+                    {
+                        ColumnId = Tb.Columns.Count + 1
+                    };
+                    ;
                     newColumn.TagName = txtTagName.Text;
                     newColumn.Channel = txtChannel.Text;
                     newColumn.ColumnName = txtColumnName.Text;
@@ -85,7 +88,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -104,7 +107,7 @@ namespace AdvancedScada.Studio.LinkToSQL
                 txtChannel.DataSource = objChannelManager.Channels.ToList();
                 txtChannel.DisplayMember = "ChannelName";
                 txtChannel.ValueMember = "ChannelId";
-                var linkToSql = new AdvancedScada.Utils.DriverLinkToSQL.LinkToSQL();
+                Utils.DriverLinkToSQL.LinkToSQL linkToSql = new AdvancedScada.Utils.DriverLinkToSQL.LinkToSQL();
 
                 txtColumnName.DataSource = linkToSql.AddColumn(txtSQLTable.Text, SQL.ServerName, DBS.DataBaseName);
                 txtColumnName.DisplayMember = "ColumnName";
@@ -128,7 +131,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -147,7 +150,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -155,15 +158,15 @@ namespace AdvancedScada.Studio.LinkToSQL
         {
             try
             {
-                var chCurrent = objChannelManager.GetByChannelName(txtChannel.Text);
-                var dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, txtDevice.Text);
+                Channel chCurrent = objChannelManager.GetByChannelName(txtChannel.Text);
+                Device dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, txtDevice.Text);
                 txtDataBlock.DataSource = dvCurrent.DataBlocks.ToList();
                 txtDataBlock.DisplayMember = "DataBlockName";
                 txtDataBlock.ValueMember = "DataBlockId";
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -171,9 +174,9 @@ namespace AdvancedScada.Studio.LinkToSQL
         {
             try
             {
-                var chCurrent = objChannelManager.GetByChannelName(txtChannel.Text);
-                var dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, txtDevice.Text);
-                var dbCurrent = objDataBlockManager.GetByDataBlockName(dvCurrent, txtDataBlock.Text);
+                Channel chCurrent = objChannelManager.GetByChannelName(txtChannel.Text);
+                Device dvCurrent = objDeviceManager.GetByDeviceName(chCurrent, txtDevice.Text);
+                DataBlock dbCurrent = objDataBlockManager.GetByDataBlockName(dvCurrent, txtDataBlock.Text);
                 bS7Tags = new BindingList<Tag>(dbCurrent.Tags);
                 txtTagName.DataSource = dbCurrent.Tags.ToList();
                 txtTagName.DisplayMember = "TagName";
@@ -181,7 +184,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
     }

@@ -34,9 +34,9 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     m_GraphicAllOff = svgGraphicAllOff.Draw();
                     Image1 = new Bitmap(Width, Height);
 
-                    using (var gr_dest = Graphics.FromImage(Image1))
+                    using (Graphics gr_dest = Graphics.FromImage(Image1))
                     {
-                        using (var m = new Matrix())
+                        using (Matrix m = new Matrix())
                         {
                             if (m_RotationAngle == RotationAngleEnum.Rotate90)
                             {
@@ -44,31 +44,39 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                                 m.Translate(m_GraphicAllOff.Height, 0F);
                                 m.Rotate(90F, MatrixOrder.Prepend);
                                 if (SizeMode == PictureBoxSizeMode.StretchImage)
+                                {
                                     m.Scale(Convert.ToSingle(Width / (double)m_GraphicAllOff.Height),
                                         Convert.ToSingle(Height / (double)m_GraphicAllOff.Width), MatrixOrder.Append);
+                                }
                             }
                             else if (m_RotationAngle == RotationAngleEnum.Rotate180)
                             {
                                 m.Translate(-m_GraphicAllOff.Width, -m_GraphicAllOff.Height);
                                 m.Rotate(180F, MatrixOrder.Append);
                                 if (SizeMode == PictureBoxSizeMode.StretchImage)
+                                {
                                     m.Scale(Convert.ToSingle(Width / (double)m_GraphicAllOff.Width),
                                         Convert.ToSingle(Height / (double)m_GraphicAllOff.Height), MatrixOrder.Append);
+                                }
                             }
                             else if (m_RotationAngle == RotationAngleEnum.Rotate270)
                             {
                                 m.Translate(0F, m_GraphicAllOff.Width);
                                 m.Rotate(270F, MatrixOrder.Prepend);
                                 if (SizeMode == PictureBoxSizeMode.StretchImage)
+                                {
                                     m.Scale(Convert.ToSingle(Width / (double)m_GraphicAllOff.Height),
                                         Convert.ToSingle(Height / (double)m_GraphicAllOff.Width), MatrixOrder.Append);
+                                }
                             }
                             else
                             {
                                 //* No Rotaion
                                 if (SizeMode == PictureBoxSizeMode.StretchImage)
+                                {
                                     m.Scale(Convert.ToSingle(Width / (double)m_GraphicAllOff.Width),
                                         Convert.ToSingle(Height / (double)m_GraphicAllOff.Height), MatrixOrder.Append);
+                                }
                             }
 
                             gr_dest.Transform = m;
@@ -85,41 +93,49 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     m_GraphicSelect1 = svgGraphicSelect1.Draw();
                     Image2 = new Bitmap(Width, Height);
 
-                    using (var gr_dest = Graphics.FromImage(Image2))
+                    using (Graphics gr_dest = Graphics.FromImage(Image2))
                     {
-                        using (var m = new Matrix())
+                        using (Matrix m = new Matrix())
                         {
                             if (m_RotationAngle == RotationAngleEnum.Rotate90)
                             {
                                 m.Translate(m_GraphicSelect1.Height, 0F);
                                 m.Rotate(90F, MatrixOrder.Prepend);
                                 if (SizeMode == PictureBoxSizeMode.StretchImage)
+                                {
                                     m.Scale(Convert.ToSingle(Width / (double)m_GraphicSelect1.Height),
                                         Convert.ToSingle(Height / (double)m_GraphicSelect1.Width), MatrixOrder.Append);
+                                }
                             }
                             else if (m_RotationAngle == RotationAngleEnum.Rotate180)
                             {
                                 m.Translate(-m_GraphicSelect1.Width, -m_GraphicSelect1.Height);
                                 m.Rotate(180F, MatrixOrder.Append);
                                 if (SizeMode == PictureBoxSizeMode.StretchImage)
+                                {
                                     m.Scale(Convert.ToSingle(Width / (double)m_GraphicSelect1.Width),
                                         Convert.ToInt32(Height / (double)m_GraphicSelect1.Height), MatrixOrder.Append);
+                                }
                             }
                             else if (m_RotationAngle == RotationAngleEnum.Rotate270)
                             {
                                 m.Translate(0F, m_GraphicSelect1.Width);
                                 m.Rotate(270F, MatrixOrder.Prepend);
                                 if (SizeMode == PictureBoxSizeMode.StretchImage)
+                                {
                                     m.Scale(Convert.ToSingle(Width / (double)m_GraphicSelect1.Height),
                                         Convert.ToSingle(Height / (double)m_GraphicSelect1.Width), MatrixOrder.Append);
+                                }
                             }
                             else
                             {
                                 //* No Rotaion
                                 if (SizeMode == PictureBoxSizeMode.StretchImage)
+                                {
                                     m.Scale(Convert.ToSingle(Width / (double)m_GraphicSelect1.Width),
                                         Convert.ToSingle(Height / (double)m_GraphicSelect1.Height),
                                         MatrixOrder.Append);
+                                }
                             }
 
                             gr_dest.Transform = m;
@@ -136,42 +152,50 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     m_GraphicSelect2 = svgGraphicSelect2.Draw();
                     Image3 = new Bitmap(Width, Height);
 
-                    using (var gr_dest = Graphics.FromImage(Image3))
+                    using (Graphics gr_dest = Graphics.FromImage(Image3))
                     {
-                        using (var m = new Matrix())
+                        using (Matrix m = new Matrix())
                         {
                             if (m_RotationAngle == RotationAngleEnum.Rotate90)
                             {
                                 m.Translate(m_GraphicSelect2.Height, 0F);
                                 m.Rotate(90F, MatrixOrder.Prepend);
                                 if (SizeMode == PictureBoxSizeMode.StretchImage)
+                                {
                                     m.Scale(Convert.ToSingle(Width / (double)m_GraphicSelect2.Height),
                                         Convert.ToSingle(Height / (double)m_GraphicSelect2.Width), MatrixOrder.Append);
+                                }
                             }
                             else if (m_RotationAngle == RotationAngleEnum.Rotate180)
                             {
                                 m.Translate(-m_GraphicSelect2.Width, -m_GraphicSelect2.Height);
                                 m.Rotate(180F, MatrixOrder.Append);
                                 if (SizeMode == PictureBoxSizeMode.StretchImage)
+                                {
                                     m.Scale(Convert.ToSingle(Width / (double)m_GraphicSelect2.Width),
                                         Convert.ToSingle(Height / (double)m_GraphicSelect2.Height),
                                         MatrixOrder.Append);
+                                }
                             }
                             else if (m_RotationAngle == RotationAngleEnum.Rotate270)
                             {
                                 m.Translate(0F, m_GraphicSelect2.Width);
                                 m.Rotate(270F, MatrixOrder.Prepend);
                                 if (SizeMode == PictureBoxSizeMode.StretchImage)
+                                {
                                     m.Scale(Convert.ToSingle(Width / (double)m_GraphicSelect2.Height),
                                         Convert.ToSingle(Height / (double)m_GraphicSelect2.Width), MatrixOrder.Append);
+                                }
                             }
                             else
                             {
                                 //* No Rotaion
                                 if (SizeMode == PictureBoxSizeMode.StretchImage)
+                                {
                                     m.Scale(Convert.ToSingle(Width / (double)m_GraphicSelect2.Width),
                                         Convert.ToSingle(Height / (double)m_GraphicSelect2.Height),
                                         MatrixOrder.Append);
+                                }
                             }
 
                             gr_dest.Transform = m;
@@ -206,12 +230,36 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
-            if (sf2 != null) sf2.Dispose();
-            if (sf != null) sf.Dispose();
-            if (m_Font2 != null) m_Font2.Dispose();
-            if (Image1 != null) Image1.Dispose();
-            if (Image2 != null) Image2.Dispose();
-            if (Image3 != null) Image3.Dispose();
+            if (sf2 != null)
+            {
+                sf2.Dispose();
+            }
+
+            if (sf != null)
+            {
+                sf.Dispose();
+            }
+
+            if (m_Font2 != null)
+            {
+                m_Font2.Dispose();
+            }
+
+            if (Image1 != null)
+            {
+                Image1.Dispose();
+            }
+
+            if (Image2 != null)
+            {
+                Image2.Dispose();
+            }
+
+            if (Image3 != null)
+            {
+                Image3.Dispose();
+            }
+
             TextBrush.Dispose();
         }
 
@@ -221,7 +269,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         private string m_PLCAddressSelect1 = string.Empty;
         public string PLCAddressValueSelect1
         {
-            get { return m_PLCAddressSelect1; }
+            get => m_PLCAddressSelect1;
             set
             {
                 if (m_PLCAddressSelect1 != value)
@@ -231,8 +279,12 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressSelect1) ||
-                            string.IsNullOrWhiteSpace(m_PLCAddressSelect1) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("ValueSelect1", TagCollectionClient.Tags[m_PLCAddressSelect1], "Value", true);
+                            string.IsNullOrWhiteSpace(m_PLCAddressSelect1) || Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("ValueSelect1", TagCollectionClient.Tags[m_PLCAddressSelect1], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -245,7 +297,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         private string m_PLCAddressVisible = string.Empty;
         public string PLCAddressVisible
         {
-            get { return m_PLCAddressVisible; }
+            get => m_PLCAddressVisible;
             set
             {
                 if (m_PLCAddressVisible != value)
@@ -256,8 +308,12 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
-                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -271,7 +327,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public bool ValueSelect1
         {
-            get { return m_ValueSelect1; }
+            get => m_ValueSelect1;
             set
             {
                 if (value != m_ValueSelect1)
@@ -290,7 +346,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public bool ValueSelect2
         {
-            get { return m_ValueSelect2; }
+            get => m_ValueSelect2;
             set
             {
                 if (value != m_ValueSelect2)
@@ -310,18 +366,22 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         //*****************************************
         //Private m_LightOnColor As Color = Color.Green
         private string n_GraphicAllOff;
-        SvgDocument svgGraphicAllOff = null;
+        private SvgDocument svgGraphicAllOff = null;
         [Category("PLC Properties")]
         [Editor(typeof(GraphicDialogEditorString), typeof(UITypeEditor))]
         public string GraphicAllOff
         {
-            get { return n_GraphicAllOff; }
+            get => n_GraphicAllOff;
             set
             {
                 if (n_GraphicAllOff != value)
                 {
                     n_GraphicAllOff = value;
-                    if (n_GraphicAllOff == null || n_GraphicAllOff == string.Empty) return;
+                    if (n_GraphicAllOff == null || n_GraphicAllOff == string.Empty)
+                    {
+                        return;
+                    }
+
                     svgGraphicAllOff = SvgDocument.FromSvg<SvgDocument>(n_GraphicAllOff);
                     SVGSample.svg.SVGParser.MaximumSize = new Size(Width, Height);
 
@@ -339,16 +399,20 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         //Private m_LightOnColor As Color = Color.Green
         private string n_GraphicSelect1;
         private Bitmap m_GraphicSelect1;
-        SvgDocument svgGraphicSelect1 = null;
+        private SvgDocument svgGraphicSelect1 = null;
         [Category("PLC Properties")]
         [Editor(typeof(GraphicDialogEditorString), typeof(UITypeEditor))]
         public string GraphicSelect1
         {
-            get { return n_GraphicSelect1; }
+            get => n_GraphicSelect1;
             set
             {
                 n_GraphicSelect1 = value;
-                if (n_GraphicSelect1 == null || n_GraphicSelect1 == string.Empty) return;
+                if (n_GraphicSelect1 == null || n_GraphicSelect1 == string.Empty)
+                {
+                    return;
+                }
+
                 svgGraphicSelect1 = SvgDocument.FromSvg<SvgDocument>(n_GraphicSelect1);
                 SVGSample.svg.SVGParser.MaximumSize = new Size(Width, Height);
                 m_GraphicSelect1 = svgGraphicSelect1.Draw();
@@ -363,16 +427,20 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         //Private m_LightOnColor As Color = Color.Green
         private string n_GraphicSelect2;
         private Bitmap m_GraphicSelect2;
-        SvgDocument svgGraphicSelect2 = null;
+        private SvgDocument svgGraphicSelect2 = null;
         [Category("PLC Properties")]
         [Editor(typeof(GraphicDialogEditorString), typeof(UITypeEditor))]
         public string GraphicSelect2
         {
-            get { return n_GraphicSelect2; }
+            get => n_GraphicSelect2;
             set
             {
                 n_GraphicSelect2 = value;
-                if (n_GraphicSelect2 == null || n_GraphicSelect2 == string.Empty) return;
+                if (n_GraphicSelect2 == null || n_GraphicSelect2 == string.Empty)
+                {
+                    return;
+                }
+
                 svgGraphicSelect2 = SvgDocument.FromSvg<SvgDocument>(n_GraphicSelect1);
                 SVGSample.svg.SVGParser.MaximumSize = new Size(Width, Height);
                 m_GraphicSelect2 = svgGraphicSelect2.Draw();
@@ -386,7 +454,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public bool Flash1
         {
-            get { return m_Flash1; }
+            get => m_Flash1;
             set
             {
                 if (m_Flash1 != value)
@@ -397,15 +465,20 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     {
                         if (FlashTimer == null)
                         {
-                            FlashTimer = new Timer();
-                            FlashTimer.Interval = 800;
+                            FlashTimer = new Timer
+                            {
+                                Interval = 800
+                            };
                             FlashTimer.Tick += FlashTimerTick;
                             FlashTimer.Start();
                         }
                     }
                     else
                     {
-                        if (FlashTimer != null) FlashTimer.Stop();
+                        if (FlashTimer != null)
+                        {
+                            FlashTimer.Stop();
+                        }
                     }
                 }
             }
@@ -420,7 +493,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public PictureBoxSizeMode SizeMode
         {
-            get { return m_SizeMode; }
+            get => m_SizeMode;
             set
             {
                 if (m_SizeMode != value)
@@ -443,7 +516,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public RotationAngleEnum RotationAngle
         {
-            get { return m_RotationAngle; }
+            get => m_RotationAngle;
             set
             {
                 if (m_RotationAngle != value)
@@ -464,13 +537,14 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public string Text2
         {
-            get { return m_Text2; }
+            get => m_Text2;
             set
             {
                 if (m_Text2 != value)
                 {
                     m_Text2 = value;
                     if (!string.IsNullOrEmpty(NumericFormat) && !DesignMode)
+                    {
                         try
                         {
                             m_Text2 = (float.Parse(value) * (float)m_ValueScaleFactor).ToString(NumericFormat);
@@ -480,6 +554,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                             m_Text2 = "Check NumericFormat and variable type";
                             Console.WriteLine(ex.Message);
                         }
+                    }
 
                     Invalidate();
                 }
@@ -493,7 +568,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public Font Font2
         {
-            get { return m_Font2; }
+            get => m_Font2;
             set
             {
                 m_Font2 = value;
@@ -508,8 +583,8 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public decimal ValueScaleFactor
         {
-            get { return m_ValueScaleFactor; }
-            set { m_ValueScaleFactor = value; }
+            get => m_ValueScaleFactor;
+            set => m_ValueScaleFactor = value;
         }
 
         //*****************************************
@@ -528,8 +603,8 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public OutputTypes OutputType
         {
-            get { return m_OutputType; }
-            set { m_OutputType = value; }
+            get => m_OutputType;
+            set => m_OutputType = value;
         }
 
         public string PLCAddressValue { get; set; }
@@ -570,13 +645,17 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         protected virtual void OnValueSelect1Changed(EventArgs e)
         {
             if (ValueSelect1Changed != null)
+            {
                 ValueSelect1Changed(this, e);
+            }
         }
 
         protected virtual void OnValueSelect2Changed(EventArgs e)
         {
             if (ValueSelect2Changed != null)
+            {
                 ValueSelect2Changed(this, e);
+            }
         }
 
         protected override void OnForeColorChanged(EventArgs e)
@@ -584,9 +663,13 @@ namespace AdvancedScada.Controls_Binding.ImageAll
             base.OnForeColorChanged(e);
 
             if (TextBrush == null)
+            {
                 TextBrush = new SolidBrush(ForeColor);
+            }
             else
+            {
                 TextBrush.Color = ForeColor;
+            }
 
             Invalidate();
         }
@@ -601,21 +684,25 @@ namespace AdvancedScada.Controls_Binding.ImageAll
             //* to the background to simulate transparency
             //******************************************************
             if (BackColor == Color.Transparent)
+            {
                 if (Parent != null)
                 {
-                    var index = Parent.Controls.GetChildIndex(this);
+                    int index = Parent.Controls.GetChildIndex(this);
 
-                    for (var i = Parent.Controls.Count - 1; i > index; i--)
+                    for (int i = Parent.Controls.Count - 1; i > index; i--)
                     {
-                        var c = Parent.Controls[i];
+                        Control c = Parent.Controls[i];
                         if (c.Bounds.IntersectsWith(Bounds) && c.Visible)
-                            using (var bmp = new Bitmap(c.Width, c.Height, pevent.Graphics))
+                        {
+                            using (Bitmap bmp = new Bitmap(c.Width, c.Height, pevent.Graphics))
                             {
                                 c.DrawToBitmap(bmp, c.ClientRectangle);
                                 pevent.Graphics.DrawImageUnscaled(bmp, c.Left - Left, c.Top - Top);
                             }
+                        }
                     }
                 }
+            }
         }
 
         //*************************************************************************
@@ -628,9 +715,12 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (TextBrush == null) return;
+            if (TextBrush == null)
+            {
+                return;
+            }
 
-            var g = e.Graphics;
+            Graphics g = e.Graphics;
             //'g.RotateTransform(20.0)
             //If m_GraphicAllOff IsNot Nothing Then
             //    m_GraphicAllOff.RotateFlip(RotateFlipType.Rotate90FlipNone)
@@ -639,22 +729,36 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
             if (m_ValueSelect1)
             {
-                if (Image2 != null) g.DrawImage(Image2, 0, 0);
+                if (Image2 != null)
+                {
+                    g.DrawImage(Image2, 0, 0);
+                }
             }
             else if (m_ValueSelect2)
             {
-                if (Image3 != null) g.DrawImage(Image3, 0, 0);
+                if (Image3 != null)
+                {
+                    g.DrawImage(Image3, 0, 0);
+                }
             }
             else
             {
-                if (Image1 != null) g.DrawImage(Image1, 0, 0);
+                if (Image1 != null)
+                {
+                    g.DrawImage(Image1, 0, 0);
+                }
             }
 
 
             if (!string.IsNullOrEmpty(Text))
+            {
                 g.DrawString(Text, Font, TextBrush, Convert.ToSingle(Width / 2.0F), Height / 3.0F, sf);
+            }
 
-            if (!string.IsNullOrEmpty(m_Text2)) g.DrawString(m_Text2, m_Font2, TextBrush, Text2Rect, sf2);
+            if (!string.IsNullOrEmpty(m_Text2))
+            {
+                g.DrawString(m_Text2, m_Font2, TextBrush, Text2Rect, sf2);
+            }
 
             //Copy the back buffer to the screen
             //e.Graphics.DrawImage(_backBuffer, 0, 0)
@@ -674,7 +778,10 @@ namespace AdvancedScada.Controls_Binding.ImageAll
             sf2.Alignment = StringAlignment.Center;
             sf2.LineAlignment = StringAlignment.Near;
 
-            if (TextBrush == null) TextBrush = new SolidBrush(ForeColor);
+            if (TextBrush == null)
+            {
+                TextBrush = new SolidBrush(ForeColor);
+            }
         }
 
 

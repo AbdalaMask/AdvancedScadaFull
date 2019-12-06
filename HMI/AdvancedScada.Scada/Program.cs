@@ -1,17 +1,16 @@
-﻿using AdvancedScada.HMI;
-using AdvancedScada.HMI.MainForm;
+﻿using AdvancedScada.HMI.MainForm;
 using System;
 using System.Windows.Forms;
 
 namespace Scada
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -68,7 +68,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressText
         {
-            get { return m_PLCAddressText; }
+            get => m_PLCAddressText;
             set
             {
                 if (m_PLCAddressText != value)
@@ -79,8 +79,12 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressText) || string.IsNullOrWhiteSpace(m_PLCAddressText) ||
-                                 Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressText], "Value", true);
+                                 Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressText], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -95,7 +99,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressVisible
         {
-            get { return m_PLCAddressVisible; }
+            get => m_PLCAddressVisible;
             set
             {
                 if (m_PLCAddressVisible != value)
@@ -106,8 +110,12 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) || string.IsNullOrWhiteSpace(m_PLCAddressVisible) ||
-                                 Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                                 Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -122,7 +130,7 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressValue
         {
-            get { return m_PLCAddressValue; }
+            get => m_PLCAddressValue;
             set
             {
                 if (m_PLCAddressValue != value)
@@ -133,8 +141,12 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressValue) || string.IsNullOrWhiteSpace(m_PLCAddressValue) ||
-                                 Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
+                                 Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -149,10 +161,13 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressClick
         {
-            get { return m_PLCAddressClick; }
+            get => m_PLCAddressClick;
             set
             {
-                if (m_PLCAddressClick != value) m_PLCAddressClick = value;
+                if (m_PLCAddressClick != value)
+                {
+                    m_PLCAddressClick = value;
+                }
             }
         }
 
@@ -162,22 +177,28 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
         [Category("PLC Properties")]
         public int MinimumHoldTime
         {
-            get { return m_MinimumHoldTime; }
+            get => m_MinimumHoldTime;
             set
             {
                 m_MinimumHoldTime = value;
-                if (value > 0) MinHoldTimer.Interval = value;
+                if (value > 0)
+                {
+                    MinHoldTimer.Interval = value;
+                }
             }
         }
 
         [Category("PLC Properties")]
         public int MaximumHoldTime
         {
-            get { return m_MaximumHoldTime; }
+            get => m_MaximumHoldTime;
             set
             {
                 m_MaximumHoldTime = value;
-                if (value > 0) MaxHoldTimer.Interval = value;
+                if (value > 0)
+                {
+                    MaxHoldTimer.Interval = value;
+                }
             }
         }
 
@@ -211,7 +232,10 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
         {
             MinHoldTimer.Enabled = false;
             HoldTimeMet = true;
-            if (!MouseIsDown) ReleaseValue();
+            if (!MouseIsDown)
+            {
+                ReleaseValue();
+            }
         }
 
         private void MaxHoldTimer_Tick(object sender, EventArgs e)
@@ -246,11 +270,16 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
                             break;
                         case OutputType.Toggle:
 
-                            var CurrentValue = Value;
+                            bool CurrentValue = Value;
                             if (CurrentValue)
+                            {
                                 Utilities.Write(m_PLCAddressClick, false);
+                            }
                             else
+                            {
                                 Utilities.Write(m_PLCAddressClick, true);
+                            }
+
                             break;
                         default:
 
@@ -294,7 +323,10 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
 
         protected virtual void OnValueChanged(object sender, EventArgs e)
         {
-            if (ValueChanged != null) ValueChanged(this, e);
+            if (ValueChanged != null)
+            {
+                ValueChanged(this, e);
+            }
         }
         #endregion
         #region "Basic Properties"
@@ -304,14 +336,21 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
 
         public bool Value
         {
-            get { return m_Value; }
+            get => m_Value;
             set
             {
                 if (m_Value != value)
                 {
                     m_Value = value;
-                    if (m_Value) this.MoveSpeed = 1;
-                    else this.MoveSpeed = 0;
+                    if (m_Value)
+                    {
+                        MoveSpeed = 1;
+                    }
+                    else
+                    {
+                        MoveSpeed = 0;
+                    }
+
                     OnValueChanged(this, EventArgs.Empty);
                     Invalidate();
                 }
@@ -341,12 +380,12 @@ namespace AdvancedScada.Controls_Binding.HslControl.Pipe
                 //* Save the text to return to
                 if (!ErrorDisplayTime.Enabled)
                 {
-                    OriginalText = this.Text;
+                    OriginalText = Text;
                 }
 
                 ErrorDisplayTime.Enabled = true;
                 Utilities.DisplayError(this, ErrorMessage);
-                this.Text = ErrorMessage;
+                Text = ErrorMessage;
             }
         }
 

@@ -111,11 +111,11 @@ Public Class AnalogMovingIndicator
             If value <> m_Value Then
                 m_Value = value
 
-                If m_HiAlarm <> "" AndAlso (m_Value >= m_HiAlarm) Or m_LoAlarm <> "" AndAlso (m_Value <= m_LoAlarm) Then
+                If m_HiAlarm <> String.Empty AndAlso (m_Value >= m_HiAlarm) Or m_LoAlarm <> String.Empty AndAlso (m_Value <= m_LoAlarm) Then
                     OnWarningValueExceeded(System.EventArgs.Empty)
                 End If
 
-                If m_HiHiAlarm <> "" AndAlso (m_Value >= m_HiHiAlarm) Or m_LoLoAlarm <> "" AndAlso (m_Value <= m_LoLoAlarm) Then
+                If m_HiHiAlarm <> String.Empty AndAlso (m_Value >= m_HiHiAlarm) Or m_LoLoAlarm <> String.Empty AndAlso (m_Value <= m_LoLoAlarm) Then
                     OnAlarmValueExceeded(System.EventArgs.Empty)
                 End If
 
@@ -142,7 +142,7 @@ Public Class AnalogMovingIndicator
 
             If value <> m_HiHiAlarm Then
                 If Not IsNumeric(value) Then
-                    value = ""
+                    value = String.Empty
                 End If
                 m_HiHiAlarm = value
                 RefreshImage()
@@ -165,7 +165,7 @@ Public Class AnalogMovingIndicator
 
             If value <> m_HiAlarm Then
                 If Not IsNumeric(value) Then
-                    value = ""
+                    value = String.Empty
                 End If
                 m_HiAlarm = value
                 RefreshImage()
@@ -188,7 +188,7 @@ Public Class AnalogMovingIndicator
 
             If value <> m_LoAlarm Then
                 If Not IsNumeric(value) Then
-                    value = ""
+                    value = String.Empty
                 End If
                 m_LoAlarm = value
                 RefreshImage()
@@ -211,7 +211,7 @@ Public Class AnalogMovingIndicator
 
             If value <> m_LoLoAlarm Then
                 If Not IsNumeric(value) Then
-                    value = ""
+                    value = String.Empty
                 End If
                 m_LoLoAlarm = value
                 RefreshImage()
@@ -234,7 +234,7 @@ Public Class AnalogMovingIndicator
 
             If value <> m_DesiredHigh Then
                 If Not IsNumeric(value) Then
-                    value = ""
+                    value = String.Empty
                 End If
                 m_DesiredHigh = value
                 RefreshImage()
@@ -257,7 +257,7 @@ Public Class AnalogMovingIndicator
 
             If value <> m_DesiredLow Then
                 If Not IsNumeric(value) Then
-                    value = ""
+                    value = String.Empty
                 End If
                 m_DesiredLow = value
                 RefreshImage()
@@ -606,7 +606,7 @@ Public Class AnalogMovingIndicator
         End Using
 
 
-        If m_LoAlarm <> "" Then 'Disregard if not using Lo Alarm
+        If m_LoAlarm <> String.Empty Then 'Disregard if not using Lo Alarm
             If m_Value <= m_LoAlarm Then
                 Using br4 = New SolidBrush(m_Level2AlarmColor)
                     e.Graphics.FillRectangle(br4, BarRectangles(3))
@@ -621,7 +621,7 @@ Public Class AnalogMovingIndicator
         End If
 
 
-        If m_LoLoAlarm <> "" Then 'Disregard if not using Lo Lo Alarm
+        If m_LoLoAlarm <> String.Empty Then 'Disregard if not using Lo Lo Alarm
             If m_Value <= m_LoLoAlarm Then
                 Using br3 = New SolidBrush(m_Level1AlarmColor)
                     e.Graphics.FillRectangle(br3, BarRectangles(2))
@@ -636,7 +636,7 @@ Public Class AnalogMovingIndicator
         End If
 
 
-        If m_HiAlarm <> "" Then 'Disregard if not using Hi Alarm
+        If m_HiAlarm <> String.Empty Then 'Disregard if not using Hi Alarm
             If m_Value >= m_HiAlarm Then
                 Using br5 = New SolidBrush(m_Level2AlarmColor)
                     e.Graphics.FillRectangle(br5, BarRectangles(4))
@@ -650,7 +650,7 @@ Public Class AnalogMovingIndicator
             End If
         End If
 
-        If m_HiHiAlarm <> "" Then 'Disregard if not using Hi Hi Alarm
+        If m_HiHiAlarm <> String.Empty Then 'Disregard if not using Hi Hi Alarm
             If m_Value >= m_HiHiAlarm Then
                 Using br6 = New SolidBrush(m_Level1AlarmColor)
                     e.Graphics.FillRectangle(br6, BarRectangles(5))
@@ -725,7 +725,7 @@ Public Class AnalogMovingIndicator
 
 #Region "IniFileHandling"
 
-    Private m_IniFileName As String = ""
+    Private m_IniFileName As String = String.Empty
     <System.ComponentModel.Category("PLC Data")>
     Public Property IniFileName As String
         Get

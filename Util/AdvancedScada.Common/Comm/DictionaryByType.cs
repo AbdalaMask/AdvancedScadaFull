@@ -50,8 +50,7 @@ namespace AdvancedScada.Common
         /// </summary>
         public bool TryGet<T>(out T value)
         {
-            object tmp;
-            if (dictionary.TryGetValue(typeof(T), out tmp))
+            if (dictionary.TryGetValue(typeof(T), out object tmp))
             {
                 value = (T)tmp;
                 return true;

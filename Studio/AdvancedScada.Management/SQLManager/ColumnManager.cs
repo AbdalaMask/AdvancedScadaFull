@@ -22,7 +22,10 @@ namespace AdvancedScada.Management.SQLManager
         {
             lock (mutex)
             {
-                if (_instance == null) _instance = new ColumnManager();
+                if (_instance == null)
+                {
+                    _instance = new ColumnManager();
+                }
             }
 
             return _instance;
@@ -36,7 +39,11 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                if (tg == null) throw new NullReferenceException("The Tag is null reference exception");
+                if (tg == null)
+                {
+                    throw new NullReferenceException("The Tag is null reference exception");
+                }
+
                 IsExisted(db, tg);
                 db.Columns.Add(tg);
             }
@@ -55,9 +62,14 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                if (tg == null) throw new NullReferenceException("The Tag is null reference exception");
+                if (tg == null)
+                {
+                    throw new NullReferenceException("The Tag is null reference exception");
+                }
+
                 IsExisted(db, tg);
-                foreach (var item in db.Columns)
+                foreach (Column item in db.Columns)
+                {
                     if (item.ColumnId == tg.ColumnId)
                     {
                         item.ColumnId = tg.ColumnId;
@@ -70,6 +82,7 @@ namespace AdvancedScada.Management.SQLManager
                         item.Description = tg.Description;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -86,8 +99,12 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                var result = GetByTagId(db, tgId);
-                if (result == null) throw new KeyNotFoundException("Tag Id is not found exception");
+                Column result = GetByTagId(db, tgId);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("Tag Id is not found exception");
+                }
+
                 db.Columns.Remove(result);
             }
             catch (Exception ex)
@@ -105,8 +122,12 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                var result = GetByTagName(db, dbName);
-                if (result == null) throw new KeyNotFoundException("Tag name is not found exception");
+                Column result = GetByTagName(db, dbName);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("Tag name is not found exception");
+                }
+
                 db.Columns.Remove(result);
             }
             catch (Exception ex)
@@ -124,13 +145,19 @@ namespace AdvancedScada.Management.SQLManager
         {
             try
             {
-                if (tg == null) throw new NullReferenceException("The Tag is null reference exception");
-                foreach (var item in db.Columns)
+                if (tg == null)
+                {
+                    throw new NullReferenceException("The Tag is null reference exception");
+                }
+
+                foreach (Column item in db.Columns)
+                {
                     if (item.ColumnId == tg.ColumnId)
                     {
                         db.Columns.Remove(item);
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -149,12 +176,17 @@ namespace AdvancedScada.Management.SQLManager
             Column result = null;
             try
             {
-                foreach (var item in db.Columns)
+                foreach (Column item in db.Columns)
                 {
                     if (item.ColumnId != tg.ColumnId && item.TagName.Equals(tg.TagName))
+                    {
                         throw new InvalidOperationException($"Tag name: '{tg.TagName}' is existed");
+                    }
+
                     if (item.ColumnId != tg.ColumnId && item.ColumnName.Equals(tg.ColumnName))
+                    {
                         throw new InvalidOperationException($"Tag address: '{tg.ColumnName}' is existed");
+                    }
                 }
             }
             catch (Exception ex)
@@ -176,12 +208,14 @@ namespace AdvancedScada.Management.SQLManager
             Column result = null;
             try
             {
-                foreach (var item in db.Columns)
+                foreach (Column item in db.Columns)
+                {
                     if (item.ColumnId == tgId)
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -202,12 +236,14 @@ namespace AdvancedScada.Management.SQLManager
             Column result = null;
             try
             {
-                foreach (var item in db.Columns)
+                foreach (Column item in db.Columns)
+                {
                     if (item.TagName.Equals(tgName))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -229,12 +265,14 @@ namespace AdvancedScada.Management.SQLManager
             Column result = null;
             try
             {
-                foreach (var item in db.Columns)
+                foreach (Column item in db.Columns)
+                {
                     if (item.ColumnName.Equals(tgAddress))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -251,20 +289,22 @@ namespace AdvancedScada.Management.SQLManager
         /// <returns>Danh sách gói dữ liệu</returns>
         public static List<Column> GetTags(XmlNode dbNote)
         {
-            var dbList = new List<Column>();
+            List<Column> dbList = new List<Column>();
             try
             {
                 foreach (XmlNode item in dbNote)
                 {
-                    var tg = new Column();
-                    tg.ColumnId = int.Parse(item.Attributes[Column_ID].Value);
-                    tg.TagName = item.Attributes[TAG_NAME].Value;
-                    tg.ColumnName = item.Attributes[Column_NAME].Value;
-                    tg.Channel = item.Attributes[Channel].Value;
-                    tg.Device = item.Attributes[Device].Value;
-                    tg.DataBlock = item.Attributes[DataBlock].Value;
-                    tg.Cycle = item.Attributes[Cycle].Value;
-                    tg.Description = item.Attributes[DESCRIPTION].Value;
+                    Column tg = new Column
+                    {
+                        ColumnId = int.Parse(item.Attributes[Column_ID].Value),
+                        TagName = item.Attributes[TAG_NAME].Value,
+                        ColumnName = item.Attributes[Column_NAME].Value,
+                        Channel = item.Attributes[Channel].Value,
+                        Device = item.Attributes[Device].Value,
+                        DataBlock = item.Attributes[DataBlock].Value,
+                        Cycle = item.Attributes[Cycle].Value,
+                        Description = item.Attributes[DESCRIPTION].Value
+                    };
                     dbList.Add(tg);
                 }
             }

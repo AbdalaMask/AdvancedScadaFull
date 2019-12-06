@@ -8,10 +8,10 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
 {
     public class LS_CNET : IDriverAdapter
     {
-        private SerialPort serialPort;
+        private readonly SerialPort serialPort;
         private XGBCnet xGBCnet = null;
         public byte Station { get; set; }
-        private object LockObject = new object();
+        private readonly object LockObject = new object();
         public LS_CNET(short slaveId, SerialPort serialPort)
         {
             Station = (byte)slaveId;
@@ -30,8 +30,10 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
                 lock (LockObject)
                 {
                     xGBCnet?.Close();
-                    xGBCnet = new XGBCnet();
-                    xGBCnet.Station = Station;
+                    xGBCnet = new XGBCnet
+                    {
+                        Station = Station
+                    };
 
                     try
                     {
@@ -46,19 +48,19 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
                         xGBCnet.Open();
                         if (xGBCnet.IsOpen())
                         {
-                            EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedSuccess);
+                            EventscadaException?.Invoke(GetType().Name, StringResources.Language.ConnectedSuccess);
                             IsConnected = true;
                         }
                         else
                         {
-                            EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedFailed);
+                            EventscadaException?.Invoke(GetType().Name, StringResources.Language.ConnectedFailed);
                         }
                         IsConnected = true;
                         return IsConnected;
                     }
                     catch (Exception ex)
                     {
-                        EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                        EventscadaException?.Invoke(GetType().Name, ex.Message);
                         return IsConnected;
 
                     }
@@ -67,7 +69,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
             catch (TimeoutException ex)
             {
                 IsConnected = false;
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
                 return IsConnected;
             }
         }
@@ -83,7 +85,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
             catch (TimeoutException ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
                 return IsConnected;
             }
         }
@@ -107,13 +109,13 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
         {
             if (typeof(TValue) == typeof(bool))
             {
-                var b = ReadCoil(address, length);
+                object b = ReadCoil(address, length);
                 return (TValue[])b;
             }
             if (typeof(TValue) == typeof(ushort))
             {
 
-                var b = xGBCnet.ReadUInt16(address, length);
+                OperateResult<ushort[]> b = xGBCnet.ReadUInt16(address, length);
                 if (!b.IsSuccess)
                 {
                     throw new InvalidOperationException($"{b.Message}");
@@ -126,7 +128,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
             }
             if (typeof(TValue) == typeof(int))
             {
-                var b = xGBCnet.ReadInt32(address, length);
+                OperateResult<int[]> b = xGBCnet.ReadInt32(address, length);
                 if (!b.IsSuccess)
                 {
                     throw new InvalidOperationException($"{b.Message}");
@@ -140,7 +142,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
             }
             if (typeof(TValue) == typeof(uint))
             {
-                var b = xGBCnet.ReadUInt32(address, length);
+                OperateResult<uint[]> b = xGBCnet.ReadUInt32(address, length);
                 if (!b.IsSuccess)
                 {
                     throw new InvalidOperationException($"{b.Message}");
@@ -153,7 +155,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
             }
             if (typeof(TValue) == typeof(long))
             {
-                var b = xGBCnet.ReadInt64(address, length);
+                OperateResult<long[]> b = xGBCnet.ReadInt64(address, length);
 
                 if (!b.IsSuccess)
                 {
@@ -166,7 +168,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
             }
             if (typeof(TValue) == typeof(ulong))
             {
-                var b = xGBCnet.ReadUInt64(address, length);
+                OperateResult<ulong[]> b = xGBCnet.ReadUInt64(address, length);
                 if (!b.IsSuccess)
                 {
                     throw new InvalidOperationException($"{b.Message}");
@@ -179,7 +181,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
 
             if (typeof(TValue) == typeof(short))
             {
-                var b = xGBCnet.ReadInt16(address, length);
+                OperateResult<short[]> b = xGBCnet.ReadInt16(address, length);
                 if (!b.IsSuccess)
                 {
                     throw new InvalidOperationException($"{b.Message}");
@@ -191,7 +193,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
             }
             if (typeof(TValue) == typeof(double))
             {
-                var b = xGBCnet.ReadDouble(address, length);
+                OperateResult<double[]> b = xGBCnet.ReadDouble(address, length);
                 if (!b.IsSuccess)
                 {
                     throw new InvalidOperationException($"{b.Message}");
@@ -203,7 +205,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
             }
             if (typeof(TValue) == typeof(float))
             {
-                var b = xGBCnet.ReadFloat(address, length);
+                OperateResult<float[]> b = xGBCnet.ReadFloat(address, length);
                 if (!b.IsSuccess)
                 {
                     throw new InvalidOperationException($"{b.Message}");
@@ -216,7 +218,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
             }
             if (typeof(TValue) == typeof(string))
             {
-                var b = xGBCnet.ReadString(address, length);
+                OperateResult<string> b = xGBCnet.ReadString(address, length);
                 if (!b.IsSuccess)
                 {
                     throw new InvalidOperationException($"{b.Message}");
@@ -233,7 +235,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
         #endregion
         private object ReadCoil(string address, ushort length)
         {
-            var b = xGBCnet.Read(address, length);
+            OperateResult<byte[]> b = xGBCnet.Read(address, length);
             if (!b.IsSuccess)
             {
                 throw new InvalidOperationException($"{b.Message}");
@@ -249,7 +251,7 @@ namespace AdvancedScada.LSIS.Core.LSIS.Cnet
         {
             if (typeof(TValue) == typeof(bool))
             {
-                var read = xGBCnet.ReadBool(address, 1);
+                OperateResult<bool[]> read = xGBCnet.ReadBool(address, 1);
                 if (!read.IsSuccess)
                 {
                     throw new InvalidOperationException($"{read.Message}");

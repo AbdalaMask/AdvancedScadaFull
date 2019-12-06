@@ -10,14 +10,8 @@ namespace AdvancedScada.Common
         private int _ErrorCode;
         public int ErrorCode
         {
-            get
-            {
-                return _ErrorCode;
-            }
-            set
-            {
-                _ErrorCode = value;
-            }
+            get => _ErrorCode;
+            set => _ErrorCode = value;
         }
 
         public PLCDriverException()

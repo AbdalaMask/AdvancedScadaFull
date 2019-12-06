@@ -15,8 +15,7 @@ namespace AdvancedScada.Controls_Binding
     public class Utilities
     {
         private static IReadService client;
-
-        static object myLockRead = new object();
+        private static readonly object myLockRead = new object();
 
         public static void Write(string PLCAddressClick, dynamic Value)
         {
@@ -26,7 +25,9 @@ namespace AdvancedScada.Controls_Binding
                 {
                     client = ClientDriverHelper.GetInstance().GetReadService();
                     if (client != null)
+                    {
                         client.WriteTag(PLCAddressClick, Value);
+                    }
                 }
 
                 Thread.Sleep(50);

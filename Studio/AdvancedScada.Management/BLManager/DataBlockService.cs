@@ -27,7 +27,10 @@ namespace AdvancedScada.Management.BLManager
         {
             lock (mutex)
             {
-                if (_instance == null) _instance = new DataBlockService();
+                if (_instance == null)
+                {
+                    _instance = new DataBlockService();
+                }
             }
 
             return _instance;
@@ -41,15 +44,22 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                if (db == null) throw new NullReferenceException("The DataBlock is null reference exception");
-                var fDv = IsExisted(dv, db);
+                if (db == null)
+                {
+                    throw new NullReferenceException("The DataBlock is null reference exception");
+                }
+
+                DataBlock fDv = IsExisted(dv, db);
                 if (fDv != null)
+                {
                     throw new Exception($"DataBlock name: '{db.DataBlockName}' is existed");
+                }
+
                 dv.DataBlocks.Add(db);
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
         public void Add(Channel ch, Device dv, DataBlock db)
@@ -57,22 +67,31 @@ namespace AdvancedScada.Management.BLManager
             Device result = null;
             try
             {
-                if (db == null) throw new NullReferenceException("The DataBlock is null reference exception");
-                foreach (var item in ch.Devices)
+                if (db == null)
+                {
+                    throw new NullReferenceException("The DataBlock is null reference exception");
+                }
+
+                foreach (Device item in ch.Devices)
+                {
                     if (item.DeviceId == dv.DeviceId && item.DeviceName.Equals(dv.DeviceName))
                     {
                         result = item;
                         break;
                     }
+                }
 
-                var fDv = IsExisted(result, db);
+                DataBlock fDv = IsExisted(result, db);
                 if (fDv != null)
+                {
                     throw new Exception($"DataBlock name: '{db.DataBlockName}' is existed");
+                }
+
                 result.DataBlocks.Add(db);
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
         /// <summary>
@@ -84,11 +103,19 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                if (db == null) throw new NullReferenceException("The DataBlock is null reference exception");
-                var fCh = IsExisted(dv, db);
+                if (db == null)
+                {
+                    throw new NullReferenceException("The DataBlock is null reference exception");
+                }
+
+                DataBlock fCh = IsExisted(dv, db);
                 if (fCh != null)
+                {
                     throw new Exception($"DataBlock name: '{db.DataBlockName}' is existed");
-                foreach (var item in dv.DataBlocks)
+                }
+
+                foreach (DataBlock item in dv.DataBlocks)
+                {
                     if (item.DataBlockId == db.DataBlockId)
                     {
                         item.ChannelId = db.ChannelId;
@@ -103,10 +130,11 @@ namespace AdvancedScada.Management.BLManager
                         item.IsArray = db.IsArray;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -119,13 +147,17 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                var result = GetByDataBlockId(dv, dbId);
-                if (result == null) throw new KeyNotFoundException("DataBlock Id is not found exception");
+                DataBlock result = GetByDataBlockId(dv, dbId);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("DataBlock Id is not found exception");
+                }
+
                 dv.DataBlocks.Remove(result);
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -138,13 +170,17 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                var result = GetByDataBlockName(dv, dbName);
-                if (result == null) throw new KeyNotFoundException("DataBlock name is not found exception");
+                DataBlock result = GetByDataBlockName(dv, dbName);
+                if (result == null)
+                {
+                    throw new KeyNotFoundException("DataBlock name is not found exception");
+                }
+
                 dv.DataBlocks.Remove(result);
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -157,17 +193,23 @@ namespace AdvancedScada.Management.BLManager
         {
             try
             {
-                if (db == null) throw new NullReferenceException("The DataBlock is null reference exception");
-                foreach (var item in dv.DataBlocks)
+                if (db == null)
+                {
+                    throw new NullReferenceException("The DataBlock is null reference exception");
+                }
+
+                foreach (DataBlock item in dv.DataBlocks)
+                {
                     if (item.DataBlockId == db.DataBlockId)
                     {
                         dv.DataBlocks.Remove(item);
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -182,16 +224,18 @@ namespace AdvancedScada.Management.BLManager
             DataBlock result = null;
             try
             {
-                foreach (var item in dv.DataBlocks)
+                foreach (DataBlock item in dv.DataBlocks)
+                {
                     if (item.DataBlockId != db.DataBlockId && item.DataBlockName.Equals(db.DataBlockName))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -208,16 +252,18 @@ namespace AdvancedScada.Management.BLManager
             DataBlock result = null;
             try
             {
-                foreach (var item in ch.DataBlocks)
+                foreach (DataBlock item in ch.DataBlocks)
+                {
                     if (item.DataBlockId == chId)
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -234,16 +280,18 @@ namespace AdvancedScada.Management.BLManager
             DataBlock result = null;
             try
             {
-                foreach (var item in ch.DataBlocks)
+                foreach (DataBlock item in ch.DataBlocks)
+                {
                     if (item.DataBlockName.Equals(chName))
                     {
                         result = item;
                         break;
                     }
+                }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return result;
@@ -256,30 +304,32 @@ namespace AdvancedScada.Management.BLManager
         /// <returns>Danh sách gói dữ liệu</returns>
         public List<DataBlock> GetDataBlocks(XmlNode dvNode)
         {
-            var dbList = new List<DataBlock>();
+            List<DataBlock> dbList = new List<DataBlock>();
             try
             {
                 foreach (XmlNode dbNote in dvNode)
                 {
-                    var db = new DataBlock();
-                    db.ChannelId = int.Parse(dbNote.Attributes[CHANNEL_ID].Value);
-                    db.DeviceId = int.Parse(dbNote.Attributes[DEVICE_ID].Value);
-                    db.DataBlockId = int.Parse(dbNote.Attributes[DATABLOCK_ID].Value);
-                    db.DataBlockName = dbNote.Attributes[DATABLOCK_NAME].Value;
-                    db.TypeOfRead = $"{dbNote.Attributes[TypeOfRead].Value}";
-                    db.StartAddress = ushort.Parse(dbNote.Attributes[START_ADDRESS].Value);
-                    db.MemoryType = $"{dbNote.Attributes[MemoryType].Value}";
-                    db.Length = ushort.Parse(dbNote.Attributes[LENGTH].Value);
-                    db.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", dbNote.Attributes[DATA_TYPE].Value));
-                    db.IsArray = bool.Parse(dbNote.Attributes[Is_Array].Value);
-                    db.Description = dbNote.Attributes[ChannelService.DESCRIPTION].Value;
-                    db.Tags = objTagManager.GetTags(dbNote);
+                    DataBlock db = new DataBlock
+                    {
+                        ChannelId = int.Parse(dbNote.Attributes[CHANNEL_ID].Value),
+                        DeviceId = int.Parse(dbNote.Attributes[DEVICE_ID].Value),
+                        DataBlockId = int.Parse(dbNote.Attributes[DATABLOCK_ID].Value),
+                        DataBlockName = dbNote.Attributes[DATABLOCK_NAME].Value,
+                        TypeOfRead = $"{dbNote.Attributes[TypeOfRead].Value}",
+                        StartAddress = ushort.Parse(dbNote.Attributes[START_ADDRESS].Value),
+                        MemoryType = $"{dbNote.Attributes[MemoryType].Value}",
+                        Length = ushort.Parse(dbNote.Attributes[LENGTH].Value),
+                        DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), string.Format("{0}", dbNote.Attributes[DATA_TYPE].Value)),
+                        IsArray = bool.Parse(dbNote.Attributes[Is_Array].Value),
+                        Description = dbNote.Attributes[ChannelService.DESCRIPTION].Value,
+                        Tags = objTagManager.GetTags(dbNote)
+                    };
                     dbList.Add(db);
                 }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return dbList;
@@ -319,7 +369,7 @@ namespace AdvancedScada.Management.BLManager
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return dataBlock;
         }
@@ -338,7 +388,7 @@ namespace AdvancedScada.Management.BLManager
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return GetInt;
         }

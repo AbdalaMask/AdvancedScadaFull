@@ -9,10 +9,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         private bool m_ValueSelect1;
         public bool ValueSelect1
         {
-            get
-            {
-                return m_ValueSelect1;
-            }
+            get => m_ValueSelect1;
             set
             {
                 if (value != m_ValueSelect1)
@@ -27,10 +24,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         private bool m_ValueSelect2;
         public bool ValueSelect2
         {
-            get
-            {
-                return m_ValueSelect2;
-            }
+            get => m_ValueSelect2;
             set
             {
                 if (value != m_ValueSelect2)
@@ -49,10 +43,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         private Bitmap m_GraphicAllOff;
         public Bitmap GraphicAllOff
         {
-            get
-            {
-                return (m_GraphicAllOff);
-            }
+            get => (m_GraphicAllOff);
             set
             {
                 m_GraphicAllOff = value;
@@ -66,10 +57,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         private Bitmap m_GraphicSelect1;
         public Bitmap GraphicSelect1
         {
-            get
-            {
-                return (m_GraphicSelect1);
-            }
+            get => (m_GraphicSelect1);
             set
             {
                 m_GraphicSelect1 = value;
@@ -83,10 +71,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         private Bitmap m_GraphicSelect2;
         public Bitmap GraphicSelect2
         {
-            get
-            {
-                return (m_GraphicSelect2);
-            }
+            get => (m_GraphicSelect2);
             set
             {
                 m_GraphicSelect2 = value;

@@ -32,11 +32,14 @@ namespace AdvancedScada.OPC.Core.Editors
         {
             try
             {
-                var se = new ServerEnumerator();
+                ServerEnumerator se = new ServerEnumerator();
 
-                var servers = se.GetAvailableServers(Specification.COM_DA_20);
+                Opc.Server[] servers = se.GetAvailableServers(Specification.COM_DA_20);
                 serversComboBox.Items.Clear();
-                foreach (var item in servers) serversComboBox.Items.Add(item.Name);
+                foreach (Opc.Server item in servers)
+                {
+                    serversComboBox.Items.Add(item.Name);
+                }
             }
             catch (Exception)
             {
@@ -107,7 +110,10 @@ namespace AdvancedScada.OPC.Core.Editors
 
                     die.ChannelId = objChannelManager.Channels.Count + 1;
                     die.Devices = new List<Device>();
-                    if (eventChannelChanged != null) eventChannelChanged(die, true);
+                    if (eventChannelChanged != null)
+                    {
+                        eventChannelChanged(die, true);
+                    }
                     //this.DialogResult = System.Windows.Forms.DialogResult.OK;
                     EventscadaLogger?.Invoke(1, "ChannelManager", $"{DateTime.Now}", "Add Channel");
 
@@ -117,7 +123,10 @@ namespace AdvancedScada.OPC.Core.Editors
 
                     die.ChannelId = ch.ChannelId;
                     die.Devices = ch.Devices;
-                    if (eventChannelChanged != null) eventChannelChanged(die, false);
+                    if (eventChannelChanged != null)
+                    {
+                        eventChannelChanged(die, false);
+                    }
                     //this.DialogResult = System.Windows.Forms.DialogResult.OK;
                     EventscadaLogger?.Invoke(1, "ChannelManager", $"{DateTime.Now}", "Editor Channel");
 
@@ -131,7 +140,7 @@ namespace AdvancedScada.OPC.Core.Editors
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
         }

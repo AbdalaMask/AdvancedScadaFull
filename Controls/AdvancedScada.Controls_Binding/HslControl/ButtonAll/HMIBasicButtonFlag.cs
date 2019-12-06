@@ -23,14 +23,8 @@ namespace AdvancedScada.Controls_Binding.HslControl.ButtonAll
         private int m_Flag = (int)FlagSET.Flag1;
         public FlagSET Flag
         {
-            get
-            {
-                return (FlagSET)m_Flag;
-            }
-            set
-            {
-                m_Flag = (int)value;
-            }
+            get => (FlagSET)m_Flag;
+            set => m_Flag = (int)value;
         }
 
         protected override void OnMouseDown(MouseEventArgs mevent)
@@ -39,19 +33,34 @@ namespace AdvancedScada.Controls_Binding.HslControl.ButtonAll
 
             if (PLCAddressClick != null && string.Compare(PLCAddressClick, string.Empty) != 0 && Enabled &&
                 PLCAddressClick != null)
+            {
                 try
                 {
                     if (OutputType == MfgControl.AdvancedHMI.Controls.OutputType.MomentarySet)
                     {
                         Utilities.Write(PLCAddressClick, "1");
-                        if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
-                        if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
+                        if (m_MinimumHoldTime > 0)
+                        {
+                            MinHoldTimer.Enabled = true;
+                        }
+
+                        if (m_MaximumHoldTime > 0)
+                        {
+                            MaxHoldTimer.Enabled = true;
+                        }
                     }
                     else if (OutputType == MfgControl.AdvancedHMI.Controls.OutputType.MomentaryReset)
                     {
                         Utilities.Write(PLCAddressClick, "0");
-                        if (m_MinimumHoldTime > 0) MinHoldTimer.Enabled = true;
-                        if (m_MaximumHoldTime > 0) MaxHoldTimer.Enabled = true;
+                        if (m_MinimumHoldTime > 0)
+                        {
+                            MinHoldTimer.Enabled = true;
+                        }
+
+                        if (m_MaximumHoldTime > 0)
+                        {
+                            MaxHoldTimer.Enabled = true;
+                        }
                     }
 
                     else if (OutputType == MfgControl.AdvancedHMI.Controls.OutputType.SetTrue)
@@ -68,14 +77,19 @@ namespace AdvancedScada.Controls_Binding.HslControl.ButtonAll
                     {
                         bool CurrentValue = Convert.ToBoolean(Value);
                         if (CurrentValue)
+                        {
                             Utilities.Write(PLCAddressClick, "0");
+                        }
                         else
+                        {
                             Utilities.Write(PLCAddressClick, $"{m_Flag}");
+                        }
                     }
                 }
                 catch (Exception)
                 {
                 }
+            }
 
             //this.Invalidate();
         }

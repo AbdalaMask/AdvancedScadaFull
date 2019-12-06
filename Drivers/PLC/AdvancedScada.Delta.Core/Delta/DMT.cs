@@ -12,10 +12,10 @@ namespace AdvancedScada.IODriver.Delta
         public static byte[] strData;
 
 
-        public static UInt32 data_from_dev;
+        public static uint data_from_dev;
 
 
-        public static UInt32 data_to_dev;
+        public static uint data_to_dev;
 
 
         public static string strProduct;
@@ -84,41 +84,41 @@ namespace AdvancedScada.IODriver.Delta
 
         //// Wrapped MODBUS Funcion : 0x01
         [System.Runtime.InteropServices.DllImport("DMT.dll", EntryPoint = "ReadCoilsW", ExactSpelling = false, CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
-        public static extern int ReadCoilsW(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref UInt32 data_r, StringBuilder req, StringBuilder res);
+        public static extern int ReadCoilsW(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref uint data_r, StringBuilder req, StringBuilder res);
 
         //// Wrapped MODBUS Funcion : 0x02
         [System.Runtime.InteropServices.DllImport("DMT.dll", EntryPoint = "ReadInputsW", ExactSpelling = false, CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
-        public static extern int ReadInputsW(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref UInt32 data_r, StringBuilder req, StringBuilder res);
+        public static extern int ReadInputsW(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref uint data_r, StringBuilder req, StringBuilder res);
 
         //// Wrapped MODBUS Funcion : 0x03
         [System.Runtime.InteropServices.DllImport("DMT.dll", EntryPoint = "ReadHoldRegsW", ExactSpelling = false, CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
-        public static extern int ReadHoldRegsW(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref UInt32 data_r, StringBuilder req, StringBuilder res);
+        public static extern int ReadHoldRegsW(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref uint data_r, StringBuilder req, StringBuilder res);
         [System.Runtime.InteropServices.DllImport("DMT.dll", EntryPoint = "ReadHoldRegs32W", ExactSpelling = false, CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
-        public static extern int ReadHoldRegs32W(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref UInt32 data_r, StringBuilder req, StringBuilder res);
+        public static extern int ReadHoldRegs32W(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref uint data_r, StringBuilder req, StringBuilder res);
 
         //// Wrapped MODBUS Funcion : 0x04
         [System.Runtime.InteropServices.DllImport("DMT.dll", EntryPoint = "ReadInputRegsW", ExactSpelling = false, CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
-        public static extern int ReadInputRegsW(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref UInt32 data_r, StringBuilder req, StringBuilder res);
+        public static extern int ReadInputRegsW(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref uint data_r, StringBuilder req, StringBuilder res);
 
         //// Wrapped MODBUS Funcion : 0x05		   
         [System.Runtime.InteropServices.DllImport("DMT.dll", EntryPoint = "WriteSingleCoilW", ExactSpelling = false, CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
-        public static extern int WriteSingleCoilW(int comm_type, int conn_num, int slave_addr, int dev_addr, UInt32 data_w, StringBuilder req, StringBuilder res);
+        public static extern int WriteSingleCoilW(int comm_type, int conn_num, int slave_addr, int dev_addr, uint data_w, StringBuilder req, StringBuilder res);
 
         //// Wrapped MODBUS Funcion : 0x06
         [System.Runtime.InteropServices.DllImport("DMT.dll", EntryPoint = "WriteSingleRegW", ExactSpelling = false, CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
-        public static extern int WriteSingleRegW(int comm_type, int conn_num, int slave_addr, int dev_addr, UInt32 data_w, StringBuilder req, StringBuilder res);
+        public static extern int WriteSingleRegW(int comm_type, int conn_num, int slave_addr, int dev_addr, uint data_w, StringBuilder req, StringBuilder res);
         [System.Runtime.InteropServices.DllImport("DMT.dll", EntryPoint = "WriteSingleReg32W", ExactSpelling = false, CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
-        public static extern int WriteSingleReg32W(int comm_type, int conn_num, int slave_addr, int dev_addr, UInt32 data_w, StringBuilder req, StringBuilder res);
+        public static extern int WriteSingleReg32W(int comm_type, int conn_num, int slave_addr, int dev_addr, uint data_w, StringBuilder req, StringBuilder res);
 
         //// Wrapped MODBUS Funcion : 0x0F
         [System.Runtime.InteropServices.DllImport("DMT.dll", EntryPoint = "WriteMultiCoilsW", ExactSpelling = false, CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
-        public static extern int WriteMultiCoilsW(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref UInt32 data_w, StringBuilder req, StringBuilder res);
+        public static extern int WriteMultiCoilsW(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref uint data_w, StringBuilder req, StringBuilder res);
 
         //// Wrapped MODBUS Funcion : 0x10
         [System.Runtime.InteropServices.DllImport("DMT.dll", EntryPoint = "WriteMultiRegsW", ExactSpelling = false, CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
-        public static extern int WriteMultiRegsW(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref UInt32 data_w, StringBuilder req, StringBuilder res);
+        public static extern int WriteMultiRegsW(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref uint data_w, StringBuilder req, StringBuilder res);
         [System.Runtime.InteropServices.DllImport("DMT.dll", EntryPoint = "WriteMultiRegs32W", ExactSpelling = false, CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
-        public static extern int WriteMultiRegs32W(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref UInt32 data_w, StringBuilder req, StringBuilder res);
+        public static extern int WriteMultiRegs32W(int comm_type, int conn_num, int slave_addr, int dev_addr, int qty, ref uint data_w, StringBuilder req, StringBuilder res);
         #endregion
 
 

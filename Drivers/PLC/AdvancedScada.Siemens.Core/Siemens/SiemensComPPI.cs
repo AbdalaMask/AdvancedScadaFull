@@ -12,7 +12,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
     {
         private SiemensPPI siemensPPI = null;
         private const int DELAY = 100; // delay 100 ms
-        private SerialPort serialPort;
+        private readonly SerialPort serialPort;
 
         public bool IsConnected { get; set; }
         private byte station;
@@ -26,7 +26,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
 
         public bool Connection()
         {
-            var stopwatch = Stopwatch.StartNew();
+            Stopwatch stopwatch = Stopwatch.StartNew();
             siemensPPI?.Close();
             siemensPPI = new SiemensPPI();
             try
@@ -44,12 +44,12 @@ namespace AdvancedScada.Siemens.Core.Siemens
                 siemensPPI.Station = station;
                 if (siemensPPI.IsOpen())
                 {
-                    EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedSuccess);
+                    EventscadaException?.Invoke(GetType().Name, StringResources.Language.ConnectedSuccess);
                     IsConnected = true;
                 }
                 else
                 {
-                    EventscadaException?.Invoke(this.GetType().Name, StringResources.Language.ConnectedFailed);
+                    EventscadaException?.Invoke(GetType().Name, StringResources.Language.ConnectedFailed);
                 }
                 IsConnected = true;
 
@@ -61,7 +61,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
             {
                 stopwatch.Stop();
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
                 return IsConnected;
             }
         }
@@ -76,7 +76,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
             catch (TimeoutException ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return IsConnected;
         }
@@ -97,56 +97,56 @@ namespace AdvancedScada.Siemens.Core.Siemens
         {
             if (typeof(TValue) == typeof(bool))
             {
-                var b = siemensPPI.ReadBool(address, length).Content;
+                bool[] b = siemensPPI.ReadBool(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(ushort))
             {
-                var b = siemensPPI.ReadUInt16(address, length).Content;
+                ushort[] b = siemensPPI.ReadUInt16(address, length).Content;
 
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(int))
             {
-                var b = siemensPPI.ReadInt32(address, length).Content;
+                int[] b = siemensPPI.ReadInt32(address, length).Content;
 
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(uint))
             {
-                var b = siemensPPI.ReadUInt32(address, length).Content;
+                uint[] b = siemensPPI.ReadUInt32(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(long))
             {
-                var b = siemensPPI.ReadInt64(address, length).Content;
+                long[] b = siemensPPI.ReadInt64(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(ulong))
             {
-                var b = siemensPPI.ReadUInt64(address, length).Content;
+                ulong[] b = siemensPPI.ReadUInt64(address, length).Content;
                 return (TValue[])(object)b;
             }
 
             if (typeof(TValue) == typeof(short))
             {
-                var b = siemensPPI.ReadInt16(address, length).Content;
+                short[] b = siemensPPI.ReadInt16(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(double))
             {
-                var b = siemensPPI.ReadDouble(address, length).Content;
+                double[] b = siemensPPI.ReadDouble(address, length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(float))
             {
-                var b = siemensPPI.ReadFloat(address, length).Content;
+                float[] b = siemensPPI.ReadFloat(address, length).Content;
                 return (TValue[])(object)b;
 
             }
             if (typeof(TValue) == typeof(string))
             {
-                var b = siemensPPI.ReadString(address, length).Content;
+                string b = siemensPPI.ReadString(address, length).Content;
                 return (TValue[])(object)b;
             }
 
@@ -175,7 +175,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
         {
             double numBytes = 0.0;
 
-            var infos = structType.Tags;
+            System.Collections.Generic.List<Tag> infos = structType.Tags;
             foreach (Tag info in infos)
             {
                 switch (info.DataType)
@@ -195,34 +195,49 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.UShort:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         numBytes += 2;
                         break;
                     case DriverBase.DataTypes.Int:
                     case DriverBase.DataTypes.UInt:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         numBytes += 4;
                         break;
                     case DriverBase.DataTypes.Long:
                     case DriverBase.DataTypes.ULong:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         numBytes += 4;
                         break;
                     case DriverBase.DataTypes.Float:
                     case DriverBase.DataTypes.Double:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         numBytes += 4;
                         break;
                     case DriverBase.DataTypes.String:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         numBytes += 2;
                         break;
                     default:
@@ -242,17 +257,21 @@ namespace AdvancedScada.Siemens.Core.Siemens
         public object FromBytes(DataBlock structType, byte[] bytes)
         {
             if (bytes == null)
+            {
                 return null;
+            }
 
             if (bytes.Length != GetStructSize(structType))
+            {
                 return null;
+            }
 
             // and decode it
             int bytePos = 0;
             int bitPos = 0;
             double numBytes = 0.0;
 
-            var infos = structType.Tags;
+            System.Collections.Generic.List<Tag> infos = structType.Tags;
 
             foreach (Tag info in infos)
             {
@@ -265,7 +284,7 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.Bit:
                         // get the value
                         bytePos = (int)Math.Floor(numBytes);
-                        bitPos = (int)((numBytes - (double)bytePos) / 0.125);
+                        bitPos = (int)((numBytes - bytePos) / 0.125);
                         if ((bytes[bytePos] & (int)Math.Pow(2, bitPos)) != 0)
                         {
                             info.Value = true;
@@ -291,7 +310,10 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.Short:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         info.Value = siemensPPI.ByteTransform.TransInt16(bytes, (int)numBytes);
                         info.TimeSpan = DateTime.Now;
                         numBytes += 2;
@@ -299,7 +321,10 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.UShort:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         info.Value = siemensPPI.ByteTransform.TransUInt16(bytes, (int)numBytes);
                         info.TimeSpan = DateTime.Now;
                         numBytes += 2;
@@ -307,7 +332,10 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.Int:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         info.Value = siemensPPI.ByteTransform.TransInt32(bytes, (int)numBytes);
                         info.TimeSpan = DateTime.Now;
                         numBytes += 4;
@@ -315,7 +343,10 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.UInt:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         info.Value = siemensPPI.ByteTransform.TransUInt32(bytes, (int)numBytes);
                         info.TimeSpan = DateTime.Now;
                         numBytes += 4;
@@ -323,7 +354,10 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.Long:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         info.Value = siemensPPI.ByteTransform.TransInt64(bytes, (int)numBytes);
                         info.TimeSpan = DateTime.Now;
                         numBytes += 4;
@@ -331,7 +365,10 @@ namespace AdvancedScada.Siemens.Core.Siemens
                     case DriverBase.DataTypes.ULong:
                         numBytes = Math.Ceiling(numBytes);
                         if ((numBytes / 2 - Math.Floor(numBytes / 2.0)) > 0)
+                        {
                             numBytes++;
+                        }
+
                         info.Value = siemensPPI.ByteTransform.TransUInt64(bytes, (int)numBytes);
                         info.TimeSpan = DateTime.Now;
                         numBytes += 4;

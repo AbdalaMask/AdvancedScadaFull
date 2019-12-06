@@ -27,22 +27,28 @@ namespace AdvancedScada.Siemens.Core.Editors
             {
                 if (string.IsNullOrEmpty(txtDeviceName.Text)
                                || string.IsNullOrWhiteSpace(txtDeviceName.Text))
+                {
                     DxErrorProvider1.SetError(txtDeviceName, "The device name is empty");
+                }
                 else
                 {
                     DxErrorProvider1.Clear();
                     if (dv == null)
                     {
-                        Device dvNew = new Device();
-                        dvNew.DeviceId = ch.Devices.Count + 1;
-                        dvNew.SlaveId = (short)txtSlaveId.Value;
-                        dvNew.DeviceName = txtDeviceName.Text;
-                        dvNew.Description = txtDesp.Text;
-                        dvNew.DataBlocks = new List<DataBlock>();
+                        Device dvNew = new Device
+                        {
+                            DeviceId = ch.Devices.Count + 1,
+                            SlaveId = (short)txtSlaveId.Value,
+                            DeviceName = txtDeviceName.Text,
+                            Description = txtDesp.Text,
+                            DataBlocks = new List<DataBlock>()
+                        };
                         EventscadaLogger?.Invoke(1, "DeviceManager", $"{DateTime.Now}", "Add Device");
 
-                        if (eventDeviceChanged != null) eventDeviceChanged(dvNew, true);
-
+                        if (eventDeviceChanged != null)
+                        {
+                            eventDeviceChanged(dvNew, true);
+                        }
                     }
                     else
                     {
@@ -51,14 +57,17 @@ namespace AdvancedScada.Siemens.Core.Editors
                         dv.Description = txtDesp.Text;
                         EventscadaLogger?.Invoke(1, "DeviceManager", $"{DateTime.Now}", "Editor Device");
 
-                        if (eventDeviceChanged != null) eventDeviceChanged(dv, false);
+                        if (eventDeviceChanged != null)
+                        {
+                            eventDeviceChanged(dv, false);
+                        }
                     }
                     Close();
                 }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -71,7 +80,7 @@ namespace AdvancedScada.Siemens.Core.Editors
 
                 if (dv != null)
                 {
-                    this.Text = "Edit Device  " + ch.ChannelTypes;
+                    Text = "Edit Device  " + ch.ChannelTypes;
                     txtSlaveId.Value = dv.SlaveId;
                     txtDeviceName.Text = dv.DeviceName;
                     txtDeviceId.Text = $"{dv.DeviceId}";
@@ -79,14 +88,14 @@ namespace AdvancedScada.Siemens.Core.Editors
                 }
                 else
                 {
-                    this.Text = "Add Device  " + ch.ChannelTypes;
+                    Text = "Add Device  " + ch.ChannelTypes;
                     txtDeviceId.Text = Convert.ToString(ch.Devices.Count + 1);
                     txtDeviceName.Text = "PLC" + Convert.ToString(ch.Devices.Count + 1);
                 }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 

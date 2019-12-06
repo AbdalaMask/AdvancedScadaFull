@@ -20,9 +20,9 @@ namespace AdvancedScada.Modbus.Core
         public static List<Channel> Channels = new List<Channel>();
 
         //==================================Modbus===================================================
-        private static Dictionary<string, ModbusTCPMaster> mbe = new Dictionary<string, ModbusTCPMaster>();
-        private static Dictionary<string, ModbusRTUMaster> rtu = new Dictionary<string, ModbusRTUMaster>();
-        private static Dictionary<string, ModbusASCIIMaster> ascii = new Dictionary<string, ModbusASCIIMaster>();
+        private static readonly Dictionary<string, ModbusTCPMaster> mbe = new Dictionary<string, ModbusTCPMaster>();
+        private static readonly Dictionary<string, ModbusRTUMaster> rtu = new Dictionary<string, ModbusRTUMaster>();
+        private static readonly Dictionary<string, ModbusASCIIMaster> ascii = new Dictionary<string, ModbusASCIIMaster>();
 
         private static Task[] taskArray;
         private static bool IsConnected;
@@ -41,18 +41,22 @@ namespace AdvancedScada.Modbus.Core
 
 
 
-                if (Channels == null) return;
+                if (Channels == null)
+                {
+                    return;
+                }
+
                 Channels.Add(ch);
                 IModbusAdapter DriverAdapter = null;
-                foreach (var dv in ch.Devices)
+                foreach (Device dv in ch.Devices)
                 {
                     try
                     {
                         switch (ch.ConnectionType)
                         {
                             case "SerialPort":
-                                var dis = (DISerialPort)ch;
-                                var sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
+                                DISerialPort dis = (DISerialPort)ch;
+                                SerialPort sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
                                 {
                                     Handshake = dis.Handshake
                                 };
@@ -72,7 +76,7 @@ namespace AdvancedScada.Modbus.Core
 
                                 break;
                             case "Ethernet":
-                                var die = (DIEthernet)ch;
+                                DIEthernet die = (DIEthernet)ch;
                                 DriverAdapter = new ModbusTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
                                 mbe.Add(ch.ChannelName, (ModbusTCPMaster)DriverAdapter);
                                 break;
@@ -81,12 +85,12 @@ namespace AdvancedScada.Modbus.Core
                     }
                     catch (Exception ex)
                     {
-                        EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                        EventscadaException?.Invoke(GetType().Name, ex.Message);
                     }
-                    foreach (var db in dv.DataBlocks)
+                    foreach (DataBlock db in dv.DataBlocks)
                     {
                         DataBlockCollection.DataBlocks.Add($"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}", db);
-                        foreach (var tg in db.Tags)
+                        foreach (Tag tg in db.Tags)
                         {
                             TagCollection.Tags.Add(
                                 $"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
@@ -99,7 +103,7 @@ namespace AdvancedScada.Modbus.Core
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
 
             }
         }
@@ -115,7 +119,11 @@ namespace AdvancedScada.Modbus.Core
 
                 Console.WriteLine(string.Format("STARTED: {0}", ++COUNTER));
                 taskArray = new Task[Channels.Count];
-                if (taskArray == null) throw new NullReferenceException("No Data");
+                if (taskArray == null)
+                {
+                    throw new NullReferenceException("No Data");
+                }
+
                 for (int i = 0; i < Channels.Count; i++)
                 {
                     taskArray[i] = new Task((chParam) =>
@@ -148,7 +156,10 @@ namespace AdvancedScada.Modbus.Core
 
                                     foreach (DataBlock db in dv.DataBlocks)
                                     {
-                                        if (!IsConnected) break;
+                                        if (!IsConnected)
+                                        {
+                                            break;
+                                        }
 
                                         SendPackageModbus(DriverAdapter, db);
 
@@ -179,18 +190,18 @@ namespace AdvancedScada.Modbus.Core
                     taskArray[i].Start();
                 }
                 //Task.WaitAll(taskArray);
-                foreach (var task in taskArray)
+                foreach (Task task in taskArray)
                 {
-                    var data = task.AsyncState as Channel;
+                    Channel data = task.AsyncState as Channel;
                     if (data != null)
-                        EventscadaException?.Invoke(this.GetType().Name, $"Task #{data.ChannelId} created at {data.ChannelName}, ran on thread #{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}.");
-
-
+                    {
+                        EventscadaException?.Invoke(GetType().Name, $"Task #{data.ChannelId} created at {data.ChannelName}, ran on thread #{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}.");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -214,7 +225,7 @@ namespace AdvancedScada.Modbus.Core
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
 
             }
         }
@@ -242,8 +253,16 @@ namespace AdvancedScada.Modbus.Core
                                 bitRs = DriverAdapter.ReadDiscrete($"{db.StartAddress}", db.Length);
                             }
 
-                            if (bitRs == null) return;
-                            if (bitRs.Length > db.Tags.Count) return;
+                            if (bitRs == null)
+                            {
+                                return;
+                            }
+
+                            if (bitRs.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < db.Tags.Count; j++)
                             {
                                 db.Tags[j].Value = bitRs[j];
@@ -255,8 +274,16 @@ namespace AdvancedScada.Modbus.Core
                         lock (DriverAdapter)
                         {
                             byte[] byteRs = DriverAdapter.Read<byte>($"{db.StartAddress}", db.Length);
-                            if (byteRs == null) return;
-                            if (byteRs.Length > db.Tags.Count) return;
+                            if (byteRs == null)
+                            {
+                                return;
+                            }
+
+                            if (byteRs.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < db.Tags.Count; j++)
                             {
                                 db.Tags[j].Value = byteRs[j];
@@ -268,8 +295,16 @@ namespace AdvancedScada.Modbus.Core
                         lock (DriverAdapter)
                         {
                             short[] IntRs = DriverAdapter.Read<short>($"{db.StartAddress}", db.Length);
-                            if (IntRs == null) return;
-                            if (IntRs.Length > db.Tags.Count) return;
+                            if (IntRs == null)
+                            {
+                                return;
+                            }
+
+                            if (IntRs.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < db.Tags.Count; j++)
                             {
                                 db.Tags[j].Value = IntRs[j];
@@ -281,8 +316,16 @@ namespace AdvancedScada.Modbus.Core
                         lock (DriverAdapter)
                         {
                             ushort[] IntRs = DriverAdapter.Read<ushort>($"{db.StartAddress}", db.Length);
-                            if (IntRs == null) return;
-                            if (IntRs.Length > db.Tags.Count) return;
+                            if (IntRs == null)
+                            {
+                                return;
+                            }
+
+                            if (IntRs.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < db.Tags.Count; j++)
                             {
                                 db.Tags[j].Value = IntRs[j];
@@ -294,8 +337,16 @@ namespace AdvancedScada.Modbus.Core
                         lock (DriverAdapter)
                         {
                             int[] DIntRs = DriverAdapter.Read<int>(string.Format("{0}", db.StartAddress), db.Length);
-                            if (DIntRs == null) return;
-                            if (DIntRs.Length > db.Tags.Count) return;
+                            if (DIntRs == null)
+                            {
+                                return;
+                            }
+
+                            if (DIntRs.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < DIntRs.Length; j++)
                             {
                                 db.Tags[j].Value = DIntRs[j];
@@ -306,10 +357,18 @@ namespace AdvancedScada.Modbus.Core
                     case DataTypes.UInt:
                         lock (DriverAdapter)
                         {
-                            var wdRs = DriverAdapter.Read<uint>($"{db.StartAddress}", db.Length);
+                            uint[] wdRs = DriverAdapter.Read<uint>($"{db.StartAddress}", db.Length);
 
-                            if (wdRs == null) return;
-                            if (wdRs.Length > db.Tags.Count) return;
+                            if (wdRs == null)
+                            {
+                                return;
+                            }
+
+                            if (wdRs.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < wdRs.Length; j++)
                             {
 
@@ -322,7 +381,11 @@ namespace AdvancedScada.Modbus.Core
                         lock (DriverAdapter)
                         {
                             long[] dwRs = DriverAdapter.Read<long>(string.Format("{0}", db.StartAddress), db.Length);
-                            if (dwRs == null) return;
+                            if (dwRs == null)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < dwRs.Length; j++)
                             {
                                 db.Tags[j].Value = dwRs[j];
@@ -334,7 +397,11 @@ namespace AdvancedScada.Modbus.Core
                         lock (DriverAdapter)
                         {
                             ulong[] dwRs = DriverAdapter.Read<ulong>(string.Format("{0}", db.StartAddress), db.Length);
-                            if (dwRs == null) return;
+                            if (dwRs == null)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < dwRs.Length; j++)
                             {
                                 db.Tags[j].Value = dwRs[j];
@@ -346,7 +413,11 @@ namespace AdvancedScada.Modbus.Core
                         lock (DriverAdapter)
                         {
                             float[] rl1Rs = DriverAdapter.Read<float>(string.Format("{0}", db.StartAddress), db.Length);
-                            if (rl1Rs == null) return;
+                            if (rl1Rs == null)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < rl1Rs.Length; j++)
                             {
                                 db.Tags[j].Value = rl1Rs[j];
@@ -358,7 +429,11 @@ namespace AdvancedScada.Modbus.Core
                         lock (DriverAdapter)
                         {
                             double[] rl2Rs = DriverAdapter.Read<double>(string.Format("{0}", db.StartAddress), db.Length);
-                            if (rl2Rs == null) return;
+                            if (rl2Rs == null)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < rl2Rs.Length; j++)
                             {
                                 db.Tags[j].Value = rl2Rs[j];
@@ -378,7 +453,7 @@ namespace AdvancedScada.Modbus.Core
             catch (Exception ex)
             {
                 Disconnect();
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -417,8 +492,13 @@ namespace AdvancedScada.Modbus.Core
                                     break;
                             }
 
-                            if (DriverAdapter == null) return;
+                            if (DriverAdapter == null)
+                            {
+                                return;
+                            }
+
                             lock (DriverAdapter)
+                            {
                                 switch (TagCollection.Tags[tagName].DataType)
                                 {
                                     case DataTypes.Bit:
@@ -467,14 +547,14 @@ namespace AdvancedScada.Modbus.Core
                                     default:
                                         break;
                                 }
-
+                            }
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             finally
             {

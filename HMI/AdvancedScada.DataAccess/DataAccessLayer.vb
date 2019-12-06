@@ -1,5 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports System.Data
 Imports System.Windows.Forms
 
 Public Class DataAccessLayer

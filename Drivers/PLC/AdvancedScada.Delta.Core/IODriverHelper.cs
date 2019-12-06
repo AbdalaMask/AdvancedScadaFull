@@ -21,8 +21,8 @@ namespace AdvancedScada.Delta.Core
         public static List<Channel> Channels = new List<Channel>();
         //==================================Delta===================================================
         private static Dictionary<string, DeltaTCPMaster> Deltambe = new Dictionary<string, DeltaTCPMaster>();
-        private static Dictionary<string, DeltaRTUMaster> Deltartu = new Dictionary<string, DeltaRTUMaster>();
-        private static Dictionary<string, DeltaASCIIMaster> Deltaascii = new Dictionary<string, DeltaASCIIMaster>();
+        private static readonly Dictionary<string, DeltaRTUMaster> Deltartu = new Dictionary<string, DeltaRTUMaster>();
+        private static readonly Dictionary<string, DeltaASCIIMaster> Deltaascii = new Dictionary<string, DeltaASCIIMaster>();
 
 
         private static bool IsConnected;
@@ -39,20 +39,24 @@ namespace AdvancedScada.Delta.Core
 
                 //=================================================================
 
-                if (Channels == null) return;
+                if (Channels == null)
+                {
+                    return;
+                }
+
                 Channels.Add(ch);
 
 
                 IDeltaAdapter DriverAdapter = null;
-                foreach (var dv in ch.Devices)
+                foreach (Device dv in ch.Devices)
                 {
                     try
                     {
                         switch (ch.ConnectionType)
                         {
                             case "SerialPort":
-                                var dis = (DISerialPort)ch;
-                                var sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
+                                DISerialPort dis = (DISerialPort)ch;
+                                SerialPort sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
                                 {
                                     Handshake = dis.Handshake
                                 };
@@ -70,7 +74,7 @@ namespace AdvancedScada.Delta.Core
                                 }
                                 break;
                             case "Ethernet":
-                                var die = (DIEthernet)ch;
+                                DIEthernet die = (DIEthernet)ch;
 
 
                                 DriverAdapter = new DeltaTCPMaster(dv.SlaveId, die.IPAddress, die.Port);
@@ -83,12 +87,12 @@ namespace AdvancedScada.Delta.Core
                     }
                     catch (Exception ex)
                     {
-                        EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                        EventscadaException?.Invoke(GetType().Name, ex.Message);
                     }
-                    foreach (var db in dv.DataBlocks)
+                    foreach (DataBlock db in dv.DataBlocks)
                     {
                         DataBlockCollection.DataBlocks.Add($"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}", db);
-                        foreach (var tg in db.Tags)
+                        foreach (Tag tg in db.Tags)
                         {
                             TagCollection.Tags.Add(
                                 $"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
@@ -101,7 +105,7 @@ namespace AdvancedScada.Delta.Core
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
 
             }
         }
@@ -117,7 +121,11 @@ namespace AdvancedScada.Delta.Core
 
                 Console.WriteLine(string.Format("STARTED: {0}", ++COUNTER));
                 taskArray = new Task[Channels.Count];
-                if (taskArray == null) throw new NullReferenceException("No Data");
+                if (taskArray == null)
+                {
+                    throw new NullReferenceException("No Data");
+                }
+
                 for (int i = 0; i < Channels.Count; i++)
                 {
                     taskArray[i] = new Task((chParam) =>
@@ -151,7 +159,10 @@ namespace AdvancedScada.Delta.Core
 
                                     foreach (DataBlock db in dv.DataBlocks)
                                     {
-                                        if (!IsConnected) break;
+                                        if (!IsConnected)
+                                        {
+                                            break;
+                                        }
 
                                         SendPackageDelta(DriverAdapter, db);
 
@@ -181,18 +192,18 @@ namespace AdvancedScada.Delta.Core
                     }, Channels[i]);
                     taskArray[i].Start();
                 }
-                foreach (var task in taskArray)
+                foreach (Task task in taskArray)
                 {
-                    var data = task.AsyncState as Channel;
+                    Channel data = task.AsyncState as Channel;
                     if (data != null)
-                        EventscadaException?.Invoke(this.GetType().Name, $"Task #{data.ChannelId} created at {data.ChannelName}, ran on thread #{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}.");
-
-
+                    {
+                        EventscadaException?.Invoke(GetType().Name, $"Task #{data.ChannelId} created at {data.ChannelName}, ran on thread #{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}.");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -216,7 +227,7 @@ namespace AdvancedScada.Delta.Core
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
 
             }
         }
@@ -244,9 +255,17 @@ namespace AdvancedScada.Delta.Core
                             }
 
 
-                            if (bitRs == null) return;
+                            if (bitRs == null)
+                            {
+                                return;
+                            }
+
                             int length = bitRs.Length;
-                            if (bitRs.Length > db.Tags.Count) length = db.Tags.Count;
+                            if (bitRs.Length > db.Tags.Count)
+                            {
+                                length = db.Tags.Count;
+                            }
+
                             for (int j = 0; j < length; j++)
                             {
                                 db.Tags[j].Value = bitRs[j];
@@ -258,8 +277,16 @@ namespace AdvancedScada.Delta.Core
                         lock (DriverAdapter)
                         {
                             byte[] IntRs = DriverAdapter.Read<byte>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                            if (IntRs == null) return;
-                            if (IntRs.Length > db.Tags.Count) return;
+                            if (IntRs == null)
+                            {
+                                return;
+                            }
+
+                            if (IntRs.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < IntRs.Length; j++)
                             {
 
@@ -272,8 +299,16 @@ namespace AdvancedScada.Delta.Core
                         lock (DriverAdapter)
                         {
                             short[] DIntRs = DriverAdapter.Read<short>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                            if (DIntRs == null) return;
-                            if (DIntRs.Length > db.Tags.Count) return;
+                            if (DIntRs == null)
+                            {
+                                return;
+                            }
+
+                            if (DIntRs.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < DIntRs.Length; j++)
                             {
                                 db.Tags[j].Value = DIntRs[j];
@@ -284,9 +319,17 @@ namespace AdvancedScada.Delta.Core
                     case DataTypes.UShort:
                         lock (DriverAdapter)
                         {
-                            var wdRs = DriverAdapter.Read<ushort>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                            if (wdRs == null) return;
-                            if (wdRs.Length > db.Tags.Count) return;
+                            ushort[] wdRs = DriverAdapter.Read<ushort>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                            if (wdRs == null)
+                            {
+                                return;
+                            }
+
+                            if (wdRs.Length > db.Tags.Count)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < wdRs.Length; j++)
                             {
 
@@ -299,7 +342,11 @@ namespace AdvancedScada.Delta.Core
                         lock (DriverAdapter)
                         {
                             int[] dwRs = DriverAdapter.Read<int>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                            if (dwRs == null) return;
+                            if (dwRs == null)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < dwRs.Length; j++)
                             {
                                 db.Tags[j].Value = dwRs[j];
@@ -311,7 +358,11 @@ namespace AdvancedScada.Delta.Core
                         lock (DriverAdapter)
                         {
                             uint[] dwRs = DriverAdapter.Read<uint>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                            if (dwRs == null) return;
+                            if (dwRs == null)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < dwRs.Length; j++)
                             {
                                 db.Tags[j].Value = dwRs[j];
@@ -323,7 +374,11 @@ namespace AdvancedScada.Delta.Core
                         lock (DriverAdapter)
                         {
                             long[] rl1Rs = DriverAdapter.Read<long>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                            if (rl1Rs == null) return;
+                            if (rl1Rs == null)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < rl1Rs.Length; j++)
                             {
                                 db.Tags[j].Value = rl1Rs[j];
@@ -335,7 +390,11 @@ namespace AdvancedScada.Delta.Core
                         lock (DriverAdapter)
                         {
                             ulong[] rl1Rs = DriverAdapter.Read<ulong>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                            if (rl1Rs == null) return;
+                            if (rl1Rs == null)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < rl1Rs.Length; j++)
                             {
                                 db.Tags[j].Value = rl1Rs[j];
@@ -347,7 +406,11 @@ namespace AdvancedScada.Delta.Core
                         lock (DriverAdapter)
                         {
                             float[] rl1Rs = DriverAdapter.Read<float>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                            if (rl1Rs == null) return;
+                            if (rl1Rs == null)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < rl1Rs.Length; j++)
                             {
                                 db.Tags[j].Value = rl1Rs[j];
@@ -359,7 +422,11 @@ namespace AdvancedScada.Delta.Core
                         lock (DriverAdapter)
                         {
                             double[] rl2Rs = DriverAdapter.Read<double>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                            if (rl2Rs == null) return;
+                            if (rl2Rs == null)
+                            {
+                                return;
+                            }
+
                             for (int j = 0; j < rl2Rs.Length; j++)
                             {
                                 db.Tags[j].Value = rl2Rs[j];
@@ -379,7 +446,7 @@ namespace AdvancedScada.Delta.Core
             catch (Exception ex)
             {
                 Disconnect();
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -417,8 +484,13 @@ namespace AdvancedScada.Delta.Core
                                     break;
                             }
 
-                            if (DriverAdapter == null) return;
+                            if (DriverAdapter == null)
+                            {
+                                return;
+                            }
+
                             lock (DriverAdapter)
+                            {
                                 switch (TagCollection.Tags[tagName].DataType)
                                 {
                                     case DataTypes.Bit:
@@ -467,14 +539,14 @@ namespace AdvancedScada.Delta.Core
                                     default:
                                         break;
                                 }
-
+                            }
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             finally
             {

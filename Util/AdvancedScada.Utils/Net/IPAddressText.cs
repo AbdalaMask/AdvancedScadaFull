@@ -28,15 +28,9 @@ namespace AdvancedScada.Utils.Net
     public delegate void FieldChangedHandler(object sender, FieldChangedEventArgs e);
     public class FieldChangedEventArgs : EventArgs
     {
-        private int _field, _value;
-        public int Field
-        {
-            get { return _field; }
-        }
-        public int Value
-        {
-            get { return _value; }
-        }
+        private readonly int _field, _value;
+        public int Field => _field;
+        public int Value => _value;
         public FieldChangedEventArgs(int field, int value)
             : base()
         {
@@ -71,21 +65,26 @@ namespace AdvancedScada.Utils.Net
             WS_EX_RIGHTSCROLLBAR = 0x00000000,
             WS_EX_NOPARENTNOTIFY = 0x00000004,
             WS_EX_CLIENTEDGE = 0x00000200;
-        private int[] values = new int[4];
-        bool initialized = false;
+        private readonly int[] values = new int[4];
+        private bool initialized = false;
         public event FieldChangedHandler FieldChanged;
         public IPAddressText()
             : base()
         {
             for (int i = 0; i < 4; i++)
+            {
                 values[i] = 0;
+            }
         }
         [DllImport("comctl32")]
-        static extern bool InitCommonControlsEx(ref InitCommonControlsEX lpInitCtrls);
+        private static extern bool InitCommonControlsEx(ref InitCommonControlsEX lpInitCtrls);
 
         protected virtual void OnFieldChanged(FieldChangedEventArgs e)
         {
-            if (FieldChanged != null) FieldChanged(this, e);
+            if (FieldChanged != null)
+            {
+                FieldChanged(this, e);
+            }
         }
         protected override CreateParams CreateParams
         {
@@ -93,9 +92,11 @@ namespace AdvancedScada.Utils.Net
             {
                 if (!initialized)
                 {
-                    InitCommonControlsEX ic = new InitCommonControlsEX();
-                    ic.Size = Marshal.SizeOf(typeof(InitCommonControlsEX));
-                    ic.Icc = ICC_INTERNET_CLASSES;
+                    InitCommonControlsEX ic = new InitCommonControlsEX
+                    {
+                        Size = Marshal.SizeOf(typeof(InitCommonControlsEX)),
+                        Icc = ICC_INTERNET_CLASSES
+                    };
                     initialized = InitCommonControlsEx(ref ic);
                 }
                 if (initialized)
@@ -126,7 +127,11 @@ namespace AdvancedScada.Utils.Net
         }
         public bool SetIPRange(IPField field, byte lowValue, byte highValue)
         {
-            if (!initialized) return false;
+            if (!initialized)
+            {
+                return false;
+            }
+
             Message m = Message.Create(Handle, IPM_SETRANGE, (IntPtr)((int)field), MakeRange(lowValue, highValue));
             WndProc(ref m);
             return m.Result.ToInt32() > 0;
@@ -135,7 +140,11 @@ namespace AdvancedScada.Utils.Net
         {
             get
             {
-                if (!initialized) return System.Net.IPAddress.None;
+                if (!initialized)
+                {
+                    return System.Net.IPAddress.None;
+                }
+
                 return System.Net.IPAddress.Parse(base.Text);
             }
         }
@@ -143,13 +152,17 @@ namespace AdvancedScada.Utils.Net
         {
             get
             {
-                if (!initialized) return !(base.Text.Length > 0);
+                if (!initialized)
+                {
+                    return !(base.Text.Length > 0);
+                }
+
                 Message m = Message.Create(Handle, IPM_ISBLANK, IntPtr.Zero, IntPtr.Zero);
                 WndProc(ref m);
                 return m.Result.ToInt32() > 0;
             }
         }
-        new public void Clear()
+        public new void Clear()
         {
             if (!initialized)
             {

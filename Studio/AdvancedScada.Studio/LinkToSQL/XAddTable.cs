@@ -39,13 +39,19 @@ namespace AdvancedScada.Studio.LinkToSQL
                     DxErrorProvider1.Clear();
                     if (db == null)
                     {
-                        var TableNew = new Table();
-                        TableNew.TableId = dv.Tables.Count + 1;
+                        Table TableNew = new Table
+                        {
+                            TableId = dv.Tables.Count + 1,
 
-                        TableNew.TableName = txtTableName.Text;
-                        TableNew.Description = txtDescription.Text;
+                            TableName = txtTableName.Text,
+                            Description = txtDescription.Text
+                        };
                         TableManager.Add(dv, TableNew);
-                        if (eventTableChanged != null) eventTableChanged(TableNew);
+                        if (eventTableChanged != null)
+                        {
+                            eventTableChanged(TableNew);
+                        }
+
                         Close();
                     }
                     else
@@ -55,7 +61,10 @@ namespace AdvancedScada.Studio.LinkToSQL
                         db.Description = txtDescription.Text;
 
                         TableManager.Update(dv, db);
-                        if (eventTableChanged != null) eventTableChanged(db);
+                        if (eventTableChanged != null)
+                        {
+                            eventTableChanged(db);
+                        }
 
                         Close();
                     }
@@ -64,7 +73,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -75,7 +84,7 @@ namespace AdvancedScada.Studio.LinkToSQL
 
         private void AddTable_Load(object sender, EventArgs e)
         {
-            var linkToSql = new AdvancedScada.Utils.DriverLinkToSQL.LinkToSQL();
+            Utils.DriverLinkToSQL.LinkToSQL linkToSql = new AdvancedScada.Utils.DriverLinkToSQL.LinkToSQL();
             try
             {
                 if (db == null)
@@ -106,7 +115,7 @@ namespace AdvancedScada.Studio.LinkToSQL
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
         }

@@ -27,9 +27,14 @@ namespace AdvancedScada.Management.SQLManager
         {
             get
             {
-                foreach (var item in DataBase)
+                foreach (DataBase item in DataBase)
+                {
                     if (DataBaseName.Equals(item.DataBaseName))
+                    {
                         return item;
+                    }
+                }
+
                 return null;
             }
         }

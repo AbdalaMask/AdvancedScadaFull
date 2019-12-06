@@ -8,7 +8,7 @@ namespace AdvancedScada.BaseService.Client
 {
     public class ClientDriverHelper : BaseBinding
     {
-        private static ClientDriverHelper objDriverHelper = null;
+        private static readonly ClientDriverHelper objDriverHelper = null;
 
         public static string IP_ADDRESS = "127.0.0.1";
 
@@ -39,7 +39,7 @@ namespace AdvancedScada.BaseService.Client
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return null;
         }
@@ -57,7 +57,7 @@ namespace AdvancedScada.BaseService.Client
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return null;
         }
@@ -75,7 +75,7 @@ namespace AdvancedScada.BaseService.Client
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return null;
         }

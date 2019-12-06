@@ -20,8 +20,8 @@ namespace AdvancedScada.Siemens.Core
         public static List<Channel> Channels = new List<Channel>();
 
         //==================================Siemens===================================================
-        private static Dictionary<string, SiemensNet> _PLCS7 = new Dictionary<string, SiemensNet>();
-        private static Dictionary<string, SiemensComPPI> _PLCPPI = new Dictionary<string, SiemensComPPI>();
+        private static readonly Dictionary<string, SiemensNet> _PLCS7 = new Dictionary<string, SiemensNet>();
+        private static readonly Dictionary<string, SiemensComPPI> _PLCPPI = new Dictionary<string, SiemensComPPI>();
         private static bool IsConnected;
         private static int COUNTER;
         private static Task[] taskArray;
@@ -37,20 +37,24 @@ namespace AdvancedScada.Siemens.Core
 
                 //=================================================================
 
-                if (Channels == null) return;
+                if (Channels == null)
+                {
+                    return;
+                }
+
                 Channels.Add(ch);
 
 
                 IPLCS7Adapter DriverAdapter = null;
-                foreach (var dv in ch.Devices)
+                foreach (Device dv in ch.Devices)
                 {
                     try
                     {
                         switch (ch.ConnectionType)
                         {
                             case "SerialPort":
-                                var dis = (DISerialPort)ch;
-                                var sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
+                                DISerialPort dis = (DISerialPort)ch;
+                                SerialPort sp = new SerialPort(dis.PortName, dis.BaudRate, dis.Parity, dis.DataBits, dis.StopBits)
                                 {
                                     Handshake = dis.Handshake
                                 };
@@ -59,8 +63,8 @@ namespace AdvancedScada.Siemens.Core
                                 _PLCPPI.Add(ch.ChannelName, (SiemensComPPI)DriverAdapter);
                                 break;
                             case "Ethernet":
-                                var die = (DIEthernet)ch;
-                                var cpu = (SiemensPLCS)Enum.Parse(typeof(SiemensPLCS), die.CPU);
+                                DIEthernet die = (DIEthernet)ch;
+                                SiemensPLCS cpu = (SiemensPLCS)Enum.Parse(typeof(SiemensPLCS), die.CPU);
                                 DriverAdapter = new SiemensNet(cpu, die.IPAddress, (short)die.Rack, (short)die.Slot);
                                 _PLCS7.Add(ch.ChannelName, (SiemensNet)DriverAdapter);
 
@@ -70,12 +74,12 @@ namespace AdvancedScada.Siemens.Core
                     }
                     catch (Exception ex)
                     {
-                        EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                        EventscadaException?.Invoke(GetType().Name, ex.Message);
                     }
-                    foreach (var db in dv.DataBlocks)
+                    foreach (DataBlock db in dv.DataBlocks)
                     {
                         DataBlockCollection.DataBlocks.Add($"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}", db);
-                        foreach (var tg in db.Tags)
+                        foreach (Tag tg in db.Tags)
                         {
                             TagCollection.Tags.Add(
                                 $"{ch.ChannelName}.{dv.DeviceName}.{db.DataBlockName}.{tg.TagName}", tg);
@@ -88,7 +92,7 @@ namespace AdvancedScada.Siemens.Core
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
 
             }
         }
@@ -104,7 +108,11 @@ namespace AdvancedScada.Siemens.Core
 
                 Console.WriteLine(string.Format("STARTED: {0}", ++COUNTER));
                 taskArray = new Task[Channels.Count];
-                if (taskArray == null) throw new NullReferenceException("No Data");
+                if (taskArray == null)
+                {
+                    throw new NullReferenceException("No Data");
+                }
+
                 for (int i = 0; i < Channels.Count; i++)
                 {
                     taskArray[i] = new Task((chParam) =>
@@ -127,7 +135,7 @@ namespace AdvancedScada.Siemens.Core
                         catch (Exception ex)
                         {
                             Disconnect();
-                            EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                            EventscadaException?.Invoke(GetType().Name, ex.Message);
                         }
 
 
@@ -144,7 +152,10 @@ namespace AdvancedScada.Siemens.Core
 
                                     foreach (DataBlock db in dv.DataBlocks)
                                     {
-                                        if (!IsConnected) break;
+                                        if (!IsConnected)
+                                        {
+                                            break;
+                                        }
 
                                         SendPackageSiemens(DriverAdapter, dv, db);
                                     }
@@ -171,20 +182,20 @@ namespace AdvancedScada.Siemens.Core
 
                     }, Channels[i]);
                     taskArray[i].Start();
-                    foreach (var task in taskArray)
+                    foreach (Task task in taskArray)
                     {
-                        var data = task.AsyncState as Channel;
+                        Channel data = task.AsyncState as Channel;
                         if (data != null)
-                            EventscadaException?.Invoke(this.GetType().Name, $"Task #{data.ChannelId} created at {data.ChannelName}, ran on thread #{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}.");
-
-
+                        {
+                            EventscadaException?.Invoke(GetType().Name, $"Task #{data.ChannelId} created at {data.ChannelName}, ran on thread #{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}.");
+                        }
                     }
                 }
 
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -208,7 +219,7 @@ namespace AdvancedScada.Siemens.Core
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
 
             }
         }
@@ -239,7 +250,11 @@ namespace AdvancedScada.Siemens.Core
                                 bool[] bitRs = ISiemens.Read<bool>($"{db.MemoryType}{db.StartAddress}", db.Length);
 
                                 int length = bitRs.Length;
-                                if (bitRs.Length > db.Tags.Count) length = db.Tags.Count;
+                                if (bitRs.Length > db.Tags.Count)
+                                {
+                                    length = db.Tags.Count;
+                                }
+
                                 for (int j = 0; j < length; j++)
                                 {
                                     db.Tags[j].Value = bitRs[j];
@@ -251,8 +266,12 @@ namespace AdvancedScada.Siemens.Core
 
                             lock (ISiemens)
                             {
-                                short[] IntRs = ISiemens.Read<Int16>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                                if (IntRs.Length > db.Tags.Count) return;
+                                short[] IntRs = ISiemens.Read<short>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                                if (IntRs.Length > db.Tags.Count)
+                                {
+                                    return;
+                                }
+
                                 for (int j = 0; j < IntRs.Length; j++)
                                 {
 
@@ -265,8 +284,12 @@ namespace AdvancedScada.Siemens.Core
 
                             lock (ISiemens)
                             {
-                                int[] DIntRs = ISiemens.Read<Int32>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                                if (DIntRs.Length > db.Tags.Count) return;
+                                int[] DIntRs = ISiemens.Read<int>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                                if (DIntRs.Length > db.Tags.Count)
+                                {
+                                    return;
+                                }
+
                                 for (int j = 0; j < DIntRs.Length; j++)
                                 {
                                     db.Tags[j].Value = DIntRs[j];
@@ -278,9 +301,17 @@ namespace AdvancedScada.Siemens.Core
 
                             lock (ISiemens)
                             {
-                                var wdRs = ISiemens.Read<uint>($"{db.MemoryType}{db.StartAddress}", db.Length);
-                                if (wdRs == null) return;
-                                if (wdRs.Length > db.Tags.Count) return;
+                                uint[] wdRs = ISiemens.Read<uint>($"{db.MemoryType}{db.StartAddress}", db.Length);
+                                if (wdRs == null)
+                                {
+                                    return;
+                                }
+
+                                if (wdRs.Length > db.Tags.Count)
+                                {
+                                    return;
+                                }
+
                                 for (int j = 0; j < wdRs.Length; j++)
                                 {
 
@@ -336,7 +367,7 @@ namespace AdvancedScada.Siemens.Core
             catch (Exception ex)
             {
                 Disconnect();
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -369,8 +400,13 @@ namespace AdvancedScada.Siemens.Core
                                     DriverAdapter = _PLCS7[ch.ChannelName];
                                     break;
                             }
-                            if (DriverAdapter == null) return;
+                            if (DriverAdapter == null)
+                            {
+                                return;
+                            }
+
                             lock (DriverAdapter)
+                            {
                                 switch (TagCollection.Tags[tagName].DataType)
                                 {
                                     case DataTypes.Bit:
@@ -419,14 +455,14 @@ namespace AdvancedScada.Siemens.Core
                                     default:
                                         break;
                                 }
-
+                            }
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             finally
             {

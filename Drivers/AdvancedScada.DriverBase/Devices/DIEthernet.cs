@@ -39,8 +39,8 @@ namespace AdvancedScada.DriverBase.Devices
         [Browsable(true)]
         public short Port
         {
-            get { return _Port; }
-            set { _Port = value; }
+            get => _Port;
+            set => _Port = value;
         }
 
         [DisplayName("IPAddress")]
@@ -49,8 +49,8 @@ namespace AdvancedScada.DriverBase.Devices
         [Browsable(true)]
         public string IPAddress
         {
-            get { return _IPAddress; }
-            set { _IPAddress = value; }
+            get => _IPAddress;
+            set => _IPAddress = value;
         }
 
     }

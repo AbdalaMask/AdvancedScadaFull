@@ -22,10 +22,10 @@ namespace AdvancedScada.Studio.Editors
 
         public Management.Editors.XChannelForm GetForm(string Path, Channel ch, ChannelService objChannelManager, string classname)
         {
-            var objFunctions = GetIODriver.GetFunctions();
-            var context = objFunctions.ParseNamespace($@"\AdvancedScada.{Path}.Core.dll", classname);
-            var t = (Type)context;
-            var ctrl = (Management.Editors.XChannelForm)objFunctions.CreateInstance(t, new object[] { Path, objChannelManager, ch });
+            GetIODriver objFunctions = GetIODriver.GetFunctions();
+            object context = objFunctions.ParseNamespace($@"\AdvancedScada.{Path}.Core.dll", classname);
+            Type t = (Type)context;
+            Management.Editors.XChannelForm ctrl = (Management.Editors.XChannelForm)objFunctions.CreateInstance(t, new object[] { Path, objChannelManager, ch });
             ctrl.eventChannelChanged += (chCurrent, isNew) =>
             {
                 eventChannelChanged?.Invoke(chCurrent, isNew);
@@ -50,11 +50,11 @@ namespace AdvancedScada.Studio.Editors
 
         public Management.Editors.XDeviceForm GetForm(string Path, Channel chParam, Device dvPara, string classname)
         {
-            var objFunctions = GetIODriver.GetFunctions();
-            var context = objFunctions.ParseNamespace($@"\AdvancedScada.{Path}.Core.dll", classname);
-            var t = (Type)context;
+            GetIODriver objFunctions = GetIODriver.GetFunctions();
+            object context = objFunctions.ParseNamespace($@"\AdvancedScada.{Path}.Core.dll", classname);
+            Type t = (Type)context;
 
-            var newObject = (Management.Editors.XDeviceForm)objFunctions.CreateInstance(t, new object[] { chParam, dvPara });
+            Management.Editors.XDeviceForm newObject = (Management.Editors.XDeviceForm)objFunctions.CreateInstance(t, new object[] { chParam, dvPara });
             newObject.eventDeviceChanged += (dv, isNew) =>
             {
                 eventDeviceChanged?.Invoke(dv, isNew);
@@ -79,11 +79,11 @@ namespace AdvancedScada.Studio.Editors
 
         public Management.Editors.XDataBlockForm GetForm(string Path, Channel chParam, Device dvParam, DataBlock dbParam, string classname)
         {
-            var objFunctions = GetIODriver.GetFunctions();
-            var context = objFunctions.ParseNamespace($@"\AdvancedScada.{Path}.Core.dll", classname);
-            var t = (Type)context;
+            GetIODriver objFunctions = GetIODriver.GetFunctions();
+            object context = objFunctions.ParseNamespace($@"\AdvancedScada.{Path}.Core.dll", classname);
+            Type t = (Type)context;
 
-            var newObject = (Management.Editors.XDataBlockForm)objFunctions.CreateInstance(t, new object[] { chParam, dvParam, dbParam });
+            Management.Editors.XDataBlockForm newObject = (Management.Editors.XDataBlockForm)objFunctions.CreateInstance(t, new object[] { chParam, dvParam, dbParam });
             newObject.eventDataBlockChanged += (db, isNew) =>
             {
                 eventDataBlockChanged?.Invoke(db, isNew);
@@ -108,11 +108,11 @@ namespace AdvancedScada.Studio.Editors
 
         public Management.Editors.XTagForm GetForm(string Path, Channel chParam, Device dvParam, DataBlock dbParam, Tag tgParam, string classname)
         {
-            var objFunctions = GetIODriver.GetFunctions();
-            var context = objFunctions.ParseNamespace($@"\AdvancedScada.{Path}.Core.dll", classname);
-            var t = (Type)context;
+            GetIODriver objFunctions = GetIODriver.GetFunctions();
+            object context = objFunctions.ParseNamespace($@"\AdvancedScada.{Path}.Core.dll", classname);
+            Type t = (Type)context;
 
-            var newObject = (Management.Editors.XTagForm)objFunctions.CreateInstance(t, new object[] { chParam, dvParam, dbParam, tgParam });
+            Management.Editors.XTagForm newObject = (Management.Editors.XTagForm)objFunctions.CreateInstance(t, new object[] { chParam, dvParam, dbParam, tgParam });
             newObject.eventTagChanged += (tg, isNew) =>
             {
                 eventTagChanged?.Invoke(tg, isNew);

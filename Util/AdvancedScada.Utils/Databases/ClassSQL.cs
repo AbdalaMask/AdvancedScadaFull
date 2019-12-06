@@ -13,29 +13,36 @@ namespace AdvancedScada.Utils.Databases
 
         public void FillComboServers(ComboBox Combo)
         {
-            var SqlEnumerator = SqlDataSourceEnumerator.Instance;
-            var dTable = SqlEnumerator.GetDataSources();
-            foreach (DataRow Dr in dTable.Rows) Combo.Items.Add(Dr[0]);
+            SqlDataSourceEnumerator SqlEnumerator = SqlDataSourceEnumerator.Instance;
+            DataTable dTable = SqlEnumerator.GetDataSources();
+            foreach (DataRow Dr in dTable.Rows)
+            {
+                Combo.Items.Add(Dr[0]);
+            }
         }
 
         public List<string> GetSQLInstances()
         {
-            var Instances = new List<string>();
-            var s = SqlDataSourceEnumerator.Instance;
-            var ta = s.GetDataSources();
-            foreach (DataRow row in ta.Rows) Instances.Add(row[1].ToString());
+            List<string> Instances = new List<string>();
+            SqlDataSourceEnumerator s = SqlDataSourceEnumerator.Instance;
+            DataTable ta = s.GetDataSources();
+            foreach (DataRow row in ta.Rows)
+            {
+                Instances.Add(row[1].ToString());
+            }
+
             return Instances;
         }
 
         public static void CREATE_DATABASE(string connectionstring, string Databasename)
         {
-            var strSQL = $"CREATE DATABASE {Databasename}";
-            var stringconnectionstring =
+            string strSQL = $"CREATE DATABASE {Databasename}";
+            string stringconnectionstring =
                 $"Server={connectionstring};DataBase=master;Integrated Security=SSPI";
-            var northwindConnection = new SqlConnection(stringconnectionstring);
+            SqlConnection northwindConnection = new SqlConnection(stringconnectionstring);
 
             // A SqlCommand object is used to execute the SQL commands. 
-            var cmd = new SqlCommand(strSQL, northwindConnection);
+            SqlCommand cmd = new SqlCommand(strSQL, northwindConnection);
             northwindConnection.Open();
             cmd.ExecuteNonQuery();
             northwindConnection.Close();
@@ -43,10 +50,10 @@ namespace AdvancedScada.Utils.Databases
 
         public static void CREATE_TABLE(string connectionstring, string Databasename, string strSQL)
         {
-            var stringconnectionstring = $"Server={connectionstring};DataBase={Databasename};Integrated Security=SSPI";
-            var northwindConnection = new SqlConnection(stringconnectionstring);
+            string stringconnectionstring = $"Server={connectionstring};DataBase={Databasename};Integrated Security=SSPI";
+            SqlConnection northwindConnection = new SqlConnection(stringconnectionstring);
             // A SqlCommand object is used to execute the SQL commands. 
-            var cmd = new SqlCommand(strSQL, northwindConnection);
+            SqlCommand cmd = new SqlCommand(strSQL, northwindConnection);
             northwindConnection.Open();
             cmd.ExecuteNonQuery();
             northwindConnection.Close();
@@ -54,16 +61,18 @@ namespace AdvancedScada.Utils.Databases
 
         public void CREATE_PROCEDURE(string stringconnectionstring)
         {
-            var northwindConnection = new SqlConnection(stringconnectionstring);
+            SqlConnection northwindConnection = new SqlConnection(stringconnectionstring);
             northwindConnection.Open();
-            var strSQL = string.Empty;
-            var cmd = new SqlCommand(strSQL, northwindConnection);
-            cmd.CommandText = "CREATE PROCEDURE AddSeafood AS" + Environment.NewLine +
+            string strSQL = string.Empty;
+            SqlCommand cmd = new SqlCommand(strSQL, northwindConnection)
+            {
+                CommandText = "CREATE PROCEDURE AddSeafood AS" + Environment.NewLine +
                               "INSERT INTO NW_Seafood" + Environment.NewLine +
                               "(ProductID, ProductName, QuantityPerUnit, UnitPrice)" +
                               "SELECT ProductID, ProductName, QuantityPerUnit, UnitPrice " +
                               "FROM Northwind.dbo.Products " +
-                              "WHERE CategoryID = 8";
+                              "WHERE CategoryID = 8"
+            };
 
             cmd.ExecuteNonQuery();
             northwindConnection.Close();
@@ -71,9 +80,9 @@ namespace AdvancedScada.Utils.Databases
 
         public static byte[] GetPhoto(string FilePath)
         {
-            var Fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read);
-            var Br = new BinaryReader(Fs);
-            var Photo = Br.ReadBytes((int)Fs.Length);
+            FileStream Fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read);
+            BinaryReader Br = new BinaryReader(Fs);
+            byte[] Photo = Br.ReadBytes((int)Fs.Length);
             Br.Close();
             Fs.Close();
             return Photo;
@@ -82,17 +91,17 @@ namespace AdvancedScada.Utils.Databases
 
         public void CreateDatabase(string connString, string dbName, bool dropExistent = true)
         {
-            var cn = new SqlConnection(connString);
+            SqlConnection cn = new SqlConnection(connString);
             try
             {
                 // the command for creating the DB 
-                var cmdCreate = new SqlCommand("CREATE DATABASE [" + dbName + "]", cn);
+                SqlCommand cmdCreate = new SqlCommand("CREATE DATABASE [" + dbName + "]", cn);
 
                 cn.Open();
                 if (dropExistent)
                 {
                     // drop the existent DB with the same name 
-                    var cmdDrop =
+                    SqlCommand cmdDrop =
                         new SqlCommand(
                             "IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = @name ) DROP DATABASE [" +
                             dbName + "]", cn);
@@ -112,13 +121,13 @@ namespace AdvancedScada.Utils.Databases
 
         public void DropDataBase(string constring, string DbName, bool DropExistent = true)
         {
-            var cn = new SqlConnection(constring);
+            SqlConnection cn = new SqlConnection(constring);
             try
             {
                 cn.Open();
                 if (DropExistent)
                 {
-                    var cmd = new SqlCommand(
+                    SqlCommand cmd = new SqlCommand(
                         "IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = @name)  DROP DATABASE [" +
                         DbName + "]", cn);
 
@@ -144,7 +153,7 @@ namespace AdvancedScada.Utils.Databases
 
         public static string GetServerConnectionString(string teServer)
         {
-            var connectionString = $"data source={teServer};integrated security=SSPI";
+            string connectionString = $"data source={teServer};integrated security=SSPI";
             //if (radioGroup1.SelectedIndex == 1)
             //    connectionString = String.Format("data source={0};user id={1};password={2}", Settings.Default.teServer, Settings.Default.teLogin, Settings.Default.tePassword);
             return connectionString;
@@ -154,8 +163,8 @@ namespace AdvancedScada.Utils.Databases
 
         public List<string> AddDatabaseNames(string teServer)
         {
-            var cbDatabase = new List<string>();
-            using (var connection = new SqlConnection(GetServerConnectionString(teServer)))
+            List<string> cbDatabase = new List<string>();
+            using (SqlConnection connection = new SqlConnection(GetServerConnectionString(teServer)))
             {
                 try
                 {
@@ -166,16 +175,18 @@ namespace AdvancedScada.Utils.Databases
                     return null;
                 }
 
-                using (var command = new SqlCommand("select name from master..sysdatabases", connection))
+                using (SqlCommand command = new SqlCommand("select name from master..sysdatabases", connection))
                 {
-                    using (var reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
                         cbDatabase.Clear();
                         while (reader.Read())
                         {
-                            var name = reader.GetString(0);
+                            string name = reader.GetString(0);
                             if ("master;model;tempdb;msdb;pubs".IndexOf(name) < 0)
+                            {
                                 cbDatabase.Add(name);
+                            }
                         }
                     }
                 }
@@ -196,10 +207,10 @@ namespace AdvancedScada.Utils.Databases
             string connetionString = null;
             SqlConnection connection;
             SqlCommand command;
-            var adapter = new SqlDataAdapter();
-            var ds = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            DataTable ds = new DataTable();
             string sql = null;
-            var i = 0;
+            int i = 0;
             connetionString = $"Data Source={teServer};Initial Catalog={Databasename};Integrated Security=True";
             sql = "Select DISTINCT(name) FROM sys.Tables";
 
@@ -219,7 +230,7 @@ namespace AdvancedScada.Utils.Databases
                 for (i = 0; i <= ds.Rows.Count - 1; i++)
                 {
                     //Add Rows
-                    var drow = dtable.NewRow();
+                    DataRow drow = dtable.NewRow();
                     drow["TableNameID"] = i + 1;
                     drow["TableName"] = ds.Rows[i].ItemArray[0].ToString();
                     dtable.Rows.Add(drow);
@@ -230,7 +241,7 @@ namespace AdvancedScada.Utils.Databases
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return dtable;
         }
@@ -241,8 +252,8 @@ namespace AdvancedScada.Utils.Databases
             string connetionString = null;
             SqlConnection sqlCnn;
             SqlCommand command;
-            var adapter = new SqlDataAdapter();
-            var ds = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            DataTable ds = new DataTable();
 
             string sql = null;
             connetionString = $"Data Source={teServer};Initial Catalog={Databasename};Integrated Security=True";
@@ -263,7 +274,7 @@ namespace AdvancedScada.Utils.Databases
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return ds;
         }
@@ -284,17 +295,17 @@ namespace AdvancedScada.Utils.Databases
             {
                 sqlCnn.Open();
                 sqlCmd = new SqlCommand(sql, sqlCnn);
-                var sqlReader = sqlCmd.ExecuteReader();
+                SqlDataReader sqlReader = sqlCmd.ExecuteReader();
                 schemaTable = sqlReader.GetSchemaTable();
 
                 foreach (DataRow row in schemaTable.Rows)
+                {
                     foreach (DataColumn column in schemaTable.Columns)
                     {
-                        var Columnstr = $"{column.ColumnName}  =   {row[column]}";
+                        string Columnstr = $"{column.ColumnName}  =   {row[column]}";
                         List.Add(Columnstr);
                     }
-
-
+                }
 
                 sqlReader.Close();
                 sqlCmd.Dispose();
@@ -304,7 +315,7 @@ namespace AdvancedScada.Utils.Databases
             catch (Exception ex)
             {
 
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
             return schemaTable;
         }
@@ -320,13 +331,13 @@ namespace AdvancedScada.Utils.Databases
                 dtable.Columns.Add("DBID", typeof(short));
                 dtable.Columns.Add("DatabaseName", typeof(string));
                 dtable.Columns.Add("State", typeof(string));
-                var connetionString = GetServerConnectionString(teServer);
+                string connetionString = GetServerConnectionString(teServer);
                 SqlConnection connection;
                 SqlCommand command;
-                var adapter = new SqlDataAdapter();
-                var ds = new DataTable();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                DataTable ds = new DataTable();
                 string sql = null;
-                var i = 0;
+                int i = 0;
                 // DBListLookUpEdit.Items.Clear();
                 connection = new SqlConnection(connetionString);
                 sql = "Select DISTINCT(name) FROM sys.databases";
@@ -342,7 +353,7 @@ namespace AdvancedScada.Utils.Databases
                 for (i = 0; i <= ds.Rows.Count - 1; i++)
                 {
                     //Add Rows
-                    var drow = dtable.NewRow();
+                    DataRow drow = dtable.NewRow();
                     drow["DBID"] = i + 1;
                     drow["DatabaseName"] = ds.Rows[i].ItemArray[0].ToString();
                     drow["State"] = "Open";
@@ -365,8 +376,8 @@ namespace AdvancedScada.Utils.Databases
             string connetionString = null;
             SqlConnection connection;
             SqlCommand command;
-            var adapter = new SqlDataAdapter();
-            var ds = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            DataTable ds = new DataTable();
             string sql = null;
 
 
@@ -413,7 +424,7 @@ namespace AdvancedScada.Utils.Databases
             SqlConnection sqlCnn;
             SqlCommand sqlCmd;
             string sql = null;
-            var ds = new DataTable();
+            DataTable ds = new DataTable();
             connetionString = $"Data Source={teServer};Initial Catalog={DBListLookUpEdit};Integrated Security=True";
             sql = $"Select * from {TableNamesListBox}";
 
@@ -422,13 +433,13 @@ namespace AdvancedScada.Utils.Databases
             {
                 sqlCnn.Open();
                 sqlCmd = new SqlCommand(sql, sqlCnn);
-                var sqlReader = sqlCmd.ExecuteReader();
+                SqlDataReader sqlReader = sqlCmd.ExecuteReader();
                 ds = sqlReader.GetSchemaTable();
 
                 foreach (DataRow row in ds.Rows)
                 {
                     //Add Rows
-                    var drow = dtable.NewRow();
+                    DataRow drow = dtable.NewRow();
                     drow["ColumnName"] = row["ColumnName"].ToString();
                     drow["DataType"] = row["DataTypeName"].ToString();
                     drow["MaxLength"] = row["ColumnSize"].ToString();

@@ -14,7 +14,7 @@ namespace HslScada.Studio.Tools
         private void UserPropertyGrid_Load(object sender, EventArgs e)
         {
             XCollection.EventPvGridChannelGet += EventPvGridChannel;
-            
+
         }
 
 

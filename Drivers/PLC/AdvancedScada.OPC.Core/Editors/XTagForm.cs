@@ -15,10 +15,10 @@ namespace AdvancedScada.OPC.Core.Editors
         public XTagForm(Channel chParam, Device dvParam, DataBlock dbParam, Tag tgParam = null)
         {
             InitializeComponent();
-            this.dv = dvParam;
-            this.db = dbParam;
-            this.ch = chParam;
-            this.tg = tgParam;
+            dv = dvParam;
+            db = dbParam;
+            ch = chParam;
+            tg = tgParam;
         }
         public string GetIDTag()
         {
@@ -30,17 +30,22 @@ namespace AdvancedScada.OPC.Core.Editors
             {
                 if (tg == null)
                 {
-                    Tag newTg = new Tag();
-                    newTg.ChannelId = int.Parse(txtChannelId.Text);
-                    newTg.DeviceId = int.Parse(txtDeviceId.Text);
-                    newTg.DataBlockId = int.Parse(txtDataBlockId.Text);
-                    newTg.TagId = db.Tags.Count + 1;
-                    newTg.TagName = txtTagName.Text;
-                    newTg.Address = txtAddress.Text;
-                    newTg.Description = txtDesc.Text;
-                    newTg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString());
+                    Tag newTg = new Tag
+                    {
+                        ChannelId = int.Parse(txtChannelId.Text),
+                        DeviceId = int.Parse(txtDeviceId.Text),
+                        DataBlockId = int.Parse(txtDataBlockId.Text),
+                        TagId = db.Tags.Count + 1,
+                        TagName = txtTagName.Text,
+                        Address = txtAddress.Text,
+                        Description = txtDesc.Text,
+                        DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString())
+                    };
 
-                    if (eventTagChanged != null) eventTagChanged(newTg, true);
+                    if (eventTagChanged != null)
+                    {
+                        eventTagChanged(newTg, true);
+                    }
                 }
                 else
                 {
@@ -52,14 +57,16 @@ namespace AdvancedScada.OPC.Core.Editors
                     tg.Description = txtDesc.Text;
                     tg.DataType = (DataTypes)System.Enum.Parse(typeof(DataTypes), cboxDataType.SelectedItem.ToString());
 
-                    if (eventTagChanged != null) eventTagChanged(tg, false);
-
+                    if (eventTagChanged != null)
+                    {
+                        eventTagChanged(tg, false);
+                    }
                 }
                 Close();
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
         }
@@ -69,10 +76,10 @@ namespace AdvancedScada.OPC.Core.Editors
             try
             {
 
-                cboxDataType.SelectedItem = $"{this.db.DataType}";
-                this.txtChannelName.Text = this.ch.ChannelName;
-                this.txtDeviceName.Text = this.dv.DeviceName;
-                this.txtDataBlock.Text = this.db.DataBlockName;
+                cboxDataType.SelectedItem = $"{db.DataType}";
+                txtChannelName.Text = ch.ChannelName;
+                txtDeviceName.Text = dv.DeviceName;
+                txtDataBlock.Text = db.DataBlockName;
                 txtChannelId.Text = ch.ChannelId.ToString();
                 txtDeviceId.Text = Convert.ToString(ch.Devices.Count);
                 txtDataBlockId.Text = Convert.ToString(db.DataBlockId);
@@ -80,7 +87,7 @@ namespace AdvancedScada.OPC.Core.Editors
                 if (tg == null)
                 {
 
-                    this.Text = "Add Tag";
+                    Text = "Add Tag";
                     txtTagId.Text = GetIDTag();
                 }
                 else
@@ -88,7 +95,7 @@ namespace AdvancedScada.OPC.Core.Editors
 
 
 
-                    this.Text = "Edit Tag";
+                    Text = "Edit Tag";
                     txtTagId.Text = tg.TagId.ToString();
                     txtAddress.Text = tg.Address;
                     txtAddress.Enabled = true;
@@ -99,7 +106,7 @@ namespace AdvancedScada.OPC.Core.Editors
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 

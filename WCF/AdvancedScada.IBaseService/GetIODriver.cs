@@ -16,7 +16,10 @@ namespace AdvancedScada.IBaseService
         {
             lock (mutex)
             {
-                if (_instance == null) _instance = new GetIODriver();
+                if (_instance == null)
+                {
+                    _instance = new GetIODriver();
+                }
             }
 
             return _instance;
@@ -34,7 +37,7 @@ namespace AdvancedScada.IBaseService
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
             return iODriver;
@@ -46,14 +49,14 @@ namespace AdvancedScada.IBaseService
             try
             {
                 // قراءة مصفوفة  البايت الخاصة بالمشروع الثاني
-                var buffer = Application.StartupPath + Path;
+                string buffer = Application.StartupPath + Path;
 
                 // تحميل الملف
-                var dll = Assembly.LoadFile(buffer);
+                Assembly dll = Assembly.LoadFile(buffer);
 
                 // تعريف متغير يعبر عن اسم الكلاس في المشروع الثاني شاملا الاسم الخاص بفضاء الأسماء الموجود بها الكلاس
-                var dllName = NameSpaceAndClass;
-                var t = dll.GetType(dllName);
+                string dllName = NameSpaceAndClass;
+                Type t = dll.GetType(dllName);
                 // أخيرا نحصل علي الواجهة كالتالي
                 iODriver = (IODriver)Activator.CreateInstance(t);
 
@@ -61,7 +64,7 @@ namespace AdvancedScada.IBaseService
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
 
@@ -71,61 +74,84 @@ namespace AdvancedScada.IBaseService
         #region CreateInstance
         public static T CreateInstance<T>(params object[] Params) where T : class // params keyword for array
         {
-            var argTypes = new List<Type>();
+            List<Type> argTypes = new List<Type>();
 
             //used .GetType() method to get the appropriate type
             //Param can be null so handle accordingly
-            foreach (var Param in Params)
-                argTypes.Add((Param ?? new object()).GetType());
-            var Types = typeof(T).GetConstructors();
-            foreach (var node in Types)
+            foreach (object Param in Params)
             {
-                var Args = node.GetParameters();
+                argTypes.Add((Param ?? new object()).GetType());
+            }
+
+            ConstructorInfo[] Types = typeof(T).GetConstructors();
+            foreach (ConstructorInfo node in Types)
+            {
+                ParameterInfo[] Args = node.GetParameters();
                 if (Params.Length == Args.Length)
                 {
-                    var cond = new bool[Params.Length];
+                    bool[] cond = new bool[Params.Length];
                     //handle derived types
-                    for (var i = 0; i < Params.Length; i++)
+                    for (int i = 0; i < Params.Length; i++)
+                    {
                         if (Args[i].ParameterType.IsAssignableFrom(argTypes[i]))
+                        {
                             cond[i] = true;
+                        }
+                    }
+
                     if (cond[0] && cond[1])
+                    {
                         return (T)node.Invoke(Params);
+                    }
                 }
             }
             return default(T);
         }
         public object ParseNamespace(string Path, string classname) //Looks up class in System.dll
         {
-            var DotNetPath = Application.StartupPath + Path;
-            var Asm = Assembly.LoadFile(DotNetPath);
-            var Types = Asm.GetExportedTypes();
-            foreach (var Node in Types)
+            string DotNetPath = Application.StartupPath + Path;
+            Assembly Asm = Assembly.LoadFile(DotNetPath);
+            Type[] Types = Asm.GetExportedTypes();
+            foreach (Type Node in Types)
+            {
                 if (Node.Name == classname)
+                {
                     return Node;
+                }
+            }
+
             return null;
         }
         public object CreateInstance(Type pContext, object[] Params)
         {
-            var argTypes = new List<Type>();
+            List<Type> argTypes = new List<Type>();
 
             //used .GetType() method to get the appropriate type
             //Param can be null so handle accordingly
             if (Params != null)
-                foreach (var Param in Params)
-                    if (Param != null)
-                        argTypes.Add(Param.GetType());
-                    else
-                        argTypes.Add(null);
-
-            var Types = pContext.GetConstructors();
-            foreach (var node in Types)
             {
-                var Args = node.GetParameters();
+                foreach (object Param in Params)
+                {
+                    if (Param != null)
+                    {
+                        argTypes.Add(Param.GetType());
+                    }
+                    else
+                    {
+                        argTypes.Add(null);
+                    }
+                }
+            }
+
+            ConstructorInfo[] Types = pContext.GetConstructors();
+            foreach (ConstructorInfo node in Types)
+            {
+                ParameterInfo[] Args = node.GetParameters();
                 // Params can be null for default constructors so use argTypes
                 if (argTypes.Count == Args.Length)
                 {
-                    var areTypesCompatible = true;
-                    for (var i = 0; i < Params.Length; i++)
+                    bool areTypesCompatible = true;
+                    for (int i = 0; i < Params.Length; i++)
                     {
                         if (argTypes[i] == null)
                         {
@@ -147,7 +173,9 @@ namespace AdvancedScada.IBaseService
                         }
                     }
                     if (areTypesCompatible)
+                    {
                         return node.Invoke(Params);
+                    }
                 }
             }
 

@@ -28,7 +28,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressVisible
         {
-            get { return m_PLCAddressVisible; }
+            get => m_PLCAddressVisible;
             set
             {
                 if (m_PLCAddressVisible != value)
@@ -40,8 +40,12 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
 
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
-                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
@@ -62,7 +66,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressValue
         {
-            get { return m_PLCAddressValue; }
+            get => m_PLCAddressValue;
             set
             {
                 if (m_PLCAddressValue != value)
@@ -73,8 +77,12 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressValue) || string.IsNullOrWhiteSpace(m_PLCAddressValue) ||
-                            Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
+                            Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -88,10 +96,13 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressKeypad
         {
-            get { return m_PLCAddressKeypad; }
+            get => m_PLCAddressKeypad;
             set
             {
-                if (m_PLCAddressKeypad != value) m_PLCAddressKeypad = value;
+                if (m_PLCAddressKeypad != value)
+                {
+                    m_PLCAddressKeypad = value;
+                }
             }
         }
         [Category("PLC Properties")]
@@ -124,7 +135,10 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
                 }
 
                 //* Save the text to return to
-                if (!ErrorDisplayTime.Enabled) OriginalText = Text;
+                if (!ErrorDisplayTime.Enabled)
+                {
+                    OriginalText = Text;
+                }
 
                 ErrorDisplayTime.Enabled = true;
 
@@ -167,24 +181,24 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
 
         public Color KeypadFontColor
         {
-            get { return m_KeypadFontColor; }
-            set { m_KeypadFontColor = value; }
+            get => m_KeypadFontColor;
+            set => m_KeypadFontColor = value;
         }
 
         private int m_KeypadWidth = 300;
 
         public int KeypadWidth
         {
-            get { return m_KeypadWidth; }
-            set { m_KeypadWidth = value; }
+            get => m_KeypadWidth;
+            set => m_KeypadWidth = value;
         }
 
         private double m_KeypadScaleFactor = 1;
 
         public double KeypadScaleFactor
         {
-            get { return m_KeypadScaleFactor; }
-            set { m_KeypadScaleFactor = value; }
+            get => m_KeypadScaleFactor;
+            set => m_KeypadScaleFactor = value;
         }
 
         public double KeypadMinValue { get; set; }
@@ -201,6 +215,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
             else if (e.Key == "Enter")
             {
                 if (KeypadPopUp.Value != null && string.Compare(KeypadPopUp.Value, string.Empty) != 0)
+                {
                     try
                     {
                         Utilities.Write(m_PLCAddressKeypad, KeypadPopUp.Value);
@@ -209,6 +224,7 @@ namespace AdvancedScada.Controls_Binding.SevenSegment
                     {
                         Utilities.DisplayError(this, "Failed to write value. " + ex.Message);
                     }
+                }
 
                 KeypadPopUp.Visible = false;
             }

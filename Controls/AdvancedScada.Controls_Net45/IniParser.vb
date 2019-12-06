@@ -2,7 +2,6 @@
 Option Explicit On
 
 Imports System.IO
-Imports System.Collections
 '*************************************************************************************
 '* Adapted from http://bytes.com/topic/net/insights/797169-reading-parsing-ini-file-c
 '*************************************************************************************
@@ -114,7 +113,7 @@ Public Class IniParser
     Public Function GetSetting(sectionName As String, settingName As String) As String
         Dim sectionPair As SectionPair
 
-        If sectionName Is Nothing Then sectionName = ""
+        If sectionName Is Nothing Then sectionName = String.Empty
         If String.IsNullOrEmpty(settingName) Then
             Throw New ArgumentException("Setting name cannot be null.")
         End If
@@ -132,7 +131,7 @@ Public Class IniParser
     'End Function
 
     Public Function ListSettings(sectionName As String) As String()
-        If sectionName Is Nothing Then sectionName = ""
+        If sectionName Is Nothing Then sectionName = String.Empty
         Dim tmpArray As New List(Of String)
 
         For Each pair As SectionPair In keyPairs.Keys
@@ -167,7 +166,7 @@ Public Class IniParser
             Throw New System.ArgumentNullException("settingName")
         End If
 
-        If sectionName Is Nothing Then sectionName = ""
+        If sectionName Is Nothing Then sectionName = String.Empty
 
         Dim sectionPair As SectionPair
         sectionPair.Section = sectionName.ToUpper(Globalization.CultureInfo.CurrentCulture)
@@ -195,8 +194,8 @@ Public Class IniParser
     ''' <param name="sectionName">Section to add under.</param>
     ''' <param name="settingName">Key name to add.</param>
     Public Sub DeleteSetting(sectionName As String, settingName As String)
-        If sectionName Is Nothing Then sectionName = ""
-        If settingName Is Nothing Then settingName = ""
+        If sectionName Is Nothing Then sectionName = String.Empty
+        If settingName Is Nothing Then settingName = String.Empty
         Dim sectionPair As SectionPair
         sectionPair.Section = sectionName.ToUpper(Globalization.CultureInfo.CurrentCulture)
         sectionPair.SettingName = settingName.ToUpper(Globalization.CultureInfo.CurrentCulture)
@@ -212,8 +211,8 @@ Public Class IniParser
     ''' <param name="newFilePath">New file path.</param>
     Public Sub SaveSettings(newFilePath As String)
         Dim sections As New ArrayList()
-        Dim tmpValue As String = ""
-        Dim strToSave As String = ""
+        Dim tmpValue As String = String.Empty
+        Dim strToSave As String = String.Empty
 
         For Each sectionPair As SectionPair In keyPairs.Keys
             If Not sections.Contains(sectionPair.Section) Then
@@ -226,7 +225,7 @@ Public Class IniParser
 
             For Each sectionPair As SectionPair In keyPairs.Keys
                 If sectionPair.Section = section Then
-                    tmpValue = DirectCast(keyPairs(sectionPair), String)
+                    tmpValue = keyPairs(sectionPair)
 
                     If tmpValue IsNot Nothing Then
                         tmpValue = sectionPair.SettingName & "=" & tmpValue

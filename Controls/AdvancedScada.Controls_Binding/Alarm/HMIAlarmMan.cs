@@ -27,11 +27,14 @@ namespace AdvancedScada.Controls_Binding.Alarm
 
         public string GetValueByName(string name)
         {
-            var index = 0;
+            int index = 0;
             while (index < m_PLCAddressValueItems.Count)
             {
                 if (string.Compare(m_PLCAddressValueItems[index].Name, name, true) == 0)
+                {
                     return m_PLCAddressValueItems[index].LastValue;
+                }
+
                 index += 1;
             }
 
@@ -52,10 +55,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
 
         [Category("PLC Properties")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        public ObservableCollection<PLCAddressItem> PLCAddressValueItems
-        {
-            get { return m_PLCAddressValueItems; }
-        }
+        public ObservableCollection<PLCAddressItem> PLCAddressValueItems => m_PLCAddressValueItems;
 
         #endregion
 
@@ -65,7 +65,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
 
         public void GetWCF()
         {
-            var ic = new InstanceContext(this);
+            InstanceContext ic = new InstanceContext(this);
             XCollection.CURRENT_MACHINE = new Machine
             {
                 MachineName = Environment.MachineName,
@@ -101,9 +101,13 @@ namespace AdvancedScada.Controls_Binding.Alarm
         public static void listViewAddItem(ListView varListView, ListViewItem item)
         {
             if (varListView.InvokeRequired)
+            {
                 varListView.BeginInvoke(new MethodInvoker(() => listViewAddItem(varListView, item)));
+            }
             else
+            {
                 varListView.Items.Add(item);
+            }
         }
 
         //**************************************************
@@ -111,46 +115,64 @@ namespace AdvancedScada.Controls_Binding.Alarm
         //**************************************************
         private void SafeMethodTrue(string[] row0)
         {
-            var flag = false;
+            bool flag = false;
             string[] TagNameSub;
             string[] TagNameEnd;
             if (Items.Count > 0)
+            {
                 foreach (ListViewItem listViewItem in Items)
                 {
-                    if (listViewItem == null) break;
+                    if (listViewItem == null)
+                    {
+                        break;
+                    }
+
                     TagNameSub = listViewItem.SubItems[2].Text.Split(':', ' ', '.');
                     TagNameEnd = row0[2].Split(':', ' ', '.');
                     if (listViewItem.Text == row0[0] && TagNameEnd[2] == TagNameEnd[2])
                     {
                         listViewItem.ForeColor = Color.Red;
                         if (listViewItem.SubItems[1].Text != row0[1])
+                        {
                             listViewItem.SubItems[1].Text = row0[1];
+                        }
+
                         if (listViewItem.SubItems[2].Text != row0[2])
+                        {
                             listViewItem.SubItems[2].Text = row0[2];
+                        }
 
                         flag = true;
                     }
 
                     break;
                 }
+            }
 
             if (!flag)
             {
-                var Listitem = new ListViewItem(row0);
-                Listitem.ForeColor = Color.Red;
+                ListViewItem Listitem = new ListViewItem(row0)
+                {
+                    ForeColor = Color.Red
+                };
                 Items.Insert(0, Listitem);
             }
         }
 
         private void SafeMethodFalse(string[] row1)
         {
-            var flag = false;
+            bool flag = false;
             string[] TagNameSub;
             string[] TagNameEnd;
             if (Items.Count > 0)
+            {
                 foreach (ListViewItem listViewItem in Items)
                 {
-                    if (listViewItem == null) break;
+                    if (listViewItem == null)
+                    {
+                        break;
+                    }
+
                     TagNameSub = listViewItem.SubItems[2].Text.Split(':', ' ', '.');
                     TagNameEnd = row1[2].Split(':', ' ', '.');
 
@@ -158,18 +180,25 @@ namespace AdvancedScada.Controls_Binding.Alarm
                     {
                         listViewItem.ForeColor = Color.Green;
                         if (listViewItem.SubItems[1].Text != row1[1])
+                        {
                             listViewItem.SubItems[1].Text = row1[1];
+                        }
+
                         if (listViewItem.SubItems[2].Text != row1[2])
+                        {
                             listViewItem.SubItems[2].Text = row1[2];
+                        }
+
                         flag = true;
                     }
 
                     break;
                 }
+            }
 
             if (!flag)
             {
-                var Listitem = new ListViewItem(row1) { ForeColor = Color.Green };
+                ListViewItem Listitem = new ListViewItem(row1) { ForeColor = Color.Green };
                 Items.Insert(0, Listitem);
             }
         }
@@ -178,20 +207,29 @@ namespace AdvancedScada.Controls_Binding.Alarm
         {
             if (!DesignMode && IsHandleCreated)
             {
-                if (TagValue == null) return;
-                var List2 = TagValue
+                if (TagValue == null)
+                {
+                    return;
+                }
+
+                List<Tag> List2 = TagValue
                     .Where(item => m_PLCAddressValueItems.Any(item2 => item2.PLCAddress == item.TagName)).ToList();
                 string[] TagName;
-                for (var index1 = 0; index1 < List2.Count; index1++)
-                    for (var index = 0; index < m_PLCAddressValueItems.Count; index++)
+                for (int index1 = 0; index1 < List2.Count; index1++)
+                {
+                    for (int index = 0; index < m_PLCAddressValueItems.Count; index++)
                     {
-                        var LastValue = string.Empty;
+                        string LastValue = string.Empty;
                         TagName = m_PLCAddressValueItems[index].PLCAddress.Split('.');
 
                         if (string.Compare(List2[index1].TagName, TagName[0], true) == 0)
                         {
-                            if (List2[index1].Value == null) return;
-                            var ser = string.Empty;
+                            if (List2[index1].Value == null)
+                            {
+                                return;
+                            }
+
+                            string ser = string.Empty;
                             ser = string.Format("{0}", List2[index1].Value);
                             if (ser != m_PLCAddressValueItems[index].LastValue)
                             {
@@ -225,6 +263,7 @@ namespace AdvancedScada.Controls_Binding.Alarm
                             }
                         }
                     }
+                }
             }
         }
 

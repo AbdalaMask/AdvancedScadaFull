@@ -12,7 +12,10 @@ namespace AdvancedScada.Controls_Binding.Licenses
                     || Process.GetCurrentProcess().ProcessName == "VCSExpress"
                     || Process.GetCurrentProcess().ProcessName == "vbexpress"
                     || Process.GetCurrentProcess().ProcessName == "WDExpress")
+                {
                     return true;
+                }
+
                 return false;
             }
         }

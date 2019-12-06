@@ -21,9 +21,9 @@ namespace AdvancedScada.IBaseService
             objNetTcpBinding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
             objNetTcpBinding.ReceiveTimeout = TimeSpan.FromDays(7);
             objNetTcpBinding.SendTimeout = TimeSpan.FromDays(7);
-            objNetTcpBinding.MaxReceivedMessageSize = Int32.MaxValue;
-            objNetTcpBinding.MaxBufferPoolSize = Int32.MaxValue;
-            objNetTcpBinding.MaxBufferSize = Int32.MaxValue;
+            objNetTcpBinding.MaxReceivedMessageSize = int.MaxValue;
+            objNetTcpBinding.MaxBufferPoolSize = int.MaxValue;
+            objNetTcpBinding.MaxBufferSize = int.MaxValue;
             return objNetTcpBinding;
         }
 
@@ -35,10 +35,12 @@ namespace AdvancedScada.IBaseService
         {
             try
             {
-                WebHttpBinding objWebHttpBinding = new WebHttpBinding();
-                objWebHttpBinding.ReceiveTimeout = TimeSpan.FromHours(2);
-                objWebHttpBinding.SendTimeout = TimeSpan.FromHours(2);
-                objWebHttpBinding.MaxReceivedMessageSize = 2000000;
+                WebHttpBinding objWebHttpBinding = new WebHttpBinding
+                {
+                    ReceiveTimeout = TimeSpan.FromHours(2),
+                    SendTimeout = TimeSpan.FromHours(2),
+                    MaxReceivedMessageSize = 2000000
+                };
                 //objWebHttpBinding.Security.Mode = WebHttpSecurityMode.None;
                 return objWebHttpBinding;
             }
@@ -56,10 +58,12 @@ namespace AdvancedScada.IBaseService
         {
             try
             {
-                WSHttpBinding objWSHttpBinding = new WSHttpBinding();
-                objWSHttpBinding.ReceiveTimeout = TimeSpan.FromHours(2);
-                objWSHttpBinding.SendTimeout = TimeSpan.FromHours(2);
-                objWSHttpBinding.MaxReceivedMessageSize = 2000000;
+                WSHttpBinding objWSHttpBinding = new WSHttpBinding
+                {
+                    ReceiveTimeout = TimeSpan.FromHours(2),
+                    SendTimeout = TimeSpan.FromHours(2),
+                    MaxReceivedMessageSize = 2000000
+                };
                 //objWSHttpBinding.Security.Mode = SecurityMode.Message;
                 //objWSHttpBinding.Security.Message.ClientCredentialType = MessageCredentialType.Windows;
                 return objWSHttpBinding;
@@ -77,10 +81,12 @@ namespace AdvancedScada.IBaseService
             ServiceThrottlingBehavior serviceThrottlingBehavior = host.Description.Behaviors.Find<ServiceThrottlingBehavior>();
             if (serviceThrottlingBehavior == null)
             {
-                serviceThrottlingBehavior = new ServiceThrottlingBehavior();
-                serviceThrottlingBehavior.MaxConcurrentCalls = int.MaxValue;
-                serviceThrottlingBehavior.MaxConcurrentSessions = int.MaxValue;
-                serviceThrottlingBehavior.MaxConcurrentInstances = int.MaxValue;
+                serviceThrottlingBehavior = new ServiceThrottlingBehavior
+                {
+                    MaxConcurrentCalls = int.MaxValue,
+                    MaxConcurrentSessions = int.MaxValue,
+                    MaxConcurrentInstances = int.MaxValue
+                };
 
                 host.Description.Behaviors.Add(serviceThrottlingBehavior);
 

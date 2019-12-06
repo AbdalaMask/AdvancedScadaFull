@@ -9,19 +9,29 @@ namespace AdvancedScada.HMI.MainForm
     public partial class FRM_Advanced : KryptonForm
     {
         #region Filed
-        private SqlConnection con = new SqlConnection("Server=" + Properties.Settings.Default.Server + "; Database=" + Properties.Settings.Default.DataBase + "; Integrated Security=true");
+        private readonly SqlConnection con = new SqlConnection("Server=" + Properties.Settings.Default.Server + "; Database=" + Properties.Settings.Default.DataBase + "; Integrated Security=true");
         private SqlCommand cmd;
         public void GetSQLServer()
         {
-            var rk = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
-            var instances = (string[])rk.GetValue("InstalledInstances");
+            Microsoft.Win32.RegistryKey rk = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
+            string[] instances = (string[])rk.GetValue("InstalledInstances");
             if (instances != null)
+            {
                 if (instances.Length > 0)
-                    foreach (var element in instances)
+                {
+                    foreach (string element in instances)
+                    {
                         if (element == "MSSQLSERVER")
+                        {
                             cboxServer.Items.Add(Environment.MachineName);
+                        }
                         else
+                        {
                             cboxServer.Items.Add(Environment.MachineName + "\\" + element);
+                        }
+                    }
+                }
+            }
         }
         #endregion
         public FRM_Advanced()

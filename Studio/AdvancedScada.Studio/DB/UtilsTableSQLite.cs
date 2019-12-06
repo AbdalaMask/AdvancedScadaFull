@@ -18,7 +18,7 @@ namespace AdvancedScada.Studio.DB
 
 
             //Add Rows
-            var drow = dtable.NewRow();
+            DataRow drow = dtable.NewRow();
             drow["DBID"] = 1;
             drow["DatabaseName"] = System.IO.Path.GetFileNameWithoutExtension(teServer);
             drow["State"] = "Open";
@@ -30,8 +30,8 @@ namespace AdvancedScada.Studio.DB
         public static DataTable AddTableListBox(string DBListLookUpEdit)
         {
 
-            var adapter = new SQLiteDataAdapter();
-            var ds = new DataTable();
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter();
+            DataTable ds = new DataTable();
 
 
 
@@ -90,7 +90,7 @@ namespace AdvancedScada.Studio.DB
         /// <returns>True if the given table contains a column with the given name.</returns>
         public static DataTable ColumnExists(string tableName, string columnName)
         {
-            var ds = new DataTable();
+            DataTable ds = new DataTable();
             DataTable dtable;
             dtable = new DataTable("DatabaseName");
             //set columns names
@@ -106,20 +106,20 @@ namespace AdvancedScada.Studio.DB
             using (SQLiteConnection connection = new SQLiteConnection("data source=" + columnName))
             {
                 connection.Open();
-                var cmd = new SQLiteCommand("PRAGMA table_info(" + tableName + ")", connection);
-                var dr = cmd.ExecuteReader();
+                SQLiteCommand cmd = new SQLiteCommand("PRAGMA table_info(" + tableName + ")", connection);
+                SQLiteDataReader dr = cmd.ExecuteReader();
 
 
 
-                for (var i = 0; i < dr.FieldCount; i++)
+                for (int i = 0; i < dr.FieldCount; i++)
                 {
                     Console.WriteLine(dr.GetName(i));
                 }
                 while (dr.Read())//loop through the various columns and their info
                 {
-                    var value = dr.GetValue(4);//column 1 from the result contains the column names
+                    object value = dr.GetValue(4);//column 1 from the result contains the column names
                     //Add Rows
-                    var drow = dtable.NewRow();
+                    DataRow drow = dtable.NewRow();
                     drow["ColumnName"] = dr.GetValue(1).ToString();
                     drow["DataType"] = dr.GetValue(2).ToString();
                     drow["IsNullable"] = Convert.ToBoolean(dr.GetValue(3));

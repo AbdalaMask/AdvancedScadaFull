@@ -62,8 +62,7 @@ namespace AdvancedScada.Common
         {
             if (!string.IsNullOrWhiteSpace(address))
             {
-                IPAddress ip;
-                if (IPAddress.TryParse(address, out ip))
+                if (IPAddress.TryParse(address, out IPAddress ip))
                 {
                     return ip.AddressFamily == AddressFamily.InterNetworkV6;
                 }

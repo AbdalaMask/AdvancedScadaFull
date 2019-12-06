@@ -21,10 +21,13 @@ namespace AdvancedScada.Controls_Binding.DialogEditor
         public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
         {
             // Attempts to obtain an IWindowsFormsEditorService.
-            var edSvc = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
-            if (ReferenceEquals(edSvc, null)) return null;
+            IWindowsFormsEditorService edSvc = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
+            if (ReferenceEquals(edSvc, null))
+            {
+                return null;
+            }
 
-            var frm = new MainView();
+            MainView frm = new MainView();
             frm.OnImagSelected_Clicked += ImageName1 => { value = ImageName1; };
             frm.StartPosition = FormStartPosition.CenterScreen;
             frm.ShowDialog();
@@ -47,9 +50,13 @@ namespace AdvancedScada.Controls_Binding.DialogEditor
         public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
         {
             // Attempts to obtain an IWindowsFormsEditorService.
-            var edSvc = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
-            if (ReferenceEquals(edSvc, null)) return null;
-            var frm = new MainView();
+            IWindowsFormsEditorService edSvc = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
+            if (ReferenceEquals(edSvc, null))
+            {
+                return null;
+            }
+
+            MainView frm = new MainView();
             frm.OnImagSVGSelected_Clicked += ImageName1 => { value = ImageName1; };
             frm.StartPosition = FormStartPosition.CenterScreen;
             frm.ShowDialog();

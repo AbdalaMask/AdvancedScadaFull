@@ -81,7 +81,10 @@ namespace AdvancedScada.HMI.MainForm
                 //  MainForm frm = new MainForm();
                 MainForm form = Application.OpenForms["MainForm"] as MainForm;
                 if (form != null)
+                {
                     form.Focus();
+                }
+
                 Microsoft.Win32.Registry.SetValue("HKEY_CURRENT_USER\\Software\\TestApp", "Name", comBatchName.Text);
                 Microsoft.Win32.Registry.SetValue("HKEY_CURRENT_USER\\Software\\TestApp", "LBL_Name_Silo1", com_n_T1.Text);
                 Microsoft.Win32.Registry.SetValue("HKEY_CURRENT_USER\\Software\\TestApp", "LBL_Name_Silo2", com_n_T2.Text);
@@ -399,7 +402,11 @@ namespace AdvancedScada.HMI.MainForm
         {
             try
             {
-                if (comBatchName.Text == "System.Data.DataRowView") return;
+                if (comBatchName.Text == "System.Data.DataRowView")
+                {
+                    return;
+                }
+
                 Get_BatchsDetails(comBatchName);
             }
             catch (Exception ex)
@@ -424,7 +431,11 @@ namespace AdvancedScada.HMI.MainForm
             {
                 if (!DesignMode && IsHandleCreated)
                 {
-                    if (comBatchName.Text == "System.Data.DataRowView") return;
+                    if (comBatchName.Text == "System.Data.DataRowView")
+                    {
+                        return;
+                    }
+
                     if (SqlDb.Get_BatchsDetails(comBatchName.Text).Rows.Count > 0)
                     {
                         Tools.Tools.ListTankName.Clear();
@@ -486,7 +497,7 @@ namespace AdvancedScada.HMI.MainForm
                     return;
                 }
                 string sqlstr = "SELECT * FROM Batchs WHERE BatchName =@BatchName";
-                using (var cmd = new SqlCommand(sqlstr, SqlDb.con))
+                using (SqlCommand cmd = new SqlCommand(sqlstr, SqlDb.con))
                 {
                     cmd.Parameters.AddWithValue("@BatchName", SqlDbType.VarChar).Value = txt_BatchName.Text;
 

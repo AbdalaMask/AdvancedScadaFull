@@ -25,10 +25,10 @@ namespace AdvancedScada.Utils.Tools
     public class SymbolsList : ListView
     {
         public BackgroundWorker bgIconLoader = new BackgroundWorker();
-        ImageList il16 = new ImageList();
-        ImageList il32 = new ImageList();
-        List<ItemType> Paths = new List<ItemType>();
-        Win32 win32 = new Win32();
+        private readonly ImageList il16 = new ImageList();
+        private readonly ImageList il32 = new ImageList();
+        private readonly List<ItemType> Paths = new List<ItemType>();
+        private readonly Win32 win32 = new Win32();
         private bool use16 = true;
 
         public static GetSelectedPath eventSelectedPath;
@@ -69,7 +69,7 @@ namespace AdvancedScada.Utils.Tools
 
         private void bgIconLoader_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.Invoke(new MethodInvoker(delegate
+            Invoke(new MethodInvoker(delegate
             {
                 AutoColResize();
             }));
@@ -83,7 +83,7 @@ namespace AdvancedScada.Utils.Tools
                 string name = Path.GetFileName((string)e.UserState);
                 ListViewItem item = null;
 
-                this.Invoke(new MethodInvoker(delegate
+                Invoke(new MethodInvoker(delegate
                 {
                     item = FindItemWithText(name, false, 0, true);
                 }));
@@ -109,13 +109,13 @@ namespace AdvancedScada.Utils.Tools
             }
         }
 
-        void bgIconLoader_DoWork(object sender, DoWorkEventArgs e)
+        private void bgIconLoader_DoWork(object sender, DoWorkEventArgs e)
         {
             string fullname = string.Empty;
 
-            foreach (ItemType item in this.Paths)
+            foreach (ItemType item in Paths)
             {
-                if (this.bgIconLoader.CancellationPending)
+                if (bgIconLoader.CancellationPending)
                 {
                     e.Cancel = true;
                     return;
@@ -124,7 +124,7 @@ namespace AdvancedScada.Utils.Tools
                 #region // get associated icon
                 if (item.Type == Types.FOLDER)
                 {
-                    var icon = AdvancedScada.Utils.Properties.Resources.FolderOpen_32x32_72;
+                    Bitmap icon = AdvancedScada.Utils.Properties.Resources.FolderOpen_32x32_72;
                     DirectoryInfo di = (DirectoryInfo)item.ItemInfo;
                     if (use16)
                     {
@@ -135,7 +135,7 @@ namespace AdvancedScada.Utils.Tools
                     }
                     else
                     {
-                        this.Invoke(new MethodInvoker(delegate
+                        Invoke(new MethodInvoker(delegate
                         {
                             if (!il32.Images.ContainsKey(di.FullName))
                             {
@@ -154,16 +154,16 @@ namespace AdvancedScada.Utils.Tools
                     {
                         if (!il16.Images.ContainsKey(fi.FullName))
                         {
-                            il16.Images.Add(fi.FullName, this.win32.GetIcon(fi.FullName, true));
+                            il16.Images.Add(fi.FullName, win32.GetIcon(fi.FullName, true));
                         }
                     }
                     else
                     {
-                        this.Invoke(new MethodInvoker(delegate
+                        Invoke(new MethodInvoker(delegate
                         {
                             if (!il32.Images.ContainsKey(fi.FullName))
                             {
-                                il32.Images.Add(fi.FullName, this.win32.GetIcon(fi.FullName, false));
+                                il32.Images.Add(fi.FullName, win32.GetIcon(fi.FullName, false));
                             }
                         }));
                     }
@@ -177,14 +177,14 @@ namespace AdvancedScada.Utils.Tools
                 string name = Path.GetFileName(fullname);
                 ListViewItem lvItem = null;
 
-                this.Invoke(new MethodInvoker(delegate
+                Invoke(new MethodInvoker(delegate
                 {
                     lvItem = FindItemWithText(name, false, 0, true);
                 }));
 
                 if (lvItem != null)
                 {
-                    this.Invoke(new MethodInvoker(delegate
+                    Invoke(new MethodInvoker(delegate
                     {
                         lvItem.ImageKey = fullname;
 
@@ -202,26 +202,28 @@ namespace AdvancedScada.Utils.Tools
             }
         }
 
-        void FileFolderList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        private void FileFolderList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            if (this.SelectedItems.Count <= 0) { return; }
+            if (SelectedItems.Count <= 0) { return; }
 
             //try
             {
-                ListViewItem item = this.SelectedItems[0];
+                ListViewItem item = SelectedItems[0];
                 ItemType type = (ItemType)item.Tag;
 
                 if (type.Type == Types.FOLDER)
                 {
                     DirectoryInfo di = (DirectoryInfo)type.ItemInfo;
-                    this._SelectedPath = di.FullName;
+                    _SelectedPath = di.FullName;
                 }
                 else
                 {
                     FileInfo fi = (FileInfo)type.ItemInfo;
-                    this._SelectedPath = fi.FullName;
+                    _SelectedPath = fi.FullName;
                     if (eventSelectedPath != null)
+                    {
                         eventSelectedPath(fi.FullName);
+                    }
                 }
             }
             //catch { }
@@ -232,20 +234,23 @@ namespace AdvancedScada.Utils.Tools
         {
             try
             {
-                if (SelectedItems.Count <= 0) return;
+                if (SelectedItems.Count <= 0)
+                {
+                    return;
+                }
 
-                var thisItem = SelectedItems[0];
-                var type = (ItemType)thisItem.Tag;
+                ListViewItem thisItem = SelectedItems[0];
+                ItemType type = (ItemType)thisItem.Tag;
 
                 if (type.Type == Types.FOLDER)
                 {
-                    var di = (DirectoryInfo)type.ItemInfo;
+                    DirectoryInfo di = (DirectoryInfo)type.ItemInfo;
                     Browse(di.FullName);
                 }
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
         }
@@ -261,29 +266,31 @@ namespace AdvancedScada.Utils.Tools
                     use16 = false;
                 }
 
-                while (this.bgIconLoader.IsBusy)
+                while (bgIconLoader.IsBusy)
                 {
                     Application.DoEvents();
                 }
 
-                this.Paths.Clear();
-                this.Items.Clear();
+                Paths.Clear();
+                Items.Clear();
 
-                this.BeginUpdate();
+                BeginUpdate();
 
                 #region // add "back" item if necessary
 
                 if (_isSoloBrowser)
                 {
-                    var currentPath = new DirectoryInfo(path);
+                    DirectoryInfo currentPath = new DirectoryInfo(path);
                     if (currentPath.FullName.Length > 3)
                     {
 
-                        item = new ListViewItem("...", 0);
-                        item.Tag = new ItemType
+                        item = new ListViewItem("...", 0)
                         {
-                            ItemInfo = currentPath.Parent,
-                            Type = Types.FOLDER
+                            Tag = new ItemType
+                            {
+                                ItemInfo = currentPath.Parent,
+                                Type = Types.FOLDER
+                            }
                         };
 
                         Items.Add(item);
@@ -294,29 +301,32 @@ namespace AdvancedScada.Utils.Tools
 
                 #region // get folders
 
-                foreach (var folder in Directory.GetDirectories(path))
+                foreach (string folder in Directory.GetDirectories(path))
                 {
-                    var di = new DirectoryInfo(folder);
+                    DirectoryInfo di = new DirectoryInfo(folder);
 
                     if (di.Attributes.ToString().Contains("System"))
                     {
                         continue;
                     }
 
-                    item = new ListViewItem(di.Name);
-
-
-                    item.ImageKey = di.FullName;
-                    item.Tag = new ItemType
+                    item = new ListViewItem(di.Name)
                     {
-                        ItemInfo = di,
-                        Type = Types.FOLDER
+                        ImageKey = di.FullName,
+                        Tag = new ItemType
+                        {
+                            ItemInfo = di,
+                            Type = Types.FOLDER
+                        }
                     };
 
                     // add temp subitems if View was set to Details
                     //if (this.View == System.Windows.Forms.View.Details)
                     {
-                        for (var i = 0; i < Columns.Count; i++) item.SubItems.Add(string.Empty);
+                        for (int i = 0; i < Columns.Count; i++)
+                        {
+                            item.SubItems.Add(string.Empty);
+                        }
 
                         item.SubItems[3].Text = di.CreationTime.ToString();
                         // key should be "colType" but am not sure
@@ -333,9 +343,9 @@ namespace AdvancedScada.Utils.Tools
 
                 #region // get files
 
-                foreach (var file in Directory.GetFiles(path))
+                foreach (string file in Directory.GetFiles(path))
                 {
-                    var fi = new FileInfo(file);
+                    FileInfo fi = new FileInfo(file);
 
                     if (fi.Attributes.ToString().Contains("System"))
                     {
@@ -343,16 +353,16 @@ namespace AdvancedScada.Utils.Tools
                     }
                     if (file.EndsWith(".svg"))
                     {
-                        var svgDocument = SvgDocument.Open(fi.FullName);
+                        SvgDocument svgDocument = SvgDocument.Open(fi.FullName);
                         item = new ListViewItem(fi.Name);
-                        var bitmap = svgDocument.Draw();
+                        Bitmap bitmap = svgDocument.Draw();
                         il32.Images.Add(fi.FullName, bitmap);
                         svgDocument = null;
                     }
                     else
                     {
                         item = new ListViewItem(fi.Name);
-                        var bitmap = Image.FromFile(fi.FullName);
+                        Image bitmap = Image.FromFile(fi.FullName);
                         il32.Images.Add(fi.FullName, bitmap);
                     }
 
@@ -366,7 +376,7 @@ namespace AdvancedScada.Utils.Tools
                     // add temp subitems if View was set to Details
                     //if (this.View == System.Windows.Forms.View.Details)
                     {
-                        for (int i = 0; i < this.Columns.Count; i++)
+                        for (int i = 0; i < Columns.Count; i++)
                         {
                             item.SubItems.Add(string.Empty);
                         }
@@ -382,8 +392,8 @@ namespace AdvancedScada.Utils.Tools
 
                 #endregion
 
-                this.EndUpdate();
-                this.Refresh();
+                EndUpdate();
+                Refresh();
 
                 Application.DoEvents();
 
@@ -391,7 +401,7 @@ namespace AdvancedScada.Utils.Tools
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
 
             }
 
@@ -405,15 +415,17 @@ namespace AdvancedScada.Utils.Tools
             try
             {
                 foreach (ColumnHeader col in Columns)
+                {
                     //this.Invoke(new MethodInvoker(delegate
                     //{
                     col.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                }
                 //col.Width = -2;
                 //}));
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
 
         }
@@ -424,23 +436,20 @@ namespace AdvancedScada.Utils.Tools
 
         public string DefaultPath
         {
-            get { return _DefaultPath; }
-            set { _DefaultPath = value; }
+            get => _DefaultPath;
+            set => _DefaultPath = value;
         }
 
         private string _SelectedPath = string.Empty;
 
-        public string SelectedPath
-        {
-            get { return _SelectedPath; }
-        }
+        public string SelectedPath => _SelectedPath;
 
         private bool _isSoloBrowser = true;
 
         public bool isSoloBrowser
         {
-            get { return _isSoloBrowser; }
-            set { _isSoloBrowser = value; }
+            get => _isSoloBrowser;
+            set => _isSoloBrowser = value;
         }
 
         #endregion
@@ -471,19 +480,19 @@ namespace AdvancedScada.Utils.Tools
 
         public string GetFileSize(string fullpath)
         {
-            var fi = new FileInfo(fullpath);
-            var size = fi.Length;
-            var sizeString = string.Format(new FileSizeFormatProvider(), "{0:fs}", size);
+            FileInfo fi = new FileInfo(fullpath);
+            long size = fi.Length;
+            string sizeString = string.Format(new FileSizeFormatProvider(), "{0:fs}", size);
 
             return sizeString;
         }
 
         public string GetFileType(string fullpath)
         {
-            var dwFileAttributes = FILE_ATTRIBUTE.FILE_ATTRIBUTE_NORMAL;
-            var uFlags = SHGFI.SHGFI_TYPENAME | SHGFI.SHGFI_USEFILEATTRIBUTES;
-            var shinfo = new SHFILEINFO();
-            var n = SHGetFileInfo(fullpath, dwFileAttributes, ref shinfo, (uint)Marshal.SizeOf(shinfo), uFlags);
+            uint dwFileAttributes = FILE_ATTRIBUTE.FILE_ATTRIBUTE_NORMAL;
+            uint uFlags = SHGFI.SHGFI_TYPENAME | SHGFI.SHGFI_USEFILEATTRIBUTES;
+            SHFILEINFO shinfo = new SHFILEINFO();
+            IntPtr n = SHGetFileInfo(fullpath, dwFileAttributes, ref shinfo, (uint)Marshal.SizeOf(shinfo), uFlags);
 
             return shinfo.szTypeName;
         }
@@ -493,7 +502,7 @@ namespace AdvancedScada.Utils.Tools
             Icon ico = null;
             IntPtr hImgSmall;
             IntPtr hImgLarge;
-            var shinfo = new SHFILEINFO();
+            SHFILEINFO shinfo = new SHFILEINFO();
 
             if (use16)
             {
@@ -548,9 +557,15 @@ namespace AdvancedScada.Utils.Tools
 
         public string Format(string format, object arg, IFormatProvider formatProvider)
         {
-            if (format == null || !format.StartsWith(fileSizeFormat)) return defaultFormat(format, arg, formatProvider);
+            if (format == null || !format.StartsWith(fileSizeFormat))
+            {
+                return defaultFormat(format, arg, formatProvider);
+            }
 
-            if (arg is string) return defaultFormat(format, arg, formatProvider);
+            if (arg is string)
+            {
+                return defaultFormat(format, arg, formatProvider);
+            }
 
             decimal size;
 
@@ -584,21 +599,33 @@ namespace AdvancedScada.Utils.Tools
                 suffix = " Byte(s)";
             }
 
-            var precision = format.Substring(2);
-            if (string.IsNullOrEmpty(precision)) precision = "0";
+            string precision = format.Substring(2);
+            if (string.IsNullOrEmpty(precision))
+            {
+                precision = "0";
+            }
+
             return string.Format("{0:N" + precision + "}{1}", size, suffix);
         }
 
         public object GetFormat(Type formatType)
         {
-            if (formatType == typeof(ICustomFormatter)) return this;
+            if (formatType == typeof(ICustomFormatter))
+            {
+                return this;
+            }
+
             return null;
         }
 
         private static string defaultFormat(string format, object arg, IFormatProvider formatProvider)
         {
-            var formattableArg = arg as IFormattable;
-            if (formattableArg != null) return formattableArg.ToString(format, formatProvider);
+            IFormattable formattableArg = arg as IFormattable;
+            if (formattableArg != null)
+            {
+                return formattableArg.ToString(format, formatProvider);
+            }
+
             return arg.ToString();
         }
     }

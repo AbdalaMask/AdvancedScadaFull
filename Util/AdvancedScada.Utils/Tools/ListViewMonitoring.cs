@@ -4,7 +4,7 @@
     {
         public ListViewMonitoring()
         {
-            this.DoubleBuffered = true;
+            DoubleBuffered = true;
         }
     }
 }

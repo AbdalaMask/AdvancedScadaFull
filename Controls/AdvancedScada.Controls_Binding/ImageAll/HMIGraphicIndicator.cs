@@ -73,7 +73,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public string PLCAddressValueSelect1
         {
-            get { return m_PLCAddressSelect1; }
+            get => m_PLCAddressSelect1;
             set
             {
                 if (m_PLCAddressSelect1 != value)
@@ -83,8 +83,12 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressSelect1) ||
-                            string.IsNullOrWhiteSpace(m_PLCAddressSelect1) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("ValueSelect1", TagCollectionClient.Tags[m_PLCAddressSelect1], "Value", true);
+                            string.IsNullOrWhiteSpace(m_PLCAddressSelect1) || Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("ValueSelect1", TagCollectionClient.Tags[m_PLCAddressSelect1], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -97,16 +101,19 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public string PLCAddressValueSelect2
         {
-            get { return m_PLCAddressSelect2; }
+            get => m_PLCAddressSelect2;
             set
             {
-                if (m_PLCAddressSelect2 != value) m_PLCAddressSelect2 = value;
+                if (m_PLCAddressSelect2 != value)
+                {
+                    m_PLCAddressSelect2 = value;
+                }
             }
         }
 
         public string PLCAddressVisible
         {
-            get { return m_PLCAddressVisible; }
+            get => m_PLCAddressVisible;
             set
             {
                 if (m_PLCAddressVisible != value)
@@ -117,8 +124,12 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
-                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -131,10 +142,13 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public string PLCAddressText2
         {
-            get { return m_PLCAddressText2; }
+            get => m_PLCAddressText2;
             set
             {
-                if (m_PLCAddressText2 != value) m_PLCAddressText2 = value;
+                if (m_PLCAddressText2 != value)
+                {
+                    m_PLCAddressText2 = value;
+                }
             }
         }
 
@@ -142,10 +156,13 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressClick
         {
-            get { return m_PLCAddressClick; }
+            get => m_PLCAddressClick;
             set
             {
-                if (m_PLCAddressClick != value) m_PLCAddressClick = value;
+                if (m_PLCAddressClick != value)
+                {
+                    m_PLCAddressClick = value;
+                }
             }
         }
 
@@ -155,22 +172,28 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         [Category("PLC Properties")]
         public int MinimumHoldTime
         {
-            get { return m_MinimumHoldTime; }
+            get => m_MinimumHoldTime;
             set
             {
                 m_MinimumHoldTime = value;
-                if (value > 0) MinHoldTimer.Interval = value;
+                if (value > 0)
+                {
+                    MinHoldTimer.Interval = value;
+                }
             }
         }
 
         [Category("PLC Properties")]
         public int MaximumHoldTime
         {
-            get { return m_MaximumHoldTime; }
+            get => m_MaximumHoldTime;
             set
             {
                 m_MaximumHoldTime = value;
-                if (value > 0) MaxHoldTimer.Interval = value;
+                if (value > 0)
+                {
+                    MaxHoldTimer.Interval = value;
+                }
             }
         }
 
@@ -203,7 +226,10 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         {
             MinHoldTimer.Enabled = false;
             HoldTimeMet = true;
-            if (!MouseIsDown) ReleaseValue();
+            if (!MouseIsDown)
+            {
+                ReleaseValue();
+            }
         }
 
         private void MaxHoldTimer_Tick(object sender, EventArgs e)
@@ -238,11 +264,16 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                             break;
                         case OutputTypes.Toggle:
 
-                            var CurrentValue = false;
+                            bool CurrentValue = false;
                             if (CurrentValue)
+                            {
                                 Utilities.Write(m_PLCAddressClick, false);
+                            }
                             else
+                            {
                                 Utilities.Write(m_PLCAddressClick, true);
+                            }
+
                             break;
                         default:
 
@@ -303,7 +334,10 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                 }
 
                 //* Save the text to return to
-                if (!ErrorDisplayTime.Enabled) OriginalText = Text;
+                if (!ErrorDisplayTime.Enabled)
+                {
+                    OriginalText = Text;
+                }
 
                 ErrorDisplayTime.Enabled = true;
                 Utilities.DisplayError(this, ErrorMessage);

@@ -37,27 +37,44 @@ namespace AdvancedScada.Studio.Config
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
         public void FillComboServers(KryptonComboBox Combo)
         {
-            var SqlEnumerator = SqlDataSourceEnumerator.Instance;
-            var dTable = SqlEnumerator.GetDataSources();
-            foreach (DataRow Dr in dTable.Rows) Combo.Items.Add(Dr[0]);
+            SqlDataSourceEnumerator SqlEnumerator = SqlDataSourceEnumerator.Instance;
+            DataTable dTable = SqlEnumerator.GetDataSources();
+            foreach (DataRow Dr in dTable.Rows)
+            {
+                Combo.Items.Add(Dr[0]);
+            }
         }
         public void GetSQLServer()
         {
-            var rk = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
-            if (rk == null) return;
-            var instances = (string[])rk.GetValue("InstalledInstances");
+            RegistryKey rk = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
+            if (rk == null)
+            {
+                return;
+            }
+
+            string[] instances = (string[])rk.GetValue("InstalledInstances");
             if (instances != null)
+            {
                 if (instances.Length > 0)
-                    foreach (var element in instances)
+                {
+                    foreach (string element in instances)
+                    {
                         if (element == "MSSQLSERVER")
+                        {
                             txtServerName.Items.Add(Environment.MachineName);
+                        }
                         else
+                        {
                             txtServerName.Items.Add(Environment.MachineName + "\\" + element);
+                        }
+                    }
+                }
+            }
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -85,7 +102,7 @@ namespace AdvancedScada.Studio.Config
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 

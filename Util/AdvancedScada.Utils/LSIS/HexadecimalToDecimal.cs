@@ -30,9 +30,9 @@ namespace AdvancedScada.Utils.LSIS
             decimal result = 0;
             hex = hex.ToLower();
 
-            for (var i = 0; i < hex.Length; i++)
+            for (int i = 0; i < hex.Length; i++)
             {
-                var valAt = hex[hex.Length - 1 - i];
+                char valAt = hex[hex.Length - 1 - i];
                 result += hexdecval[valAt] * (int)Math.Pow(16, i);
             }
 
@@ -71,8 +71,8 @@ namespace AdvancedScada.Utils.LSIS
                 while (decimalNumber > 0)
                 {
                     // must be long; when this type is int the result is wrong
-                    var checkRemainder = decimalNumber % 16;
-                    var remainder = string.Empty;
+                    long checkRemainder = decimalNumber % 16;
+                    string remainder = string.Empty;
                     switch (checkRemainder)
                     {
                         case 10:

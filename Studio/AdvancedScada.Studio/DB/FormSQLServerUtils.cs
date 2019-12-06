@@ -30,7 +30,7 @@ namespace AdvancedScada.Studio.DB
                 // Show the dialog and get result.
                 openFileDialog1.Filter = "db3 Files (*.db3)|*.db3|All files (*.*)|*.*";
                 openFileDialog1.FileName = "config";
-                var result = openFileDialog1.ShowDialog();
+                DialogResult result = openFileDialog1.ShowDialog();
                 if (result == DialogResult.OK) // Test result.
                 {
                     FileName = openFileDialog1.FileName;
@@ -53,8 +53,12 @@ namespace AdvancedScada.Studio.DB
         {
             try
             {
-                if (DBListLookUpEdit.Text == "System.Data.DataRowView") return;
-                var ds = new DataTable();
+                if (DBListLookUpEdit.Text == "System.Data.DataRowView")
+                {
+                    return;
+                }
+
+                DataTable ds = new DataTable();
                 if (Settings.Default.DatabaseTypes == "SQLite")
                 {
                     //ds = UtilsTableSQLite.AddTableListBox(FileName);
@@ -67,9 +71,10 @@ namespace AdvancedScada.Studio.DB
                 {
                     ds = UtilsTable.AddTableListBox(DBListLookUpEdit.Text, Settings.Default.teServer);
                     TableNamesListBox.Items.Clear();
-                    for (var i = 0; i <= ds.Rows.Count - 1; i++)
+                    for (int i = 0; i <= ds.Rows.Count - 1; i++)
+                    {
                         TableNamesListBox.Items.Add(ds.Rows[i].ItemArray[0].ToString());
-
+                    }
                 }
 
 
@@ -77,7 +82,7 @@ namespace AdvancedScada.Studio.DB
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 
@@ -87,14 +92,14 @@ namespace AdvancedScada.Studio.DB
             {
                 if (Settings.Default.DatabaseTypes == "SQLite")
                 {
-                    var dt = new DataTable();
+                    DataTable dt = new DataTable();
                     dt = UtilsTableSQLite.ColumnExists($"{TableNamesListBox.SelectedItem}", FileName);
                     ColumnLookUpEdit.DataSource = dt;
                 }
                 else if (Settings.Default.DatabaseTypes == "SQL")
                 {
 
-                    var dt = new DataTable();
+                    DataTable dt = new DataTable();
                     dt = UtilsTable.AddColumnGrid(DBListLookUpEdit.Text, $"{TableNamesListBox.SelectedItem}", Settings.Default.teServer);
 
                     ColumnLookUpEdit.DataSource = dt;
@@ -103,7 +108,7 @@ namespace AdvancedScada.Studio.DB
             }
             catch (Exception ex)
             {
-                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
+                EventscadaException?.Invoke(GetType().Name, ex.Message);
             }
         }
 

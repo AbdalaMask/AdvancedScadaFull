@@ -17,8 +17,8 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
 
         public OutputType OutputType
         {
-            get { return m_OutputType; }
-            set { m_OutputType = value; }
+            get => m_OutputType;
+            set => m_OutputType = value;
         }
 
         //*****************************************
@@ -30,7 +30,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressText
         {
-            get { return m_PLCAddressText; }
+            get => m_PLCAddressText;
             set
             {
                 if (m_PLCAddressText != value)
@@ -41,8 +41,12 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressText) || string.IsNullOrWhiteSpace(m_PLCAddressText) ||
-                            Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressChecked], "Value", true);
+                            Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressChecked], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -62,7 +66,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressVisible
         {
-            get { return m_PLCAddressVisible; }
+            get => m_PLCAddressVisible;
             set
             {
                 if (m_PLCAddressVisible != value)
@@ -74,8 +78,12 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                         // If Not String.IsNullOrEmpty(m_PLCAddressVisible) Then
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
-                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
@@ -96,7 +104,7 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressChecked
         {
-            get { return m_PLCAddressChecked; }
+            get => m_PLCAddressChecked;
             set
             {
                 if (m_PLCAddressChecked != value)
@@ -107,8 +115,12 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressChecked) ||
-                            string.IsNullOrWhiteSpace(m_PLCAddressChecked) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Checked", TagCollectionClient.Tags[m_PLCAddressChecked], "Value", true);
+                            string.IsNullOrWhiteSpace(m_PLCAddressChecked) || Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Checked", TagCollectionClient.Tags[m_PLCAddressChecked], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -128,10 +140,13 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressCheckChanged
         {
-            get { return m_PLCAddressCheckChanged; }
+            get => m_PLCAddressCheckChanged;
             set
             {
-                if (m_PLCAddressCheckChanged != value) m_PLCAddressCheckChanged = value;
+                if (m_PLCAddressCheckChanged != value)
+                {
+                    m_PLCAddressCheckChanged = value;
+                }
             }
         }
 
@@ -164,7 +179,10 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
                 }
 
                 //* Save the text to return to
-                if (!ErrorDisplayTime.Enabled) OriginalText = Text;
+                if (!ErrorDisplayTime.Enabled)
+                {
+                    OriginalText = Text;
+                }
 
                 ErrorDisplayTime.Enabled = true;
                 Utilities.DisplayError(this, ErrorMessage);
@@ -193,16 +211,22 @@ namespace AdvancedScada.Controls_Binding.ButtonAll
         {
             base.OnClick(e);
             if (!string.IsNullOrEmpty(m_PLCAddressCheckChanged))
+            {
                 try
                 {
-                    var WriteValue = "0";
-                    if (Checked) WriteValue = "1";
+                    string WriteValue = "0";
+                    if (Checked)
+                    {
+                        WriteValue = "1";
+                    }
+
                     Utilities.Write(m_PLCAddressCheckChanged, WriteValue);
                 }
                 catch (Exception ex)
                 {
                     DisplayError(ex.Message);
                 }
+            }
         }
 
 

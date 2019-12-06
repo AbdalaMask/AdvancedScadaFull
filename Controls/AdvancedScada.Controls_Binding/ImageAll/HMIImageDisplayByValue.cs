@@ -25,7 +25,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public override string Text
         {
-            get { return base.Text; }
+            get => base.Text;
             set
             {
                 //* True/False comes from driver, change if BooleanDisplay is different 31-DEC-11
@@ -33,19 +33,35 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                 {
                     if (value == "True")
                     {
-                        if (BooleanDisplay == BooleanDisplayOption.OnOff) value = "On";
-                        if (BooleanDisplay == BooleanDisplayOption.YesNo) value = "Yes";
+                        if (BooleanDisplay == BooleanDisplayOption.OnOff)
+                        {
+                            value = "On";
+                        }
+
+                        if (BooleanDisplay == BooleanDisplayOption.YesNo)
+                        {
+                            value = "Yes";
+                        }
                     }
                     else
                     {
-                        if (BooleanDisplay == BooleanDisplayOption.OnOff) value = "Off";
-                        if (BooleanDisplay == BooleanDisplayOption.YesNo) value = "No";
+                        if (BooleanDisplay == BooleanDisplayOption.OnOff)
+                        {
+                            value = "Off";
+                        }
+
+                        if (BooleanDisplay == BooleanDisplayOption.YesNo)
+                        {
+                            value = "No";
+                        }
                     }
                 }
 
                 //* If suffix has already been added, then removed 17-OCT-11
                 if (m_Suffix != null && string.Compare(m_Suffix, string.Empty) != 0 && value.IndexOf(m_Suffix) > 0)
+                {
                     value = value.Substring(0, value.IndexOf(m_Suffix));
+                }
 
                 if (NumericFormat != null && string.Compare(NumericFormat, string.Empty) != 0 && !DesignMode)
                 {
@@ -64,17 +80,27 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     //* Highlight in red if a Highlightcharacter found mark is in text
                     if (value.IndexOf(_HighlightKeyChar) >= 0)
                     {
-                        if (BackColor != _Highlightcolor) SavedBackColor = BackColor;
+                        if (BackColor != _Highlightcolor)
+                        {
+                            SavedBackColor = BackColor;
+                        }
+
                         BackColor = _Highlightcolor;
                     }
                     else
                     {
-                        if (SavedBackColor != new Color()) BackColor = SavedBackColor;
+                        if (SavedBackColor != new Color())
+                        {
+                            BackColor = SavedBackColor;
+                        }
                     }
 
                     if (_ValueScaleFactor == 1M)
+                    {
                         base.Text = _Prefix + value + m_Suffix;
+                    }
                     else
+                    {
                         try
                         {
                             base.Text = (Convert.ToSingle(value) * (float)_ValueScaleFactor).ToString();
@@ -83,6 +109,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                         {
                             DisplayError("Scale Factor Error - " + ex.Message);
                         }
+                    }
                 }
             }
         }
@@ -94,7 +121,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public string TextPrefix
         {
-            get { return _Prefix; }
+            get => _Prefix;
             set
             {
                 _Prefix = value;
@@ -106,7 +133,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public string TextSuffix
         {
-            get { return m_Suffix; }
+            get => m_Suffix;
             set
             {
                 m_Suffix = value;
@@ -122,8 +149,8 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public int KeypadWidth
         {
-            get { return m_KeypadWidth; }
-            set { m_KeypadWidth = value; }
+            get => m_KeypadWidth;
+            set => m_KeypadWidth = value;
         }
 
         [DefaultValue(false)]
@@ -137,8 +164,8 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         [Category("Appearance")]
         public Color HighlightColor
         {
-            get { return _Highlightcolor; }
-            set { _Highlightcolor = value; }
+            get => _Highlightcolor;
+            set => _Highlightcolor = value;
         }
 
         private string _HighlightKeyChar = "!";
@@ -146,8 +173,8 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         [Category("Appearance")]
         public string HighlightKeyCharacter
         {
-            get { return _HighlightKeyChar; }
-            set { _HighlightKeyChar = value; }
+            get => _HighlightKeyChar;
+            set => _HighlightKeyChar = value;
         }
 
 
@@ -157,8 +184,8 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public decimal ScaleFactor
         {
-            get { return _ValueScaleFactor; }
-            set { _ValueScaleFactor = value; }
+            get => _ValueScaleFactor;
+            set => _ValueScaleFactor = value;
         }
 
         public enum BooleanDisplayOption
@@ -178,8 +205,8 @@ namespace AdvancedScada.Controls_Binding.ImageAll
 
         public OutputType OutputType
         {
-            get { return m_OutputType; }
-            set { m_OutputType = value; }
+            get => m_OutputType;
+            set => m_OutputType = value;
         }
 
         //*****************************************
@@ -191,7 +218,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressText
         {
-            get { return m_PLCAddressText; }
+            get => m_PLCAddressText;
             set
             {
                 if (m_PLCAddressText != value)
@@ -202,8 +229,12 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressText) || string.IsNullOrWhiteSpace(m_PLCAddressText) ||
-                            Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
+                            Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Text", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -223,7 +254,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressVisible
         {
-            get { return m_PLCAddressVisible; }
+            get => m_PLCAddressVisible;
             set
             {
                 if (m_PLCAddressVisible != value)
@@ -235,8 +266,12 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                         // If Not String.IsNullOrEmpty(m_PLCAddressVisible) Then
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressVisible) ||
-                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
+                            string.IsNullOrWhiteSpace(m_PLCAddressVisible) || Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Visible", TagCollectionClient.Tags[m_PLCAddressVisible], "Value", true);
                         DataBindings.Add(bd);
                         //End If
                     }
@@ -257,7 +292,7 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressValue
         {
-            get { return m_PLCAddressValue; }
+            get => m_PLCAddressValue;
             set
             {
                 if (m_PLCAddressValue != value)
@@ -268,8 +303,12 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                     {
                         //* When address is changed, re-subscribe to new address
                         if (string.IsNullOrEmpty(m_PLCAddressValue) || string.IsNullOrWhiteSpace(m_PLCAddressValue) ||
-                            Licenses.LicenseManager.IsInDesignMode) return;
-                        var bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
+                            Licenses.LicenseManager.IsInDesignMode)
+                        {
+                            return;
+                        }
+
+                        Binding bd = new Binding("Value", TagCollectionClient.Tags[m_PLCAddressValue], "Value", true);
                         DataBindings.Add(bd);
                     }
                     catch (Exception ex)
@@ -289,10 +328,13 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         [Editor(typeof(TestDialogEditor), typeof(UITypeEditor))]
         public string PLCAddressKeypad
         {
-            get { return m_PLCAddressKeypad; }
+            get => m_PLCAddressKeypad;
             set
             {
-                if (m_PLCAddressKeypad != value) m_PLCAddressKeypad = value;
+                if (m_PLCAddressKeypad != value)
+                {
+                    m_PLCAddressKeypad = value;
+                }
             }
         }
 
@@ -321,7 +363,10 @@ namespace AdvancedScada.Controls_Binding.ImageAll
                 }
 
                 //* Save the text to return to
-                if (!ErrorDisplayTime.Enabled) OriginalText = Text;
+                if (!ErrorDisplayTime.Enabled)
+                {
+                    OriginalText = Text;
+                }
 
                 ErrorDisplayTime.Enabled = true;
                 Utilities.DisplayError(this, ErrorMessage);
@@ -360,17 +405,25 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         private void KeypadPopUp_ButtonClick(object sender, KeypadEventArgs e)
         {
             if (e.Key == "Quit")
+            {
                 KeypadPopUp.Visible = false;
+            }
             else if (e.Key == "Enter")
+            {
                 if (KeypadPopUp.Value != null && string.Compare(KeypadPopUp.Value, string.Empty) != 0)
                 {
                     if (ScaleFactor == 1)
+                    {
                         Utilities.Write(m_PLCAddressKeypad, KeypadPopUp.Value);
+                    }
                     else
+                    {
                         Utilities.Write(m_PLCAddressKeypad, KeypadPopUp.Value);
+                    }
 
                     KeypadPopUp.Visible = false;
                 }
+            }
         }
 
         //***********************************************************
@@ -380,7 +433,10 @@ namespace AdvancedScada.Controls_Binding.ImageAll
         {
             if (m_PLCAddressKeypad != null && (string.Compare(m_PLCAddressKeypad, string.Empty) != 0) & Enabled)
             {
-                if (KeypadPopUp == null) KeypadPopUp = new Keypad_v3(m_KeypadWidth);
+                if (KeypadPopUp == null)
+                {
+                    KeypadPopUp = new Keypad_v3(m_KeypadWidth);
+                }
 
                 KeypadPopUp.Text = KeypadText;
                 KeypadPopUp.Value = string.Empty;

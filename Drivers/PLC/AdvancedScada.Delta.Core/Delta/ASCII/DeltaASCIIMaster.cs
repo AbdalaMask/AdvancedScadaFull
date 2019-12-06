@@ -10,7 +10,7 @@ namespace AdvancedScada.IODriver.Delta.ASCII
 {
     public class DeltaASCIIMaster : IDeltaAdapter
     {
-        private SerialPort serialPort;
+        private readonly SerialPort serialPort;
 
         public bool IsConnected { get; set; }
         public byte Station { get; set; }
@@ -26,10 +26,12 @@ namespace AdvancedScada.IODriver.Delta.ASCII
         {
 
             busAsciiClient?.Close();
-            busAsciiClient = new ModbusAscii(Station);
-            busAsciiClient.AddressStartWithZero = true;
+            busAsciiClient = new ModbusAscii(Station)
+            {
+                AddressStartWithZero = true,
 
-            busAsciiClient.IsStringReverse = false;
+                IsStringReverse = false
+            };
             try
             {
 
@@ -77,13 +79,13 @@ namespace AdvancedScada.IODriver.Delta.ASCII
 
         public bool[] ReadDiscrete(string address, ushort length)
         {
-            var Address = DMT.DevToAddrW("DVP", address, Station);
+            int Address = DMT.DevToAddrW("DVP", address, Station);
             return busAsciiClient.ReadDiscrete($"{Address}", length).Content;
         }
 
         public bool Write(string address, dynamic value)
         {
-            var Address = DMT.DevToAddrW("DVP", address, Station);
+            int Address = DMT.DevToAddrW("DVP", address, Station);
             if (value is bool)
             {
                 busAsciiClient.Write($"{Address}", value);
@@ -98,59 +100,59 @@ namespace AdvancedScada.IODriver.Delta.ASCII
 
         public TValue[] Read<TValue>(string address, ushort length)
         {
-            var Address = DMT.DevToAddrW("DVP", address, Station);
+            int Address = DMT.DevToAddrW("DVP", address, Station);
             if (typeof(TValue) == typeof(bool))
             {
-                var b = busAsciiClient.ReadCoil($"{Address}", length).Content;
+                bool[] b = busAsciiClient.ReadCoil($"{Address}", length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(ushort))
             {
-                var b = busAsciiClient.ReadUInt16($"{Address}", length).Content;
+                ushort[] b = busAsciiClient.ReadUInt16($"{Address}", length).Content;
 
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(int))
             {
-                var b = busAsciiClient.ReadInt32($"{Address}", length).Content;
+                int[] b = busAsciiClient.ReadInt32($"{Address}", length).Content;
 
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(uint))
             {
-                var b = busAsciiClient.ReadUInt32($"{Address}", length).Content;
+                uint[] b = busAsciiClient.ReadUInt32($"{Address}", length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(long))
             {
-                var b = busAsciiClient.ReadInt64($"{Address}", length).Content;
+                long[] b = busAsciiClient.ReadInt64($"{Address}", length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(ulong))
             {
-                var b = busAsciiClient.ReadUInt64($"{Address}", length).Content;
+                ulong[] b = busAsciiClient.ReadUInt64($"{Address}", length).Content;
                 return (TValue[])(object)b;
             }
 
             if (typeof(TValue) == typeof(short))
             {
-                var b = busAsciiClient.ReadInt16($"{Address}", length).Content;
+                short[] b = busAsciiClient.ReadInt16($"{Address}", length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(double))
             {
-                var b = busAsciiClient.ReadDouble($"{Address}", length).Content;
+                double[] b = busAsciiClient.ReadDouble($"{Address}", length).Content;
                 return (TValue[])(object)b;
             }
             if (typeof(TValue) == typeof(float))
             {
-                var b = busAsciiClient.ReadFloat($"{Address}", length).Content;
+                float[] b = busAsciiClient.ReadFloat($"{Address}", length).Content;
                 return (TValue[])(object)b;
 
             }
             if (typeof(TValue) == typeof(string))
             {
-                var b = busAsciiClient.ReadString($"{Address}", length).Content;
+                string b = busAsciiClient.ReadString($"{Address}", length).Content;
                 return (TValue[])(object)b;
             }
 
