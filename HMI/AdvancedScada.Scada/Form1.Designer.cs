@@ -35,7 +35,7 @@
             // 
             this.hmiAlarm1.Location = new System.Drawing.Point(-1, 3);
             this.hmiAlarm1.Name = "hmiAlarm1";
-            this.hmiAlarm1.Size = new System.Drawing.Size(681, 446);
+            this.hmiAlarm1.Size = new System.Drawing.Size(718, 446);
             this.hmiAlarm1.TabIndex = 0;
             // 
             // Form1

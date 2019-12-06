@@ -322,7 +322,7 @@ namespace AdvancedScada.Studio
 
 
 
-              
+
                 if (host.State == CommunicationState.Opened) txtStatus.Text = "The Server is running";
 
 
@@ -442,18 +442,18 @@ namespace AdvancedScada.Studio
             if (string.IsNullOrEmpty(xmlFile) || string.IsNullOrWhiteSpace(xmlFile)) return;
             var chList = objChannelManager.GetChannels(xmlFile);
             if (chList.Count < 1) return;
-          
+
 
             try
             {
 
-                 InitializeTags(true);
+                InitializeTags(true);
 
             }
             catch (Exception ex)
             {
 
-                
+                EventscadaException?.Invoke(this.GetType().Name, ex.Message);
             }
         }
         private void FormStudio_FormClosing(object sender, FormClosingEventArgs e)
@@ -576,6 +576,7 @@ namespace AdvancedScada.Studio
             }
             KryptonPage page = NewPage("DiscreteAlarm ", 0, new FrmDiscreteAlarm());
             TabForm.Pages.Add(page);
+            TabForm.SelectedPage = page;
         }
         private void btnFormMain_Click()
         {
@@ -589,6 +590,7 @@ namespace AdvancedScada.Studio
             }
             KryptonPage page = NewPage("FormMain ", 0, new FormMain());
             TabForm.Pages.Add(page);
+            TabForm.SelectedPage = page;
         }
         private void btnAlarmAnalog_Click(object sender, EventArgs e)
         {
@@ -602,6 +604,7 @@ namespace AdvancedScada.Studio
             }
             KryptonPage page = NewPage("AlarmAnalog ", 0, new FrmAddAlarm());
             TabForm.Pages.Add(page);
+            TabForm.SelectedPage = page;
         }
 
         private void btnAlarmclasses_Click(object sender, EventArgs e)
@@ -616,6 +619,7 @@ namespace AdvancedScada.Studio
             }
             KryptonPage page = NewPage("AlarmClasses ", 0, new FrmAlarmClasses());
             TabForm.Pages.Add(page);
+            TabForm.SelectedPage = page;
         }
     }
 }

@@ -1199,7 +1199,7 @@ namespace AdvancedScada.Studio.Editors
         {
             try
             {
-                saveFileDialog1.Filter = "Text Files (*.Text)|*.Text|All files (*.*)|*.*";
+                saveFileDialog1.Filter = "Text Files (*.Txt)|*.Txt|All files (*.*)|*.*";
 
                 DialogResult dr = saveFileDialog1.ShowDialog();
                 if (dr == DialogResult.OK)
@@ -1209,7 +1209,7 @@ namespace AdvancedScada.Studio.Editors
                     {
                         var tgName = '"';
 
-                        sb.AppendLine($"public const string {(item.Key.Replace('.', '_'))} = {tgName} {item.Key.ToString()} {tgName}; ");
+                        sb.AppendLine($"public const string {(item.Key.Replace('.', '_'))} = {tgName}{item.Key.ToString()}{tgName};");
                     }
 
                     File.WriteAllText(saveFileDialog1.FileName, sb.ToString());

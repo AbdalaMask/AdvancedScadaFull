@@ -63,7 +63,7 @@
             // HeaderGroupChannel.Panel
             // 
             this.HeaderGroupChannel.Panel.Controls.Add(this.PvGridChannel);
-            this.HeaderGroupChannel.Size = new System.Drawing.Size(211, 214);
+            this.HeaderGroupChannel.Size = new System.Drawing.Size(211, 313);
             this.HeaderGroupChannel.TabIndex = 1;
             this.HeaderGroupChannel.ValuesPrimary.Heading = "Channel";
             this.HeaderGroupChannel.ValuesPrimary.Image = global::AdvancedScada.Utils.Properties.Resources.AddChannel;
@@ -79,7 +79,7 @@
             this.PvGridChannel.HelpVisible = false;
             this.PvGridChannel.Location = new System.Drawing.Point(0, 0);
             this.PvGridChannel.Name = "PvGridChannel";
-            this.PvGridChannel.Size = new System.Drawing.Size(209, 190);
+            this.PvGridChannel.Size = new System.Drawing.Size(209, 289);
             this.PvGridChannel.TabIndex = 2;
             this.PvGridChannel.ToolbarVisible = false;
             // 

@@ -49,6 +49,7 @@ namespace AdvancedScada.Studio.Config
         public void GetSQLServer()
         {
             var rk = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
+            if (rk == null) return;
             var instances = (string[])rk.GetValue("InstalledInstances");
             if (instances != null)
                 if (instances.Length > 0)
