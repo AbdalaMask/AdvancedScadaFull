@@ -567,7 +567,7 @@ namespace AdvancedScada.Studio
                     return;
                 }
             }
-            KryptonPage page = NewPage("DiscreteAlarm ", 0, new FrmDiscreteAlarm());
+            KryptonPage page = NewPage("DiscreteAlarm", 0, new FrmDiscreteAlarm());
             TabForm.Pages.Add(page);
             TabForm.SelectedPage = page;
         }
