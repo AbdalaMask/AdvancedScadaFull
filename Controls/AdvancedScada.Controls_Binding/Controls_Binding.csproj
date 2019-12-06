@@ -90,6 +90,12 @@
     <Compile Include="Alarm\HMIAlarm.Designer.cs">
       <DependentUpon>HMIAlarm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Alarm\HMIAlarmBit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Alarm\HMIAlarmBit.Designer.cs">
+      <DependentUpon>HMIAlarmBit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Alarm\HMIAlarmMan.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -320,6 +326,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Alarm\HMIAlarm.resx">
       <DependentUpon>HMIAlarm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Alarm\HMIAlarmBit.resx">
+      <DependentUpon>HMIAlarmBit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Alarm\HMIAlarmMan.resx">
       <DependentUpon>HMIAlarmMan.cs</DependentUpon>

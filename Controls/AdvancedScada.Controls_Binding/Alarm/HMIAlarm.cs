@@ -149,15 +149,6 @@ namespace AdvancedScada.Controls_Binding.Alarm
                             }
 
                         }
-
-
-
-
-
-
-
-
-
                     }
                 }
             }

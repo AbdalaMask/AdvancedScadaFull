@@ -102,7 +102,13 @@ namespace AdvancedScada.Studio
             {
                 if (form.GetType() == typeof(FormSQLServerUtils))
                 {
-                    form.Activate();
+                    foreach (KryptonPage item in TabForm.Pages)
+                    {
+                        if (item.Text == "SQLServerUtils")
+                        {
+                            TabForm.SelectedPage = item;
+                        }
+                    }
                     return;
                 }
             }

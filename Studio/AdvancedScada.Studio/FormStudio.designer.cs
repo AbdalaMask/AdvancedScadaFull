@@ -42,7 +42,6 @@
             this.mSQLServerUtils = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.CheckEnabele = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupCheckBox();
             this.kryptonRibbonGroupTriple2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
-            this.mPCControllercs = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroup7 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple7 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.mTags = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
@@ -71,6 +70,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.txtChannelCount = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.lblConnectState = new System.Windows.Forms.ToolStripLabel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -81,7 +81,6 @@
             this.kryptonDockableWorkspace = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ThisNotificationPopup = new Tulpep.NotificationWindow.PopupNotifier();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TabForm)).BeginInit();
@@ -103,7 +102,6 @@
             this.kryptonRibbon1.Name = "kryptonRibbon1";
             this.kryptonRibbon1.RibbonTabs.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab[] {
             this.kryptonRibbonTab1});
-            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = this.kryptonRibbonTab1;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1284, 115);
             this.kryptonRibbon1.TabIndex = 0;
@@ -202,18 +200,6 @@
             this.CheckEnabele.TextLine1 = "RUN";
             this.CheckEnabele.Click += new System.EventHandler(this.CheckEnabele_Click);
             this.CheckEnabele.CheckedChanged += new System.EventHandler(this.CheckEnabele_CheckedChanged);
-            // 
-            // kryptonRibbonGroupTriple2
-            // 
-            this.kryptonRibbonGroupTriple2.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
-            this.mPCControllercs});
-            // 
-            // mPCControllercs
-            // 
-            this.mPCControllercs.ImageLarge = global::AdvancedScada.Studio.Properties.Resources.BottomCenterHorizontalOutside_32x32;
-            this.mPCControllercs.ImageSmall = global::AdvancedScada.Studio.Properties.Resources.BottomCenterHorizontalOutside_16x16;
-            this.mPCControllercs.TextLine1 = "PCControllercs";
-            this.mPCControllercs.Click += new System.EventHandler(this.mPCControllercs_Click);
             // 
             // kryptonRibbonGroup7
             // 
@@ -398,6 +384,11 @@
             this.txtChannelCount.Size = new System.Drawing.Size(13, 22);
             this.txtChannelCount.Text = "0";
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
@@ -493,11 +484,6 @@
             this.ThisNotificationPopup.TitleFont = new System.Drawing.Font("Segoe UI", 9F);
             this.ThisNotificationPopup.TitleText = null;
             // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
             // FormStudio
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -539,7 +525,6 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup1;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple1;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple2;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton mPCControllercs;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup2;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple3;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton barButtonLibraryImages;
